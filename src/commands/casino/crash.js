@@ -8,10 +8,10 @@ module.exports = async (client, interaction, args) => {
 
         Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
             if (data) {
-                let money = parseInt(args[0]);
+                let money = parseInt(interaction.options.getUser('amount'));
                 if (!money) return client.errUsage({ usage: "crash [amount]", type: 'editreply' }, interaction);
 
-                if (money > data.Money) return client.errNormal({ error: `You are betting more than you have!`, type: 'editreply' }, interaction);
+                if (money > data.Money) return client.errNormal({ error: `Tu mises plus que ce que tu as !`, type: 'editreply' }, interaction);
 
                 const row = new Discord.MessageActionRow()
                     .addComponents(
@@ -31,7 +31,7 @@ module.exports = async (client, interaction, args) => {
                     )
 
                 client.embed({
-                    desc: `Crash started by ${user}・React 🛑 to stop`,
+                    desc: `Crash lancé par ${user}・Réagi avec 🛑 pour arrêter`,
                     fields: [
                         {
                             name: `Multiplier`,
@@ -65,12 +65,12 @@ module.exports = async (client, interaction, args) => {
                             })
 
                             return client.embed({
-                                title: `Crash Results of ${user}`,
+                                title: `Résultats de Crash de ${user}`,
                                 desc: `${f} \n${msg}`,
                                 edit: true,
                                 fields: [
                                     {
-                                        name: `Loss`,
+                                        name: `Perte`,
                                         value: `**${money}**`,
                                         inline: false,
                                     }
@@ -86,7 +86,7 @@ module.exports = async (client, interaction, args) => {
                             let profit = calc - money;
 
                             client.embed({
-                                desc: `Crash started by ${user}・React 🛑 to stop`,
+                                desc: `Crash lancé par ${user}・Réagi avec 🛑 pour arrêter`,
                                 edit: true,
                                 fields: [
                                     {
@@ -95,7 +95,7 @@ module.exports = async (client, interaction, args) => {
                                         inline: true,
                                     },
                                     {
-                                        name: `Profit`,
+                                        name: `Gain`,
                                         value: `**$${profit.toFixed(2)}**`,
                                         inline: true,
                                     }
@@ -119,11 +119,11 @@ module.exports = async (client, interaction, args) => {
                                         })
 
                                         return client.embed({
-                                            desc: `Crash Results of ${user}`,
+                                            desc: `Résultats de Crash de ${user}`,
                                             edit: true,
                                             fields: [
                                                 {
-                                                    name: `Profit`,
+                                                    name: `Gain`,
                                                     value: `**$${profit.toFixed(2)}**`,
                                                     inline: false,
                                                 }
@@ -139,7 +139,7 @@ module.exports = async (client, interaction, args) => {
 
             }
             else {
-                client.errNormal({ error: `You has no ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+                client.errNormal({ error: `Tu n'as pas assez de ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
             }
         })
 }
