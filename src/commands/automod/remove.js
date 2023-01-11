@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/blacklist");
-const { blacklistedWords } = require("../../Collection");
 
 module.exports = async (client, interaction, args) => {
     const word = interaction.options.getString('word');
@@ -10,7 +9,7 @@ module.exports = async (client, interaction, args) => {
         if (data) {
             if (!data.Words.includes(word)) {
                 return client.errNormal({
-                    error: `Ce mot n'existe pas dans la base de données !`,
+                    error: `Ce mot n'existe pas dans la base de données!`,
                     type: 'editreply'
                 }, interaction);
             }
@@ -22,13 +21,11 @@ module.exports = async (client, interaction, args) => {
                 Words: filtered
             });
 
-            blacklistedWords.set(interaction.guild.id, filtered)
-
             client.succNormal({
-                text: `Ce mot a été retiré de la liste noire !`,
+                text: `Le mot est supprimé de la liste noire!`,
                 fields: [
                     {
-                        name: `<:uo_BotEvent:1015565719330627584> ┆ Mot`,
+                        name: `💬┆Mot`,
                         value: `${word}`
                     }
                 ],
@@ -37,7 +34,7 @@ module.exports = async (client, interaction, args) => {
         }
         else {
             client.errNormal({
-                error: `Ce serveur ne possède pas de données!`,
+                error: `Ce serveur n'a pas de données!`,
                 type: 'editreply'
             }, interaction);
         }

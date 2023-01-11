@@ -5,58 +5,58 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: `You're not in a voice channel!`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: `You're not in the same voice channel!`,
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.previous) return client.errNormal({
-        error: "Il n'y a pas eu de musique jouée précedemment",
+        error: "There are no songs was played previously",
         type: 'editreply'
     }, interaction);
 
     const track = player.queue.previous;
 
-    let row = new Discord.MessageActionRow()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏮️")
                 .setCustomId("Bot-musicprev")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏸️")
                 .setCustomId("Bot-musicpause")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏹️")
                 .setCustomId("Bot-musicstop")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setEmoji("⏭️")
                 .setCustomId("Bot-musicnext")
-                .setStyle("PRIMARY"),
+                .setStyle(Discord.ButtonStyle.Primary),
         );
 
     client.embed({
         title: `${client.emotes.normal.music}・${track.title}`,
         url: track.uri,
-        desc: `La musique a été lancée dans <#${player.voiceChannel}>!`,
+        desc: `La musique a commencé <#${player.voiceChannel}>!`,
         thumbnail: track.thumbnail,
         fields: [
             {
-                name: `👤┆Demandée par`,
+                name: `👤┆Demandé par`,
                 value: `${track.requester}`,
                 inline: true
             },
             {
-                name: `${client.emotes.normal.clock}┆Ends at`,
+                name: `${client.emotes.normal.clock}┆Fini à`,
                 value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
                 inline: true
             },

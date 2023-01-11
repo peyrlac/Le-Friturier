@@ -4,8 +4,8 @@ const Schema = require("../../database/models/ticketMessage");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -18,14 +18,14 @@ module.exports = async (client, interaction, args) => {
             const data = await Schema.findOne({ Guild: interaction.guild.id })
 
             if (data) {
-                data.openTicket = "Thanks for creating a ticket! \nSupport will be with you shortly \n\n🔒 - Close ticket \n✋ - Claim ticket \n📝 - Save transcript \n🔔 - Send a notification";
+                data.openTicket = "Merci d'avoir créé un billet!\ nsupport sera avec vous sous peu \n\n🔒 - Ticket \ n✋ - réclamer le ticket \ n📝 - Enregistrer la transcription \ n🔔 - Envoyer une notification";
                 data.save();
 
                 client.succNormal({
-                    text: `The ticket message has been set successfully`,
+                    text: `Le message du billet a été défini avec succès`,
                     fields: [
                         {
-                            name: `📘┆Message type`,
+                            name: `📘┆Type de message`,
                             value: `${type}`,
                             inline: true
                         },
@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.errNormal({
-                    error: `No ticket message data found!`,
+                    error: `Aucune donnée de message de billet trouvé!`,
                     type: 'editreply'
                 }, interaction)
             }
@@ -62,10 +62,10 @@ module.exports = async (client, interaction, args) => {
         })
 
         client.succNormal({
-            text: `The ticket message has been set successfully`,
+            text: `Le message du billet a été défini avec succès`,
             fields: [
                 {
-                    name: `📘┆Message type`,
+                    name: `📘┆Type de message`,
                     value: `${type}`,
                     inline: true
                 },
@@ -83,14 +83,14 @@ module.exports = async (client, interaction, args) => {
             const data = await Schema.findOne({ Guild: interaction.guild.id })
 
             if (data) {
-                data.dmMessage = "Here is the transcript for your ticket, please keep this if you ever want to refer to it!";
+                data.dmMessage = "Voici la transcription de votre billet, veuillez garder ceci si vous souhaitez vous y référer!";
                 data.save();
 
                 client.succNormal({
-                    text: `The ticket message has been set successfully`,
+                    text: `Le message du billet a été défini avec succès`,
                     fields: [
                         {
-                            name: `📘┆Message type`,
+                            name: `📘┆Type de message`,
                             value: `${type}`,
                             inline: true
                         },
@@ -105,7 +105,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.errNormal({
-                    error: `No ticket message data found!`,
+                    error: `Aucune donnée de message de billet trouvé!`,
                     type: 'editreply'
                 }, interaction)
             }

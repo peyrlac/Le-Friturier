@@ -7,17 +7,17 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: `Vous n'êtes pas dans un canal vocal!`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: `Vous n'êtes pas dans le même canal vocal!`,
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.current) return client.errNormal({
-        error: "Il n'y a pas de musiques jouées dans ce serveur",
+        error: "Il n'y a pas de chansons qui jouent dans ce serveur",
         type: 'editreply'
     }, interaction);
 
@@ -32,7 +32,7 @@ module.exports = async (client, interaction, args) => {
         thumbnail: player.queue.current?.thumbnail ? player.queue.current?.thumbnail : '',
         fields: [
             {
-                name: `👤┆Demandée par`,
+                name: `👤┆Demandé par`,
                 value: `${player.queue.current.requester}`,
                 inline: true
             },
@@ -47,7 +47,7 @@ module.exports = async (client, interaction, args) => {
                 inline: true
             },
             {
-                name: `${client.emotes.normal.music}┆Progression`,
+                name: `${client.emotes.normal.music}┆Progrès`,
                 value: `${new Date(player.position).toISOString().slice(11, 19)} ┃ ` +
                     bar +
                     ` ┃ ${new Date(player.queue.current.duration).toISOString().slice(11, 19)}`,

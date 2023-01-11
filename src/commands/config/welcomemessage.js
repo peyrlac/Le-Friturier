@@ -4,8 +4,8 @@ const inviteMessages = require("../../database/models/inviteMessages");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -41,7 +41,7 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({
-                    text: `Welcome message deleted!`,
+                    text: `Message de bienvenue supprimé!`,
                     type: 'editreply'
                 }, interaction);
             }
@@ -61,7 +61,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             client.succNormal({
-                text: `The welcome message has been set successfully`,
+                text: `Le message de bienvenue a été défini avec succès`,
                 fields: [
                     {
                         name: `💬┆Message`,

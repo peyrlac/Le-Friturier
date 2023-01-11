@@ -4,8 +4,8 @@ const Schema = require("../../database/models/levelMessages");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -32,7 +32,7 @@ module.exports = async (client, interaction, args) => {
             if (data) {
                 Schema.findOneAndDelete({ Guild: interaction.guild.id }).then(() => {
                     client.succNormal({ 
-                        text: `Level message deleted!`,
+                        text: `Message de niveau supprimé!`,
                         type: 'editreply'
                     }, interaction);
                 })
@@ -53,7 +53,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             client.succNormal({
-                text: `The level message has been set successfully`,
+                text: `Le message de niveau a été défini avec succès`,
                 fields: [
                     {
                         name: `💬┆Message`,

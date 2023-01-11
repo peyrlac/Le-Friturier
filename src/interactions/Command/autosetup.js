@@ -1,80 +1,88 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('autosetup')
-        .setDescription('Let the bot setup automatically')
+        .setDescription('Laissez la configuration du bot automatiquement')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the auto setup commands')
+                .setDescription('Obtenez des informations sur les commandes de configuration automatique')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('logs')
-                .setDescription('Set the logs from the server')
+                .setDescription('Définissez les journaux du serveur')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
-                        .addChoice('Server logs', 'serverLogs')
-                        .addChoice('Level logs', 'levelLogs')
-                        .addChoice('Boost logs', 'boostLogs')
+                        .addChoices(
+                            { name: 'Journaux des serveurs', value: 'serverLogs' },
+                            { name: 'Journaux de niveau', value: 'levelLogs' },
+                            { name: 'Boost les journaux', value: 'boostLogs' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('fun')
-                .setDescription('Set the fun channels from the server')
+                .setDescription('Définissez les canaux amusants du serveur')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
-                        .addChoice('Birthdays', 'birthdays')
-                        .addChoice('Chatbot', 'chatbot')
-                        .addChoice('Reviews', 'reviews')
-                        .addChoice('Suggestions', 'suggestions')
-                        .addChoice('Starboard', 'starboard')
+                        .addChoices(
+                            { name: 'Anniversaires', value: 'birthdays' },
+                            { name: 'chatbot', value: 'chatbot' },
+                            { name: 'Commentaires', value: 'reviews' },
+                            { name: 'suggestions', value: 'suggestions' },
+                            { name: 'Starboard', value: 'starboard' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('games')
-                .setDescription('Set the game channels from the server')
+                .setDescription('Définissez les canaux de jeu du serveur')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
-                        .addChoice('Counting', 'counting')
-                        .addChoice('Guess the number', 'gtn')
-                        .addChoice('Guess the word', 'gtw')
-                        .addChoice('Word snake', 'wordsnake')
+                        .addChoices(
+                            { name: 'Compte', value: 'counting' },
+                            { name: 'Devinez le nombre', value: 'gtn' },
+                            { name: 'Devinez le mot', value: 'gtw' },
+                            { name: 'Mot Snake', value: 'wordsnake' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('welcome')
-                .setDescription('Setup the welcome system')
+                .setDescription('Configurer le système de bienvenue')
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('The setup that you want')
+                        .setDescription('La configuration que vous voulez')
                         .setRequired(true)
-                        .addChoice('Welcome channel', 'welcomechannel')
-                        .addChoice('Welcome role', 'welcomerole')
-                        .addChoice('Leave channnel', 'leavechannel')
+                        .addChoices(
+                            { name: 'Canal de bienvenue', value: 'welcomechannel' },
+                            { name: 'Rôle de bienvenue', value: 'welcomerole' },
+                            { name: 'Quitter le canal', value: 'leavechannel' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('customvoice')
-                .setDescription('Set the custom voice channels from the server')
+                .setDescription('Définissez les canaux vocaux personnalisés du serveur')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('ticketpanel')
-                .setDescription('Set the ticket panel from the server')
+                .setDescription('Définissez le panneau de ticket du serveur')
         )
     ,
 
@@ -85,9 +93,10 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         const perms = await client.checkUserPerms({
-            flags: [Discord.Permissions.FLAGS.ADMINISTRATOR],
-            perms: ["ADMINISTRATOR"]
+            flags: [Discord.PermissionsBitField.Flags.Administrator],
+            perms: [Discord.PermissionsBitField.Flags.Administrator]
         }, interaction)
 
         if (perms == false) return;

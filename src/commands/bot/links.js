@@ -1,37 +1,35 @@
-/* Pas nécessaire -Pierre
-
 const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
-    const row = new Discord.MessageActionRow()
+    const row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageSelectMenu()
+            new Discord.StringSelectMenuBuilder()
                 .setCustomId('Bot-linkspanel')
-                .setPlaceholder('❌ ┆ Aucune sélection')
+                .setPlaceholder('❌┆Rien de sélectionné')
                 .addOptions([
                     {
-                        label: `Serveur support`,
-                        description: `Join the suppport server`,
+                        label: `Serveur d'assistance`,
+                        description: `Rejoignez le serveur Suppport`,
                         emoji: "❓",
                         value: "support-linkspanel",
                     },
                     {
                         label: `Inviter le bot`,
-                        description: `Invite Bot to your server`,
+                        description: `Invitez Bot sur votre serveur`,
                         emoji: "📨",
                         value: "invite-linkspanel",
                     },
                     {
-                        label: `Invite Bot 2`,
-                        description: `Invite Bot 2 to your server`,
-                        emoji: "📕",
-                        value: "invite2-linkspanel",
-                    },
-                    {
-                        label: `Community Server`,
-                        description: `Join the community server!`,
+                        label: `Serveur communautaire`,
+                        description: `Rejoignez le serveur communautaire!`,
                         emoji: "🌍",
                         value: "community-linkspanel",
+                    },
+                    {
+                        label: `Top.gg`,
+                        description: `Afficher le lien top.gg`,
+                        emoji: "📃",
+                        value: "top.gg-linkspanel",
                     },
                 ]),
         );
@@ -45,4 +43,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
-*/
+ 

@@ -4,8 +4,8 @@ const Schema = require("../../database/models/functions");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -25,7 +25,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     client.succNormal({
-        text: `Levels is now **${boolean ? 'enabled' : 'disabled'}** in this guild`,
+        text: `Les niveaux sont maintenant**${boolean ? 'activé' : 'désactivé'}** dans ce serveur`,
         type: 'editreply'
     }, interaction);
 }

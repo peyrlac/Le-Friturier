@@ -1,37 +1,55 @@
 const Discord = require('discord.js');
 const chalk = require('chalk');
+const { random } = require('mathjs');
 
 module.exports = async (client) => {
-  const activities = [
-        { name: `${client.guilds.cache.size} Servers`, type: 2 }, // LISTENING
-        { name: `${client.channels.cache.size} Channels`, type: 0 }, // PLAYING
-        { name: `${client.users.cache.size} Users`, type: 3 }, // WATCHING
-        { name: `si Eliott fait pas bêtises`, type: 3 },
-    ];
-    const status = [
-        'online',
-        'dnd',
-        'idle'
-    ];
-   /* let i = 0;
-    setInterval(() => {
-        if(i >= activities.length) i = 0
-        client.user.setActivity(activities[i])
-        i++;
-    }, 5000);
-  
-    let s = 0;
-    setInterval(() => {
-        if(s >= activities.length) s = 0
-        
-        s++;
-    }, 30000);
-  */
-    client.user.setStatus(status[0])
-    client.user.setActivity(activities[3])
-  
-    client.player.init(client.user.id);    
-  console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`${client.user.username}`), chalk.green(`is ready!`))
+    const startLogs = new Discord.WebhookClient({
+        id: client.webhooks.startLogs.id,
+        token: client.webhooks.startLogs.token,
+    });
+
+    console.log(`\u001b[0m`);
+    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Shard #${client.shard.ids[0] + 1}`), chalk.green(`is ready!`))
+    console.log(chalk.blue(chalk.bold(`Bot`)), (chalk.white(`>>`)), chalk.green(`Started on`), chalk.red(`${client.guilds.cache.size}`), chalk.green(`servers!`))
+
+    let embed = new Discord.EmbedBuilder()
+        .setTitle(`🆙・Finishing shard`)
+        .setDescription(`A shard just finished`)
+        .addFields(
+            { name: "🆔┆ID", value: `${client.shard.ids[0] + 1}/${client.options.shardCount}`, inline: true },
+            { name: "📃┆State", value: `Ready`, inline: true },
+        )
+        .setColor(client.config.colors.normal)
+    startLogs.send({
+        username: 'Bot Logs',
+        embeds: [embed],
+    });
+
+    setInterval(async function () {
+        const promises = [
+            client.shard.fetchClientValues('guilds.cache.size'),
+        ];
+        return Promise.all(promises)
+            .then(results => {
+                const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
+                let statuttext;
+                if (process.env.DISCORD_STATUS) {
+                    statuttext = process.env.DISCORD_STATUS.split(', ');
+                } else {
+                    statuttext = [
+                        `・❓┆/help`,
+                        `・💻┆${totalGuilds} servers`,
+                        `・📨┆discord.me/corwindev`,
+                        `・🎉┆400+ commands`,
+                        `・🏷️┆Version ${require(`${process.cwd()}/package.json`).version}`
+                    ];
+                }
+                const randomText = statuttext[Math.floor(Math.random() * statuttext.length)];
+                client.user.setActivity('activity', { type: Discord.ActivityType.Streaming });
+                client.user.setPresence({ activities: [{ name: randomText }], status: 'online' });
+            })
+    }, 50000)
+
+    client.player.init(client.user.id);
 }
 
- 

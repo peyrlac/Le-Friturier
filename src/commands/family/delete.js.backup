@@ -4,22 +4,22 @@ const Schema = require("../../database/models/family");
 
 module.exports = async (client, interaction, args) => {
 
-    const row = new Discord.MessageActionRow()
+    const row = new Discord.ActionRowBuilder()
         .addComponents(
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('family_delete')
                 .setEmoji('✅')
-                .setStyle('SUCCESS'),
+                .setStyle(Discord.ButtonStyle.Success),
 
-            new Discord.MessageButton()
+            new Discord.ButtonBuilder()
                 .setCustomId('family_stop')
                 .setEmoji('❌')
-                .setStyle('DANGER'),
+                .setStyle(Discord.ButtonStyle.Danger),
         );
 
     client.embed({
-        title: `${client.emotes.normal.error}・Remise à zero`,
-        desc: `Es-tu sûr de vouloir décimer ta famille ?`,
+        title: `${client.emotes.normal.error}・Reset family`,
+        desc: `Are you sure you want to reset your family?`,
         components: [row],
         type: 'editreply'
     }, interaction);
@@ -31,9 +31,9 @@ module.exports = async (client, interaction, args) => {
             if (i.customId == "family_delete") {
                 i.message.delete();
 
-                var remove = await Schema.findOneAndDelete({ Guild: interaction.guild.id, User: interaction.author.id });
-                const parent = await Schema.findOne({ Guild: interaction.guild.id, Parent: interaction.author.id });
-                const partner = await Schema.findOne({ Guild: interaction.guild.id, Partner: interaction.author.id });
+                var remove = await Schema.findOneAndDelete({ Guild: interaction.guild.id, User: interaction.user.id });
+                const parent = await Schema.findOne({ Guild: interaction.guild.id, Parent: interaction.user.id });
+                const partner = await Schema.findOne({ Guild: interaction.guild.id, Partner: interaction.user.id });
 
                 if (parent) {
                     parent.Parent = " ";
@@ -45,7 +45,7 @@ module.exports = async (client, interaction, args) => {
                     partner.save();
                 }
 
-                client.succNormal({ text: `Ta famille a été décimée !`, type: 'editreply' }, interaction);
+                client.succNormal({ text: `Your family has been deleted!`, type: 'editreply' }, interaction);
             }
 
             if (i.customId == "family_stop") {
@@ -54,7 +54,7 @@ module.exports = async (client, interaction, args) => {
         })
         .catch((err) => {
             console.log(err)
-            client.errNormal({ error: "Time's up! Chargement de la backup!", type: 'editreply' }, interaction);
+            client.errNormal({ error: "Time's up! Cancelled backup loading!", type: 'editreply' }, interaction);
         });
 }
 

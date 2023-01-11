@@ -4,7 +4,7 @@ const Schema = require("../../database/models/family");
 
 module.exports = async (client, interaction, args) => {
 
-    const target = interaction.options.getUser('user');
+    const target = interaction.options.getUser('membre');
     const author = interaction.user;
 
     if (author.id == target.id) return client.errNormal({
@@ -29,7 +29,7 @@ module.exports = async (client, interaction, args) => {
         data.save();
 
         client.embed({ 
-            title: `👰・Divorcé`, 
+            title: `👰・Divorcés`, 
             desc: `${author} et ${target} viennent de divorcer`, 
             type: 'editreply' 
         }, interaction);

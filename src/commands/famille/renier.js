@@ -4,7 +4,7 @@ const Schema = require("../../database/models/family");
 
 module.exports = async (client, interaction, args) => {
 
-    const target = interaction.options.getUser('user');
+    const target = interaction.options.getUser('membre');
     const author = interaction.user;
     const guild = { Guild: interaction.guild.id };
 
@@ -23,8 +23,10 @@ module.exports = async (client, interaction, args) => {
             Schema.findOne({ Guild: interaction.guild.id, User: data.Parent }, async (err, data2) => {
                 if (data2) {
                     client.embed({ title: `👪・Renié`, desc: `${author} a renié <@!${data.Parent}>`, type: 'editreply' }, interaction);
-
-                    data.Parent = null;
+                    let tempArray = data.Parent;
+                    let filteredArray = tempArray.filter(val => val !== target.id);
+                    
+                    data.Parent = filteredArray;
                     data.save();
                 }
             })
@@ -32,8 +34,8 @@ module.exports = async (client, interaction, args) => {
         else {
             Schema.findOne({ Guild: interaction.guild.id, User: author.id }, async (err, data) => {
                 if (data) {
-                    if (data.Children.includes(target.username)) {
-                        const filtered = data.Children.filter((user) => user !== target.username);
+                    if (data.Children.includes(target.id)) {
+                        const filtered = data.Children.filter((user) => user !== target.id);
 
                         await Schema.findOneAndUpdate(guild, {
                             Guild: interaction.guild.id,
@@ -43,7 +45,10 @@ module.exports = async (client, interaction, args) => {
 
                         Schema.findOne({ Guild: interaction.guild.id, Parent: author.id }, async (err, data) => {
                             if (data) {
-                                data.Parent = null;
+                                let tempArray = data.Parent;
+                                let filteredArray = tempArray.filter(val => val !== target.id);
+
+                                data.Parent = filteredArray;
                                 data.save();
                             }
                         })

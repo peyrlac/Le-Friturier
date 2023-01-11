@@ -4,8 +4,8 @@ const Schema = require("../../database/models/verify");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_MESSAGES],
-        perms: ["MANAGE_MESSAGES"]
+        flags: [Discord.PermissionsBitField.Flags.ManageMessages],
+        perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction)
 
     if (perms == false) return;
@@ -30,10 +30,10 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `Verify panel has been successfully created`,
+            text: `Vérifier que le panneau a été créé avec succès`,
             fields: [
                 {
-                    name: `📘┆Channel`,
+                    name: `📘┆Canal`,
                     value: `${channel} (${channel.name})`,
                     inline: true
                 },
@@ -46,17 +46,17 @@ module.exports = async (client, interaction, args) => {
             type: 'editreply'
         }, interaction);
 
-        const row = new Discord.MessageActionRow()
+        const row = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.MessageButton()
+                new Discord.ButtonBuilder()
                     .setCustomId('Bot_verify')
                     .setEmoji('✅')
-                    .setStyle('SUCCESS'),
+                    .setStyle(Discord.ButtonStyle.Success),
             );
 
         client.embed({
-            title: `${interaction.guild.name}・verify`,
-            desc: `Click on the button to verify yourself`,
+            title: `${interaction.guild.name}・vérifier`,
+            desc: `Cliquez sur le bouton pour vous vérifier`,
             components: [row]
         }, channel)
     }

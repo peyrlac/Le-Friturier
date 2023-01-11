@@ -4,8 +4,8 @@ const Schema = require("../../database/models/functions");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.ADMINISTRATOR],
-        perms: ["ADMINISTRATOR"]
+        flags: [Discord.PermissionsBitField.Flags.Administrator],
+        perms: [Discord.PermissionsBitField.Flags.Administrator]
     }, interaction)
 
     if (perms == false) return;
@@ -21,7 +21,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (!isHexColor(color)) return client.errNormal({
-        error: "You did not specify an hex color! Example: ff0000",
+        error: "Vous n'avez pas précisé de couleur hexadécimale!Exemple: FF0000",
         type: 'editreply'
     }, interaction)
 
@@ -39,7 +39,7 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.succNormal({
-        text: `The embed color has been adjusted successfully`,
+        text: `La couleur intégrée a été ajustée avec succès`,
         fields: [
             {
                 name: `🎨┆New color`,

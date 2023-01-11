@@ -19,12 +19,12 @@ module.exports = async (client, interaction, args) => {
 
             if (!colour || !money) return client.errUsage({ usage: "roulette [color] [amount]", type: 'editreply' }, interaction);
             colour = colour.toLowerCase()
-            if (money > data.Money) return client.errNormal({ error: `Tu mises plus de ce que tu as !`, type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ error: `Vous pariez plus que vous ne l'avez fait!`, type: 'editreply' }, interaction);
 
             if (colour == "b" || colour.includes("black")) colour = 0;
             else if (colour == "r" || colour.includes("red")) colour = 1;
             else if (colour == "g" || colour.includes("green")) colour = 2;
-            else return client.errNormal({ error: `Aucune couleur correct spécifiée !`, type: 'editreply' }, interaction);
+            else return client.errNormal({ error: `Aucune couleur correcte spécifiée!`, type: 'editreply' }, interaction);
 
             if (random == 0 && colour == 2) { // Green
                 money *= 15
@@ -55,12 +55,12 @@ module.exports = async (client, interaction, args) => {
                 data.Money -= money;
                 data.save();
 
-                client.embed({ title: `🎰・Multiplicateur: 0x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ title: `🎰・Multiplicateur: 0x`, desc: `Tu as perdu **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
         }
         else {
-            client.errNormal({ error: `Tu n'as pas assez de ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+            client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
         }
     })
 }

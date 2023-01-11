@@ -9,11 +9,11 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
         if (data) {
-            let money = parseInt(args[0]);
+            let money = parseInt(interaction.options.getNumber('amount'));
             let win = false;
 
             if (!money) return client.errUsage({ usage: "slots [amount]", type: 'editreply' }, interaction);
-            if (money > data.Money) return client.errNormal({ error: `Tu mises plus de ce que tu as !`, type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ error: `Vous pariez plus que vous avez!`, type: 'editreply' }, interaction);
 
             let number = []
             for (i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
@@ -26,22 +26,22 @@ module.exports = async (client, interaction, args) => {
                 win = true;
             }
 
-            const row = new Discord.MessageActionRow()
+            const row = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('slots_1')
                         .setLabel(`${slotItems[number[0]]}`)
-                        .setStyle('PRIMARY'),
+                        .setStyle(Discord.ButtonStyle.Primary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('slots_2')
                         .setLabel(`${slotItems[number[1]]}`)
-                        .setStyle('PRIMARY'),
+                        .setStyle(Discord.ButtonStyle.Primary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setCustomId('slots_3')
                         .setLabel(`${slotItems[number[2]]}`)
-                        .setStyle('PRIMARY'),
+                        .setStyle(Discord.ButtonStyle.Primary),
                 );
             if (win) {
 
@@ -70,7 +70,7 @@ module.exports = async (client, interaction, args) => {
             }
         }
         else {
-            client.errNormal({ error: `Tu n'as pas assez de ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+            client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
         }
     })
 }

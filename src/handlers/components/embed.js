@@ -10,8 +10,8 @@ const Schema = require("../../database/models/functions");
 
 module.exports = (client) => {
     client.templateEmbed = function () {
-        return new Discord.MessageEmbed()
-            .setAuthor({
+        return new Discord.EmbedBuilder()
+            /*.setAuthor({
                 name: client.user.username,
                 iconURL: client.user.avatarURL({ size: 1024 })
             })
@@ -19,7 +19,7 @@ module.exports = (client) => {
             .setFooter({
                 text: client.config.discord.footer,
                 iconURL: client.user.avatarURL({ size: 1024 })
-            })
+            })*/
             .setTimestamp();
     }
 
@@ -35,9 +35,11 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Quelque chose a mal tourné !`)
-        embed.addField("💬┇Commentaire", `\`\`\`${error}\`\`\``)
+        embed.setTitle(`${client.emotes.normal.error}・Error!`)
+        embed.setDescription(`Something went wrong!`)
+        embed.addFields( 
+            { name: "💬┆Error comment", value: `\`\`\`${error}\`\`\``},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -56,9 +58,11 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Tu n'as pas fourni de variables correctes`)
-        embed.addField("💬┇Variables requises", `\`\`\`${usage}\`\`\``)
+        embed.setTitle(`${client.emotes.normal.error}・Error!`)
+        embed.setDescription(`You did not provide the correct arguments`)
+        embed.addFields(
+            { name: "💬┆Required arguments", value: `\`\`\`${usage}\`\`\``},    
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -78,9 +82,11 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreurr!`)
-        embed.setDescription(`Tu n'as pas suffisamment de permissions`)
-        embed.addField("🔑┇Permission requise", `\`\`\`${perms}\`\`\``)
+        embed.setTitle(`${client.emotes.normal.error}・Error!`)
+        embed.setDescription(`You don't have the right permissions`)
+        embed.addFields(
+            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -100,9 +106,11 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Je n'ai pas les bonnes permissions`)
-        embed.addField("🔑┇Permission requise", `\`\`\`${perms}\`\`\``)
+        embed.setTitle(`${client.emotes.normal.error}・Error!`)
+        embed.setDescription(`I don't have the right permissions`)
+        embed.addFields(
+            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -122,9 +130,11 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur!`)
-        embed.setDescription(`Tu as déjà fais cette commande une fois`)
-        embed.addField("⏰┇Essaye à nouveau", `<t:${time}:f>`)
+        embed.setTitle(`${client.emotes.normal.error}・Error!`)
+        embed.setDescription(`You've already done this once`)
+        embed.addFields(
+            { name: "⏰┆Try again on", value: `<t:${time}:f>`},
+        )
         embed.setColor(client.config.colors.error)
 
         return client.sendEmbed({
@@ -148,7 +158,7 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.check}・Succès!`)
+        embed.setTitle(`${client.emotes.normal.check}・Success!`)
         embed.setDescription(`${text}`)
         embed.setColor(client.config.colors.succes)
 
@@ -193,10 +203,9 @@ module.exports = (client) => {
         if (fields) embed.addFields(fields);
         if (author) embed.setAuthor(author);
         if (url) embed.setURL(url);
-        if (footer) embed.setFooter(footer);
+        if (footer) embed.setFooter({ text: footer });
         if (color) embed.setColor(color);
         if (functiondata && functiondata.Color && !color) embed.setColor(functiondata.Color)
-
         return client.sendEmbed({
             embeds: [embed],
             content: content,
@@ -220,7 +229,7 @@ module.exports = (client) => {
     }, interaction) {
         const functiondata = await Schema.findOne({ Guild: interaction.guild.id })
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
             .setColor(client.config.colors.normal)
 
         if (title) embed.setTitle(title);

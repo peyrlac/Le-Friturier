@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
     }, editMessage);
 
     client.succNormal({
-        text: `L'Annonce a été éditée avec succès !`,
+        text: `L'annonce a été modifiée avec succès!`,
         type: 'ephemeraledit'
     }, interaction);
 }

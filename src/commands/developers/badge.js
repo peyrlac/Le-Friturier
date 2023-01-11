@@ -35,14 +35,14 @@ module.exports = async (client, interaction, args) => {
     let Badges = await model.findOne({ User: member.id });
 
     if (!badgeFlags[badge.toUpperCase()]) return client.errNormal({
-        error: `I can't find that badge`,
+        error: `Je ne trouve pas ce badge`,
         type: `editreply`
     }, interaction);
 
     if (boolean == true) {
         if (Badges) {
             if (Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
-                error: `This users already has that badge!`,
+                error: `Ces utilisateurs ont déjà ce badge!`,
                 type: `editreply`
             }, interaction);
 
@@ -52,13 +52,13 @@ module.exports = async (client, interaction, args) => {
             array.push(FLAG);
 
             model.findOne({ User: member.id }, async (err, data) => {
-                if (err) throw err;
+                if (err) console.log(err);
                 data.FLAGS = array
                 data.save();
             });
 
             client.succNormal({
-                text: `Added the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+                text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: `editreply`
             }, interaction);
         } else {
@@ -66,27 +66,29 @@ module.exports = async (client, interaction, args) => {
             await newSettings.save().catch(() => { });
 
             client.succNormal({
-                text: `Added the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+                text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: `editreply`
             }, interaction)
         }
 
-        let embedLogs = new Discord.MessageEmbed()
-            .setTitle(`📛・Badge added`)
-            .setDescription(`Added a new badge to ${member} (${member.id})`)
-            .addField('👤┆Added By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`📛┆Badge`, `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, true)
+        let embedLogs = new Discord.EmbedBuilder()
+            .setTitle(`📛・Badge ajouté`)
+            .setDescription(`A ajouté un nouveau badge à ${member} (${member.id})`)
+            .addFields(
+                { name: "👤┆Ajouté par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: `📛┆Badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
+            )
             .setColor(client.config.colors.normal)
-            .setFooter(client.config.discord.footer)
+            .setFooter({ text: client.config.discord.footer})
             .setTimestamp();
         webhookClientLogs.send({
-            username: 'Bot Badges',
+            username: 'Badges bot',
             embeds: [embedLogs],
         });
     }
     else if (boolean == false) {
         if (!Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
-            error: `The user does not have this badge`,
+            error: `L'utilisateur n'a pas ce badge`,
             type: `editreply`
         }, interaction);
 
@@ -104,7 +106,7 @@ module.exports = async (client, interaction, args) => {
         if (!array[0]) {
             let deleted = await model.deleteMany({ User: member.id });
             client.succNormal({
-                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, the user is now removed of the badge system, it has no badges left!`,
+                text: `Enlevé le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, l'utilisateur a été retiré du système de badge, il n'a plus de badges!`,
                 type: 'editreply'
             }, interaction);
 
@@ -112,27 +114,29 @@ module.exports = async (client, interaction, args) => {
             model.findOne(
                 { User: member.id },
                 async (err, data) => {
-                    if (err) throw err;
+                    if (err) console.log(err);
                     data.FLAGS = array
                     data.save();
                 }
             );
             client.succNormal({
-                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+                text: `Enlevé le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: 'editreply'
             }, interaction);
         }
 
-        let embedLogs = new Discord.MessageEmbed()
-            .setTitle(`📛・Badge removed`)
-            .setDescription(`Removed a badge from ${member} (${member.id})`)
-            .addField('👤┆Removed By', `${interaction.user} (${interaction.user.tag})`, true)
-            .addField(`📛┆Badge`, `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, true)
+        let embedLogs = new Discord.EmbedBuilder()
+            .setTitle(`📛・Badge supprimé`)
+            .setDescription(`Retiré un badge de ${member} (${member.id})`)
+            .addFields(
+                { name: "👤┆Supprimé par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: `📛┆badge`, value: `${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()})`, inline: true },
+            )
             .setColor(client.config.colors.normal)
-            .setFooter(client.config.discord.footer)
+            .setFooter({ text: client.config.discord.footer })
             .setTimestamp();
         webhookClientLogs.send({
-            username: 'Bot Badges',
+            username: 'Badges bot',
             embeds: [embedLogs],
         });
     }

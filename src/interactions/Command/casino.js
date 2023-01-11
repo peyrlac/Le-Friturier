@@ -1,40 +1,40 @@
 const { CommandInteraction, Client } = require('discord.js');
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('casino')
-        .setDescription('Play the casino game')
+        .setDescription('Jouer au jeu du casino')
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the casino category commands')
+                .setDescription('Obtenez des informations sur les commandes de catégorie de casino')
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('blackjack')
-                .setDescription('Play a blackjack game to win money')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription('Jouez à un jeu de blackjack pour gagner de l\'argent')
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('crash')
-                .setDescription('More risk, more reward')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription('Plus de risques, plus de récompense')
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('roulette')
-                .setDescription('Play roulette')
-                .addStringOption(option => option.setName('color').setDescription('Enter a hex color').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription('Jouer à la roulette')
+                .addStringOption(option => option.setName('color').setDescription('Entrez dans une couleur hexagonale').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('slots')
-                .setDescription('Play slots')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription('Jouer à des créneaux')
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
         )
     ,
 
@@ -45,6 +45,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         client.loadSubcommands(client, interaction, args);
     },
 };

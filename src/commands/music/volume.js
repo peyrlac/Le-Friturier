@@ -5,29 +5,29 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: `Vous n'êtes pas dans un canal vocal!`,
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: `Vous n'êtes pas dans le même canal vocal!`,
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.current) return client.errNormal({
-        error: "Il n'y a pas de musiques jouées dans ce serveur",
+        error: "Il n'y a pas de chansons qui jouent dans ce serveur",
         type: 'editreply'
     }, interaction);
 
     let amount = interaction.options.getNumber('amount');
 
     if (!amount) return client.simpleEmbed({
-        desc: `${client.emotes.normal.volume}┆Le volume actuel est sur **${player.volume}%**`,
+        desc: `${client.emotes.normal.volume}┆Le volume actuel est **${player.volume}%**`,
         type: 'editreply'
     }, interaction);
 
     if (isNaN(amount) || amount === 'Infinity') return client.errNormal({
-        text: `Entre un chiffre valide s'il te plait!`,
+        text: `S'il vous plait, entrez un nombre valide!`,
         type: 'editreply'
     }, interaction);
 
@@ -39,7 +39,7 @@ module.exports = async (client, interaction, args) => {
     player.setVolume(parseInt(amount))
 
     client.succNormal({
-        text: `Le volume a été ajusté à **${amount}%**`,
+        text: `Volume réglé sur **${amount}%**`,
         type: 'editreply'
     }, interaction);
 }

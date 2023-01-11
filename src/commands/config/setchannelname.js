@@ -4,8 +4,8 @@ const Schema = require("../../database/models/stats");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
-        flags: [Discord.Permissions.FLAGS.MANAGE_CHANNELS],
-        perms: ["MANAGE_CHANNELS"]
+        flags: [Discord.PermissionsBitField.Flags.ManageChannels],
+        perms: [Discord.PermissionsBitField.Flags.ManageChannels]
     }, interaction)
 
     if (perms == false) return;
@@ -14,10 +14,10 @@ module.exports = async (client, interaction, args) => {
 
     if (name.toUpperCase() == "HELP") {
         return client.embed({
-            title: `ℹ️・Channel name options`,
-            desc: `These are the channel name options: \n
-            \`{emoji}\` - Channel emoji
-            \`{name}\` - Channel name`,
+            title: `ℹ️・Options de nom de canal`,
+            desc: `Ce sont les options de nom de canal: \n
+            \`{emoji}\` - Emoji de canal
+            \`{name}\` - Nom du canal`,
             type: 'editreply'
         }, interaction)
     }
@@ -35,10 +35,10 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `The channel name has been set successfully`,
+            text: `Le nom du canal a été défini avec succès`,
             fields: [
                 {
-                    name: `💬┆Name`,
+                    name: `💬┆Nom`,
                     value: `${name}`,
                     inline: true
                 },

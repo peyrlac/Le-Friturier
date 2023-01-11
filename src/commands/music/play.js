@@ -2,20 +2,20 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     if (!interaction.member.voice.channel) return client.errNormal({
-        error: `Tu n'es pas dans un canal vocal !`,
+        error: `Vous n'êtes pas dans un canal vocal!`,
         type: 'editreply'
     }, interaction);
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
     if (!channel) return client.errNormal({
-        error: `Le canal n'existe pas !`,
+        error: `Le canal n'existe pas!`,
         type: 'editreply'
     }, interaction);
 
     let player = client.player.players.get(interaction.guild.id);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Tu n'es pas dans le même canal vocal que moi !`,
+        error: `Vous n'êtes pas dans le même canal vocal!`,
         type: 'editreply'
     }, interaction);
 
@@ -34,8 +34,8 @@ module.exports = async (client, interaction, args) => {
         player.connect()
 
         setTimeout(() => {
-            if (channel.type == "GUILD_STAGE_VOICE") {
-                interaction.guild.me.voice.setSuppressed(false);
+            if (channel.type == Discord.ChannelType.GuildStageVoice) {
+                interaction.guild.members.me.voice.setSuppressed(false);
             }
         }, 500)
     }
@@ -55,7 +55,7 @@ module.exports = async (client, interaction, args) => {
     if (res.loadType === 'LOAD_FAILED') {
         if (!player.queue.current) player.destroy();
         return client.errNormal({
-            error: `Oups ! il y a eu une erreur pour obtenir la musique\NRéessaye d'ici quelques minutes`,
+            error: `Erreur d'obtention de la musique.S'il vous plait, réessayez dans quelques minutes`,
             type: 'editreply'
         }, interaction);
     }
@@ -64,7 +64,7 @@ module.exports = async (client, interaction, args) => {
         case 'NO_MATCHES': {
             if (!player.queue.current) player.destroy()
             await client.errNormal({
-                error: `Aucune musique trouvée`,
+                error: `Aucune musique n'a été trouvée`,
                 type: 'editreply'
             }, interaction);
             break;
@@ -81,21 +81,21 @@ module.exports = async (client, interaction, args) => {
                 client.embed({
                     title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: `La musique a été ajoutée à la file !`,
+                    desc: `The song has been added to the queue!`,
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: `👤┆Demandée par`,
+                            name: `👤┆Requested By`,
                             value: `${track.requester}`,
                             inline: true
                         },
                         {
-                            name: `${client.emotes.normal.clock}┆Terminée à`,
+                            name: `${client.emotes.normal.clock}┆Ends at`,
                             value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
-                            name: `🎬┆Auteur`,
+                            name: `🎬┆Author`,
                             value: `${track.author}`,
                             inline: true
                         }
@@ -119,41 +119,41 @@ module.exports = async (client, interaction, args) => {
             let max = 5, collected, filter = (i) => i.user.id === interaction.user.id;
             if (res.tracks.length < max) max = res.tracks.length;
 
-            let row = new Discord.MessageActionRow()
+            let row = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("1️⃣")
                         .setCustomId("1")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("2️⃣")
                         .setCustomId("2")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("3️⃣")
                         .setCustomId("3")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("4️⃣")
                         .setCustomId("4")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
 
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("5️⃣")
                         .setCustomId("5")
-                        .setStyle("SECONDARY"),
+                        .setStyle(Discord.ButtonStyle.Secondary),
                 );
 
-            let row2 = new Discord.MessageActionRow()
+            let row2 = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.MessageButton()
+                    new Discord.ButtonBuilder()
                         .setEmoji("🛑")
-                        .setLabel("Annuler")
+                        .setLabel("Cancel")
                         .setCustomId("cancel")
-                        .setStyle("DANGER"),
+                        .setStyle(Discord.ButtonStyle.Danger),
                 );
 
             const results = res.tracks
@@ -162,12 +162,12 @@ module.exports = async (client, interaction, args) => {
                 .join('\n');
 
             client.embed({
-                title: `🔍・Résultats de recherche`,
+                title: `🔍・Search Results`,
                 desc: results,
                 fields: [
                     {
-                        name: `❓┆Annuler recherche ?`,
-                        value: `Clique sur \`annuler\` pour arrêter la recherche`,
+                        name: `❓┆Cancel search?`,
+                        value: `Press \`cancel\` to stop the search`,
                         inline: true
                     }
                 ],
@@ -176,12 +176,15 @@ module.exports = async (client, interaction, args) => {
             }, interaction)
 
             try {
-                i = await interaction.channel.awaitMessageComponent({ filter, max: 1, time: 30e3, componentType: 'BUTTON', errors: ['time'] });
+                i = await interaction.channel.awaitMessageComponent({ filter, max: 1, time: 30e3, componentType: Discord.ComponentType.Button, errors: ['time'] });
             } catch (e) {
                 if (!player.queue.current) player.destroy();
+                row.components.forEach((button) => button.setDisabled(true));
+                row2.components.forEach((button) => button.setDisabled(true));
                 return client.errNormal({
-                    error: `Tu n'as fournis aucune sélection`,
-                    type: 'editreply'
+                    error: `You didn't provide a selection`,
+                    type: 'editreply',
+                    components: [row, row2]
                 }, interaction)
             }
 
@@ -191,12 +194,12 @@ module.exports = async (client, interaction, args) => {
 
             if (first.toLowerCase() === 'cancel') {
                 if (!player.queue.current) player.destroy();
-                return interaction.channel.send('Sélection annulée.');
+                return interaction.channel.send('Cancelled selection.');
             }
 
             const index = Number(first) - 1;
             if (index < 0 || index > max - 1) return client.errNormal({
-                error: `Le nombre que vous avez fourni est trop petit ou trop grand (1-${max})`,
+                error: `The number you provided too small or too big (1-${max})`,
                 type: 'editreply'
             }, interaction)
 
@@ -210,21 +213,21 @@ module.exports = async (client, interaction, args) => {
                 client.embed({
                     title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: `La musique a été ajoutée à la file !`,
+                    desc: `The song has been added to the queue!`,
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: `👤┆Demandée par`,
+                            name: `👤┆Requested By`,
                             value: `${track.requester}`,
                             inline: true
                         },
                         {
-                            name: `${client.emotes.normal.clock}┆Terminée à`,
+                            name: `${client.emotes.normal.clock}┆Ends at`,
                             value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
-                            name: `🎬┆Auteur`,
+                            name: `🎬┆Author`,
                             value: `${track.author}`,
                             inline: true
                         }
