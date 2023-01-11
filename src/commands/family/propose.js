@@ -8,32 +8,32 @@ module.exports = async (client, interaction, args) => {
     const author = interaction.user;
     const guild = { Guild: interaction.guild.id };
 
-    if (author.id == target.id) return client.errNormal({ error: "Tu ne peux pas te marier toi-même !", type: 'editreply' }, interaction);
+    if (author.id == target.id) return client.errNormal({ error: "Tu ne peux pas te marrier toi-même !", type: 'editreply' }, interaction);
 
     Schema.findOne({ Guild: interaction.guild.id, Partner: author.id }, async (err, data) => {
         if (data) {
-            client.errNormal({ error: "Quelqu'un dans le couple est déjà marié !", type: 'editreply' }, interaction);
+            client.errNormal({ error: "Quelqu'un dans le couple est déjà marrié !", type: 'editreply' }, interaction);
         }
         else {
             Schema.findOne({ Guild: interaction.guild.id, Partner: target.id }, async (err, data) => {
                 if (data) {
-                    client.errNormal({ error: "Quelqu'un dans le couple est déjà marié !", type: 'editreply' }, interaction);
+                    client.errNormal({ error: "Quelqu'un dans le couple est déjà marrié !", type: 'editreply' }, interaction);
                 }
                 else {
                     Schema.findOne({ Guild: interaction.guild.id, User: target.id, Parent: author.id }, async (err, data) => {
                         if (data) {
-                            client.errNormal({ error: "Tu ne peux pas te marier avec un membre de ta famille !", type: 'editreply' }, interaction);
+                            client.errNormal({ error: "Tu ne peux pas te marrier avec un membre de ta famille !", type: 'editreply' }, interaction);
                         }
                         else {
                             Schema.findOne({ Guild: interaction.guild.id, User: author.id, Parent: target.id }, async (err, data) => {
                                 if (data) {
-                                    client.errNormal({ error: "Tu ne peux pas te marier avec un membre de ta famille !", type: 'editreply' }, interaction);
+                                    client.errNormal({ error: "Tu ne peux pas te marrier avec un membre de ta famille !", type: 'editreply' }, interaction);
                                 }
                                 else {
                                     Schema.findOne({ Guild: interaction.guild.id, User: author.id }, async (err, data) => {
                                         if (data) {
                                             if (data.Children.includes(target.id)) {
-                                                client.errNormal({ error: "Tu ne peux pas te marier avec un membre de ta famille !", type: 'editreply' }, interaction);
+                                                client.errNormal({ error: "Tu ne peux pas te marrier avec un membre de ta famille !", type: 'editreply' }, interaction);
                                             }
                                             else {
                                                 propose();
@@ -62,13 +62,13 @@ module.exports = async (client, interaction, args) => {
 
                 new Discord.MessageButton()
                     .setCustomId('propose_deny')
-                    .setEmoji('🚫')
+                    .setEmoji('❌')
                     .setStyle('DANGER'),
             );
 
         client.embed({
             title: `👰・Demande en marriage`,
-            desc: `${author} a demandé en mariage ${target} ! \n${target}, clique sur un des boutons`,
+            desc: `${author} a demandé en marriage ${target} ! \n${target}, clique sur un des boutons`,
             components: [row],
             content: `${target}`,
             type: 'editreply'
@@ -108,19 +108,18 @@ module.exports = async (client, interaction, args) => {
                 })
 
                 client.embed({
-                    title: `👰・Demande en mariage acceptée`,
-                    desc: `${author} et ${target} sont maintenant mariés ! 👰🎉`,
+                    title: `👰・Marriage proposal - Approved`,
+                    desc: `${author} et ${target} sont maintenant marrié ! 👰🎉`,
                     components: [],
                     content: `${target}`,
-                    image('https://media4.giphy.com/media/JsETGYKdNZNuLioYe3/giphy.gif'),
                     type: 'editreply'
                 }, interaction);
             }
 
             if (i.customId == "propose_deny") {
                 client.embed({
-                    title: `👰・Demande en mariage refusée`,
-                    desc: `${target} aime quelqu'un d'autre ou préfère resté seul et a décidé de ne pas se marier avec ${author}`,
+                    title: `👰・Demande en marriage refusée`,
+                    desc: `${target} aime quelqu'un d'autre ou préfère resté seul et a décidé de ne pas se marrier avec ${author}`,
                     components: [],
                     content: `${target}`,
                     type: 'editreply'
