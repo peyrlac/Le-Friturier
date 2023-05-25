@@ -2,12 +2,13 @@ const Discord = require('discord.js');
 const axios = require('axios');
 const cheerio = require('cheerio');
 const https = require('https');
+
 module.exports = async (client) => {
     const regex = {
         teleparty: /\bhttps?:\/\/redirect\.teleparty\.com\/join\/[a-f0-9]+\b/i,
         primeparty: /\bhttps?:\/\/(?:www\.)?(?:watchparty\.amazon|primevideo\.com)\/(?:[\w-]+\/)*amzn1\.dv\.wp\.room\.[\w-]+\b/i,
-        primeparty2: /https:\/\/www\.primevideo\.com\/watchparty\//,
-        watchpartyme: /\bhttps?:\/\/www\.watchparty\.me\/#[\w-]+\b/i,
+        primeparty2: /\bhttps:\/\/www\.primevideo\.com\/watchparty\//i,
+        watchpartyme: /\bhttps:\/\/www\.watchparty\.me\/watch\//i,
         disneyparty: /\bhttps?:\/\/www\.disneyplus\.com(?:\/\w{2}-\w{2})?\/groupwatch\/[\w-]+\b/i,
         imgUrl: /(https?:\/\/.*\.(?:png|webp|jpg|jpeg|gif))/i
     };
@@ -107,7 +108,9 @@ module.exports = async (client) => {
               watchparty = true;
               support = jsonData.videoService;
               videoId = jsonData.videoId;
-              cleanedMessage = cleanedMessage.replace(regex.teleparty, `<:teleparty:1110295762300055653> [lien](${url})`);
+              console.log(support + " " + videoId);
+              cleanedMessage = cleanedMessage.replace(regex.teleparty, `<:teleparty:1110295762300055653>`);
+              messageOnlyLink = regex.teleparty.test(cleanedMessage);
             }
 
             /*
@@ -127,9 +130,7 @@ module.exports = async (client) => {
                   titleFound = false;
                 }
               }
-              await netflix();
-              cleanedMessage = cleanedMessage.replace(regex.teleparty, `[\[lien\]](${url})`);
-              messageOnlyLink = regex.teleparty.test(cleanedMessage);
+              await netflix();     
 
               // Streaming platform parameters
               support = "Netflix";
@@ -218,7 +219,8 @@ module.exports = async (client) => {
             /*
                         Watchparty.me
             */
-            if (message.content.match(regex.watchpartyme) || support == "watch") {
+            if (message.content.match(regex.watchpartyme)) {
+              url = message.content.match(regex.watchpartyme)[0];
               cleanedMessage = cleanedMessage.replace(regex.watchpartyme, `[\[lien\]](${url})`);
               messageOnlyLink = regex.watchpartyme.test(cleanedMessage);
 
@@ -227,7 +229,7 @@ module.exports = async (client) => {
               icon = "https://www.saashub.com/images/app/service_logos/183/j18sqik9nu3s/large.png?1626896447";
               color = 0xff0000;
               watchparty = true;
-              url = watchpartyme[0];
+              
             };
 
 
