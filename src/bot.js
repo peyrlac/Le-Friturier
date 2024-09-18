@@ -68,13 +68,7 @@ if (clientID && clientSecret) {
             {
                 host: process.env.LAVALINK_HOST || "lava.link",
                 port: parseInt(process.env.LAVALINK_PORT) || 80,
-                password: process.env.LAVALINK_PASSWORD || "CorwinDev",
-                secure: Boolean(process.env.LAVALINK_SECURE) || false
-            },
-            {
-                host: "lavalink.techpoint.world",
-                port: 80,
-                password: "techpoint"
+                password: process.env.LAVALINK_PASSWORD || "CorwinDev"
             },
         ],
         send(id, payload) {
@@ -96,7 +90,7 @@ if (clientID && clientSecret) {
                 host: process.env.LAVALINK_HOST || "lava.link",
                 port: parseInt(process.env.LAVALINK_PORT) || 80,
                 password: process.env.LAVALINK_PASSWORD || "CorwinDev",
-                secure: Boolean(process.env.LAVALINK_SECURE) || false
+                secure: true
             },
         ],
         send(id, payload) {
@@ -155,20 +149,20 @@ fs.readdirSync('./src/handlers').forEach((dir) => {
 client.login(process.env.DISCORD_TOKEN);
 
 process.on('unhandledRejection', error => {
-    console.error('Unhandled promise rejection:', error);
-    if (error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
-    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
+    console.error('Rejet de promesse non gérée:', error);
+    if (error) if (error.length > 950) error = error.slice(0, 950) + '... Afficher la console pour plus de détails';
+    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... Afficher la console pour plus de détails';
     if(!error.stack) return
     const embed = new Discord.EmbedBuilder()
-        .setTitle(`🚨・Unhandled promise rejection`)
+        .setTitle(`🚨・Rejet de promesse non gérée`)
         .addFields([
             {
-                name: "Error",
-                value: error ? Discord.codeBlock(error) : "No error",
+                name: "Erreur",
+                value: error ? Discord.codeBlock(error) : "Pas d'erreur",
             },
             {
-                name: "Stack error",
-                value: error.stack ? Discord.codeBlock(error.stack) : "No stack error",
+                name: "Erreur de pile",
+                value: error.stack ? Discord.codeBlock(error.stack) : "Aucune erreur de Stack",
             }
         ])
         .setColor(client.config.colors.normal)
@@ -176,15 +170,15 @@ process.on('unhandledRejection', error => {
         username: 'Bot Logs',
         embeds: [embed],
     }).catch(() => {
-        console.log('Error sending unhandledRejection to webhook')
+        console.log('Erreur lors de l\'envoi du rejet non géré au webhook')
         console.log(error)
     })
 });
 
 process.on('warning', warn => {
-    console.warn("Warning:", warn);
+    console.warn("Avertissement:", warn);
     const embed = new Discord.EmbedBuilder()
-        .setTitle(`🚨・New warning found`)
+        .setTitle(`🚨・Nouvel avertissement trouvé`)
         .addFields([
             {
                 name: `Warn`,
@@ -193,34 +187,34 @@ process.on('warning', warn => {
         ])
         .setColor(client.config.colors.normal)
     warnLogs.send({
-        username: 'Bot Logs',
+        username: 'Logs',
         embeds: [embed],
     }).catch(() => {
-        console.log('Error sending warning to webhook')
+        console.log('Erreur lors de l\'envoi de l\'avertissement au webhook')
         console.log(warn)
     })
 });
 
 client.on(Discord.ShardEvents.Error, error => {
     console.log(error)
-    if (error) if (error.length > 950) error = error.slice(0, 950) + '... view console for details';
-    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... view console for details';
+    if (error) if (error.length > 950) error = error.slice(0, 950) + '... Afficher la console pour plus de détails';
+    if (error.stack) if (error.stack.length > 950) error.stack = error.stack.slice(0, 950) + '... Afficher la console pour plus de détails';
     if (!error.stack) return
     const embed = new Discord.EmbedBuilder()
-        .setTitle(`🚨・A websocket connection encountered an error`)
+        .setTitle(`🚨・Une connexion WebSocket a rencontré une erreur`)
         .addFields([
             {
-                name: `Error`,
+                name: `Erreur`,
                 value: `\`\`\`${error}\`\`\``,
             },
             {
-                name: `Stack error`,
+                name: `Erreur Stack`,
                 value: `\`\`\`${error.stack}\`\`\``,
             }
         ])
         .setColor(client.config.colors.normal)
     consoleLogs.send({
-        username: 'Bot Logs',
+        username: 'Logs',
         embeds: [embed],
     });
 });

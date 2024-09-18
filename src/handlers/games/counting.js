@@ -2,7 +2,6 @@ const Discord = require("discord.js");
 
 const countSchema = require("../../database/models/countChannel");
 const count = require("../../database/models/count");
-const math = require('mathjs');
 
 module.exports = async (client) => {
   client
@@ -10,21 +9,11 @@ module.exports = async (client) => {
       if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
       if (
+        isNaN(message.content) ||
         message.attachments.size > 0 ||
-        message.type == Discord.MessageType.ChannelPinnedMessage ||
-        message.stickers.size == 1
+        message.type == Discord.MessageType.ChannelPinnedMessage
       )
         return;
-      var content = message.content.toLowerCase();
-      if(isNaN(content)) {
-        try {
-          const result = math.evaluate(content);
-          content = result;
-        } catch (error) {
-          return;
-        }        
-        
-      }
 
       const data = await countSchema.findOne({
         Guild: message.guild.id,
@@ -53,7 +42,7 @@ module.exports = async (client) => {
             console.log(error);
           }
         } else {
-          if (content == countData.Count) {
+          if (message.content == countData.Count) {
             message.react(client.emotes.normal.check);
             countData.User = message.author.id;
             countData.Count += 1;
@@ -79,7 +68,7 @@ module.exports = async (client) => {
           }
         }
       } else if (data) {
-        if (content == 1) {
+        if (message.content == 1) {
           message.react(client.emotes.normal.check);
 
           new count({
@@ -97,24 +86,7 @@ module.exports = async (client) => {
   client
     .on("messageDelete", async (message) => {
       try {
-        if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
-        
-        if (
-          message.attachments.size > 0 ||
-          message.type == Discord.MessageType.ChannelPinnedMessage ||
-          message.stickers.size == 1
-        )
-          return;
-        var content = message.content.toLowerCase();
-        if(isNaN(content)) {
-          try {
-            const result = math.evaluate(content);
-            content = result;
-          } catch (error) {
-            return;
-          }        
-          
-        }
+        if (isNaN(message.content) || message.author.bot) return;
 
         const data = await countSchema.findOne({
           Guild: message.guild.id,
@@ -124,10 +96,10 @@ module.exports = async (client) => {
 
         if (data && countData) {
           let lastCount = countData.Count - 1;
-          if (content == lastCount) {
+          if (message.content == lastCount) {
             client.simpleEmbed(
               {
-                desc: `**${message.author.tag}**: ${content}`,
+                desc: `**${message.author.tag}**: ${message.content}`,
               },
               message.channel
             );
