@@ -2,8 +2,18 @@ const chalk = require('chalk');
 
 class StatisticsManager {
     constructor() {
-        // Ensure the API URL has a protocol
-        const baseUrl = process.env.STATS_API_URL || 'http://localhost:3000/api';
+        // Resolve API base URL from environment. In production you MUST set STATS_API_URL to
+        // the public URL of the FriturierAPI (example: https://api.example.com/api).
+        // If not provided we fall back to a sensible development default (localhost:3001).
+        const envUrl = process.env.STATS_API_URL || process.env.STATS_API_BASE;
+
+        if (!envUrl && process.env.NODE_ENV === 'production') {
+            console.error(chalk.red('Environment variable STATS_API_URL is not set.'));
+            console.error(chalk.yellow('In production, set STATS_API_URL to your API public URL (e.g. https://api.example.com/api).'));
+            console.error(chalk.yellow('Falling back to http://localhost:3001/api for now (development default).'));
+        }
+
+        const baseUrl = envUrl || 'http://localhost:3001/api';
         this.API_BASE_URL = baseUrl.startsWith('http://') || baseUrl.startsWith('https://')
             ? baseUrl
             : `http://${baseUrl}`;
@@ -86,10 +96,7 @@ class StatisticsManager {
                 try {
                     await this.fetch(`${this.API_BASE_URL}/voice/${guildId}`, {
                         method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            'x-api-key': process.env.STATS_API_KEY
-                         },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ channels })
                     });
                     
