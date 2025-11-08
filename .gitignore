@@ -103,4 +103,14 @@ dist
 # TernJS port file
 .tern-port
 
+src/config/*
+
 package-lock.json
+
+docs
+.pm2
+.ssh
+.vscode
+.cache
+.agents
+test
