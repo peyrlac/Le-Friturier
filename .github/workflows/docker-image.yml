@@ -31,5 +31,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/peyrlac/le-friturier:latest
-            ghcr.io/peyrlac/le-friturier:${{ github.sha }}
+            ghcr.io/peyrlac/friturier-bot:latest
+            ghcr.io/peyrlac/friturier-bot:${{ github.sha }}
