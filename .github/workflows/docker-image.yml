@@ -38,5 +38,10 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            ghcr.io/peyrlac/le-friturier:latest
-            ghcr.io/peyrlac/le-friturier:${{ github.sha }}
+            ghcr.io/peyrlac/friturier-bot:latest
+            ghcr.io/peyrlac/friturier-bot:${{ github.sha }}
+
+      - name: Redeploy Portainer stack
+        if: success()
+        run: |
+          curl -X POST "${{ secrets.PORTAINER_WEBHOOK_URL }}"
