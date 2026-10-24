@@ -3,9 +3,10 @@ const Discord = require('discord.js');
 
 // Map pour stocker les verrous par catégorie
 const locks = new Map();
+const PINNED_EMOJI = '📌';
 
 module.exports = (client) => {
-    async function sortChannels(client, guildId, categoryId) {
+    async function sortChannels(client, guildId, categoryId, mode = 'automatic', pinnedOrder = 'first') {
         // Vérifier si un tri est déjà en cours pour cette catégorie
         const lockKey = `${guildId}-${categoryId}`;
         if (locks.get(lockKey)) {
@@ -16,6 +17,8 @@ module.exports = (client) => {
         try {
             // Poser le verrou
             locks.set(lockKey, true);
+
+            if (mode === 'manual') return;
 
             const guild = await client.guilds.fetch(guildId);
             if (!guild) return;
@@ -54,9 +57,25 @@ module.exports = (client) => {
                 ])
             );
 
-            // Trier les salons par dernier message avec plus de précision
+            const orderedChannels = [...channelsWithPermissions.values()]
+                .sort((a, b) => a.position - b.position)
+                .map(channel => channel.position);
+
+            // En mode hybride, les salons dont la description contient 📌 sont manuels.
+            const pinnedChannels = mode === 'hybrid'
+                ? [...channelsWithPermissions.values()].filter(channel =>
+                    typeof channel.topic === 'string' && channel.topic.includes(PINNED_EMOJI)
+                )
+                : [];
+            const autoChannels = mode === 'hybrid'
+                ? [...channelsWithPermissions.values()].filter(channel =>
+                    !pinnedChannels.includes(channel)
+                )
+                : [...channelsWithPermissions.values()];
+
+            // Trier les salons automatiques par dernier message avec plus de précision
             const sortedChannels = await Promise.all(
-                [...channelsWithPermissions.values()].map(async channel => {
+                [...autoChannels.values()].map(async channel => {
                     try {
                         const messages = await channel.messages.fetch({ limit: 1 });
                         const lastMessage = messages.first();
@@ -84,12 +103,18 @@ module.exports = (client) => {
                 return b.lastMessageTime - a.lastMessageTime;
             });
 
-            // Réorganiser les positions des salons de manière séquentielle
-            for (let i = 0; i < sortedChannels.length; i++) {
-                const channel = sortedChannels[i].channel;
-                if (channel.position !== i) {
+            const manuallyOrderedPinnedChannels = pinnedChannels.sort((a, b) => a.position - b.position);
+            const channelsToPlace = mode === 'hybrid' && pinnedOrder === 'last'
+                ? [...sortedChannels.map(item => item.channel), ...manuallyOrderedPinnedChannels]
+                : [...manuallyOrderedPinnedChannels, ...sortedChannels.map(item => item.channel)];
+
+            // Réorganiser les salons gérés en conservant les autres salons de la catégorie.
+            for (let i = 0; i < channelsToPlace.length; i++) {
+                const channel = channelsToPlace[i];
+                const targetPosition = orderedChannels[i];
+                if (channel.position !== targetPosition) {
                     try {
-                        await channel.setPosition(i);
+                        await channel.setPosition(targetPosition);
                         // Petit délai entre chaque modification pour éviter les conflits
                         await new Promise(resolve => setTimeout(resolve, 100));
                     } catch (error) {
