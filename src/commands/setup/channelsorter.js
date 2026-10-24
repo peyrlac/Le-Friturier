@@ -3,6 +3,8 @@ const Schema = require("../../database/models/channelActivity");
 
 module.exports = async (client, interaction, args) => {
     const category = interaction.options.getChannel('category');
+    const mode = interaction.options.getString('mode') || 'automatic';
+    const pinnedOrder = interaction.options.getString('pinned-order') || 'first';
     
     if (category.type !== Discord.ChannelType.GuildCategory) {
         return client.errNormal({
@@ -14,7 +16,13 @@ module.exports = async (client, interaction, args) => {
     // Sauvegarder la configuration dans la base de données
     await Schema.findOneAndUpdate(
         { Guild: interaction.guild.id, Category: category.id },
-        { Guild: interaction.guild.id, Category: category.id, IsActive: true },
+        {
+            Guild: interaction.guild.id,
+            Category: category.id,
+            Mode: mode,
+            PinnedOrder: pinnedOrder,
+            IsActive: true
+        },
         { upsert: true }
     );
 
@@ -24,6 +32,14 @@ module.exports = async (client, interaction, args) => {
             {
                 name: `📘┆Category`,
                 value: `${category.name}`
+            },
+            {
+                name: `⚙️┆Mode`,
+                value: mode
+            },
+            {
+                name: `📌┆Pinned order`,
+                value: pinnedOrder
             }
         ],
         type: 'editreply'

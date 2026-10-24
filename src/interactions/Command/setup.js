@@ -15,13 +15,34 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('channelsorter')
-                .setDescription('Setup automatic channel sorting in a category')
+                .setDescription('Configure channel sorting in a category')
                 .addChannelOption(option => 
                     option
                         .setName('category')
                         .setDescription('Select a category to enable automatic channel sorting')
                         .setRequired(true)
                         .addChannelTypes(ChannelType.GuildCategory)
+                )
+                .addStringOption(option =>
+                    option
+                        .setName('mode')
+                        .setDescription('Choose how channels should be arranged')
+                        .setRequired(true)
+                        .addChoices(
+                            { name: 'Automatic', value: 'automatic' },
+                            { name: 'Manual', value: 'manual' },
+                            { name: 'Hybrid', value: 'hybrid' }
+                        )
+                )
+                .addStringOption(option =>
+                    option
+                        .setName('pinned-order')
+                        .setDescription('Choose whether pinned channels come first or last')
+                        .setRequired(false)
+                        .addChoices(
+                            { name: 'Pinned first', value: 'first' },
+                            { name: 'Pinned last', value: 'last' }
+                        )
                 )
         )
         .addSubcommand(subcommand =>

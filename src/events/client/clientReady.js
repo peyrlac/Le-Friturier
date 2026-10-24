@@ -12,6 +12,20 @@ module.exports = async (client) => {
     const reminderManager = createManager();
     const statisticsManager = statistics.createManager();
 
+    // Migrer les anciennes configurations vers le mode automatique.
+    try {
+        await Schema.updateMany(
+            { $or: [{ Mode: { $exists: false } }, { Mode: null }] },
+            { $set: { Mode: 'automatic' } }
+        );
+        await Schema.updateMany(
+            { $or: [{ PinnedOrder: { $exists: false } }, { PinnedOrder: null }] },
+            { $set: { PinnedOrder: 'first' } }
+        );
+    } catch (error) {
+        console.error('Erreur lors de la migration des configurations du Channel Sorter:', error);
+    }
+
     // Debug: confirm clientReady handler started
     console.log(chalk.blue(chalk.bold('System')), chalk.white('>>'), chalk.green('clientReady handler start'));
 
@@ -77,7 +91,15 @@ module.exports = async (client) => {
             // Ajout du tri des salons comme nouvelle promesse
             Schema.find({ IsActive: true }).then(configs => 
                 Promise.all(configs.map(config => 
-                    channelSorter.sortChannels(client, config.Guild, config.Category)
+                    config.Mode === 'manual'
+                        ? Promise.resolve()
+                        : channelSorter.sortChannels(
+                            client,
+                            config.Guild,
+                            config.Category,
+                            config.Mode || 'automatic',
+                            config.PinnedOrder || 'first'
+                        )
                 ))
             ),
             // Vérification des rappels d'événements
