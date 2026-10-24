@@ -16,36 +16,51 @@ module.exports = (client) => {
     }
 
     async function getLastActivity(channel) {
-        if (channel.type !== Discord.ChannelType.GuildForum) {
+        const activities = [];
+
+        if (channel.messages && typeof channel.messages.fetch === 'function') {
             const messages = await channel.messages.fetch({ limit: 1 });
             const lastMessage = messages.first();
-            return {
+            activities.push({
                 lastMessageTime: lastMessage ? lastMessage.createdTimestamp : 0,
                 lastMessageId: lastMessage ? lastMessage.id : '0'
-            };
+            });
         }
 
-        // Pour un forum, l'activité du salon est celle de son thread le plus récent.
-        const activeThreads = await channel.threads.fetchActive();
-        const threadActivities = await Promise.all(
-            [...activeThreads.threads.values()].map(async thread => {
-                try {
-                    const messages = await thread.messages.fetch({ limit: 1 });
-                    const lastMessage = messages.first();
-                    return {
-                        lastMessageTime: lastMessage ? lastMessage.createdTimestamp : thread.createdTimestamp,
-                        lastMessageId: lastMessage ? lastMessage.id : thread.id
-                    };
-                } catch (error) {
-                    return {
-                        lastMessageTime: thread.createdTimestamp,
-                        lastMessageId: thread.id
-                    };
-                }
-            })
-        );
+        if (channel.threads && typeof channel.threads.fetchActive === 'function') {
+            // Les salons texte et les forums peuvent tous deux contenir des threads.
+            const activeThreads = await channel.threads.fetchActive();
+            const archivedThreads = await channel.threads.fetchArchived({
+                type: 'public',
+                limit: 100
+            }).catch(() => null);
+            const threads = [
+                ...activeThreads.threads.values(),
+                ...(archivedThreads ? archivedThreads.threads.values() : [])
+            ];
 
-        return threadActivities.reduce(
+            const threadActivities = await Promise.all(
+                threads.map(async thread => {
+                    try {
+                        const messages = await thread.messages.fetch({ limit: 1 });
+                        const lastMessage = messages.first();
+                        return {
+                            lastMessageTime: lastMessage ? lastMessage.createdTimestamp : thread.createdTimestamp,
+                            lastMessageId: lastMessage ? lastMessage.id : thread.id
+                        };
+                    } catch (error) {
+                        return {
+                            lastMessageTime: thread.createdTimestamp,
+                            lastMessageId: thread.id
+                        };
+                    }
+                })
+            );
+
+            activities.push(...threadActivities);
+        }
+
+        return activities.reduce(
             (latest, activity) => activity.lastMessageTime > latest.lastMessageTime ? activity : latest,
             { lastMessageTime: 0, lastMessageId: '0' }
         );
@@ -93,6 +108,7 @@ module.exports = (client) => {
             const textChannels = category.children.cache.filter(
                 channel => [
                     Discord.ChannelType.GuildText,
+                    Discord.ChannelType.GuildAnnouncement,
                     Discord.ChannelType.GuildForum
                 ].includes(channel.type)
             );

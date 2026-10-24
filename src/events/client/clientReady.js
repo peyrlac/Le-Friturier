@@ -14,14 +14,16 @@ module.exports = async (client) => {
 
     // Migrer les anciennes configurations vers le mode automatique.
     try {
-        await Schema.updateMany(
-            { $or: [{ Mode: { $exists: false } }, { Mode: null }] },
-            { $set: { Mode: 'automatic' } }
-        );
-        await Schema.updateMany(
-            { $or: [{ PinnedOrder: { $exists: false } }, { PinnedOrder: null }] },
-            { $set: { PinnedOrder: 'first' } }
-        );
+        await Promise.all([
+            Schema.updateMany(
+                { $or: [{ Mode: { $exists: false } }, { Mode: null }] },
+                { $set: { Mode: 'automatic' } }
+            ),
+            Schema.updateMany(
+                { $or: [{ PinnedOrder: { $exists: false } }, { PinnedOrder: null }] },
+                { $set: { PinnedOrder: 'first' } }
+            )
+        ]);
     } catch (error) {
         console.error('Erreur lors de la migration des configurations du Channel Sorter:', error);
     }
@@ -34,22 +36,24 @@ module.exports = async (client) => {
         token: client.webhooks.startLogs.token,
     });
 
-    // Nettoyage des anciens événements
-    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Starting event cleanup...`));
-    try {
-        const result = await clearOldEventsFromDatabase(client);
-        console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Event cleanup completed successfully`));
-    } catch (error) {
-        console.error(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Error during event cleanup:`));
-        console.error(error);
-    }
+    // Nettoyage des anciens événements et vérification des rappels sont indépendants.
+    const cleanupPromise = (async () => {
+        console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Starting event cleanup...`));
+        try {
+            await clearOldEventsFromDatabase(client);
+            console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Event cleanup completed successfully`));
+        } catch (error) {
+            console.error(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Error during event cleanup:`));
+            console.error(error);
+        }
+    })();
 
-    // Vérification immédiate des rappels au démarrage
-    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Vérification des rappels ...`));
-    await reminderManager.checkEventReminders(client).catch(error => {
+    const remindersPromise = reminderManager.checkEventReminders(client).catch(error => {
         console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Erreur lors de la vérification initiale des rappels:`));
         console.error(error);
     });
+
+    await Promise.all([cleanupPromise, remindersPromise]);
 
     console.log(`\u001b[0m`);
     console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Shard #${client.shard.ids[0] + 1}`), chalk.green(`is ready!`));
