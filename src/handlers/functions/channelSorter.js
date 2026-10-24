@@ -6,6 +6,15 @@ const locks = new Map();
 const PINNED_EMOJI = '📌';
 
 module.exports = (client) => {
+    function isPinnedChannel(channel) {
+        if (channel.type === Discord.ChannelType.GuildForum) {
+            // Pour un forum, `topic` contient les Post guidelines.
+            return typeof channel.topic === 'string' && channel.topic.includes(PINNED_EMOJI);
+        }
+
+        return typeof channel.topic === 'string' && channel.topic.includes(PINNED_EMOJI);
+    }
+
     async function getLastActivity(channel) {
         if (channel.type !== Discord.ChannelType.GuildForum) {
             const messages = await channel.messages.fetch({ limit: 1 });
@@ -102,9 +111,7 @@ module.exports = (client) => {
 
             // En mode hybride, les salons dont la description contient 📌 sont manuels.
             const pinnedChannels = mode === 'hybrid'
-                ? [...channelsWithPermissions.values()].filter(channel =>
-                    typeof channel.topic === 'string' && channel.topic.includes(PINNED_EMOJI)
-                )
+                ? [...channelsWithPermissions.values()].filter(isPinnedChannel)
                 : [];
             const autoChannels = mode === 'hybrid'
                 ? [...channelsWithPermissions.values()].filter(channel =>
