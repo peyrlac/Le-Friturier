@@ -90,7 +90,7 @@ if (clientID && clientSecret) {
                 host: process.env.LAVALINK_HOST || "lava.link",
                 port: parseInt(process.env.LAVALINK_PORT) || 80,
                 password: process.env.LAVALINK_PASSWORD || "CorwinDev",
-                secure: true
+                secure: Boolean(process.env.LAVALINK_SECURE) || false
             },
             {
                 host: "lavalink.techpoint.world",

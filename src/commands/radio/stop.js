@@ -32,12 +32,12 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 
     let embed = new Discord.EmbedBuilder()
-        .setTitle(`📻・La radio s'est arrêtée`)
-        .setDescription(`_______________ \n\nLa radio s'est arrêtée avec succès`)
+        .setTitle(`📻・Radio stopped`)
+        .setDescription(`_______________ \n\nRadio has stopped successfully`)
         .addFields(
-            { name: "👤┆Arreté par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
-            { name: "📺┆Canal", value: `${channel} (${channel.name})`, inline: true },
-            { name: "⚙️┆Serveur", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
+            { name: "👤┆Stopped By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+            { name: "📺┆Channel", value: `${channel} (${channel.name})`, inline: true },
+            { name: "⚙️┆Guild", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
         )
         .setColor(client.config.colors.normal)
         .setTimestamp();

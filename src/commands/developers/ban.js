@@ -14,7 +14,7 @@ module.exports = async (client, interaction, args) => {
     if (boolean == true) {
         if (member.id === interaction.user.id) { // add the check here
             return client.errNormal({
-                error: `Vous ne pouvez pas vous interdiction du bot`,
+                error: `You cannot ban yourself from the bot`,
                 type: `editreply`
             }, interaction);
         }
@@ -37,10 +37,10 @@ module.exports = async (client, interaction, args) => {
                 }, interaction)
 
                 let embedLogs = new Discord.EmbedBuilder()
-                    .setTitle(`🔨・Interdire ajoutée`)
-                    .setDescription(`<@!${member.id}> (${member.id}) Interdiction du bot`)
+                    .setTitle(`🔨・Ban added`)
+                    .setDescription(`<@!${member.id}> (${member.id}) banned from the bot`)
                     .addFields(
-                        { name: "👤┆Interdit par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                        { name: "👤┆Banned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
                     )
                     .setColor(client.config.colors.normal)
                     .setFooter({ text: client.config.discord.footer })
@@ -62,10 +62,10 @@ module.exports = async (client, interaction, args) => {
                     }, interaction)
 
                     let embedLogs = new Discord.EmbedBuilder()
-                        .setTitle(`🔨・Interdire supprimée`)
-                        .setDescription(`<@!${member.id}> (${member.id}) UNCANNÉ DU BOT`)
+                        .setTitle(`🔨・Ban removed`)
+                        .setDescription(`<@!${member.id}> (${member.id}) unbanned from the bot`)
                         .addFields(
-                            { name: "👤┆Infassé par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                            { name: "👤┆Unbanned By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
                         )
                         .setColor(client.config.colors.normal)
                         .setFooter({ text: client.config.discord.footer })

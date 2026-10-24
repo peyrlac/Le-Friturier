@@ -24,9 +24,9 @@ module.exports = {
                         .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Journaux des serveurs', value: 'serverLogs' },
-                            { name: 'Journaux de niveau', value: 'levelLogs' },
-                            { name: 'Boost les journaux', value: 'boostLogs' }
+                            { name: 'Server logs', value: 'serverLogs' },
+                            { name: 'Level logs', value: 'levelLogs' },
+                            { name: 'Boost logs', value: 'boostLogs' }
                         )
                 )
         )
@@ -39,10 +39,10 @@ module.exports = {
                         .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Anniversaires', value: 'birthdays' },
-                            { name: 'chatbot', value: 'chatbot' },
-                            { name: 'Commentaires', value: 'reviews' },
-                            { name: 'suggestions', value: 'suggestions' },
+                            { name: 'Birthdays', value: 'birthdays' },
+                            { name: 'Chatbot', value: 'chatbot' },
+                            { name: 'Reviews', value: 'reviews' },
+                            { name: 'Suggestions', value: 'suggestions' },
                             { name: 'Starboard', value: 'starboard' }
                         )
                 )
@@ -56,10 +56,10 @@ module.exports = {
                         .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Compte', value: 'counting' },
-                            { name: 'Devinez le nombre', value: 'gtn' },
-                            { name: 'Devinez le mot', value: 'gtw' },
-                            { name: 'Mot Snake', value: 'wordsnake' }
+                            { name: 'Counting', value: 'counting' },
+                            { name: 'Guess the number', value: 'gtn' },
+                            { name: 'Guess the word', value: 'gtw' },
+                            { name: 'Word snake', value: 'wordsnake' }
                         )
                 )
         )
@@ -72,9 +72,9 @@ module.exports = {
                         .setDescription('La configuration que vous voulez')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Canal de bienvenue', value: 'welcomechannel' },
-                            { name: 'Rôle de bienvenue', value: 'welcomerole' },
-                            { name: 'Quitter le canal', value: 'leavechannel' }
+                            { name: 'Welcome channel', value: 'welcomechannel' },
+                            { name: 'Welcome role', value: 'welcomerole' },
+                            { name: 'Leave channnel', value: 'leavechannel' }
                         )
                 )
         )

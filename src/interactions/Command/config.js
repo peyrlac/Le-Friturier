@@ -27,10 +27,10 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('setverify')
-                .setDescription('Configurer le panneau Vérifier')
-                .addBooleanOption(option => option.setName('enable').setDescription('Sélectionnez un booléen').setRequired(true))
-                .addChannelOption(option => option.setName('channel').setDescription('Sélectionnez un canal').setRequired(true).addChannelTypes(ChannelType.GuildText))
-                .addRoleOption(option => option.setName('role').setDescription('Sélectionnez un rôle').setRequired(true))
+                .setDescription('Setup the verify panel')
+                .addBooleanOption(option => option.setName('enable').setDescription('Select a boolean').setRequired(true))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText))
+                .addRoleOption(option => option.setName('role').setDescription('Select a role').setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -65,8 +65,8 @@ module.exports = {
                         .setDescription('Type de message de ticket')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'ouvrir', value: 'open' },
-                            { name: 'fermée', value: 'close' }
+                            { name: 'open', value: 'open' },
+                            { name: 'closeDM', value: 'close' }
                         )
                 )
                 .addStringOption(option => option.setName("message").setDescription("Entrez un message pour le billet").setRequired(true))

@@ -14,9 +14,9 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('create')
-                .setDescription('Faire une annonce')
-                .addChannelOption(option => option.setName('channel').setDescription('Sélectionnez un canal').setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
-                .addStringOption(option => option.setName('message').setDescription('Votre message d\'annonce').setRequired(true)),
+                .setDescription('Make an announcement')
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
+                .addStringOption(option => option.setName('message').setDescription('Your announcement message').setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -34,6 +34,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
+        await interaction.deferReply({ fetchReply: true });
         await interaction.deferReply({ fetchReply: true });
         const perms = await client.checkUserPerms({
             flags: [Discord.PermissionsBitField.Flags.ManageMessages],

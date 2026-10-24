@@ -2,9 +2,10 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     let row = new Discord.ActionRowBuilder()
+    let row = new Discord.ActionRowBuilder()
         .addComponents(
             new Discord.ButtonBuilder()
-                .setLabel("Serveur d'assistance")
+                .setLabel("Support server")
                 .setURL(client.config.discord.serverInvite)
                 .setStyle(Discord.ButtonStyle.Link),
         );

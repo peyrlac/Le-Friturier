@@ -39,11 +39,11 @@ module.exports = {
                         .setDescription('Que voulez-vous faire avec la chaîne?')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Ajouter', value: 'add' },
-                            { name: 'Retirer', value: 'remove' }
+                            { name: 'Add', value: 'add' },
+                            { name: 'Remove', value: 'remove' }
                         )
                 )
-                .addChannelOption(option => option.setName('channel').setDescription('Sélectionnez un canal').setRequired(true).addChannelTypes(ChannelType.GuildText))
+                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText))
         )
         .addSubcommandGroup(group =>
             group

@@ -4,7 +4,7 @@ const voiceSchema = require("../../database/models/voice");
 
 module.exports = async (client, interaction, args) => {
     interaction.guild.channels.create({
-        name: "Salon vocal custom",
+        name: "Custom voice",
         type: Discord.ChannelType.GuildCategory,
     }).then((cat) => {
         interaction.guild.channels.create({

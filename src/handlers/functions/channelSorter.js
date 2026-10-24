@@ -6,6 +6,66 @@ const locks = new Map();
 const PINNED_EMOJI = '📌';
 
 module.exports = (client) => {
+    function isPinnedChannel(channel) {
+        if (channel.type === Discord.ChannelType.GuildForum) {
+            // Pour un forum, `topic` contient les Post guidelines.
+            return typeof channel.topic === 'string' && channel.topic.includes(PINNED_EMOJI);
+        }
+
+        return typeof channel.topic === 'string' && channel.topic.includes(PINNED_EMOJI);
+    }
+
+    async function getLastActivity(channel) {
+        const activities = [];
+
+        if (channel.messages && typeof channel.messages.fetch === 'function') {
+            const messages = await channel.messages.fetch({ limit: 1 });
+            const lastMessage = messages.first();
+            activities.push({
+                lastMessageTime: lastMessage ? lastMessage.createdTimestamp : 0,
+                lastMessageId: lastMessage ? lastMessage.id : '0'
+            });
+        }
+
+        if (channel.threads && typeof channel.threads.fetchActive === 'function') {
+            // Les salons texte et les forums peuvent tous deux contenir des threads.
+            const activeThreads = await channel.threads.fetchActive();
+            const archivedThreads = await channel.threads.fetchArchived({
+                type: 'public',
+                limit: 100
+            }).catch(() => null);
+            const threads = [
+                ...activeThreads.threads.values(),
+                ...(archivedThreads ? archivedThreads.threads.values() : [])
+            ];
+
+            const threadActivities = await Promise.all(
+                threads.map(async thread => {
+                    try {
+                        const messages = await thread.messages.fetch({ limit: 1 });
+                        const lastMessage = messages.first();
+                        return {
+                            lastMessageTime: lastMessage ? lastMessage.createdTimestamp : thread.createdTimestamp,
+                            lastMessageId: lastMessage ? lastMessage.id : thread.id
+                        };
+                    } catch (error) {
+                        return {
+                            lastMessageTime: thread.createdTimestamp,
+                            lastMessageId: thread.id
+                        };
+                    }
+                })
+            );
+
+            activities.push(...threadActivities);
+        }
+
+        return activities.reduce(
+            (latest, activity) => activity.lastMessageTime > latest.lastMessageTime ? activity : latest,
+            { lastMessageTime: 0, lastMessageId: '0' }
+        );
+    }
+
     async function sortChannels(client, guildId, categoryId, mode = 'automatic', pinnedOrder = 'first') {
         // Vérifier si un tri est déjà en cours pour cette catégorie
         const lockKey = `${guildId}-${categoryId}`;
@@ -46,7 +106,11 @@ module.exports = (client) => {
 
             // Récupérer tous les salons textuels de la catégorie
             const textChannels = category.children.cache.filter(
-                channel => channel.type === Discord.ChannelType.GuildText
+                channel => [
+                    Discord.ChannelType.GuildText,
+                    Discord.ChannelType.GuildAnnouncement,
+                    Discord.ChannelType.GuildForum
+                ].includes(channel.type)
             );
 
             // Vérifier les permissions pour chaque salon
@@ -63,9 +127,7 @@ module.exports = (client) => {
 
             // En mode hybride, les salons dont la description contient 📌 sont manuels.
             const pinnedChannels = mode === 'hybrid'
-                ? [...channelsWithPermissions.values()].filter(channel =>
-                    typeof channel.topic === 'string' && channel.topic.includes(PINNED_EMOJI)
-                )
+                ? [...channelsWithPermissions.values()].filter(isPinnedChannel)
                 : [];
             const autoChannels = mode === 'hybrid'
                 ? [...channelsWithPermissions.values()].filter(channel =>
@@ -77,12 +139,10 @@ module.exports = (client) => {
             const sortedChannels = await Promise.all(
                 [...autoChannels.values()].map(async channel => {
                     try {
-                        const messages = await channel.messages.fetch({ limit: 1 });
-                        const lastMessage = messages.first();
+                        const activity = await getLastActivity(channel);
                         return {
                             channel: channel,
-                            lastMessageTime: lastMessage ? lastMessage.createdTimestamp : 0,
-                            lastMessageId: lastMessage ? lastMessage.id : '0'
+                            ...activity
                         };
                     } catch (error) {
                         console.error(`Erreur lors de la récupération des messages pour ${channel.name}:`, error);

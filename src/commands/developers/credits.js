@@ -32,11 +32,11 @@ module.exports = async (client, interaction, args) => {
         }, interaction);
 
         let embedLogs = new Discord.EmbedBuilder()
-            .setTitle(`🪙・Crédits ajoutés`)
-            .setDescription(`Ajout de crédits à ${user} (${user.id})`)
+            .setTitle(`🪙・Credits added`)
+            .setDescription(`Added credits to ${user} (${user.id})`)
             .addFields(
-                { name: "👤┆Ajouté par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
-                { name: "🔢┆Montant", value: `${amount}`, inline: true },
+                { name: "👤┆Added By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: "🔢┆Amount", value: `${amount}`, inline: true },
             )
             .setColor(client.config.colors.normal)
             .setTimestamp();
@@ -59,11 +59,11 @@ module.exports = async (client, interaction, args) => {
         }, interaction);
 
         let embedLogs = new Discord.EmbedBuilder()
-            .setTitle(`🪙・Crédits supprimés`)
-            .setDescription(`Supprimé les crédits de ${user} (${user.id})`)
+            .setTitle(`🪙・Credits removed`)
+            .setDescription(`Removed credits from ${user} (${user.id})`)
             .addFields(
-                { name: "👤┆Supprimé par", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
-                { name: "🔢┆Montant", value: `${amount}`, inline: true },
+                { name: "👤┆Removed By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+                { name: "🔢┆Amount", value: `${amount}`, inline: true },
             )
             .setColor(client.config.colors.normal)
             .setTimestamp();

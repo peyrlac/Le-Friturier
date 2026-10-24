@@ -20,8 +20,8 @@ module.exports = async (client, interaction, args) => {
                         value: "invite-linkspanel",
                     },
                     {
-                        label: `Serveur communautaire`,
-                        description: `Rejoignez le serveur communautaire!`,
+                        label: `Community Server`,
+                        description: `Join the community server!`,
                         emoji: "🌍",
                         value: "community-linkspanel",
                     },
