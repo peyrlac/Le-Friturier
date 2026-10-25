@@ -1,13 +1,11 @@
-const Discord = require('discord.js');
-const fetch = require('node-fetch');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
     let countries = interaction.options.getString('country');
 
-    fetch(`https://covid19.mathdro.id/api/countries/${countries}`)
-        .then(response => response.json())
-        .then(data => {
+    try {
+        const data = await getJson(`https://covid19.mathdro.id/api/countries/${countries}`);
             let confirmed = data.confirmed.value.toLocaleString()
             let recovered = data.recovered.value.toLocaleString()
             let deaths = data.deaths.value.toLocaleString()
@@ -33,9 +31,9 @@ module.exports = async (client, interaction, args) => {
                 ], type: 'editreply'
             }, interaction);
 
-        }).catch(e => {
-            return client.errNormal({ error: `Invalid country provided!`, type: 'editreply' }, interaction);
-        })
+    } catch (error) {
+        return client.errNormal({ error: `Invalid country provided!`, type: 'editreply' }, interaction);
+    }
 }
 
  
