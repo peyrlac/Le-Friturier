@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/invites");
+const showLocalized = require('./showLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return showLocalized(client, interaction, args);
     let user = interaction.options.getUser('user') || interaction.user;
 
     Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
@@ -47,4 +49,3 @@ module.exports = async (client, interaction, args) => {
     });
 }
 
- 

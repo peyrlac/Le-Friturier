@@ -29,6 +29,16 @@
     }
     },
     "commands": {
+      "invites": {
+        "added": "Added **{amount}** invite(s) to {user}.",
+        "removed": "Removed **{amount}** invite(s) from {user}.",
+        "noData": "No invite data found for {user}.",
+        "total": "Total invites",
+        "left": "Left",
+        "title": "Invites",
+        "description": "**{user}** has **{invites}** invite(s).",
+        "leaderboardTitle": "Invites - {guild}"
+      },
       "profile": {
         "statusTooLong": "Your status cannot be longer than 30 characters.",
         "statusSuccess": "Your status is now: {status}",
