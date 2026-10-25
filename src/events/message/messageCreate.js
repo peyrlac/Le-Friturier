@@ -126,51 +126,46 @@ module.exports = async (client, message) => {
             }
           }
 
-          levelRewards.findOne(
-            { Guild: message.guild.id, Level: user.level },
-            async (err, data) => {
-              if (data) {
-                message.guild.members.cache
-                  .get(message.author.id)
-                  .roles.add(data.Role)
-                  .catch((e) => { });
-              }
-            }
-          );
+          const levelReward = await levelRewards.findOne({
+            Guild: message.guild.id,
+            Level: user.level
+          });
+          if (levelReward) {
+            await message.guild.members.cache
+              .get(message.author.id)
+              .roles.add(levelReward.Role);
+          }
         }
       }
     }
   });
 
   // Message tracker system
-  messagesSchema.findOne(
-    { Guild: message.guild.id, User: message.author.id },
-    async (err, data) => {
-      if (data) {
-        data.Messages += 1;
-        data.save();
+  const messageData = await messagesSchema.findOne({
+    Guild: message.guild.id,
+    User: message.author.id
+  });
+  if (messageData) {
+    messageData.Messages += 1;
+    await messageData.save();
 
-        messageRewards.findOne(
-          { Guild: message.guild.id, Messages: data.Messages },
-          async (err, data) => {
-            if (data) {
-              try {
-                message.guild.members.cache
-                  .get(message.author.id)
-                  .roles.add(data.Role);
-              } catch { }
-            }
-          }
-        );
-      } else {
-        new messagesSchema({
-          Guild: message.guild.id,
-          User: message.author.id,
-          Messages: 1,
-        }).save();
-      }
+    const reward = await messageRewards.findOne({
+      Guild: message.guild.id,
+      Messages: messageData.Messages
+    });
+    if (reward) {
+      await message.guild.members.cache
+        .get(message.author.id)
+        .roles.add(reward.Role);
     }
-  );
+  }
+  else {
+    await new messagesSchema({
+      Guild: message.guild.id,
+      User: message.author.id,
+      Messages: 1
+    }).save();
+  }
 
   // AFK system
   afk.findOne(
