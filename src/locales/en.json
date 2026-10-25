@@ -323,6 +323,15 @@
         "negative": "You cannot deposit negative money!",
         "insufficient": "You do not have enough money.",
         "success": "You deposited money into your bank!"
+      },
+      "pay": {
+        "negative": "You cannot pay negative money!",
+        "self": "You cannot pay money to yourself!",
+        "insufficient": "You don't have that much money!",
+        "empty": "You don't have any money!",
+        "success": "You sent money to {user}.",
+        "user": "User",
+        "amount": "Amount"
       }
     },
     "casino": {

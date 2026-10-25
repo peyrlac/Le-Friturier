@@ -298,6 +298,15 @@
         "bank": "Banque",
         "total": "Total"
       },
+      "pay": {
+        "negative": "Vous ne pouvez pas donner une somme négative !",
+        "self": "Vous ne pouvez pas vous donner de l'argent à vous-même !",
+        "insufficient": "Vous n'avez pas assez d'argent.",
+        "empty": "Vous n'avez pas encore d'argent.",
+        "success": "Vous avez envoyé de l'argent à {user}.",
+        "user": "Utilisateur",
+        "amount": "Montant"
+      },
       "deposit": {
         "usage": "deposit [montant]",
         "invalid": "Saisissez un nombre valide !",
