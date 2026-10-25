@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const voiceSchema = require("../../database/models/voice");
 
 module.exports = async (client, interaction, args) => {
+    return require('./customvoiceAsync')(client, interaction, args);
+
     interaction.guild.channels.create({
         name: "Custom voice",
         type: Discord.ChannelType.GuildCategory,
