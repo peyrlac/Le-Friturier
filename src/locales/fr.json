@@ -99,7 +99,14 @@
       "notClaimed": "Le ticket n'est pas pris en charge.",
       "notClaimedByYou": "Vous n'avez pas pris en charge ce ticket.",
       "availableAgain": "Ce ticket peut maintenant être pris en charge à nouveau !",
-      "deleteCountdown": "Ce ticket sera supprimé dans **5 secondes**."
+      "deleteCountdown": "Ce ticket sera supprimé dans **5 secondes**.",
+      "added": "{user} a été ajouté au ticket.",
+      "lowered": "Les permissions du ticket ont été abaissées par <@!{user}>.",
+      "raised": "Les permissions du ticket ont été élevées par <@!{user}>.",
+      "renamed": "Le nom du salon a été changé en {name}.",
+      "operationFailed": "Une erreur est survenue.",
+      "transcriptSaving": "Enregistrement du transcript...",
+      "transcriptSaved": "Transcript enregistré."
     },
     "music": {
       "notInVoice": "Vous n'êtes pas dans un canal vocal !",
