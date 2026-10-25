@@ -5,6 +5,8 @@ const ticketChannels = require("../../database/models/ticketChannels");
 const ticketMessageConfig = require("../../database/models/ticketMessage");
 
 module.exports = async (client, interaction, args) => {
+    return require('./createAsync')(client, interaction, args);
+
     let reason = "Not given";
     if (interaction.options) reason = interaction.options.getString('reason') || "Not given";
 
@@ -216,5 +218,3 @@ module.exports = async (client, interaction, args) => {
         }
     })
 }
-
- 
