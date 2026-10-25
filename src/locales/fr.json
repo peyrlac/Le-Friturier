@@ -617,6 +617,14 @@
     "submitted": "Votre avis a été envoyé avec succès.",
     "newReview": "Un nouvel avis a été publié."
   },
+  "moderation": {
+    "warningsTitle": "⚠️・Avertissements",
+    "warningsDescription": "Avertissements de **{user}**",
+    "warningCase": "Avertissement **{case}**",
+    "warningDetails": "Motif : {reason}\nModérateur {moderator}",
+    "total": "Total",
+    "noWarnings": "L'utilisateur {user} n'a aucun avertissement."
+  },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",
     "promptAction": "Quelle action doit être associée à cette commande ?",
