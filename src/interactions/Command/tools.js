@@ -107,6 +107,14 @@ module.exports = {
         )
     ,
 
+    localizations: {
+        name: { fr: 'outils', en: 'tools' },
+        description: {
+            fr: 'Utiliser les outils du bot',
+            en: 'Use the bot tools'
+        }
+    },
+
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
