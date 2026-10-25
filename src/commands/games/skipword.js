@@ -15,25 +15,26 @@ module.exports = async (client, interaction, args) => {
                 data.Word = word;
                 data.save();
 
-                client.succNormal({ 
-                    text: `Word skipped successfully!`,
+                client.succNormal({
+                    key: 'games.skipWordSkipped',
                     type: 'ephemeral'
                 }, interaction);
 
-                return client.embed({ 
-                    title: `💬・Guess the word`, 
-                    desc: `Put the letters in the right position! \n\n🔀 ${shuffled.toLowerCase()}`,
+                return client.embed({
+                    titleKey: 'games.skipWordTitle',
+                    descKey: 'games.skipWordDescription',
+                    variables: { word: shuffled.toLowerCase() },
                 }, interaction.channel)
             }
             catch { }
         }
         else {
             client.errNormal({
-                error: "You are not in the right channel!",
+                key: 'games.skipWordWrongChannel',
                 type: 'editreply'
             }, interaction)
         }
     })
 }
 
- 
+
