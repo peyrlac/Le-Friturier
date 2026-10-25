@@ -347,6 +347,12 @@
         "success": "The role was deleted from the store.",
         "notFound": "This role is not in the store!"
       },
+      "removeMoney": {
+        "invalid": "Enter a valid number!",
+        "bot": "You cannot remove money from a bot!",
+        "success": "Money was removed from the user.",
+        "insufficient": "This user doesn't have enough money."
+      },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",
