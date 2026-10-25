@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require('../../database/models/channelList');
+const localizedLinksChannel = require('./linkschannelLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedLinksChannel(client, interaction, args);
     const type = interaction.options.getString('type');
     const channel = interaction.options.getChannel('channel');
 
@@ -77,4 +79,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

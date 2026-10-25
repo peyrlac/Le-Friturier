@@ -38,6 +38,11 @@
         "wordRemoved": "The word **{word}** was removed from the blacklist.",
         "title": "Blacklisted words",
         "words": "{words}"
+        ,"channelExists": "The channel {channel} is already allowlisted.",
+        "channelMissing": "The channel {channel} is not allowlisted.",
+        "channelField": "📘・Channel",
+        "channelAdded": "The channel {channel} was added to the allowlist.",
+        "channelRemoved": "The channel {channel} was removed from the allowlist."
       },
       "serverstats": {
         "channel": "📘・Channel",
