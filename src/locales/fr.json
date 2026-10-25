@@ -314,6 +314,11 @@
       "monthly": { "success": "Vous avez récupéré votre récompense mensuelle !" },
       "yearly": { "success": "Vous avez récupéré votre récompense annuelle !" },
       "present": { "success": "Vous avez récupéré votre cadeau !" },
+      "beg": { "success": "Vous avez mendié et reçu **{amount}** pièces !" },
+      "crime": {
+        "success": "Votre crime a réussi ! Vous avez gagné **{amount}** pièces.",
+        "failure": "Vous avez été arrêté pendant le crime : {crime}."
+      },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",
