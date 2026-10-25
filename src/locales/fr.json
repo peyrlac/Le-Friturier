@@ -27,6 +27,13 @@
     }
   },
   "commands": {
+      "profile": {
+        "statusTooLong": "Votre statut ne peut pas dépasser 30 caractères.",
+        "statusSuccess": "Votre statut est maintenant : {status}",
+        "invalidAge": "Aucun nombre valide n'a été fourni.",
+        "ageSuccess": "Votre âge est maintenant : {age}",
+        "notFound": "Aucun profil trouvé ! Ouvrez-en un avec `createprofile`."
+      },
     "config": {
       "language": {
         "success": "La langue du serveur est maintenant : {language}.",

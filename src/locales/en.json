@@ -29,6 +29,13 @@
     }
     },
     "commands": {
+      "profile": {
+        "statusTooLong": "Your status cannot be longer than 30 characters.",
+        "statusSuccess": "Your status is now: {status}",
+        "invalidAge": "No valid number was provided.",
+        "ageSuccess": "Your age is now: {age}",
+        "notFound": "No profile found! Open one with `createprofile`."
+      },
         "config": {
             "language": {
         "success": "The server language is now {language}.",
