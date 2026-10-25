@@ -27,6 +27,17 @@
     }
   },
     "commands": {
+      "notes": {
+        "codeCollision": "Le code de note est déjà utilisé, veuillez réessayer.",
+        "added": "Note ajoutée ! Utilisez `/notepad notes` pour voir vos notes.",
+        "edited": "Note modifiée !",
+        "notFound": "Aucune note trouvée.",
+        "deleteNotFound": "Aucune note trouvée avec l'identifiant **#{id}**.",
+        "deleted": "La note **#{id}** a été supprimée !"
+        ,"none": "Aucune note trouvée !",
+        "leaderboardTitle": "📓・Notes de {user}",
+        "entry": "**Identifiant : {id}**\n{note}\n"
+      },
       "birthdays": {
         "invalidDay": "Le format du jour est incorrect.",
         "invalidMonth": "Le format du mois est incorrect.",
