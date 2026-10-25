@@ -164,7 +164,10 @@
       "bannerNoBannerNoAccent": "{user} doesn't have a banner or an accent color.",
       "bannerError": "Unable to retrieve this user banner.",
       "channelNotFound": "Channel not found.",
-      "imageSent": "The image was successfully sent to {channel}."
+      "imageSent": "The image was successfully sent to {channel}.",
+      "tweetTitle": "Tweet",
+      "trumpTweetTitle": "Trump tweet",
+      "generateError": "Unable to generate the requested image."
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",

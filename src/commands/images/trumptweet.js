@@ -12,12 +12,12 @@ module.exports = async (client, interaction, args) => {
     const img = json.message;
 
     client.embed({
-        title: `🖼・Trump tweet`,
+        titleKey: 'images.trumpTweetTitle',
         image: img,
         type: 'editreply'
     }, interaction);
     } catch (error) {
-        return client.errNormal({ error: 'Unable to generate the tweet image.', type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'images.generateError', type: 'editreply' }, interaction);
     }
 }
 

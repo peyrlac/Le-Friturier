@@ -145,7 +145,10 @@
       "bannerNoBannerNoAccent": "{user} n'a pas de bannière ni de couleur d'accent.",
       "bannerError": "Impossible de récupérer la bannière de cet utilisateur.",
       "channelNotFound": "Salon introuvable.",
-      "imageSent": "L'image a été envoyée avec succès dans {channel}."
+      "imageSent": "L'image a été envoyée avec succès dans {channel}.",
+      "tweetTitle": "Tweet",
+      "trumpTweetTitle": "Tweet de Trump",
+      "generateError": "Impossible de générer l'image demandée."
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
