@@ -29,6 +29,12 @@
     }
     },
     "commands": {
+      "security": {
+        "moderationTitle": "❌・Moderation",
+        "invitesBlocked": "Discord links are not allowed in this server.",
+        "linksBlocked": "Links are not allowed in this server.",
+        "spamBlocked": "Spamming is not allowed in this server."
+      },
       "automod": {
         "wordExists": "The word **{word}** already exists in the blacklist.",
         "wordMissing": "The word **{word}** does not exist in the blacklist.",
