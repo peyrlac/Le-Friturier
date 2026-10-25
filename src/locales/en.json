@@ -134,6 +134,7 @@
       "rickrollTitle": "Rickroll",
       "gifTitle": "{query} Gif",
       "roastTitle": "Roast"
+      ,"killTitle": "Kill"
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",

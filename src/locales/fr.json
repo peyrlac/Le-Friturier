@@ -115,6 +115,7 @@
       "rickrollTitle": "Rickroll",
       "gifTitle": "Gif de {query}",
       "roastTitle": "Roast"
+      ,"killTitle": "Élimination"
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
