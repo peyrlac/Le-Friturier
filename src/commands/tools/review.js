@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/reviewChannels");
 
 module.exports = async (client, interaction, args) => {
+    return require('./reviewAsync')(client, interaction, args);
+
     const stars = interaction.options.getNumber('stars');
     const message = interaction.options.getString('message') || 'Not given';
 
@@ -67,5 +69,3 @@ module.exports = async (client, interaction, args) => {
         }
     })
 }
-
- 

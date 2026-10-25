@@ -622,6 +622,12 @@
       }
     }
   },
+  "review": {
+    "starsInvalid": "Stars must be between 1 and 5.",
+    "noChannel": "No review channel is configured. Use `reviewchannel`.",
+    "submitted": "Your review has been successfully submitted.",
+    "newReview": "A new review has been published."
+  },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
     "promptAction": "Which action should be attached to this command?",
