@@ -10,7 +10,7 @@ Permettre à chaque serveur de choisir `fr` ou `en`, avec `fr` comme valeur par 
 - Conserver `backup/pre-i18n-upstream-hardening` comme point de retour.
 - Vérifier un worktree propre avant chaque vague.
 - Garder `7e3a72a` comme référence locale avant intégration.
-- Utiliser `npm test` comme commande de test officielle (`node --test test`).
+- Utiliser `npm test` comme commande de test officielle (`node --test test/*.test.js`).
 
 ## 2. Comparaison upstream sélective
 
@@ -90,11 +90,11 @@ Pour chaque vague : remplacer les textes par des clés, traduire les description
 - Socle i18n, préférence serveur et premières vagues communes/config/setup/bot/modération en place.
 - Dépendances upstream principales et correctifs musique/interaction intégrés sélectivement.
 - Helper HTTP et migrations des commandes HTTP avancés.
-- Vague économie/casino commencée avec `balance`, `deposit` et `slots`, et catalogues UTF-8 corrigés.
-- Les vagues giveaways et radio utilisent désormais les clés fr/en pour leurs réponses ; les catalogues fr/en sont alignés et les validations runtime ainsi que les vagues restantes restent à clôturer.
+- Vague économie/casino renforcée avec les métadonnées localisées, les transactions blackjack atomiques et la correction de la roulette ; les catalogues UTF-8 sont corrigés.
+- Les vagues giveaways et radio utilisent désormais les clés fr/en pour leurs réponses, et les catégories tickets, musique, radio, giveaways, modération, setup et bot exposent des métadonnées Discord localisées.
 - Le runtime de référence est Node 20 : `canvas@2.11.2` y dispose d’un binaire Windows précompilé ; Node 24/22 n’en disposent pas dans cette version.
 - Le Dockerfile reste également en Node 20 : le build réel passe ; le build Node 22 échoue sur la compilation native de `canvas@2.11.2` avec `nan`, malgré les dépendances système présentes.
-- Le bot de test atteint Discord et ses commandes ont été publiées sur les deux serveurs de laboratoire ; les scénarios d’interaction restent à exécuter manuellement.
+- Le bot de test atteint Discord et ses commandes ont été publiées sur les deux serveurs de laboratoire ; `/config language` a déjà été testé avec persistance et restauration de `fr`.
 - Le démarrage complet fonctionne avec `MONGO_DNS_SERVERS=1.1.1.1,8.8.8.8` lorsque le résolveur système ne résout pas le SRV Atlas ; les interactions manuelles restent à exécuter.
 - Lavalink est désormais entièrement explicite via `LAVALINK_*` ; `LAVALINK_ENABLED=false` permet au bot de test de démarrer sans nœud musical.
-- La comparaison finale avec `upstream/main` couvre 634 fichiers ; la migration V11 complète reste volontairement non fusionnée.
+- La comparaison directe finale avec `upstream/main` couvre 636 fichiers ; la migration V11 complète reste volontairement non fusionnée.
