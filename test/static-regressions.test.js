@@ -228,6 +228,16 @@ test('image attachment commands localize their embed titles', () => {
   }
 });
 
+test('profile wave localizes fields and select placeholders', () => {
+  assert.match(read('src/commands/profile/age.js'), /profile\.ageField/);
+  assert.match(read('src/commands/profile/color.js'), /profile\.colorField/);
+  assert.match(read('src/commands/profile/origin.js'), /profile\.originField/);
+
+  const gender = read('src/commands/profile/gender.js');
+  assert.match(gender, /profile\.genderPlaceholder/);
+  assert.doesNotMatch(gender, /Nothing selected/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

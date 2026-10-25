@@ -14,7 +14,6 @@ module.exports = async (client, interaction, args) => {
             const menu = new Discord.StringSelectMenuBuilder()
                 .setCustomId('gender-setup')
                 .setPlaceholder(placeholder)
-                .setPlaceholder('❌┆Nothing selected')
                 .addOptions(
                     {
                         emoji: "👨",
