@@ -319,6 +319,7 @@
         "success": "Votre crime a réussi ! Vous avez gagné **{amount}** pièces.",
         "failure": "Vous avez été arrêté pendant le crime : {crime}."
       },
+      "work": { "success": "Vous avez travaillé comme {job} et gagné **{amount}** pièces !" },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",

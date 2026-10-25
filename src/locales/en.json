@@ -338,6 +338,7 @@
         "success": "Your crime went successfully! You earned **{amount}** coins.",
         "failure": "You were caught carrying out the crime: {crime}."
       },
+      "work": { "success": "You worked as a {job} and earned **{amount}** coins!" },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",
