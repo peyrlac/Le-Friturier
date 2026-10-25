@@ -29,6 +29,16 @@
     }
     },
     "commands": {
+      "automod": {
+        "wordExists": "The word **{word}** already exists in the blacklist.",
+        "wordMissing": "The word **{word}** does not exist in the blacklist.",
+        "noData": "This server has no blacklist data.",
+        "wordField": "💬・Word",
+        "wordAdded": "The word **{word}** was added to the blacklist.",
+        "wordRemoved": "The word **{word}** was removed from the blacklist.",
+        "title": "Blacklisted words",
+        "words": "{words}"
+      },
       "serverstats": {
         "channel": "📘・Channel",
         "channelsCreated": "The channel count was created.",
