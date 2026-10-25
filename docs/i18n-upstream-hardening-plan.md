@@ -90,5 +90,6 @@ Pour chaque vague : remplacer les textes par des clés, traduire les description
 - Socle i18n, préférence serveur et premières vagues communes/config/setup/bot/modération en place.
 - Dépendances upstream principales et correctifs musique/interaction intégrés sélectivement.
 - Helper HTTP et migrations des commandes HTTP avancés.
+- Vague économie/casino commencée avec `balance`, `deposit` et `slots`, et catalogues UTF-8 corrigés.
 - Les vagues restantes et la validation complète doivent encore être clôturées.
 - La compilation de `canvas` reste bloquée dans l’environnement Node 24 faute de binaire compatible et de bibliothèques GTK/Cairo.
