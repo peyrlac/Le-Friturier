@@ -38,6 +38,7 @@
         "title": "Invites",
         "description": "**{user}** has **{invites}** invite(s).",
         "leaderboardTitle": "Invites - {guild}"
+        ,"leaderboardEntry": "**{rank}** | <@!{user}> - Invites: `{invites}`"
       },
       "profile": {
         "statusTooLong": "Your status cannot be longer than 30 characters.",
@@ -108,7 +109,13 @@
         "disabled": "Levels are now disabled in this server.",
         "levelUpdated": "{user}'s level is now {level}.",
         "xpUpdated": "{user}'s XP is now {xp}.",
-        "noLevels": "This user has no levels yet."
+        "noLevels": "This user has no levels yet.",
+        "noData": "No level data found.",
+        "noRewards": "No level rewards found.",
+        "leaderboardTitle": "Levels - {guild}",
+        "leaderboardEntry": "**{rank}** | <@!{user}> - Level: `{level}` ({xp} XP)",
+        "rewardsTitle": "Level rewards - {guild}",
+        "rewardEntry": "**Level {level}** - <@&{role}>"
       },
       "setcolor": {
         "invalid": "You did not provide a hexadecimal color. Example: FF0000",

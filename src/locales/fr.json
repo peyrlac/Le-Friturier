@@ -36,6 +36,7 @@
         "title": "Invitations",
         "description": "**{user}** possède **{invites}** invitation(s).",
         "leaderboardTitle": "Invitations - {guild}"
+        ,"leaderboardEntry": "**{rank}** | <@!{user}> - Invitations : `{invites}`"
       },
       "profile": {
         "statusTooLong": "Votre statut ne peut pas dépasser 30 caractères.",
@@ -106,7 +107,13 @@
         "disabled": "Les niveaux sont maintenant d\u00e9sactiv\u00e9s dans ce serveur.",
         "levelUpdated": "Le niveau de {user} est maintenant {level}.",
         "xpUpdated": "L'XP de {user} est maintenant {xp}.",
-        "noLevels": "Cet utilisateur n'a pas encore de niveau."
+        "noLevels": "Cet utilisateur n'a pas encore de niveau.",
+        "noData": "Aucune donnée de niveau trouvée.",
+        "noRewards": "Aucune récompense de niveau trouvée.",
+        "leaderboardTitle": "Niveaux - {guild}",
+        "leaderboardEntry": "**{rank}** | <@!{user}> - Niveau : `{level}` ({xp} XP)",
+        "rewardsTitle": "Récompenses de niveau - {guild}",
+        "rewardEntry": "**Niveau {level}** - <@&{role}>"
       },
       "setcolor": {
         "invalid": "Vous n'avez pas pr\u00e9cis\u00e9 de couleur hexad\u00e9cimale. Exemple : FF0000",

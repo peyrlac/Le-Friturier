@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/levelRewards");
+const localizedRewards = require('./rewardsLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedRewards(client, interaction, args);
     const rawLeaderboard = await Schema.find({ Guild: interaction.guild.id });
 
     if (rawLeaderboard.length < 1) return client.errNormal({
@@ -15,4 +17,3 @@ module.exports = async (client, interaction, args) => {
     await client.createLeaderboard(`🆙・Level rewards - ${interaction.guild.name}`, lb, interaction);
 }
 
- 
