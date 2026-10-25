@@ -12,7 +12,7 @@ module.exports = async (client, interaction, args) => {
 
                     if (ticketCategory == undefined) {
                         return client.errNormal({
-                            error: "Do the setup!",
+                            key: 'tickets.setupRequired',
                             type: 'editreply'
                         }, interaction);
                     }
@@ -20,37 +20,37 @@ module.exports = async (client, interaction, args) => {
                     if (interaction.channel.parentId == ticketCategory.id) {
 
                         client.embed({
-                            desc: `${client.emotes.animated.loading}・Loading information...`,
+                            descKey: 'tickets.informationLoading',
                             type: 'editreply'
-                        }, interaction).then((msg) => {
+                        }, interaction).then(async (msg) => {
 
                             client.transcript(interaction, interaction.channel);
 
                             return client.embed({
-                                title: `ℹ・Information`,
+                                titleKey: 'tickets.informationTitle',
                                 fields: [
                                     {
-                                        name: "Ticket name",
+                                        name: await client.t(interaction, 'tickets.ticketName'),
                                         value: `\`${interaction.channel.name}\``,
                                         inline: true,
                                     },
                                     {
-                                        name: "Channel id",
+                                        name: await client.t(interaction, 'tickets.channelId'),
                                         value: `\`${interaction.channel.id}\``,
                                         inline: true,
                                     },
                                     {
-                                        name: "Creator",
+                                        name: await client.t(interaction, 'tickets.creator'),
                                         value: `<@!${ticketData.creator}>`,
                                         inline: true,
                                     },
                                     {
-                                        name: "Claimed by",
+                                        name: await client.t(interaction, 'tickets.claimedBy'),
                                         value: `<@!${ticketData.claimed}>`,
                                         inline: true,
                                     },
                                     {
-                                        name: "Ticket id",
+                                        name: await client.t(interaction, 'tickets.ticketId'),
                                         value: `${ticketData.TicketID}`,
                                         inline: true,
                                     },
@@ -61,15 +61,15 @@ module.exports = async (client, interaction, args) => {
 
                     }
                     else {
-                        client.errNormal({ 
-                            error: "This is not a ticket!", 
+                        client.errNormal({
+                            key: 'tickets.notTicket',
                             type: 'editreply'
                         }, interaction);
                     }
                 }
                 else {
-                    return client.errNormal({ 
-                        error: "Do the setup!", 
+                    return client.errNormal({
+                        key: 'tickets.setupRequired',
                         type: 'editreply'
                     }, interaction);
                 }
@@ -78,4 +78,4 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
+

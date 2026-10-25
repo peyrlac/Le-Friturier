@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
 
     if (ticketData) {
         if (ticketData.resolved == true) return client.errNormal({
-            error: "Ticket is already closed!",
+            key: 'tickets.alreadyClosed',
             type: 'ephemeraledit'
         }, interaction);
 
@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
 
             if (ticketCategory == undefined) {
                 return client.errNormal({
-                    error: "Do the setup!",
+                    key: 'tickets.closeSetupRequired',
                     type: type
                 }, interaction);
             }
@@ -72,8 +72,8 @@ module.exports = async (client, interaction, args) => {
 
                 if (logsChannel) {
                     client.embed({
-                        title: `🔒・Ticket closed`,
-                        desc: `Ticket is closed`,
+                        titleKey: 'tickets.closed',
+                        descKey: 'tickets.closed',
                         color: client.config.colors.error,
                         fields: [
                             {
@@ -106,7 +106,8 @@ module.exports = async (client, interaction, args) => {
 
                 interaction.channel.edit({ name: `ticket-closed` });
                 client.simpleEmbed({
-                    desc: `Ticket closed by <@!${interaction.user.id}>`,
+                    descKey: 'tickets.closedBy',
+                    variables: { user: interaction.user.id },
                     type: type
                 }, interaction)
 
@@ -129,14 +130,14 @@ module.exports = async (client, interaction, args) => {
                     );
 
                 client.embed({
-                    title: "🔒・Closed",
-                    desc: `📝 - Save transcript \n🔓 - Reopen ticket \n⛔ - Delete ticket`,
+                    titleKey: 'tickets.closed',
+                    descKey: 'tickets.closedPanel',
                     components: [row],
                 }, interaction.channel)
             }
             else {
                 return client.errNormal({
-                    error: "Do the ticket setup!",
+                    key: 'tickets.closeSetupRequired',
                     type: type
                 }, interaction);
 
@@ -144,11 +145,11 @@ module.exports = async (client, interaction, args) => {
         }
         else {
             return client.errNormal({
-                error: "Do the ticket setup!",
+                key: 'tickets.closeSetupRequired',
                 type: type
             }, interaction)
         }
     }
 }
 
- 
+
