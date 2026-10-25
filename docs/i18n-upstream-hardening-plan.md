@@ -10,7 +10,7 @@ Permettre à chaque serveur de choisir `fr` ou `en`, avec `fr` comme valeur par 
 - Conserver `backup/pre-i18n-upstream-hardening` comme point de retour.
 - Vérifier un worktree propre avant chaque vague.
 - Garder `7e3a72a` comme référence locale avant intégration.
-- Utiliser `npm test` comme commande de test officielle (`node --test`).
+- Utiliser `npm test` comme commande de test officielle (`node --test test`).
 
 ## 2. Comparaison upstream sélective
 
@@ -92,5 +92,7 @@ Pour chaque vague : remplacer les textes par des clés, traduire les description
 - Helper HTTP et migrations des commandes HTTP avancés.
 - Vague économie/casino commencée avec `balance`, `deposit` et `slots`, et catalogues UTF-8 corrigés.
 - Les vagues giveaways et radio utilisent désormais les clés fr/en pour leurs réponses ; les catalogues fr/en sont alignés et les validations runtime ainsi que les vagues restantes restent à clôturer.
-- La compilation de `canvas` reste bloquée dans l’environnement Node 24 faute de binaire compatible et de bibliothèques GTK/Cairo.
+- Le runtime de référence est Node 20 : `canvas@2.11.2` y dispose d’un binaire Windows précompilé ; Node 24/22 n’en disposent pas dans cette version.
+- Le bot de test atteint Discord et ses commandes ont été publiées sur les deux serveurs de laboratoire ; les scénarios d’interaction restent à exécuter manuellement.
+- Le démarrage complet reste dépendant de MongoDB : l’hôte Atlas fourni par l’environnement répond actuellement `ENOTFOUND`.
 - La comparaison finale avec `upstream/main` couvre 634 fichiers ; la migration V11 complète reste volontairement non fusionnée.
