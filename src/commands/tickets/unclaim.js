@@ -13,13 +13,13 @@ module.exports = async (client, interaction, args) => {
                 flags: [Discord.PermissionsBitField.Flags.ManageMessages],
                 perms: [Discord.PermissionsBitField.Flags.ManageMessages]
             }, interaction)
-        
+
             if (perms == false) return;
 
             if (data) {
                 if (ticketData.claimed == "" || ticketData.claimed == undefined || ticketData.claimed == "None") {
                     client.errNormal({
-                        text: "Ticket not claimed!",
+                        key: 'tickets.notClaimed',
                         type: 'ephemeral'
                     }, interaction)
                 }
@@ -29,7 +29,7 @@ module.exports = async (client, interaction, args) => {
 
                         if (ticketCategory == undefined) {
                             return client.errNormal({
-                                error: "Do the setup!",
+                                key: 'tickets.setupRequired',
                                 type: 'editreply'
                             }, interaction);
                         }
@@ -40,21 +40,21 @@ module.exports = async (client, interaction, args) => {
                             ticketData.save();
 
                             return client.simpleEmbed({
-                                desc: `This ticket can now be claimed again!`,
+                                descKey: 'tickets.availableAgain',
                                 type: 'editreply'
                             }, interaction)
 
                         }
                         else {
                             client.errNormal({
-                                error: "This is not a ticket!",
+                                key: 'tickets.notTicket',
                                 type: 'editreply'
                             }, interaction)
                         }
                     }
                     else {
                         client.errNormal({
-                            error: "You have not claimed this ticket!",
+                            key: 'tickets.notClaimedByYou',
                             type: 'editreply'
                         }, interaction)
                     }
@@ -62,7 +62,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 return client.errNormal({
-                    error: "Do the ticket setup!",
+                    key: 'tickets.setupRequired',
                     type: 'editreply'
                 }, interaction)
             }
@@ -70,4 +70,4 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 
+

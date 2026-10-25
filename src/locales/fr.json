@@ -88,6 +88,19 @@
       "unpaused": "Le giveaway n'est plus en pause !",
       "rerolled": "Les gagnants du giveaway ont été retirés au sort."
     },
+    "tickets": {
+      "setupRequired": "Configurez les tickets d'abord.",
+      "notTicket": "Ceci n'est pas un ticket.",
+      "alreadyClaimed": "Le ticket est déjà pris en charge.",
+      "ownTicket": "Vous ne pouvez pas prendre en charge votre propre ticket.",
+      "claimedBy": "Vous serez maintenant assisté par <@!{user}>.",
+      "alreadyClosed": "Le ticket est déjà fermé.",
+      "closedBy": "Ticket fermé par <@!{user}>.",
+      "notClaimed": "Le ticket n'est pas pris en charge.",
+      "notClaimedByYou": "Vous n'avez pas pris en charge ce ticket.",
+      "availableAgain": "Ce ticket peut maintenant être pris en charge à nouveau !",
+      "deleteCountdown": "Ce ticket sera supprimé dans **5 secondes**."
+    },
     "music": {
       "notInVoice": "Vous n'êtes pas dans un canal vocal !",
       "notSameVoice": "Vous n'êtes pas dans le même canal vocal !",
