@@ -29,6 +29,19 @@
     }
     },
     "commands": {
+      "reactionroles": {
+        "emojiNotFound": "That emoji could not be found on this server.",
+        "created": "Reaction role created! Create a panel with one of the following commands.",
+        "menuPanel": "📘・Menu panel",
+        "buttonPanel": "📘・Button panel",
+        "noData": "No reaction role data found.",
+        "noRoles": "No valid roles found.",
+        "selectPlaceholder": "❌・Select an option",
+        "panelTitle": "{category}・Roles",
+        "panelDescription": "_____\n\nChoose your roles in the menu!\n\n{roles}",
+        "sendError": "I couldn't send the message. Check my permissions.",
+        "panelCreated": "Reaction role panel created!"
+      },
       "triggers": {
         "invalidEmoji": "That emoji could not be found on this server.",
         "saved": "Trigger **{alias}** was saved.",

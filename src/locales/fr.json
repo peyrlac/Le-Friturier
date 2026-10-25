@@ -27,6 +27,19 @@
     }
   },
     "commands": {
+      "reactionroles": {
+        "emojiNotFound": "Emoji introuvable dans ce serveur !",
+        "created": "Rôle de réaction créé ! Créez un panneau avec l'une des commandes suivantes.",
+        "menuPanel": "📘・Panneau menu",
+        "buttonPanel": "📘・Panneau bouton",
+        "noData": "Aucune donnée trouvée.",
+        "noRoles": "Aucun rôle valide trouvé.",
+        "selectPlaceholder": "❌・Sélectionnez une option",
+        "panelTitle": "{category}・Rôles",
+        "panelDescription": "_____\n\nChoisissez vos rôles dans le menu !\n\n{roles}",
+        "sendError": "Impossible d'envoyer le message. Vérifiez mes permissions.",
+        "panelCreated": "Panneau de rôles créé !"
+      },
       "triggers": {
         "invalidEmoji": "Emoji introuvable dans ce serveur !",
         "saved": "Le trigger **{alias}** a été enregistré.",
