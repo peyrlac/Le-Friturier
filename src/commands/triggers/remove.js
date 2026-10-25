@@ -1,9 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/triggers");
+const localizedRemove = require('./removeLocalized');
 
 module.exports = async (client, interaction, args) => {
-    const nom = interaction.options.getString('alias');
+    return localizedRemove(client, interaction, args);
 
     Schema.findOne({ Guild: interaction.guild.id, alias: alias }, async (err, data) => {
         if (data) {

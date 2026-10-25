@@ -1,7 +1,9 @@
 const Discord = require('discord.js');
 const Schema = require("../../database/models/triggers");
+const localizedAdd = require('./addLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedAdd(client, interaction, args);
     var isActive = interaction.options.getString('isactive');
     if (isActive == null) {
         isActive = true;
@@ -351,4 +353,3 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 */
- 
