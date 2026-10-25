@@ -11,6 +11,7 @@ const levelRewards = require("../../database/models/levelRewards");
 const levelLogs = require("../../database/models/levelChannels");
 const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
+const { request, getJson } = require("../../handlers/http");
 
 /**
  * 
@@ -215,67 +216,38 @@ module.exports = async (client, message) => {
   });
 
   // Chat bot
-  chatBotSchema.findOne({ Guild: message.guild.id }, async (err, data) => {
-    if (!data) return;
-    if (message.channel.id !== data.Channel) return;
-    if (process.env.OPENAI) {
-      fetch(
-        `https://api.openai.com/v1/chat/completions`,
-        {
+  const chatSettings = await chatBotSchema.findOne({ Guild: message.guild.id });
+  if (chatSettings && message.channel.id === chatSettings.Channel) {
+    try {
+      if (process.env.OPENAI) {
+        const response = await request('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + process.env.OPENAI,
+            'Authorization': 'Bearer ' + process.env.OPENAI
           },
           body: JSON.stringify({
-            'model': 'gpt-3.5-turbo',
-            'messages': [{
-              'role': 'user',
-              'content': message.content
-            }]
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: message.content }]
           })
-        }
-      )
-        .catch(() => {
-        })
-        .then((res) => {
-          res.json().then((data) => {
-            if(data.error) return;
-            message.reply({ content: data.choices[0].message.content });
-          });
         });
-    } else {
-      try {
-        const input = message;
-        try {
-          fetch(
-            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}&uid=${message.author.id}`,
-          )
-            .catch(() => { console.log })
-            .then((res) => res.json())
-            .catch(() => { console.log})
-            .then(async (json) => {
-              console.log(json);
-              if (json) {
-                if (
-                  json.response !== " " ||
-                  json.response !== undefined ||
-                  json.response !== "" ||
-                  json.response !== null
-                ) {
-                  try {
-                    return message
-                      .reply({ content: json.response })
-                      .catch(() => { });
-                  } catch { }
-                }
-              }
-            })
-            .catch(() => { });
-        } catch { }
-      } catch { }
+        const data = await response.json();
+        const content = data.choices?.[0]?.message?.content;
+        if (content) await message.reply({ content });
+      }
+      else {
+        const data = await getJson(
+          `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(message.content)}&uid=${message.author.id}`
+        );
+        if (data?.response && data.response.trim()) {
+          await message.reply({ content: data.response });
+        }
+      }
     }
-  });
+    catch (error) {
+      console.error(error);
+    }
+  }
 
   // Sticky messages
   try {
