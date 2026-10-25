@@ -29,6 +29,18 @@
     }
     },
     "commands": {
+      "birthdays": {
+        "invalidDay": "The day format is invalid.",
+        "invalidMonth": "The month format is invalid.",
+        "of": "of",
+        "setSuccess": "Your birthday has been saved.",
+        "deleted": "Your birthday was deleted.",
+        "notFound": "No birthday found.",
+        "field": "🎂・Birthday",
+        "checkTitle": "🎂・Birthday check",
+        "checkDescription": "{user}'s birthday is on {birthday}.",
+        "months": { "1": "January", "2": "February", "3": "March", "4": "April", "5": "May", "6": "June", "7": "July", "8": "August", "9": "September", "10": "October", "11": "November", "12": "December" }
+      },
       "security": {
         "moderationTitle": "❌・Moderation",
         "invitesBlocked": "Discord links are not allowed in this server.",

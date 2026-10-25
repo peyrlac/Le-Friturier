@@ -27,6 +27,18 @@
     }
   },
     "commands": {
+      "birthdays": {
+        "invalidDay": "Le format du jour est incorrect.",
+        "invalidMonth": "Le format du mois est incorrect.",
+        "of": "de",
+        "setSuccess": "Votre anniversaire a été enregistré.",
+        "deleted": "Votre anniversaire a été supprimé.",
+        "notFound": "Aucun anniversaire trouvé.",
+        "field": "🎂・Anniversaire",
+        "checkTitle": "🎂・Vérification de l'anniversaire",
+        "checkDescription": "L'anniversaire de {user} est le {birthday}.",
+        "months": { "1": "janvier", "2": "février", "3": "mars", "4": "avril", "5": "mai", "6": "juin", "7": "juillet", "8": "août", "9": "septembre", "10": "octobre", "11": "novembre", "12": "décembre" }
+      },
       "security": {
         "moderationTitle": "❌・Modération",
         "invitesBlocked": "Les liens Discord ne sont pas autorisés sur ce serveur.",

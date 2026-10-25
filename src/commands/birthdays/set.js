@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/birthday");
+const localizedSet = require('./setLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedSet(client, interaction, args);
     const months = {
         1: "January",
         2: "February",
@@ -72,4 +74,3 @@ function suffixes(number) {
                 ? `${converted}rd` : `${converted}th`
 }
 
- 
