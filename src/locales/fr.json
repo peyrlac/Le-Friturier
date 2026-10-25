@@ -96,7 +96,13 @@
       "sayTooLong": "Vous ne pouvez pas utiliser plus de 2000 caractères !",
       "messageSent": "Message envoyé avec succès.",
       "sudoTooLong": "Vous ne pouvez pas utiliser plus de 2000 caractères !",
-      "sudoSent": "Le message sudo a été envoyé !"
+      "sudoSent": "Le message sudo a été envoyé !",
+      "remoteDataError": "Impossible de récupérer les données distantes.",
+      "birdFactTitle": "Fait aléatoire sur les oiseaux",
+      "catFactTitle": "Fait aléatoire sur les chats",
+      "dogFactTitle": "Fait aléatoire sur les chiens",
+      "koalaFactTitle": "Fait aléatoire sur les koalas",
+      "pandaFactTitle": "Fait aléatoire sur les pandas"
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
