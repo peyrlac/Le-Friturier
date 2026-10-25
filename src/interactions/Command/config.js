@@ -93,6 +93,14 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizations: {
+        name: { fr: 'config', en: 'config' },
+        description: {
+            fr: 'Ajustez le bot à votre goût',
+            en: 'Customize the bot to your liking'
+        }
+    },
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);
