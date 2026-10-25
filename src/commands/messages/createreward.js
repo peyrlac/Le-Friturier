@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/messageRewards");
+const localizedCreateReward = require('./createrewardLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedCreateReward(client, interaction, args);
     let messages = interaction.options.getNumber('amount');
     let role = interaction.options.getRole('role');
 
@@ -42,4 +44,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 

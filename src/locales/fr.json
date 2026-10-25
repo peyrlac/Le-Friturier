@@ -27,6 +27,25 @@
     }
   },
     "commands": {
+      "messages": {
+        "added": "{amount} message(s) ajoutée(s) à {user}.",
+        "removed": "{amount} message(s) retirée(s) à {user}.",
+        "noData": "Aucune donnée de messages trouvée pour {user}.",
+        "total": "Total des messages",
+        "title": "Messages",
+        "description": "**{user}** possède **{count}** message(s).",
+        "noLeaderboard": "Aucune donnée de messages trouvée.",
+        "leaderboardTitle": "💬・Messages - {guild}",
+        "leaderboardEntry": "**{rank}** | <@!{user}> - Messages : `{count}`",
+        "noRewards": "Aucune récompense de messages trouvée.",
+        "rewardsTitle": "💬・Récompenses de messages - {guild}",
+        "rewardEntry": "**{count} messages** - <@&{role}>",
+        "rewardExists": "Ce montant de messages possède déjà une récompense.",
+        "rewardCreated": "Récompense créée pour {messages} messages.",
+        "rewardRemoved": "Récompense supprimée pour {messages} messages.",
+        "rewardNotFound": "Aucune récompense trouvée pour {messages} messages.",
+        "role": "📘・Rôle"
+      },
       "reactionroles": {
         "emojiNotFound": "Emoji introuvable dans ce serveur !",
         "created": "Rôle de réaction créé ! Créez un panneau avec l'une des commandes suivantes.",

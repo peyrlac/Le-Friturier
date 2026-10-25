@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/messages");
+const localizedLeaderboard = require('./leaderboardLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedLeaderboard(client, interaction, args);
     const rawLeaderboard = await Schema.find({ Guild: interaction.guild.id }).sort(([['Messages', 'descending']]));
 
     if (!rawLeaderboard) return client.errNormal({
@@ -15,4 +17,3 @@ module.exports = async (client, interaction, args) => {
     await client.createLeaderboard(`💬・Messages - ${interaction.guild.name}`, lb, interaction);
 }
 
- 

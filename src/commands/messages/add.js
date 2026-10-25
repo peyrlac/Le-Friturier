@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/messages");
+const localizedAdd = require('./addLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedAdd(client, interaction, args);
     let user = interaction.options.getUser('user');
     let amount = interaction.options.getNumber('amount');
 
@@ -39,4 +41,3 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 
- 
