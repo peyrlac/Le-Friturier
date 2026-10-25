@@ -191,6 +191,14 @@ module.exports = {
                 )
         ),
 
+    localizations: {
+        name: { fr: 'fun', en: 'fun' },
+        description: {
+            fr: 'Exécuter les commandes amusantes du bot',
+            en: 'Run fun commands in the bot'
+        }
+    },
+
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction

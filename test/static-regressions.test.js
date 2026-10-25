@@ -172,6 +172,18 @@ test('radio commands use localization keys for user-facing responses', () => {
   }
 });
 
+test('fun command exposes localized top-level metadata', () => {
+  const command = require(path.join(root, 'src/interactions/Command/fun.js'));
+
+  assert.deepEqual(command.localizations, {
+    name: { fr: 'fun', en: 'fun' },
+    description: {
+      fr: 'Exécuter les commandes amusantes du bot',
+      en: 'Run fun commands in the bot'
+    }
+  });
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
