@@ -41,7 +41,7 @@ module.exports = async (client, interaction, args) => {
                         inline: true
                     },
                     {
-                        name: `${client.emotes.economy.coins}ãƒ»${await client.t(interaction, 'economy.pay.amount')}`,
+                        name: `${client.emotes.economy.coins}・${await client.t(interaction, 'economy.pay.amount')}`,
                         value: `$${amount}`,
                         inline: true
                     }
