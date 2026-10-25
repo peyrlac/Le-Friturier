@@ -10,7 +10,7 @@ module.exports = async (client, interaction, args) => {
 
     if (perms == false) {
         client.errNormal({
-            error: "You don't have the required permissions to use this command!",
+            key: "errors.noPermission",
             type: 'editreply'
         }, interaction);
         return;
@@ -77,7 +77,7 @@ module.exports = async (client, interaction, args) => {
 
     client.emit('warnAdd', member, interaction.user, reason)
     client.succNormal({
-        text: `User has received a warning!`,
+        key: "errors.moderation.warnSuccess",
         fields: [
             {
                 name: "👤┆User",
