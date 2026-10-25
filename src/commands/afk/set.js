@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 const Schema = require('../../database/models/afk');
 
 module.exports = async (client, interaction, args) => {
+    return require('./setAsync')(client, interaction, args);
+
     const reason = interaction.options.getString('reason') || `Not specified`;
 
     Schema.findOne({ Guild: interaction.guild.id, User: interaction.user.id }, async (err, data) => {
@@ -34,5 +36,3 @@ module.exports = async (client, interaction, args) => {
         }
     })
 }
-
- 
