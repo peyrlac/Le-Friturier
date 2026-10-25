@@ -1,8 +1,14 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/stats");
+const createStatsChannel = require('../../handlers/serverstats/createStatsChannel');
 
 module.exports = async (client, interaction, args) => {
+    const staticCount = interaction.guild.emojis.cache.filter(emoji => !emoji.animated).size;
+    const localizedChannelName = (await client.getTemplate(interaction.guild))
+        .replace(`{emoji}`, '😀')
+        .replace(`{name}`, `Static Emojis: ${staticCount || '0'}`);
+    return createStatsChannel(client, interaction, { channelName: localizedChannelName, field: 'StaticEmojis', successKey: 'serverstats.staticEmojisCreated' });
     let Emojis = "";
     let EmojiCount = 0;
     let Animated = 0;

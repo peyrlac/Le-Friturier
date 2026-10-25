@@ -36,6 +36,16 @@
         "rolesCreated": "The role count was created.",
         "boostsCreated": "The boost count was created.",
         "botsCreated": "The bot count was created."
+        ,"animatedEmojisCreated": "The animated emoji count was created.",
+        "emojisCreated": "The emoji count was created.",
+        "newsChannelsCreated": "The news channel count was created.",
+        "stageChannelsCreated": "The stage channel count was created.",
+        "staticEmojisCreated": "The static emoji count was created.",
+        "textChannelsCreated": "The text channel count was created.",
+        "voiceChannelsCreated": "The voice channel count was created.",
+        "tierCreated": "The boost tier count was created.",
+        "invalidTimezone": "The timezone is invalid.",
+        "timeCreated": "The time count was created."
       },
       "invites": {
         "added": "Added **{amount}** invite(s) to {user}.",

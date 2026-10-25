@@ -34,6 +34,16 @@
         "rolesCreated": "Le compteur de rôles a été créé.",
         "boostsCreated": "Le compteur de boosts a été créé.",
         "botsCreated": "Le compteur de bots a été créé."
+        ,"animatedEmojisCreated": "Le compteur d'emojis animés a été créé.",
+        "emojisCreated": "Le compteur d'emojis a été créé.",
+        "newsChannelsCreated": "Le compteur de salons d'annonces a été créé.",
+        "stageChannelsCreated": "Le compteur de salons stage a été créé.",
+        "staticEmojisCreated": "Le compteur d'emojis statiques a été créé.",
+        "textChannelsCreated": "Le compteur de salons textuels a été créé.",
+        "voiceChannelsCreated": "Le compteur de salons vocaux a été créé.",
+        "tierCreated": "Le compteur de niveau de boost a été créé.",
+        "invalidTimezone": "Le fuseau horaire est invalide.",
+        "timeCreated": "Le compteur horaire a été créé."
       },
       "invites": {
         "added": "{amount} invitation(s) ajoutée(s) à {user}.",
