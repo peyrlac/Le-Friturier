@@ -35,7 +35,7 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `Le nom du canal a été défini avec succès`,
+            key: 'commands.config.setchannelname.success',
             fields: [
                 {
                     name: `💬┆Nom`,
@@ -48,4 +48,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 

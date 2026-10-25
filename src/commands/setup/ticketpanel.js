@@ -25,17 +25,16 @@ module.exports = async (client, interaction, args) => {
             }, channel)
 
             client.succNormal({
-                text: `Ticket panel has been set up successfully!`,
+                key: 'commands.setup.ticketpanel.success',
                 type: 'editreply'
             }, interaction);
         }
         else {
             client.errNormal({
-                error: `Run the ticket setup first!`,
+                key: 'commands.setup.ticketpanel.missingSetup',
                 type: 'editreply'
             }, interaction);
         }
     })
 }
 
- 

@@ -8,6 +8,11 @@ const Discord = require('discord.js');
 
 const Schema = require("../../database/models/functions");
 
+async function translate(client, interaction, key, variables, fallback) {
+    if (key && client.t) return client.t(interaction, key, variables);
+    return fallback;
+}
+
 module.exports = (client) => {
     client.templateEmbed = function () {
         return new Discord.EmbedBuilder()
@@ -33,13 +38,14 @@ module.exports = (client) => {
         error: error,
         key: key,
         variables: variables = {},
+        descriptionKey: descriptionKey = 'errors.generic',
         type: type,
         content: content,
         components: components
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
-        embed.setDescription(`Une erreur est survenue !`)
-        const translatedError = key && client.t ? await client.t(interaction, key, variables) : error;
+        embed.setDescription(await translate(client, interaction, descriptionKey, variables, 'Une erreur est survenue !'))
+        const translatedError = await translate(client, interaction, key, variables, error);
         error = translatedError;
         embed.addFields( 
             { name: "💬┆Error comment", value: `\`\`\`${error}\`\`\``},
@@ -58,12 +64,13 @@ module.exports = (client) => {
     client.errUsage = async function ({
         embed: embed = client.templateEmbed(),
         usage: usage,
+        descriptionKey: descriptionKey = 'errors.invalidArguments',
         type: type,
         content: content,
         components: components
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
-        embed.setDescription(`Les arguments fournis sont incorrects`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, 'Les arguments fournis sont incorrects'))
         embed.addFields(
             { name: "💬┆Required arguments", value: `\`\`\`${usage}\`\`\``},    
         )
@@ -82,14 +89,15 @@ module.exports = (client) => {
     client.errMissingPerms = async function ({
         embed: embed = client.templateEmbed(),
         perms: perms,
+        descriptionKey: descriptionKey = 'errors.noPermission',
         type: type,
         content: content,
         components: components
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
-        embed.setDescription(`Vous n'avez pas les permissions requises`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, "Vous n'avez pas les permissions requises"))
         embed.addFields(
-            { name: "Permission requise", value: `\`\`\`${perms}\`\`\``},
+            { name: await translate(client, interaction, 'common.requiredPermission', {}, 'Permission requise'), value: `\`\`\`${perms}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -106,14 +114,15 @@ module.exports = (client) => {
     client.errNoPerms = async function ({
         embed: embed = client.templateEmbed(),
         perms: perms,
+        descriptionKey: descriptionKey = 'errors.botNoPermission',
         type: type,
         content: content,
         components: components
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
-        embed.setDescription(`Le bot n'a pas les permissions requises`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, "Le bot n'a pas les permissions requises"))
         embed.addFields(
-            { name: "Permission requise", value: `\`\`\`${perms}\`\`\``},
+            { name: await translate(client, interaction, 'common.requiredPermission', {}, 'Permission requise'), value: `\`\`\`${perms}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -130,12 +139,13 @@ module.exports = (client) => {
     client.errWait = async function ({
         embed: embed = client.templateEmbed(),
         time: time,
+        descriptionKey: descriptionKey = 'errors.alreadyPerformed',
         type: type,
         content: content,
         components: components
     }, interaction) {
         embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
-        embed.setDescription(`Vous avez déjà effectué cette action`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, 'Vous avez déjà effectué cette action'))
         embed.addFields(
             { name: "⏰┆Try again on", value: `<t:${time}:f>`},
         )
@@ -159,13 +169,14 @@ module.exports = (client) => {
         text: text,
         key: key,
         variables: variables = {},
+        titleKey: titleKey = 'common.successTitle',
         fields: fields,
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.check}・Succes !`)
-        const translatedText = key && client.t ? await client.t(interaction, key, variables) : text;
+        embed.setTitle(`${client.emotes.normal.check}・${await translate(client, interaction, titleKey, variables, 'Succes !')}`)
+        const translatedText = await translate(client, interaction, key, variables, text);
         embed.setDescription(`${translatedText}`)
         embed.setColor(client.config.colors.succes)
 
@@ -188,6 +199,9 @@ module.exports = (client) => {
         embed: embed = client.templateEmbed(),
         title: title,
         desc: desc,
+        titleKey: titleKey,
+        descKey: descKey,
+        variables: variables = {},
         color: color,
         image: image,
         author: author,
@@ -202,9 +216,11 @@ module.exports = (client) => {
         if (interaction.guild == undefined) interaction.guild = { id: "0" };
         const functiondata = await Schema.findOne({ Guild: interaction.guild.id })
 
-        if (title) embed.setTitle(title);
-        if (desc && desc.length >= 2048) embed.setDescription(desc.substr(0, 2044) + "...");
-        else if (desc) embed.setDescription(desc);
+        const translatedTitle = await translate(client, interaction, titleKey, variables, title);
+        const translatedDesc = await translate(client, interaction, descKey, variables, desc);
+        if (translatedTitle) embed.setTitle(translatedTitle);
+        if (translatedDesc && translatedDesc.length >= 2048) embed.setDescription(translatedDesc.substr(0, 2044) + "...");
+        else if (translatedDesc) embed.setDescription(translatedDesc);
         if (image) embed.setImage(image);
         if (thumbnail) embed.setThumbnail(thumbnail);
         if (fields) embed.addFields(fields);
@@ -224,6 +240,9 @@ module.exports = (client) => {
     client.simpleEmbed = async function ({
         title: title,
         desc: desc,
+        titleKey: titleKey,
+        descKey: descKey,
+        variables: variables = {},
         color: color,
         image: image,
         author: author,
@@ -239,9 +258,11 @@ module.exports = (client) => {
         let embed = new Discord.EmbedBuilder()
             .setColor(client.config.colors.normal)
 
-        if (title) embed.setTitle(title);
-        if (desc && desc.length >= 2048) embed.setDescription(desc.substr(0, 2044) + "...");
-        else if (desc) embed.setDescription(desc);
+        const translatedTitle = await translate(client, interaction, titleKey, variables, title);
+        const translatedDesc = await translate(client, interaction, descKey, variables, desc);
+        if (translatedTitle) embed.setTitle(translatedTitle);
+        if (translatedDesc && translatedDesc.length >= 2048) embed.setDescription(translatedDesc.substr(0, 2044) + "...");
+        else if (translatedDesc) embed.setDescription(translatedDesc);
         if (image) embed.setImage(image);
         if (thumbnail) embed.setThumbnail(thumbnail);
         if (fields) embed.addFields(fields);

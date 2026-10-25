@@ -25,9 +25,8 @@ module.exports = async (client, interaction, args) => {
     }
 
     client.succNormal({
-        text: `Les niveaux sont maintenant**${boolean ? 'activé' : 'désactivé'}** dans ce serveur`,
+        key: boolean ? 'commands.config.levels.enabled' : 'commands.config.levels.disabled',
         type: 'editreply'
     }, interaction);
 }
 
- 

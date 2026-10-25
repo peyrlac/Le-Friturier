@@ -1,16 +1,94 @@
 {
     "common": {
-        "success": "Opération effectuée avec succès.",
-        "onlyFrench": "Texte disponible uniquement en français."
+    "success": "Opération effectuée avec succès.",
+    "onlyFrench": "Texte disponible uniquement en français.",
+    "errorTitle": "Erreur !",
+    "successTitle": "Succès !",
+    "errorComment": "Détail de l'erreur",
+    "requiredArguments": "Arguments requis",
+    "requiredPermission": "Permission requise",
+    "tryAgainAt": "Réessayez à",
+    "languageNames": {
+      "fr": "Français",
+      "en": "Anglais"
+    }
     },
     "errors": {
+        "generic": "Une erreur est survenue !",
         "missingTranslation": "Traduction manquante.",
-        "noPermission": "Vous n'avez pas la permission d'utiliser cette commande."
+        "noPermission": "Vous n'avez pas la permission d'utiliser cette commande.",
+        "botNoPermission": "Le bot n'a pas les permissions requises.",
+        "invalidArguments": "Les arguments fournis sont incorrects.",
+        "alreadyPerformed": "Vous avez déjà effectué cette action.",
+        "unsupportedLanguage": "Cette langue n'est pas prise en charge."
     },
     "commands": {
         "config": {
             "language": {
-                "success": "La langue du serveur est maintenant : {language}."
+                "success": "La langue du serveur est maintenant : {language}.",
+                "description": "Choisir la langue du serveur",
+                "optionDescription": "Choisissez une langue"
+            },
+            "levels": {
+                "enabled": "Les niveaux sont maintenant activés dans ce serveur.",
+                "disabled": "Les niveaux sont maintenant désactivés dans ce serveur."
+            },
+            "setcolor": {
+                "invalid": "Vous n'avez pas précisé de couleur hexadécimale. Exemple : FF0000",
+                "success": "La couleur intégrée a été ajustée avec succès."
+            },
+            "setchannelname": {
+                "success": "Le nom du canal a été défini avec succès."
+            },
+            "setverify": {
+                "success": "Le panneau de vérification a été créé avec succès."
+            },
+            "levelmessage": {
+                "success": "Le message de niveau a été défini avec succès."
+            },
+            "welcomemessage": {
+                "success": "Le message de bienvenue a été défini avec succès."
+            },
+            "leavemessage": {
+                "success": "Le message de congé a été défini avec succès."
+            }
+        },
+        "setup": {
+            "channelsorter": {
+                "invalidChannel": "Le salon sélectionné doit être une catégorie.",
+                "success": "Le tri des salons a été configuré avec succès."
+            },
+            "deletesetup": {
+                "noConfig": "Aucune configuration de tri des salons n'a été trouvée.",
+                "selectionPrompt": "Sélectionnez la catégorie à retirer du tri automatique :",
+                "removed": "Le tri des salons a été retiré de la catégorie sélectionnée.",
+                "cancelled": "Aucune catégorie sélectionnée dans la minute, opération annulée.",
+                "success": "La configuration a été supprimée avec succès."
+            },
+            "tickets": {
+                "success": "Les tickets ont été configurés avec succès."
+            },
+            "customvoice": {
+                "success": "Le système de salons vocaux personnalisés a été configuré avec succès.",
+                "error": "Une erreur est survenue lors de la configuration des salons vocaux personnalisés."
+            },
+            "ticketpanel": {
+                "success": "Le panneau de tickets a été configuré avec succès.",
+                "missingSetup": "Configurez d'abord les tickets."
+            }
+        },
+        "bot": {
+            "ping": {
+                "loading": "Calcul du ping...",
+                "description": "Découvrez à quelle vitesse répond notre bot."
+            },
+            "vote": {
+                "voted": "Vous avez voté !",
+                "notVoted": "Vous n'avez pas voté !",
+                "error": "Une erreur est survenue lors de la vérification du vote."
+            },
+            "feedback": {
+                "success": "Votre avis a été envoyé aux développeurs avec succès."
             }
         }
     }

@@ -14,7 +14,7 @@ module.exports = async (client, interaction) => {
     const language = interaction.options.getString('language', true);
     if (!SUPPORTED_LOCALES.includes(language)) {
         return client.errNormal({
-            error: 'Unsupported language.',
+            key: 'errors.unsupportedLanguage',
             type: 'editreply',
         }, interaction);
     }
@@ -25,9 +25,9 @@ module.exports = async (client, interaction) => {
         { upsert: true, new: true, setDefaultsOnInsert: true }
     );
 
-    const languageName = language === 'fr' ? 'Français' : 'English';
     return client.succNormal({
-        text: await client.t(interaction, 'commands.config.language.success', { language: languageName }),
+        key: 'commands.config.language.success',
+        variables: { language: language === 'fr' ? 'Français' : 'English' },
         type: 'editreply',
     }, interaction);
 };
