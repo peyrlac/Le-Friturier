@@ -193,6 +193,91 @@ module.exports = {
         description: {
             fr: 'Créer et gérer votre profil',
             en: 'Create and manage your profile'
+        },
+        subcommands: {
+            help: { description: { fr: 'Voir les commandes de profil disponibles', en: 'Get information about the profile category commands' } },
+            create: { description: { fr: 'Créer votre profil', en: 'Create your profile' } },
+            delete: { description: { fr: 'Supprimer votre profil', en: 'Delete your profile' } },
+            profile: {
+                description: { fr: 'Voir votre profil', en: 'See your profile' },
+                options: { user: { description: { fr: 'Utilisateur dont vous voulez voir le profil', en: 'The user you want the profile from' } } }
+            },
+            aboutme: {
+                description: { fr: 'Définir votre présentation', en: 'Set your about me' },
+                options: { text: { description: { fr: 'Saisissez votre présentation', en: 'Enter a about me' } } }
+            },
+            age: {
+                description: { fr: 'Définir votre âge', en: 'Set your age' },
+                options: { number: { description: { fr: 'Saisissez un nombre', en: 'Enter a number' } } }
+            },
+            bday: {
+                description: { fr: 'Définir votre anniversaire', en: 'Set your bday' },
+                options: { bday: { description: { fr: 'Saisissez votre anniversaire', en: 'Enter a bday' } } }
+            },
+            color: {
+                description: { fr: 'Définir votre couleur préférée', en: 'Set your favorite color' },
+                options: { color: { description: { fr: 'Saisissez la couleur à définir', en: 'The color you want to set' } } }
+            },
+            gender: { description: { fr: 'Définir votre genre', en: 'Set your gender' } },
+            origin: {
+                description: { fr: 'Définir votre origine', en: 'Set your origin' },
+                options: { country: { description: { fr: 'Saisissez un pays', en: 'Enter a country' } } }
+            },
+            status: {
+                description: { fr: 'Définir votre statut', en: 'Set your status' },
+                options: { text: { description: { fr: 'Saisissez un statut', en: 'Enter a status' } } }
+            }
+        },
+        subcommandGroups: {
+            actor: {
+                description: { fr: 'Gérer votre acteur préféré', en: 'Set your favorite actor' },
+                subcommands: {
+                    addactor: { description: { fr: 'Ajouter un acteur', en: 'The actor you want to add' }, options: { actor: { description: { fr: 'Acteur à ajouter', en: 'The actor you want to add' } } } },
+                    delactor: { description: { fr: 'Supprimer un acteur', en: 'The actor you want to remove' }, options: { actor: { description: { fr: 'Acteur à supprimer', en: 'The actor you want to remove' } } } }
+                }
+            },
+            artist: {
+                description: { fr: 'Gérer votre artiste préféré', en: 'Set your favorite artist' },
+                subcommands: {
+                    addartist: { description: { fr: 'Ajouter un artiste', en: 'The artist you want to add' }, options: { artist: { description: { fr: 'Artiste à ajouter', en: 'The artist you want to add' } } } },
+                    delartist: { description: { fr: 'Supprimer un artiste', en: 'The artist you want to remove' }, options: { artist: { description: { fr: 'Artiste à supprimer', en: 'The artist you want to remove' } } } }
+                }
+            },
+            food: {
+                description: { fr: 'Gérer votre nourriture préférée', en: 'Set your favorite food' },
+                subcommands: {
+                    addfood: { description: { fr: 'Ajouter un aliment', en: 'The food you want to add' }, options: { food: { description: { fr: 'Aliment à ajouter', en: 'The food you want to add' } } } },
+                    delfood: { description: { fr: 'Supprimer un aliment', en: 'The food you want to remove' }, options: { food: { description: { fr: 'Aliment à supprimer', en: 'The food you want to remove' } } } }
+                }
+            },
+            movie: {
+                description: { fr: 'Gérer votre film préféré', en: 'Set your favorite movie' },
+                subcommands: {
+                    addmovie: { description: { fr: 'Ajouter un film', en: 'The movie you want to add' }, options: { movie: { description: { fr: 'Film à ajouter', en: 'The movie you want to add' } } } },
+                    delmovie: { description: { fr: 'Supprimer un film', en: 'The movie you want to remove' }, options: { movie: { description: { fr: 'Film à supprimer', en: 'The movie you want to remove' } } } }
+                }
+            },
+            pet: {
+                description: { fr: 'Gérer votre animal préféré', en: 'Set your favorite pet' },
+                subcommands: {
+                    addpet: { description: { fr: 'Ajouter un animal', en: 'The pet you want to add' }, options: { pet: { description: { fr: 'Animal à ajouter', en: 'The pet you want to add' } } } },
+                    delpet: { description: { fr: 'Supprimer un animal', en: 'The pet you want to remove' }, options: { pet: { description: { fr: 'Animal à supprimer', en: 'The pet you want to remove' } } } }
+                }
+            },
+            song: {
+                description: { fr: 'Gérer votre chanson préférée', en: 'Set your favorite song' },
+                subcommands: {
+                    addsong: { description: { fr: 'Ajouter une chanson', en: 'The song you want to add' }, options: { song: { description: { fr: 'Chanson à ajouter', en: 'The song you want to add' } } } },
+                    delsong: { description: { fr: 'Supprimer une chanson', en: 'The song you want to remove' }, options: { song: { description: { fr: 'Chanson à supprimer', en: 'The song you want to remove' } } } }
+                }
+            },
+            hobbies: {
+                description: { fr: 'Gérer vos loisirs préférés', en: 'Set your favorite hobby' },
+                subcommands: {
+                    addhobby: { description: { fr: 'Ajouter un loisir', en: 'The hobby you want to add' }, options: { hobby: { description: { fr: 'Loisir à ajouter', en: 'The hobby you want to add' } } } },
+                    delhobby: { description: { fr: 'Supprimer un loisir', en: 'The hobby you want to remove' }, options: { hobby: { description: { fr: 'Loisir à supprimer', en: 'The hobby you want to remove' } } } }
+                }
+            }
         }
     },
 

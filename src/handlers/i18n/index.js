@@ -75,6 +75,10 @@ function applyCommandLocalizations(command) {
         }
 
         const children = Array.isArray(target.options) ? target.options : [];
+        for (const [name, childValues] of Object.entries(values.subcommandGroups || {})) {
+            const child = children.find(option => option.name === name);
+            applyBuilderLocalizations(child, childValues);
+        }
         for (const [name, childValues] of Object.entries(values.subcommands || {})) {
             const child = children.find(option => option.name === name);
             applyBuilderLocalizations(child, childValues);

@@ -25,7 +25,7 @@
 ## Points à vérifier avant fusion
 
 - Comparer les commits upstream restants avec les fichiers locaux `interactionCreate.js`, `embed.js`, musique et vérification.
-- `npm test` passe actuellement avec 47 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
+- `npm test` passe actuellement avec 57 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
 - Les tests i18n couvrent également les titres/libellés des helpers centraux, le rejet des langues non supportées et le contrat `withResponse`/`MessageFlags.Ephemeral`.
 - Les catalogues fr/en sont structurellement alignés ; l’unique clé française absente de l’anglais (`common.onlyFrench`) est volontaire et couvre le fallback.
 - La vague giveaways (`start` et `drop`) utilise désormais les clés fr/en pour tous les messages du manager et sa confirmation de lancement.
@@ -39,7 +39,7 @@
 ## Validation runtime du bot de test
 
 - Node 20.20.2 charge `canvas@2.11.2` et `sourcebin.create` sans erreur ; `sourcebin@6.0.1` déclare toutefois Node >=22.13 dans ses engines. Un build Docker Node 22 a été testé et échoue sur la compilation de `canvas@2.11.2`/`nan`, donc l’image reste volontairement en Node 20 jusqu’à la migration de canvas.
-- Le build Docker Node 20 est validé avec `npm ci --omit=dev`, un utilisateur non-root, le healthcheck portable et un contexte réduit à environ 43 Ko grâce à `.dockerignore`.
+- Le build Docker Node 20 est validé avec `npm ci --omit=dev`, un utilisateur non-root, `dumb-init`, le healthcheck portable et un contexte réduit à environ 197 Ko grâce à `.dockerignore`.
 - Le Gateway Discord répond ; le bot voit 2 serveurs de laboratoire.
 - 51 commandes ont été publiées globalement et sur les 2 serveurs de test, dont `/config language`.
 - Le loader ignore désormais les modules utilitaires non-factories (`http/index.js` et `serverstats/createStatsChannel.js`) ; le healthcheck utilise un chemin temporaire portable.

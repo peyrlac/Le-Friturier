@@ -255,6 +255,29 @@ test('serverstats publishes localized subcommand descriptions', () => {
     });
 });
 
+test('profile publishes localized subcommands, groups, and options', () => {
+    const command = require('../src/interactions/Command/profile');
+    applyCommandLocalizations(command);
+    const data = command.data.toJSON();
+    const create = data.options.find(option => option.name === 'create');
+    const actor = data.options.find(option => option.name === 'actor');
+    const addActor = actor.options.find(option => option.name === 'addactor');
+    const actorOption = addActor.options.find(option => option.name === 'actor');
+
+    assert.deepEqual(create.description_localizations, {
+        fr: 'Créer votre profil',
+        'en-US': 'Create your profile'
+    });
+    assert.deepEqual(actor.description_localizations, {
+        fr: 'Gérer votre acteur préféré',
+        'en-US': 'Set your favorite actor'
+    });
+    assert.deepEqual(actorOption.description_localizations, {
+        fr: 'Acteur à ajouter',
+        'en-US': 'The actor you want to add'
+    });
+});
+
 test('response helpers resolve a translation key before sending an embed', async () => {
     const installEmbeds = require('../src/handlers/components/embed');
     const sent = [];
