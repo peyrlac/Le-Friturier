@@ -5,13 +5,15 @@ module.exports = async (client, interaction, args) => {
 
     const data = await Schema.findOne({ User: interaction.user.id });
     if (data) {
-            const [male, female, other] = await Promise.all([
+            const [male, female, other, placeholder] = await Promise.all([
                 client.t(interaction, 'profile.genderMale'),
                 client.t(interaction, 'profile.genderFemale'),
                 client.t(interaction, 'profile.genderOther'),
+                client.t(interaction, 'profile.genderPlaceholder'),
             ]);
             const menu = new Discord.StringSelectMenuBuilder()
                 .setCustomId('gender-setup')
+                .setPlaceholder(placeholder)
                 .setPlaceholder('❌┆Nothing selected')
                 .addOptions(
                     {
