@@ -109,7 +109,13 @@
       "stankRate": "You are {result}% stanky!",
       "stankRateTitle": "Stank Rate",
       "christmas": "Christmas",
-      "christmasDays": "{days} days until Christmas."
+      "christmasDays": "{days} days until Christmas.",
+      "asciiTitle": "Ascii",
+      "asciiTooLong": "Please provide text shorter than 2000 characters!",
+      "sayTooLong": "You may not use more than 2000 characters!",
+      "messageSent": "Message sent successfully.",
+      "sudoTooLong": "You may not use more than 2000 characters!",
+      "sudoSent": "The sudo message was sent!"
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",

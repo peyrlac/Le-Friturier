@@ -4,13 +4,13 @@ module.exports = async (client, interaction, args) => {
     const text = interaction.options.getString('text');
 
     if (text.length >= 2000) return client.errNormal({
-        error: "You may not use more than 2000 characters!",
+        key: 'fun.sayTooLong',
         type: 'editreply'
     }, interaction);
 
     await interaction.followUp({ content: client.removeMentions(text) }).then(() => {
         client.succNormal({
-            text: `Message sent successfully`,
+            key: 'fun.messageSent',
             type: 'ephemeraledit'
         }, interaction)
     })
