@@ -56,6 +56,10 @@
         "originTooLong": "Your origin cannot be longer than 50 characters.",
         "originSuccess": "Your origin has been saved.",
         "originField": "Country",
+        "itemAlreadyExists": "{item} already exists in your profile.",
+        "itemNotFound": "{item} does not exist in your profile.",
+        "itemAdded": "{item} was added to your profile.",
+        "itemRemoved": "{item} was removed from your profile.",
         "notFound": "No profile found! Open one with `createprofile`."
       },
         "config": {
