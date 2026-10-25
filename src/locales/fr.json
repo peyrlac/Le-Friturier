@@ -139,6 +139,13 @@
       "koalaTitle": "Koala aléatoire",
       "pandaTitle": "Panda aléatoire",
       "redpandaTitle": "Panda roux aléatoire"
+      ,"avatarTitle": "Avatar utilisateur",
+      "bannerTitle": "Bannière utilisateur",
+      "bannerNoBanner": "{user} n'a pas de bannière, mais possède une couleur d'accent.",
+      "bannerNoBannerNoAccent": "{user} n'a pas de bannière ni de couleur d'accent.",
+      "bannerError": "Impossible de récupérer la bannière de cet utilisateur.",
+      "channelNotFound": "Salon introuvable.",
+      "imageSent": "L'image a été envoyée avec succès dans {channel}."
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",

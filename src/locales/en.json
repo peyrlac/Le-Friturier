@@ -158,6 +158,13 @@
       "koalaTitle": "Random Koala",
       "pandaTitle": "Random Panda",
       "redpandaTitle": "Random Redpanda"
+      ,"avatarTitle": "User avatar",
+      "bannerTitle": "User Banner",
+      "bannerNoBanner": "{user} doesn't have a banner but they do have an accent color.",
+      "bannerNoBannerNoAccent": "{user} doesn't have a banner or an accent color.",
+      "bannerError": "Unable to retrieve this user banner.",
+      "channelNotFound": "Channel not found.",
+      "imageSent": "The image was successfully sent to {channel}."
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",
