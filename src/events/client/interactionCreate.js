@@ -8,10 +8,9 @@ const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
 const { model: AnnouncementChannels } = require("../../database/models/announcement-channels");
 const { ReminderManager, createManager } = require("../../handlers/functions/eventReminders");
+const reminderManager = createManager();
 
 module.exports = async (client, interaction) => {
-    const reminderManager = createManager();
-
     /*
     if (
         interaction.isAutocomplete() &&
@@ -65,7 +64,7 @@ module.exports = async (client, interaction) => {
                         Name: interaction.commandName,
                     });
                     if (cmdd) {
-                        return interaction.channel.send({ content: cmdd.Responce });
+                        return interaction.reply({ content: cmdd.Responce });
                     }
 
                     const cmdx = await CommandsSchema.findOne({

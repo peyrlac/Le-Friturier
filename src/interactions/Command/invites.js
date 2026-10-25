@@ -16,14 +16,14 @@ module.exports = {
                 .setName('add')
                 .setDescription('Add invites to a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of invites').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of invites').setMinValue(1).setMaxValue(1000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
                 .setDescription('Remove invites from a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of invites').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of invites').setMinValue(1).setMaxValue(1000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand

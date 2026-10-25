@@ -16,7 +16,7 @@ module.exports = {
                 .setName('additem')
                 .setDescription('Add a role item to the economy store')
                 .addRoleOption(option => option.setName('role').setDescription('Select a role').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setMinValue(1).setMaxValue(1000000000).setRequired(true))
 
         )
         .addSubcommand(subcommand =>
@@ -24,7 +24,7 @@ module.exports = {
                 .setName('addmoney')
                 .setDescription('Add money to a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -68,7 +68,7 @@ module.exports = {
             subcommand
                 .setName('deposit')
                 .setDescription('Deposit money to the bank')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -95,7 +95,7 @@ module.exports = {
                 .setName('pay')
                 .setDescription('Pay a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -107,7 +107,7 @@ module.exports = {
                 .setName('removemoney')
                 .setDescription('Remove money from a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -129,7 +129,7 @@ module.exports = {
             subcommand
                 .setName('withdraw')
                 .setDescription('Withdraw your money')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand

@@ -30,8 +30,8 @@ module.exports = {
             subcommand
                 .setName('set')
                 .setDescription('Définissez votre anniversaire')
-                .addNumberOption(option => option.setName('day').setDescription('Le numéro de jour qui est votre anniversaire').setRequired(true))
-                .addNumberOption(option => option.setName('month').setDescription('Le numéro de mois qui est votre anniversaire').setRequired(true))
+                .addNumberOption(option => option.setName('day').setDescription('Le numéro de jour qui est votre anniversaire').setMinValue(1).setMaxValue(31).setRequired(true))
+                .addNumberOption(option => option.setName('month').setDescription('Le numéro de mois qui est votre anniversaire').setMinValue(1).setMaxValue(12).setRequired(true))
         )
     ,
 

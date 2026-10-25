@@ -39,7 +39,7 @@ module.exports = {
             subcommand
                 .setName('age')
                 .setDescription('Set your age')
-                .addNumberOption(option => option.setName('number').setDescription('Enter a number').setRequired(true))
+                .addNumberOption(option => option.setName('number').setDescription('Enter a number').setMinValue(13).setMaxValue(120).setRequired(true))
         ).
         addSubcommand(subcommand =>
             subcommand

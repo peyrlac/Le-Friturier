@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const vm = require('node:vm');
 
 const { inspect } = require('util');
 
@@ -16,7 +17,11 @@ module.exports = async (client, interaction, args) => {
 
     try {
         const start = process.hrtime();
-        evaled = eval(code);
+        // Execute developer snippets without exposing the bot process, require(),
+        // or the global object. The timeout also prevents a synchronous loop
+        // from blocking the command handler indefinitely.
+        const sandbox = Object.create(null);
+        evaled = new vm.Script(code).runInNewContext(sandbox, { timeout: 1000 });
 
         if (evaled instanceof Promise) {
             evaled = await evaled;
@@ -66,8 +71,8 @@ module.exports = async (client, interaction, args) => {
                 .setColor(client.config.colors.succes)
                 .setFooter(client.config.discord.footer)
                 .setTimestamp();
-            interaction.editreply({ embeds: [embed2] });
-            await interaction.channel.send({ files: [output] });
+            await interaction.editReply({ embeds: [embed2] });
+            await interaction.followUp({ files: [output] });
         }
     }
     catch (err) {

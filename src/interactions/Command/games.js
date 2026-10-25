@@ -26,7 +26,7 @@ module.exports = {
             subcommand
                 .setName('music-trivia')
                 .setDescription('Play music trivia')
-                .addNumberOption(option => option.setName('number').setDescription('The amount of songs').setRequired(true)),
+                .addNumberOption(option => option.setName('number').setDescription('The amount of songs').setMinValue(1).setMaxValue(50).setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
