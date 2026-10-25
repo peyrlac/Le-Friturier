@@ -114,6 +114,10 @@
         "leaderboardEntry": "**{rank}** | <@!{user}> - Niveau : `{level}` ({xp} XP)",
         "rewardsTitle": "Récompenses de niveau - {guild}",
         "rewardEntry": "**Niveau {level}** - <@&{role}>"
+        ,"rewardExists": "Ce niveau possède déjà une récompense.",
+        "rewardCreated": "Récompense créée pour le niveau {level}.",
+        "rewardRemoved": "Récompense du niveau {level} supprimée.",
+        "rewardNotFound": "Aucune récompense trouvée pour le niveau {level}."
       },
       "setcolor": {
         "invalid": "Vous n'avez pas pr\u00e9cis\u00e9 de couleur hexad\u00e9cimale. Exemple : FF0000",
