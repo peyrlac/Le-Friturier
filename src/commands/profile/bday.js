@@ -10,14 +10,14 @@ module.exports = async (client, interaction, args) => {
     if (!day || !month) return client.errUsage({ usage: "setbday [day]/[month]", type: 'editreply' }, interaction);
 
     if (isNaN(day) || isNaN(month)) {
-        return client.errNormal({ error: "The date you gave is not a valid number", type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'profile.bdayInvalidNumber', type: 'editreply' }, interaction);
     }
 
     day = parseInt(day);
     month = parseInt(month);
 
-    if (!day || day > 31) return client.errNormal({ error: "Wrong day format!", type: 'editreply' }, interaction);
-    if (!month || month > 12) return client.errNormal({ error: "Wrong month format!", type: 'editreply' }, interaction);
+    if (!day || day > 31) return client.errNormal({ key: 'profile.bdayInvalidDay', type: 'editreply' }, interaction);
+    if (!month || month > 12) return client.errNormal({ key: 'profile.bdayInvalidMonth', type: 'editreply' }, interaction);
 
     const bday = `${day}/${month}`;
 
@@ -27,7 +27,8 @@ module.exports = async (client, interaction, args) => {
             data.save();
 
             client.succNormal({
-                text: "Your birthday is set",
+                key: 'profile.bdaySuccess',
+                variables: { bday },
                 fields: [{
                     name: "🎂┆Bday",
                     value: `\`\`\`${bday}\`\`\``,
@@ -37,9 +38,8 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
         }
         else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
+            return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
         }
     })
 }
 
- 

@@ -7,13 +7,14 @@ module.exports = async (client, interaction, args) => {
 
     Schema.findOne({ User: interaction.user.id }, async (err, data) => {
         if (data) {
-            if (!isHexcolor(color)) return client.errNormal({ error: "You did not specify an hex color! Example: #ff0000", type: 'editreply' }, interaction);
+            if (!isHexcolor(color)) return client.errNormal({ key: 'profile.invalidColor', type: 'editreply' }, interaction);
 
             data.Color = color;
             data.save();
 
             client.succNormal({
-                text: "Your favorite color is set",
+                key: 'profile.colorSuccess',
+                variables: { color },
                 fields: [{
                     name: "🎨┆Color",
                     value: `\`\`\`${color}\`\`\``,
@@ -23,9 +24,8 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
         }
         else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
+            return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
         }
     })
 }
 
- 

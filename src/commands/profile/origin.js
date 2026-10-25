@@ -4,7 +4,7 @@ module.exports = async (client, interaction, args) => {
 
     const country = interaction.options.getString('country');
 
-    if (country.length > 50) return client.errNormal({ error: "Your origin cannot be longer than 50 characters", type: 'editreply' }, interaction);
+    if (country.length > 50) return client.errNormal({ key: 'profile.originTooLong', type: 'editreply' }, interaction);
 
     Schema.findOne({ User: interaction.user.id }, async (err, data) => {
         if (data) {
@@ -12,7 +12,8 @@ module.exports = async (client, interaction, args) => {
             data.save();
 
             client.succNormal({
-                text: "Your origin is set",
+                key: 'profile.originSuccess',
+                variables: { country },
                 fields: [{
                     name: "🌍┆Country",
                     value: `\`\`\`${country}\`\`\``,
@@ -22,9 +23,8 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
         }
         else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
+            return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
         }
     })
 }
 
- 
