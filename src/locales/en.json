@@ -125,7 +125,13 @@
       "renamed": "The channel name has changed to {name}.",
       "operationFailed": "Something went wrong.",
       "transcriptSaving": "Saving transcript...",
-      "transcriptSaved": "Transcript saved."
+      "transcriptSaved": "Transcript saved.",
+      "notice": "Hey <@!{user}>,\n\nCan we still help you?\nIf there is no response within **24 hours**, we will close this ticket.\n\n- Team {guild}",
+      "ownNotice": "You are not allowed to notice your own ticket.",
+      "alreadyOpen": "The ticket is already open.",
+      "opened": "Ticket opened by <@!{user}>.",
+      "cannotRemoveCreator": "You cannot remove the ticket creator from this ticket.",
+      "removed": "{user} was removed from the ticket."
     },
     "music": {
       "notInVoice": "You are not in a voice channel!",

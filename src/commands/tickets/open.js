@@ -17,7 +17,7 @@ module.exports = async (client, interaction, args) => {
     ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id }, async (err, ticketData) => {
         if (ticketData) {
             if (ticketData.resolved == false) return client.errNormal({
-                error: "Ticket is already open!",
+                key: 'tickets.alreadyOpen',
                 type: 'ephemeraledit'
             }, interaction);
 
@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
 
                     if (ticketCategory == undefined) {
                         return client.errNormal({
-                            error: "Do the setup!",
+                            key: 'tickets.setupRequired',
                             type: type
                         }, interaction);
                     }
@@ -50,13 +50,14 @@ module.exports = async (client, interaction, args) => {
                         ticketData.save();
 
                         return client.simpleEmbed({
-                            desc: `Ticket opened by <@!${interaction.user.id}>`,
+                            descKey: 'tickets.opened',
+                            variables: { user: interaction.user.id },
                             type: type
                         }, interaction)
                     }
                     else {
                         client.errNormal({
-                            error: "This is not a ticket!",
+                            key: 'tickets.notTicket',
                             type: type
                         }, interaction);
 
@@ -64,7 +65,7 @@ module.exports = async (client, interaction, args) => {
                 }
                 else {
                     return client.errNormal({
-                        error: "Do the setup!",
+                        key: 'tickets.setupRequired',
                         type: type
                     }, interaction);
                 }
@@ -73,4 +74,4 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
+
