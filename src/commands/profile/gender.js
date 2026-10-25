@@ -3,25 +3,30 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (data) {
+            const [male, female, other] = await Promise.all([
+                client.t(interaction, 'profile.genderMale'),
+                client.t(interaction, 'profile.genderFemale'),
+                client.t(interaction, 'profile.genderOther'),
+            ]);
             const menu = new Discord.StringSelectMenuBuilder()
                 .setCustomId('gender-setup')
                 .setPlaceholder('❌┆Nothing selected')
                 .addOptions(
                     {
                         emoji: "👨",
-                        label: `Male`,
+                        label: male,
                         value: `Male`,
                     },
                     {
                         emoji: "👩",
-                        label: `Female`,
+                        label: female,
                         value: `Female`,
                     },
                     {
                         emoji: "👪",
-                        label: `Other`,
+                        label: other,
                         value: `Other`,
                     }
                 );
@@ -29,31 +34,26 @@ module.exports = async (client, interaction, args) => {
             const row = new Discord.ActionRowBuilder()
                 .addComponents(menu)
 
-            client.embed({
-                desc: `Select a gender`,
+            await client.embed({
+                descKey: 'profile.genderPrompt',
                 type: 'editreply',
                 components: [row],
-            }, interaction).then(msg => {
-                const filter = i => i.user.id === interaction.user.id;
+            }, interaction);
 
-                interaction.channel.awaitMessageComponent({ filter, max: 1, componentType: Discord.ComponentType.StringSelect }).then(i => {
-                    if (i.customId == 'gender-setup') {
+            const filter = i => i.user.id === interaction.user.id;
+            const i = await interaction.channel.awaitMessageComponent({ filter, max: 1, componentType: Discord.ComponentType.StringSelect });
+            if (i.customId == 'gender-setup') {
                         data.Gender = i.values[0];
-                        data.save();
+                        await data.save();
 
                         client.succNormal({
-                            text: "Set your gender to " + i.values[0],
+                            key: 'profile.genderSuccess',
+                            variables: { gender: i.values[0] },
                             type: 'editreply',
                             components: [],
                         }, interaction);
-                    }
-                })
-            })
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type: 'editreply' }, interaction);
-        }
-    })
+            }
+    } else {
+        return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
+    }
 }
-
- 
