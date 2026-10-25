@@ -26,3 +26,20 @@ test('all command modules load without errors', () => {
 
   assert.equal(failures.length, 0, failures.join('\n'));
 });
+
+test('all native interaction command modules load without errors', () => {
+  const commandRoot = path.join(process.cwd(), 'src', 'interactions', 'Command');
+  const commandFiles = listJavaScriptFiles(commandRoot);
+  const failures = [];
+
+  for (const filePath of commandFiles) {
+    try {
+      delete require.cache[require.resolve(filePath)];
+      require(filePath);
+    } catch (error) {
+      failures.push(`${path.relative(process.cwd(), filePath)}: ${error.message}`);
+    }
+  }
+
+  assert.equal(failures.length, 0, failures.join('\n'));
+});
