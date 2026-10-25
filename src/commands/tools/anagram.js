@@ -5,7 +5,7 @@ module.exports = async (client, interaction, args) => {
 
     const word = interaction.options.getString('word');
 
-    fetch(`http://www.anagramica.com/all/${encodeURIComponent(word)}`).then((res) => res.json()).catch({})
+    fetch(`http://www.anagramica.com/all/${encodeURIComponent(word)}`).then((res) => res.json()).catch(() => {})
         .then(async (json) => {
             let content = ``;
             if (!json.all[0]) return client.errNormal({ error: "No word found!", type: 'editreply' }, interaction)
@@ -25,7 +25,7 @@ module.exports = async (client, interaction, args) => {
                 ],
                 type: 'editreply'
             }, interaction)
-        }).catch({})
+        }).catch(() => {})
 
 }
 

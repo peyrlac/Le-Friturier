@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     try {
         fetch(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user}&text=${text}`)
 
-            .then((res) => res.json()).catch({})
+            .then((res) => res.json()).catch(() => {})
             .then(async (json) => {
 
                 client.embed({
@@ -17,7 +17,7 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
 
-            }).catch({})
+            }).catch(() => {})
     }
     catch { }
 

@@ -42,7 +42,7 @@ module.exports = async (client, interaction, args) => {
                             value: `${embedData.description}`
                         }
                     ],
-                }, user).catch({})
+                }, user).catch(() => {})
             }
         }
         catch { }
