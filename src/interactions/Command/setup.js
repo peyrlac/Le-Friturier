@@ -181,6 +181,10 @@ module.exports = {
                 )
         )
     ,
+    localizations: {
+        name: { fr: 'configuration', en: 'setup' },
+        description: { fr: 'Gérer la configuration du bot', en: 'Manage the bot setups' }
+    },
 
     /** 
      * @param {Client} client

@@ -121,6 +121,10 @@ module.exports = {
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
         )
     ,
+    localizations: {
+        name: { fr: 'modération', en: 'moderation' },
+        description: { fr: 'Gérer la modération du serveur', en: 'Manage all server moderation' }
+    },
 
     /** 
      * @param {Client} client

@@ -28,6 +28,10 @@ module.exports = {
                 .setName('playing')
                 .setDescription('Show what is playing now'),
         ),
+    localizations: {
+        name: { fr: 'radio', en: 'radio' },
+        description: { fr: 'Écouter la radio dans le bot', en: 'Play radio in the bot' }
+    },
 
     /** 
      * @param {Client} client
