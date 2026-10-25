@@ -149,6 +149,14 @@
       "hackPranked": "Pranked",
       "hackRemoteError": "Unable to retrieve remote data."
     },
+    "games": {
+      "rollTitle": "Roll",
+      "rolled": "You rolled {result}.",
+      "rpsTitle": "Rock paper scissors",
+      "rpsWin": "I have {result}, you win!",
+      "rpsLose": "I have {result}, I win!",
+      "rpsDraw": "I have {result}, it's a draw!"
+    },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",
       "birdTitle": "Random Bird",

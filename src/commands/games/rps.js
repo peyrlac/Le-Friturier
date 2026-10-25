@@ -9,64 +9,73 @@ module.exports = async (client, interaction, args) => {
     switch (option) {
         case "rock":
             if (result == "paper") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, I win!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsLose',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
 
             if (result == "scissors") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, You win!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsWin',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
 
             if (result == "rock") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, It's a draw!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsDraw',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
             break;
 
         case "paper":
             if (result == "paper") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, It's a draw!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsDraw',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
 
             if (result == "scissors") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, I win!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsLose',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
 
             if (result == "rock") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, You win!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsWin',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
             break;
 
         case "scissors":
             if (result == "paper") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, You win!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsWin',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
 
             if (result == "scissors") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, It's a draw!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsDraw',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
 
             if (result == "rock") return client.embed({
-                title: `${client.emotes.normal.paper}・Rock paper scissors`,
-                desc: `I have ${result}, I win!`,
+                titleKey: 'games.rpsTitle',
+                descKey: 'games.rpsLose',
+                variables: { result },
                 type: 'editreply'
             }, interaction);
             break;
     }
 }
 
- 
+
