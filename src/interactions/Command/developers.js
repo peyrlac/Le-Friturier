@@ -85,7 +85,7 @@ module.exports = {
     run: async (client, interaction, args) => {
         model.findOne({ User: interaction.user.id }, async (err, data) => {
             if (data && data.FLAGS.includes("DEVELOPER")) {
-                await interaction.deferReply({ fetchReply: true });
+                await interaction.deferReply();
                 client.loadSubcommands(client, interaction, args);
             } else {
                 return client.errNormal({

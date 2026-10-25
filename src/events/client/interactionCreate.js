@@ -85,7 +85,7 @@ module.exports = async (client, interaction) => {
                                 interaction,
                             );
                         } else if (cmdx.Action == "DM") {
-                            await interaction.deferReply({ ephemeral: true });
+                            await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
                             interaction.editReply({ content: "I have sent you something in your DMs" });
                             return interaction.user.send({ content: cmdx.Responce }).catch((e) => {
                                 client.errNormal(
@@ -125,7 +125,7 @@ module.exports = async (client, interaction) => {
             try {
                 var image = new Discord.AttachmentBuilder(captcha.JPEGStream, {name:"captcha.jpeg"});
 
-                interaction.reply({ files: [image], fetchReply: true }).then(function (msg) {
+                interaction.reply({ files: [image], withResponse: true }).then(function (msg) {
                     const filter = s => s.author.id == interaction.user.id;
 
                     interaction.channel.awaitMessages({ filter, max: 1 }).then(response => {
@@ -487,7 +487,7 @@ module.exports = async (client, interaction) => {
 
         try {
             // Différer la réponse immédiatement
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
 
             // Récupérer les données de l'événement
             const data = await AnnouncementChannels.findOne({

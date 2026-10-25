@@ -96,7 +96,7 @@ module.exports = {
      * @param {String[]} args
      */
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         const perms = await client.checkUserPerms({
             flags: [Discord.PermissionsBitField.Flags.Administrator],
             perms: [Discord.PermissionsBitField.Flags.Administrator]
