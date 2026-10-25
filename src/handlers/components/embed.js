@@ -323,7 +323,7 @@ module.exports = (client) => {
                 content: content,
                 components: components,
                 withResponse: true,
-                ephemeral: true
+                flags: Discord.MessageFlags.Ephemeral
             }).catch(e => { });
         }
         else if (type && type.toLowerCase() == "ephemeral") {
@@ -332,7 +332,7 @@ module.exports = (client) => {
                 content: content,
                 components: components,
                 withResponse: true,
-                ephemeral: true
+                flags: Discord.MessageFlags.Ephemeral
             }).catch(e => { });
         }
         else {
