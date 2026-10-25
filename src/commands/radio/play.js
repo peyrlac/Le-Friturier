@@ -12,20 +12,19 @@ module.exports = async (client, interaction, args) => {
 
     client.radioStart(channel);
 
-    Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
-            data.Channel = channel.id;
-            data.save();
-        }
-        else {
-            new Schema({
-                Guild: interaction.guild.id,
-                Channel: channel.id,
-            }).save();
-        }
-    })
+    const data = await Schema.findOne({ Guild: interaction.guild.id });
+    if (data) {
+        data.Channel = channel.id;
+        await data.save();
+    }
+    else {
+        await new Schema({
+            Guild: interaction.guild.id,
+            Channel: channel.id,
+        }).save();
+    }
 
-    client.embed({
+    await client.embed({
         title: `📻・Démarré la radio`,
         desc: `La radio a commencé avec succès \ nto faire partir le bot: \`rleave\``,
         fields: [{
@@ -57,10 +56,10 @@ module.exports = async (client, interaction, args) => {
         )
         .setColor(client.config.colors.normal)
         .setTimestamp();
-    webhookClientLogs.send({
+    await webhookClientLogs.send({
         username: 'Bot Logs',
         embeds: [embed],
     });
 }
 
- 
+
