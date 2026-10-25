@@ -309,6 +309,22 @@
       "skippedTo": "Skipped to song **{number}**."
     },
     "economy": {
+      "withdraw": {
+        "invalid": "Enter a valid number!",
+        "negative": "You cannot withdraw negative money!",
+        "emptyBank": "You have nothing left in the bank!",
+        "noAccount": "You don't have any money to withdraw!",
+        "success": "You've withdrawn money from your bank!",
+        "amount": "Amount"
+      },
+      "fish": {
+        "noRod": "You have to buy a fishing rod!",
+        "rodBroken": "Your fishing rod has broken! Go buy a new one!",
+        "success": "You've fished and gotten a {fish}"
+      },
+      "hunt": {
+        "success": "You've hunted and gotten a {animal}"
+      },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",
