@@ -109,7 +109,12 @@
       "cancelSearchHint": "Appuyez sur `cancel` pour arrêter la recherche.",
       "selectionMissing": "Vous n'avez pas fourni de sélection.",
       "selectionCancelled": "Sélection annulée.",
-      "invalidSelection": "Le nombre fourni est trop petit ou trop grand (1-{max})."
+      "invalidSelection": "Le nombre fourni est trop petit ou trop grand (1-{max}).",
+      "bassboostLevel": "Niveau de boost des basses réglé sur **{level}**.",
+      "queueCleared": "La file d'attente vient d'être **supprimée** !",
+      "previousUnavailable": "Aucune musique n'a été jouée précédemment.",
+      "startedInVoice": "La musique a commencé dans <#{channel}> !",
+      "skippedTo": "Musique passée à **{number}**."
     },
     "economy": {
       "balance": {

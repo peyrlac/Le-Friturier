@@ -128,7 +128,12 @@
       "cancelSearchHint": "Press `cancel` to stop the search.",
       "selectionMissing": "You didn't provide a selection.",
       "selectionCancelled": "Selection cancelled.",
-      "invalidSelection": "The number you provided is too small or too big (1-{max})."
+      "invalidSelection": "The number you provided is too small or too big (1-{max}).",
+      "bassboostLevel": "Bass boost level set to **{level}**.",
+      "queueCleared": "The queue has just been **cleared**!",
+      "previousUnavailable": "No song was played previously.",
+      "startedInVoice": "The music started in <#{channel}>!",
+      "skippedTo": "Skipped to song **{number}**."
     },
     "economy": {
       "balance": {
