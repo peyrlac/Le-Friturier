@@ -122,6 +122,40 @@ test('config language persists the selected locale before replying', async () =>
     }
 });
 
+test('config language rejects locales outside the supported set', async () => {
+    const command = require('../src/commands/config/language');
+    const Functions = require('../src/database/models/functions');
+    const originalFindOneAndUpdate = Functions.findOneAndUpdate;
+    let persisted = false;
+    let error;
+
+    Functions.findOneAndUpdate = async () => {
+        persisted = true;
+    };
+
+    try {
+        const client = {
+            checkUserPerms: async () => true,
+            errNormal: async payload => {
+                error = payload;
+                return payload;
+            },
+        };
+        const interaction = {
+            guild: { id: 'guild' },
+            options: { getString: () => 'de' },
+        };
+
+        await command(client, interaction);
+
+        assert.equal(persisted, false);
+        assert.equal(error.key, 'errors.unsupportedLanguage');
+    }
+    finally {
+        Functions.findOneAndUpdate = originalFindOneAndUpdate;
+    }
+});
+
 test('serializes native command localizations for Discord', () => {
     const command = require('../src/interactions/Command/config');
     applyCommandLocalizations(command);
@@ -204,4 +238,96 @@ test('central response helpers translate common permission and success messages'
     assert.equal(sent[0].embeds[0].data.fields[0].name, 'Translated permission');
     assert.equal(sent[1].embeds[0].data.description, 'Translated success text');
     assert.match(sent[1].embeds[0].data.title, /Translated success/);
+});
+
+test('central error helper localizes its title and error label', async () => {
+    const installEmbeds = require('../src/handlers/components/embed');
+    let sent;
+    const embed = {
+        setTitle(value) { this.title = value; return this; },
+        setDescription(value) { this.description = value; return this; },
+        addFields(fields) { this.fields = fields; return this; },
+        setColor() { return this; },
+    };
+    const translations = {
+        'errors.generic': 'Localized description',
+        'common.errorTitle': 'Localized error',
+        'common.errorComment': 'Localized comment',
+    };
+    const client = {
+        config: { colors: { error: '#ED4245', normal: '#5865F2', succes: '#57F287' }, discord: { footer: 'footer' } },
+        emotes: { normal: { error: 'ERR', check: 'OK' } },
+        user: { username: 'test', avatarURL: () => null },
+        templateEmbed: () => ({ ...embed }),
+        t: async (_interaction, key) => translations[key] || key,
+    };
+    const interaction = {
+        guild: { id: 'guild' },
+        reply: async payload => {
+            sent = payload;
+            return payload;
+        },
+    };
+
+    installEmbeds(client);
+    await client.errNormal({ error: 'detail', type: 'reply' }, interaction);
+
+    assert.equal(sent.embeds[0].data.title, 'ERR・Localized error');
+    assert.equal(sent.embeds[0].data.fields[0].name, 'Localized comment');
+});
+
+test('response helper keeps withResponse and ephemeral flags for ephemeral replies', async () => {
+    const Discord = require('discord.js');
+    const installEmbeds = require('../src/handlers/components/embed');
+    let sent;
+    const client = {
+        config: { colors: { error: '#ED4245', normal: '#5865F2', succes: '#57F287' }, discord: { footer: 'footer' } },
+        emotes: { normal: { error: 'ERR', check: 'OK' } },
+        user: { username: 'test', avatarURL: () => null },
+    };
+    const interaction = {
+        reply: async payload => {
+            sent = payload;
+            return payload;
+        },
+    };
+
+    installEmbeds(client);
+    await client.sendEmbed({ embeds: [], type: 'ephemeral' }, interaction);
+
+    assert.equal(sent.withResponse, true);
+    assert.equal(sent.flags, Discord.MessageFlags.Ephemeral);
+});
+
+test('permission error helpers localize their shared error title', async () => {
+    const installEmbeds = require('../src/handlers/components/embed');
+    let sent;
+    const client = {
+        config: { colors: { error: '#ED4245', normal: '#5865F2', succes: '#57F287' }, discord: { footer: 'footer' } },
+        emotes: { normal: { error: 'ERR', check: 'OK' } },
+        user: { username: 'test', avatarURL: () => null },
+        templateEmbed: () => ({
+            setTitle(value) { this.title = value; return this; },
+            setDescription(value) { this.description = value; return this; },
+            addFields(fields) { this.fields = fields; return this; },
+            setColor() { return this; },
+        }),
+        t: async (_interaction, key) => ({
+            'common.errorTitle': 'Localized error',
+            'common.requiredPermission': 'Localized permission',
+            'errors.noPermission': 'Localized description',
+        }[key] || key),
+    };
+    const interaction = {
+        guild: { id: 'guild' },
+        reply: async payload => {
+            sent = payload;
+            return payload;
+        },
+    };
+
+    installEmbeds(client);
+    await client.errMissingPerms({ perms: 'ManageGuild', type: 'reply' }, interaction);
+
+    assert.equal(sent.embeds[0].data.title, 'ERR・Localized error');
 });

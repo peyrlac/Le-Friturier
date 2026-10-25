@@ -23,7 +23,8 @@
 ## Points à vérifier avant fusion
 
 - Comparer les commits upstream restants avec les fichiers locaux `interactionCreate.js`, `embed.js`, musique et vérification.
-- `npm test` passe actuellement avec 31 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
+- `npm test` passe actuellement avec 35 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
+- Les tests i18n couvrent également les titres/libellés des helpers centraux, le rejet des langues non supportées et le contrat `withResponse`/`MessageFlags.Ephemeral`.
 - Les scans statiques confirment `0` callback Mongoose legacy et `0` occurrence `.catch({})`.
 - Les deux fichiers `pinned channel` ont le même blob Git que `upgrade` : `channelSorter.js` et `clientReady.js`.
 - Les arbres Git de `main` et `upgrade` sont également identiques ; aucune modification supplémentaire de `upgrade` ne peut être intégrée sélectivement pour cette feature.
