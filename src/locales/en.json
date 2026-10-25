@@ -325,6 +325,9 @@
       "hunt": {
         "success": "You've hunted and gotten a {animal}"
       },
+      "daily": {
+        "success": "You've collected your daily reward!"
+      },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",
