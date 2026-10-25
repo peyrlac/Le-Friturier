@@ -48,9 +48,8 @@ module.exports = async (client, message) => {
   }
 
   // Levels
-  Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
-    if (data) {
-      if (data.Levels == true) {
+  const levelSettings = await Functions.findOne({ Guild: message.guild.id });
+  if (levelSettings?.Levels == true) {
         const randomXP = Math.floor(Math.random() * 9) + 1;
         const hasLeveledUp = await client.addXP(
           message.author.id,
@@ -136,9 +135,7 @@ module.exports = async (client, message) => {
               .roles.add(levelReward.Role);
           }
         }
-      }
-    }
-  });
+  }
 
   // Message tracker system
   const messageData = await messagesSchema.findOne({
