@@ -1,8 +1,13 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/stats");
+const createStatsChannel = require('../../handlers/serverstats/createStatsChannel');
 
 module.exports = async (client, interaction, args) => {
+    const localizedChannelName = (await client.getTemplate(interaction.guild))
+        .replace(`{emoji}`, '🔧')
+        .replace(`{name}`, `Channels: ${interaction.guild.channels.cache.size.toLocaleString()}`);
+    return createStatsChannel(client, interaction, { channelName: localizedChannelName, field: 'Channels', successKey: 'serverstats.channelsCreated' });
     var channelName = await client.getTemplate(interaction.guild);
     channelName = channelName.replace(`{emoji}`, "🔧")
     channelName = channelName.replace(`{name}`, `Channels: ${interaction.guild.channels.cache.size.toLocaleString()}`)
@@ -43,4 +48,3 @@ module.exports = async (client, interaction, args) => {
 
 }
 
- 

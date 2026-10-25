@@ -1,8 +1,13 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/stats");
+const createStatsChannel = require('../../handlers/serverstats/createStatsChannel');
 
 module.exports = async (client, interaction, args) => {
+    const localizedChannelName = (await client.getTemplate(interaction.guild))
+        .replace(`{emoji}`, '💎')
+        .replace(`{name}`, `Boosts: ${interaction.guild.premiumSubscriptionCount || '0'}`);
+    return createStatsChannel(client, interaction, { channelName: localizedChannelName, field: 'Boost', successKey: 'serverstats.boostsCreated' });
     var channelName = await client.getTemplate(interaction.guild);
     channelName = channelName.replace(`{emoji}`, "💎")
     channelName = channelName.replace(`{name}`, `Boosts: ${interaction.guild.premiumSubscriptionCount || '0'}`)

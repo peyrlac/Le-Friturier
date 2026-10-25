@@ -29,6 +29,14 @@
     }
     },
     "commands": {
+      "serverstats": {
+        "channel": "📘・Channel",
+        "channelsCreated": "The channel count was created.",
+        "membersCreated": "The member count was created.",
+        "rolesCreated": "The role count was created.",
+        "boostsCreated": "The boost count was created.",
+        "botsCreated": "The bot count was created."
+      },
       "invites": {
         "added": "Added **{amount}** invite(s) to {user}.",
         "removed": "Removed **{amount}** invite(s) from {user}.",
