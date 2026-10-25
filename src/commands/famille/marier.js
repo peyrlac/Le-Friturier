@@ -121,7 +121,7 @@ module.exports = async (client, interaction, args) => {
             if (i.customId == "propose_deny") {
                 client.embed({
                     title: '👰・Demande en mariage refusée',
-                    desc: '${target} aime quelqu'un d'autre ou préfère rester seul.e et a décidé.e de ne pas se marier avec ${author}',
+                    desc: `${target} aime quelqu'un d'autre ou préfère rester seul.e et a décidé.e de ne pas se marier avec ${author}`,
                     components: [],
                     content: '${target}',
                     image: 'https://media4.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif',
@@ -131,7 +131,7 @@ module.exports = async (client, interaction, args) => {
         }).catch(() => {
             client.embed({
                 title: '👰・Demande en marriage refusée',
-                desc: '${target} n'a pas répondu ! Le mariage est annulé',
+                desc: `${target} n'a pas répondu ! Le mariage est annulé`,
                 components: [],
                 content: '${target}',
                 image: 'https://media3.giphy.com/media/FKcC27kUBByAo/giphy.gif',
