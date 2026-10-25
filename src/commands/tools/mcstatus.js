@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -7,8 +7,8 @@ module.exports = async (client, interaction, args) => {
 
     if (ip == null) return client.errUsage({ usage: "mcstatus [ip]", type: 'editreply' }, interaction)
 
-    fetch(`https://api.mcsrvstat.us/2/${ip}`)
-        .then((res) => res.json()).catch(() => {})
+    return getJson(`https://api.mcsrvstat.us/2/${ip}`)
+
         .then(async (json) => {
 
             if (!json.players) return client.errNormal({ error: "Can't find the server!", type: 'editreply' }, interaction)
@@ -33,7 +33,7 @@ module.exports = async (client, interaction, args) => {
                 },
                 ], type: 'editreply'
             }, interaction)
-        }).catch(() => {})
+        }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
 }
 
- 
+

@@ -1,19 +1,19 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
-    fetch(
+    return getJson(
         `https://some-random-api.com/img/red_panda`
     )
-        .then((res) => res.json()).catch(() => {})
+
         .then(async (json) => {
             client.embed({
                 title: `🔴・Random Redpanda`,
                 image: json.link,
                 type: 'editreply'
             }, interaction)
-        }).catch(() => {})
+        }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
 }
 
- 
+

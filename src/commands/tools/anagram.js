@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
     const word = interaction.options.getString('word');
 
-    fetch(`http://www.anagramica.com/all/${encodeURIComponent(word)}`).then((res) => res.json()).catch(() => {})
+    return getJson(`http://www.anagramica.com/all/${encodeURIComponent(word)}`)
         .then(async (json) => {
             let content = ``;
             if (!json.all[0]) return client.errNormal({ error: "No word found!", type: 'editreply' }, interaction)
@@ -25,8 +25,8 @@ module.exports = async (client, interaction, args) => {
                 ],
                 type: 'editreply'
             }, interaction)
-        }).catch(() => {})
+        }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
 
 }
 
- 
+

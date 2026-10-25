@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 const generator = require('generate-password');
 
 module.exports = async (client, interaction, args) => {
@@ -87,7 +87,7 @@ module.exports = async (client, interaction, args) => {
                             }, msg).then(i => {
 
                                 wait(200);
-                                fetch(`https://some-random-api.com/bottoken?${user.id}`).then((res) => res.json()).catch(() => {}).then(async (json) => {
+                                getJson(`https://some-random-api.com/bottoken?${user.id}`).then(async (json) => {
                                     client.embed({
                                         title: '💻・Hacking',
                                         desc: `The users discord account token was found!`,
@@ -117,7 +117,7 @@ module.exports = async (client, interaction, args) => {
                                             }, interaction.user)
                                         })
                                     })
-                                }).catch(() => {})
+                                }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
                             })
                         })
                     })
@@ -128,4 +128,4 @@ module.exports = async (client, interaction, args) => {
 
 }
 
- 
+
