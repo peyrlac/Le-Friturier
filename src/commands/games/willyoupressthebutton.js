@@ -33,7 +33,7 @@ module.exports = async (client, interaction, args) => {
 
     getJson('https://api2.willyoupressthebutton.com/api/v2/dilemma', {
         method: 'POST',
-    }).then((data) => {
+    }).then(async (data) => {
         const res = {
             questions: [data.dilemma.txt1, data.dilemma.txt2],
             percentage: {
@@ -42,45 +42,48 @@ module.exports = async (client, interaction, args) => {
             },
         };
 
+        const yesLabel = await client.t(interaction, 'games.willYouPressYes');
+        const noLabel = await client.t(interaction, 'games.willYouPressNo');
+
         let btn = new Discord.ButtonBuilder()
             .setStyle(Discord.ButtonStyle.Success)
-            .setLabel("Yes")
+            .setLabel(yesLabel)
             .setCustomId(id1);
         let btn2 = new Discord.ButtonBuilder()
             .setStyle(Discord.ButtonStyle.Danger)
-            .setLabel("No")
+            .setLabel(noLabel)
             .setCustomId(id2);
 
         let row = new Discord.ActionRowBuilder()
             .addComponents(btn, btn2);
 
         client.embed({
-            title: `🤔・Will you press the button?`,
+            titleKey: 'games.willYouPressTitle',
             desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
             components: [row],
             type: 'editreply'
         }, interaction).then(async (m) => {
             const collector = interaction.channel.createMessageComponentCollector({ componentType: Discord.ComponentType.Button });
 
-            collector.on('collect', (btn) => {
+            collector.on('collect', async (btn) => {
                 if (btn.user.id !== interaction.user.id) return;
 
                 btn.deferUpdate();
                 if (btn.customId === id1) {
                     btn = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Success)
-                        .setLabel(`Yes (${res.percentage['1']})`)
+                        .setLabel(`${yesLabel} (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Danger)
-                        .setLabel(`No (${res.percentage['2']})`)
+                        .setLabel(`${noLabel} (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: `🤔・Will you press the button?`,
+                        titleKey: 'games.willYouPressTitle',
                         desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
@@ -88,18 +91,18 @@ module.exports = async (client, interaction, args) => {
                 } else if (btn.customId === id2) {
                     btn = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Danger)
-                        .setLabel(`Yes (${res.percentage['1']})`)
+                        .setLabel(`${yesLabel} (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Success)
-                        .setLabel(`No (${res.percentage['2']})`)
+                        .setLabel(`${noLabel} (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: `🤔・Will you press the button?`,
+                        titleKey: 'games.willYouPressTitle',
                         desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
