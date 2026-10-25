@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
+    const cancelLabel = await client.t(interaction, 'games.cancel');
     const getRandomString = (length) => {
         const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let result = '';
@@ -166,7 +167,7 @@ module.exports = async (client, interaction, args) => {
             .setStyle(Discord.ButtonStyle.Primary)
             .setCustomId(id5);
         stopy = new Discord.ButtonBuilder()
-            .setLabel("Cancel")
+            .setLabel(cancelLabel)
             .setStyle(Discord.ButtonStyle.Danger)
             .setCustomId(id6);
 
@@ -226,7 +227,7 @@ module.exports = async (client, interaction, args) => {
             .setCustomId(id5)
             .setDisabled(true);
         stopy = new Discord.ButtonBuilder()
-            .setLabel("Cancel")
+            .setLabel(cancelLabel)
             .setStyle(Discord.ButtonStyle.Danger)
             .setCustomId(id6)
             .setDisabled(true);
@@ -283,7 +284,7 @@ module.exports = async (client, interaction, args) => {
         .setStyle(Discord.ButtonStyle.Primary)
         .setCustomId(id5);
     stopy = new Discord.ButtonBuilder()
-        .setLabel("Cancel")
+        .setLabel(cancelLabel)
         .setStyle(Discord.ButtonStyle.Danger)
         .setCustomId(id6);
 
