@@ -363,6 +363,10 @@
         "insufficient": "You are betting more than you own!",
         "noAccount": "You don't have any money yet."
       },
+      "crash": {
+        "insufficient": "You are betting more than you own!",
+        "noAccount": "You don't have any money yet."
+      },
       "slots": {
         "usage": "slots [amount]",
         "insufficient": "You are betting more than you own!",

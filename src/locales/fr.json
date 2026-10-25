@@ -344,6 +344,10 @@
         "insufficient": "Vous pariez plus que vous ne possédez !",
         "noAccount": "Vous n'avez pas encore d'argent."
       },
+      "crash": {
+        "insufficient": "Vous pariez plus que vous ne possédez !",
+        "noAccount": "Vous n'avez pas encore d'argent."
+      },
       "slots": {
         "usage": "slots [montant]",
         "insufficient": "Vous pariez plus que vous ne possédez !",
