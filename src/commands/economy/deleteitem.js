@@ -14,13 +14,13 @@ module.exports = async (client, interaction, args) => {
 
     if (!role) return client.errUsage({ usage: "deleteitem [role]", type: 'editreply' }, interaction);
 
-    store.findOne({ Guild: interaction.guild.id, Role: role.id }, async (err, storeData) => {
-        if (storeData) {
+    const storeData = await store.findOne({ Guild: interaction.guild.id, Role: role.id });
+    if (storeData) {
 
-            var remove = await store.deleteOne({ Guild: interaction.guild.id, Role: role.id });
+        await store.deleteOne({ Guild: interaction.guild.id, Role: role.id });
 
-            client.succNormal({
-                text: `The role was deleted from the store`,
+        client.succNormal({
+                key: 'economy.deleteItem.success',
                 fields: [
                     {
                         name: `🛒┆Role`,
@@ -28,16 +28,9 @@ module.exports = async (client, interaction, args) => {
                     }
                 ],
                 type: 'editreply'
-            }, interaction);
-        }
-        else {
+        }, interaction);
+    } else {
 
-            client.errNormal({
-                error: `This role is not in the store!`,
-                type: 'editreply'
-            }, interaction);
-        }
-    })
+        client.errNormal({ key: 'economy.deleteItem.notFound', type: 'editreply' }, interaction);
+    }
 }
-
- 
