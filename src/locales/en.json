@@ -24,6 +24,8 @@
       "clearTooMany": "I cannot delete more than 100 messages at a time!",
       "clearTooFew": "I cannot delete less than 1 message!",
       "clearFailed": "There was an error trying to delete messages in this channel.",
+      "clearUserNone": "No recent messages from this user were found in this channel.",
+      "clearUserSuccess": "The user's recent messages were deleted.",
       "cannotModerate": "You cannot moderate another moderator.",
       "warnSuccess": "The user has received a warning."
     }
@@ -35,6 +37,7 @@
         "noData": "No message data found for {user}.",
         "total": "Total messages",
         "title": "Messages",
+        "userField": "👤┆User",
         "description": "**{user}** has **{count}** messages.",
         "noLeaderboard": "No message data found.",
         "leaderboardTitle": "💬・Messages - {guild}",

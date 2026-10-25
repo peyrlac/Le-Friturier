@@ -22,6 +22,8 @@
       "clearTooMany": "Je ne peux pas supprimer plus de 100 messages \u00e0 la fois !",
       "clearTooFew": "Je ne peux pas supprimer moins d'un message !",
       "clearFailed": "Une erreur est survenue lors de la suppression des messages dans ce salon.",
+      "clearUserNone": "Aucun message récent de cet utilisateur n'a été trouvé dans ce salon.",
+      "clearUserSuccess": "Les messages récents de cet utilisateur ont été supprimés.",
       "cannotModerate": "Vous ne pouvez pas mod\u00e9rer un autre mod\u00e9rateur.",
       "warnSuccess": "L'utilisateur a re\u00e7u un avertissement."
     }
@@ -33,6 +35,7 @@
         "noData": "Aucune donnée de messages trouvée pour {user}.",
         "total": "Total des messages",
         "title": "Messages",
+        "userField": "👤┆Utilisateur",
         "description": "**{user}** possède **{count}** message(s).",
         "noLeaderboard": "Aucune donnée de messages trouvée.",
         "leaderboardTitle": "💬・Messages - {guild}",

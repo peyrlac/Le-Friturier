@@ -10,48 +10,36 @@ module.exports = async (client, interaction, args) => {
 
     const member = interaction.options.getUser('user');
 
-    interaction.guild.channels.cache.forEach(async (channel) => {
-        if (channel.messages) {
-            let messages = await channel.messages.fetch();
-            let userMessages = messages.filter((m) => m.author.id === member.id);
-            await channel.bulkDelete(userMessages).then(() => {
-                client.succNormal({
-                    text: `I have successfully deleted the messages`,
-                    fields: [
-                        {
-                            name: "👤┆User",
-                            value: `${member} (${member.tag})`,
-                            inline: true
-                        }
-                    ],
-                    type: 'editreply'
-                }, interaction).then(msg => setTimeout(() => {
-                    msg.delete()
-                }, 5000));
-            }).catch(err => { });
-        }
-    });
+    try {
+        const messages = await interaction.channel.messages.fetch({ limit: 100 });
+        const userMessages = messages.filter(message => message.author.id === member.id);
 
-    interaction.channel.bulkDelete(amount).then(() => {
-        client.succNormal({
-            text: `I have successfully deleted the messages`,
+        if (!userMessages.size) {
+            return client.errNormal({
+                key: 'errors.moderation.clearUserNone',
+                type: 'editreply'
+            }, interaction);
+        }
+
+        await interaction.channel.bulkDelete(userMessages, true);
+        return client.succNormal({
+            key: 'errors.moderation.clearUserSuccess',
             fields: [
                 {
-                    name: "💬┆Amount",
-                    value: amount,
+                    name: await client.t(interaction, 'commands.messages.userField'),
+                    value: `${member} (${member.tag})`,
                     inline: true
                 }
             ],
             type: 'editreply'
-        }, interaction).then(msg => setTimeout(() => {
-            msg.delete()
-        }, 5000));
-    }).catch(err => {
-        client.errNormal({
-            error: "There was an error trying to delete messages in this channel!",
+        }, interaction);
+    }
+    catch (error) {
+        return client.errNormal({
+            key: 'errors.moderation.clearFailed',
             type: 'editreply'
         }, interaction);
-    });
+    }
 }
 
  
