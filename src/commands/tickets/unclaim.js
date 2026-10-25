@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
 
             if (data) {
                 if (ticketData.claimed == "" || ticketData.claimed == undefined || ticketData.claimed == "None") {
-                    client.errNormal({
+                    return client.errNormal({
                         key: 'tickets.notClaimed',
                         type: 'ephemeral'
                     }, interaction)
@@ -37,7 +37,7 @@ module.exports = async (client, interaction, args) => {
                         if (interaction.channel.parentId == ticketCategory.id) {
 
                             ticketData.claimed = "None";
-                            ticketData.save();
+                            await ticketData.save();
 
                             return client.simpleEmbed({
                                 descKey: 'tickets.availableAgain',
@@ -46,14 +46,14 @@ module.exports = async (client, interaction, args) => {
 
                         }
                         else {
-                            client.errNormal({
+                            return client.errNormal({
                                 key: 'tickets.notTicket',
                                 type: 'editreply'
                             }, interaction)
                         }
                     }
                     else {
-                        client.errNormal({
+                        return client.errNormal({
                             key: 'tickets.notClaimedByYou',
                             type: 'editreply'
                         }, interaction)

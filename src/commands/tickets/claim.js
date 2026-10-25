@@ -33,7 +33,7 @@ module.exports = async (client, interaction, args) => {
                     if (interaction.channel.parentId == ticketCategory.id) {
 
                         ticketData.claimed = interaction.user.id;
-                        ticketData.save();
+                        await ticketData.save();
 
                         return client.simpleEmbed({
                             descKey: 'tickets.claimedBy',
@@ -43,14 +43,14 @@ module.exports = async (client, interaction, args) => {
 
                     }
                     else {
-                        client.errNormal({
+                        return client.errNormal({
                             key: 'tickets.notTicket',
                             type: type
                         }, interaction)
                     }
                 }
                 else {
-                    client.errNormal({
+                    return client.errNormal({
                         key: 'tickets.alreadyClaimed',
                         type: 'ephemeral'
                     }, interaction)
