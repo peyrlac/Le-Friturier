@@ -23,10 +23,14 @@ module.exports = async (client) => {
                         const channel = guild.channels.cache.get(d.Time)
                         await channel.setName(channelName)
                     }
-                    catch (e) { }
+                    catch (error) {
+                        console.error('Failed to update statistics channel name', error);
+                    }
                 })
             }
         }, 600000);
     }
-    catch (err) { }
+    catch (error) {
+        console.error('Failed to update statistics clocks', error);
+    }
 };

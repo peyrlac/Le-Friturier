@@ -88,7 +88,9 @@ test('empty catch handlers and per-interaction reminder initialization are gone'
     .filter(file => file.endsWith('.js'));
 
   for (const file of sourceFiles) {
-    assert.doesNotMatch(read(path.join('src', file)), /\.catch\(\{\}\)/, file);
+    const source = read(path.join('src', file));
+    assert.doesNotMatch(source, /\.catch\(\{\}\)/, file);
+    assert.doesNotMatch(source, /findOne\([^\n]*,\s*async\s*\(err/, file);
   }
 
   const interactionSource = read('src/events/client/interactionCreate.js');
