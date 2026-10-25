@@ -84,12 +84,10 @@ module.exports = async (client, interaction, args) => {
             deck.shuffle();
             async function bet(outcome) {
                 if (outcome === "win") {
-                    data.Money += money;
-                    await data.save();
+                    await client.addMoney(interaction, user, money);
                 }
                 if (outcome === "lose") {
-                    data.Money -= money;
-                    await data.save();
+                    await client.removeMoney(interaction, user, money);
                 }
             }
 
@@ -189,7 +187,7 @@ module.exports = async (client, interaction, args) => {
 
             async function endGame() {
                 if (player.score === 21) {
-                    bet("win");
+                    await bet("win");
                     gameOver = true;
                     endMsg(
                         `Gagné! Vous en avez 21!`,
@@ -198,7 +196,7 @@ module.exports = async (client, interaction, args) => {
                     );
                 }
                 if (player.score > 21) {
-                    bet("lose");
+                    await bet("lose");
                     gameOver = true;
                     endMsg(
                         `Perdu! Vous avez atteint plus de 21!`,
@@ -207,7 +205,7 @@ module.exports = async (client, interaction, args) => {
                     );
                 }
                 if (dealer.score === 21) {
-                    bet("lose");
+                    await bet("lose");
                     gameOver = true;
                     endMsg(
                         `Perdu! Le croupier a eu 21!`,
@@ -216,7 +214,7 @@ module.exports = async (client, interaction, args) => {
                     );
                 }
                 if (dealer.score > 21) {
-                    bet("win");
+                    await bet("win");
                     gameOver = true;
                     endMsg(
                         `Gagné! Le bot a atteint plus de 21!`,
@@ -229,7 +227,7 @@ module.exports = async (client, interaction, args) => {
                     player.score > dealer.score &&
                     player.score < 21
                 ) {
-                    bet("win");
+                    await bet("win");
                     gameOver = true;
                     endMsg(
                         `Gagner! Vous avez vaincu Bot!`,
@@ -242,7 +240,7 @@ module.exports = async (client, interaction, args) => {
                     player.score < dealer.score &&
                     dealer.score < 21
                 ) {
-                    bet("lose");
+                    await bet("lose");
                     gameOver = true;
                     endMsg(
                         `Perdu!Bot gagné!`,
@@ -312,9 +310,9 @@ module.exports = async (client, interaction, args) => {
                             return i.deferUpdate();;
                         }
                     })
-                    .catch(_ => {
+                    .catch(async _ => {
                         interaction.followUp({ content: "Perdu!!" });
-                        bet("lose");
+                        await bet("lose");
                         return;
                     });
             }

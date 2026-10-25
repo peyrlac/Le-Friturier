@@ -278,6 +278,31 @@ test('profile publishes localized subcommands, groups, and options', () => {
     });
 });
 
+test('economy and casino publish localized subcommands and options', () => {
+    const economy = require('../src/interactions/Command/economy');
+    const casino = require('../src/interactions/Command/casino');
+    applyCommandLocalizations(economy);
+    applyCommandLocalizations(casino);
+
+    const economyData = economy.data.toJSON();
+    const casinoData = casino.data.toJSON();
+    const pay = economyData.options.find(option => option.name === 'pay');
+    const roulette = casinoData.options.find(option => option.name === 'roulette');
+
+    assert.deepEqual(pay.description_localizations, {
+        fr: 'Payer un utilisateur',
+        'en-US': 'Pay a user'
+    });
+    assert.deepEqual(roulette.description_localizations, {
+        fr: 'Jouer à la roulette',
+        'en-US': 'Play roulette'
+    });
+    assert.deepEqual(roulette.options.find(option => option.name === 'amount').description_localizations, {
+        fr: 'Entrez un montant',
+        'en-US': 'Enter an amount'
+    });
+});
+
 test('response helpers resolve a translation key before sending an embed', async () => {
     const installEmbeds = require('../src/handlers/components/embed');
     const sent = [];

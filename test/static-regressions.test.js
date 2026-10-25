@@ -307,3 +307,13 @@ test('warn command allocates cases and stores warnings atomically', () => {
   assert.match(source, /\$inc:\s*\{\s*Case:\s*1\s*\}/);
   assert.match(source, /\$push:\s*\{\s*Warnings:/);
 });
+
+test('casino transactions keep dynamic values valid and atomic', () => {
+  const roulette = read('src/commands/casino/roulette.js');
+  const blackjack = read('src/commands/casino/blackjack.js');
+
+  assert.doesNotMatch(roulette, /variables:\s*\{\s*amount,\s*coins:/);
+  assert.match(roulette, /variables:\s*\{\s*amount:\s*money,\s*coins:/);
+  assert.doesNotMatch(blackjack, /data\.save\(\)/);
+  assert.match(blackjack, /client\.(addMoney|removeMoney)\(/);
+});
