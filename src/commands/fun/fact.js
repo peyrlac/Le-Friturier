@@ -1,20 +1,20 @@
 const Discord = require('discord.js');
-const request = require('request');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
     var url = 'https://uselessfacts.jsph.pl/random.json?language=en'
 
 
-    request(url, function (err, response, body) {
-        fact = JSON.parse(body).text;
+    getJson(url).then((json) => {
+        const fact = json.text;
 
         client.embed({
-            title: `😂・Fact`,
+            titleKey: 'fun.factTitle',
             desc: fact,
             type: 'editreply',
         }, interaction);
-    })
+    }).catch(() => client.errNormal({ key: 'fun.remoteDataError', type: 'editreply' }, interaction))
 }
 
- 
+

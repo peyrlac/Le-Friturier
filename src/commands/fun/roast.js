@@ -82,7 +82,7 @@ module.exports = async (client, interaction, args) => {
     ];
 
     client.embed({
-        title: `😓・Roast`,
+            titleKey: 'fun.roastTitle',
         desc: `${user}, ${roasts[Math.floor(Math.random() * roasts.length)]}`,
         type: 'editreply'
     }, interaction)

@@ -111,6 +111,10 @@
       "loveNameTwo": "Nom 2",
       "loveResult": "Résultat",
       "loveMatch": "**{user1}** et **{user2}** sont compatibles à **{result}%** !"
+      ,"factTitle": "Fait aléatoire",
+      "rickrollTitle": "Rickroll",
+      "gifTitle": "Gif de {query}",
+      "roastTitle": "Roast"
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
