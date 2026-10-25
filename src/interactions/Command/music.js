@@ -78,13 +78,13 @@ module.exports = {
             subcommand
                 .setName('remove')
                 .setDescription('Remove a song from the queue')
-                .addNumberOption(option => option.setName('number').setDescription('Song number').setRequired(true))
+                .addNumberOption(option => option.setName('number').setDescription('Song number').setMinValue(1).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('seek')
                 .setDescription('Seek the current playing music')
-                .addNumberOption(option => option.setName('time').setDescription('New song time').setRequired(true))
+                .addNumberOption(option => option.setName('time').setDescription('New song time').setMinValue(0).setMaxValue(86400).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -100,7 +100,7 @@ module.exports = {
             subcommand
                 .setName('skipto')
                 .setDescription('Skip to a new song')
-                .addNumberOption(option => option.setName('number').setDescription('Song number').setRequired(true))
+                .addNumberOption(option => option.setName('number').setDescription('Song number').setMinValue(1).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -111,7 +111,7 @@ module.exports = {
             subcommand
                 .setName('volume')
                 .setDescription('Set the music volume')
-                .addNumberOption(option => option.setName('amount').setDescription('New volume number'))
+                .addNumberOption(option => option.setName('amount').setDescription('New volume number').setMinValue(0).setMaxValue(100))
         ),
 
     /** 
