@@ -30,6 +30,22 @@
       "warnSuccess": "The user has received a warning."
     }
     },
+    "tools": {
+      "noWordFound": "No word found.",
+      "remoteDataError": "Unable to retrieve remote data.",
+      "anagramTitle": "Anagram",
+      "anagramDescription": "I formed a word with the given letters.",
+      "words": "Word(s)",
+      "buttonTooLong": "Your button text cannot be longer than 50 characters.",
+      "buttonTitle": "Button",
+      "buttonDescription": "Click the button to open the link.",
+      "decodeInvalid": "You can only decode binary code.",
+      "decodeDescription": "I have decoded the code.",
+      "input": "Input",
+      "output": "Output",
+      "emojifyTooLong": "Your emojify text cannot be longer than 4096 characters.",
+      "emojifyTitle": "Emojify"
+    },
     "commands": {
       "messages": {
         "added": "Added **{amount}** message(s) to {user}.",

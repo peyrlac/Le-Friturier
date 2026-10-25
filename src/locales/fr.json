@@ -28,6 +28,22 @@
       "warnSuccess": "L'utilisateur a re\u00e7u un avertissement."
     }
   },
+  "tools": {
+    "noWordFound": "Aucun mot trouvé.",
+    "remoteDataError": "Impossible de récupérer les données distantes.",
+    "anagramTitle": "Anagramme",
+    "anagramDescription": "J'ai formé un mot avec les lettres fournies.",
+    "words": "Mot(s)",
+    "buttonTooLong": "Le texte du bouton ne peut pas dépasser 50 caractères.",
+    "buttonTitle": "Bouton",
+    "buttonDescription": "Cliquez sur le bouton pour ouvrir le lien.",
+    "decodeInvalid": "Vous pouvez uniquement décoder du code binaire.",
+    "decodeDescription": "Le code a été décodé.",
+    "input": "Entrée",
+    "output": "Sortie",
+    "emojifyTooLong": "Le texte à emojifier ne peut pas dépasser 4096 caractères.",
+    "emojifyTitle": "Emojification"
+  },
     "commands": {
       "messages": {
         "added": "{amount} message(s) ajoutée(s) à {user}.",
