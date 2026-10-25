@@ -21,7 +21,8 @@ function interpolate(value, variables) {
 function createI18n({ warn = message => console.warn(message) } = {}) {
     function t(locale, key, variables = {}) {
         const requestedLocale = SUPPORTED_LOCALES.includes(locale) ? locale : DEFAULT_LOCALE;
-        const value = getValue(LOCALES[requestedLocale], key) ?? getValue(LOCALES[DEFAULT_LOCALE], key);
+        const resolve = source => getValue(source, key) ?? getValue(source, `commands.${key}`);
+        const value = resolve(LOCALES[requestedLocale]) ?? resolve(LOCALES[DEFAULT_LOCALE]);
 
         if (typeof value !== 'string') {
             if (process.env.NODE_ENV !== 'production') {
