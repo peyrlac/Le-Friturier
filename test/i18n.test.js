@@ -237,6 +237,24 @@ test('serializes subcommand and option localizations for Discord', () => {
     });
 });
 
+test('serverstats publishes localized subcommand descriptions', () => {
+    const command = require('../src/interactions/Command/serverstats');
+    applyCommandLocalizations(command);
+    const data = command.data.toJSON();
+    const boosts = data.options.find(option => option.name === 'boosts');
+    const time = data.options.find(option => option.name === 'time');
+    const timezone = time.options.find(option => option.name === 'timezone');
+
+    assert.deepEqual(boosts.description_localizations, {
+        fr: 'Suivre le nombre de boosts',
+        'en-US': 'Keep track of the boost count'
+    });
+    assert.deepEqual(timezone.description_localizations, {
+        fr: 'Fuseau horaire à utiliser (ex. Europe/Amsterdam)',
+        'en-US': 'The timezone you want to set (e.g. Europe/Amsterdam)'
+    });
+});
+
 test('response helpers resolve a translation key before sending an embed', async () => {
     const installEmbeds = require('../src/handlers/components/embed');
     const sent = [];
