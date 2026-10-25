@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../http');
 
 const Functions = require("../../database/models/functions");
 const VoiceSchema = require("../../database/models/voiceChannels");
@@ -196,7 +196,7 @@ module.exports = async (client) => {
     }
 
     client.generateActivity = function (id, name, channel, interaction) {
-        fetch(`https://discord.com/api/v10/channels/${channel.id}/invites`, {
+        getJson(`https://discord.com/api/v10/channels/${channel.id}/invites`, {
             method: "POST",
             body: JSON.stringify({
                 max_age: 86400,
@@ -210,8 +210,7 @@ module.exports = async (client) => {
                 "Authorization": `Bot ${client.token}`,
                 "Content-Type": "application/json"
             }
-        }).then(res => res.json())
-            .then(invite => {
+        }).then(invite => {
                 if (invite.error || !invite.code) return client.errNormal({ 
                     error: `Could not start **${name}**!`, 
                     type: 'editreply'

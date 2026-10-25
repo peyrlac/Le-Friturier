@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
-const { truncate } = require('fs/promises');
 const { decode } = require('html-entities');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
     const getRandomString = (length) => {
@@ -32,9 +31,9 @@ module.exports = async (client, interaction, args) => {
         '-' +
         getRandomString(20);
 
-    fetch('https://api2.willyoupressthebutton.com/api/v2/dilemma ', {
+    getJson('https://api2.willyoupressthebutton.com/api/v2/dilemma', {
         method: 'POST',
-    }).then((data) => data.json()).then((data) => {
+    }).then((data) => {
         const res = {
             questions: [data.dilemma.txt1, data.dilemma.txt2],
             percentage: {
@@ -111,4 +110,4 @@ module.exports = async (client, interaction, args) => {
     });
 }
 
- 
+

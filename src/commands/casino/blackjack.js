@@ -313,7 +313,7 @@ module.exports = async (client, interaction, args) => {
                         }
                     })
                     .catch(_ => {
-                        interaction.channel.send("Perdu!!");
+                        interaction.followUp({ content: "Perdu!!" });
                         bet("lose");
                         return;
                     });

@@ -118,8 +118,8 @@ module.exports = {
         i.deferUpdate();
 
         if (i.values == "title_embed") {
-          interaction.channel
-            .send({ content: "Please enter a title" })
+          interaction
+            .followUp({ content: "Please enter a title" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -141,8 +141,8 @@ module.exports = {
         }
 
         if (i.values == "description_embed") {
-          interaction.channel
-            .send({ content: "Please enter a description" })
+          interaction
+            .followUp({ content: "Please enter a description" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -164,8 +164,8 @@ module.exports = {
         }
 
         if (i.values == "author_embed") {
-          interaction.channel
-            .send({ content: "Please enter a author" })
+          interaction
+            .followUp({ content: "Please enter a author" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -190,8 +190,8 @@ module.exports = {
         }
 
         if (i.values == "footer_embed") {
-          interaction.channel
-            .send({ content: "Please enter a footer" })
+          interaction
+            .followUp({ content: "Please enter a footer" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -215,8 +215,8 @@ module.exports = {
         }
 
         if (i.values == "thumbnail_embed") {
-          interaction.channel
-            .send({ content: "Please enter a thumbnail" })
+          interaction
+            .followUp({ content: "Please enter a thumbnail" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -235,7 +235,7 @@ module.exports = {
                     !collected.first().content.includes("http://") &&
                     !collected.first().content.includes("https://")
                   )
-                    return interaction.channel.send({
+                    return interaction.followUp({
                       content: "Incorrect thumbnail link!",
                     });
                   embed.setThumbnail(`${collected.first().content}`);
@@ -250,8 +250,8 @@ module.exports = {
         }
 
         if (i.values == "image_embed") {
-          interaction.channel
-            .send({ content: "Please enter a image" })
+          interaction
+            .followUp({ content: "Please enter a image" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -270,7 +270,7 @@ module.exports = {
                     !collected.first().content.includes("http://") &&
                     !collected.first().content.includes("https://")
                   )
-                    return interaction.channel.send({
+                    return interaction.followUp({
                       content: "Incorrect image link!",
                     });
                   embed.setImage(`${collected.first().content}`);
@@ -280,8 +280,8 @@ module.exports = {
         }
 
         if (i.values == "url_embed") {
-          interaction.channel
-            .send({ content: "Please enter a url" })
+          interaction
+            .followUp({ content: "Please enter a url" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
@@ -300,7 +300,7 @@ module.exports = {
                     !collected.first().content.includes("http://") &&
                     !collected.first().content.includes("https://")
                   )
-                    return interaction.channel.send({
+                    return interaction.followUp({
                       content: "Incorrect url!",
                     });
                   embed.setURL(`${collected.first().content}`);
@@ -310,8 +310,8 @@ module.exports = {
         }
 
         if (i.values == "color_embed") {
-          interaction.channel
-            .send({ content: "Please enter a color. e.g. #FF0000" })
+          interaction
+            .followUp({ content: "Please enter a color. e.g. #FF0000" })
             .then((message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
