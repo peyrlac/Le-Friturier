@@ -623,7 +623,13 @@
     "warningCase": "Avertissement **{case}**",
     "warningDetails": "Motif : {reason}\nModérateur {moderator}",
     "total": "Total",
-    "noWarnings": "L'utilisateur {user} n'a aucun avertissement."
+    "noWarnings": "L'utilisateur {user} n'a aucun avertissement.",
+    "caseNotFound": "Aucun avertissement ne correspond au cas {case}.",
+    "unwarnTitle": "🔨・Retrait d'avertissement",
+    "unwarnDescription": "Un avertissement vous a été retiré sur **{guild}**.",
+    "unwarnSuccess": "L'avertissement a été retiré avec succès.",
+    "moderator": "👤┆Modérateur",
+    "user": "👤┆Utilisateur"
   },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",

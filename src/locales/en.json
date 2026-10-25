@@ -636,7 +636,13 @@
     "warningCase": "Warning **{case}**",
     "warningDetails": "Reason: {reason}\nModerator {moderator}",
     "total": "Total",
-    "noWarnings": "User {user} has no warnings."
+    "noWarnings": "User {user} has no warnings.",
+    "caseNotFound": "No warning matches case {case}.",
+    "unwarnTitle": "🔨・Unwarn",
+    "unwarnDescription": "A warning was removed from you in **{guild}**.",
+    "unwarnSuccess": "The user's warning was successfully removed.",
+    "moderator": "👤┆Moderator",
+    "user": "👤┆User"
   },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
