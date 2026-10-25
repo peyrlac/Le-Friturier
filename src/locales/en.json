@@ -95,7 +95,33 @@
       },
       "feedback": {
         "success": "Your feedback was sent to the developers successfully."
-            }
-        }
+      }
+    },
+    "economy": {
+      "balance": {
+        "bot": "You cannot view a bot's balance!",
+        "empty": "This user does not have any money yet.",
+        "description": "Current balance of `{user}`",
+        "wallet": "Wallet",
+        "bank": "Bank",
+        "total": "Total"
+      },
+      "deposit": {
+        "usage": "deposit [amount]",
+        "invalid": "Enter a valid number!",
+        "negative": "You cannot deposit negative money!",
+        "insufficient": "You do not have enough money.",
+        "success": "You deposited money into your bank!"
+      }
+    },
+    "casino": {
+      "slots": {
+        "usage": "slots [amount]",
+        "insufficient": "You are betting more than you own!",
+        "win": "You won {amount}.",
+        "lose": "You lost {amount}.",
+        "empty": "You do not have enough money to play."
+      }
     }
+  }
 }
