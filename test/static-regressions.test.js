@@ -121,3 +121,11 @@ test('warnings command uses async persistence and localized responses', () => {
   assert.match(source, /Schema\.findOne\([\s\S]*?\);/);
   assert.match(source, /(?:key|titleKey|descKey):\s*['"][^'"]+/);
 });
+
+test('warn command allocates cases and stores warnings atomically', () => {
+  const source = read('src/commands/moderation/warn.js');
+
+  assert.doesNotMatch(source, /findOne\([^\n]*,\s*async\s*\(err/);
+  assert.match(source, /\$inc:\s*\{\s*Case:\s*1\s*\}/);
+  assert.match(source, /\$push:\s*\{\s*Warnings:/);
+});
