@@ -195,9 +195,25 @@
       },
       "setchannelname": { "success": "Le nom du canal a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." },
       "setverify": { "success": "Le panneau de v\u00e9rification a \u00e9t\u00e9 cr\u00e9\u00e9 avec succ\u00e8s." },
-      "levelmessage": { "success": "Le message de niveau a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." },
-      "welcomemessage": { "success": "Le message de bienvenue a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." },
-      "leavemessage": { "success": "Le message de d\u00e9part a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." }
+      "levelmessage": {
+        "success": "Le message de niveau a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s.",
+        "deleted": "Le message de niveau a \u00e9t\u00e9 supprim\u00e9.",
+        "helpTitle": "Options du message de niveau",
+        "help": "Utilisez les variables {user:username}, {user:tag}, {user:mention}, {user:level} et {user:xp}."
+      },
+      "welcomemessage": {
+        "success": "Le message de bienvenue a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s.",
+        "deleted": "Le message de bienvenue a \u00e9t\u00e9 supprim\u00e9.",
+        "helpTitle": "Options du message de bienvenue",
+        "help": "Utilisez les variables utilisateur, invitant et serveur disponibles dans l'aide de la commande."
+      },
+      "leavemessage": {
+        "success": "Le message de d\u00e9part a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s.",
+        "deleted": "Le message de d\u00e9part a \u00e9t\u00e9 supprim\u00e9.",
+        "helpTitle": "Options du message de d\u00e9part",
+        "help": "Utilisez les variables utilisateur, invitant et serveur disponibles dans l'aide de la commande."
+      },
+      "messageField": "💬・Message"
     },
     "setup": {
       "channel": "📘・Salon",

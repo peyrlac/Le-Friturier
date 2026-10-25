@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const inviteMessages = require("../../database/models/inviteMessages");
+const localizedLeaveMessage = require('./leavemessageLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedLeaveMessage(client, interaction, args);
     const perms = await client.checkUserPerms({
         flags: [Discord.PermissionsBitField.Flags.ManageMessages],
         perms: [Discord.PermissionsBitField.Flags.ManageMessages]
@@ -75,4 +77,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 
