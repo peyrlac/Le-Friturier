@@ -331,6 +331,8 @@
       "hourly": { "success": "You've collected your hourly reward!" },
       "weekly": { "success": "You've collected your weekly reward!" },
       "monthly": { "success": "You've collected your monthly reward!" },
+      "yearly": { "success": "You've collected your yearly reward!" },
+      "present": { "success": "You've collected your present reward!" },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",
