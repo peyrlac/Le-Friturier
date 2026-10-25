@@ -101,3 +101,15 @@ test('wave 1-2 commands use translation keys for migrated responses', () => {
     assert.match(read(file), /(?:key|descKey):[\s\S]{0,120}['"`]commands\.[\w.]+['"`]/, file);
   }
 });
+
+test('moderation wave uses translation keys for common responses', () => {
+  const files = [
+    'src/commands/moderation/clear.js',
+    'src/commands/moderation/ban.js',
+    'src/commands/moderation/warn.js',
+  ];
+
+  for (const file of files) {
+    assert.match(read(file), /key:\s*["'][^"']+\.[^"']+/i, file);
+  }
+});
