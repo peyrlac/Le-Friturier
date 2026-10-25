@@ -9,6 +9,20 @@ module.exports = {
         .setDescription('Ajustez le bot à votre goût')
         .addSubcommand(subcommand =>
             subcommand
+                .setName('language')
+                .setDescription('Choisir la langue du serveur')
+                .addStringOption(option => option
+                    .setName('language')
+                    .setDescription('Choisissez une langue')
+                    .setRequired(true)
+                    .addChoices(
+                        { name: 'Français', value: 'fr' },
+                        { name: 'English', value: 'en' },
+                    )
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName('help')
                 .setDescription('Obtenez des informations sur les commandes de catégorie de configuration')
         )

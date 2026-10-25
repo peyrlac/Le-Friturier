@@ -31,12 +31,16 @@ module.exports = (client) => {
     client.errNormal = async function ({
         embed: embed = client.templateEmbed(),
         error: error,
+        key: key,
+        variables: variables = {},
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`Something went wrong!`)
+        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setDescription(`Une erreur est survenue !`)
+        const translatedError = key && client.t ? await client.t(interaction, key, variables) : error;
+        error = translatedError;
         embed.addFields( 
             { name: "💬┆Error comment", value: `\`\`\`${error}\`\`\``},
         )
@@ -58,8 +62,8 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`You did not provide the correct arguments`)
+        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setDescription(`Les arguments fournis sont incorrects`)
         embed.addFields(
             { name: "💬┆Required arguments", value: `\`\`\`${usage}\`\`\``},    
         )
@@ -82,10 +86,10 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`You don't have the right permissions`)
+        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setDescription(`Vous n'avez pas les permissions requises`)
         embed.addFields(
-            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+            { name: "Permission requise", value: `\`\`\`${perms}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -106,10 +110,10 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`I don't have the right permissions`)
+        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setDescription(`Le bot n'a pas les permissions requises`)
         embed.addFields(
-            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+            { name: "Permission requise", value: `\`\`\`${perms}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -130,8 +134,8 @@ module.exports = (client) => {
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`You've already done this once`)
+        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setDescription(`Vous avez déjà effectué cette action`)
         embed.addFields(
             { name: "⏰┆Try again on", value: `<t:${time}:f>`},
         )
@@ -153,13 +157,16 @@ module.exports = (client) => {
     client.succNormal = async function ({
         embed: embed = client.templateEmbed(),
         text: text,
+        key: key,
+        variables: variables = {},
         fields: fields,
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.check}・Success!`)
-        embed.setDescription(`${text}`)
+        embed.setTitle(`${client.emotes.normal.check}・Succes !`)
+        const translatedText = key && client.t ? await client.t(interaction, key, variables) : text;
+        embed.setDescription(`${translatedText}`)
         embed.setColor(client.config.colors.succes)
 
         if (fields) embed.addFields(fields);
