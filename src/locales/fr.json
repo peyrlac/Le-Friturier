@@ -98,6 +98,7 @@
       "shuffled": "La file d'attente a été mélangée !",
       "queueTooShort": "La file d'attente ne contient pas autant de chansons.",
       "removed": "**{song}** a été retirée de la file d'attente."
+      ,"lyricsNotFound": "Aucune parole trouvée pour {song} :x:"
     },
     "economy": {
       "balance": {
