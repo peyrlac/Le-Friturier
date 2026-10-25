@@ -24,7 +24,7 @@ module.exports = async (client, interaction, args) => {
                 key: 'profile.itemAdded',
                 variables: { item: artist },
                 fields: [{
-                    name: "🎤┆Artist",
+                    name: await client.t(interaction, 'profile.fields.artists'),
                     value: `\`\`\`${artist}\`\`\``,
                     inline: true,
                 }],
