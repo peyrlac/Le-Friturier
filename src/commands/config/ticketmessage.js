@@ -48,18 +48,17 @@ module.exports = async (client, interaction, args) => {
             return;
         }
 
-        Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-            if (data) {
-                data.openTicket = message;
-                data.save();
-            }
-            else {
-                new Schema({
-                    Guild: interaction.guild.id,
-                    openTicket: message
-                }).save();
-            }
-        })
+        const data = await Schema.findOne({ Guild: interaction.guild.id });
+        if (data) {
+            data.openTicket = message;
+            await data.save();
+        }
+        else {
+            await new Schema({
+                Guild: interaction.guild.id,
+                openTicket: message
+            }).save();
+        }
 
         client.succNormal({
             text: `Le message du billet a été défini avec succès`,
@@ -113,18 +112,17 @@ module.exports = async (client, interaction, args) => {
             return;
         }
 
-        Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-            if (data) {
-                data.dmMessage = message;
-                data.save();
-            }
-            else {
-                new Schema({
-                    Guild: interaction.guild.id,
-                    dmMessage: message
-                }).save();
-            }
-        })
+        const data = await Schema.findOne({ Guild: interaction.guild.id });
+        if (data) {
+            data.dmMessage = message;
+            await data.save();
+        }
+        else {
+            await new Schema({
+                Guild: interaction.guild.id,
+                dmMessage: message
+            }).save();
+        }
 
         client.succNormal({
             text: `The ticket message has been set successfully`,
@@ -144,5 +142,3 @@ module.exports = async (client, interaction, args) => {
         }, interaction)
     }
 }
-
- 
