@@ -13,6 +13,15 @@ test('prefix fallback uses the configured discord prefix', () => {
   assert.match(source, /client\.config\.discord\.prefix/);
 });
 
+test('music progress bars remain bounded for streams and completed tracks', () => {
+  const createProgressBar = require('../src/handlers/music/createProgressBar');
+
+  assert.equal(createProgressBar(null, null), '🔘▬▬▬▬▬▬▬▬▬');
+  assert.equal(createProgressBar(100, -10), '🔘▬▬▬▬▬▬▬▬▬');
+  assert.equal(createProgressBar(100, 50), '▬▬▬▬▬🔘▬▬▬▬');
+  assert.equal(createProgressBar(100, 200), '▬▬▬▬▬▬▬▬▬🔘');
+});
+
 test('simple custom commands return their own response', () => {
   const source = read('src/events/message/messageCreate.js');
 
