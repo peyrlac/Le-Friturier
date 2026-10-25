@@ -50,6 +50,13 @@ test('healthcheck path is portable and creates its parent directory', () => {
   assert.match(source, /mkdirSync\([^\n]*recursive:\s*true/);
 });
 
+test('Mongo connection accepts optional DNS servers for SRV resolution', () => {
+  const source = read('src/database/connect.js');
+
+  assert.match(source, /MONGO_DNS_SERVERS/);
+  assert.match(source, /dns\.setServers\(/);
+});
+
 test('shared embed helpers expose French labels', () => {
   const source = read('src/handlers/components/embed.js');
 
