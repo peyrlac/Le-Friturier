@@ -34,6 +34,27 @@ test('falls back to French when a key is missing from the requested locale', () 
     assert.equal(i18n.t('en', 'common.onlyFrench'), 'Texte disponible uniquement en français.');
 });
 
+test('French and English catalogs stay structurally aligned', () => {
+    const fr = require('../src/locales/fr.json');
+    const en = require('../src/locales/en.json');
+    const flatten = (value, prefix = '', result = {}) => {
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+            for (const [key, nested] of Object.entries(value)) {
+                flatten(nested, prefix ? `${prefix}.${key}` : key, result);
+            }
+        }
+        else {
+            result[prefix] = true;
+        }
+        return result;
+    };
+    const frKeys = Object.keys(flatten(fr));
+    const enKeys = Object.keys(flatten(en));
+
+    assert.deepEqual(frKeys.filter(key => !enKeys.includes(key)), ['common.onlyFrench']);
+    assert.deepEqual(enKeys.filter(key => !frKeys.includes(key)), []);
+});
+
 test('returns a visible fallback and warns for an unknown key', () => {
     const warnings = [];
     const i18n = createI18n({ warn: message => warnings.push(message) });

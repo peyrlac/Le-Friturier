@@ -25,8 +25,9 @@
 ## Points à vérifier avant fusion
 
 - Comparer les commits upstream restants avec les fichiers locaux `interactionCreate.js`, `embed.js`, musique et vérification.
-- `npm test` passe actuellement avec 37 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
+- `npm test` passe actuellement avec 38 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
 - Les tests i18n couvrent également les titres/libellés des helpers centraux, le rejet des langues non supportées et le contrat `withResponse`/`MessageFlags.Ephemeral`.
+- Les catalogues fr/en sont structurellement alignés ; l’unique clé française absente de l’anglais (`common.onlyFrench`) est volontaire et couvre le fallback.
 - La vague giveaways (`start` et `drop`) utilise désormais les clés fr/en pour tous les messages du manager et sa confirmation de lancement.
 - La vague radio (`play`, `playing`, `stop`) utilise désormais les clés fr/en et gère l’absence de canal vocal sans accès nul.
 - Les scans statiques confirment `0` callback Mongoose legacy et `0` occurrence `.catch({})`.
