@@ -97,6 +97,20 @@
         "success": "Your feedback was sent to the developers successfully."
       }
     },
+    "fun": {
+      "cleverRate": "You are {result}% clever!",
+      "cleverRateTitle": "Clever Rate",
+      "epicGamerRate": "You are {result}% epic gamer!",
+      "epicGamerRateTitle": "Epic Gamer Rate",
+      "gayRate": "You are {result}% gay!",
+      "gayRateTitle": "Gay Rate",
+      "simpRate": "You are {result}% simp!",
+      "simpRateTitle": "Simp Rate",
+      "stankRate": "You are {result}% stanky!",
+      "stankRateTitle": "Stank Rate",
+      "christmas": "Christmas",
+      "christmasDays": "{days} days until Christmas."
+    },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",
       "notFound": "I can't find the giveaway for {messageID}!",
