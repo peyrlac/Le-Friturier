@@ -309,6 +309,9 @@
       "daily": {
         "success": "Vous avez récupéré votre récompense quotidienne !"
       },
+      "hourly": { "success": "Vous avez récupéré votre récompense horaire !" },
+      "weekly": { "success": "Vous avez récupéré votre récompense hebdomadaire !" },
+      "monthly": { "success": "Vous avez récupéré votre récompense mensuelle !" },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",
