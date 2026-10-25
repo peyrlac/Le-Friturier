@@ -125,6 +125,15 @@ test('moderation wave uses translation keys for common responses', () => {
   }
 });
 
+test('giveaway manager messages use localization keys', () => {
+  for (const file of ['src/commands/giveaway/start.js', 'src/commands/giveaway/drop.js']) {
+    const source = read(file);
+
+    assert.match(source, /commands\.giveaway\./, file);
+    assert.doesNotMatch(source, /LAST CHANCE|GIVEAWAY ENDED|Congratulations/, file);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

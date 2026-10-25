@@ -91,5 +91,5 @@ Pour chaque vague : remplacer les textes par des clés, traduire les description
 - Dépendances upstream principales et correctifs musique/interaction intégrés sélectivement.
 - Helper HTTP et migrations des commandes HTTP avancés.
 - Vague économie/casino commencée avec `balance`, `deposit` et `slots`, et catalogues UTF-8 corrigés.
-- Les vagues restantes et la validation complète doivent encore être clôturées.
+- La vague giveaways (`start` et `drop`) utilise désormais les clés fr/en pour les messages du manager ; les vagues radio et les validations runtime restent à clôturer.
 - La compilation de `canvas` reste bloquée dans l’environnement Node 24 faute de binaire compatible et de bibliothèques GTK/Cairo.

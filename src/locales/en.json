@@ -436,7 +436,28 @@
       "ended": "The giveaway will end in less than {seconds} seconds.",
       "paused": "Giveaway paused!",
       "unpaused": "Giveaway unpaused!",
-      "rerolled": "Giveaway rerolled."
+    "rerolled": "Giveaway rerolled.",
+    "started": "Giveaway started in {channel}.",
+    "lastChance": "{error} **LAST CHANCE TO ENTER!** {error}",
+    "pausedMessage": "⚠️ **THIS GIVEAWAY IS PAUSED!** ⚠️",
+    "title": "{party} **GIVEAWAY** {party}",
+    "endedTitle": "{party} **GIVEAWAY ENDED** {party}",
+    "drawing": "{clock} - Ends at: **{timestamp}**!",
+    "inviteToParticipate": "React with 🥳 to enter the giveaway!\n",
+    "dropMessage": "Be the first to react with 🥳",
+    "winMessage": "Congratulations {winners}! You just won the **{this.prize}**!",
+    "footer": "Giveaway!",
+    "noWinner": "Giveaway canceled, not enough participants.\n",
+    "hostedBy": "{party} - Hosted by: {this.hostedBy}",
+    "winners": "🏆 - Winner(s)",
+    "endedAt": "Ends at:",
+    "units": {
+      "seconds": "seconds",
+      "minutes": "minutes",
+      "hours": "hours",
+      "days": "days",
+      "pluralS": false
+    }
     },
     "tickets": {
       "setupRequired": "Set up tickets first.",
