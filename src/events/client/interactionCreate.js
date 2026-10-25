@@ -172,61 +172,52 @@ module.exports = async (client, interaction) => {
         var buttonID = interaction.customId.split("-");
 
         if (buttonID[0] == "reaction_button") {
-            reactionSchema.findOne({ Message: interaction.message.id }, async (err, data) => {
-                if (!data) return;
+            const data = await reactionSchema.findOne({ Message: interaction.message.id });
+            if (!data) return;
 
-                const [roleid] = data.Roles[buttonID[1]];
+            const [roleid] = data.Roles[buttonID[1]];
+            const member = interaction.guild.members.cache.get(interaction.user.id);
+            const hasRole = interaction.member.roles.cache.get(roleid);
 
-                if (interaction.member.roles.cache.get(roleid)) {
-                    interaction.guild.members.cache.get(interaction.user.id).roles.remove(roleid).catch(error => { })
+            if (hasRole) {
+                await member.roles.remove(roleid);
+            }
+            else {
+                await member.roles.add(roleid);
+            }
 
-                    interaction.reply({ content: `<@&${roleid}> was removed!`, flags: Discord.MessageFlags.Ephemeral });
-                }
-                else {
-                    interaction.guild.members.cache.get(interaction.user.id).roles.add(roleid).catch(error => { })
-
-                    interaction.reply({ content: `<@&${roleid}> was added!`, flags: Discord.MessageFlags.Ephemeral });
-                }
-            })
+            return interaction.reply({
+                content: `<@&${roleid}> was ${hasRole ? 'removed' : 'added'}!`,
+                flags: Discord.MessageFlags.Ephemeral
+            });
         }
     }
 
     // Reaction roles select
     if (interaction.isStringSelectMenu()) {
         if (interaction.customId == "reaction_select") {
-            reactionSchema.findOne(
-                { Message: interaction.message.id },
-                async (err, data) => {
-                    if (!data) return;
+            const data = await reactionSchema.findOne({ Message: interaction.message.id });
+            if (!data) return;
 
-                    let roles = "";
+            const member = interaction.guild.members.cache.get(interaction.user.id);
+            const roles = [];
 
-                    for (let i = 0; i < interaction.values.length; i++) {
-                        const [roleid] = data.Roles[interaction.values[i]];
+            for (const value of interaction.values) {
+                const [roleid] = data.Roles[value];
+                roles.push(`<@&${roleid}>`);
 
-                        roles += `<@&${roleid}> `;
-
-                        if (interaction.member.roles.cache.get(roleid)) {
-                            interaction.guild.members.cache
-                                .get(interaction.user.id)
-                                .roles.remove(roleid)
-                                .catch((error) => { });
-                        } else {
-                            interaction.guild.members.cache
-                                .get(interaction.user.id)
-                                .roles.add(roleid)
-                                .catch((error) => { });
-                        }
-
-                        if ((i + 1) === interaction.values.length) {
-                            interaction.reply({
-                                content: `I have updated the following roles for you: ${roles}`,
-                                flags: Discord.MessageFlags.Ephemeral,
-                            });
-                        }
-                    }
+                if (interaction.member.roles.cache.get(roleid)) {
+                    await member.roles.remove(roleid);
                 }
-            );
+                else {
+                    await member.roles.add(roleid);
+                }
+            }
+
+            return interaction.reply({
+                content: `I have updated the following roles for you: ${roles.join(' ')}`,
+                flags: Discord.MessageFlags.Ephemeral
+            });
         }
     }
     // Tickets
