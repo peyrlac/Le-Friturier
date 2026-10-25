@@ -2,28 +2,29 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/music");
 
 module.exports = async (client, interaction, args) => {
+    const t = (key, variables = {}) => client.t(interaction, `commands.radio.${key}`, variables);
     const webhookClientLogs = new Discord.WebhookClient({
         id: client.webhooks.voiceLogs.id,
         token: client.webhooks.voiceLogs.token,
     });
 
-    let channel = interaction.member.voice ? interaction.member.voice.channel : null;
-    if (!channel) return client.errNormal({ error: `Le canal n'existe pas!`, type: 'editreply' }, interaction);
+    const channel = interaction.member.voice?.channel;
+    if (!channel) return client.errNormal({ key: 'commands.radio.noVoiceChannel', type: 'editreply' }, interaction);
 
     client.radioStop(channel);
 
-    var remove = await Schema.deleteOne({ Guild: interaction.guild.id });
+    await Schema.deleteOne({ Guild: interaction.guild.id });
 
-    client.embed({
-        title: `📻・La radio s'est arrêtée`,
-        desc: `La radio a cessé avec succès \ nPour faire rejoindre le bot: \`rplay\``,
+    await client.embed({
+        titleKey: 'commands.radio.stoppedTitle',
+        descKey: 'commands.radio.stoppedDescription',
         fields: [{
-            name: "👤┆Arreté par",
+            name: await t('stoppedBy'),
             value: `${interaction.user} (${interaction.user.tag})`,
             inline: true
         },
         {
-            name: "📺┆Canal",
+            name: await t('channel'),
             value: `${channel} (${channel.name})`,
             inline: true
         }
@@ -32,19 +33,18 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 
     let embed = new Discord.EmbedBuilder()
-        .setTitle(`📻・Radio stopped`)
-        .setDescription(`_______________ \n\nRadio has stopped successfully`)
+        .setTitle(await t('stoppedLogTitle'))
+        .setDescription(await t('stoppedLogDescription'))
         .addFields(
-            { name: "👤┆Stopped By", value: `${interaction.user} (${interaction.user.tag})`, inline: true },
-            { name: "📺┆Channel", value: `${channel} (${channel.name})`, inline: true },
-            { name: "⚙️┆Guild", value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
+            { name: await t('stoppedBy'), value: `${interaction.user} (${interaction.user.tag})`, inline: true },
+            { name: await t('channel'), value: `${channel} (${channel.name})`, inline: true },
+            { name: await t('guild'), value: `${interaction.guild.name} (${interaction.guild.id})`, inline: true },
         )
         .setColor(client.config.colors.normal)
         .setTimestamp();
-    webhookClientLogs.send({
+    await webhookClientLogs.send({
         username: 'Bot Logs',
         embeds: [embed],
     });
-}
+};
 
- 
