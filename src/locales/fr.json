@@ -78,6 +78,14 @@
       },
       "feedback": { "success": "Votre avis a \u00e9t\u00e9 envoy\u00e9 aux d\u00e9veloppeurs avec succ\u00e8s." }
     },
+    "music": {
+      "notInVoice": "Vous n'êtes pas dans un canal vocal !",
+      "notSameVoice": "Vous n'êtes pas dans le même canal vocal !",
+      "noSongs": "Il n'y a aucune chanson en cours.",
+      "paused": "La musique a été mise en pause.",
+      "resumed": "La musique a repris.",
+      "searching": "Recherche..."
+    },
     "economy": {
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
