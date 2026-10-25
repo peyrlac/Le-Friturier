@@ -1,20 +1,15 @@
 module.exports = (client) => {
     client.createChannelSetup = async function (Schema, channel, interaction) {
-        Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-            if (data) {
-                data.Channel = channel.id;
-                data.save();
-            }
-            else {
-                new Schema({
-                    Guild: interaction.guild.id,
-                    Channel: channel.id
-                }).save();
-            }
-        });
+        const data = await Schema.findOne({ Guild: interaction.guild.id });
+        if (data) {
+            data.Channel = channel.id;
+            await data.save();
+        } else {
+            await new Schema({ Guild: interaction.guild.id, Channel: channel.id }).save();
+        }
 
-        client.succNormal({
-            text: `Channel has been set up successfully!`,
+        return client.succNormal({
+            key: 'setup.channelSuccess',
             fields: [
                 {
                     name: `📘┆Channel`,
@@ -26,21 +21,16 @@ module.exports = (client) => {
     }
 
     client.createRoleSetup = async function (Schema, role, interaction) {
-        Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-            if (data) {
-                data.Role = role.id;
-                data.save();
-            }
-            else {
-                new Schema({
-                    Guild: interaction.guild.id,
-                    Role: role.id
-                }).save();
-            }
-        });
+        const data = await Schema.findOne({ Guild: interaction.guild.id });
+        if (data) {
+            data.Role = role.id;
+            await data.save();
+        } else {
+            await new Schema({ Guild: interaction.guild.id, Role: role.id }).save();
+        }
 
-        client.succNormal({
-            text: `Role has been set up successfully!`,
+        return client.succNormal({
+            key: 'setup.roleSuccess',
             fields: [
                 {
                     name: `📘┆Role`,

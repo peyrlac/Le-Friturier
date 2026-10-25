@@ -160,6 +160,10 @@
       }
     },
     "setup": {
+      "channel": "📘・Channel",
+      "role": "📘・Role",
+      "channelSuccess": "The channel was set up successfully!",
+      "roleSuccess": "The role was set up successfully!",
       "channelsorter": {
         "invalidChannel": "The selected channel must be a category.",
         "success": "Channel sorting was configured successfully."
