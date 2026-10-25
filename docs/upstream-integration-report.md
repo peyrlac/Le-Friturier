@@ -23,9 +23,10 @@
 ## Points à vérifier avant fusion
 
 - Comparer les commits upstream restants avec les fichiers locaux `interactionCreate.js`, `embed.js`, musique et vérification.
-- `npm test` passe actuellement avec 30 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
+- `npm test` passe actuellement avec 31 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
 - Les scans statiques confirment `0` callback Mongoose legacy et `0` occurrence `.catch({})`.
 - Les deux fichiers `pinned channel` ont le même blob Git que `upgrade` : `channelSorter.js` et `clientReady.js`.
+- Les arbres Git de `main` et `upgrade` sont également identiques ; aucune modification supplémentaire de `upgrade` ne peut être intégrée sélectivement pour cette feature.
 - Tester manuellement `withResponse`, les réponses éphémères et `/config language`.
 - Revoir les vulnérabilités transitives restantes et décider lesquelles nécessitent une migration indépendante.
 
@@ -33,4 +34,4 @@
 
 ## Audit npm au 25 octobre 2026
 
-`npm audit --omit=dev --audit-level=high` signale encore 69 vulnérabilités (5 faibles, 28 modérées, 29 hautes et 7 critiques). Les dépendances directes ciblées ont été mises à jour, mais plusieurs alertes proviennent de dépendances historiques imbriquées (`request`, `weather-js`, `sourcebin`, les plugins `erela`, `puppeteer` et `discord-giveaways`). `npm audit fix --force` est volontairement exclu car il propose des changements cassants.
+`npm audit --omit=dev --audit-level=high` signale actuellement 39 vulnérabilités de production (12 modérées, 22 hautes et 5 critiques). Les dépendances directes ciblées ont été mises à jour, mais plusieurs alertes proviennent de dépendances historiques imbriquées (`request`, `weather-js`, `sourcebin`, les plugins `erela`, `puppeteer` et `discord-giveaways`). `npm audit fix --force` est volontairement exclu car il propose des changements cassants ; les correctifs sans migration seront traités séparément lorsque leur impact applicatif sera vérifié.
