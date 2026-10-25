@@ -608,5 +608,12 @@
         "empty": "Vous n'avez pas assez d'argent pour jouer."
       }
     }
+  },
+  "customCommands": {
+    "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",
+    "promptAction": "Quelle action doit être associée à cette commande ?",
+    "added": "La commande a été ajoutée avec succès.",
+    "notFound": "Impossible de trouver cette commande.",
+    "removed": "La commande a été supprimée avec succès."
   }
 }

@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/customCommandAdvanced");
 
 module.exports = async (client, interaction, args) => {
+    return require('./addAsync')(client, interaction, args);
+
     const cmdname = interaction.options.getString('command');
     const cmdresponce = interaction.options.getString('text');
 
@@ -113,5 +115,3 @@ module.exports = async (client, interaction, args) => {
     })
 
 }
-
- 
