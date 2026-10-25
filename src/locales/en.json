@@ -122,6 +122,14 @@
       "dogFactTitle": "Random dog fact",
       "koalaFactTitle": "Random koala fact",
       "pandaFactTitle": "Random panda fact"
+      ,"hugTitle": "{from} hugs {to}",
+      "loveTitle": "Love Meter",
+      "loveDescription": "See how much you match!",
+      "loveSameUser": "You cannot compare the same user twice!",
+      "loveNameOne": "Name 1",
+      "loveNameTwo": "Name 2",
+      "loveResult": "Result",
+      "loveMatch": "**{user1}** and **{user2}** match **{result}%**!"
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",

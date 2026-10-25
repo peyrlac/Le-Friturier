@@ -103,6 +103,14 @@
       "dogFactTitle": "Fait aléatoire sur les chiens",
       "koalaFactTitle": "Fait aléatoire sur les koalas",
       "pandaFactTitle": "Fait aléatoire sur les pandas"
+      ,"hugTitle": "{from} fait un câlin à {to}",
+      "loveTitle": "Baromètre de l'amour",
+      "loveDescription": "Découvrez votre compatibilité.",
+      "loveSameUser": "Vous ne pouvez pas comparer deux fois la même personne !",
+      "loveNameOne": "Nom 1",
+      "loveNameTwo": "Nom 2",
+      "loveResult": "Résultat",
+      "loveMatch": "**{user1}** et **{user2}** sont compatibles à **{result}%** !"
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",

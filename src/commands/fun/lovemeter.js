@@ -6,27 +6,28 @@ module.exports = async (client, interaction, args) => {
 
     if (!user1 || !user2) return client.errUsage({ usage: "lovemeter [user1]", type: 'editreply' }, interaction);
 
-    if (user1 == user2) return client.errNormal({ error: "You cannot give 2 of the same names!", type: 'editreply' }, interaction);
+    if (user1 == user2) return client.errNormal({ key: 'fun.loveSameUser', type: 'editreply' }, interaction);
 
     var result = Math.ceil(Math.random() * 100);
 
     client.embed({
-        title: `${client.emotes.normal.heart}・Love meter`,
-        desc: "See how much you match!",
+        titleKey: 'fun.loveTitle',
+        descKey: 'fun.loveDescription',
+        variables: { user1: String(user1), user2: String(user2), result },
         fields: [
             {
-                name: "Name 1",
+                name: await client.t(interaction, 'fun.loveNameOne'),
                 value: `${user1}`,
                 inline: true,
             },
             {
-                name: "Name 2",
+                name: await client.t(interaction, 'fun.loveNameTwo'),
                 value: `${user2}`,
                 inline: true,
             },
             {
-                name: "Result",
-                value: `**${user2}** and **${user2}** match **${result}%**`,
+                name: await client.t(interaction, 'fun.loveResult'),
+                value: await client.t(interaction, 'fun.loveMatch', { user1: String(user1), user2: String(user2), result }),
                 inline: false,
             },
         ],
@@ -34,4 +35,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
-     
+
