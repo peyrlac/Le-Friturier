@@ -189,6 +189,54 @@ test('serializes native command localizations for Discord', () => {
     });
 });
 
+test('serializes subcommand and option localizations for Discord', () => {
+    const { SlashCommandBuilder } = require('discord.js');
+    const command = {
+        data: new SlashCommandBuilder()
+            .setName('sample')
+            .setDescription('Sample')
+            .addSubcommand(subcommand => subcommand
+                .setName('language')
+                .setDescription('Language')
+                .addStringOption(option => option
+                    .setName('locale')
+                    .setDescription('Locale')
+                    .setRequired(true)
+                )
+            ),
+        localizations: {
+            name: { fr: 'exemple', en: 'sample' },
+            description: { fr: 'Exemple', en: 'Sample' },
+            subcommands: {
+                language: {
+                    name: { fr: 'langue', en: 'language' },
+                    description: { fr: 'Choisir la langue', en: 'Choose the language' },
+                    options: {
+                        locale: {
+                            description: { fr: 'Langue du serveur', en: 'Server language' }
+                        }
+                    }
+                }
+            }
+        }
+    };
+
+    applyCommandLocalizations(command);
+    const data = command.data.toJSON();
+    const subcommand = data.options[0];
+    const option = subcommand.options[0];
+
+    assert.deepEqual(subcommand.name_localizations, { fr: 'langue', 'en-US': 'language' });
+    assert.deepEqual(subcommand.description_localizations, {
+        fr: 'Choisir la langue',
+        'en-US': 'Choose the language'
+    });
+    assert.deepEqual(option.description_localizations, {
+        fr: 'Langue du serveur',
+        'en-US': 'Server language'
+    });
+});
+
 test('response helpers resolve a translation key before sending an embed', async () => {
     const installEmbeds = require('../src/handlers/components/embed');
     const sent = [];
