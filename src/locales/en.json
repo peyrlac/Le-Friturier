@@ -117,7 +117,18 @@
       "shuffled": "The queue was shuffled!",
       "queueTooShort": "The queue does not contain that many songs.",
       "removed": "**{song}** was removed from the queue."
-      ,"lyricsNotFound": "No lyrics found for {song} :x:"
+      ,"lyricsNotFound": "No lyrics found for {song} :x:",
+      "channelMissing": "The voice channel does not exist.",
+      "notJoinable": "This voice channel is not joinable.",
+      "loadFailed": "The music could not be loaded. Please try again in a few minutes.",
+      "noMatches": "No music was found.",
+      "songQueued": "The song has been added to the queue!",
+      "searchResults": "Search Results",
+      "cancelSearch": "Cancel search?",
+      "cancelSearchHint": "Press `cancel` to stop the search.",
+      "selectionMissing": "You didn't provide a selection.",
+      "selectionCancelled": "Selection cancelled.",
+      "invalidSelection": "The number you provided is too small or too big (1-{max})."
     },
     "economy": {
       "balance": {
