@@ -12,7 +12,9 @@ module.exports = async (client, interaction, args) => {
     const img = await Canvas.burn(userAvatar, lvl);
 
     let attach = new Discord.AttachmentBuilder(img, { name: "burn.png" });
-    const embed = client.templateEmbed().setImage("attachment://burn.png");
+    const embed = client.templateEmbed()
+        .setTitle(await client.t(interaction, 'images.burnTitle'))
+        .setImage("attachment://burn.png");
     interaction.editReply({ files: [attach], embeds: [embed] });
 }
 

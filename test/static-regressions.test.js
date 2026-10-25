@@ -215,6 +215,19 @@ test('tools response wave uses translation keys', () => {
   assert.doesNotMatch(read('src/commands/tools/emojify.js'), /cannot be longer than 4096/);
 });
 
+test('image attachment commands localize their embed titles', () => {
+  const files = [
+    'src/commands/images/ad.js',
+    'src/commands/images/bed.js',
+    'src/commands/images/blur.js',
+    'src/commands/images/burn.js'
+  ];
+
+  for (const file of files) {
+    assert.match(read(file), /client\.t\(interaction, ['"]images\.[A-Za-z]+Title['"]\)/, file);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
