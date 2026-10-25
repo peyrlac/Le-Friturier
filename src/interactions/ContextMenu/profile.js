@@ -60,8 +60,8 @@ module.exports = {
 
         const user = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ User: user.id }, async (err, data) => {
-            if (data) {
+        const data = await Schema.findOne({ User: user.id });
+        if (data) {
                 await interaction.deferReply();
                 let Badges = await model.findOne({ User: user.id });
 
@@ -188,7 +188,6 @@ module.exports = {
             else {
                 return client.errNormal({ error: "No profile found! Open a profile with /profile create", type: 'ephemeral' }, interaction);
             }
-        })
     },
 };
 
