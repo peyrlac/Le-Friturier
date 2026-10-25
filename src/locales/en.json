@@ -88,6 +88,7 @@
         "deleted": "Your birthday was deleted.",
     "notFound": "No birthday found.",
     "listEmpty": "No birthdays have been recorded.",
+    "listTitle": "🎂・Birthdays - {guild}",
         "field": "🎂・Birthday",
         "checkTitle": "🎂・Birthday check",
         "checkDescription": "{user}'s birthday is on {birthday}.",
