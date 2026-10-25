@@ -44,6 +44,7 @@
 - Le loader ignore désormais les modules utilitaires non-factories (`http/index.js` et `serverstats/createStatsChannel.js`) ; le healthcheck utilise un chemin temporaire portable.
 - Le démarrage complet a été validé avec `MONGO_DNS_SERVERS=1.1.1.1,8.8.8.8` : MongoDB est connecté, le bot devient prêt sur 2 serveurs et les commandes/événements sont chargés. Les scénarios d’interaction restent à exécuter manuellement.
 - Les erreurs restantes du serveur de test sont limitées aux permissions de lecture des invites et à la résolution du nœud Lavalink `lava.link`; elles n’empêchent pas le Gateway ni les commandes non musicales.
+- Les nœuds Lavalink publics et le mot de passe en dur ont été supprimés ; `LAVALINK_ENABLED=false` valide désormais un démarrage propre sans dépendance musicale externe.
 
 `main` et `upgrade` n'ont pas de merge-base commun avec cette branche ; la comparaison finale doit donc rester une comparaison directe des arbres et des fichiers ciblés, sans fusion automatique.
 

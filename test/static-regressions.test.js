@@ -57,6 +57,14 @@ test('Mongo connection accepts optional DNS servers for SRV resolution', () => {
   assert.match(source, /dns\.setServers\(/);
 });
 
+test('Lavalink nodes come only from explicit environment configuration', () => {
+  const source = read('src/bot.js');
+
+  assert.match(source, /createLavalinkNodes/);
+  assert.match(source, /LAVALINK_ENABLED/);
+  assert.doesNotMatch(source, /lavalink\.techpoint\.world|password:\s*['"]techpoint['"]|lava\.link/);
+});
+
 test('shared embed helpers expose French labels', () => {
   const source = read('src/handlers/components/embed.js');
 
