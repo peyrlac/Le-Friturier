@@ -93,7 +93,10 @@
       },
       "levels": {
         "enabled": "Les niveaux sont maintenant activ\u00e9s dans ce serveur.",
-        "disabled": "Les niveaux sont maintenant d\u00e9sactiv\u00e9s dans ce serveur."
+        "disabled": "Les niveaux sont maintenant d\u00e9sactiv\u00e9s dans ce serveur.",
+        "levelUpdated": "Le niveau de {user} est maintenant {level}.",
+        "xpUpdated": "L'XP de {user} est maintenant {xp}.",
+        "noLevels": "Cet utilisateur n'a pas encore de niveau."
       },
       "setcolor": {
         "invalid": "Vous n'avez pas pr\u00e9cis\u00e9 de couleur hexad\u00e9cimale. Exemple : FF0000",

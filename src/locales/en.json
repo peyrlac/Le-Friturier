@@ -95,7 +95,10 @@
       },
       "levels": {
         "enabled": "Levels are now enabled in this server.",
-        "disabled": "Levels are now disabled in this server."
+        "disabled": "Levels are now disabled in this server.",
+        "levelUpdated": "{user}'s level is now {level}.",
+        "xpUpdated": "{user}'s XP is now {xp}.",
+        "noLevels": "This user has no levels yet."
       },
       "setcolor": {
         "invalid": "You did not provide a hexadecimal color. Example: FF0000",
