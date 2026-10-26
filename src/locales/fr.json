@@ -990,6 +990,17 @@
     "inviteTitle": "📨・Invitation",
     "inviteDescription": "Rendez votre serveur encore meilleur avec le bot !"
   },
+  "moderationEvents": {
+    "warnTitle": "🔨・Membre averti",
+    "warnDescription": "Un utilisateur a été averti.",
+    "unwarnTitle": "🔨・Avertissement retiré",
+    "unwarnDescription": "Un avertissement a été retiré.",
+    "user": "> Utilisateur",
+    "tag": "> Tag",
+    "id": "> Identifiant",
+    "moderator": "> Modérateur",
+    "reason": "> Motif"
+  },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",
     "promptAction": "Quelle action doit être associée à cette commande ?",

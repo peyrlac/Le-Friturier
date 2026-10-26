@@ -1003,6 +1003,17 @@
     "inviteTitle": "📨・Invite",
     "inviteDescription": "Make your server even better with the bot!"
   },
+  "moderationEvents": {
+    "warnTitle": "🔨・Member warned",
+    "warnDescription": "A user has been warned.",
+    "unwarnTitle": "🔨・Member unwarned",
+    "unwarnDescription": "A user has been unwarned.",
+    "user": "> User",
+    "tag": "> Tag",
+    "id": "> ID",
+    "moderator": "> Moderator",
+    "reason": "> Reason"
+  },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
     "promptAction": "Which action should be attached to this command?",
