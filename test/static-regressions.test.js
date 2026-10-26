@@ -473,6 +473,20 @@ test('native radio, report, and levels responses use localization keys', () => {
   }
 });
 
+test('channel moderation responses use localization keys', () => {
+  const expectations = {
+    'src/commands/moderation/lock.js': 'moderation.channelLocked',
+    'src/commands/moderation/unlock.js': 'moderation.channelUnlocked',
+    'src/commands/moderation/lockdown.js': 'moderation.channelsLocked'
+  };
+
+  for (const [file, key] of Object.entries(expectations)) {
+    const source = read(file);
+    assert.match(source, new RegExp(key.replace('.', '\\.') ), `${file}: ${key}`);
+    assert.doesNotMatch(source, /Channel locked successfully|Channel unlocked successfully|Channels locked successfully/i, file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

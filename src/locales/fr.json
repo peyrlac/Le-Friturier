@@ -750,6 +750,10 @@
     "newReview": "Un nouvel avis a été publié."
   },
   "moderation": {
+    "channelLocked": "Salon verrouillé avec succès !",
+    "channelUnlocked": "Salon déverrouillé avec succès !",
+    "channelsLocked": "Salons verrouillés avec succès !",
+    "channel": "📘‡Salon",
     "warningsTitle": "⚠️・Avertissements",
     "warningsDescription": "Avertissements de **{user}**",
     "warningCase": "Avertissement **{case}**",
