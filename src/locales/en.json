@@ -1269,7 +1269,25 @@
     "noParticipants": "No participants available.",
     "eventTitle": "📅 {name}",
     "listTitle": "Participants list ({count})",
-    "fetchError": "❌ An error occurred while retrieving the participants."
+    "fetchError": "❌ An error occurred while retrieving the participants.",
+    "reminderCreatorOnly": "❌ Only the event creator can configure reminders.",
+    "reminders": {
+      "enable": "Enable reminders",
+      "disable": "Disable reminders",
+      "deleteEvent": "Delete event",
+      "title": "🎉 Event configuration",
+      "welcome": "Welcome to the discussion thread for your event **{event}**!",
+      "inviteTitle": "📝 Invite participants",
+      "invite": "Remember to mention (@) the roles or people you want to invite to this discussion thread.",
+      "automaticTitle": "⏰ Automatic reminders",
+      "available": "By default, reminders will be sent:\n• 1 month before\n• 1 week before\n• 1 day before\n\nUse the buttons below to manage reminders.",
+      "unavailable": "Reminders are not available because the event is too soon.",
+      "availableFooter": "You can configure reminders at any time",
+      "unavailableFooter": "Reminders are not available for this event",
+      "deletedMessage": "This message will be deleted <t:{timestamp}:R>",
+      "configured": "✅ Reminders have been configured for this event.",
+      "setupError": "❌ An error occurred while configuring reminders."
+    }
   },
   "suggestions": {
     "title": "💡・Suggestion",

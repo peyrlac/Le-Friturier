@@ -1224,6 +1224,34 @@ test('remaining hardcoded interaction responses use localization keys', () => {
   assert.doesNotMatch(sources.directMessages, /I can't DM you, maybe you have DM turned off/);
 });
 
+test('event reminder setup uses the active locale for its user-facing copy', () => {
+  const source = read('src/events/client/interactionCreate.js');
+  const keys = [
+    'events.reminderCreatorOnly',
+    'events.reminders.enable',
+    'events.reminders.disable',
+    'events.reminders.deleteEvent',
+    'events.reminders.title',
+    'events.reminders.welcome',
+    'events.reminders.inviteTitle',
+    'events.reminders.invite',
+    'events.reminders.automaticTitle',
+    'events.reminders.available',
+    'events.reminders.unavailable',
+    'events.reminders.availableFooter',
+    'events.reminders.unavailableFooter',
+    'events.reminders.deletedMessage',
+    'events.reminders.configured',
+    'events.reminders.setupError'
+  ];
+
+  for (const key of keys) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+
+  assert.doesNotMatch(source, /Activer les rappels|Désactiver les rappels|Configuration de l'événement|Les rappels ont été configurés/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

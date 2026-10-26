@@ -1256,7 +1256,25 @@
     "noParticipants": "Aucun participant disponible.",
     "eventTitle": "📅 {name}",
     "listTitle": "Liste des participants ({count})",
-    "fetchError": "❌ Une erreur est survenue lors de la récupération des participants."
+    "fetchError": "❌ Une erreur est survenue lors de la récupération des participants.",
+    "reminderCreatorOnly": "❌ Seul le créateur de l'événement peut configurer les rappels.",
+    "reminders": {
+      "enable": "Activer les rappels",
+      "disable": "Désactiver les rappels",
+      "deleteEvent": "Supprimer l'événement",
+      "title": "🎉 Configuration de l'événement",
+      "welcome": "Bienvenue dans le fil de discussion de ton événement **{event}** !",
+      "inviteTitle": "📝 Inviter des participants",
+      "invite": "N'oubliez pas de mentionner (@) les rôles ou les personnes que vous souhaitez inviter dans ce fil de discussion.",
+      "automaticTitle": "⏰ Rappels automatiques",
+      "available": "Par défaut, des rappels seront envoyés :\n• 1 mois avant\n• 1 semaine avant\n• 1 jour avant\n\nUtilisez les boutons ci-dessous pour gérer les rappels.",
+      "unavailable": "Les rappels ne sont pas disponibles car l'événement est trop proche.",
+      "availableFooter": "Vous pouvez configurer les rappels à tout moment",
+      "unavailableFooter": "Les rappels ne sont pas disponibles pour cet événement",
+      "deletedMessage": "Ce message se supprimera <t:{timestamp}:R>",
+      "configured": "✅ Les rappels ont été configurés pour cet événement.",
+      "setupError": "❌ Une erreur est survenue lors de la configuration des rappels."
+    }
   },
   "suggestions": {
     "title": "💡・Suggestion",
