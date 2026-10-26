@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
     }
     catch (error) {
         return client.errNormal({
-            key: 'common.error',
+            key: 'errors.generic',
             type: 'ephemeral'
         }, interaction);
     }

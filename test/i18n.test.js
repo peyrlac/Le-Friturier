@@ -262,23 +262,12 @@ test('afk and activities expose localized metadata', () => {
 
 test('voice exposes localized metadata and supports localized channel responses', () => {
   const command = require('../src/interactions/Command/voice');
+  const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
-  assert.deepEqual(command.localizations, {
+  assert.equal(command.localizationKey, 'commandMetadata.voice');
+  assert.deepEqual(resolveCommandLocalizations(command), {
     name: { fr: 'vocal', en: 'voice' },
-    description: { fr: 'Gérer les salons vocaux', en: 'Manage voice channels' },
-    subcommands: {
-      help: { description: { fr: 'Voir l’aide de la catégorie vocale', en: 'View voice category help' } },
-      limit: {
-        description: { fr: 'Modifier la limite de votre salon vocal', en: 'Change your voice channel limit' },
-        options: { limit: { description: { fr: 'Limite de membres', en: 'Member limit' } } }
-      },
-      lock: { description: { fr: 'Verrouiller votre salon vocal', en: 'Lock your voice channel' } },
-      rename: {
-        description: { fr: 'Renommer votre salon vocal', en: 'Rename your voice channel' },
-        options: { name: { description: { fr: 'Nouveau nom du salon', en: 'New channel name' } } }
-      },
-      unlock: { description: { fr: 'Déverrouiller votre salon vocal', en: 'Unlock your voice channel' } }
-    }
+    description: { fr: 'Gérer les salons vocaux', en: 'Manage voice channels' }
   });
 });
 
@@ -311,6 +300,25 @@ test('serializes native command localizations for Discord', () => {
     assert.deepEqual(data.description_localizations, {
         fr: 'Ajustez le bot à votre goût',
         'en-US': 'Customize the bot to your liking'
+    });
+});
+
+test('serializes command metadata from locale JSON using localizationKey', () => {
+    const { SlashCommandBuilder } = require('discord.js');
+    const command = {
+        data: new SlashCommandBuilder()
+            .setName('voice')
+            .setDescription('Manage voice channels'),
+        localizationKey: 'commandMetadata.voice'
+    };
+
+    applyCommandLocalizations(command);
+    const data = command.data.toJSON();
+
+    assert.deepEqual(data.name_localizations, { fr: 'vocal', 'en-US': 'voice' });
+    assert.deepEqual(data.description_localizations, {
+        fr: 'Gérer les salons vocaux',
+        'en-US': 'Manage voice channels'
     });
 });
 

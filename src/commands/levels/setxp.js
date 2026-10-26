@@ -21,7 +21,7 @@ module.exports = async (client, interaction, args) => {
         const user = await client.setXP(target.id, interaction.guild.id, xp);
 
         return client.succNormal({
-            key: 'levels.xpUpdated',
+            key: 'config.levels.xpUpdated',
             variables: { xp: user.xp, user: target.tag },
             fields: [
                 {
@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         client.errNormal({
-            key: 'levels.disabled',
+            key: 'config.levels.disabled',
             type: 'editreply'
         }, interaction);
     }

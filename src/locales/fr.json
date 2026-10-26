@@ -764,6 +764,12 @@
     "typeDelete": "Supprime",
     "typeReact": "Ajoute une réaction"
   },
+  "commandMetadata": {
+    "voice": {
+      "name": "vocal",
+      "description": "Gérer les salons vocaux"
+    }
+  },
   "features": {
     "enabled": "La fonctionnalité {feature} est activée.",
     "disabled": "La fonctionnalité {feature} est désactivée.",
