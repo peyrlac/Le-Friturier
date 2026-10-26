@@ -1764,7 +1764,7 @@
         "fasttype": { "description": "Apprendre à taper plus vite" },
         "music-trivia": { "description": "Jouer au quiz musical", "options": { "number": { "description": "Nombre de chansons" } } },
         "roll": { "description": "Lancer un dé" },
-        "rps": { "description": "Jouer à pierre-papier-ciseaux contre le bot", "options": { "option": { "description": "Choisir votre option" } } },
+        "rps": { "description": "Jouer à pierre-papier-ciseaux contre le bot", "options": { "option": { "description": "Choisir votre option", "choices": { "rock": { "name": "🪨 Pierre" }, "paper": { "name": "📃 Papier" }, "scissors": { "name": "✂️ Ciseaux" } } } } },
         "skipword": { "description": "Passer le mot actuel" },
         "snake": { "description": "Jouer au jeu du serpent" },
         "trivia": { "description": "Jouer à un quiz" },
