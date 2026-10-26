@@ -1088,6 +1088,12 @@
     "started": "Le soundboard a démarré ! Lecture de **{sound}**"
   },
   "developers": {
+    "badgeNotFound": "Je ne trouve pas ce badge.",
+    "badgeAlreadyAssigned": "Cet utilisateur possède déjà ce badge !",
+    "badgeAdded": "Badge {badge} ({flag}) ajouté !",
+    "badgeMissing": "L’utilisateur ne possède pas ce badge.",
+    "badgeRemovedLast": "Badge {badge} ({flag}) retiré ; l’utilisateur n’a plus de badge.",
+    "badgeRemoved": "Badge {badge} ({flag}) retiré !",
     "tokenRefusal": "Je ne vais pas envoyer mon token !",
     "evalTitle": "💻・Eval",
     "input": "📥┇Entrée",

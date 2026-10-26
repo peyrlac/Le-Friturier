@@ -1101,6 +1101,12 @@
     "started": "Soundboard started! Playing **{sound}**"
   },
   "developers": {
+    "badgeNotFound": "I cannot find that badge.",
+    "badgeAlreadyAssigned": "This user already has that badge!",
+    "badgeAdded": "Added the {badge} ({flag}) badge!",
+    "badgeMissing": "The user doesn't have that badge.",
+    "badgeRemovedLast": "Removed the {badge} ({flag}) badge; the user has no badges left.",
+    "badgeRemoved": "Removed the {badge} ({flag}) badge!",
     "tokenRefusal": "I'm not going to send my token!",
     "evalTitle": "💻・Eval",
     "input": "📥┇Input",
