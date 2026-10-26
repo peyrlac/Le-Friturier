@@ -292,6 +292,17 @@ test('profile and serverstats commands expose localized top-level metadata', () 
   assert.equal(serverstats.localizations.name.en, 'serverstats');
 });
 
+test('message and context profile common responses use localization keys', () => {
+  const message = read('src/interactions/Command/message.js');
+  const profile = read('src/interactions/ContextMenu/profile.js');
+
+  assert.match(message, /key:\s*['"]fun\.messageSent['"]/);
+  assert.match(message, /key:\s*['"]errors\.developerOnly['"]/);
+  assert.doesNotMatch(message, /Message has been sent successfully|Only Bot 2 developers are allowed/);
+  assert.match(profile, /key:\s*['"]profile\.notFound['"]/);
+  assert.doesNotMatch(profile, /No profile found! Open a profile with \/profile create/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

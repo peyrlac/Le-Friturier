@@ -40,7 +40,7 @@ module.exports = {
                 const message = interaction.options.getString('message');
 
                 client.succNormal({
-                    text: `Message has been sent successfully!`,
+                    key: 'fun.messageSent',
                     type: 'ephemeraledit'
                 }, interaction);
 
@@ -459,7 +459,7 @@ module.exports = {
                 }
             }
 
-        return client.errNormal({ text: "Only Bot 2 developers are allowed to do this", editreply: true }, interaction);
+        return client.errNormal({ key: 'errors.developerOnly', editreply: true }, interaction);
     },
 };
 

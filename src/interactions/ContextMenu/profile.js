@@ -186,7 +186,7 @@ module.exports = {
                 }, interaction);
             }
             else {
-                return client.errNormal({ error: "No profile found! Open a profile with /profile create", type: 'ephemeral' }, interaction);
+                return client.errNormal({ key: 'profile.notFound', type: 'ephemeral' }, interaction);
             }
     },
 };
