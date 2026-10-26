@@ -777,7 +777,13 @@
       },
       "crash": {
         "insufficient": "Vous pariez plus que vous ne possédez !",
-        "noAccount": "Vous n'avez pas encore d'argent."
+        "noAccount": "Vous n'avez pas encore d'argent.",
+        "usage": "crash [montant]",
+        "started": "Crash lancé par {user}・Réagissez 🛑 pour vous arrêter",
+        "multiplier": "Multiplicateur",
+        "profit": "Profit",
+        "results": "Résultats du Crash de {user}",
+        "loss": "Perte"
       },
       "slots": {
         "title": "🎰・Machines à sous",

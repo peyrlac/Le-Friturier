@@ -820,6 +820,19 @@ test('blackjack responses use localization keys', () => {
   assert.doesNotMatch(source, /Blackjack|Toi|Pour frapper|Bonne chance|Perdu!!/);
 });
 
+test('crash responses use localization keys', () => {
+  const source = read('src/commands/casino/crash.js');
+  for (const key of [
+    'commands.casino.crash.usage',
+    'commands.casino.crash.started',
+    'commands.casino.crash.multiplier',
+    'commands.casino.crash.profit',
+    'commands.casino.crash.results',
+    'commands.casino.crash.loss'
+  ]) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  assert.doesNotMatch(source, /Crash a commencé|Multiplicateur|Résultats de|Perte|Profit/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
