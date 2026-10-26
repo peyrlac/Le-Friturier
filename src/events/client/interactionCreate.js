@@ -52,7 +52,7 @@ module.exports = async (client, interaction) => {
         const data = await banSchema.findOne({ User: interaction.user.id });
         if (data) {
             return client.errNormal({
-                error: "You have been banned by the developers of this bot",
+                key: 'router.banned',
                 type: 'ephemeral'
             }, interaction);
         }
@@ -88,11 +88,11 @@ module.exports = async (client, interaction) => {
                             );
                         } else if (cmdx.Action == "DM") {
                             await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
-                            interaction.editReply({ content: "I have sent you something in your DMs" });
+                            interaction.editReply({ content: await client.t(interaction, 'router.dmSent') });
                             return interaction.user.send({ content: cmdx.Responce }).catch((e) => {
                                 client.errNormal(
                                     {
-                                        error: "I can't DM you, maybe you have DM turned off!",
+                                        key: 'router.cannotDM',
                                         type: 'ephemeral'
                                     },
                                     interaction,
@@ -105,8 +105,8 @@ module.exports = async (client, interaction) => {
                     const commands = interaction.client.commands.filter(x => x.data.name == interaction.commandName).map((x) => x.data.options.map((c) => '`' + c.name + '` - ' + c.description).join("\n"));
 
                     return client.embed({
-                        title: `❓・Help panel`,
-                        desc: `Get help with the commands in \`${interaction.commandName}\` \n\n${commands}`,
+                        title: await client.t(interaction, 'router.helpTitle'),
+                        desc: await client.t(interaction, 'router.helpDescription', { command: interaction.commandName, commands }),
                         type: 'reply'
                     }, interaction)
                 }
@@ -134,7 +134,7 @@ module.exports = async (client, interaction) => {
                             msg.delete();
 
                             client.succNormal({
-                                text: "You have been successfully verified!"
+                                key: 'router.verificationSuccess'
                             }, interaction.user).catch(error => {
                                 console.error('Failed to send verification confirmation', error);
                             })
@@ -147,7 +147,7 @@ module.exports = async (client, interaction) => {
                             msg.delete();
 
                             client.errNormal({
-                                error: "You have answered the captcha incorrectly!",
+                                key: 'router.captchaIncorrect',
                                 type: 'editreply'
                             }, interaction).then(msgError => {
                                 setTimeout(() => {
@@ -164,7 +164,7 @@ module.exports = async (client, interaction) => {
         }
         else {
             client.errNormal({
-                error: "Verify is disabled in this server! Or you are using the wrong channel!",
+                key: 'router.verificationUnavailable',
                 type: 'ephemeral'
             }, interaction);
         }

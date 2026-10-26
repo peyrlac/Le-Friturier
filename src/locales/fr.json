@@ -805,6 +805,16 @@
     "typeDelete": "Supprime",
     "typeReact": "Ajoute une réaction"
   },
+  "router": {
+    "banned": "Vous avez été banni par les développeurs de ce bot.",
+    "dmSent": "Je vous ai envoyé un message privé.",
+    "cannotDM": "Je ne peux pas vous envoyer de message privé ; vos messages privés sont peut-être désactivés.",
+    "helpTitle": "❓・Panneau d’aide",
+    "helpDescription": "Obtenez de l’aide sur les commandes de `{command}`\\n\\n{commands}",
+    "verificationSuccess": "Vous avez été vérifié avec succès !",
+    "captchaIncorrect": "Vous avez répondu incorrectement au captcha !",
+    "verificationUnavailable": "La vérification est désactivée sur ce serveur ou vous utilisez le mauvais salon !"
+  },
   "family": {
     "selfAdoption": "Tu ne peux pas t’adopter toi-même.",
     "botAdoption": "Tu ne peux pas adopter un robot.",
