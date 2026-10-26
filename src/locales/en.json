@@ -848,6 +848,17 @@
     "renamed": "The channel was renamed to `{name}`.",
     "unlocked": "The channel was unlocked successfully."
   },
+  "voiceRoles": {
+    "noPermission": "You do not have permission to manage roles!",
+    "invalidChannel": "The selected channel must be a voice channel!",
+    "setupSuccess": "Voice role configuration succeeded!",
+    "noChannels": "No voice channels were found on this server!",
+    "progress": "Configuring {count} voice channels...",
+    "setupAllSuccess": "Voice role configuration completed!",
+    "channel": "📘┆Channel",
+    "role": "📘┆Role",
+    "configuredChannels": "📊┆Configured channels"
+  },
   "triggers": {
     "listTitle": "Trigger list",
     "documentationTitle": "Trigger documentation",
