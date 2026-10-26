@@ -982,6 +982,21 @@ test('sticker lifecycle events use localization keys', () => {
   assert.doesNotMatch(read('src/events/sticker/stickerDelete.js'), /Sticker deleted|A sticker has been deleted|> Name|> ID/);
 });
 
+test('role lifecycle events use localization keys', () => {
+  const expectations = {
+    'src/events/role/roleCreate.js': ['auditEvents.roleCreatedTitle', 'auditEvents.roleCreatedDescription', 'auditEvents.role', 'auditEvents.name', 'auditEvents.id', 'auditEvents.color', 'auditEvents.position', 'auditEvents.timestamp'],
+    'src/events/role/roleDelete.js': ['auditEvents.roleDeletedTitle', 'auditEvents.roleDeletedDescription', 'auditEvents.role', 'auditEvents.name', 'auditEvents.id', 'auditEvents.color', 'auditEvents.position', 'auditEvents.timestamp'],
+    'src/events/role/roleColorUpdate.js': ['auditEvents.roleColorUpdatedTitle', 'auditEvents.roleUpdatedDescription', 'auditEvents.role', 'auditEvents.before', 'auditEvents.after', 'auditEvents.id', 'auditEvents.timestamp'],
+    'src/events/role/roleNameUpdate.js': ['auditEvents.roleNameUpdatedTitle', 'auditEvents.roleUpdatedDescription', 'auditEvents.role', 'auditEvents.before', 'auditEvents.after', 'auditEvents.id', 'auditEvents.timestamp'],
+    'src/events/role/rolePermissionsUpdate.js': ['auditEvents.rolePermissionsUpdatedTitle', 'auditEvents.roleUpdatedDescription', 'auditEvents.role', 'auditEvents.before', 'auditEvents.after', 'auditEvents.id', 'auditEvents.timestamp', 'auditEvents.none']
+  };
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), `${file}: ${key}`);
+  }
+  for (const file of Object.keys(expectations)) assert.doesNotMatch(read(file), /Role (created|deleted|color updated|name updated|permissions updated)|A role has been updated|> (Role|Name|ID|Color|Position|Timestamp|Before|After)/, file);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
