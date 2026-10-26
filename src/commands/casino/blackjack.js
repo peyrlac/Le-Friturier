@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
     if (data) {
             let money = parseInt(interaction.options.getNumber('amount'));
 
-            if (!money) return client.errUsage({ usage: "blackjack [amount]", type: 'editreply' }, interaction);
+            if (!money) return client.errUsage({ usage: await client.t(interaction, 'commands.casino.blackjack.usage'), type: 'editreply' }, interaction);
             if (money > data.Money) return client.errNormal({ key: 'casino.blackjack.insufficient', type: 'editreply' }, interaction);
 
             var numCardsPulled = 0;
@@ -91,7 +91,7 @@ module.exports = async (client, interaction, args) => {
                 }
             }
 
-            function endMsg(f, msg, cl, dealerC) {
+            async function endMsg(f, msg, cl, dealerC) {
                 let cardsMsg = "";
                 player.cards.forEach(function (card) {
                     var emAR = ["♥", "♦", "♠", "♣"];
@@ -134,28 +134,28 @@ module.exports = async (client, interaction, args) => {
                     .addComponents(
                         new Discord.ButtonBuilder()
                             .setCustomId('blackjack_hit')
-                            .setLabel(`Hit`)
+                            .setLabel(await client.t(interaction, 'commands.casino.blackjack.hit'))
                             .setStyle(Discord.ButtonStyle.Primary),
 
                         new Discord.ButtonBuilder()
                             .setCustomId('blackjack_stand')
-                            .setLabel(`Stand`)
+                            .setLabel(await client.t(interaction, 'commands.casino.blackjack.stand'))
                             .setStyle(Discord.ButtonStyle.Primary),
                     )
 
                 if (cl) {
 
                     client.embed({
-                        title: `♦️・Blackjack`,
+                        title: await client.t(interaction, 'commands.casino.blackjack.title'),
                         desc: `${f} \n${msg}`,
                         fields: [
                             {
-                                name: `Toi`,
+                                name: await client.t(interaction, 'commands.casino.blackjack.player'),
                                 value: cardsMsg,
                                 inline: true,
                             },
                             {
-                                name: `Bot`,
+                                name: await client.t(interaction, 'commands.casino.blackjack.dealer'),
                                 value: dealerMsg,
                                 inline: true,
                             }
@@ -165,16 +165,16 @@ module.exports = async (client, interaction, args) => {
                 }
                 else {
                     client.embed({
-                        title: `♦️・Blackjack`,
+                        title: await client.t(interaction, 'commands.casino.blackjack.title'),
                         desc: `${f} \n${msg}`,
                         fields: [
                             {
-                                name: `Toi`,
+                                name: await client.t(interaction, 'commands.casino.blackjack.player'),
                                 value: cardsMsg,
                                 inline: true,
                             },
                             {
-                                name: `Bot`,
+                                name: await client.t(interaction, 'commands.casino.blackjack.dealer'),
                                 value: dealerMsg,
                                 inline: true,
                             }
@@ -189,36 +189,36 @@ module.exports = async (client, interaction, args) => {
                 if (player.score === 21) {
                     await bet("win");
                     gameOver = true;
-                    endMsg(
-                        `Gagné! Vous en avez 21!`,
-                        `Bot avait ${dealer.score.toString()}`,
+                    await endMsg(
+                        await client.t(interaction, 'commands.casino.blackjack.outcome21'),
+                        await client.t(interaction, 'commands.casino.blackjack.dealerScore', { score: dealer.score }),
                         `GREEN`
                     );
                 }
                 if (player.score > 21) {
                     await bet("lose");
                     gameOver = true;
-                    endMsg(
-                        `Perdu! Vous avez atteint plus de 21!`,
-                        `Bot avait ${dealer.score.toString()}`,
+                    await endMsg(
+                        await client.t(interaction, 'commands.casino.blackjack.outcomePlayerBust'),
+                        await client.t(interaction, 'commands.casino.blackjack.dealerScore', { score: dealer.score }),
                         `RED`
                     );
                 }
                 if (dealer.score === 21) {
                     await bet("lose");
                     gameOver = true;
-                    endMsg(
-                        `Perdu! Le croupier a eu 21!`,
-                        `Bot avait ${dealer.score.toString()}`,
+                    await endMsg(
+                        await client.t(interaction, 'commands.casino.blackjack.outcomeDealer21'),
+                        await client.t(interaction, 'commands.casino.blackjack.dealerScore', { score: dealer.score }),
                         `RED`
                     );
                 }
                 if (dealer.score > 21) {
                     await bet("win");
                     gameOver = true;
-                    endMsg(
-                        `Gagné! Le bot a atteint plus de 21!`,
-                        `Bot had ${dealer.score.toString()}`,
+                    await endMsg(
+                        await client.t(interaction, 'commands.casino.blackjack.outcomeDealerBust'),
+                        await client.t(interaction, 'commands.casino.blackjack.dealerScore', { score: dealer.score }),
                         `GREEN`
                     );
                 }
@@ -229,9 +229,9 @@ module.exports = async (client, interaction, args) => {
                 ) {
                     await bet("win");
                     gameOver = true;
-                    endMsg(
-                        `Gagner! Vous avez vaincu Bot!`,
-                        `Bot avait ${dealer.score.toString()}`,
+                    await endMsg(
+                        await client.t(interaction, 'commands.casino.blackjack.outcomeWin'),
+                        await client.t(interaction, 'commands.casino.blackjack.dealerScore', { score: dealer.score }),
                         `GREEN`
                     );
                 }
@@ -242,9 +242,9 @@ module.exports = async (client, interaction, args) => {
                 ) {
                     await bet("lose");
                     gameOver = true;
-                    endMsg(
-                        `Perdu!Bot gagné!`,
-                        `Bot avait ${dealer.score.toString()}`,
+                    await endMsg(
+                        await client.t(interaction, 'commands.casino.blackjack.outcomeLose'),
+                        await client.t(interaction, 'commands.casino.blackjack.dealerScore', { score: dealer.score }),
                         `RED`
                     );
                 }
@@ -254,7 +254,11 @@ module.exports = async (client, interaction, args) => {
                     dealer.score < 21
                 ) {
                     gameOver = true;
-                    endMsg(`Cravate!`, `Bot avait ${dealer.score.toString()}`, `RED`);
+                    await endMsg(
+                        await client.t(interaction, 'commands.casino.blackjack.outcomeTie'),
+                        await client.t(interaction, 'commands.casino.blackjack.dealerScore', { score: dealer.score }),
+                        `RED`
+                    );
                 }
             }
 
@@ -291,9 +295,9 @@ module.exports = async (client, interaction, args) => {
             async function loop() {
                 if (gameOver) return;
 
-                endMsg(
-                    "Pour frapper le type `h ', pour le type de stand` s`",
-                    `Bonne chance ;)`,
+                await endMsg(
+                    await client.t(interaction, 'commands.casino.blackjack.instruction'),
+                    await client.t(interaction, 'commands.casino.blackjack.goodLuck'),
                     client.color
                 );
 
@@ -311,7 +315,7 @@ module.exports = async (client, interaction, args) => {
                         }
                     })
                     .catch(async _ => {
-                        interaction.followUp({ content: "Perdu!!" });
+                            interaction.followUp({ content: await client.t(interaction, 'commands.casino.blackjack.timeout') });
                         await bet("lose");
                         return;
                     });

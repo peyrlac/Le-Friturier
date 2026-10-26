@@ -769,7 +769,24 @@
       },
       "blackjack": {
         "insufficient": "You are betting more than you own!",
-        "noAccount": "You don't have any money yet."
+        "noAccount": "You don't have any money yet.",
+        "usage": "blackjack [amount]",
+        "title": "♦️・Blackjack",
+        "hit": "Hit",
+        "stand": "Stand",
+        "player": "You",
+        "dealer": "Dealer",
+        "dealerScore": "The dealer had {score}",
+        "outcome21": "Won! You have 21!",
+        "outcomePlayerBust": "Lost! You went over 21!",
+        "outcomeDealer21": "Lost! The dealer got 21!",
+        "outcomeDealerBust": "Won! The dealer went over 21!",
+        "outcomeWin": "Won! You beat the dealer!",
+        "outcomeLose": "Lost! The dealer won!",
+        "outcomeTie": "Draw!",
+        "instruction": "Use the Hit or Stand button.",
+        "goodLuck": "Good luck!",
+        "timeout": "Lost! The game timed out."
       },
       "crash": {
         "insufficient": "You are betting more than you own!",
