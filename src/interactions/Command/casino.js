@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.casino',
     data: new SlashCommandBuilder()
         .setName('casino')
         .setDescription('Jouer au jeu du casino')
@@ -37,17 +38,6 @@ module.exports = {
                 .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
     ,
-    localizations: {
-        name: { fr: 'casino', en: 'casino' },
-        description: { fr: 'Jouer aux jeux du casino', en: 'Play casino games' },
-        subcommands: {
-            help: { description: { fr: 'Voir les commandes du casino disponibles', en: 'Get information about the casino category commands' } },
-            blackjack: { description: { fr: 'Jouer au blackjack pour gagner de l’argent', en: 'Play blackjack to win money' }, options: { amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
-            crash: { description: { fr: 'Plus de risques, plus de récompenses', en: 'More risk, more reward' }, options: { amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
-            roulette: { description: { fr: 'Jouer à la roulette', en: 'Play roulette' }, options: { color: { description: { fr: 'Entrez une couleur', en: 'Enter a color' } }, amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
-            slots: { description: { fr: 'Jouer aux machines à sous', en: 'Play slots' }, options: { amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } }
-        }
-    },
 
     /** 
      * @param {Client} client
