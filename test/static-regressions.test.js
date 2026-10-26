@@ -674,6 +674,12 @@ test('soundboard command reads all native metadata from the locale catalog', () 
   assert.doesNotMatch(source, /\.setDescription\((['"])[^'"\n]*\1\)/);
 });
 
+test('message command reads native metadata from the locale catalog', () => {
+  const source = read('src/interactions/Command/message.js');
+  assert.match(source, /getCommandMetadata\(/);
+  assert.doesNotMatch(source, /\.setDescription\((['"])[^'"\n]*\1\)/);
+});
+
 test('move commands use localization keys for all user-facing responses', () => {
   const files = ['all.js', 'group.js', 'random.js', 'empty.js', 'split.js', 'regroup.js', 'emergency-meeting.js'];
   for (const file of files) {
