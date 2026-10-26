@@ -1054,6 +1054,54 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "profile": {
+      "name": "profil",
+      "description": "Créer et gérer votre profil",
+      "subcommands": {
+        "help": { "description": "Voir les commandes de profil disponibles" },
+        "create": { "description": "Créer votre profil" },
+        "delete": { "description": "Supprimer votre profil" },
+        "profile": { "description": "Voir votre profil", "options": { "user": { "description": "Utilisateur dont vous voulez voir le profil" } } },
+        "aboutme": { "description": "Définir votre présentation", "options": { "text": { "description": "Saisissez votre présentation" } } },
+        "age": { "description": "Définir votre âge", "options": { "number": { "description": "Saisissez un nombre" } } },
+        "bday": { "description": "Définir votre anniversaire", "options": { "bday": { "description": "Saisissez votre anniversaire" } } },
+        "color": { "description": "Définir votre couleur préférée", "options": { "color": { "description": "Saisissez la couleur à définir" } } },
+        "gender": { "description": "Définir votre genre" },
+        "origin": { "description": "Définir votre origine", "options": { "country": { "description": "Saisissez un pays" } } },
+        "status": { "description": "Définir votre statut", "options": { "text": { "description": "Saisissez un statut" } } }
+      },
+      "subcommandGroups": {
+        "actor": { "description": "Gérer votre acteur préféré", "subcommands": { "addactor": { "description": "Ajouter un acteur", "options": { "actor": { "description": "Acteur à ajouter" } } }, "delactor": { "description": "Supprimer un acteur", "options": { "actor": { "description": "Acteur à supprimer" } } } } },
+        "artist": { "description": "Gérer votre artiste préféré", "subcommands": { "addartist": { "description": "Ajouter un artiste", "options": { "artist": { "description": "Artiste à ajouter" } } }, "delartist": { "description": "Supprimer un artiste", "options": { "artist": { "description": "Artiste à supprimer" } } } } },
+        "food": { "description": "Gérer votre nourriture préférée", "subcommands": { "addfood": { "description": "Ajouter un aliment", "options": { "food": { "description": "Aliment à ajouter" } } }, "delfood": { "description": "Supprimer un aliment", "options": { "food": { "description": "Aliment à supprimer" } } } } },
+        "movie": { "description": "Gérer votre film préféré", "subcommands": { "addmovie": { "description": "Ajouter un film", "options": { "movie": { "description": "Film à ajouter" } } }, "delmovie": { "description": "Supprimer un film", "options": { "movie": { "description": "Film à supprimer" } } } } },
+        "pet": { "description": "Gérer votre animal préféré", "subcommands": { "addpet": { "description": "Ajouter un animal", "options": { "pet": { "description": "Animal à ajouter" } } }, "delpet": { "description": "Supprimer un animal", "options": { "pet": { "description": "Animal à supprimer" } } } } },
+        "song": { "description": "Gérer votre chanson préférée", "subcommands": { "addsong": { "description": "Ajouter une chanson", "options": { "song": { "description": "Chanson à ajouter" } } }, "delsong": { "description": "Supprimer une chanson", "options": { "song": { "description": "Chanson à supprimer" } } } } },
+        "hobbies": { "description": "Gérer vos loisirs préférés", "subcommands": { "addhobby": { "description": "Ajouter un loisir", "options": { "hobby": { "description": "Loisir à ajouter" } } }, "delhobby": { "description": "Supprimer un loisir", "options": { "hobby": { "description": "Loisir à supprimer" } } } } }
+      }
+    },
+    "serverstats": {
+      "name": "statistiques",
+      "description": "Gérer les statistiques du serveur",
+      "subcommands": {
+        "help": { "description": "Voir les commandes de statistiques du serveur" },
+        "boosts": { "description": "Suivre le nombre de boosts" },
+        "tier": { "description": "Suivre le niveau de boosts" },
+        "channels": { "description": "Suivre le nombre de salons" },
+        "stage-channels": { "description": "Suivre le nombre de salons stage" },
+        "text-channels": { "description": "Suivre le nombre de salons textuels" },
+        "voice-channels": { "description": "Suivre le nombre de salons vocaux" },
+        "news-channels": { "description": "Suivre le nombre de salons d’annonces" },
+        "members": { "description": "Suivre le nombre de membres" },
+        "bots": { "description": "Suivre le nombre de bots" },
+        "roles": { "description": "Suivre le nombre de rôles" },
+        "emoji": { "description": "Suivre le nombre d’emojis" },
+        "static-emoji": { "description": "Suivre le nombre d’emojis statiques" },
+        "animated-emoji": { "description": "Suivre le nombre d’emojis animés" },
+        "time": { "description": "Suivre votre fuseau horaire actuel", "options": { "timezone": { "description": "Fuseau horaire à utiliser (ex. Europe/Amsterdam)" } } }
+      }
+    },
+    "tools": { "name": "outils", "description": "Utiliser les outils du bot" },
     "fun": {
       "name": "fun",
       "description": "Exécuter les commandes amusantes du bot"

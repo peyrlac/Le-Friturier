@@ -88,65 +88,7 @@ module.exports = {
         )
     ,
 
-    localizations: {
-        name: { fr: 'statistiques', en: 'serverstats' },
-        description: {
-            fr: 'Gérer les statistiques du serveur',
-            en: 'Manage the server stats'
-        },
-        subcommands: {
-            help: {
-                description: { fr: 'Voir les commandes de statistiques du serveur', en: 'Get information about the server stats category commands' }
-            },
-            boosts: {
-                description: { fr: 'Suivre le nombre de boosts', en: 'Keep track of the boost count' }
-            },
-            tier: {
-                description: { fr: 'Suivre le niveau de boosts', en: 'Keep track of the boost tier count' }
-            },
-            channels: {
-                description: { fr: 'Suivre le nombre de salons', en: 'Keep track of the channel count' }
-            },
-            'stage-channels': {
-                description: { fr: 'Suivre le nombre de salons stage', en: 'Keep track of the stage channel count' }
-            },
-            'text-channels': {
-                description: { fr: 'Suivre le nombre de salons textuels', en: 'Keep track of the text channel count' }
-            },
-            'voice-channels': {
-                description: { fr: 'Suivre le nombre de salons vocaux', en: 'Keep track of the voice channel count' }
-            },
-            'news-channels': {
-                description: { fr: 'Suivre le nombre de salons d’annonces', en: 'Keep track of the news channel count' }
-            },
-            members: {
-                description: { fr: 'Suivre le nombre de membres', en: 'Keep track of the member count' }
-            },
-            bots: {
-                description: { fr: 'Suivre le nombre de bots', en: 'Keep track of the bots count' }
-            },
-            roles: {
-                description: { fr: 'Suivre le nombre de rôles', en: 'Keep track of the role count' }
-            },
-            emoji: {
-                description: { fr: 'Suivre le nombre d’emojis', en: 'Keep track of the emoji\'s count' }
-            },
-            'static-emoji': {
-                description: { fr: 'Suivre le nombre d’emojis statiques', en: 'Keep track of the static emoji\'s count' }
-            },
-            'animated-emoji': {
-                description: { fr: 'Suivre le nombre d’emojis animés', en: 'Keep track of the animated emoji\'s count' }
-            },
-            time: {
-                description: { fr: 'Suivre votre fuseau horaire actuel', en: 'Keep track of your current time zone' },
-                options: {
-                    timezone: {
-                        description: { fr: 'Fuseau horaire à utiliser (ex. Europe/Amsterdam)', en: 'The timezone you want to set (e.g. Europe/Amsterdam)' }
-                    }
-                }
-            }
-        }
-    },
+    localizationKey: 'commandMetadata.serverstats',
 
     /** 
      * @param {Client} client

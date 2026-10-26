@@ -107,13 +107,7 @@ module.exports = {
         )
     ,
 
-    localizations: {
-        name: { fr: 'outils', en: 'tools' },
-        description: {
-            fr: 'Utiliser les outils du bot',
-            en: 'Use the bot tools'
-        }
-    },
+    localizationKey: 'commandMetadata.tools',
 
     /** 
      * @param {Client} client
