@@ -4,42 +4,42 @@ module.exports = async (client, interaction, args) => {
   const channel = interaction.options.getChannel('channel');
 
   client.embed({
-      title: `ℹ・Channel information`,
-      desc: `Channel information about: <#${channel.id}>`,
+      title: await client.t(interaction, 'guild.channelInfo.title'),
+      desc: await client.t(interaction, 'guild.channelInfo.description', { channel: channel.id }),
       fields: [
           {
-              name: "Type",
+              name: await client.t(interaction, 'guild.channelInfo.type'),
               value: `${channel.type}`,
               inline: true,
           },
           {
-              name: "ID",
+              name: await client.t(interaction, 'guild.channelInfo.id'),
               value: `${channel.id}`,
               inline: true,
           },
           {
-              name: "Type",
+              name: await client.t(interaction, 'guild.channelInfo.type'),
               value: `${channel.type}`,
               inline: true,
           },
           {
-              name: "Made on",
+              name: await client.t(interaction, 'guild.channelInfo.createdAt'),
               value: `${channel.createdAt}`,
               inline: true,
           },
           {
-              name: "Subject",
-              value: `${channel.topic ? channel.topic : 'N/A'}`,
+              name: await client.t(interaction, 'guild.channelInfo.topic'),
+              value: `${channel.topic ? channel.topic : await client.t(interaction, 'guild.channelInfo.notAvailable')}`,
               inline: true,
           },
           {
-              name: "NSFW",
+              name: await client.t(interaction, 'guild.channelInfo.nsfw'),
               value: `${channel.nsfw}`,
               inline: true,
           },
           {
-              name: "Parent",
-              value: `${channel.parentID ? channel.parentID : 'N/A'}`,
+              name: await client.t(interaction, 'guild.channelInfo.parent'),
+              value: `${channel.parentID ? channel.parentID : await client.t(interaction, 'guild.channelInfo.notAvailable')}`,
               inline: true,
           },
       ],
@@ -47,4 +47,3 @@ module.exports = async (client, interaction, args) => {
   }, interaction)
 }
 
-   
