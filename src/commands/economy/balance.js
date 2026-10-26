@@ -17,7 +17,7 @@ module.exports = async (client, interaction, args) => {
             let total = data.Money + data.Bank;
 
             client.embed({
-                title: `${client.emotes.economy.coins}・Balance`,
+                title: await client.t(interaction, 'commands.economy.balance.title', { coins: client.emotes.economy.coins }),
                 fields: [
                     {
                         name: `${client.emotes.economy.pocket}┆${await client.t(interaction, 'commands.economy.balance.wallet')}`,

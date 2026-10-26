@@ -701,7 +701,8 @@
       },
       "deleteItem": {
         "success": "Le rôle a été supprimé de la boutique.",
-        "notFound": "Ce rôle n'est pas dans la boutique !"
+        "notFound": "Ce rôle n'est pas dans la boutique !",
+        "role": "\ud83d\uded2┆R\u00f4le"
       },
       "removeMoney": {
         "invalid": "Saisissez un nombre valide !",
@@ -715,7 +716,8 @@
         "storeDescription": "Choisissez un article dans le menu pour l'acheter.",
         "insufficient": "Vous n'avez pas assez d'argent pour cet achat.",
         "success": "L'achat a été effectué avec succès.",
-        "roleError": "Je ne peux pas vous attribuer <@&{role}>."
+        "roleError": "Je ne peux pas vous attribuer <@&{role}>.",
+        "item": "\ud83d\udcd8┆Article"
       },
       "rob": {
         "bot": "Vous ne pouvez pas voler un bot !",
@@ -731,7 +733,8 @@
         "description": "Solde actuel de `{user}`",
         "wallet": "Portefeuille",
         "bank": "Banque",
-        "total": "Total"
+        "total": "Total",
+        "title": "{coins}・Solde"
       },
       "pay": {
         "negative": "Vous ne pouvez pas donner une somme négative !",

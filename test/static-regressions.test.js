@@ -1068,6 +1068,23 @@ test('economy operator responses use localization keys', () => {
   }
 });
 
+test('economy balance and shop embeds use localization keys', () => {
+  const balance = read('src/commands/economy/balance.js');
+  const buy = read('src/commands/economy/buy.js');
+  const deleteItem = read('src/commands/economy/deleteitem.js');
+
+  for (const key of ['commands.economy.balance.title', 'commands.economy.balance.wallet', 'commands.economy.balance.bank', 'commands.economy.balance.total']) {
+    assert.match(balance, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+  for (const key of ['economy.buy.storeTitle', 'economy.buy.storeDescription', 'economy.buy.item']) {
+    assert.match(buy, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+  assert.match(deleteItem, /economy\.deleteItem\.role/);
+  assert.doesNotMatch(balance, /Balance/);
+  assert.doesNotMatch(buy, /Choose a item from the menu to buy|`[^`]*Store`/);
+  assert.doesNotMatch(deleteItem, />Role/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

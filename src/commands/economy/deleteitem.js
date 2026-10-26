@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 key: 'economy.deleteItem.success',
                 fields: [
                     {
-                        name: `🛒┆Role`,
+                        name: await client.t(interaction, 'economy.deleteItem.role'),
                         value: `${role}`
                     }
                 ],
