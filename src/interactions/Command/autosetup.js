@@ -25,9 +25,9 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.logs.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Server logs', value: 'serverLogs' },
-                            { name: 'Level logs', value: 'levelLogs' },
-                            { name: 'Boost logs', value: 'boostLogs' }
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.logs.options.setup.choices.serverLogs.name'), value: 'serverLogs' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.logs.options.setup.choices.levelLogs.name'), value: 'levelLogs' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.logs.options.setup.choices.boostLogs.name'), value: 'boostLogs' }
                         )
                 )
         )
@@ -40,11 +40,11 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.fun.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Birthdays', value: 'birthdays' },
-                            { name: 'Chatbot', value: 'chatbot' },
-                            { name: 'Reviews', value: 'reviews' },
-                            { name: 'Suggestions', value: 'suggestions' },
-                            { name: 'Starboard', value: 'starboard' }
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.fun.options.setup.choices.birthdays.name'), value: 'birthdays' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.fun.options.setup.choices.chatbot.name'), value: 'chatbot' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.fun.options.setup.choices.reviews.name'), value: 'reviews' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.fun.options.setup.choices.suggestions.name'), value: 'suggestions' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.fun.options.setup.choices.starboard.name'), value: 'starboard' }
                         )
                 )
         )
@@ -57,10 +57,10 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.games.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Counting', value: 'counting' },
-                            { name: 'Guess the number', value: 'gtn' },
-                            { name: 'Guess the word', value: 'gtw' },
-                            { name: 'Word snake', value: 'wordsnake' }
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.games.options.setup.choices.counting.name'), value: 'counting' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.games.options.setup.choices.gtn.name'), value: 'gtn' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.games.options.setup.choices.gtw.name'), value: 'gtw' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.games.options.setup.choices.wordsnake.name'), value: 'wordsnake' }
                         )
                 )
         )
@@ -73,9 +73,9 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.welcome.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Welcome channel', value: 'welcomechannel' },
-                            { name: 'Welcome role', value: 'welcomerole' },
-                            { name: 'Leave channnel', value: 'leavechannel' }
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.welcome.options.setup.choices.welcomechannel.name'), value: 'welcomechannel' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.welcome.options.setup.choices.welcomerole.name'), value: 'welcomerole' },
+                            { name: getCommandMetadata('commandMetadata.autosetup.subcommands.welcome.options.setup.choices.leavechannel.name'), value: 'leavechannel' }
                         )
                 )
         )

@@ -2074,10 +2074,10 @@
       "subcommands": {
         "help": { "description": "Obtenir des informations sur les commandes de configuration automatique" },
         "aprilfools": { "description": "Configurer le poisson d’avril" },
-        "logs": { "description": "Définir les journaux du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
-        "fun": { "description": "Définir les salons amusants du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
-        "games": { "description": "Définir les salons de jeu du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
-        "welcome": { "description": "Configurer le système de bienvenue", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
+        "logs": { "description": "Définir les journaux du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée", "choices": { "serverLogs": { "name": "Journaux du serveur" }, "levelLogs": { "name": "Journaux des niveaux" }, "boostLogs": { "name": "Journaux des boosts" } } } } },
+        "fun": { "description": "Définir les salons amusants du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée", "choices": { "birthdays": { "name": "Anniversaires" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Avis" }, "suggestions": { "name": "Suggestions" }, "starboard": { "name": "Starboard" } } } } },
+        "games": { "description": "Définir les salons de jeu du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée", "choices": { "counting": { "name": "Compteur" }, "gtn": { "name": "Devinez le nombre" }, "gtw": { "name": "Devinez le mot" }, "wordsnake": { "name": "Serpent de mots" } } } } },
+        "welcome": { "description": "Configurer le système de bienvenue", "options": { "setup": { "description": "Choisissez la configuration souhaitée", "choices": { "welcomechannel": { "name": "Salon de bienvenue" }, "welcomerole": { "name": "Rôle de bienvenue" }, "leavechannel": { "name": "Salon de départ" } } } } },
         "customvoice": { "description": "Définir les salons vocaux personnalisés du serveur" },
         "ticketpanel": { "description": "Définir le panneau de tickets du serveur" }
       }

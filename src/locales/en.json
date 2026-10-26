@@ -2074,10 +2074,10 @@
       "subcommands": {
         "help": { "description": "Get information about automatic setup commands" },
         "aprilfools": { "description": "Configure April Fools" },
-        "logs": { "description": "Set up server logs", "options": { "setup": { "description": "Choose the setup you want" } } },
-        "fun": { "description": "Set up fun server channels", "options": { "setup": { "description": "Choose the setup you want" } } },
-        "games": { "description": "Set up game channels", "options": { "setup": { "description": "Choose the setup you want" } } },
-        "welcome": { "description": "Configure the welcome system", "options": { "setup": { "description": "Choose the setup you want" } } },
+        "logs": { "description": "Set up server logs", "options": { "setup": { "description": "Choose the setup you want", "choices": { "serverLogs": { "name": "Server logs" }, "levelLogs": { "name": "Level logs" }, "boostLogs": { "name": "Boost logs" } } } } },
+        "fun": { "description": "Set up fun server channels", "options": { "setup": { "description": "Choose the setup you want", "choices": { "birthdays": { "name": "Birthdays" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Reviews" }, "suggestions": { "name": "Suggestions" }, "starboard": { "name": "Starboard" } } } } },
+        "games": { "description": "Set up game channels", "options": { "setup": { "description": "Choose the setup you want", "choices": { "counting": { "name": "Counting" }, "gtn": { "name": "Guess the number" }, "gtw": { "name": "Guess the word" }, "wordsnake": { "name": "Word snake" } } } } },
+        "welcome": { "description": "Configure the welcome system", "options": { "setup": { "description": "Choose the setup you want", "choices": { "welcomechannel": { "name": "Welcome channel" }, "welcomerole": { "name": "Welcome role" }, "leavechannel": { "name": "Leave channel" } } } } },
         "customvoice": { "description": "Set up custom voice channels" },
         "ticketpanel": { "description": "Set up the ticket panel" }
       }
