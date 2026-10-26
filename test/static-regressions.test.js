@@ -501,6 +501,15 @@ test('reaction roles responses use localization keys', () => {
   }
 });
 
+test('move commands use localization keys for all user-facing responses', () => {
+  const files = ['all.js', 'group.js', 'random.js', 'empty.js', 'split.js', 'regroup.js', 'emergency-meeting.js'];
+  for (const file of files) {
+    const source = read(`src/commands/move/${file}`);
+    assert.match(source, /move\.[A-Za-z]+/, file);
+    assert.doesNotMatch(source, /(?:error|text|title|desc):\s*[`'\"][A-Za-zÀ-ÿ]/, file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

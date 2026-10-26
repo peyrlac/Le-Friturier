@@ -11,14 +11,14 @@ module.exports = async (client, interaction) => {
 
     if (!startChannel) {
         return client.errNormal({
-            error: `You are not in a voice channel and no starting channel was specified.`,
+            key: 'move.noStart',
             type: 'editreply'
         }, interaction);
     }
 
     if (startChannel.id === endChannel.id) {
         return client.errNormal({
-            error: `The starting and destination channels cannot be the same.`,
+            key: 'move.sameChannel',
             type: 'editreply'
         }, interaction);
     }
@@ -28,14 +28,14 @@ module.exports = async (client, interaction) => {
         endChannel.type !== ChannelType.GuildVoice
     ) {
         return client.errNormal({
-            error: `Both channels must be voice channels.`,
+            key: 'move.invalidChannels',
             type: 'editreply'
         }, interaction);
     }
 
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MoveMembers)) {
         return client.errNormal({
-            error: `The bot does not have permission to move members.`,
+            key: 'move.movePermission',
             type: 'editreply'
         }, interaction);
     }
@@ -46,14 +46,15 @@ module.exports = async (client, interaction) => {
 
     if (eligibleMembers.length === 0) {
         return client.errNormal({
-            error: `No members to move according to the criteria.`,
+            key: 'move.noMembersCriteria',
             type: 'editreply'
         }, interaction);
     }
 
     if (eligibleMembers.length < amount) {
         return client.errNormal({
-            error: `Only ${eligibleMembers.length} member(s) available, but ${amount} requested.`,
+            key: 'move.insufficient',
+            variables: { available: eligibleMembers.length, requested: amount },
             type: 'editreply'
         }, interaction);
     }
@@ -75,7 +76,8 @@ module.exports = async (client, interaction) => {
     const movedCount = results.filter(Boolean).length;
 
     return client.succNormal({
-        text: `🎲 Randomly moved ${movedCount} member(s) from \`${startChannel.name}\` to \`${endChannel.name}\`.`,
+        key: 'move.moved',
+        variables: { count: movedCount, from: startChannel.name, to: endChannel.name },
         type: 'editreply'
     }, interaction);
 };
