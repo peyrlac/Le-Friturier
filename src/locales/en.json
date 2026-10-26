@@ -1279,7 +1279,8 @@
     "userSent": "User report successfully sent to the developers!"
   },
   "levels": {
-    "disabled": "The level system is disabled!"
+    "disabled": "The level system is disabled!",
+    "up": "**GG** {user}, you are now level **{level}**"
   },
   "announcement": {
     "title": "📢・Announcement!",

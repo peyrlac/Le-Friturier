@@ -1266,7 +1266,8 @@
     "userSent": "Le signalement utilisateur a été envoyé aux développeurs !"
   },
   "levels": {
-    "disabled": "Le système de niveaux est désactivé !"
+    "disabled": "Le système de niveaux est désactivé !",
+    "up": "**GG** {user}, vous êtes maintenant niveau **{level}** !"
   },
   "announcement": {
     "title": "📢・Annonce !",
