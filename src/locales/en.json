@@ -874,6 +874,24 @@
     "resetSuccess": "Your family has been destroyed!",
     "resetTimeout": "The time limit expired. Your family was not changed."
   },
+  "suggestions": {
+    "title": "💡・Suggestion",
+    "accepted": "Suggestion successfully accepted",
+    "denied": "Suggestion successfully denied",
+    "submitted": "Suggestion successfully submitted!",
+    "notConfigured": "No suggestion channel set! Please do the setup.",
+    "suggestionField": "💬‡Suggestion",
+    "channelField": "📘‡Channel"
+  },
+  "stickymessages": {
+    "title": "💬・Sticky messages",
+    "created": "Sticky message created",
+    "deleted": "Sticky message deleted",
+    "notFound": "No message found!",
+    "noData": "No data found!",
+    "message": "💬‡Message",
+    "channel": "📘‡Channel"
+  },
   "search": {
     "invalidCountry": "Invalid country provided!",
     "docsNotFound": "Could not find that documentation!",

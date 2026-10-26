@@ -861,6 +861,24 @@
     "resetSuccess": "Ta famille a été décimée !",
     "resetTimeout": "Le délai est dépassé. La famille n'a pas été modifiée."
   },
+  "suggestions": {
+    "title": "💡・Suggestion",
+    "accepted": "Suggestion acceptée avec succès",
+    "denied": "Suggestion refusée avec succès",
+    "submitted": "Suggestion envoyée avec succès !",
+    "notConfigured": "Aucun salon de suggestions configuré ! Veuillez effectuer la configuration.",
+    "suggestionField": "💬‡Suggestion",
+    "channelField": "📘‡Salon"
+  },
+  "stickymessages": {
+    "title": "💬・Messages persistants",
+    "created": "Message persistant créé",
+    "deleted": "Message persistant supprimé",
+    "notFound": "Aucun message persistant trouvé !",
+    "noData": "Aucune donnée trouvée !",
+    "message": "💬‡Message",
+    "channel": "📘‡Salon"
+  },
   "search": {
     "invalidCountry": "Pays fourni invalide !",
     "docsNotFound": "Documentation introuvable !",

@@ -402,6 +402,24 @@ test('search and tools response wave uses localization keys', () => {
   }
 });
 
+test('suggestions and sticky messages use localization keys', () => {
+  const expectations = {
+    'src/commands/suggestions/accept.js': ['suggestions.accepted', 'suggestions.notConfigured'],
+    'src/commands/suggestions/deny.js': ['suggestions.denied', 'suggestions.notConfigured'],
+    'src/commands/suggestions/send.js': ['suggestions.submitted', 'suggestions.title', 'suggestions.notConfigured'],
+    'src/commands/stickymessages/messages.js': ['stickymessages.title', 'stickymessages.noData'],
+    'src/commands/stickymessages/stick.js': ['stickymessages.created'],
+    'src/commands/stickymessages/unstick.js': ['stickymessages.deleted', 'stickymessages.notFound']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), `${file}: ${key}`);
+    assert.doesNotMatch(source, /Suggestion successfully|No suggestion channel set|Sticky message (created|deleted)|No message found|No data found/i, file);
+  }
+  assert.match(read('src/commands/stickymessages/messages.js'), /data\.length/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

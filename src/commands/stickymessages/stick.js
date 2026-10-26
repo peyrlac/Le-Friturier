@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     return client.succNormal({
-        text: "Sticky message created",
+        key: 'stickymessages.created',
         fields: [
             {
                 name: `💬┆Message`,

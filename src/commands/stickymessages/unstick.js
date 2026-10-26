@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
     if (data) {
         await Schema.findOneAndDelete({ Guild: interaction.guild.id, Channel: channel.id });
         return client.succNormal({
-            text: "Sticky message deleted",
+            key: 'stickymessages.deleted',
             fields: [
                 {
                     name: `📘┆Channel`,
@@ -21,7 +21,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     return client.errNormal({
-        error: 'No message found!',
+        key: 'stickymessages.notFound',
         type: 'editreply'
     }, interaction)
 }
