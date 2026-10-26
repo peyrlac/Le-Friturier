@@ -47,8 +47,8 @@ function variableNames(objectSource) {
 }
 
 test('all static response keys exist in both locale catalogs', () => {
-  const files = [...filesIn('src/commands'), ...filesIn('src/interactions/Command')];
-  const keyPattern = /\b(?:key|descKey|titleKey):[ \t]*['"]([^'"]+)['"]|client\.t\([^,]+,[ \t]*['"]([^'"]+)['"]/g;
+  const files = sourceFiles().filter(file => file !== path.join('src', 'handlers', 'features', 'registry.js'));
+  const keyPattern = /\b(?:key|descKey|titleKey|labelKey):[ \t]*['"]([^'"]+)['"]|client\.t\([^,]+,[ \t]*['"]([^'"]+)['"]/g;
   const missing = [];
 
   for (const file of files) {
