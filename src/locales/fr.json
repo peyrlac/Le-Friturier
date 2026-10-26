@@ -1792,12 +1792,7 @@
     "message": {
       "name": "message",
       "description": "Publier des messages prédéfinis",
-      "options": { "message": { "description": "Sélectionner un message" } }
-    },
-    "message": {
-      "name": "message",
-      "description": "Publier des messages prédéfinis",
-      "options": { "message": { "description": "Sélectionnez un message" } }
+      "options": { "message": { "description": "Sélectionnez un message", "choices": { "information": { "name": "Information" }, "rules": { "name": "Règles" }, "applications": { "name": "Candidatures" }, "helpdesk": { "name": "Assistance" }, "network": { "name": "Réseau" }, "botinfo": { "name": "Informations du bot" }, "badges": { "name": "Badges du bot" }, "beta": { "name": "Bêta du bot" }, "credits": { "name": "Crédits du bot" } } } }
     },
     "soundboard": {
       "name": "soundboard",

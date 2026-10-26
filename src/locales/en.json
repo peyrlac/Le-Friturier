@@ -1805,12 +1805,7 @@
     "message": {
       "name": "message",
       "description": "Post preset messages",
-      "options": { "message": { "description": "Select a message" } }
-    },
-    "message": {
-      "name": "message",
-      "description": "Post preset messages",
-      "options": { "message": { "description": "Select a message" } }
+      "options": { "message": { "description": "Select a message", "choices": { "information": { "name": "Information" }, "rules": { "name": "Rules" }, "applications": { "name": "Applications" }, "helpdesk": { "name": "Helpdesk" }, "network": { "name": "Network" }, "botinfo": { "name": "Bot-Info" }, "badges": { "name": "Bot-Badges" }, "beta": { "name": "Bot-Beta" }, "credits": { "name": "Bot-Credits" } } } }
     },
     "soundboard": {
       "name": "soundboard",
