@@ -1608,7 +1608,28 @@
         "time": { "description": "Suivre votre fuseau horaire actuel", "options": { "timezone": { "description": "Fuseau horaire à utiliser (ex. Europe/Amsterdam)" } } }
       }
     },
-    "tools": { "name": "outils", "description": "Utiliser les outils du bot" },
+    "tools": {
+      "name": "outils",
+      "description": "Utiliser les outils du bot",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie outils" },
+        "anagram": { "description": "Former un mot avec certaines lettres", "options": { "word": { "description": "Mot à former" } } },
+        "button": { "description": "Créer un bouton", "options": { "url": { "description": "URL du bouton" }, "text": { "description": "Texte du bouton" } } },
+        "calculator": { "description": "Calculer une somme" },
+        "decode": { "description": "Décoder du binaire en texte", "options": { "code": { "description": "Code binaire à décoder" } } },
+        "emojify": { "description": "Convertir du texte en emojis", "options": { "text": { "description": "Texte à convertir" } } },
+        "encode": { "description": "Encoder du texte en binaire", "options": { "text": { "description": "Texte à encoder" } } },
+        "enlarge": { "description": "Agrandir un emoji", "options": { "emoji": { "description": "Emoji à agrandir" } } },
+        "mcskin": { "description": "Voir le skin d’un joueur Minecraft", "options": { "name": { "description": "Nom du joueur" } } },
+        "mcstatus": { "description": "Voir le statut d’un serveur Minecraft", "options": { "ip": { "description": "Adresse IP du serveur Minecraft" } } },
+        "pwdgen": { "description": "Générer un mot de passe" },
+        "qrcode": { "description": "Envoyer un QR code à partir d’un texte", "options": { "text": { "description": "Texte à convertir" } } },
+        "remind": { "description": "Définir un rappel", "options": { "time": { "description": "Durée du rappel" }, "message": { "description": "Message du rappel" } } },
+        "sourcebin": { "description": "Importer du code sur SourceBin", "options": { "language": { "description": "Langage du code" }, "code": { "description": "Votre code" } } },
+        "url": { "description": "Créer une URL raccourcie", "options": { "site": { "description": "Lien du site" }, "code": { "description": "Code de l’URL" } } },
+        "review": { "description": "Écrire un avis", "options": { "stars": { "description": "Nombre d’étoiles (maximum 5)" }, "message": { "description": "Courte description de l’avis" } } }
+      }
+    },
     "fun": {
       "name": "fun",
       "description": "Exécuter les commandes amusantes du bot"

@@ -1,109 +1,110 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('tools')
-        .setDescription('Use some cool tools')
+        .setName(getCommandMetadata('commandMetadata.tools.name'))
+        .setDescription(getCommandMetadata('commandMetadata.tools.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the tools category commands')
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('anagram')
-                .setDescription('Form a word with certain letters')
-                .addStringOption(option => option.setName('word').setDescription('The word you want to form').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.anagram.description'))
+                .addStringOption(option => option.setName('word').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.anagram.options.word.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('button')
-                .setDescription('Create a button')
-                .addStringOption(option => option.setName('url').setDescription('The url for the button').setRequired(true))
-                .addStringOption(option => option.setName('text').setDescription('The text for the button').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.button.description'))
+                .addStringOption(option => option.setName('url').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.button.options.url.description')).setRequired(true))
+                .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.button.options.text.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('calculator')
-                .setDescription('Calculate a sum')
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.calculator.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('decode')
-                .setDescription('Decode binary code to text')
-                .addStringOption(option => option.setName('code').setDescription('The binary code you want to decode').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.decode.description'))
+                .addStringOption(option => option.setName('code').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.decode.options.code.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('emojify')
-                .setDescription('Convert text to emojis')
-                .addStringOption(option => option.setName('text').setDescription('The text you want to convert').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.emojify.description'))
+                .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.emojify.options.text.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('encode')
-                .setDescription('Encode text to binary code')
-                .addStringOption(option => option.setName('text').setDescription('The text you want to encode').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.encode.description'))
+                .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.encode.options.text.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('enlarge')
-                .setDescription('Enlarge an emoji')
-                .addStringOption(option => option.setName('emoji').setDescription('The emoji you want to enlarge').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.enlarge.description'))
+                .addStringOption(option => option.setName('emoji').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.enlarge.options.emoji.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('mcskin')
-                .setDescription('See the skin of a minecraft user')
-                .addStringOption(option => option.setName('name').setDescription('The username of the player').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.mcskin.description'))
+                .addStringOption(option => option.setName('name').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.mcskin.options.name.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('mcstatus')
-                .setDescription('See the status of a minecraft server')
-                .addStringOption(option => option.setName('ip').setDescription('The ip of the mc server').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.mcstatus.description'))
+                .addStringOption(option => option.setName('ip').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.mcstatus.options.ip.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('pwdgen')
-                .setDescription('Generate a password')
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.pwdgen.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('qrcode')
-                .setDescription('Sends a qrcode photo of text you have given')
-                .addStringOption(option => option.setName('text').setDescription('The text you want to convert').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.qrcode.description'))
+                .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.qrcode.options.text.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remind')
-                .setDescription('Set a reminder')
-                .addStringOption(option => option.setName('time').setDescription('The time for your reminder').setRequired(true))
-                .addStringOption(option => option.setName('message').setDescription('The message for your reminder').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.remind.description'))
+                .addStringOption(option => option.setName('time').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.remind.options.time.description')).setRequired(true))
+                .addStringOption(option => option.setName('message').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.remind.options.message.description')).setRequired(true))
 
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('sourcebin')
-                .setDescription('Upload code to source bin')
-                .addStringOption(option => option.setName('language').setDescription('The language of your code').setRequired(true))
-                .addStringOption(option => option.setName('code').setDescription('Your code').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.sourcebin.description'))
+                .addStringOption(option => option.setName('language').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.sourcebin.options.language.description')).setRequired(true))
+                .addStringOption(option => option.setName('code').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.sourcebin.options.code.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('url')
-                .setDescription('Make a shortend url')
-                .addStringOption(option => option.setName('site').setDescription('The link to the website').setRequired(true))
-                .addStringOption(option => option.setName('code').setDescription('The code for the url').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.url.description'))
+                .addStringOption(option => option.setName('site').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.url.options.site.description')).setRequired(true))
+                .addStringOption(option => option.setName('code').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.url.options.code.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('review')
-                .setDescription('Write a review')
-                .addNumberOption(option => option.setName('stars').setDescription('The number of stars (max 5)').setMinValue(1).setMaxValue(5).setRequired(true))
-                .addStringOption(option => option.setName('message').setDescription('A small description with the review'))
+                .setDescription(getCommandMetadata('commandMetadata.tools.subcommands.review.description'))
+                .addNumberOption(option => option.setName('stars').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.review.options.stars.description')).setMinValue(1).setMaxValue(5).setRequired(true))
+                .addStringOption(option => option.setName('message').setDescription(getCommandMetadata('commandMetadata.tools.subcommands.review.options.message.description')))
         )
     ,
 
