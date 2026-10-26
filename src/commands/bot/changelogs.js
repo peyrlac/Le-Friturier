@@ -2,12 +2,12 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     client.embed({
-        title: "📃・Changelogs",
-        desc: `_____`,
+        title: await client.t(interaction, 'botResponses.changelogsTitle'),
+        desc: await client.t(interaction, 'botResponses.changelogs'),
         thumbnail: client.user.avatarURL({ size: 1024 }),
         fields: [{
-            name: "📃┆Changelogs",
-                value: '15/3/2023 Dépendances mises à jour',
+            name: await client.t(interaction, 'botResponses.changelogEntry'),
+                value: await client.t(interaction, 'botResponses.changelogEntryValue'),
                 inline: false,
             },
         ],
