@@ -369,6 +369,14 @@ test('interaction router user-facing responses use localization keys', () => {
   assert.doesNotMatch(source, /You have been banned by the developers|I can't DM you|Help panel|successfully verified|answered the captcha incorrectly|Verify is disabled/);
 });
 
+test('music lifecycle events use localization keys', () => {
+  for (const file of ['queueEnd.js', 'playerMove.js', 'playerDisconnect.js']) {
+    const source = read(`src/events/music/${file}`);
+    assert.match(source, /key:\s*['"]music\.(queueEmpty|disconnected)['"]/ , file);
+    assert.doesNotMatch(source, /Queue is empty|Music has stopped/ , file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

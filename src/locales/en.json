@@ -556,6 +556,7 @@
       "skipped": "The song was skipped.",
       "stopped": "The music was stopped.",
       "queueEmpty": "There is no more music in the queue.",
+      "disconnected": "Music has stopped. I’m disconnected from the channel.",
       "currentVolume": "Current volume is **{amount}%**",
       "invalidNumber": "Please enter a valid number!",
       "maxVolume": "Volume cannot exceed 1000%.",
