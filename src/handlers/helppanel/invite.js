@@ -12,29 +12,29 @@ module.exports = async (client) => {
                     .addComponents( 
                         new Discord.StringSelectMenuBuilder()
                             .setCustomId('Bot-helppanel')
-                            .setPlaceholder('❌┆Nothing selected')
+                            .setPlaceholder(await client.t(interaction, 'helpResponses.placeholder'))
                             .addOptions([
                                 {
-                                    label: `Commands`,
-                                    description: `Show the commands of ${client.user.username}!`,
+                                    label: await client.t(interaction, 'helpResponses.commands'),
+                                    description: await client.t(interaction, 'helpResponses.commandsDescription'),
                                     emoji: "💻",
                                     value: "commands-Bothelp",
                                 },
                                 {
-                                    label: `Invite`,
-                                    description: `Invite ${client.user.username} to your server`,
+                                    label: await client.t(interaction, 'helpResponses.invite'),
+                                    description: await client.t(interaction, 'helpResponses.inviteDescription', { bot: client.user.username }),
                                     emoji: "📨",
                                     value: "invite-Bothelp",
                                 },
                                 {
-                                    label: `Support server`,
-                                    description: `Join the suppport server`,
+                                    label: await client.t(interaction, 'helpResponses.support'),
+                                    description: await client.t(interaction, 'helpResponses.supportDescription'),
                                     emoji: "❓",
                                     value: "support-Bothelp",
                                 },
                                 {
-                                    label: `Changelogs`,
-                                    description: `Show the ${client.user.username} bot changelogs`,
+                                    label: await client.t(interaction, 'helpResponses.changelogs'),
+                                    description: await client.t(interaction, 'helpResponses.changelogsDescription', { bot: client.user.username }),
                                     emoji: "📃",
                                     value: "changelogs-Bothelp",
                                 },
@@ -44,19 +44,19 @@ module.exports = async (client) => {
                 let row = new Discord.ActionRowBuilder()
                     .addComponents(
                         new Discord.ButtonBuilder()
-                            .setLabel("Invite")
+                            .setLabel(await client.t(interaction, 'helpResponses.invite'))
                             .setURL(client.config.discord.botInvite)
                             .setStyle(Discord.ButtonStyle.Link),
 
                         new Discord.ButtonBuilder()
-                            .setLabel("Support server")
+                            .setLabel(await client.t(interaction, 'helpResponses.support'))
                             .setURL(client.config.discord.serverInvite)
                             .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({
-                    title: `📨・Invite`,
-                    desc: `Make your server even better with the ${client.user.username} bot!`,
+                    title: await client.t(interaction, 'helpResponses.inviteTitle'),
+                    desc: await client.t(interaction, 'helpResponses.invitePanelDescription', { bot: client.user.username }),
                     image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/dbot_banner_invite.jpg",
                     url: client.config.discord.botInvite,
                     components: [row2, row],
@@ -66,5 +66,3 @@ module.exports = async (client) => {
         }
     }).setMaxListeners(0);
 }
-
- 

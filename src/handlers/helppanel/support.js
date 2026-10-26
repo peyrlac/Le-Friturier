@@ -12,29 +12,29 @@ module.exports = async (client) => {
                     .addComponents(
                         new Discord.StringSelectMenuBuilder()
                             .setCustomId('Bot-helppanel')
-                            .setPlaceholder('❌┆Nothing selected')
+                            .setPlaceholder(await client.t(interaction, 'helpResponses.placeholder'))
                             .addOptions([
                                 {
-                                    label: `Commands`,
-                                    description: `Show the commands of ${client.user.username}!`,
+                                    label: await client.t(interaction, 'helpResponses.commands'),
+                                    description: await client.t(interaction, 'helpResponses.commandsDescription'),
                                     emoji: "💻",
                                     value: "commands-Bothelp",
                                 },
                                 {
-                                    label: `Invite`,
-                                    description: `Invite ${client.user.username} to your server`,
+                                    label: await client.t(interaction, 'helpResponses.invite'),
+                                    description: await client.t(interaction, 'helpResponses.inviteDescription', { bot: client.user.username }),
                                     emoji: "📨",
                                     value: "invite-Bothelp",
                                 },
                                 {
-                                    label: `Support server`,
-                                    description: `Join the suppport server`,
+                                    label: await client.t(interaction, 'helpResponses.support'),
+                                    description: await client.t(interaction, 'helpResponses.supportDescription'),
                                     emoji: "❓",
                                     value: "support-Bothelp",
                                 },
                                 {
-                                    label: `Changelogs`,
-                                    description: `Show the ${client.user.username} changelogs`,
+                                    label: await client.t(interaction, 'helpResponses.changelogs'),
+                                    description: await client.t(interaction, 'helpResponses.changelogsDescription', { bot: client.user.username }),
                                     emoji: "📃",
                                     value: "changelogs-Bothelp",
                                 },
@@ -44,14 +44,14 @@ module.exports = async (client) => {
                 let row = new Discord.ActionRowBuilder()
                     .addComponents(
                         new Discord.ButtonBuilder()
-                            .setLabel("Support server")
+                            .setLabel(await client.t(interaction, 'helpResponses.support'))
                             .setURL(client.config.discord.serverInvite)
                             .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({
-                    title: `❓・Support`,
-                    desc: `Make your server even better with ${client.user.username}!`,
+                    title: await client.t(interaction, 'helpResponses.supportTitle'),
+                    desc: await client.t(interaction, 'helpResponses.supportPanelDescription', { bot: client.user.username }),
                     image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
                     url: client.config.discord.serverInvite,
                     components: [row2, row],
@@ -61,5 +61,3 @@ module.exports = async (client) => {
         }
     }).setMaxListeners(0);
 }
-
- 

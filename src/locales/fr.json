@@ -988,7 +988,10 @@
     "links": "🔗・Liens",
     "linksValue": "[Site web](https://corwindev.nl/) | [Inviter]({invite}) | [Voter](https://top.gg/bot/798144456528363550/vote)",
     "inviteTitle": "📨・Invitation",
-    "inviteDescription": "Rendez votre serveur encore meilleur avec le bot !"
+    "inviteDescription": "Rendez votre serveur encore meilleur avec le bot !",
+    "supportTitle": "❓・Support",
+    "supportPanelDescription": "Rendez votre serveur encore meilleur avec {bot} !",
+    "invitePanelDescription": "Rendez votre serveur encore meilleur avec le bot {bot} !"
   },
   "moderationEvents": {
     "warnTitle": "🔨・Membre averti",
