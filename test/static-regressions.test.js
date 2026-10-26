@@ -538,6 +538,12 @@ test('casino command metadata is sourced from the locale catalogs', () => {
   assert.doesNotMatch(source, /localizations:\s*\{/);
 });
 
+test('economy command metadata is sourced from the locale catalogs', () => {
+  const source = read('src/interactions/Command/economy.js');
+  assert.match(source, /localizationKey:\s*['"]commandMetadata\.economy['"]/);
+  assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

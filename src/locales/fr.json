@@ -1025,6 +1025,37 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "economy": {
+      "name": "économie",
+      "description": "Jouer au jeu économique du serveur",
+      "subcommands": {
+        "help": { "description": "Voir les commandes économiques disponibles" },
+        "additem": { "description": "Ajouter un rôle à la boutique", "options": { "role": { "description": "Sélectionnez un rôle" }, "amount": { "description": "Entrez un montant" } } },
+        "addmoney": { "description": "Ajouter de l’argent à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Entrez un montant" } } },
+        "balance": { "description": "Voir votre solde", "options": { "user": { "description": "Utilisateur dont voir le solde" } } },
+        "beg": { "description": "Mendier de l’argent" },
+        "buy": { "description": "Acheter des articles dans la boutique" },
+        "clear": { "description": "Réinitialiser l’économie" },
+        "crime": { "description": "Commettre un crime" },
+        "daily": { "description": "Récupérer votre récompense quotidienne" },
+        "deleteitem": { "description": "Supprimer un rôle de la boutique", "options": { "role": { "description": "Sélectionnez un rôle" } } },
+        "deposit": { "description": "Déposer de l’argent à la banque", "options": { "amount": { "description": "Entrez un montant" } } },
+        "fish": { "description": "Pêcher" },
+        "hourly": { "description": "Récupérer votre récompense horaire" },
+        "hunt": { "description": "Chasser des animaux" },
+        "monthly": { "description": "Récupérer votre récompense mensuelle" },
+        "pay": { "description": "Payer un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Entrez un montant" } } },
+        "present": { "description": "Récupérer un cadeau hebdomadaire" },
+        "removemoney": { "description": "Retirer de l’argent à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Entrez un montant" } } },
+        "rob": { "description": "Voler un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
+        "store": { "description": "Voir la boutique du serveur" },
+        "weekly": { "description": "Récupérer votre récompense hebdomadaire" },
+        "withdraw": { "description": "Retirer votre argent", "options": { "amount": { "description": "Entrez un montant" } } },
+        "work": { "description": "Aller travailler" },
+        "yearly": { "description": "Récupérer votre récompense annuelle" },
+        "leaderboard": { "description": "Voir le classement économique", "options": { "type": { "description": "Type de classement souhaité" } } }
+      }
+    },
     "casino": {
       "name": "casino",
       "description": "Jouer aux jeux du casino",
