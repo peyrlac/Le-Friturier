@@ -39,7 +39,7 @@ module.exports = async (client, interaction, args) => {
                     });
 
                     try {
-                        var closeMessageTicket = "Here is the transcript for your ticket, please keep this if you ever want to refer to it!";
+                        var closeMessageTicket = await client.t(usr, 'tickets.transcriptMessage');
                         let ticketMessageData = await ticketMessageConfig.findOne({ Guild: interaction.guild.id });
                         if (ticketMessageData) {
                             closeMessageTicket = ticketMessageData.dmMessage;
@@ -49,17 +49,17 @@ module.exports = async (client, interaction, args) => {
                             desc: closeMessageTicket,
                             fields: [
                                 {
-                                    name: "👤┆Closer",
+                                    name: await client.t(usr, 'tickets.closer'),
                                     value: `${interaction.user}`,
                                     inline: true
                                 },
                                 {
-                                    name: "📄┆Ticket id",
+                                    name: await client.t(usr, 'tickets.ticketId'),
                                     value: `${ticketData.TicketID}`,
                                     inline: true
                                 },
                                 {
-                                    name: "💬┆Server",
+                                    name: await client.t(usr, 'tickets.server'),
                                     value: `${interaction.guild.name}`,
                                     inline: true
                                 }
@@ -81,23 +81,23 @@ module.exports = async (client, interaction, args) => {
                         color: client.config.colors.error,
                         fields: [
                             {
-                                name: "📘┆Ticket id",
+                                name: await client.t(logsChannel, 'tickets.ticketId'),
                                 value: `${ticketData.TicketID}`,
                             },
                             {
-                                name: "👤┆Closer",
+                                name: await client.t(logsChannel, 'tickets.closer'),
                                 value: `${interaction.user.tag} (${interaction.user.id})`,
                             },
                             {
-                                name: "👤┆Creator",
+                                name: await client.t(logsChannel, 'tickets.creator'),
                                 value: `<@!${ticketData.creator}>`,
                             },
                             {
-                                name: "✋┆Claimed by",
+                                name: await client.t(logsChannel, 'tickets.claimedBy'),
                                 value: `<@!${ticketData.creator}>`,
                             },
                             {
-                                name: "⏰┆Date",
+                                name: await client.t(logsChannel, 'tickets.date'),
                                 value: `<t:${(Date.now() / 1000).toFixed(0)}:F>`,
                             }
                         ]

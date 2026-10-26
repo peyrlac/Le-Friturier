@@ -513,6 +513,15 @@
     }
     },
     "tickets": {
+      "notGiven": "Non précisé",
+      "openLogTitle": "📝・Ticket ouvert",
+      "openLogDescription": "Un nouveau ticket a été créé par {user} ({id}) dans {channel}.",
+      "subject": "📄・Sujet",
+      "createdAt": "⏰・Créé le",
+      "transcriptMessage": "Voici le transcript de votre ticket. Conservez-le si vous souhaitez le consulter plus tard !",
+      "closer": "👤┆Fermé par",
+      "server": "💬┆Serveur",
+      "date": "⏰┆Date",
       "setupRequired": "Configurez les tickets d'abord.",
       "notTicket": "Ceci n'est pas un ticket.",
       "alreadyClaimed": "Le ticket est déjà pris en charge.",

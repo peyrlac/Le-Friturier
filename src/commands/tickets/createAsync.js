@@ -5,7 +5,7 @@ const ticketChannels = require("../../database/models/ticketChannels");
 const ticketMessageConfig = require("../../database/models/ticketMessage");
 
 module.exports = async (client, interaction, args) => {
-    const reason = interaction.options?.getString('reason') || "Not given";
+    const reason = interaction.options?.getString('reason') || await client.t(interaction, 'tickets.notGiven');
     const type = interaction.isCommand() ? 'editreply' : 'reply';
 
     const existingTicket = await ticketChannels.findOne({
@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     try {
-        let openTicket = client.t(interaction, 'tickets.defaultOpenMessage');
+        let openTicket = await client.t(interaction, 'tickets.defaultOpenMessage');
         const ticketMessageData = await ticketMessageConfig.findOne({ Guild: interaction.guild.id });
         if (ticketMessageData?.openTicket) openTicket = ticketMessageData.openTicket;
 
@@ -80,17 +80,17 @@ module.exports = async (client, interaction, args) => {
 
         if (logsChannel) {
             await client.embed({
-                title: '📝・Open ticket',
-                desc: `A new ticket has been created by ${interaction.user.tag} (${interaction.user.id}) in ${channel}.`
+                title: await client.t(logsChannel, 'tickets.openLogTitle'),
+                desc: await client.t(logsChannel, 'tickets.openLogDescription', { user: interaction.user.tag, id: interaction.user.id, channel })
             }, logsChannel);
         }
 
         return client.embed({
             desc: openTicket,
             fields: [
-                { name: '👤・Creator', value: `${interaction.user}`, inline: true },
-                { name: '📄・Subject', value: `${reason}`, inline: true },
-                { name: '⏰・Created at', value: `<t:${(Date.now() / 1000).toFixed(0)}:F>`, inline: true }
+                { name: await client.t(interaction, 'tickets.creator'), value: `${interaction.user}`, inline: true },
+                { name: await client.t(interaction, 'tickets.subject'), value: `${reason}`, inline: true },
+                { name: await client.t(interaction, 'tickets.createdAt'), value: `<t:${(Date.now() / 1000).toFixed(0)}:F>`, inline: true }
             ],
             components: [row],
             content: `${interaction.user}, ${ticketRole}`

@@ -526,6 +526,15 @@
     }
     },
     "tickets": {
+      "notGiven": "Not given",
+      "openLogTitle": "📝・Open ticket",
+      "openLogDescription": "A new ticket has been created by {user} ({id}) in {channel}.",
+      "subject": "📄・Subject",
+      "createdAt": "⏰・Created at",
+      "transcriptMessage": "Here is the transcript for your ticket, please keep this if you ever want to refer to it!",
+      "closer": "👤┆Closer",
+      "server": "💬┆Server",
+      "date": "⏰┆Date",
       "setupRequired": "Set up tickets first.",
       "notTicket": "This is not a ticket.",
       "alreadyClaimed": "The ticket has already been claimed.",

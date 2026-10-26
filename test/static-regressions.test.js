@@ -714,6 +714,19 @@ test('search embeds use localized field labels', () => {
   }
 });
 
+test('ticket creation and closure embeds use localized labels', () => {
+  const createSource = read('src/commands/tickets/createAsync.js');
+  const closeSource = read('src/commands/tickets/close.js');
+  for (const key of ['tickets.notGiven', 'tickets.openLogTitle', 'tickets.openLogDescription', 'tickets.creator', 'tickets.subject', 'tickets.createdAt']) {
+    assert.match(createSource, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  }
+  for (const key of ['tickets.transcriptMessage', 'tickets.closer', 'tickets.ticketId', 'tickets.server', 'tickets.claimedBy', 'tickets.date']) {
+    assert.match(closeSource, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  }
+  assert.doesNotMatch(createSource, /Open ticket|A new ticket has been created|Creator|Subject|Created at/);
+  assert.doesNotMatch(closeSource, /Here is the transcript|Closer|Ticket id|Claimed by/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
