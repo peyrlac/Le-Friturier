@@ -7,6 +7,7 @@
     "requiredArguments": "Required arguments",
     "requiredPermission": "Required permission",
     "tryAgainAt": "Try again at",
+    "notSpecified": "Not specified",
     "languageNames": {
       "fr": "French",
       "en": "English"
@@ -723,6 +724,17 @@
     "added": "The command was added successfully.",
     "notFound": "Unable to find this command.",
     "removed": "The command was removed successfully."
+  },
+  "afk": {
+    "noData": "No AFK data is available.",
+    "reason": "Reason",
+    "title": "AFK users - {guild}",
+    "already": "You are already AFK.",
+    "setSuccess": "Your AFK status has been saved.",
+    "nowAfk": "{user} is now AFK! **Reason:** {reason}"
+  },
+  "activities": {
+    "notInVoice": "You are not in a voice channel."
   },
   "features": {
     "enabled": "The {feature} feature is enabled.",

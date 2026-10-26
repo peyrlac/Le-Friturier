@@ -5,14 +5,16 @@ const Schema = require('../../database/models/afk');
 module.exports = async (client, interaction, args) => {
     const rawboard = await Schema.find({ Guild: interaction.guild.id })
 
-    if (rawboard.length < 1) return client.errNormal({ 
-        error: "Aucune donnée disponible!",
+    if (rawboard.length < 1) return client.errNormal({
+        key: 'afk.noData',
         type: 'editreply'
     }, interaction);
 
-    const lb = rawboard.map(e => `<@!${e.User}> - **Raison** ${e.Message}`);
+    const reason = await client.t(interaction, 'afk.reason');
+    const lb = rawboard.map(e => `<@!${e.User}> - **${reason}** ${e.Message}`);
 
-    await client.createLeaderboard(`🚫・Utilisateurs AFK - ${interaction.guild.name}`, lb, interaction);
+    const title = await client.t('afk.title', { guild: interaction.guild.name });
+    return client.createLeaderboard(title, lb, interaction);
 }
 
- 
+

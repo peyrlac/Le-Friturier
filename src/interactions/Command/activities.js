@@ -27,6 +27,12 @@ module.exports = {
         )
     ,
 
+    localizations: {
+        name: { fr: 'activites', en: 'activities' },
+        description: { fr: 'Démarrer une activité', en: 'Start an activity' },
+        options: { activity: { description: { fr: 'Activité à démarrer', en: 'Activity to start' } } }
+    },
+
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
@@ -38,8 +44,8 @@ module.exports = {
         const activity = interaction.options.getString('activity');
 
         const channel = interaction.member.voice.channel;
-        if (!channel) return client.errNormal({ 
-            error: `Vous n'êtes pas dans un canal vocal!`, 
+        if (!channel) return client.errNormal({
+            key: 'activities.notInVoice',
             type: 'editreply' 
         }, interaction);
 
