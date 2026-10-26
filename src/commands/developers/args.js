@@ -199,14 +199,14 @@ module.exports = async (client, interaction, args) => {
     if (message == "links") {
         client.simpleEmbed({
             image: `https://media.discordapp.net/attachments/843487478881976381/881396544195149874/Bot_banner_boosters.jpg`
-        }, interaction.channel).then(() => {
+        }, interaction.channel).then(async () => {
             client.embed({
-                title: `🔗・Links`,
+                title: await client.t(interaction, 'developers.args.links.title'),
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                desc: `_____ \n\nSee all the links from Bot Network!`,
+                desc: await client.t(interaction, 'developers.args.links.description'),
                 fields: [
                     {
-                        name: `▬▬│Servers│▬▬`,
+                        name: await client.t(interaction, 'developers.args.links.servers'),
                         value: ``,
                     }
                 ]
@@ -216,20 +216,20 @@ module.exports = async (client, interaction, args) => {
 
     if (message == "rewards") {
         client.embed({
-            title: `😜・Role Rewards`,
+            title: await client.t(interaction, 'developers.args.rewards.title'),
             thumbnail: client.user.avatarURL({ size: 1024 }),
-            desc: `_____ \n\nDo you want some extras in the server? Or do you want to stand out more in the server? Look below for the rewards`,
+            desc: await client.t(interaction, 'developers.args.rewards.description'),
             fields: [
                 {
-                    name: `🏆┆Levels`,
+                    name: await client.t(interaction, 'developers.args.rewards.levelsTitle'),
                     value: `- Level 5   | <@&833307296699908097>\n- Level 10  | <@&833307450437664838>\n- Level 15  | <@&833307452279226379>\n- Level 30 | <@&915290300757458964>\n- Level 40 | <@&915290324480430080>`,
                 },
                 {
-                    name: `🥳┆Special`,
+                    name: await client.t(interaction, 'developers.args.rewards.specialTitle'),
                     value: `- 1 server vote | <@&833959913742794772>\n- 1 boost | <@&744208324022501447>\n- 1 donate | <@&849554599371210793>`,
                 },
                 {
-                    name: `💰┆Economy`,
+                    name: await client.t(interaction, 'developers.args.rewards.economyTitle'),
                     value: `- $10.000 | <@&890720270086733854>\n- $15.000 | <@&833936202725720084>\n- $20.000 | <@&833936185167839232> \n- $25.000 | <@&928236333309255711> \n- $30.000 | <@&928235747100733450>`,
                 }
             ]
@@ -239,27 +239,27 @@ module.exports = async (client, interaction, args) => {
     if (message == "ourbots") {
         client.simpleEmbed({
             image: `https://cdn.discordapp.com/attachments/843487478881976381/874742741224022016/Bot_banner_bot_info.jpg`
-        }, interaction.channel).then(() => {
+        }, interaction.channel).then(async () => {
             client.embed({
-                title: `🤖・Our bots`,
+                title: await client.t(interaction, 'developers.args.ourbots.title'),
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                desc: `_____ \n\nOutside of a community we also maintain 2 public bots. These bots are all made to make your server better!`,
+                desc: await client.t(interaction, 'developers.args.ourbots.description'),
                 fields: [
                     {
-                        name: `📘┆What is Bot?`,
-                        value: `Bot is a bot with which you can run your entire server! With no less than 400+ commands, we have a large bot with many options to improve your server! You know what else is beautiful? All of this is **FREE** to use!`,
+                        name: await client.t(interaction, 'developers.args.ourbots.botTitle'),
+                        value: await client.t(interaction, 'developers.args.ourbots.bot'),
                     },
                     {
-                        name: `🎶┆What is Bot 2?`,
-                        value: `Bot 2 was created for additional music. This way you never get in each other's way when someone is already listening to music. Furthermore, this bot contains a soundboard and a radio system`,
+                        name: await client.t(interaction, 'developers.args.ourbots.bot2Title'),
+                        value: await client.t(interaction, 'developers.args.ourbots.bot2'),
                     },
                     {
-                        name: `📨┆How do I invite the bots?`,
-                        value: `You can invite the bots by doing \`/invite\` or by clicking on the links below \n\n**Bot** - [Invite here](${client.config.discord.botInvite})`,
+                        name: await client.t(interaction, 'developers.args.ourbots.inviteTitle'),
+                        value: await client.t(interaction, 'developers.args.ourbots.invite', { botInvite: client.config.discord.botInvite }),
                     },
                     {
-                        name: `🎫┆How do I get help when needed?`,
-                        value: `You can make a ticket in <#820308164322656327>! We are happy to help you with your questions here and offer support in your server!`,
+                        name: await client.t(interaction, 'developers.args.ourbots.helpTitle'),
+                        value: await client.t(interaction, 'developers.args.ourbots.help'),
                     }
                 ]
             }, interaction.channel)
