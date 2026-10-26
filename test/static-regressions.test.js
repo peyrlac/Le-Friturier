@@ -445,6 +445,20 @@ test('announcement responses use localization keys', () => {
   }
 });
 
+test('guild information commands use localization keys for responses and labels', () => {
+  const expectations = {
+    'src/commands/guild/userinfo.js': ['guild.userNotFound', 'guild.userInfoTitle'],
+    'src/commands/guild/inviteinfo.js': ['guild.inviteNotFound', 'guild.inviteInfoTitle'],
+    'src/commands/guild/stealemoji.js': ['guild.emojiAdded', 'guild.emojiNotFound']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), `${file}: ${key}`);
+    assert.doesNotMatch(source, /This user is not in this guild|I couldn't find the server|Emoji successfully added|Emoji not found/i, file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

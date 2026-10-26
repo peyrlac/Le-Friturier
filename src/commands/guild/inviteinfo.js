@@ -22,6 +22,7 @@ module.exports = async (client, interaction, args) => {
     let channelTimestamp = (await toUnix(data.channel.id)).timestamp;
 
     return client.embed({
+      titleKey: 'guild.inviteInfoTitle',
       title: `📨・Invite information`,
       thumbnail: `https://cdn.discordapp.com/icons/${data.guild.id}/${data.guild.icon}.png?size=1024`,
       image: `https://cdn.discordapp.com/banners/${data.guild.id}/${data.guild.banner}.png?size=1024`,
@@ -73,7 +74,7 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
   } catch {
     return client.errNormal({
-      error: "I couldn't find the server",
+      key: 'guild.inviteNotFound',
       type: 'editreply'
     }, interaction);
   }
