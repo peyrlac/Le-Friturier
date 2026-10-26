@@ -9,15 +9,15 @@ module.exports = async (client, interaction, args) => {
     let row = new Discord.ActionRowBuilder()
         .addComponents(
             new Discord.ButtonBuilder()
-                .setLabel("Vote for me")
+                .setLabel(await client.t(interaction, 'botResponses.voteButton'))
                 .setURL("https://top.gg/bot/798144456528363550/vote")
                 .setStyle(Discord.ButtonStyle.Link),
         );
 
-    dbl.hasVoted(interaction.user.id).then(voted => {
+    dbl.hasVoted(interaction.user.id).then(async voted => {
         if (voted) {
             client.embed({
-                title: `📨・Vote`,
+                title: await client.t(interaction, 'botResponses.voteTitle'),
                 descKey: 'commands.bot.vote.voted',
                 image: `https://cdn.discordapp.com/attachments/843487478881976381/874694192755007509/Bot_banner_vote.jpg`,
                 color: client.config.colors.succes,
@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
         }
         if (!voted) {
             client.embed({
-                title: `📨・Vote`,
+                title: await client.t(interaction, 'botResponses.voteTitle'),
                 descKey: 'commands.bot.vote.notVoted',
                 image: `https://cdn.discordapp.com/attachments/843487478881976381/874694192755007509/Bot_banner_vote.jpg`,
                 color: client.config.colors.error,
