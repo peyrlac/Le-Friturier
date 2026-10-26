@@ -1661,7 +1661,11 @@
     },
     "setup": {
       "name": "configuration",
-      "description": "Gérer la configuration du bot"
+      "description": "Gérer la configuration du bot",
+      "subcommands": {
+        "channelsorter": { "options": { "mode": { "choices": { "automatic": { "name": "Automatique" }, "manual": { "name": "Manuel" }, "hybrid": { "name": "Hybride" } } }, "pinned-order": { "choices": { "first": { "name": "Épinglés en premier" }, "last": { "name": "Épinglés en dernier" } } } } },
+        "deletesetup": { "options": { "setup": { "choices": { "tickets": { "name": "Tickets" }, "customvoice": { "name": "Voix personnalisée" }, "serverlogs": { "name": "Journaux du serveur" }, "levellogs": { "name": "Journaux des niveaux" }, "boostlogs": { "name": "Journaux des boosts" }, "birthdays": { "name": "Anniversaires" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Avis" }, "suggestions": { "name": "Suggestions" }, "counting": { "name": "Compteur" }, "gtn": { "name": "Devinez le nombre" }, "gtw": { "name": "Devinez le mot" }, "welcomechannel": { "name": "Salon de bienvenue" }, "leavechannel": { "name": "Salon de départ" }, "welcomerole": { "name": "Rôle de bienvenue" }, "wordsnake": { "name": "Serpent de mots" }, "channelsorter": { "name": "Tri des salons" } } } } }
+      }
     },
     "tickets": {
       "name": "tickets",

@@ -2,6 +2,7 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     localizationKey: 'commandMetadata.setup',
@@ -30,9 +31,9 @@ module.exports = {
                         .setDescription('Choose how channels should be arranged')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Automatic', value: 'automatic' },
-                            { name: 'Manual', value: 'manual' },
-                            { name: 'Hybrid', value: 'hybrid' }
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.channelsorter.options.mode.choices.automatic.name'), value: 'automatic' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.channelsorter.options.mode.choices.manual.name'), value: 'manual' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.channelsorter.options.mode.choices.hybrid.name'), value: 'hybrid' }
                         )
                 )
                 .addStringOption(option =>
@@ -41,8 +42,8 @@ module.exports = {
                         .setDescription('Choose whether pinned channels come first or last')
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Pinned first', value: 'first' },
-                            { name: 'Pinned last', value: 'last' }
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.channelsorter.options.pinned-order.choices.first.name'), value: 'first' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.channelsorter.options.pinned-order.choices.last.name'), value: 'last' }
                         )
                 )
         )
@@ -161,23 +162,23 @@ module.exports = {
                         .setDescription('The setup that you want')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Tickets', value: 'tickets' },
-                            { name: 'Custom voice', value: 'customvoice' },
-                            { name: 'Server logs', value: 'serverlogs' },
-                            { name: 'Level logs', value: 'levellogs' },
-                            { name: 'Boost logs', value: 'boostlogs' },
-                            { name: 'Birthdays', value: 'birthdays' },
-                            { name: 'Chatbot', value: 'chatbot' },
-                            { name: 'Reviews', value: 'reviews' },
-                            { name: 'Suggestions', value: 'suggestions' },
-                            { name: 'Counting', value: 'counting' },
-                            { name: 'Guess the number', value: 'gtn' },
-                            { name: 'Guess the word', value: 'gtw' },
-                            { name: 'Welcome channel', value: 'welcomechannel' },
-                            { name: 'Leave channel', value: 'leavechannel' },
-                            { name: 'Welcome role', value: 'welcomerole' },
-                            { name: 'Word snake', value: 'wordsnake' },
-                            { name: 'Channel sorter', value: 'channelsorter' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.tickets.name'), value: 'tickets' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.customvoice.name'), value: 'customvoice' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.serverlogs.name'), value: 'serverlogs' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.levellogs.name'), value: 'levellogs' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.boostlogs.name'), value: 'boostlogs' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.birthdays.name'), value: 'birthdays' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.chatbot.name'), value: 'chatbot' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.reviews.name'), value: 'reviews' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.suggestions.name'), value: 'suggestions' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.counting.name'), value: 'counting' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.gtn.name'), value: 'gtn' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.gtw.name'), value: 'gtw' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.welcomechannel.name'), value: 'welcomechannel' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.leavechannel.name'), value: 'leavechannel' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.welcomerole.name'), value: 'welcomerole' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.wordsnake.name'), value: 'wordsnake' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.deletesetup.options.setup.choices.channelsorter.name'), value: 'channelsorter' },
                         )
                 )
         )

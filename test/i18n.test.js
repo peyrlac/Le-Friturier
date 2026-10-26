@@ -540,6 +540,31 @@ test('serializes localized autosetup choice names from command metadata', () => 
   });
 });
 
+test('serializes localized setup choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/setup');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const data = command.data.toJSON();
+  const sorter = data.options.find(option => option.name === 'channelsorter').options;
+  const modeChoices = sorter.find(option => option.name === 'mode').choices;
+  const pinnedChoices = sorter.find(option => option.name === 'pinned-order').choices;
+  const deletionChoices = data.options.find(option => option.name === 'deletesetup').options[0].choices;
+
+  assert.deepEqual(modeChoices.find(choice => choice.value === 'automatic').name_localizations, {
+    fr: 'Automatique',
+    'en-US': 'Automatic'
+  });
+  assert.deepEqual(pinnedChoices.find(choice => choice.value === 'first').name_localizations, {
+    fr: '\u00c9pingl\u00e9s en premier',
+    'en-US': 'Pinned first'
+  });
+  assert.deepEqual(deletionChoices.find(choice => choice.value === 'customvoice').name_localizations, {
+    fr: 'Voix personnalisée',
+    'en-US': 'Custom voice'
+  });
+});
+
 test('serverstats publishes localized subcommand descriptions', () => {
     const command = require('../src/interactions/Command/serverstats');
     applyCommandLocalizations(command);
