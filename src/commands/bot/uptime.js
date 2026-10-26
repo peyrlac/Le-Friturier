@@ -7,16 +7,16 @@ module.exports = async (client, interaction, args) => {
     const upvalue = (Date.now() / 1000 - client.uptime / 1000).toFixed(0);
 
     client.embed({
-        title: `${client.emotes.normal.arrowUp}・Durée de la baisse`,
-        desc: `Voir le temps de disponibilité du bot`,
+        title: await client.t(interaction, 'botResponses.uptimeTitle', { arrow: client.emotes.normal.arrowUp }),
+        desc: await client.t(interaction, 'botResponses.uptimeDescription'),
         fields: [
             {
-                name: "⌛┇Durée de la baisse",
+                name: await client.t(interaction, 'botResponses.uptimeDuration'),
                 value: `${duration}`,
                 inline: true
             },
             {
-                name: "⏰┇Depuis",
+                name: await client.t(interaction, 'botResponses.uptimeSince'),
                 value: `<t:${upvalue}>`,
                 inline: true
             }
@@ -24,5 +24,3 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction)
 }
-
- 

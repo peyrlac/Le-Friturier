@@ -788,6 +788,22 @@ test('slots responses use a localized title', () => {
   assert.doesNotMatch(source, /Slots/);
 });
 
+test('bot information embeds use localization keys', () => {
+  const expectations = {
+    'src/commands/bot/donate.js': ['botResponses.donateTitle', 'botResponses.donateDescription', 'botResponses.donateButton'],
+    'src/commands/bot/support.js': ['botResponses.supportTitle', 'botResponses.supportDescription', 'botResponses.supportButton'],
+    'src/commands/bot/owner.js': ['botResponses.ownerTitle', 'botResponses.ownerName', 'botResponses.ownerTag', 'botResponses.organization', 'botResponses.website'],
+    'src/commands/bot/uptime.js': ['botResponses.uptimeTitle', 'botResponses.uptimeDescription', 'botResponses.uptimeDuration', 'botResponses.uptimeSince']
+  };
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+  }
+  assert.doesNotMatch(read('src/commands/bot/donate.js'), /Click the button below|Donate/);
+  assert.doesNotMatch(read('src/commands/bot/support.js'), /Rendez votre serveur|Support/);
+  assert.doesNotMatch(read('src/commands/bot/uptime.js'), /Durée de la baisse|Voir le temps/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
