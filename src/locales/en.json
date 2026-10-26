@@ -979,6 +979,27 @@
     "links": "🔗・Links",
     "linksValue": "Add the bot: [[HERE]]({botInvite})\nSupport server: [[HERE]]({serverInvite})"
   },
+  "helpResponses": {
+    "placeholder": "❌・Nothing selected",
+    "commands": "Commands",
+    "commandsDescription": "Show the bot commands!",
+    "invite": "Invite",
+    "inviteDescription": "Invite the bot to your server",
+    "support": "Support server",
+    "supportDescription": "Join the support server",
+    "changelogs": "Changelogs",
+    "changelogsDescription": "Show the bot changelogs",
+    "title": "❓・Help panel",
+    "description": "Welcome to the bot help panel! Choose an option from the menu.",
+    "menuBroken": "❌・Menu does not work?",
+    "menuBrokenValue": "Resend the command and report the issue if necessary.",
+    "bug": "🪲・Found a bug?",
+    "bugValue": "Report it with `/report bug`.",
+    "links": "🔗・Links",
+    "linksValue": "[Website](https://corwindev.nl/) | [Invite]({invite}) | [Vote](https://top.gg/bot/798144456528363550/vote)",
+    "inviteTitle": "📨・Invite",
+    "inviteDescription": "Make your server even better with the bot!"
+  },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
     "promptAction": "Which action should be attached to this command?",

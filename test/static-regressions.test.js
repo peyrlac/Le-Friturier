@@ -875,6 +875,19 @@ test('changelogs embed uses localization keys', () => {
   assert.doesNotMatch(source, /Changelogs|Dépendances mises à jour/);
 });
 
+test('help and invite panels use localization keys', () => {
+  const help = read('src/interactions/Command/help.js');
+  const invite = read('src/interactions/Command/invite.js');
+  for (const key of ['helpResponses.placeholder', 'helpResponses.commands', 'helpResponses.invite', 'helpResponses.support', 'helpResponses.changelogs', 'helpResponses.title', 'helpResponses.description', 'helpResponses.menuBroken', 'helpResponses.bug', 'helpResponses.links']) {
+    assert.match(help, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  }
+  for (const key of ['helpResponses.invite', 'helpResponses.support', 'helpResponses.inviteTitle', 'helpResponses.inviteDescription']) {
+    assert.match(invite, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  }
+  assert.doesNotMatch(help, /Nothing selected|Show the commands|Help panel|Menu doesn't work/);
+  assert.doesNotMatch(invite, /Make your server even better|setLabel\("Invite"\)/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);

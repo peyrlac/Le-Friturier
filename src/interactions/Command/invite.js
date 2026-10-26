@@ -20,19 +20,19 @@ module.exports = {
         let row = new Discord.ActionRowBuilder()
             .addComponents(
                 new Discord.ButtonBuilder()
-                    .setLabel("Invite")
+                    .setLabel(await client.t(interaction, 'helpResponses.invite'))
                     .setURL(client.config.discord.botInvite)
                     .setStyle(Discord.ButtonStyle.Link),
 
                 new Discord.ButtonBuilder()
-                    .setLabel("Support server")
+                    .setLabel(await client.t(interaction, 'helpResponses.support'))
                     .setURL(client.config.discord.serverInvite)
                     .setStyle(Discord.ButtonStyle.Link),
             );
 
         client.embed({
-            title: `📨・Invite`,
-            desc: `Make your server even better with Bot!`,
+            title: await client.t(interaction, 'helpResponses.inviteTitle'),
+            desc: await client.t(interaction, 'helpResponses.inviteDescription'),
             image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
             url: client.config.discord.botInvite,
             components: [row],
