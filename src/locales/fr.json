@@ -763,6 +763,7 @@
         "noAccount": "Vous n'avez pas encore d'argent."
       },
       "slots": {
+        "title": "🎰・Machines à sous",
         "usage": "slots [montant]",
         "insufficient": "Vous pariez plus que vous ne possédez !",
         "win": "Vous avez gagné {amount}.",
