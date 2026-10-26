@@ -601,6 +601,9 @@
       "queueCleared": "La file d'attente vient d'être **supprimée** !",
       "previousUnavailable": "Aucune musique n'a été jouée précédemment.",
       "startedInVoice": "La musique a commencé dans <#{channel}> !",
+      "requestedBy": "👤・Demandée par",
+      "endsAt": "Se termine à",
+      "author": "🎬・Auteur",
       "skippedTo": "Musique passée à **{number}**."
     },
     "radio": {

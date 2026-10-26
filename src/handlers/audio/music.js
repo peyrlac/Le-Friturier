@@ -40,7 +40,7 @@ module.exports = (client) => {
                 client.embed({
                     title: embedData.title,
                     url: embedData.url,
-                    desc: `Music is currently paused`,
+                    desc: await client.t(interaction, 'music.paused'),
                     thumbnail: embedData.thumbnail.url,
                     fields: embedData.fields,
                     components: [row],
@@ -85,7 +85,7 @@ module.exports = (client) => {
                 client.embed({
                     title: embedData.title,
                     url: embedData.url,
-                    desc: `Music is currently resumed`,
+                    desc: await client.t(interaction, 'music.resumed'),
                     thumbnail: embedData.thumbnail.url,
                     fields: embedData.fields,
                     components: [row],
@@ -102,7 +102,7 @@ module.exports = (client) => {
                 player.destroy();
 
                 client.embed({
-                    desc: `Music is currently stopped`,
+                    desc: await client.t(interaction, 'music.stopped'),
                     color: client.config.colors.error,
                     components: [],
                     type: 'edit'
@@ -145,21 +145,21 @@ module.exports = (client) => {
                 client.embed({
                     title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: `Music started in <#${player.voiceChannel}>!`,
+                    desc: await client.t(interaction, 'music.startedInVoice', { channel: player.voiceChannel }),
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: `👤┆Requested By`,
+                            name: await client.t(interaction, 'music.requestedBy'),
                             value: `${track.requester}`,
                             inline: true
                         },
                         {
-                            name: `${client.emotes.normal.clock}┆Ends at`,
+                            name: `${client.emotes.normal.clock}・${await client.t(interaction, 'music.endsAt')}`,
                             value: `<t:${((Date.now() / 1000) + (track.length / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
-                            name: `🎬┆Author`,
+                            name: await client.t(interaction, 'music.author'),
                             value: `${track.author}`,
                             inline: true
                         }
@@ -203,21 +203,21 @@ module.exports = (client) => {
                 client.embed({
                     title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: `Music started in <#${player.voiceChannel}>!`,
+                    desc: await client.t(interaction, 'music.startedInVoice', { channel: player.voiceChannel }),
                     thumbnail: track.thumbnail,
                     fields: [
                         {
-                            name: `👤┆Requested By`,
+                            name: await client.t(interaction, 'music.requestedBy'),
                             value: `${track.requester}`,
                             inline: true
                         },
                         {
-                            name: `${client.emotes.normal.clock}┆Ends at`,
+                            name: `${client.emotes.normal.clock}・${await client.t(interaction, 'music.endsAt')}`,
                             value: `<t:${((Date.now() / 1000) + (track.length / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
-                            name: `🎬┆Author`,
+                            name: await client.t(interaction, 'music.author'),
                             value: `${track.author}`,
                             inline: true
                         }

@@ -614,6 +614,9 @@
       "queueCleared": "The queue has just been **cleared**!",
       "previousUnavailable": "No song was played previously.",
       "startedInVoice": "The music started in <#{channel}>!",
+      "requestedBy": "👤・Requested by",
+      "endsAt": "Ends at",
+      "author": "🎬・Author",
       "skippedTo": "Skipped to song **{number}**."
     },
     "radio": {

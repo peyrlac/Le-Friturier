@@ -888,6 +888,14 @@ test('help and invite panels use localization keys', () => {
   assert.doesNotMatch(invite, /Make your server even better|setLabel\("Invite"\)/);
 });
 
+test('music interaction responses use localization keys', () => {
+  const source = read('src/handlers/audio/music.js');
+  for (const key of ['music.paused', 'music.resumed', 'music.stopped', 'music.startedInVoice', 'music.requestedBy', 'music.endsAt', 'music.author']) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  }
+  assert.doesNotMatch(source, /Music is currently paused|Music is currently resumed|Music is currently stopped|Requested By|Ends at/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
