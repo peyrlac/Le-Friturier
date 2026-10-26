@@ -589,6 +589,14 @@ test('core moderation setup and ticket metadata is sourced from the locale catal
   }
 });
 
+test('music and radio metadata is sourced from the locale catalogs', () => {
+  for (const name of ['music', 'radio']) {
+    const source = read(`src/interactions/Command/${name}.js`);
+    assert.match(source, new RegExp(`localizationKey:\\s*['"]commandMetadata\\.${name}['"]`), name);
+    assert.doesNotMatch(source, /localizations:\s*\{/);
+  }
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],
