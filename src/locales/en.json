@@ -43,6 +43,11 @@
     }
     },
     "tools": {
+    "qrcodeTitle": "📱・QR Code",
+    "encodeTitle": "Success!",
+    "encodeDescription": "I converted the text to binary",
+    "mcskinTitle": "🎮・Skin of {name}",
+    "mcskinUsage": "mcskin [player name]",
       "noWordFound": "No word found.",
       "remoteDataError": "Unable to retrieve remote data.",
       "anagramTitle": "Anagram",
@@ -771,6 +776,10 @@
     }
   },
   "review": {
+    "title": "Review・{user}",
+    "stars": "Stars",
+    "note": "Note",
+    "notGiven": "Not given",
     "starsInvalid": "Stars must be between 1 and 5.",
     "noChannel": "No review channel is configured. Use `reviewchannel`.",
     "submitted": "Your review has been successfully submitted.",

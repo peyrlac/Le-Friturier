@@ -41,6 +41,11 @@
     }
   },
   "tools": {
+    "qrcodeTitle": "📱・QR Code",
+    "encodeTitle": "Succès !",
+    "encodeDescription": "J’ai converti le texte en texte binaire",
+    "mcskinTitle": "🎮・Skin de {name}",
+    "mcskinUsage": "mcskin [nom du joueur]",
     "noWordFound": "Aucun mot trouvé.",
     "remoteDataError": "Impossible de récupérer les données distantes.",
     "anagramTitle": "Anagramme",
@@ -758,6 +763,10 @@
     }
   },
   "review": {
+    "title": "Avis・{user}",
+    "stars": "Étoiles",
+    "note": "Note",
+    "notGiven": "Non précisé",
     "starsInvalid": "La note doit être comprise entre 1 et 5 étoiles.",
     "noChannel": "Aucun salon d'avis n'est configuré. Utilisez `reviewchannel`.",
     "submitted": "Votre avis a été envoyé avec succès.",
