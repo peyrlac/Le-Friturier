@@ -270,7 +270,7 @@ module.exports = async (client, interaction) => {
             const event = await interaction.guild.scheduledEvents.fetch(eventThread.eventId).catch(() => null);
             if (!event || event.creatorId !== interaction.user.id) {
                 return interaction.reply({
-                    content: "❌ Seul le créateur de l'événement peut modifier les paramètres de rappel.",
+                    content: await client.t(interaction, 'events.reminderUpdateCreatorOnly'),
                     flags: Discord.MessageFlags.Ephemeral
                 });
             }
@@ -327,14 +327,14 @@ module.exports = async (client, interaction) => {
             const newEmbed = new Discord.EmbedBuilder(embed.data)
                 .setFields(
                     { 
-                        name: '📝 Inviter des participants', 
-                        value: 'N\'oubliez pas de mentionner (@) les rôles ou les personnes que vous souhaitez inviter dans ce fil de discussion.' 
+                        name: await client.t(interaction, 'events.reminders.inviteTitle'),
+                        value: await client.t(interaction, 'events.reminders.invite')
                     },
                     { 
-                        name: '⏰ Rappels automatiques', 
+                        name: await client.t(interaction, 'events.reminders.automaticTitle'),
                         value: enableReminders ? 
-                            'Les rappels sont activés. Ils seront envoyés automatiquement avant l\'événement.' :
-                            'Les rappels sont désactivés. Vous pouvez les réactiver à tout moment.'
+                            await client.t(interaction, 'events.reminders.enabledDescription') :
+                            await client.t(interaction, 'events.reminders.disabledDescription')
                     }
                 );
 
@@ -346,15 +346,15 @@ module.exports = async (client, interaction) => {
             // Envoyer une confirmation éphémère
             await interaction.followUp({
                 content: enableReminders ? 
-                    '🔔 Les rappels ont été réactivés pour cet événement.' :
-                    '🔕 Les rappels ont été désactivés pour cet événement.',
+                    await client.t(interaction, 'events.reminders.reenabled') :
+                    await client.t(interaction, 'events.reminders.disabled'),
                 flags: Discord.MessageFlags.Ephemeral
             });
 
         } catch (error) {
             console.error('Erreur lors de la configuration des rappels:', error);
             await interaction.reply({
-                content: "❌ Une erreur est survenue lors de la modification des paramètres de rappel.",
+                content: await client.t(interaction, 'events.reminders.updateError'),
                 flags: Discord.MessageFlags.Ephemeral
             });
         }
@@ -493,7 +493,7 @@ module.exports = async (client, interaction) => {
             const eventThread = data?.EventThreads?.find(et => et.threadId === thread.id);
             if (!eventThread) {
                 return interaction.editReply({
-                    content: "❌ Impossible de trouver les informations de l'événement.",
+                    content: await client.t(interaction, 'events.reminders.infoNotFound'),
                 });
             }
 
@@ -501,13 +501,13 @@ module.exports = async (client, interaction) => {
             const event = await interaction.guild.scheduledEvents.fetch(eventThread.eventId).catch(() => null);
             if (!event) {
                 return interaction.editReply({
-                    content: "❌ L'événement n'existe plus.",
+                    content: await client.t(interaction, 'events.reminders.eventNotFound'),
                 });
             }
 
             if (event.creatorId !== interaction.user.id) {
                 return interaction.editReply({
-                    content: "❌ Seul le créateur de l'événement peut le supprimer.",
+                    content: await client.t(interaction, 'events.reminders.deleteCreatorOnly'),
                 });
             }
 
@@ -538,7 +538,7 @@ module.exports = async (client, interaction) => {
 
             // Envoyer une confirmation
             await interaction.editReply({
-                content: "✅ L'événement a été supprimé avec succès.",
+                content: await client.t(interaction, 'events.reminders.deleted'),
             });
 
         } catch (error) {
@@ -546,7 +546,7 @@ module.exports = async (client, interaction) => {
             // Si l'interaction est toujours valide, essayer d'envoyer un message d'erreur
             try {
                 await interaction.editReply({
-                    content: "❌ Une erreur est survenue lors de la suppression de l'événement.",
+                    content: await client.t(interaction, 'events.reminders.deleteError'),
                 });
             } catch (replyError) {
                 console.error('Erreur lors de la réponse à l\'interaction:', replyError);

@@ -1275,6 +1275,7 @@
     "listTitle": "Participants list ({count})",
     "fetchError": "❌ An error occurred while retrieving the participants.",
     "reminderCreatorOnly": "❌ Only the event creator can configure reminders.",
+    "reminderUpdateCreatorOnly": "❌ Only the event creator can modify reminder settings.",
     "reminders": {
       "enable": "Enable reminders",
       "disable": "Disable reminders",
@@ -1284,13 +1285,23 @@
       "inviteTitle": "📝 Invite participants",
       "invite": "Remember to mention (@) the roles or people you want to invite to this discussion thread.",
       "automaticTitle": "⏰ Automatic reminders",
+      "enabledDescription": "Reminders are enabled. They will be sent automatically before the event.",
+      "disabledDescription": "Reminders are disabled. You can enable them again at any time.",
       "available": "By default, reminders will be sent:\n• 1 month before\n• 1 week before\n• 1 day before\n\nUse the buttons below to manage reminders.",
       "unavailable": "Reminders are not available because the event is too soon.",
       "availableFooter": "You can configure reminders at any time",
       "unavailableFooter": "Reminders are not available for this event",
+      "reenabled": "🔔 Reminders have been re-enabled for this event.",
+      "disabled": "🔕 Reminders have been disabled for this event.",
+      "updateError": "❌ An error occurred while updating reminder settings.",
       "deletedMessage": "This message will be deleted <t:{timestamp}:R>",
       "configured": "✅ Reminders have been configured for this event.",
-      "setupError": "❌ An error occurred while configuring reminders."
+      "setupError": "❌ An error occurred while configuring reminders.",
+      "infoNotFound": "❌ Could not find the event information.",
+      "eventNotFound": "❌ The event no longer exists.",
+      "deleteCreatorOnly": "❌ Only the event creator can delete it.",
+      "deleted": "✅ The event was deleted successfully.",
+      "deleteError": "❌ An error occurred while deleting the event."
     }
   },
   "suggestions": {
