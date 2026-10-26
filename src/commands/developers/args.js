@@ -141,55 +141,55 @@ module.exports = async (client, interaction, args) => {
     if (message == "boosterperks") {
         client.simpleEmbed({
             image: `https://media.discordapp.net/attachments/843487478881976381/881396544195149874/Bot_banner_boosters.jpg`
-        }, interaction.channel).then(() => {
+        }, interaction.channel).then(async () => {
             client.embed({
-                title: `💎・Booster Perks`,
+                title: await client.t(interaction, 'developers.args.boosterperks.title'),
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                desc: `_____ \n\nMore options in the server? Become a real Bot Booster and get nice benefits for a nice experience. But what do you actually get?`,
+                desc: await client.t(interaction, 'developers.args.boosterperks.description'),
                 fields: [
                     {
-                        name: `😛┆Use external stickers`,
-                        value: `Use stickers from other servers in our server`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field1Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field1'),
                     },
                     {
-                        name: `🔊┆Send TTS messages`,
-                        value: `Send messages that have a sound attached`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field2Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field2'),
                     },
                     {
-                        name: `🤔┆Access to the hidden lounge`,
-                        value: `Get access to a private lounge and chat with other boosters!`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field3Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field3'),
                     },
                     {
-                        name: `📛┆Change your nickname`,
-                        value: `Change your name in the server. This is how you stand out in the server`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field4Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field4'),
                     },
                     {
-                        name: `💭┆Create public/private threads`,
-                        value: `Create a thread in our text channels`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field5Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field5'),
                     },
                     {
-                        name: `🎉┆Private giveaways`,
-                        value: `Get access to fun exclusive giveaways`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field6Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field6'),
                     },
                     {
-                        name: `📂┆Send files in any channel`,
-                        value: `Send files in all channels where you can talk`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field7Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field7'),
                     },
                     {
-                        name: `📊┆Get access to a special promotional channel`,
-                        value: `Get the opportunity to promote your own server in a special channel`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field8Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field8'),
                     },
                     {
-                        name: `😜┆Custom role of your choice`,
-                        value: `Create your own role that you can set yourself`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field9Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field9'),
                     },
                     {
-                        name: `💎┆Get the booster role + badge`,
-                        value: `Stand out with a nice booster role and a booster badge!`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field10Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field10'),
                     },
                     {
-                        name: `💻┆Access to new bèta updates in Bot`,
-                        value: `We'll give your server access to updates that aren't out yet! How nice is that?`,
+                        name: await client.t(interaction, 'developers.args.boosterperks.field11Title'),
+                        value: await client.t(interaction, 'developers.args.boosterperks.field11'),
                     }
                 ]
             }, interaction.channel)
