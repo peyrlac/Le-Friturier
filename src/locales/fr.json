@@ -1054,6 +1054,18 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "moderation": {
+      "name": "modération",
+      "description": "Gérer la modération du serveur"
+    },
+    "setup": {
+      "name": "configuration",
+      "description": "Gérer la configuration du bot"
+    },
+    "tickets": {
+      "name": "tickets",
+      "description": "Gérer les tickets du serveur"
+    },
     "bot": {
       "name": "bot",
       "description": "Obtenir des informations sur le bot",

@@ -1067,6 +1067,18 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "moderation": {
+      "name": "moderation",
+      "description": "Manage all server moderation"
+    },
+    "setup": {
+      "name": "setup",
+      "description": "Manage the bot setups"
+    },
+    "tickets": {
+      "name": "tickets",
+      "description": "Manage tickets in your server"
+    },
     "bot": {
       "name": "bot",
       "description": "Get information about the bot",

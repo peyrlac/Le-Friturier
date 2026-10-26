@@ -4,6 +4,7 @@ const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.moderation',
     data: new SlashCommandBuilder()
         .setName('moderation')
         .setDescription('Manage all server moderation')
@@ -121,11 +122,6 @@ module.exports = {
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
         )
     ,
-    localizations: {
-        name: { fr: 'modération', en: 'moderation' },
-        description: { fr: 'Gérer la modération du serveur', en: 'Manage all server moderation' }
-    },
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction

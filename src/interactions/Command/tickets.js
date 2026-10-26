@@ -6,6 +6,7 @@ const ticketSchema = require("../../database/models/tickets");
 const ticketChannels = require("../../database/models/ticketChannels");
 
 module.exports = {
+    localizationKey: 'commandMetadata.tickets',
     data: new SlashCommandBuilder()
         .setName('tickets')
         .setDescription('Manage tickets in your server')
@@ -89,11 +90,6 @@ module.exports = {
                 .setDescription('Unclaim a ticket')
         )
     ,
-    localizations: {
-        name: { fr: 'tickets', en: 'tickets' },
-        description: { fr: 'Gérer les tickets du serveur', en: 'Manage tickets in your server' }
-    },
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
