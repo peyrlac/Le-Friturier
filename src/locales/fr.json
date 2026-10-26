@@ -890,7 +890,10 @@
     "panelDescription": "_____\n\nChoisissez vos rôles en appuyant sur le bouton !\n\n{roles}",
     "panelCreated": "Panneau de rôles créé !",
     "deleted": "La catégorie **{category}** a été supprimée !",
-    "listTitle": "📃・Rôles de réaction"
+    "listTitle": "📃・Rôles de réaction",
+    "roleAdded": "Le rôle {role} vous a été ajouté !",
+    "roleRemoved": "Le rôle {role} vous a été retiré !",
+    "rolesUpdated": "Les rôles suivants ont été mis à jour pour vous : {roles}"
   },
   "moderation": {
     "channelLocked": "Salon verrouillé avec succès !",
