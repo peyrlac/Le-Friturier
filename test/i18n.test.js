@@ -192,8 +192,9 @@ test('config exposes grouped feature controls and bot exposes global feature con
 
 test('automod exposes localized command metadata and option descriptions', () => {
   const command = require('../src/interactions/Command/automod');
+  const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
-  assert.deepEqual(command.localizations, {
+  assert.deepEqual(resolveCommandLocalizations(command), {
     name: { fr: 'automod', en: 'automod' },
     description: { fr: 'Gérer la modération automatique', en: 'Manage automatic moderation' },
     subcommands: {

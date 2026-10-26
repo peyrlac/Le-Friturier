@@ -597,6 +597,12 @@ test('music and radio metadata is sourced from the locale catalogs', () => {
   }
 });
 
+test('automod metadata is sourced from the locale catalogs', () => {
+  const source = read('src/interactions/Command/automod.js');
+  assert.match(source, /localizationKey:\s*['"]commandMetadata\.automod['"]/);
+  assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],
