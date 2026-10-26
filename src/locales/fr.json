@@ -1332,6 +1332,21 @@
     "started": "Le soundboard a démarré ! Lecture de **{sound}**"
   },
   "developers": {
+    "args": {
+      "sent": "Le message a été envoyé avec succès !",
+      "information": {
+        "title": "ℹ️・Informations",
+        "description": "_____",
+        "welcomeTitle": "👋┆Bienvenue à {guild} !",
+        "welcome": "Bienvenue dans notre lieu de rencontre ! Rencontrez de nouvelles personnes ici, jouez à des jeux et participez à des événements saisonniers ! Nous sommes un serveur où nous rassemblons tout le monde et nous essayons de le rendre confortable pour tout le monde. Soyez les bienvenus et amusez-vous !",
+        "whatTitle": "❓┆Que puis-je faire ici ?",
+        "what": "- Rencontrer de nouvelles personnes !\n- Jouer à de nombreux jeux amusants !\n- Découvrir les saisons !\n- Participer aux événements !\n- Choisir vos propres rôles dans le serveur !",
+        "helpTitle": "🎫┆Comment obtenir de l'aide en cas de besoin ?",
+        "help": "Vous pouvez ouvrir un ticket ! Nous sommes heureux de vous aider avec vos questions et d'offrir un support à votre serveur.",
+        "helpUsTitle": "⚙️┆Je veux aider à améliorer le bot !",
+        "helpUs": "- Consultez les applications pour voir les emplois disponibles !\n- Ouvrez un ticket et demandez comment aider !\n\nNous vous souhaitons un très bon séjour ici !"
+      }
+    },
     "badgeNotFound": "Je ne trouve pas ce badge.",
     "badgeAlreadyAssigned": "Cet utilisateur possède déjà ce badge !",
     "badgeAdded": "Badge {badge} ({flag}) ajouté !",

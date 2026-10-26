@@ -1111,6 +1111,14 @@ test('guild channel and emoji information embeds use localization keys', () => {
   assert.doesNotMatch(emojis, /Emoji's!|Animated \[|Standard \[/);
 });
 
+test('developer information panel uses localization keys', () => {
+  const source = read('src/commands/developers/args.js');
+  for (const key of ['developers.args.sent', 'developers.args.information.title', 'developers.args.information.welcomeTitle', 'developers.args.information.welcome', 'developers.args.information.whatTitle', 'developers.args.information.what', 'developers.args.information.helpTitle', 'developers.args.information.help', 'developers.args.information.helpUsTitle', 'developers.args.information.helpUs']) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+  assert.doesNotMatch(source, /Le message a .* envoy|Bienvenue dans notre lieu de rencontre|Que puis-je faire ici\?|Comment obtenir de l'aide/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

@@ -4,34 +4,34 @@ module.exports = async (client, interaction, args) => {
     const message = interaction.options.getString('message');
 
     client.succNormal({
-        text: `Le message a été envoyé avec succès!`,
+        key: 'developers.args.sent',
         type: 'ephemeraledit'
     }, interaction);
 
     if (message == "information") {
         client.simpleEmbed({
             image: `https://cdn.discordapp.com/attachments/843487478881976381/874742689017520128/Bot_banner_information.jpg`
-        }, interaction.channel).then(() => {
+        }, interaction.channel).then(async () => {
             client.embed({
-                title: `ℹ️・Information`,
+                title: await client.t(interaction, 'developers.args.information.title'),
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                desc: `_____`,
+                desc: await client.t(interaction, 'developers.args.information.description'),
                 fields: [
                     {
-                        name: `👋┆Bienvenue à ${interaction.guild.name}!`,
-                        value: `Bienvenue dans notre lieu de rencontre!Rencontrez de nouvelles personnes ici, jouez à des jeux et participez à des événements saisonniers!Nous sommes un serveur où nous rassemblons tout le monde et nous essayons de le rendre confortable pour tout le monde!Soyez les bienvenus et amusez-vous!`,
+                        name: await client.t(interaction, 'developers.args.information.welcomeTitle', { guild: interaction.guild.name }),
+                        value: await client.t(interaction, 'developers.args.information.welcome'),
                     },
                     {
-                        name: `❓┆Que puis-je faire ici?`,
-                        value: `- Rencontrer de nouvelles personnes!\ n- Jouez à de nombreux jeux amusants!\ n- Découvrez les saisons!\ n- Participez aux événements!\ nand….Enfin et surtout, choisissez vos propres rôles à <#847867992044994561>!`,
+                        name: await client.t(interaction, 'developers.args.information.whatTitle'),
+                        value: await client.t(interaction, 'developers.args.information.what'),
                     },
                     {
-                        name: `🎫┆Comment obtenir de l'aide en cas de besoin?`,
-                        value: `Vous pouvez faire un billet dans <# 820308164322656327>!Nous sommes heureux de vous aider avec vos questions ici et d'offrir une prise en charge de votre serveur!`,
+                        name: await client.t(interaction, 'developers.args.information.helpTitle'),
+                        value: await client.t(interaction, 'developers.args.information.help'),
                     },
                     {
-                        name: `⚙️┆Je veux aider à s'améliorer BOT pour s'améliorer!`,
-                        value: `- Allez dans les applications et voyez quel type d'emplois sont disponibles!\ n- ou faites un billet et demandez si vous pouvez aider avec certaines choses!\ n \ n ** Nous vous souhaitons un très bon et heureux temps ici! **`,
+                        name: await client.t(interaction, 'developers.args.information.helpUsTitle'),
+                        value: await client.t(interaction, 'developers.args.information.helpUs'),
                     }
                 ]
             }, interaction.channel)
@@ -267,4 +267,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 
