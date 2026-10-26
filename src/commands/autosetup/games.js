@@ -12,10 +12,10 @@ module.exports = async (client, interaction, args) => {
         interaction.guild.channels.create({
             name: "counting",
             type: Discord.ChannelType.GuildText
-        }).then((ch) => {
+        }).then(async (ch) => {
             client.embed({
-                title: `🔢・Compte`,
-                desc: `C'est le début du comptage!Le premier numéro est ** 1 **`
+                title: await client.t(interaction, 'autosetup.games.countingTitle'),
+                desc: await client.t(interaction, 'autosetup.games.countingDescription')
             }, ch)
 
             client.createChannelSetup(Counting, ch, interaction)
@@ -26,10 +26,10 @@ module.exports = async (client, interaction, args) => {
         interaction.guild.channels.create({
             name:"guess-the-number",
             type: Discord.ChannelType.GuildText
-        }).then((ch) => {
+        }).then(async (ch) => {
             client.embed({
-                title: `🔢・Devinez le nombre`,
-                desc: `Devinez le nombre entre ** 1 ** et ** 10.000 **!`
+                title: await client.t(interaction, 'autosetup.games.guessNumberTitle'),
+                desc: await client.t(interaction, 'autosetup.games.guessNumberDescription')
             }, ch)
 
             client.createChannelSetup(GTN, ch, interaction)
@@ -40,16 +40,16 @@ module.exports = async (client, interaction, args) => {
         interaction.guild.channels.create({
             name: "guess-the-word",
             type: Discord.ChannelType.GuildText
-        }).then((ch) => {
+        }).then(async (ch) => {
             var word = "start";
             var shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
             client.embed({
-                title: `💬・Devinez le mot`,
-                desc: `Mettez les lettres dans la bonne position!`,
+                title: await client.t(interaction, 'autosetup.games.guessWordTitle'),
+                desc: await client.t(interaction, 'autosetup.games.guessWordDescription'),
                 fields: [
                     {
-                        name: `🔀┆Mot`,
+                        name: await client.t(interaction, 'autosetup.games.word'),
                         value: `${shuffled.toLowerCase()}`
                     }
                 ],
