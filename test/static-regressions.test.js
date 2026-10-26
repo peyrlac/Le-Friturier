@@ -518,6 +518,14 @@ test('developer credit responses use localization keys', () => {
   assert.doesNotMatch(source, /succNormal\(\{\s*text:/);
 });
 
+test('developer bot-ban responses use localization keys', () => {
+  const source = read('src/commands/developers/ban.js');
+  for (const key of ['developerAdmin.banSelf', 'developerAdmin.alreadyBanned', 'developerAdmin.banned', 'developerAdmin.notBanned', 'developerAdmin.unbanned']) {
+    assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), key);
+  }
+  assert.doesNotMatch(source, /You cannot ban yourself|has not been banned from the bot|Interdiction du bot|UNCANN/i);
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],
