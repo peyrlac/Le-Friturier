@@ -340,6 +340,20 @@ test('trigger list and documentation use the active server locale', () => {
   }
 });
 
+test('economy operator responses use localization keys', () => {
+  const expectations = {
+    'addmoney.js': ['economy.addMoney.invalid', 'economy.addMoney.bot', 'economy.addMoney.success', 'economy.addMoney.noMoney'],
+    'additem.js': ['economy.addItem.invalid', 'economy.addItem.everyone', 'economy.addItem.success'],
+    'deposit.js': ['commands.economy.deposit.noMoney']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(`src/commands/economy/${file}`);
+    for (const key of keys) assert.match(source, new RegExp(key.replace('.', '\\.'), 'g'), `${file}: ${key}`);
+    assert.doesNotMatch(source, /Enter a valid number|You cannot add money|You don't have any money to deposit/i, file);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

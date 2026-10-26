@@ -615,8 +615,20 @@
       },
       "work": { "success": "You worked as a {job} and earned **{amount}** coins!" },
       "addItem": {
+        "invalid": "Enter a valid number!",
+        "everyone": "You cannot add the @everyone role to the store!",
         "alreadyExists": "This role is already in the store!",
-        "success": "The role was added to the store!"
+        "success": "The role was added to the store!",
+        "role": "Role",
+        "amount": "Amount"
+      },
+      "addMoney": {
+        "invalid": "Enter a valid number!",
+        "bot": "You cannot add money to a bot!",
+        "success": "Money was added to the user.",
+        "noMoney": "This user does not have any money yet.",
+        "user": "User",
+        "amount": "Amount"
       },
       "deleteItem": {
         "success": "The role was deleted from the store.",
@@ -657,6 +669,7 @@
         "invalid": "Enter a valid number!",
         "negative": "You cannot deposit negative money!",
         "insufficient": "You do not have enough money.",
+        "noMoney": "You don't have any money to deposit!",
         "success": "You deposited money into your bank!"
       },
       "pay": {
