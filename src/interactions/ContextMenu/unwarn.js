@@ -36,19 +36,19 @@ module.exports = {
         if (data) {
                 const menu = new Discord.StringSelectMenuBuilder()
                     .setCustomId('unwarn')
-                    .setPlaceholder('Select a warning to remove');
+                    .setPlaceholder(await client.t(interaction, 'moderation.selectWarning'));
                 // Get all warnings and add them to a stringselectmenu 
-                data.Warnings.forEach(element => {
+                for (const element of data.Warnings) {
                     menu.addOptions({
                         label: `Case ${element.Case}`,
                         value: element.Case.toString(),
-                        description: "Reason: " + element.Reason
-                    })
-                });
+                        description: `${await client.t(interaction, 'moderation.reason')}: ${element.Reason}`
+                    });
+                }
                 // Create a new message with the menu
                 await client.embed({
-                    title: `🔨・Unwarn`,
-                    desc: `Select a warning to remove from **${member.user.tag}**`,
+                    title: await client.t(interaction, 'moderation.unwarnTitle'),
+                    desc: await client.t(interaction, 'moderation.unwarnDescription', { guild: interaction.guild.name }),
                     components: [new Discord.ActionRowBuilder().addComponents(menu)],
                     type: 'ephemeraledit'
                 }, interaction);
@@ -71,7 +71,7 @@ module.exports = {
                             key: 'errors.moderation.warningRemoved',
                             fields: [
                                 {
-                                    name: "👤┆User",
+                                    name: await client.t(interaction, 'moderation.user'),
                                     value: `${member}`,
                                     inline: true
                                 }
@@ -80,11 +80,11 @@ module.exports = {
                         }, interaction);
                         client.emit('warnRemove', member, interaction.user)
                         client.embed({
-                            title: `🔨・Unwarn`,
-                            desc: `You've been unwarned in **${interaction.guild.name}**`,
+                            title: await client.t(member, 'moderation.unwarnTitle'),
+                            desc: await client.t(member, 'moderation.unwarnDescription', { guild: interaction.guild.name }),
                             fields: [
                                 {
-                                    name: "👤┆Moderator",
+                                    name: await client.t(member, 'moderation.moderator'),
                                     value: interaction.user.tag,
                                     inline: true
                                 },

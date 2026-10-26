@@ -832,6 +832,7 @@
     "moderator": "👤┆Modérateur",
     "user": "👤┆Utilisateur",
     "reason": "📄┆Motif"
+      ,"selectWarning": "Sélectionnez un avertissement à retirer"
   },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",

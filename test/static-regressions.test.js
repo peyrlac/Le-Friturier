@@ -744,6 +744,22 @@ test('developer badge responses use localization keys', () => {
   assert.doesNotMatch(source, /Je ne trouve pas ce badge|Ces utilisateurs ont|The user doesn't have that badge|Ajouté le|Removed the|Enlevé le/);
 });
 
+test('warning context menus use localized moderation labels', () => {
+  const expectations = {
+    'src/interactions/ContextMenu/warnings.js': ['moderation.warningsTitle', 'moderation.warningsDescription', 'moderation.warningCase', 'moderation.warningDetails', 'moderation.total', 'moderation.noWarnings'],
+    'src/interactions/ContextMenu/warn.js': ['moderation.warnTitle', 'moderation.warnDescription', 'moderation.moderator', 'moderation.reason', 'moderation.user'],
+    'src/interactions/ContextMenu/unwarn.js': ['moderation.unwarnTitle', 'moderation.unwarnDescription', 'moderation.moderator', 'moderation.user', 'moderation.selectWarning']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+  }
+  assert.doesNotMatch(read('src/interactions/ContextMenu/warnings.js'), /The warnings of|has no warnings|Warning \*\*/);
+  assert.doesNotMatch(read('src/interactions/ContextMenu/warn.js'), /You've been warned|setTitle\('Warn'\)|setPlaceholder\('Reason'\)/);
+  assert.doesNotMatch(read('src/interactions/ContextMenu/unwarn.js'), /Select a warning|You've been unwarned/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
