@@ -2007,14 +2007,6 @@
         "notes": { "description": "Afficher toutes vos notes" }
       }
     },
-    "report": {
-      "name": "signalement",
-      "description": "Signaler un bug ou un utilisateur aux développeurs",
-      "options": {
-        "type": { "description": "Le type de votre signalement" },
-        "description": { "description": "Description de votre signalement" }
-      }
-    },
     "levels": {
       "name": "niveaux",
       "description": "Voir le système de niveaux",
@@ -2108,7 +2100,7 @@
       "name": "signaler",
       "description": "Signaler un bug ou un utilisateur aux développeurs",
       "options": {
-        "type": { "description": "Type de signalement" },
+        "type": { "description": "Type de signalement", "choices": { "bug": { "name": "Bug" }, "user": { "name": "Utilisateur" } } },
         "description": { "description": "Description de votre signalement" }
       }
     },

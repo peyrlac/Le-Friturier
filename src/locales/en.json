@@ -2020,14 +2020,6 @@
         "notes": { "description": "Show all your notes" }
       }
     },
-    "report": {
-      "name": "report",
-      "description": "Report a bug or user to the developers",
-      "options": {
-        "type": { "description": "The type of your report" },
-        "description": { "description": "Description with your report" }
-      }
-    },
     "levels": {
       "name": "levels",
       "description": "View the level system",
@@ -2108,7 +2100,7 @@
       "name": "report",
       "description": "Report a bug or user to the developers",
       "options": {
-        "type": { "description": "The type of your report" },
+        "type": { "description": "The type of your report", "choices": { "bug": { "name": "Bug" }, "user": { "name": "User" } } },
         "description": { "description": "Description of your report" }
       }
     },

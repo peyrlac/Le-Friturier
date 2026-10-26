@@ -432,6 +432,23 @@ test('serializes localized game choice names from command metadata', () => {
   });
 });
 
+test('serializes localized report choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/report');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const choices = command.data.toJSON().options.find(option => option.name === 'type').choices;
+
+  assert.deepEqual(choices.find(choice => choice.value === 'bug').name_localizations, {
+    fr: 'Bug',
+    'en-US': 'Bug'
+  });
+  assert.deepEqual(choices.find(choice => choice.value === 'user').name_localizations, {
+    fr: 'Utilisateur',
+    'en-US': 'User'
+  });
+});
+
 test('serverstats publishes localized subcommand descriptions', () => {
     const command = require('../src/interactions/Command/serverstats');
     applyCommandLocalizations(command);
