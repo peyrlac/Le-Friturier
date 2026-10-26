@@ -65,6 +65,8 @@ module.exports = async (client, interaction, args) => {
 
         const optionA = await client.t(interaction, 'games.wouldYouRatherOptionA');
         const optionB = await client.t(interaction, 'games.wouldYouRatherOptionB');
+        const choiceA = await client.t(interaction, 'games.choiceA');
+        const choiceB = await client.t(interaction, 'games.choiceB');
 
         let btn = new Discord.ButtonBuilder()
             .setStyle(Discord.ButtonStyle.Primary)
@@ -80,7 +82,7 @@ module.exports = async (client, interaction, args) => {
 
         client.embed({
             titleKey: 'games.wouldYouRatherTitle',
-            desc: `**A)** ${decode(res.questions[0])} \n**B)** ${decode(res.questions[1])}`,
+            desc: `**${choiceA})** ${decode(res.questions[0])} \n**${choiceB})** ${decode(res.questions[1])}`,
             components: [row],
             type: 'editreply'
         }, interaction).then(async (m) => {
@@ -105,7 +107,7 @@ module.exports = async (client, interaction, args) => {
 
                     client.embed({
                         titleKey: 'games.wouldYouRatherTitle',
-                        desc: `**A) ${decode(res.questions[0])} (${res.percentage['1']})** \nB) ${decode(res.questions[1])} (${res.percentage['2']})`,
+                        desc: `**${choiceA}) ${decode(res.questions[0])} (${res.percentage['1']})** \n${choiceB}) ${decode(res.questions[1])} (${res.percentage['2']})`,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)
@@ -124,7 +126,7 @@ module.exports = async (client, interaction, args) => {
 
                     client.embed({
                         titleKey: 'games.wouldYouRatherTitle',
-                        desc: `A) ${decode(res.questions[0])} (${res.percentage['1']}) \n**B) ${decode(res.questions[1])} (${res.percentage['2']})**`,
+                        desc: `${choiceA}) ${decode(res.questions[0])} (${res.percentage['1']}) \n**${choiceB}) ${decode(res.questions[1])} (${res.percentage['2']})**`,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)

@@ -943,6 +943,15 @@ test('counting errors use localization keys', () => {
   assert.doesNotMatch(source, /You cannot count twice|The correct number was/);
 });
 
+test('choice games localize structural labels', () => {
+  const rather = read('src/commands/games/wouldyourather.js');
+  const press = read('src/commands/games/willyoupressthebutton.js');
+  for (const key of ['games.choiceA', 'games.choiceB']) assert.match(rather, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  assert.match(press, /games.but/);
+  assert.doesNotMatch(rather, /\*\*A\)\*\*|\nB\)/);
+  assert.doesNotMatch(press, /\*\*But\*\*/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);

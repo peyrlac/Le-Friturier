@@ -44,6 +44,7 @@ module.exports = async (client, interaction, args) => {
 
         const yesLabel = await client.t(interaction, 'games.willYouPressYes');
         const noLabel = await client.t(interaction, 'games.willYouPressNo');
+        const butLabel = await client.t(interaction, 'games.but');
 
         let btn = new Discord.ButtonBuilder()
             .setStyle(Discord.ButtonStyle.Success)
@@ -59,7 +60,7 @@ module.exports = async (client, interaction, args) => {
 
         client.embed({
             titleKey: 'games.willYouPressTitle',
-            desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
+            desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**${butLabel}** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
             components: [row],
             type: 'editreply'
         }, interaction).then(async (m) => {
@@ -84,7 +85,7 @@ module.exports = async (client, interaction, args) => {
 
                     client.embed({
                         titleKey: 'games.willYouPressTitle',
-                        desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
+                        desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**${butLabel}** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)
@@ -103,7 +104,7 @@ module.exports = async (client, interaction, args) => {
 
                     client.embed({
                         titleKey: 'games.willYouPressTitle',
-                        desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**But** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
+                        desc: `\`\`\`${decode(res.questions[0].charAt(0).toUpperCase() + res.questions[0].slice(1))} \`\`\`\n**${butLabel}** \`\`\`\n\n${decode(res.questions[1].charAt(0).toUpperCase() + res.questions[1].slice(1))}\`\`\``,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
                     }, interaction)
