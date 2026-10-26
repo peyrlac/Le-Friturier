@@ -1067,6 +1067,11 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "activities": {
+      "name": "activities",
+      "description": "Start an activity",
+      "options": { "activity": { "description": "Activity to start" } }
+    },
     "economy": {
       "name": "economy",
       "description": "Play the economy game in your server",
