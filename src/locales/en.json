@@ -777,10 +777,110 @@
     "typeDelete": "Delete",
     "typeReact": "Add a reaction"
   },
+  "family": {
+    "selfMarriage": "You cannot marry yourself!",
+    "alreadyMarried": "Someone in the couple is already married!",
+    "relativeMarriage": "You cannot marry a member of your family!",
+    "proposalTitle": "👰・Marriage proposal",
+    "proposalDescription": "{author} proposed to {target}!\\n{target}, click one of the buttons",
+    "acceptedTitle": "👰・Marriage proposal accepted",
+    "acceptedDescription": "{author} and {target} are now married! 👰🎉",
+    "declinedTitle": "👰・Marriage proposal declined",
+    "declinedDescription": "{target} loves someone else or prefers to stay alone and decided not to marry {author}",
+    "timeoutTitle": "👰・Marriage proposal declined",
+    "timeoutDescription": "{target} did not respond! The marriage is cancelled",
+    "selfDisown": "You cannot disown yourself",
+    "botDisown": "You cannot disown a bot",
+    "noRelative": "You do not have any children or parents yet",
+    "disownedTitle": "👪・Disowned",
+    "disowned": "{author} disowned <@!{target}>",
+    "resetConfirmTitle": "❌・Reset family",
+    "resetConfirmDescription": "Are you sure you want to destroy your family?",
+    "resetSuccess": "Your family has been destroyed!",
+    "resetTimeout": "The time limit expired. Your family was not changed."
+  },
+  "search": {
+    "invalidCountry": "Invalid country provided!",
+    "docsNotFound": "Could not find that documentation!",
+    "coronaTitle": "💉・COVID-19 - {country}",
+    "confirmed": "✅‡Confirmed cases",
+    "recovered": "🤗‡Recovered",
+    "deaths": "💀‡Deaths"
+  },
   "commandMetadata": {
     "voice": {
       "name": "voice",
       "description": "Manage voice channels"
+    },
+    "famille": {
+      "name": "family",
+      "description": "Create your family",
+      "subcommands": {
+        "help": { "description": "Get information about family commands" },
+        "adopter": {
+          "description": "Adopt a member",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "supprimer": { "description": "Delete your family" },
+        "renier": {
+          "description": "Disown a child or parent",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "divorcer": {
+          "description": "Divorce your partner",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "voir": {
+          "description": "View a member’s family",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "marier": {
+          "description": "Marry a person",
+          "options": { "membre": { "description": "Select a person" } }
+        }
+      }
+    },
+    "search": {
+      "name": "search",
+      "description": "Search something on the Internet",
+      "subcommands": {
+        "help": { "description": "Get information about search commands" },
+        "bing": { "description": "Find something on Bing", "options": { "name": { "description": "Your search" } } },
+        "ddg": { "description": "Find something on DuckDuckGo", "options": { "name": { "description": "Your search" } } },
+        "google": { "description": "Find something on Google", "options": { "name": { "description": "Your search" } } },
+        "youtube": { "description": "Find something on YouTube", "options": { "name": { "description": "Your search" } } },
+        "corona": { "description": "See coronavirus statistics", "options": { "country": { "description": "Enter a country" } } },
+        "crypto": {
+          "description": "See the value of a cryptocurrency",
+          "options": {
+            "coin": { "description": "Enter a cryptocurrency" },
+            "currency": { "description": "Enter a currency" }
+          }
+        },
+        "docs": { "description": "See the discord.js documentation", "options": { "name": { "description": "Your search" } } },
+        "github": { "description": "Get information about a GitHub user", "options": { "name": { "description": "Enter a GitHub name" } } },
+        "hexcolour": { "description": "Get information about a color", "options": { "color": { "description": "Enter a hexadecimal color" } } },
+        "itunes": { "description": "Search for a song on iTunes", "options": { "song": { "description": "Enter a song name" } } },
+        "npm": { "description": "Get information about an NPM package", "options": { "name": { "description": "Enter a package name" } } },
+        "steam": { "description": "Get information about a Steam application", "options": { "name": { "description": "Enter a Steam application name" } } },
+        "translate": {
+          "description": "Translate some text",
+          "options": {
+            "language": { "description": "Enter a language" },
+            "text": { "description": "Enter some text" }
+          }
+        },
+        "weather": { "description": "See the current weather", "options": { "location": { "description": "Enter a location" } } }
+      }
+    },
+    "thanks": {
+      "name": "thanks",
+      "description": "Get an overview of the thanks system",
+      "subcommands": {
+        "help": { "description": "Get information about thanks commands" },
+        "check": { "description": "See your thanks", "options": { "user": { "description": "Select a user" } } },
+        "thanks": { "description": "Thank a user", "options": { "user": { "description": "Select a user" } } }
+      }
     }
   },
   "features": {

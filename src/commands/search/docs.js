@@ -14,12 +14,12 @@ module.exports = async (client, interaction, args) => {
             return interaction.editReply({ embeds: [data] })
         } else {
             return client.errNormal({
-                error: "Could not find that documentation!", 
+                key: 'search.docsNotFound',
                 type: 'editreply' 
             }, interaction)
         }
     } catch {
-        return client.errNormal({ error: "Could not find that documentation!", type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'search.docsNotFound', type: 'editreply' }, interaction);
     }
 }
 

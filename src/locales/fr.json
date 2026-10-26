@@ -764,10 +764,110 @@
     "typeDelete": "Supprime",
     "typeReact": "Ajoute une réaction"
   },
+  "family": {
+    "selfMarriage": "Tu ne peux pas te marier toi-même !",
+    "alreadyMarried": "Quelqu'un dans le couple est déjà marié.e !",
+    "relativeMarriage": "Tu ne peux pas te marier avec un membre de ta famille !",
+    "proposalTitle": "👰・Demande en mariage",
+    "proposalDescription": "{author} a demandé en mariage {target}!\\n{target}, clique sur un des boutons",
+    "acceptedTitle": "👰・Demande en mariage acceptée",
+    "acceptedDescription": "{author} et {target} sont maintenant marié.es ! 👰🎉",
+    "declinedTitle": "👰・Demande en mariage refusée",
+    "declinedDescription": "{target} aime quelqu'un d'autre ou préfère rester seul.e et a décidé.e de ne pas se marier avec {author}",
+    "timeoutTitle": "👰・Demande en mariage refusée",
+    "timeoutDescription": "{target} n'a pas répondu ! Le mariage est annulé",
+    "selfDisown": "Tu ne peux pas te renier toi-même",
+    "botDisown": "Tu ne peux pas renier un robot",
+    "noRelative": "Tu n'as pas d'enfants ou de parents pour le moment",
+    "disownedTitle": "👪・Renié",
+    "disowned": "{author} a renié <@!{target}>",
+    "resetConfirmTitle": "❌・Remise à zéro",
+    "resetConfirmDescription": "Es-tu sûr de vouloir décimer ta famille ?",
+    "resetSuccess": "Ta famille a été décimée !",
+    "resetTimeout": "Le délai est dépassé. La famille n'a pas été modifiée."
+  },
+  "search": {
+    "invalidCountry": "Pays fourni invalide !",
+    "docsNotFound": "Documentation introuvable !",
+    "coronaTitle": "💉・COVID-19 - {country}",
+    "confirmed": "✅‡Cas confirmés",
+    "recovered": "🤗‡Guérisons",
+    "deaths": "💀‡Décès"
+  },
   "commandMetadata": {
     "voice": {
       "name": "vocal",
       "description": "Gérer les salons vocaux"
+    },
+    "famille": {
+      "name": "famille",
+      "description": "Créer ta famille",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes famille" },
+        "adopter": {
+          "description": "Adopter un membre",
+          "options": { "membre": { "description": "Sélectionnez une personne" } }
+        },
+        "supprimer": { "description": "Supprimer ta famille" },
+        "renier": {
+          "description": "Renier un enfant ou un parent",
+          "options": { "membre": { "description": "Sélectionnez une personne" } }
+        },
+        "divorcer": {
+          "description": "Divorcer de ton ou ta partenaire",
+          "options": { "membre": { "description": "Sélectionnez une personne" } }
+        },
+        "voir": {
+          "description": "Voir la famille d’un membre",
+          "options": { "membre": { "description": "Sélectionnez une personne" } }
+        },
+        "marier": {
+          "description": "Marier une personne",
+          "options": { "membre": { "description": "Sélectionnez une personne" } }
+        }
+      }
+    },
+    "search": {
+      "name": "recherche",
+      "description": "Rechercher quelque chose sur Internet",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de recherche" },
+        "bing": { "description": "Rechercher sur Bing", "options": { "name": { "description": "Votre recherche" } } },
+        "ddg": { "description": "Rechercher sur DuckDuckGo", "options": { "name": { "description": "Votre recherche" } } },
+        "google": { "description": "Rechercher sur Google", "options": { "name": { "description": "Votre recherche" } } },
+        "youtube": { "description": "Rechercher sur YouTube", "options": { "name": { "description": "Votre recherche" } } },
+        "corona": { "description": "Voir les statistiques du coronavirus", "options": { "country": { "description": "Saisissez un pays" } } },
+        "crypto": {
+          "description": "Voir la valeur d’une cryptomonnaie",
+          "options": {
+            "coin": { "description": "Saisissez une cryptomonnaie" },
+            "currency": { "description": "Saisissez une devise" }
+          }
+        },
+        "docs": { "description": "Voir la documentation discord.js", "options": { "name": { "description": "Votre recherche" } } },
+        "github": { "description": "Obtenir les informations d’un utilisateur GitHub", "options": { "name": { "description": "Saisissez un nom GitHub" } } },
+        "hexcolour": { "description": "Obtenir les informations d’une couleur", "options": { "color": { "description": "Saisissez une couleur hexadécimale" } } },
+        "itunes": { "description": "Rechercher une chanson sur iTunes", "options": { "song": { "description": "Saisissez le nom d’une chanson" } } },
+        "npm": { "description": "Obtenir les informations d’un paquet NPM", "options": { "name": { "description": "Saisissez le nom d’un paquet" } } },
+        "steam": { "description": "Obtenir les informations d’une application Steam", "options": { "name": { "description": "Saisissez le nom d’une application Steam" } } },
+        "translate": {
+          "description": "Traduire un texte",
+          "options": {
+            "language": { "description": "Saisissez une langue" },
+            "text": { "description": "Saisissez un texte" }
+          }
+        },
+        "weather": { "description": "Voir la météo actuelle", "options": { "location": { "description": "Saisissez un lieu" } } }
+      }
+    },
+    "thanks": {
+      "name": "remerciements",
+      "description": "Voir le système de remerciements",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de remerciements" },
+        "check": { "description": "Voir vos remerciements", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
+        "thanks": { "description": "Remercier un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" } } }
+      }
     }
   },
   "features": {

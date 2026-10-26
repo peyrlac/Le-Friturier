@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
     const author = interaction.user;
 
     if (author.id == target.id) return client.errNormal({
-        error: "Tu ne peux pas te renier toi-même",
+        key: 'family.selfDisown',
         type: "editreply"
     }, interaction);
 
     if (target.bot) return client.errNormal({
-        error: "Tu ne peux pas renier un robot",
+        key: 'family.botDisown',
         type: "editreply"
     }, interaction);
 
@@ -25,7 +25,7 @@ module.exports = async (client, interaction, args) => {
     const isParent = authorParents.includes(target.id);
 
     if (!isChild && !isParent) {
-        return client.errNormal({ error: "Tu n\'as pas d\'enfants/parents pour le moment", type: "editreply" }, interaction);
+        return client.errNormal({ key: 'family.noRelative', type: "editreply" }, interaction);
     }
 
     const authorUpdate = {};
@@ -54,8 +54,8 @@ module.exports = async (client, interaction, args) => {
     ]);
 
     return client.embed({
-        title: "👪・Renié",
-        desc: author + " a renié <@!" + target.id + ">",
+        title: await client.t(interaction, 'family.disownedTitle'),
+        desc: await client.t(interaction, 'family.disowned', { author, target: target.id }),
         type: "editreply"
     }, interaction);
 };

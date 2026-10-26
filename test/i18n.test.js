@@ -6,6 +6,7 @@ const {
     SUPPORTED_LOCALES,
     DEFAULT_LOCALE,
     applyCommandLocalizations,
+    resolveCommandLocalizations,
 } = require('../src/handlers/i18n');
 
 test('translates keys in French and English with interpolation', () => {
@@ -269,6 +270,14 @@ test('voice exposes localized metadata and supports localized channel responses'
     name: { fr: 'vocal', en: 'voice' },
     description: { fr: 'Gérer les salons vocaux', en: 'Manage voice channels' }
   });
+});
+
+test('family, search, and thanks expose metadata keys backed by locale JSON', () => {
+  for (const name of ['famille', 'search', 'thanks']) {
+    const command = require(`../src/interactions/Command/${name}`);
+    assert.equal(typeof command.localizationKey, 'string');
+    assert.ok(resolveCommandLocalizations(command));
+  }
 });
 
 test('triggers exposes localized metadata for its management surface', () => {
