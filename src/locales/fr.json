@@ -816,6 +816,17 @@
     "notSameVoice": "Vous n'êtes pas dans le même salon vocal !",
     "started": "Le soundboard a démarré ! Lecture de **{sound}**"
   },
+  "developers": {
+    "tokenRefusal": "Je ne vais pas envoyer mon token !",
+    "evalTitle": "💻・Eval",
+    "input": "📥┇Entrée",
+    "output": "📥┇Sortie",
+    "error": "📥┇Erreur !"
+  },
+  "fun": {
+    "tokenTitle": "🤖・Token du bot",
+    "tokenUnavailable": "Impossible de récupérer les données distantes."
+  },
   "notepad": {
     "noNotes": "Aucune note trouvée !"
   },
