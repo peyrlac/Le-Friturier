@@ -7,6 +7,7 @@ const Schema = require('../../database/models/profile');
 const CreditsSchema = require("../../database/models/votecredits");
 
 module.exports = {
+    localizationKey: 'commandMetadata.profile',
     data: new ContextMenuCommandBuilder()
         .setName('Bot profile')
         .setType(2),

@@ -6,6 +6,7 @@ const axios = require("axios");
 const model = require('../../database/models/badge');
 
 module.exports = {
+    localizationKey: 'commandMetadata.userinfo',
     data: new ContextMenuCommandBuilder()
         .setName('Userinfo')
         .setType(2),

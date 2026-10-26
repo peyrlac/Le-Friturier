@@ -518,6 +518,21 @@ test('spoiler context menu exposes localized native metadata', () => {
   assert.match(source, /localizationKey:\s*['"]commandMetadata\.spoiler['"]/);
 });
 
+test('all moderation and profile context menus expose localized native metadata', () => {
+  const metadata = {
+    warn: 'warn',
+    unwarn: 'unwarn',
+    warnings: 'warnings',
+    userinfo: 'userinfo',
+    profile: 'profile'
+  };
+
+  for (const [file, key] of Object.entries(metadata)) {
+    const source = read(`src/interactions/ContextMenu/${file}.js`);
+    assert.match(source, new RegExp(`localizationKey:\\s*['"]commandMetadata\\.${key}['"]`), file);
+  }
+});
+
 test('move commands use localization keys for all user-facing responses', () => {
   const files = ['all.js', 'group.js', 'random.js', 'empty.js', 'split.js', 'regroup.js', 'emergency-meeting.js'];
   for (const file of files) {

@@ -6,6 +6,7 @@ const Schema = require("../../database/models/warnings");
 const Case = require("../../database/models/warnCase");
 
 module.exports = {
+    localizationKey: 'commandMetadata.warn',
     data: new ContextMenuCommandBuilder()
         .setName('Warn')
         .setType(2),
