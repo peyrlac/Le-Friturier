@@ -45,7 +45,20 @@
     },
     "embed": {
       "channelNotFound": "Channel not found.",
-      "sent": "Embed successfully sent in {channel}."
+      "sent": "Embed successfully sent in {channel}.",
+      "prompts": {
+        "title": "Please enter a title",
+        "description": "Please enter a description",
+        "author": "Please enter an author",
+        "footer": "Please enter a footer",
+        "thumbnail": "Please enter a thumbnail",
+        "image": "Please enter an image",
+        "url": "Please enter a URL",
+        "color": "Please enter a color, e.g. #FF0000"
+      },
+      "invalidThumbnail": "Incorrect thumbnail link!",
+      "invalidImage": "Incorrect image link!",
+      "invalidUrl": "Incorrect URL!"
     },
     "messageEvents": {
       "cannotDM": "I can't DM you; your direct messages may be turned off."

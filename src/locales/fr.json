@@ -43,7 +43,20 @@
   },
   "embed": {
     "channelNotFound": "Salon introuvable.",
-    "sent": "Embed envoyé avec succès dans {channel}."
+    "sent": "Embed envoyé avec succès dans {channel}.",
+    "prompts": {
+      "title": "Veuillez saisir un titre",
+      "description": "Veuillez saisir une description",
+      "author": "Veuillez saisir un auteur",
+      "footer": "Veuillez saisir un pied de page",
+      "thumbnail": "Veuillez saisir une miniature",
+      "image": "Veuillez saisir une image",
+      "url": "Veuillez saisir une URL",
+      "color": "Veuillez saisir une couleur, par exemple #FF0000"
+    },
+    "invalidThumbnail": "Lien de miniature incorrect !",
+    "invalidImage": "Lien d'image incorrect !",
+    "invalidUrl": "URL incorrecte !"
   },
   "messageEvents": {
     "cannotDM": "Je ne peux pas vous envoyer de message privé ; vos messages privés sont peut-être désactivés."

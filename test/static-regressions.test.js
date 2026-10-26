@@ -1277,6 +1277,29 @@ test('activity launch responses use localization keys', () => {
   assert.doesNotMatch(source, /Could not start \*\*\$\{name\}\*\*!|Start activity|Click on the \*\*button\*\*/);
 });
 
+test('interactive embed prompts use localization keys', () => {
+  const source = read('src/interactions/Command/embed.js');
+  const keys = [
+    'embed.prompts.title',
+    'embed.prompts.description',
+    'embed.prompts.author',
+    'embed.prompts.footer',
+    'embed.prompts.thumbnail',
+    'embed.prompts.image',
+    'embed.prompts.url',
+    'embed.prompts.color',
+    'embed.invalidThumbnail',
+    'embed.invalidImage',
+    'embed.invalidUrl'
+  ];
+
+  for (const key of keys) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+
+  assert.doesNotMatch(source, /Please enter a title|Please enter a description|Incorrect thumbnail link|Incorrect image link|Incorrect url/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
