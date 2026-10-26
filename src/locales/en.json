@@ -1553,6 +1553,7 @@
     "unbanned": "<@!{user}> ({userId}) has been unbanned from the bot."
   },
   "fun": {
+    "reverse": "{text}",
     "tokenTitle": "🤖・Bot token",
     "tokenUnavailable": "Unable to retrieve remote data."
   },
