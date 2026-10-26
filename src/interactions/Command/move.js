@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.move',
     data: new SlashCommandBuilder()
         .setName('move')
         .setDescription('Move members from a voice channel to another voice channel')

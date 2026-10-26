@@ -840,6 +840,135 @@
       "name": "vocal",
       "description": "Gérer les salons vocaux"
     },
+    "developers": {
+      "name": "développeurs",
+      "description": "Commandes pour les développeurs du bot",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes développeur" },
+        "eval": { "description": "Obtenir le résultat d’un morceau de code", "options": { "code": { "description": "Votre code" } } },
+        "badge": { "description": "Gérer les badges du bot", "options": { "new": { "description": "Sélectionner une valeur booléenne" }, "user": { "description": "Sélectionner un utilisateur" }, "badge": { "description": "Choisir votre badge" } } },
+        "ban": { "description": "Gérer les bannissements du bot", "options": { "new": { "description": "Sélectionner une valeur booléenne" }, "user": { "description": "Sélectionner un utilisateur" } } },
+        "credits": { "description": "Gérer les crédits du bot", "options": { "type": { "description": "Type de crédits" }, "user": { "description": "Sélectionner un utilisateur" }, "amount": { "description": "Montant de crédits" } } },
+        "args": { "description": "Publier des messages prédéfinis", "options": { "message": { "description": "Sélectionner un message" } } },
+        "servers": { "description": "Voir tous les serveurs de ce shard" }
+      }
+    },
+    "games": {
+      "name": "jeux",
+      "description": "Jouer à des jeux sur le bot",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de jeux" },
+        "8ball": { "description": "Poser une question au bot", "options": { "question": { "description": "Question à poser" } } },
+        "fasttype": { "description": "Apprendre à taper plus vite" },
+        "music-trivia": { "description": "Jouer au quiz musical", "options": { "number": { "description": "Nombre de chansons" } } },
+        "roll": { "description": "Lancer un dé" },
+        "rps": { "description": "Jouer à pierre-papier-ciseaux contre le bot", "options": { "option": { "description": "Choisir votre option" } } },
+        "skipword": { "description": "Passer le mot actuel" },
+        "snake": { "description": "Jouer au jeu du serpent" },
+        "trivia": { "description": "Jouer à un quiz" },
+        "willyoupressthebutton": { "description": "Jouer à « Tu appuies sur le bouton ? »" },
+        "wouldyourather": { "description": "Jouer à « Tu préfères ? »" }
+      }
+    },
+    "guild": {
+      "name": "serveur",
+      "description": "Gérer le serveur",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes du serveur" },
+        "channelinfo": { "description": "Obtenir des informations sur un salon", "options": { "channel": { "description": "Sélectionner un salon" } } },
+        "members": { "description": "Voir le nombre de membres sur ce serveur" },
+        "oldestmember": { "description": "Obtenir la date de création du compte le plus ancien du serveur" },
+        "roleinfo": { "description": "Obtenir des informations sur un rôle", "options": { "role": { "description": "Sélectionner un rôle" } } },
+        "info": { "description": "Obtenir toutes les informations sur le serveur actuel" },
+        "stealemoji": { "description": "Voler un emoji", "options": { "emoji": { "description": "Saisir un emoji à voler" }, "role": { "description": "Sélectionner un rôle" } } },
+        "youngestmember": { "description": "Obtenir la date de création du compte le plus récent du serveur" },
+        "userinfo": { "description": "Obtenir toutes les informations sur un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" } } },
+        "inviteinfo": { "description": "Obtenir toutes les informations sur une invitation", "options": { "invite": { "description": "Saisir un code d’invitation" } } },
+        "emojis": { "description": "Voir les emojis du serveur" }
+      }
+    },
+    "message": {
+      "name": "message",
+      "description": "Publier des messages prédéfinis",
+      "options": { "message": { "description": "Sélectionner un message" } }
+    },
+    "move": {
+      "name": "déplacer",
+      "description": "Déplacer des membres entre les salons vocaux",
+      "subcommands": {
+        "all": { "description": "Déplacer tous les membres d’un salon vocal vers un autre salon vocal", "options": { "from": { "description": "Salon vocal de départ" }, "to": { "description": "Salon vocal de destination" }, "exclude_streamers": { "description": "Exclure les streameurs ?" }, "excepted_user": { "description": "Utilisateur exempté" } } },
+        "group": { "description": "Déplacer les membres d’un rôle vers un autre salon vocal", "options": { "role": { "description": "Rôle à déplacer" }, "from": { "description": "Salon vocal de départ" }, "to": { "description": "Salon vocal de destination" }, "excepted_streamers": { "description": "Exclure les streameurs ?" } } },
+        "random": { "description": "Déplacer un nombre aléatoire de membres", "options": { "amount": { "description": "Nombre de membres à déplacer" }, "from": { "description": "Salon vocal de départ" }, "to": { "description": "Salon vocal de destination" }, "exclude_streamers": { "description": "Exclure les streameurs ?" } } },
+        "emergency-meeting": { "description": "Déplacer tous les membres vers un autre salon vocal", "options": { "to": { "description": "Salon vocal de destination" }, "exclude_streamers": { "description": "Exclure les streameurs ?" }, "excepted_channel": { "description": "Salon vocal exempté" } } },
+        "empty": { "description": "Expulser tous les membres d’un salon vocal", "options": { "from": { "description": "Salon vocal" }, "excepted_user": { "description": "Utilisateur exempté" } } },
+        "split": { "description": "Diviser un salon vocal en plusieurs salons définis", "options": { "from": { "description": "Salon vocal de départ" }, "to_a": { "description": "Salon vocal A" }, "to_b": { "description": "Salon vocal B" }, "to_c": { "description": "Salon vocal C" }, "to_d": { "description": "Salon vocal D" } } },
+        "regroup": { "description": "Regrouper les membres de plusieurs salons dans un seul salon vocal", "options": { "from_a": { "description": "Salon vocal de départ A" }, "from_b": { "description": "Salon vocal de départ B" }, "to": { "description": "Salon vocal de destination" }, "from_c": { "description": "Salon vocal de départ C" }, "from_d": { "description": "Salon vocal de départ D" } } }
+      }
+    },
+    "soundboard": {
+      "name": "soundboard",
+      "description": "Lire tous les sons du bot",
+      "subcommands": { "help": { "description": "Obtenir des informations sur les commandes de soundboard" } },
+      "subcommandGroups": {
+        "windows": { "description": "Lire les sons de Windows", "subcommands": { "windowserror": { "description": "Lire le son d’erreur Windows" }, "windowsshutdown": { "description": "Lire le son d’arrêt de Windows" }, "windowsstartup": { "description": "Lire le son de démarrage de Windows" } } },
+        "earrape": { "description": "Lire les sons earrape", "subcommands": { "reee": { "description": "Lire le son reee" }, "defaultdance": { "description": "Lire le son defaultdance" }, "startup": { "description": "Lire le son startup" }, "thomas": { "description": "Lire le son thomas" }, "wegothim": { "description": "Lire le son wegothim" } } },
+        "songs": { "description": "Lire les sons de chansons", "subcommands": { "dancememe": { "description": "Lire le son dancememe" }, "despacito": { "description": "Lire le son despacito" }, "elevator": { "description": "Lire le son elevator" }, "rickastley": { "description": "Lire le son rickastley" }, "running": { "description": "Lire le son running" }, "tobecontinued": { "description": "Lire le son tobecontinued" } } },
+        "discord": { "description": "Lire les sons Discord", "subcommands": { "discordcall": { "description": "Lire le son d’appel Discord" }, "discordjoin": { "description": "Lire le son d’arrivée sur Discord" }, "discordleave": { "description": "Lire le son de départ de Discord" }, "discordnotification": { "description": "Lire le son de notification Discord" } } },
+        "memes": { "description": "Lire les sons de mèmes", "subcommands": { "fbi": { "description": "Lire le son fbi" }, "jeff": { "description": "Lire le son jeff" }, "lambo": { "description": "Lire le son lambo" }, "missionfailed": { "description": "Lire le son missionfailed" }, "moaning": { "description": "Lire le son moaning" }, "nani": { "description": "Lire le son nani" }, "nyancat": { "description": "Lire le son nyancat" }, "ohh": { "description": "Lire le son ohh" }, "rimshot": { "description": "Lire le son rimshot" }, "roblox": { "description": "Lire le son roblox" }, "shotdown": { "description": "Lire le son shotdown" }, "spongebob": { "description": "Lire le son spongebob" }, "wow": { "description": "Lire le son wow" }, "yeet": { "description": "Lire le son yeet" } } }
+      }
+    },
+    "images": {
+      "name": "images",
+      "description": "Voir toutes les images du bot",
+      "subcommands": { "help": { "description": "Obtenir des informations sur les commandes d’images" } },
+      "subcommandGroups": {
+        "memes": {
+          "description": "Voir tous les mèmes du bot",
+          "subcommands": {
+            "clyde": { "description": "Créer un message Clyde personnalisé", "options": { "text": { "description": "Saisir un texte" } } },
+            "drake": { "description": "Créer un mème Drake", "options": { "text1": { "description": "Saisir un texte" }, "text2": { "description": "Saisir un texte" } } },
+            "meme": { "description": "Obtenir un mème aléatoire" },
+            "pooh": { "description": "Créer un mème Winnie", "options": { "text1": { "description": "Saisir un texte" }, "text2": { "description": "Saisir un texte" } } },
+            "trumptweet": { "description": "Afficher un tweet personnalisé de Donald Trump", "options": { "text": { "description": "Saisir un texte" } } },
+            "tweet": { "description": "Publier un tweet", "options": { "text": { "description": "Saisir un texte" } } },
+            "wasted": { "description": "Ajouter l’effet GTA Wasted" }
+          }
+        },
+        "animals": {
+          "description": "Voir toutes les images d’animaux du bot",
+          "subcommands": {
+            "bird": { "description": "Obtenir un oiseau aléatoire" }, "cat": { "description": "Obtenir un chat aléatoire" }, "dog": { "description": "Obtenir un chien aléatoire" }, "fox": { "description": "Obtenir un renard aléatoire" }, "koala": { "description": "Obtenir un koala aléatoire" }, "panda": { "description": "Obtenir un panda aléatoire" }, "redpanda": { "description": "Obtenir un panda roux aléatoire" }
+          }
+        },
+        "user": {
+          "description": "Voir toutes les images d’utilisateurs du bot",
+          "subcommands": {
+            "ad": { "description": "Générer une image publicitaire", "options": { "user": { "description": "Utilisateur concerné" } } },
+            "avatar": { "description": "Voir l’avatar d’un utilisateur", "options": { "user": { "description": "Utilisateur dont voir l’avatar" } } },
+            "banner": { "description": "Voir la bannière d’un utilisateur", "options": { "user": { "description": "Utilisateur dont voir la bannière" } } },
+            "bed": { "description": "Créer un mème de lit", "options": { "user": { "description": "Utilisateur avec qui dormir" } } },
+            "blur": { "description": "Créer une image floue", "options": { "user": { "description": "Utilisateur dont flouter l’image" } } },
+            "burn": { "description": "Créer une image brûlée", "options": { "user": { "description": "Utilisateur dont brûler l’image" } } },
+            "clown": { "description": "Générer une image de clown", "options": { "user": { "description": "Utilisateur à transformer en clown" } } },
+            "colorify": { "description": "Générer une image colorée", "options": { "user": { "description": "Utilisateur concerné" } } },
+            "darkness": { "description": "Générer une image sombre", "options": { "user": { "description": "Utilisateur concerné" } } },
+            "facepalm": { "description": "Générer une image facepalm", "options": { "user": { "description": "Utilisateur concerné" } } },
+            "greyscale": { "description": "Rendre une image grise", "options": { "user": { "description": "Utilisateur concerné" } } },
+            "invert": { "description": "Inverser une image", "options": { "user": { "description": "Utilisateur concerné" } } },
+            "kiss": { "description": "Embrasser un utilisateur", "options": { "user": { "description": "Utilisateur à embrasser" } } },
+            "podium": { "description": "Créer un podium d’utilisateurs", "options": { "user1": { "description": "Premier utilisateur" }, "user2": { "description": "Deuxième utilisateur" }, "user3": { "description": "Troisième utilisateur" } } },
+            "spank": { "description": "Donner une fessée à un utilisateur", "options": { "user": { "description": "Utilisateur à viser" } } },
+            "wanted": { "description": "Créer une affiche Wanted", "options": { "user": { "description": "Utilisateur à afficher" } } }
+          }
+        },
+        "extra": {
+          "description": "Voir toutes les images supplémentaires du bot",
+          "subcommands": {
+            "car": { "description": "Obtenir une voiture aléatoire" }, "glass": { "description": "Superposer une texture de verre sur une image" }, "image": { "description": "Afficher une image dans un embed", "options": { "channel": { "description": "Salon où envoyer l’embed" }, "image-url": { "description": "Saisir l’URL d’une image" } } }, "triggered": { "description": "Se déclencher soi-même" }, "wallpaper": { "description": "Obtenir un fond d’écran HDQWalls", "options": { "name": { "description": "Saisir un nom" } } }
+          }
+        }
+      }
+    },
     "announcement": {
       "name": "annonce",
       "description": "Gérer les annonces du serveur",

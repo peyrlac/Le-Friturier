@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 const model = require('../../database/models/badge');
 
 module.exports = {
+    localizationKey: 'commandMetadata.developers',
     data: new SlashCommandBuilder()
         .setName('developers')
         .setDescription('Commands for the Bot developers')

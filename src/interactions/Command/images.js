@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const { ChannelType } = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.images',
 
     // Meme Images
 
