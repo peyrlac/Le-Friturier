@@ -220,23 +220,24 @@ module.exports = async (client) => {
                 "Authorization": `Bot ${client.token}`,
                 "Content-Type": "application/json"
             }
-        }).then(invite => {
-                if (invite.error || !invite.code) return client.errNormal({ 
-                    error: `Could not start **${name}**!`, 
+        }).then(async invite => {
+                if (invite.error || !invite.code) return client.errNormal({
+                    key: 'activities.startFailed',
+                    variables: { name },
                     type: 'editreply'
                 }, interaction);
 
                 const row = new Discord.ActionRowBuilder()
                     .addComponents(
                         new Discord.ButtonBuilder()
-                            .setLabel("Start activity")
+                            .setLabel(await client.t(interaction, 'activities.startButton'))
                             .setURL(`https://discord.gg/${invite.code}`)
                             .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({
-                    title: `${client.emotes.normal.tv}・Activities`,
-                    desc: `Click on the **button** to start **${name}** in **${channel.name}**`,
+                    title: await client.t(interaction, 'activities.title', { icon: client.emotes.normal.tv }),
+                    desc: await client.t(interaction, 'activities.description', { name, channel: channel.name }),
                     components: [row],
                     type: 'editreply'
                 }, interaction)
@@ -244,7 +245,8 @@ module.exports = async (client) => {
             .catch(e => {
                 console.log(e)
                 client.errNormal({
-                    error: `Could not start **${name}**!`,
+                    key: 'activities.startFailed',
+                    variables: { name },
                     type: 'editreply'
                 }, interaction);
             })
