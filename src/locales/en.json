@@ -1692,7 +1692,21 @@
     "bot": {
       "name": "bot",
       "description": "Get information about the bot",
-      "subcommands": { "feature": { "description": "Manage global feature switches", "options": { "action": { "choices": { "list": { "name": "List" }, "set": { "name": "Set" }, "reset": { "name": "Reset" } } } } } }
+      "subcommands": {
+        "help": { "description": "Get information about the bot category commands" },
+        "info": { "description": "Get information about the bot" },
+        "ping": { "description": "See the bot ping in milliseconds" },
+        "changelogs": { "description": "Get the bot changelogs" },
+        "donate": { "description": "Get the bot donation link" },
+        "links": { "description": "Get a message with all bot links" },
+        "owner": { "description": "Get information about the owner" },
+        "socials": { "description": "Get the bot social links" },
+        "support": { "description": "Get an invitation to the support server" },
+        "uptime": { "description": "Show the bot uptime" },
+        "vote": { "description": "See if you have voted" },
+        "feedback": { "description": "Send your feedback about the bot to the developers", "options": { "feedback": { "description": "Your feedback" } } },
+        "feature": { "description": "Manage global feature switches", "options": { "action": { "description": "Action to perform", "choices": { "list": { "name": "List" }, "set": { "name": "Set" }, "reset": { "name": "Reset" } } }, "feature": { "description": "Feature to modify" }, "enabled": { "description": "Enable the feature" } } }
+      }
     },
     "birthdays": {
       "name": "birthdays",
