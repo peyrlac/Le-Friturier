@@ -238,8 +238,10 @@ test('radio commands use localization keys for user-facing responses', () => {
 test('fun command exposes localized top-level metadata', () => {
   const command = require(path.join(root, 'src/interactions/Command/fun.js'));
   const { resolveCommandLocalizations } = require('../src/handlers/i18n');
+  const funLocalizations = resolveCommandLocalizations(command);
+  const { subcommands: _funSubcommands, subcommandGroups: _funGroups, common: _funCommon, ...funRoot } = funLocalizations;
 
-  assert.deepEqual(resolveCommandLocalizations(command), {
+  assert.deepEqual(funRoot, {
     name: { fr: 'fun', en: 'fun' },
     description: {
       fr: 'Exécuter les commandes amusantes du bot',
@@ -848,6 +850,11 @@ test('moderation command descriptions are sourced from locale metadata', () => {
 
 test('tools command descriptions are sourced from locale metadata', () => {
   const source = read('src/interactions/Command/tools.js');
+  assert.doesNotMatch(source, /\.setDescription\(['"]/);
+});
+
+test('fun command descriptions are sourced from locale metadata', () => {
+  const source = read('src/interactions/Command/fun.js');
   assert.doesNotMatch(source, /\.setDescription\(['"]/);
 });
 
