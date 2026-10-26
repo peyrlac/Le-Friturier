@@ -1666,7 +1666,8 @@
     },
     "radio": {
       "name": "radio",
-      "description": "Play radio in the bot"
+      "description": "Play radio in the bot",
+      "subcommands": { "help": { "description": "Get information about the radio category commands" }, "play": { "description": "Start the radio" }, "stop": { "description": "Stop the radio" }, "playing": { "description": "Show what is playing now" } }
     },
     "moderation": {
       "name": "moderation",
