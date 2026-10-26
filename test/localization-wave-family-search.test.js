@@ -92,3 +92,21 @@ test('tools, notes, and thanks response waves use localization keys', () => {
     assert.equal(typeof get(en, key), 'string', `Missing English locale key: ${key}`);
   }
 });
+
+test('soundboard responses use shared localized voice and playback keys', () => {
+  const directory = path.join(root, 'src/commands/soundboard');
+  const files = fs.readdirSync(directory)
+    .filter(file => file.endsWith('.js'))
+    .map(file => path.join('src/commands/soundboard', file));
+
+  for (const file of files) {
+    const source = read(file);
+    assert.doesNotMatch(source, /client\.errNormal\(\{\s*error:/);
+    assert.doesNotMatch(source, /client\.succNormal\(\{\s*text:/);
+  }
+
+  for (const key of ['soundboard.notInVoice', 'soundboard.notSameVoice', 'soundboard.started']) {
+    assert.equal(typeof get(fr, key), 'string', `Missing French locale key: ${key}`);
+    assert.equal(typeof get(en, key), 'string', `Missing English locale key: ${key}`);
+  }
+});
