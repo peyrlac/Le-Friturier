@@ -1763,8 +1763,8 @@
         "eval": { "description": "Get the result of a piece of code", "options": { "code": { "description": "Your code" } } },
         "badge": { "description": "Manage the bot badges", "options": { "new": { "description": "Select a boolean" }, "user": { "description": "Select a user" }, "badge": { "description": "Choose your badge" } } },
         "ban": { "description": "Manage the bot bans", "options": { "new": { "description": "Select a boolean" }, "user": { "description": "Select a user" } } },
-        "credits": { "description": "Manage the bot credits", "options": { "type": { "description": "The type of credits" }, "user": { "description": "Select a user" }, "amount": { "description": "Amount of credits" } } },
-        "args": { "description": "Post preset messages", "options": { "message": { "description": "Select a message" } } },
+        "credits": { "description": "Manage the bot credits", "options": { "type": { "description": "The type of credits", "choices": { "add": { "name": "Add" }, "remove": { "name": "Remove" } } }, "user": { "description": "Select a user" }, "amount": { "description": "Amount of credits" } } },
+        "args": { "description": "Post preset messages", "options": { "message": { "description": "Select a message", "choices": { "information": { "name": "Information" }, "rules": { "name": "Rules" }, "applications": { "name": "Applications" }, "boosterperks": { "name": "Booster perks" }, "links": { "name": "Links" }, "rewards": { "name": "Rewards" }, "ourbots": { "name": "Our bots" } } } } },
         "servers": { "description": "See all servers from this shard" }
       }
     },
