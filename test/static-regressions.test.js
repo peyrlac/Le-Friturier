@@ -1129,6 +1129,16 @@ test('developer rules panel uses localization keys', () => {
   assert.doesNotMatch(source, /être respectueux|Aucune langue inappropriée|Pas de spam|No not join voice chat/);
 });
 
+test('developer applications panel uses localization keys', () => {
+  const source = read('src/commands/developers/args.js');
+  const keys = ['developers.args.applications.title', 'developers.args.applications.description'];
+  for (let index = 1; index <= 6; index += 1) {
+    keys.push(`developers.args.applications.field${index}Title`, `developers.args.applications.field${index}`);
+  }
+  for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  assert.doesNotMatch(source, /A very nice team|Access to the beta program|A nice rank and badge|Learn and grow|What does everything mean\?|Apply\?/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

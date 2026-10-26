@@ -1382,6 +1382,22 @@
       "rule9Description": "You can find them here: https://discordapp.com/guidelines",
       "rule10Title": "10. Do not join voice channels without permission",
       "rule10Description": "If there is a free spot, ask whether you may join first and leave if your presence is not wanted."
+      },
+      "applications": {
+      "title": "💼・Applications",
+      "description": "_____\n\nWhat could be more fun than working with the best bot/server? We regularly have positions available.\n\nBut what can you expect?",
+      "field1Title": "👥┆A great team",
+      "field1": "The bot team always has a pleasant atmosphere and treats everyone equally!",
+      "field2Title": "🥳┆Access to the beta program",
+      "field2": "Get access to unreleased bot features with your own server and become a real tester!",
+      "field3Title": "📛┆A great role and badge",
+      "field3": "You will receive a server role and a team badge in the userinfo command.",
+      "field4Title": "📖┆Learn and grow",
+      "field4": "We give you the opportunity to learn, improve in your position, and potentially grow into the management team.",
+      "field5Title": "📘┆What do the roles mean?",
+      "field5": "**Moderator**\nHelp keep the server fun and organized.\n\n**Marketing**\nHelp the community grow.\n\n**Organization**\nWork with the team on new events.",
+      "field6Title": "📃┆Apply?",
+      "field6": "Create a ticket to receive your application form!"
       }
     },
     "badgeNotFound": "I cannot find that badge.",

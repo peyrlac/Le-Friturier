@@ -103,35 +103,35 @@ module.exports = async (client, interaction, args) => {
     if (message == "applications") {
         client.simpleEmbed({
             image: `https://cdn.discordapp.com/attachments/843487478881976381/874742737415581786/Bot_banner_applications.jpg`
-        }, interaction.channel).then(() => {
+        }, interaction.channel).then(async () => {
             client.embed({
-                title: `💼・Applications`,
+                title: await client.t(interaction, 'developers.args.applications.title'),
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                desc: `_____ \n\nWhat could be more fun than working at the best bot/server? We regularly have spots for new positions that you can apply for \n\nBut... what can you expect?`,
+                desc: await client.t(interaction, 'developers.args.applications.description'),
                 fields: [
                     {
-                        name: `👥┆A very nice team`,
-                        value: `In the Bot team there is always a pleasant atmosphere and everyone is treated equally!`,
+                        name: await client.t(interaction, 'developers.args.applications.field1Title'),
+                        value: await client.t(interaction, 'developers.args.applications.field1'),
                     },
                     {
-                        name: `🥳┆Access to the beta program`,
-                        value: `Get access to unreleased Bot features with your own server! You are a real Bot tester!`,
+                        name: await client.t(interaction, 'developers.args.applications.field2Title'),
+                        value: await client.t(interaction, 'developers.args.applications.field2'),
                     },
                     {
-                        name: `📛┆A nice rank and badge`,
-                        value: `You will get a nice rank in the server and a team badge in our userinfo command. Everyone can see that you contribute to the team`,
+                        name: await client.t(interaction, 'developers.args.applications.field3Title'),
+                        value: await client.t(interaction, 'developers.args.applications.field3'),
                     },
                     {
-                        name: `📖┆Learn and grow`,
-                        value: `We understand that you don't always understand everything right away! At Bot, we give you the opportunity to learn new things and get better at the position. You can also grow into the management team in the future!`,
+                        name: await client.t(interaction, 'developers.args.applications.field4Title'),
+                        value: await client.t(interaction, 'developers.args.applications.field4'),
                     },
                     {
-                        name: `📘┆What does everything mean?`,
-                        value: `**Moderator** \nYou keep yourself busy with the server that everything is and remains fun for everyone! Chat with us and keep the overview \n\n**Marketing** \nWe also want to grow and we do that with a great marketing team! You know better than anyone how to make a server grow well \n\n**Organization** \nYou will ensure an even nicer atmosphere in the server! Together with a team you work on new and fun events to make the server even more fun!`,
+                        name: await client.t(interaction, 'developers.args.applications.field5Title'),
+                        value: await client.t(interaction, 'developers.args.applications.field5'),
                     },
                     {
-                        name: `📃┆Apply?`,
-                        value: `Create a ticket to receive your application!`,
+                        name: await client.t(interaction, 'developers.args.applications.field6Title'),
+                        value: await client.t(interaction, 'developers.args.applications.field6'),
                     }
                 ]
             }, interaction.channel)
