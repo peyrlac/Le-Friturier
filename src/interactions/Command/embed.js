@@ -338,7 +338,7 @@ module.exports = {
         const channel = interaction.options.getChannel("channel");
         if (!channel)
           return client.errNormal(
-            { error: `Channel not found` },
+            { key: 'embed.channelNotFound' },
             collected.first().channel
           );
 
@@ -352,7 +352,8 @@ module.exports = {
 
             client.succNormal(
               {
-                text: `Embed successfully sent in ${channel}`,
+                key: 'embed.sent',
+                variables: { channel },
                 components: [],
                 type: "editreply",
               },
