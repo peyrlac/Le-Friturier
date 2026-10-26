@@ -270,7 +270,9 @@ test('voice exposes localized metadata and supports localized channel responses'
   const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
   assert.equal(command.localizationKey, 'commandMetadata.voice');
-  assert.deepEqual(resolveCommandLocalizations(command), {
+  const voiceLocalizations = resolveCommandLocalizations(command);
+  const { subcommands: _voiceSubcommands, ...voiceRoot } = voiceLocalizations;
+  assert.deepEqual(voiceRoot, {
     name: { fr: 'vocal', en: 'voice' },
     description: { fr: 'Gérer les salons vocaux', en: 'Manage voice channels' }
   });

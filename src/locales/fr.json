@@ -1769,7 +1769,8 @@
     },
     "voice": {
       "name": "vocal",
-      "description": "Gérer les salons vocaux"
+      "description": "Gérer les salons vocaux",
+      "subcommands": { "help": { "description": "Obtenir des informations sur les commandes de catégorie vocale" }, "limit": { "description": "Limiter votre salon vocal personnalisé", "options": { "limit": { "description": "Saisir une limite" } } }, "lock": { "description": "Verrouiller votre salon vocal personnalisé" }, "rename": { "description": "Renommer votre salon vocal personnalisé", "options": { "name": { "description": "Nouveau nom vocal" } } }, "unlock": { "description": "Déverrouiller votre salon vocal personnalisé" } }
     },
     "developers": {
       "name": "développeurs",

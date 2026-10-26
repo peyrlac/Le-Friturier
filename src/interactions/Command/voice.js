@@ -1,36 +1,37 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('voice')
-        .setDescription('Manage the voice channels')
+        .setName(getCommandMetadata('commandMetadata.voice.name'))
+        .setDescription(getCommandMetadata('commandMetadata.voice.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the voice category commands')
+                .setDescription(getCommandMetadata('commandMetadata.voice.subcommands.help.description'))
         ).addSubcommand(subcommand =>
             subcommand
                 .setName('limit')
-                .setDescription('Limit your custom voice channel')
-                .addNumberOption(option => option.setName('limit').setDescription('Enter a limit').setMinValue(1).setMaxValue(99).setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.voice.subcommands.limit.description'))
+                .addNumberOption(option => option.setName('limit').setDescription(getCommandMetadata('commandMetadata.voice.subcommands.limit.options.limit.description')).setMinValue(1).setMaxValue(99).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('lock')
-                .setDescription('Lock your custom voice channel')
+                .setDescription(getCommandMetadata('commandMetadata.voice.subcommands.lock.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('rename')
-                .setDescription('Rename your custom voice channel')
-                .addStringOption(option => option.setName('name').setDescription('New voice name').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.voice.subcommands.rename.description'))
+                .addStringOption(option => option.setName('name').setDescription(getCommandMetadata('commandMetadata.voice.subcommands.rename.options.name.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('unlock')
-                .setDescription('Unlock your custom voice channel')
+                .setDescription(getCommandMetadata('commandMetadata.voice.subcommands.unlock.description'))
         )
     ,
 
