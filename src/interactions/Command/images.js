@@ -1,6 +1,7 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const { ChannelType } = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     localizationKey: 'commandMetadata.images',
@@ -9,46 +10,46 @@ module.exports = {
 
     data: new SlashCommandBuilder()
         .setName('images')
-        .setDescription('See all the images in Bot')
+        .setDescription(getCommandMetadata('commandMetadata.images.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the message category commands')
+                .setDescription(getCommandMetadata('commandMetadata.images.subcommands.help.description'))
         )
         .addSubcommandGroup((group) =>
             group
                 .setName('memes')
-                .setDescription('See all the memes in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.description'))
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('clyde').setDescription('Get a custom clyde message')
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                subcommand.setName('clyde').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.clyde.description'))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.clyde.options.text.description')).setRequired(true))
 
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('drake').setDescription('Create a drake meme')
-                        .addStringOption(option => option.setName('text1').setDescription('Enter a text').setRequired(true))
-                        .addStringOption(option => option.setName('text2').setDescription('Enter a text').setRequired(true)),
+                    subcommand.setName('drake').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.drake.description'))
+                        .addStringOption(option => option.setName('text1').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.drake.options.text1.description')).setRequired(true))
+                        .addStringOption(option => option.setName('text2').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.drake.options.text2.description')).setRequired(true)),
 
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('meme').setDescription('Get a random meme'),
+                    subcommand.setName('meme').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.meme.description')),
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('pooh').setDescription('Create a pooh meme')
-                        .addStringOption(option => option.setName('text1').setDescription('Enter a text').setRequired(true))
-                        .addStringOption(option => option.setName('text2').setDescription('Enter a text').setRequired(true)),
+                    subcommand.setName('pooh').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.pooh.description'))
+                        .addStringOption(option => option.setName('text1').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.pooh.options.text1.description')).setRequired(true))
+                        .addStringOption(option => option.setName('text2').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.pooh.options.text2.description')).setRequired(true)),
 
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('trumptweet').setDescription('Display\'s a custom tweet from Donald Trump with the message provided')
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                    subcommand.setName('trumptweet').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.trumptweet.description'))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.trumptweet.options.text.description')).setRequired(true))
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('tweet').setDescription('Tweet something on twitter')
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                    subcommand.setName('tweet').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.tweet.description'))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.tweet.options.text.description')).setRequired(true))
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('wasted').setDescription('GTA wasted overlay'),
+                    subcommand.setName('wasted').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.memes.subcommands.wasted.description')),
                 )
 
         )
@@ -58,41 +59,41 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('animals')
-                .setDescription('See all the animal images in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('bird')
-                        .setDescription('Get a random bird'),
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.subcommands.bird.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('cat')
-                        .setDescription("Get a random cat")
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.subcommands.cat.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('dog')
-                        .setDescription("Get a random dog")
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.subcommands.dog.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('fox')
-                        .setDescription("Get a random fox")
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.subcommands.fox.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('koala')
-                        .setDescription("Get a random koala")
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.subcommands.koala.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('panda')
-                        .setDescription("Get a random panda")
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.subcommands.panda.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('redpanda')
-                        .setDescription("Get a random redpanda")
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.animals.subcommands.redpanda.description'))
                 )
         )
 
@@ -101,140 +102,140 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('user')
-                .setDescription('See all the user images in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('ad')
-                        .setDescription('Generate a ad image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.ad.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the ad from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.ad.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('avatar')
-                        .setDescription('See a users avatar')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.avatar.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the avatar from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.avatar.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('banner')
-                        .setDescription('See a users banner')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.banner.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the banner from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.banner.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('bed')
-                        .setDescription('Creates an bed meme')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.bed.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want to sleep with').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.bed.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('blur')
-                        .setDescription('Gives an blurred image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.blur.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the blurred image from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.blur.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('burn')
-                        .setDescription('Gives an burned image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.burn.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the burned image from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.burn.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('clown')
-                        .setDescription('Generate a clown image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.clown.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want make a clown').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.clown.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('colorify')
-                        .setDescription('Generate a colorify image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.colorify.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the colorified image from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.colorify.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('darkness')
-                        .setDescription('Gives an darkness image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.darkness.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the darkness image from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.darkness.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('facepalm')
-                        .setDescription('Generate an facepalm image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.facepalm.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the facepalm image from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.facepalm.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('greyscale')
-                        .setDescription('Make an image more grey')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.greyscale.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want to make more gray').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.greyscale.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('invert')
-                        .setDescription('Invert a image')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.invert.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want the inverted image from').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.invert.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('kiss')
-                        .setDescription('Kiss a user')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.kiss.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want to kiss').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.kiss.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('podium')
-                        .setDescription('Make a user podium')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.podium.description'))
                         .addUserOption((option) =>
-                            option.setName('user1').setDescription('The first podium user').setRequired(true),
+                            option.setName('user1').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.podium.options.user1.description')).setRequired(true),
                         )
                         .addUserOption((option) =>
-                            option.setName('user2').setDescription('The second podium user').setRequired(true),
+                            option.setName('user2').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.podium.options.user2.description')).setRequired(true),
                         )
                         .addUserOption((option) =>
-                            option.setName('user3').setDescription('The third podium user').setRequired(true),
+                            option.setName('user3').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.podium.options.user3.description')).setRequired(true),
                         )
 
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('spank')
-                        .setDescription('Spank a user')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.spank.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want to spank').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.spank.options.user.description')).setRequired(true),
                         )
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('wanted')
-                        .setDescription('Wanted a user')
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.wanted.description'))
                         .addUserOption((option) =>
-                            option.setName('user').setDescription('The user you want to wanted').setRequired(true),
+                            option.setName('user').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.user.subcommands.wanted.options.user.description')).setRequired(true),
                         )
                 )
         )
@@ -244,30 +245,30 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('extra')
-                .setDescription('See all the extra images in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('car')
-                        .setDescription('Get a random car'),
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.car.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('glass')
-                        .setDescription('Overlays a glass texture over an image'),
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.glass.description')),
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('image').setDescription('Show a image in an embed')
-                        .addChannelOption(option => option.setName('channel').setDescription('Channel where the embed should be').setRequired(true).addChannelTypes(ChannelType.GuildText))
-                        .addStringOption(option => option.setName('image-url').setDescription('Enter a image url').setRequired(true))
+                    subcommand.setName('image').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.image.description'))
+                        .addChannelOption(option => option.setName('channel').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.image.options.channel.description')).setRequired(true).addChannelTypes(ChannelType.GuildText))
+                        .addStringOption(option => option.setName('image-url').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.image.options.image-url.description')).setRequired(true))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('triggered')
-                        .setDescription('Trigger yourself'),
+                        .setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.triggered.description')),
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('wallpaper').setDescription('Returns a wallpaper from HDQWalls')
-                        .addStringOption(option => option.setName('name').setDescription('Enter a name').setRequired(true))
+                    subcommand.setName('wallpaper').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.wallpaper.description'))
+                        .addStringOption(option => option.setName('name').setDescription(getCommandMetadata('commandMetadata.images.subcommandGroups.extra.subcommands.wallpaper.options.name.description')).setRequired(true))
                 )
         ),
 

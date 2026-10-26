@@ -613,6 +613,12 @@ test('invite commands read native metadata from the locale catalog', () => {
   }
 });
 
+test('images command reads all native metadata from the locale catalog', () => {
+  const source = read('src/interactions/Command/images.js');
+  assert.match(source, /getCommandMetadata\(/);
+  assert.doesNotMatch(source, /setDescription\(['"`]/);
+});
+
 test('move commands use localization keys for all user-facing responses', () => {
   const files = ['all.js', 'group.js', 'random.js', 'empty.js', 'split.js', 'regroup.js', 'emergency-meeting.js'];
   for (const file of files) {
