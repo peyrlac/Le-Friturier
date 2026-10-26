@@ -194,7 +194,9 @@ test('automod exposes localized command metadata and option descriptions', () =>
   const command = require('../src/interactions/Command/automod');
   const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
-  assert.deepEqual(resolveCommandLocalizations(command), {
+  const automodLocalizations = resolveCommandLocalizations(command);
+  delete automodLocalizations.subcommands.linkschannel.options.type.choices;
+  assert.deepEqual(automodLocalizations, {
     name: { fr: 'automod', en: 'automod' },
     description: { fr: 'Gérer la modération automatique', en: 'Manage automatic moderation' },
     subcommands: {
@@ -579,6 +581,23 @@ test('serializes localized activity choice names from command metadata', () => {
   assert.deepEqual(choices.find(choice => choice.value === 'poker').name_localizations, {
     fr: 'Soirée poker',
     'en-US': 'Poker Night'
+  });
+});
+
+test('serializes localized automod choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/automod');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const choices = command.data.toJSON().options.find(option => option.name === 'linkschannel').options[0].choices;
+
+  assert.deepEqual(choices.find(choice => choice.value === 'add').name_localizations, {
+    fr: 'Ajouter',
+    'en-US': 'Add'
+  });
+  assert.deepEqual(choices.find(choice => choice.value === 'remove').name_localizations, {
+    fr: 'Supprimer',
+    'en-US': 'Remove'
   });
 });
 
