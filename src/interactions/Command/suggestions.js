@@ -1,33 +1,34 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('suggestions')
-        .setDescription('Manage the suggestions')
+        .setDescription(getCommandMetadata('commandMetadata.suggestions.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the suggestions category commands')
+                .setDescription(getCommandMetadata('commandMetadata.suggestions.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('accept')
-                .setDescription('Accept a suggestion')
-                .addStringOption(option => option.setName('id').setDescription('Suggestion message ID').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.suggestions.subcommands.accept.description'))
+                .addStringOption(option => option.setName('id').setDescription(getCommandMetadata('commandMetadata.suggestions.subcommands.accept.options.id.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('deny')
-                .setDescription('Deny a suggestion')
-                .addStringOption(option => option.setName('id').setDescription('Suggestion message ID').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.suggestions.subcommands.deny.description'))
+                .addStringOption(option => option.setName('id').setDescription(getCommandMetadata('commandMetadata.suggestions.subcommands.deny.options.id.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('send')
-                .setDescription('Send a suggestion')
-                .addStringOption(option => option.setName('suggestion').setDescription('Your suggestion').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.suggestions.subcommands.send.description'))
+                .addStringOption(option => option.setName('suggestion').setDescription(getCommandMetadata('commandMetadata.suggestions.subcommands.send.options.suggestion.description')).setRequired(true))
         )
     ,
 
