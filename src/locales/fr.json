@@ -748,6 +748,8 @@
     "casino": {
       "rouletteTitle": "🎰・Roulette",
       "roulette": {
+        "usage": "roulette [couleur] [montant]",
+        "multiplier": "🎰・Multiplicateur : {multiplier}",
         "insufficient": "Vous pariez plus que vous ne possédez !",
         "invalidColour": "Aucune couleur correcte spécifiée !",
         "noAccount": "Vous n'avez pas encore d'argent.",
