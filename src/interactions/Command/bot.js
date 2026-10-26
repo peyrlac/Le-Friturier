@@ -1,6 +1,7 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { FEATURE_REGISTRY } = require('../../handlers/features');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -66,10 +67,36 @@ module.exports = {
                 .setName('feedback')
                 .setDescription('Envoyez votre opinion sur le bot aux développeurs')
                 .addStringOption(option => option.setName("feedback").setDescription("Vos réactions").setRequired(true))
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName('feature')
+                .setDescription('Gérer les arrêts globaux des fonctionnalités')
+                .addStringOption(option => option
+                    .setName('action')
+                    .setDescription('Action à effectuer')
+                    .setRequired(true)
+                    .addChoices(
+                        { name: 'Lister', value: 'list' },
+                        { name: 'Modifier', value: 'set' },
+                        { name: 'Réinitialiser', value: 'reset' }
+                    ))
+                .addStringOption(option => option
+                    .setName('feature')
+                    .setDescription('Fonctionnalité à modifier')
+                    .setRequired(false)
+                    .addChoices(...Object.keys(FEATURE_REGISTRY).map(name => ({ name, value: name }))))
+                .addBooleanOption(option => option
+                    .setName('enabled')
+                    .setDescription('Activer la fonctionnalité')
+                    .setRequired(false))
         ),
     localizations: {
         name: { fr: 'bot', en: 'bot' },
-        description: { fr: 'Obtenir des informations sur le bot', en: 'Get information about the bot' }
+        description: { fr: 'Obtenir des informations sur le bot', en: 'Get information about the bot' },
+        subcommands: {
+            feature: { description: { fr: 'Gérer les arrêts globaux des fonctionnalités', en: 'Manage global feature switches' } }
+        }
     },
 
     /** 

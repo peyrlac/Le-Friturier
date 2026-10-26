@@ -302,6 +302,19 @@ test('core category commands expose localized top-level metadata', () => {
   }
 });
 
+test('bot installs the feature manager before loading handlers', () => {
+  const source = read('src/bot.js');
+  assert.match(source, /installFeatureManager/);
+  assert.match(source, /globalFeatures/);
+  assert.match(source, /Features/);
+});
+
+test('interaction routing gates disabled commands before execution', () => {
+  const source = read('src/events/client/interactionCreate.js');
+  assert.match(source, /await client\.requireFeature\(interaction, cmd\.data\.name\)/);
+  assert.match(source, /requireFeature\(interaction, cmd\.data\.name\)[\s\S]*if \(cmd\) return cmd\.run/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
