@@ -749,6 +749,14 @@
     "submitted": "Votre avis a été envoyé avec succès.",
     "newReview": "Un nouvel avis a été publié."
   },
+  "reactionroles": {
+    "noData": "Aucune donnée trouvée.",
+    "panelTitle": "{category}・Rôles",
+    "panelDescription": "_____\n\nChoisissez vos rôles en appuyant sur le bouton !\n\n{roles}",
+    "panelCreated": "Panneau de rôles créé !",
+    "deleted": "La catégorie **{category}** a été supprimée !",
+    "listTitle": "📃・Rôles de réaction"
+  },
   "moderation": {
     "channelLocked": "Salon verrouillé avec succès !",
     "channelUnlocked": "Salon déverrouillé avec succès !",

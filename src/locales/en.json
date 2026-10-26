@@ -762,6 +762,14 @@
     "submitted": "Your review has been successfully submitted.",
     "newReview": "A new review has been published."
   },
+  "reactionroles": {
+    "noData": "No reaction role data found.",
+    "panelTitle": "{category}・Roles",
+    "panelDescription": "_____\n\nChoose your roles by pressing the button!\n\n{roles}",
+    "panelCreated": "Reaction role panel created!",
+    "deleted": "**{category}** successfully deleted!",
+    "listTitle": "📃・Reaction roles"
+  },
   "moderation": {
     "channelLocked": "Channel locked successfully!",
     "channelUnlocked": "Channel unlocked successfully!",

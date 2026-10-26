@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
     const data = await Schema.findOne({ Guild: interaction.guild.id, Category: category });
     if (!data) return client.errNormal({
-        error: `No data found!`,
+        key: 'reactionroles.noData',
         type: 'editreply'
     }, interaction);
 
@@ -24,6 +24,9 @@ module.exports = async (client, interaction, args) => {
         var sendComponents = await client.buttonReactions("id", reactions)
 
     const msg = await client.embed({
+        titleKey: 'reactionroles.panelTitle',
+        descKey: 'reactionroles.panelDescription',
+        variables: { category: upper, roles: mapped },
         title: `${upper}・Roles`,
         desc: `_____ \n\nChoose your roles by pressing the button! \n\n${mapped}`,
         components: sendComponents
@@ -32,7 +35,7 @@ module.exports = async (client, interaction, args) => {
     await data.save();
 
     return client.succNormal({
-        text: "Reaction panel successfully created!",
+        key: 'reactionroles.panelCreated',
         type: 'ephemeraledit'
     }, interaction);
 }
