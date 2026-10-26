@@ -879,6 +879,11 @@ test('giveaway end event uses an async winner callback', () => {
   assert.match(source, /async \(member\)/);
 });
 
+test('giveaway reroll event uses an async winner callback', () => {
+  const source = read('src/events/giveaway/giveawayRerolled.js');
+  assert.match(source, /async \(member\)/);
+});
+
 test('music and radio metadata is sourced from the locale catalogs', () => {
   for (const name of ['music', 'radio']) {
     const source = read(`src/interactions/Command/${name}.js`);
