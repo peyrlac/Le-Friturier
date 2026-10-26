@@ -14,17 +14,17 @@ module.exports = async (client, interaction, args) => {
             return client.embed({
                 title: await client.t(interaction, 'search.coronaTitle', { country: countries }),
                 fields: [{
-                    name: "✅┇Confirmed Cases",
+                    name: await client.t(interaction, 'search.confirmed'),
                     value: `${confirmed}`,
                     inline: true,
                 },
                 {
-                    name: "🤗┇Recovered",
+                    name: await client.t(interaction, 'search.recovered'),
                     value: `${recovered}`,
                     inline: true,
                 },
                 {
-                    name: "💀┇Deaths",
+                    name: await client.t(interaction, 'search.deaths'),
                     value: `${deaths}`,
                     inline: true,
                 },

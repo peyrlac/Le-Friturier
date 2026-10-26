@@ -699,6 +699,21 @@ test('giveaway lifecycle events use localized response keys', () => {
   }
 });
 
+test('search embeds use localized field labels', () => {
+  const expectations = {
+    'src/commands/search/corona.js': ['search.confirmed', 'search.recovered', 'search.deaths'],
+    'src/commands/search/github.js': ['search.github.name', 'search.github.company', 'search.github.bio', 'search.github.repositories', 'search.github.createdAt'],
+    'src/commands/search/npm.js': ['search.package.name', 'search.package.version', 'search.package.description', 'search.package.keywords', 'search.package.author', 'search.package.downloads', 'search.package.lastPublish'],
+    'src/commands/search/itunes.js': ['search.song.name', 'search.song.artist', 'search.song.album', 'search.song.length', 'search.song.genre', 'search.song.price', 'search.song.releaseDate'],
+    'src/commands/search/steam.js': ['search.application.name', 'search.application.description', 'search.application.developers', 'search.application.publishers', 'search.application.price']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`client\\.t\\(interaction, ['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+  }
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);

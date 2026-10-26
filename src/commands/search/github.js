@@ -21,27 +21,27 @@ module.exports = async (client, interaction, args) => {
         url: r.url,
         fields: [
             {
-                name: "💬┇Name",
+                name: await client.t(interaction, 'search.github.name'),
                 value: `${r.name}`,
                 inline: true,
             },
             {
-                name: "🧑‍💼┇Company",
+                name: await client.t(interaction, 'search.github.company'),
                 value: `${r.company}`,
                 inline: true,
             },
             {
-                name: "💬┇Bio",
+                name: await client.t(interaction, 'search.github.bio'),
                 value: `${r.bio}`,
                 inline: true,
             },
             {
-                name: "📁┇Public Repositories",
+                name: await client.t(interaction, 'search.github.repositories'),
                 value: `${r.public_repos}`,
                 inline: true,
             },
             {
-                name: "⏰┇Created At",
+                name: await client.t(interaction, 'search.github.createdAt'),
                 value: `<t:${Math.round(new Date(r.created_at).getTime() / 1000)}>`,
                 inline: true,
             },
