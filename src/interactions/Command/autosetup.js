@@ -1,27 +1,28 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('autosetup')
-        .setDescription('Laissez la configuration du bot automatiquement')
+        .setName(getCommandMetadata('commandMetadata.autosetup.name'))
+        .setDescription(getCommandMetadata('commandMetadata.autosetup.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Obtenez des informations sur les commandes de configuration automatique')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.help.description'))
         ).addSubcommand(subcommand =>
             subcommand
                 .setName('aprilfools')
-                .setDescription('Paramètre le poisson d\'avril')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.aprilfools.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('logs')
-                .setDescription('Définissez les journaux du serveur')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.logs.description'))
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('La configuration que vous voulez')
+                        .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.logs.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
                             { name: 'Server logs', value: 'serverLogs' },
@@ -33,10 +34,10 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('fun')
-                .setDescription('Définissez les canaux amusants du serveur')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.fun.description'))
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('La configuration que vous voulez')
+                        .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.fun.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
                             { name: 'Birthdays', value: 'birthdays' },
@@ -50,10 +51,10 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('games')
-                .setDescription('Définissez les canaux de jeu du serveur')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.games.description'))
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('La configuration que vous voulez')
+                        .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.games.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
                             { name: 'Counting', value: 'counting' },
@@ -66,10 +67,10 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('welcome')
-                .setDescription('Configurer le système de bienvenue')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.welcome.description'))
                 .addStringOption(option =>
                     option.setName('setup')
-                        .setDescription('La configuration que vous voulez')
+                        .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.welcome.options.setup.description'))
                         .setRequired(true)
                         .addChoices(
                             { name: 'Welcome channel', value: 'welcomechannel' },
@@ -81,12 +82,12 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('customvoice')
-                .setDescription('Définissez les canaux vocaux personnalisés du serveur')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.customvoice.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('ticketpanel')
-                .setDescription('Définissez le panneau de ticket du serveur')
+                .setDescription(getCommandMetadata('commandMetadata.autosetup.subcommands.ticketpanel.description'))
         )
     ,
 
