@@ -332,6 +332,14 @@ test('voice command responses use the active server locale', () => {
   }
 });
 
+test('trigger list and documentation use the active server locale', () => {
+  for (const file of ['src/commands/triggers/list.js', 'src/commands/triggers/documentation.js']) {
+    const source = read(file);
+    assert.match(source, /client\.t\(interaction, ['"]triggers\./, file);
+    assert.doesNotMatch(source, /title:\s*['"]📃.*Liste des triggers['"]/i, file);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

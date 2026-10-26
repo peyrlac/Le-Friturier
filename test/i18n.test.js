@@ -282,6 +282,26 @@ test('voice exposes localized metadata and supports localized channel responses'
   });
 });
 
+test('triggers exposes localized metadata for its management surface', () => {
+  const command = require('../src/interactions/Command/triggers');
+
+  assert.equal(command.localizations.name.fr, 'triggers');
+  assert.equal(command.localizations.name.en, 'triggers');
+  assert.equal(command.localizations.description.en, 'Trigger responses to matching messages');
+  assert.deepEqual(command.localizations.subcommands.add.options, {
+    alias: { description: { fr: 'Alias du trigger', en: 'Trigger alias' } },
+    type: { description: { fr: 'Type de réponse', en: 'Response type' } },
+    regex: { description: { fr: 'Filtre regex', en: 'Regex filter' } },
+    regexflags: { description: { fr: 'Flags regex additionnels', en: 'Additional regex flags' } },
+    response: { description: { fr: 'Réponse du bot', en: 'Bot response' } },
+    isactive: { description: { fr: 'Statut du trigger', en: 'Trigger status' } },
+    mention: { description: { fr: 'Mentionner lors de la réponse', en: 'Mention when responding' } },
+    replied: { description: { fr: 'Format de la réponse', en: 'Response format' } },
+    emotes: { description: { fr: 'Emotes ajoutées lors de la réaction', en: 'Emotes added to the reaction' } },
+    timedeletion: { description: { fr: 'Délai avant suppression', en: 'Delay before deletion' } }
+  });
+});
+
 test('serializes native command localizations for Discord', () => {
     const command = require('../src/interactions/Command/config');
     applyCommandLocalizations(command);
