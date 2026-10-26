@@ -1,15 +1,16 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     localizationKey: 'commandMetadata.activities',
     data: new SlashCommandBuilder()
-        .setName('activities')
-        .setDescription('Démarrer une activité')
+        .setName(getCommandMetadata('commandMetadata.activities.name'))
+        .setDescription(getCommandMetadata('commandMetadata.activities.description'))
         .addStringOption(option =>
             option.setName('activity')
-                .setDescription('L\'activité que vous voulez')
+                .setDescription(getCommandMetadata('commandMetadata.activities.options.activity.description'))
                 .setRequired(true)
                 .addChoices(
                     { name: 'Betrayal.io', value: 'betrayal' },

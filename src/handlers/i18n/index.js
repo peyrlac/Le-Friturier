@@ -91,6 +91,10 @@ function resolveCommandLocalizations(command) {
     return mergeLocalizedValues(frenchMetadata, englishMetadata);
 }
 
+function getCommandMetadata(key) {
+    return getValue(fr, key) ?? getValue(en, key);
+}
+
 function applyCommandLocalizations(command) {
     const localizations = resolveCommandLocalizations(command);
     const builder = command?.data;
@@ -136,5 +140,6 @@ initializeI18n.DEFAULT_LOCALE = DEFAULT_LOCALE;
 initializeI18n.SUPPORTED_LOCALES = SUPPORTED_LOCALES;
 initializeI18n.applyCommandLocalizations = applyCommandLocalizations;
 initializeI18n.resolveCommandLocalizations = resolveCommandLocalizations;
+initializeI18n.getCommandMetadata = getCommandMetadata;
 
 module.exports = initializeI18n;
