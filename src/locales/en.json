@@ -1992,6 +1992,9 @@
         "menu": { "description": "Show reaction roles in a menu", "options": { "category": { "description": "Category name" }, "channel": { "description": "Channel where reaction roles should be sent" } } }
       }
     },
+    "spoiler": {
+      "name": "Mark as spoiler"
+    },
     "autosetup": {
       "name": "autosetup",
       "description": "Configure the bot automatically",

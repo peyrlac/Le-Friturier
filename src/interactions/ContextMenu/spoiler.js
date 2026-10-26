@@ -6,6 +6,7 @@ const fs = require('fs');
 const https = require('https');
 
 module.exports = {
+  localizationKey: 'commandMetadata.spoiler',
   data: new ContextMenuCommandBuilder()
     .setName('Mettre en spoiler')
     .setType(3),
