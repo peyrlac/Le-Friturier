@@ -20,7 +20,7 @@ module.exports = {
     const user = interaction.member.user;
     const member = interaction.member;
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
-      return interaction.reply({ content: 'Tu ne possèdes pas la permission requise \`Gérer les messages\` pour effectuer cette action ', ephemeral: true });
+      return interaction.reply({ content: await client.t(interaction, 'spoiler.noPermission'), ephemeral: true });
     }
     await interaction.reply({
       "content": ' ',
@@ -28,7 +28,7 @@ module.exports = {
         {
           "type": "rich",
           "title": "",
-          "description": `Ajoute un contexte pour mieux décrire le spoiler ou écris \`annuler\``,
+          "description": await client.t(interaction, 'spoiler.prompt'),
           "color": 0x00FFFF
         }
       ]/*,
@@ -48,7 +48,7 @@ module.exports = {
 
     collector.on('collect', async m => {
       if (m.content.trim().toLowerCase() === 'annuler') {
-        interaction.editReply({ content: 'Tu as annulé la mise en spoiler du message !', ephemeral: true });
+        interaction.editReply({ content: await client.t(interaction, 'spoiler.cancelled'), ephemeral: true });
         m.delete();
         return;
       }
@@ -78,7 +78,7 @@ module.exports = {
           // Upload the renamed file to Discord
         const uploadedMessage = await channel.send({
           files: [newFilePath],
-          content: "Automatic upload of an image turned into a spoiler"
+          content: await client.t(interaction, 'spoiler.uploaded')
         });
         console.log('File uploaded. Generated URL:', imageUrl);
         files = [{
@@ -107,7 +107,7 @@ module.exports = {
     var fields = [
       {
         "name": ``,
-        "value": `**${message.author}** a posté une image spoiler à propos de **${context}**\n`
+        "value": await client.t(interaction, 'spoiler.imagePost', { author: message.author, context })
       },
       {
         "name": ``,
@@ -118,7 +118,7 @@ module.exports = {
     var fields = [
       {
         "name": ``,
-        "value": `**${message.author}** a écris un spoiler à propos de **${context}**\n`
+        "value": await client.t(interaction, 'spoiler.textPost', { author: message.author, context })
       },
       {
         "name": ``,
@@ -140,7 +140,7 @@ module.exports = {
             "description": ``,
             "color": 0x153866,
             "author": {
-              "name": "Spoiler",
+              "name": await client.t(interaction, 'spoiler.author'),
               "icon_url": `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.webp`
             },
             "fields": fields,
@@ -153,9 +153,9 @@ module.exports = {
     message.delete({ timeout: 5000 })
   });
 
-  collector.on('end', collected => {
+  collector.on('end', async collected => {
     if (collected.size === 0) {
-      interaction.followUp({ content: 'Tu n\'as pas fourni le contexte requis. Comment savoir de quoi parle le spoiler sinon?', ephemeral: true });
+      interaction.followUp({ content: await client.t(interaction, 'spoiler.missingContext'), ephemeral: true });
     }
   });
 },

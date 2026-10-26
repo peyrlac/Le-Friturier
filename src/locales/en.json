@@ -63,6 +63,16 @@
     "messageEvents": {
       "cannotDM": "I can't DM you; your direct messages may be turned off."
     },
+    "spoiler": {
+      "noPermission": "You do not have the required `Manage Messages` permission to perform this action.",
+      "prompt": "Add context to better describe the spoiler or type `cancel`.",
+      "cancelled": "You cancelled hiding the message as a spoiler!",
+      "uploaded": "Automatically uploaded an image converted into a spoiler",
+      "imagePost": "**{author}** posted a spoiler image about **{context}**\n",
+      "textPost": "**{author}** wrote a spoiler about **{context}**\n",
+      "author": "Spoiler",
+      "missingContext": "You did not provide the required context. How could anyone know what the spoiler is about?"
+    },
     "starboard": {
       "cannotStarOwn": "You cannot star your own messages.\n\nMessage: {message}",
       "cannotStarBot": "You cannot star bot messages.\n\nMessage: {message}",
