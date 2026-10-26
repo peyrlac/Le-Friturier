@@ -550,6 +550,13 @@ test('voice-role setup responses use localization keys', () => {
   assert.doesNotMatch(source, /Vous n'avez pas la permission|doit être un salon vocal|Aucun salon vocal trouvé|Configuration des rôles vocaux/i);
 });
 
+test('ticket message configuration responses use localization keys', () => {
+  const source = read('src/commands/config/ticketmessage.js');
+  assert.match(source, /tickets\.messageSet/);
+  assert.match(source, /tickets\.messageDataMissing/);
+  assert.doesNotMatch(source, /message a été défini avec succès|Aucune donnée de message de ticket trouvé|The ticket message has been set successfully/i);
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],

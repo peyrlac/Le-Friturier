@@ -22,15 +22,15 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({
-                    text: `Le message du billet a été défini avec succès`,
+                    key: 'tickets.messageSet',
                     fields: [
                         {
-                            name: `📘┆Type de message`,
+                            name: await client.t(interaction, 'tickets.messageType'),
                             value: `${type}`,
                             inline: true
                         },
                         {
-                            name: `💬┆Message`,
+                            name: await client.t(interaction, 'tickets.message'),
                             value: `${data.openTicket}`,
                             inline: true
                         },
@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.errNormal({
-                    error: `Aucune donnée de message de billet trouvé!`,
+                    key: 'tickets.messageDataMissing',
                     type: 'editreply'
                 }, interaction)
             }
@@ -61,15 +61,15 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `Le message du billet a été défini avec succès`,
+            key: 'tickets.messageSet',
             fields: [
                 {
-                    name: `📘┆Type de message`,
+                    name: await client.t(interaction, 'tickets.messageType'),
                     value: `${type}`,
                     inline: true
                 },
                 {
-                    name: `💬┆Message`,
+                    name: await client.t(interaction, 'tickets.message'),
                     value: `${message}`,
                     inline: true
                 },
@@ -86,15 +86,15 @@ module.exports = async (client, interaction, args) => {
                 data.save();
 
                 client.succNormal({
-                    text: `Le message du billet a été défini avec succès`,
+                    key: 'tickets.messageSet',
                     fields: [
                         {
-                            name: `📘┆Type de message`,
+                            name: await client.t(interaction, 'tickets.messageType'),
                             value: `${type}`,
                             inline: true
                         },
                         {
-                            name: `💬┆Message`,
+                            name: await client.t(interaction, 'tickets.message'),
                             value: `${data.dmMessage}`,
                             inline: true
                         },
@@ -104,7 +104,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 client.errNormal({
-                    error: `Aucune donnée de message de billet trouvé!`,
+                    key: 'tickets.messageDataMissing',
                     type: 'editreply'
                 }, interaction)
             }
@@ -125,15 +125,15 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `The ticket message has been set successfully`,
+            key: 'tickets.messageSet',
             fields: [
                 {
-                    name: `📘┆Message type`,
+                    name: await client.t(interaction, 'tickets.messageType'),
                     value: `${type}`,
                     inline: true
                 },
                 {
-                    name: `💬┆Message`,
+                    name: await client.t(interaction, 'tickets.message'),
                     value: `${message}`,
                     inline: true
                 },
