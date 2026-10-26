@@ -15,6 +15,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.help',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         const row = new Discord.ActionRowBuilder()

@@ -861,6 +861,42 @@
         }
       }
     },
+    "commands": {
+      "name": "commandes-personnalisées",
+      "description": "Créer des commandes personnalisées",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes personnalisées" },
+        "add": { "description": "Créer une commande personnalisée", "options": { "command": { "description": "Nom de la commande" }, "text": { "description": "Réponse de la commande" } } },
+        "delete": { "description": "Supprimer une commande personnalisée", "options": { "commande": { "description": "Nom de la commande" } } }
+      }
+    },
+    "embed": {
+      "name": "embed",
+      "description": "Générer un embed",
+      "options": { "channel": { "description": "Salon où envoyer l’embed" } }
+    },
+    "event": {
+      "name": "evenement",
+      "description": "Commandes liées aux événements",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes événement" },
+        "participants": { "description": "Voir la liste des participants à un événement", "options": { "event_id": { "description": "Identifiant de l’événement" } } }
+      }
+    },
+    "help": {
+      "name": "aide",
+      "description": "Obtenir de l’aide sur le bot"
+    },
+    "stickymessages": {
+      "name": "messagespersistants",
+      "description": "Gérer les messages persistants",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les messages persistants" },
+        "stick": { "description": "Fixer un message dans un salon", "options": { "channel": { "description": "Sélectionnez un salon" }, "message": { "description": "Votre message persistant" } } },
+        "messages": { "description": "Afficher les messages persistants du serveur" },
+        "unstick": { "description": "Retirer un message persistant d’un salon", "options": { "channel": { "description": "Sélectionnez un salon" } } }
+      }
+    },
     "autosetup": {
       "name": "configurationauto",
       "description": "Configurer automatiquement le bot",

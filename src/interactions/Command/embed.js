@@ -20,7 +20,9 @@ module.exports = {
    * @param {String[]} args
    */
 
-  run: async (client, interaction, args) => {
+    localizationKey: 'commandMetadata.embed',
+
+    run: async (client, interaction, args) => {
         await interaction.deferReply();
     const perms = await client.checkPerms(
       {

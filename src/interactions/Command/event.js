@@ -29,8 +29,10 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.event',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply({ ephemeral: true });
         client.loadSubcommands(client, interaction, args);
     },
-}; 
+};
