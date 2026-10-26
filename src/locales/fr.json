@@ -1615,7 +1615,18 @@
     },
     "giveaway": {
       "name": "concours",
-      "description": "Organiser un concours sur le serveur"
+      "description": "Organiser un concours sur le serveur",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie concours" },
+        "start": { "description": "Démarrer un concours", "options": { "channel": { "description": "Salon où le concours doit être organisé" }, "duration": { "description": "Durée du concours" }, "winners": { "description": "Nombre de gagnants du concours" }, "prize": { "description": "Récompense du concours" } } },
+        "drop": { "description": "Démarrer un concours surprise", "options": { "channel": { "description": "Salon où le concours doit être organisé" }, "duration": { "description": "Durée du concours" }, "winners": { "description": "Nombre de gagnants du concours" }, "prize": { "description": "Récompense du concours" } } },
+        "reroll": { "description": "Relancer le tirage d’un concours", "options": { "message": { "description": "Identifiant du message du concours" } } },
+        "end": { "description": "Terminer un concours", "options": { "message": { "description": "Identifiant du message du concours" } } },
+        "edit": { "description": "Modifier la durée d’un concours", "options": { "message": { "description": "Identifiant du message du concours" } } },
+        "delete": { "description": "Supprimer un concours", "options": { "message": { "description": "Identifiant du message du concours" } } },
+        "pause": { "description": "Mettre un concours en pause", "options": { "message": { "description": "Identifiant du message du concours" } } },
+        "unpause": { "description": "Reprendre un concours", "options": { "message": { "description": "Identifiant du message du concours" } } }
+      }
     },
     "config": {
       "name": "config",
