@@ -1,30 +1,31 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 const Schema = require("../../database/models/music");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('custom-commands')
-        .setDescription('Créer des commandes personnalisées')
+        .setName(getCommandMetadata('commandMetadata.commands.name'))
+        .setDescription(getCommandMetadata('commandMetadata.commands.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Obtenez des informations sur la catégorie des commandes personnalisées'),
+                .setDescription(getCommandMetadata('commandMetadata.commands.subcommands.help.description')),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('add')
-                .setDescription('Créer une commande personnalisée')
-                .addStringOption(option => option.setName('command').setDescription('Le nom de la commande').setRequired(true))
-                .addStringOption(option => option.setName('text').setDescription('La réponse de la commande').setRequired(true)),
+                .setDescription(getCommandMetadata('commandMetadata.commands.subcommands.add.description'))
+                .addStringOption(option => option.setName('command').setDescription(getCommandMetadata('commandMetadata.commands.subcommands.add.options.command.description')).setRequired(true))
+                .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.commands.subcommands.add.options.text.description')).setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('delete')
-                .setDescription('Supprimer une commande personnalisée')
-                .addStringOption(option => option.setName('commande').setDescription('Le nom de la commande').setRequired(true)),
+                .setDescription(getCommandMetadata('commandMetadata.commands.subcommands.delete.description'))
+                .addStringOption(option => option.setName('commande').setDescription(getCommandMetadata('commandMetadata.commands.subcommands.delete.options.commande.description')).setRequired(true)),
         )
     ,
 
