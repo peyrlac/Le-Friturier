@@ -1067,6 +1067,15 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "afk": {
+      "name": "afk",
+      "description": "Manage your AFK status",
+      "subcommands": {
+        "help": { "description": "View AFK category help" },
+        "set": { "description": "Set your AFK status", "options": { "reason": { "description": "Reason for your AFK status" } } },
+        "list": { "description": "List AFK users" }
+      }
+    },
     "activities": {
       "name": "activities",
       "description": "Start an activity",
