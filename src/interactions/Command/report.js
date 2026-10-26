@@ -12,8 +12,8 @@ module.exports = {
                 .setDescription(getCommandMetadata('commandMetadata.report.options.type.description'))
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Bug', value: 'bug' },
-                    { name: 'User', value: 'user' }
+                    { name: getCommandMetadata('commandMetadata.report.options.type.choices.bug.name'), value: 'bug' },
+                    { name: getCommandMetadata('commandMetadata.report.options.type.choices.user.name'), value: 'user' }
                 )
         )
         .addStringOption(option =>

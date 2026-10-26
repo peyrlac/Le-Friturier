@@ -67,10 +67,10 @@ module.exports = {
                     .setDescription('Select the theme for voice channels')
                     .setRequired(true)
                     .addChoices(
-                        { name: 'Default', value: 'default' },
-                        { name: 'Ocean Theme', value: 'ocean' },
-                        { name: 'Gaming Theme', value: 'gaming' },
-                        { name: 'April Fools', value: 'aprilfools' }
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.customvoice.options.theme.choices.default.name'), value: 'default' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.customvoice.options.theme.choices.ocean.name'), value: 'ocean' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.customvoice.options.theme.choices.gaming.name'), value: 'gaming' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.customvoice.options.theme.choices.aprilfools.name'), value: 'aprilfools' }
                     )
                 )
         )
@@ -83,9 +83,9 @@ module.exports = {
                         .setDescription('The setup that you want')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Server logs', value: 'serverLogs' },
-                            { name: 'Level logs', value: 'levelLogs' },
-                            { name: 'Boost logs', value: 'boostLogs' }
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.logs.options.setup.choices.serverLogs.name'), value: 'serverLogs' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.logs.options.setup.choices.levelLogs.name'), value: 'levelLogs' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.logs.options.setup.choices.boostLogs.name'), value: 'boostLogs' }
                         )
                 )
                 .addChannelOption(option => option.setName('channel').setDescription('The channel for the logs').setRequired(true).addChannelTypes(ChannelType.GuildText))
@@ -99,11 +99,11 @@ module.exports = {
                         .setDescription('The setup that you want')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Birthdays', value: 'birthdays' },
-                            { name: 'Chatbot', value: 'chatbot' },
-                            { name: 'Reviews', value: 'reviews' },
-                            { name: 'Suggestions', value: 'suggestions' },
-                            { name: 'Starboard', value: 'starboard' }
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.fun.options.setup.choices.birthdays.name'), value: 'birthdays' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.fun.options.setup.choices.chatbot.name'), value: 'chatbot' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.fun.options.setup.choices.reviews.name'), value: 'reviews' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.fun.options.setup.choices.suggestions.name'), value: 'suggestions' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.fun.options.setup.choices.starboard.name'), value: 'starboard' }
                         )
                 )
                 .addChannelOption(option => option.setName('channel').setDescription('The channel for the fun').setRequired(true).addChannelTypes(ChannelType.GuildText))
@@ -117,10 +117,10 @@ module.exports = {
                         .setDescription('The setup that you want')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Counting', value: 'counting' },
-                            { name: 'Guess the number', value: 'gtn' },
-                            { name: 'Guess the word', value: 'gtw' },
-                            { name: 'Word snake', value: 'wordsnake' }
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.games.options.setup.choices.counting.name'), value: 'counting' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.games.options.setup.choices.gtn.name'), value: 'gtn' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.games.options.setup.choices.gtw.name'), value: 'gtw' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.games.options.setup.choices.wordsnake.name'), value: 'wordsnake' }
                         )
                 )
                 .addChannelOption(option => option.setName('channel').setDescription('The channel for the game').setRequired(true).addChannelTypes(ChannelType.GuildText))
@@ -134,8 +134,8 @@ module.exports = {
                         .setDescription('The setup that you want')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Welcome channel', value: 'welcomechannel' },
-                            { name: 'Leave channnel', value: 'leavechannel' }
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.welcomechannels.options.setup.choices.welcomechannel.name'), value: 'welcomechannel' },
+                            { name: getCommandMetadata('commandMetadata.setup.subcommands.welcomechannels.options.setup.choices.leavechannel.name'), value: 'leavechannel' }
                         )
                 )
                 .addChannelOption(option => option.setName('channel').setDescription('The channel that you want').setRequired(true).addChannelTypes(ChannelType.GuildText))
