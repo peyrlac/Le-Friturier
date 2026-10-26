@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 const { FEATURE_REGISTRY } = require('../../handlers/features');
 
 module.exports = {
+    localizationKey: 'commandMetadata.config',
     data: new SlashCommandBuilder()
         .setName('config')
         .setDescription('Ajustez le bot à votre goût')
@@ -120,25 +121,6 @@ module.exports = {
      * @param {CommandInteraction} interaction
      * @param {String[]} args
      */
-
-    localizations: {
-        name: { fr: 'config', en: 'config' },
-        description: {
-            fr: 'Ajustez le bot à votre goût',
-            en: 'Customize the bot to your liking'
-        },
-        subcommandGroups: {
-            feature: {
-                name: { fr: 'fonctionnalité', en: 'feature' },
-                description: { fr: 'Gérer les fonctionnalités du serveur', en: 'Manage server features' },
-                subcommands: {
-                    list: { description: { fr: 'Afficher l’état des fonctionnalités', en: 'List feature statuses' } },
-                    set: { description: { fr: 'Activer ou désactiver une fonctionnalité', en: 'Enable or disable a feature' } },
-                    reset: { description: { fr: 'Réinitialiser une fonctionnalité', en: 'Reset a feature' } }
-                }
-            }
-        }
-    },
 
     run: async (client, interaction, args) => {
         await interaction.deferReply();

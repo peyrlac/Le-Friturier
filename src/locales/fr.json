@@ -1054,6 +1054,11 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "config": {
+      "name": "config",
+      "description": "Ajustez le bot à votre goût",
+      "subcommandGroups": { "feature": { "name": "fonctionnalité", "description": "Gérer les fonctionnalités du serveur", "subcommands": { "list": { "description": "Afficher l’état des fonctionnalités" }, "set": { "description": "Activer ou désactiver une fonctionnalité" }, "reset": { "description": "Réinitialiser une fonctionnalité" } } } }
+    },
     "triggers": {
       "name": "triggers",
       "description": "Déclencher des réponses sur certains mots",
