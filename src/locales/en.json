@@ -1006,6 +1006,10 @@
     "output": "📥┇Output",
     "error": "📥┇Error!"
   },
+  "developerCredits": {
+    "added": "Added **{amount} credits** to {user}.",
+    "removed": "Removed **{amount} credits** from {user}."
+  },
   "fun": {
     "tokenTitle": "🤖・Bot token",
     "tokenUnavailable": "Unable to retrieve remote data."
