@@ -19,6 +19,7 @@
     "noPermission": "You do not have permission to use this command.",
     "developerOnly": "Only Bot 2 developers are allowed to use this command.",
     "botNoPermission": "The bot does not have the required permissions.",
+    "userNotInGuild": "This user is not in this guild.",
     "invalidArguments": "The provided arguments are invalid.",
     "alreadyPerformed": "You have already performed this action.",
     "unsupportedLanguage": "This language is not supported.",
@@ -29,7 +30,9 @@
       "clearUserNone": "No recent messages from this user were found in this channel.",
       "clearUserSuccess": "The user's recent messages were deleted.",
       "cannotModerate": "You cannot moderate another moderator.",
-      "warnSuccess": "The user has received a warning."
+      "warnSuccess": "The user has received a warning.",
+      "warningRemoved": "The warning has been successfully removed.",
+      "noWarnings": "User has no warnings."
     }
     },
     "tools": {

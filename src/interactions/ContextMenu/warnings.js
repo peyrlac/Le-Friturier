@@ -22,7 +22,7 @@ module.exports = {
 
         if (perms == false){
             client.errNormal({
-                error: "You don't have the required permissions to use this command!",
+                key: 'errors.noPermission',
                 type: 'ephemeral'
             }, interaction);
             return;

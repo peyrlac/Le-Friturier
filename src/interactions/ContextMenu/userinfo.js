@@ -20,7 +20,7 @@ module.exports = {
         await interaction.deferReply({ ephemeral: false });
         const member = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
         if (!member) return client.errNormal({
-            error: "This user is not in this guild!",
+            key: 'errors.userNotInGuild',
             type: 'editreply'
         }, interaction);
         const badgeFlags = {
@@ -123,4 +123,4 @@ module.exports = {
     },
 };
 
- 
+
