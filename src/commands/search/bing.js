@@ -6,11 +6,12 @@ module.exports = async (client, interaction, args) => {
     let link = `https://www.bing.com/search?q=${name}`;
 
     client.succNormal({
-        text: `I have found the following for: \`${name}\``,
+        key: 'search.linkResult',
+        variables: { name },
         fields: [
             {
-                name: `🔗┇Link`,
-                value: `[Click here to see the link](${link})`,
+                name: await client.t(interaction, 'search.linkLabel'),
+                value: `[${await client.t(interaction, 'search.viewLink')}](${link})`,
                 inline: true,
             }
         ], type: 'editreply'
@@ -18,4 +19,4 @@ module.exports = async (client, interaction, args) => {
 
 }
 
- 
+

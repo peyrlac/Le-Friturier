@@ -7,11 +7,13 @@ module.exports = async (client, interaction, args) => {
 
     const r = await pop.github(name).catch(() => {
         return client.errNormal({
-            error: `No account found with the username: ${name}`,
+            key: 'search.githubNotFound',
+            variables: { name },
             type: 'editreply'
         }, interaction)
-    
-    })
+
+    });
+    if (!r) return;
 
     client.embed({
         title: `🏷️・${r.name}`,
@@ -47,4 +49,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
- 
+

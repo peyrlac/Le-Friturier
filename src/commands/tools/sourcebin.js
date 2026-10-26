@@ -14,16 +14,16 @@ module.exports = async (client, interaction, args) => {
             },
         ],
         {
-            title: '💻・Random Code',
-            description: 'This is code was uploaded via Bot',
+            title: await client.t(interaction, 'tools.sourcebinTitle'),
+            description: await client.t(interaction, 'tools.sourcebinDescription'),
         },
-    ).then(value => {
+    ).then(async value => {
         client.succNormal({
-            text: `Your code has been posted!`,
+            key: 'tools.codePosted',
             fields: [
                 {
-                    name: `🔗┇Link`,
-                    value: `[Click here to see your code](${value.url})`,
+                    name: await client.t(interaction, 'tools.linkLabel'),
+                    value: `[${await client.t(interaction, 'search.viewLink')}](${value.url})`,
                     inline: true,
                 }
             ],
@@ -33,4 +33,4 @@ module.exports = async (client, interaction, args) => {
 
 }
 
- 
+

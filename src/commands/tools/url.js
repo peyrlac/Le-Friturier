@@ -6,24 +6,25 @@ module.exports = async (client, interaction, args) => {
     const url = interaction.options.getString('site');
     const code = interaction.options.getString('code');
 
-    isgd.custom(url, code, function(res) {
+    isgd.custom(url, code, async function(res) {
         if (res.startsWith("Error")) return client.errNormal({
-            error: `${res.replace("Error: ", "")}`,
+            key: 'tools.remoteUrlError',
+            variables: { error: res.replace("Error: ", "") },
             type: 'editreply'
         }, interaction)
 
         client.succNormal({
-            text: `Your shortened url has been created!`,
+            key: 'tools.shortenedUrlCreated',
             fields: [
                 {
-                    name: `🔗┇Link`,
+                    name: await client.t(interaction, 'tools.linkLabel'),
                     value: `${res}`,
                     inline: true,
                 }
-            ], 
+            ],
             type: 'editreply'
         }, interaction);
     });
 }
 
- 
+

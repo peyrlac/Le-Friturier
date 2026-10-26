@@ -6,11 +6,12 @@ module.exports = async (client, interaction, args) => {
     const name = interaction.options.getString('name');
 
     const r = await pop.npm(name).catch(e => {
-        return client.errNormal({ 
-            error: "Package not found!",
+        return client.errNormal({
+            key: 'search.packageNotFound',
             type: 'editreply'
         }, interaction)
     });
+    if (!r) return;
 
     client.embed({
         title: `📁・${r.name}`,
@@ -55,4 +56,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
- 
+

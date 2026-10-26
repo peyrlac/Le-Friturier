@@ -6,18 +6,18 @@ module.exports = async (client, interaction, args) => {
     const language = interaction.options.getString('language');
     const text = interaction.options.getString('text');
 
-    translate(text, { to: language }).then(res => {
+    translate(text, { to: language }).then(async res => {
         client.embed({
-            title: `${client.emotes.normal.check}・Success!`,
-            desc: `I have translated the following`,
+            title: `${client.emotes.normal.check}・${await client.t(interaction, 'search.translateSuccess')}`,
+            desc: await client.t(interaction, 'search.translateDescription'),
             fields: [
                 {
-                    name: "📥 - Input",
+                    name: await client.t(interaction, 'search.translateInput'),
                     value: `${text}`,
                     inline: false,
                 },
                 {
-                    name: "📤 - Output",
+                    name: await client.t(interaction, 'search.translateOutput'),
                     value: `${res.text}`,
                     inline: false,
                 },
@@ -28,10 +28,10 @@ module.exports = async (client, interaction, args) => {
     }).catch(err => {
         console.log(err)
         client.errNormal({
-            error: "Please provide a valid ISO language code!",
+            key: 'search.invalidLanguage',
             type: 'editreply'
         }, interaction);
     })
 }
 
- 
+
