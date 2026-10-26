@@ -43,7 +43,24 @@
     "input": "Entrée",
     "output": "Sortie",
     "emojifyTooLong": "Le texte à emojifier ne peut pas dépasser 4096 caractères.",
-    "emojifyTitle": "Emojification"
+    "emojifyTitle": "Emojification",
+    "invalidEmoji": "Veuillez fournir un emoji valide !",
+    "serverNotFound": "Impossible de trouver ce serveur !",
+    "serverTitle": "📁・{ip}",
+    "online": "🟢┇En ligne",
+    "version": "🏷️┇Version",
+    "playersOnline": "👤┇Joueurs en ligne",
+    "remoteDataUnavailable": "Impossible de récupérer les données distantes.",
+    "passwordSent": "J'ai généré un mot de passe et je vous l'ai envoyé en message privé.",
+    "generatedPassword": "Votre mot de passe généré",
+    "password": "🔑┇Mot de passe",
+    "length": "👣┇Longueur",
+    "reminderExists": "Vous avez déjà créé ce rappel !",
+    "reminderSet": "Votre rappel est programmé !",
+    "reminderEndTime": "🕘‡Heure de fin",
+    "reminder": "💭‡Rappel",
+    "reminderEnded": "🔔・Rappel",
+    "reminderEndedDescription": "Votre rappel vient de se terminer !"
   },
     "commands": {
       "messages": {
@@ -793,6 +810,14 @@
     "confirmed": "✅‡Cas confirmés",
     "recovered": "🤗‡Guérisons",
     "deaths": "💀‡Décès"
+  },
+  "notepad": {
+    "noNotes": "Aucune note trouvée !"
+  },
+  "thanks": {
+    "self": "Vous ne pouvez pas vous remercier vous-même !",
+    "alreadyGiven": "Vous avez déjà remercié cet utilisateur !",
+    "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
     "voice": {

@@ -54,3 +54,41 @@ test('family and search response waves use localization keys', () => {
     assert.equal(typeof get(en, key), 'string', `Missing English locale key: ${key}`);
   }
 });
+
+test('tools, notes, and thanks response waves use localization keys', () => {
+  const files = [
+    'src/commands/tools/enlarge.js',
+    'src/commands/tools/mcstatus.js',
+    'src/commands/tools/pwdgen.js',
+    'src/commands/tools/remindAsync.js',
+    'src/commands/notepad/notes.js',
+    'src/commands/thanks/thanks.js'
+  ];
+
+  for (const file of files) {
+    const source = read(file);
+    assert.doesNotMatch(source, /client\.(errNormal|succNormal)\(\{\s*(error|text):/);
+  }
+
+  for (const key of [
+    'tools.invalidEmoji',
+    'tools.serverNotFound',
+    'tools.remoteDataUnavailable',
+    'tools.passwordSent',
+    'tools.generatedPassword',
+    'tools.password',
+    'tools.length',
+    'tools.reminderExists',
+    'tools.reminderSet',
+    'tools.reminderEndTime',
+    'tools.reminder',
+    'tools.reminderEnded',
+    'notepad.noNotes',
+    'thanks.self',
+    'thanks.alreadyGiven',
+    'thanks.success'
+  ]) {
+    assert.equal(typeof get(fr, key), 'string', `Missing French locale key: ${key}`);
+    assert.equal(typeof get(en, key), 'string', `Missing English locale key: ${key}`);
+  }
+});
