@@ -437,6 +437,14 @@ test('direct message handlers honor their feature kill switches', () => {
   assert.match(antispam, /isFeatureEnabled\(['"]antiSpam['"],\s*message\.guild\.id\)/);
 });
 
+test('announcement responses use localization keys', () => {
+  for (const file of ['src/commands/announcement/create.js', 'src/commands/announcement/edit.js']) {
+    const source = read(file);
+    assert.match(source, /announcement\.(title|sent|edited|channel)/, file);
+    assert.doesNotMatch(source, /Annonce|announcement has been|announcement was/i, file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

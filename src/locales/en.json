@@ -874,6 +874,12 @@
     "resetSuccess": "Your family has been destroyed!",
     "resetTimeout": "The time limit expired. Your family was not changed."
   },
+  "announcement": {
+    "title": "📢・Announcement!",
+    "sent": "The announcement was sent successfully!",
+    "edited": "The announcement was edited successfully!",
+    "channel": "📘‡Channel"
+  },
   "events": {
     "name": "events",
     "description": "Manage events",

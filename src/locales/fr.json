@@ -861,6 +861,12 @@
     "resetSuccess": "Ta famille a été décimée !",
     "resetTimeout": "Le délai est dépassé. La famille n'a pas été modifiée."
   },
+  "announcement": {
+    "title": "📢・Annonce !",
+    "sent": "L'annonce a été envoyée avec succès !",
+    "edited": "L'annonce a été modifiée avec succès !",
+    "channel": "📘‡Canal"
+  },
   "events": {
     "name": "événements",
     "description": "Gérer les événements",
