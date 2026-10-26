@@ -610,6 +610,9 @@
       "connectedChannel": "📺┆Canal connecté"
     },
     "economy": {
+    "amount": "Montant",
+    "earned": "Gagné",
+    "job": "Métier",
       "reset": {
         "confirmTitle": "⏰・Réinitialiser l’économie",
         "confirmDescription": "Voulez-vous vraiment réinitialiser l’économie ?",

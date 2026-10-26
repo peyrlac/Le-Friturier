@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
         variables: { amount },
         fields: [
           {
-            name: `${client.emotes.economy.coins}┆Earned`,
+          name: `${client.emotes.economy.coins}┆${await client.t(interaction, 'economy.earned')}`,
             value: `$${amount}`,
             inline: true
           }

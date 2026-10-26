@@ -26,12 +26,12 @@ module.exports = async (client, interaction, args) => {
         variables: { job: replies[result], amount },
         fields: [
           {
-            name: `🦹‍♂️┆Crime`,
+            name: `🦹‍♂️┆${await client.t(interaction, 'economy.job')}`,
             value: `${replies[result]}`,
             inline: true
           },
           {
-            name: `${client.emotes.economy.coins}┆Earned`,
+            name: `${client.emotes.economy.coins}┆${await client.t(interaction, 'economy.earned')}`,
             value: `$${amount}`,
             inline: true
           }
