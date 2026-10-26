@@ -1,52 +1,53 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 const Schema = require("../../database/models/music");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('famille')
-        .setDescription('Créer ta famille')
+        .setName(getCommandMetadata('commandMetadata.famille.name'))
+        .setDescription(getCommandMetadata('commandMetadata.famille.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('❓ Obtenir des informations à propos des commandes famille.')
+                .setDescription(getCommandMetadata('commandMetadata.famille.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('adopter')
-                .setDescription('👪 Adopter un membre.')
-                .addUserOption(option => option.setName('membre').setDescription('Sélectionne une personne').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.famille.subcommands.adopter.description'))
+                .addUserOption(option => option.setName('membre').setDescription(getCommandMetadata('commandMetadata.famille.subcommands.adopter.options.membre.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('supprimer')
-                .setDescription('❌ Supprimer ta famille.'),
+                .setDescription(getCommandMetadata('commandMetadata.famille.subcommands.supprimer.description')),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('renier')
-                .setDescription('💔 Renier un enfant ou un parent.')
-                .addUserOption(option => option.setName('membre').setDescription('Sélectionne une personne').setRequired(true)),
+                .setDescription(getCommandMetadata('commandMetadata.famille.subcommands.renier.description'))
+                .addUserOption(option => option.setName('membre').setDescription(getCommandMetadata('commandMetadata.famille.subcommands.renier.options.membre.description')).setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('divorcer')
-                .setDescription('💔 Divorcer de ton/ta partenaire.')
-                .addUserOption(option => option.setName('membre').setDescription('Sélectionne une personne').setRequired(true)),
+                .setDescription(getCommandMetadata('commandMetadata.famille.subcommands.divorcer.description'))
+                .addUserOption(option => option.setName('membre').setDescription(getCommandMetadata('commandMetadata.famille.subcommands.divorcer.options.membre.description')).setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('voir')
-                .setDescription(`🔎 Voir la famille d'un membre.`)
-                .addUserOption(option => option.setName('membre').setDescription('Sélectionne une personne').setRequired(false)),
+                .setDescription(getCommandMetadata('commandMetadata.famille.subcommands.voir.description'))
+                .addUserOption(option => option.setName('membre').setDescription(getCommandMetadata('commandMetadata.famille.subcommands.voir.options.membre.description')).setRequired(false)),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('marier')
-                .setDescription('💖 Marier une personne.')
-                .addUserOption(option => option.setName('membre').setDescription('Sélectionne une personne').setRequired(true)),
+                .setDescription(getCommandMetadata('commandMetadata.famille.subcommands.marier.description'))
+                .addUserOption(option => option.setName('membre').setDescription(getCommandMetadata('commandMetadata.famille.subcommands.marier.options.membre.description')).setRequired(true)),
         ),
 
     /** 
