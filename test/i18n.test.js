@@ -307,7 +307,7 @@ test('triggers exposes localized metadata for its management surface', () => {
   assert.equal(localizations.name.fr, 'triggers');
   assert.equal(localizations.name.en, 'triggers');
   assert.equal(localizations.description.en, 'Trigger responses to matching messages');
-  assert.deepEqual(localizations.subcommands.add.options, {
+  assert.deepEqual(Object.fromEntries(Object.entries(localizations.subcommands.add.options).map(([key, value]) => [key, { description: value.description }])), {
     alias: { description: { fr: 'Alias du trigger', en: 'Trigger alias' } },
     type: { description: { fr: 'Type de réponse', en: 'Response type' } },
     regex: { description: { fr: 'Filtre regex', en: 'Regex filter' } },
@@ -319,6 +319,10 @@ test('triggers exposes localized metadata for its management surface', () => {
     emotes: { description: { fr: 'Emotes ajoutées lors de la réaction', en: 'Emotes added to the reaction' } },
     timedeletion: { description: { fr: 'Délai avant suppression', en: 'Delay before deletion' } }
   });
+  assert.equal(localizations.subcommands.add.options.type.choices['1'].name.fr, 'Répond');
+  assert.equal(localizations.subcommands.add.options.type.choices['1'].name.en, 'Reply');
+  assert.equal(localizations.subcommands.add.options.isactive.choices.false.name.fr, 'Désactivé');
+  assert.equal(localizations.subcommands.add.options.isactive.choices.false.name.en, 'Disabled');
 });
 
 test('serializes native command localizations for Discord', () => {
@@ -466,6 +470,25 @@ test('serializes localized developer choice names from command metadata', () => 
   assert.deepEqual(panelChoices.find(choice => choice.value === 'ourbots').name_localizations, {
     fr: 'Nos bots',
     'en-US': 'Our bots'
+  });
+});
+
+test('serializes localized trigger choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/triggers');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const add = command.data.toJSON().options.find(option => option.name === 'add').options;
+  const typeChoices = add.find(option => option.name === 'type').choices;
+  const activeChoices = add.find(option => option.name === 'isactive').choices;
+
+  assert.deepEqual(typeChoices.find(choice => choice.value === '1').name_localizations, {
+    fr: 'Répond',
+    'en-US': 'Reply'
+  });
+  assert.deepEqual(activeChoices.find(choice => choice.value === 'false').name_localizations, {
+    fr: 'Désactivé',
+    'en-US': 'Disabled'
   });
 });
 
