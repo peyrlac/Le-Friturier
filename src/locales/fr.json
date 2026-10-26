@@ -897,6 +897,57 @@
         "unstick": { "description": "Retirer un message persistant d’un salon", "options": { "channel": { "description": "Sélectionnez un salon" } } }
       }
     },
+    "invites": {
+      "name": "invitations",
+      "description": "Voir le système d’invitations",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes d’invitations" },
+        "add": { "description": "Ajouter des invitations à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Nombre d’invitations" } } },
+        "remove": { "description": "Retirer des invitations à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Nombre d’invitations" } } },
+        "show": { "description": "Voir vos invitations", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
+        "leaderboard": { "description": "Voir le classement des invitations" }
+      }
+    },
+    "levels": {
+      "name": "niveaux",
+      "description": "Voir le système de niveaux",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de niveaux" },
+        "setlevel": { "description": "Définir un niveau pour un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "level": { "description": "Saisissez un niveau" } } },
+        "deletereward": { "description": "Supprimer une récompense de niveau", "options": { "level": { "description": "Saisissez un niveau" } } },
+        "createreward": { "description": "Créer une récompense de niveau", "options": { "level": { "description": "Saisissez un niveau" }, "role": { "description": "Rôle de la récompense" } } },
+        "setxp": { "description": "Définir l’XP d’un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Saisissez une quantité d’XP" } } },
+        "rank": { "description": "Voir votre rang actuel", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
+        "rewards": { "description": "Afficher toutes les récompenses de niveau" },
+        "leaderboard": { "description": "Voir le classement des niveaux" }
+      }
+    },
+    "messages": {
+      "name": "messages",
+      "description": "Voir le système de messages",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de messages" },
+        "add": { "description": "Ajouter des messages à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Nombre de messages" } } },
+        "deletereward": { "description": "Supprimer une récompense de messages", "options": { "amount": { "description": "Nombre de messages" } } },
+        "createreward": { "description": "Créer une récompense de messages", "options": { "amount": { "description": "Nombre de messages" }, "role": { "description": "Rôle de la récompense" } } },
+        "remove": { "description": "Retirer des messages à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Nombre de messages" } } },
+        "show": { "description": "Voir vos messages", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
+        "rewards": { "description": "Afficher toutes les récompenses de messages" },
+        "leaderboard": { "description": "Voir le classement des messages" }
+      }
+    },
+    "reactionroles": {
+      "name": "rolesréaction",
+      "description": "Gérer les rôles réaction du serveur",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les rôles réaction" },
+        "add": { "description": "Ajouter un rôle réaction", "options": { "category": { "description": "Nom de la catégorie" }, "role": { "description": "Sélectionnez un rôle" }, "emoji": { "description": "Saisissez un emoji" } } },
+        "delete": { "description": "Supprimer une catégorie de rôles réaction", "options": { "category": { "description": "Nom de la catégorie" } } },
+        "list": { "description": "Afficher les catégories de rôles réaction" },
+        "button": { "description": "Afficher les rôles réaction avec des boutons", "options": { "category": { "description": "Nom de la catégorie" }, "channel": { "description": "Salon où envoyer les rôles" } } },
+        "menu": { "description": "Afficher les rôles réaction dans un menu", "options": { "category": { "description": "Nom de la catégorie" }, "channel": { "description": "Salon où envoyer les rôles" } } }
+      }
+    },
     "autosetup": {
       "name": "configurationauto",
       "description": "Configurer automatiquement le bot",

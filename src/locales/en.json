@@ -910,6 +910,57 @@
         "unstick": { "description": "Unstick a message from a channel", "options": { "channel": { "description": "Select a channel" } } }
       }
     },
+    "invites": {
+      "name": "invites",
+      "description": "View the invite system",
+      "subcommands": {
+        "help": { "description": "Get information about invite commands" },
+        "add": { "description": "Add invites to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of invites" } } },
+        "remove": { "description": "Remove invites from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of invites" } } },
+        "show": { "description": "See your invites", "options": { "user": { "description": "Select a user" } } },
+        "leaderboard": { "description": "See the invite leaderboard" }
+      }
+    },
+    "levels": {
+      "name": "levels",
+      "description": "View the level system",
+      "subcommands": {
+        "help": { "description": "Get information about level commands" },
+        "setlevel": { "description": "Set a new level for a user", "options": { "user": { "description": "Select a user" }, "level": { "description": "Enter a new level" } } },
+        "deletereward": { "description": "Delete a level reward", "options": { "level": { "description": "Enter a level" } } },
+        "createreward": { "description": "Create a level reward", "options": { "level": { "description": "Enter a level" }, "role": { "description": "The role for this reward" } } },
+        "setxp": { "description": "Set new XP for a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of XP" } } },
+        "rank": { "description": "See your current rank", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all level rewards" },
+        "leaderboard": { "description": "See the level leaderboard" }
+      }
+    },
+    "messages": {
+      "name": "messages",
+      "description": "View the message system",
+      "subcommands": {
+        "help": { "description": "Get information about message commands" },
+        "add": { "description": "Add messages to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "deletereward": { "description": "Delete a message reward", "options": { "amount": { "description": "Enter an amount of messages" } } },
+        "createreward": { "description": "Create a message reward", "options": { "amount": { "description": "Enter an amount of messages" }, "role": { "description": "The role for this reward" } } },
+        "remove": { "description": "Remove messages from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "show": { "description": "See your messages", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all message rewards" },
+        "leaderboard": { "description": "See the message leaderboard" }
+      }
+    },
+    "reactionroles": {
+      "name": "reactionroles",
+      "description": "Manage the server reaction roles",
+      "subcommands": {
+        "help": { "description": "Get information about reaction roles" },
+        "add": { "description": "Add a reaction role", "options": { "category": { "description": "Category name" }, "role": { "description": "Select a role" }, "emoji": { "description": "Enter an emoji" } } },
+        "delete": { "description": "Delete a reaction role category", "options": { "category": { "description": "Category name" } } },
+        "list": { "description": "Show all reaction role categories" },
+        "button": { "description": "Show reaction roles with buttons", "options": { "category": { "description": "Category name" }, "channel": { "description": "Channel where reaction roles should be sent" } } },
+        "menu": { "description": "Show reaction roles in a menu", "options": { "category": { "description": "Category name" }, "channel": { "description": "Channel where reaction roles should be sent" } } }
+      }
+    },
     "autosetup": {
       "name": "autosetup",
       "description": "Configure the bot automatically",

@@ -273,7 +273,7 @@ test('voice exposes localized metadata and supports localized channel responses'
 });
 
 test('family, search, and thanks expose metadata keys backed by locale JSON', () => {
-  for (const name of ['famille', 'search', 'thanks', 'announcement', 'autosetup', 'invite', 'notepad', 'report', 'suggestions', 'commands', 'embed', 'event', 'help', 'stickymessages']) {
+  for (const name of ['famille', 'search', 'thanks', 'announcement', 'autosetup', 'invite', 'notepad', 'report', 'suggestions', 'commands', 'embed', 'event', 'help', 'stickymessages', 'invites', 'levels', 'messages', 'reactionroles']) {
     const command = require(`../src/interactions/Command/${name}`);
     assert.equal(typeof command.localizationKey, 'string');
     assert.ok(resolveCommandLocalizations(command));
