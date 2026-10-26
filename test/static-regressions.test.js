@@ -662,6 +662,14 @@ test('recurring economy rewards localize their embed field labels', () => {
   }
 });
 
+test('family overview localizes its embed labels and empty states', () => {
+  const source = read('src/commands/famille/voir.js');
+  for (const key of ['family.viewTitle', 'family.partner', 'family.parents', 'family.siblings', 'family.children']) {
+    assert.match(source, new RegExp(`client\\.t\\(interaction, ['"]${key.replace('.', '\\.')}`), key);
+  }
+  assert.doesNotMatch(source, /Cette personne n['’]est pas mari|Cette personne n['’]a pas de parents|FrÃ¨res\/Soeurs|Famille de/, 'family overview literals');
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
