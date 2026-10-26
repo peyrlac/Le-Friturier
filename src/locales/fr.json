@@ -1054,6 +1054,14 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "fun": {
+      "name": "fun",
+      "description": "Exécuter les commandes amusantes du bot"
+    },
+    "giveaway": {
+      "name": "concours",
+      "description": "Organiser un concours sur le serveur"
+    },
     "config": {
       "name": "config",
       "description": "Ajustez le bot à votre goût",

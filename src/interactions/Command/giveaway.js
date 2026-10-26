@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 const ms = require('ms');
 
 module.exports = {
+    localizationKey: 'commandMetadata.giveaway',
     data: new SlashCommandBuilder()
         .setName('giveaway')
         .setDescription('Host a giveaway in your server')
@@ -67,11 +68,6 @@ module.exports = {
                 .setDescription('Unpause a giveaway')
                 .addStringOption(option => option.setName('message').setDescription('Giveaway message ID').setRequired(true)),
         ),
-    localizations: {
-        name: { fr: 'concours', en: 'giveaway' },
-        description: { fr: 'Organiser un concours sur le serveur', en: 'Host a giveaway in your server' }
-    },
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction

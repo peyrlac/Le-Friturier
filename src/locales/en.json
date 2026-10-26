@@ -1067,6 +1067,14 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "fun": {
+      "name": "fun",
+      "description": "Run fun commands in the bot"
+    },
+    "giveaway": {
+      "name": "giveaway",
+      "description": "Host a giveaway in your server"
+    },
     "config": {
       "name": "config",
       "description": "Customize the bot to your liking",

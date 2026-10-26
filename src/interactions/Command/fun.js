@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.fun',
     data: new SlashCommandBuilder()
         .setName('fun')
         .setDescription('Run fun commands in Bot')
@@ -190,14 +191,6 @@ module.exports = {
                         .setDescription('See the number of days until Christmas')
                 )
         ),
-
-    localizations: {
-        name: { fr: 'fun', en: 'fun' },
-        description: {
-            fr: 'Exécuter les commandes amusantes du bot',
-            en: 'Run fun commands in the bot'
-        }
-    },
 
     /** 
      * @param {Client} client

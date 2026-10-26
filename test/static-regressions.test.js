@@ -175,8 +175,9 @@ test('radio commands use localization keys for user-facing responses', () => {
 
 test('fun command exposes localized top-level metadata', () => {
   const command = require(path.join(root, 'src/interactions/Command/fun.js'));
+  const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
-  assert.deepEqual(command.localizations, {
+  assert.deepEqual(resolveCommandLocalizations(command), {
     name: { fr: 'fun', en: 'fun' },
     description: {
       fr: 'Exécuter les commandes amusantes du bot',
@@ -613,6 +614,14 @@ test('config metadata is sourced from the locale catalogs', () => {
   const source = read('src/interactions/Command/config.js');
   assert.match(source, /localizationKey:\s*['"]commandMetadata\.config['"]/);
   assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
+test('fun and giveaway metadata is sourced from the locale catalogs', () => {
+  for (const name of ['fun', 'giveaway']) {
+    const source = read(`src/interactions/Command/${name}.js`);
+    assert.match(source, new RegExp(`localizationKey:\\s*['"]commandMetadata\\.${name}['"]`), name);
+    assert.doesNotMatch(source, /localizations:\s*\{/);
+  }
 });
 
 test('advanced moderation responses use localization keys', () => {
