@@ -840,6 +840,74 @@
       "name": "vocal",
       "description": "Gérer les salons vocaux"
     },
+    "announcement": {
+      "name": "annonce",
+      "description": "Gérer les annonces du serveur",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes d’annonce" },
+        "create": {
+          "description": "Créer une annonce",
+          "options": {
+            "channel": { "description": "Sélectionnez un salon" },
+            "message": { "description": "Votre message d’annonce" }
+          }
+        },
+        "edit": {
+          "description": "Modifier une annonce",
+          "options": {
+            "id": { "description": "Identifiant de l’annonce à modifier" },
+            "message": { "description": "Votre message d’annonce" }
+          }
+        }
+      }
+    },
+    "autosetup": {
+      "name": "configurationauto",
+      "description": "Configurer automatiquement le bot",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de configuration automatique" },
+        "aprilfools": { "description": "Configurer le poisson d’avril" },
+        "logs": { "description": "Définir les journaux du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
+        "fun": { "description": "Définir les salons amusants du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
+        "games": { "description": "Définir les salons de jeu du serveur", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
+        "welcome": { "description": "Configurer le système de bienvenue", "options": { "setup": { "description": "Choisissez la configuration souhaitée" } } },
+        "customvoice": { "description": "Définir les salons vocaux personnalisés du serveur" },
+        "ticketpanel": { "description": "Définir le panneau de tickets du serveur" }
+      }
+    },
+    "invite": {
+      "name": "invitation",
+      "description": "Obtenir une invitation pour le bot"
+    },
+    "notepad": {
+      "name": "blocnotes",
+      "description": "Gérer vos notes",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de notes" },
+        "add": { "description": "Ajouter une note", "options": { "note": { "description": "Votre note" } } },
+        "delete": { "description": "Supprimer une note", "options": { "id": { "description": "Identifiant de la note" } } },
+        "edit": { "description": "Modifier une note", "options": { "id": { "description": "Identifiant de la note" }, "note": { "description": "Nouvelle note" } } },
+        "notes": { "description": "Afficher toutes vos notes" }
+      }
+    },
+    "report": {
+      "name": "signaler",
+      "description": "Signaler un bug ou un utilisateur aux développeurs",
+      "options": {
+        "type": { "description": "Type de signalement" },
+        "description": { "description": "Description de votre signalement" }
+      }
+    },
+    "suggestions": {
+      "name": "suggestions",
+      "description": "Gérer les suggestions",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de suggestions" },
+        "accept": { "description": "Accepter une suggestion", "options": { "id": { "description": "Identifiant du message de suggestion" } } },
+        "deny": { "description": "Refuser une suggestion", "options": { "id": { "description": "Identifiant du message de suggestion" } } },
+        "send": { "description": "Envoyer une suggestion", "options": { "suggestion": { "description": "Votre suggestion" } } }
+      }
+    },
     "famille": {
       "name": "famille",
       "description": "Créer ta famille",

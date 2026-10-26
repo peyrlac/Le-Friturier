@@ -13,6 +13,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.invite',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         let row = new Discord.ActionRowBuilder()

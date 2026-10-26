@@ -28,6 +28,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.report',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         const webhookClient = new Discord.WebhookClient({

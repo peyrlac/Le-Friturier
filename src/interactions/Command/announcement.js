@@ -33,6 +33,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.announcement',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         await interaction.deferReply();

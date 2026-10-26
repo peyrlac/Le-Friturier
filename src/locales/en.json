@@ -853,6 +853,74 @@
       "name": "voice",
       "description": "Manage voice channels"
     },
+    "announcement": {
+      "name": "announcement",
+      "description": "Manage server announcements",
+      "subcommands": {
+        "help": { "description": "Get information about announcement commands" },
+        "create": {
+          "description": "Make an announcement",
+          "options": {
+            "channel": { "description": "Select a channel" },
+            "message": { "description": "Your announcement message" }
+          }
+        },
+        "edit": {
+          "description": "Edit an announcement",
+          "options": {
+            "id": { "description": "ID of the announcement to change" },
+            "message": { "description": "Your announcement message" }
+          }
+        }
+      }
+    },
+    "autosetup": {
+      "name": "autosetup",
+      "description": "Configure the bot automatically",
+      "subcommands": {
+        "help": { "description": "Get information about automatic setup commands" },
+        "aprilfools": { "description": "Configure April Fools" },
+        "logs": { "description": "Set up server logs", "options": { "setup": { "description": "Choose the setup you want" } } },
+        "fun": { "description": "Set up fun server channels", "options": { "setup": { "description": "Choose the setup you want" } } },
+        "games": { "description": "Set up game channels", "options": { "setup": { "description": "Choose the setup you want" } } },
+        "welcome": { "description": "Configure the welcome system", "options": { "setup": { "description": "Choose the setup you want" } } },
+        "customvoice": { "description": "Set up custom voice channels" },
+        "ticketpanel": { "description": "Set up the ticket panel" }
+      }
+    },
+    "invite": {
+      "name": "invite",
+      "description": "Get an invite to the bot"
+    },
+    "notepad": {
+      "name": "notepad",
+      "description": "Manage your notes",
+      "subcommands": {
+        "help": { "description": "Get information about note commands" },
+        "add": { "description": "Add a note", "options": { "note": { "description": "Your note" } } },
+        "delete": { "description": "Delete a note", "options": { "id": { "description": "Note ID" } } },
+        "edit": { "description": "Edit a note", "options": { "id": { "description": "Note ID" }, "note": { "description": "New note" } } },
+        "notes": { "description": "Show all your notes" }
+      }
+    },
+    "report": {
+      "name": "report",
+      "description": "Report a bug or user to the developers",
+      "options": {
+        "type": { "description": "The type of your report" },
+        "description": { "description": "Description of your report" }
+      }
+    },
+    "suggestions": {
+      "name": "suggestions",
+      "description": "Manage suggestions",
+      "subcommands": {
+        "help": { "description": "Get information about suggestion commands" },
+        "accept": { "description": "Accept a suggestion", "options": { "id": { "description": "Suggestion message ID" } } },
+        "deny": { "description": "Deny a suggestion", "options": { "id": { "description": "Suggestion message ID" } } },
+        "send": { "description": "Send a suggestion", "options": { "suggestion": { "description": "Your suggestion" } } }
+      }
+    },
     "famille": {
       "name": "family",
       "description": "Create your family",
