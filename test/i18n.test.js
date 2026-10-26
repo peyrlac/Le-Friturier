@@ -189,6 +189,53 @@ test('config exposes grouped feature controls and bot exposes global feature con
     assert.equal(botFeature.options.find(option => option.name === 'action').required, true);
 });
 
+test('automod exposes localized command metadata and option descriptions', () => {
+  const command = require('../src/interactions/Command/automod');
+
+  assert.deepEqual(command.localizations, {
+    name: { fr: 'automod', en: 'automod' },
+    description: { fr: 'Gérer la modération automatique', en: 'Manage automatic moderation' },
+    subcommands: {
+      help: { description: { fr: 'Voir l’aide de la modération automatique', en: 'View automatic moderation help' } },
+      antiinvite: {
+        description: { fr: 'Activer ou désactiver l’anti-invitation', en: 'Enable or disable anti-invite protection' },
+        options: { active: { description: { fr: 'Activer la protection', en: 'Enable protection' } } }
+      },
+      antilinks: {
+        description: { fr: 'Activer ou désactiver l’anti-liens', en: 'Enable or disable anti-links protection' },
+        options: { active: { description: { fr: 'Activer la protection', en: 'Enable protection' } } }
+      },
+      antispam: {
+        description: { fr: 'Activer ou désactiver l’anti-spam', en: 'Enable or disable anti-spam protection' },
+        options: { active: { description: { fr: 'Activer la protection', en: 'Enable protection' } } }
+      },
+      linkschannel: {
+        description: { fr: 'Gérer les salons autorisés pour les liens', en: 'Manage channels allowed to contain links' },
+        options: {
+          type: { description: { fr: 'Action à effectuer', en: 'Action to perform' } },
+          channel: { description: { fr: 'Salon concerné', en: 'Target channel' } }
+        }
+      }
+    },
+    subcommandGroups: {
+      blacklist: {
+        description: { fr: 'Gérer la liste noire', en: 'Manage the blacklist' },
+        subcommands: {
+          display: { description: { fr: 'Afficher la liste noire', en: 'Display the blacklist' } },
+          add: {
+            description: { fr: 'Ajouter un mot à la liste noire', en: 'Add a word to the blacklist' },
+            options: { word: { description: { fr: 'Mot à ajouter', en: 'Word to add' } } }
+          },
+          remove: {
+            description: { fr: 'Supprimer un mot de la liste noire', en: 'Remove a word from the blacklist' },
+            options: { word: { description: { fr: 'Mot à supprimer', en: 'Word to remove' } } }
+          }
+        }
+      }
+    }
+  });
+});
+
 test('serializes native command localizations for Discord', () => {
     const command = require('../src/interactions/Command/config');
     applyCommandLocalizations(command);

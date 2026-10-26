@@ -132,7 +132,12 @@
         "channelMissing": "The channel {channel} is not allowlisted.",
         "channelField": "📘・Channel",
         "channelAdded": "The channel {channel} was added to the allowlist.",
-        "channelRemoved": "The channel {channel} was removed from the allowlist."
+        "channelRemoved": "The channel {channel} was removed from the allowlist.",
+        "protectionEnabled": "{feature} protection is now **enabled** on this server.",
+        "protectionDisabled": "{feature} protection is now **disabled** on this server.",
+        "antiInvite": "anti-invite",
+        "antiLinks": "anti-links",
+        "antiSpam": "anti-spam"
       },
       "serverstats": {
         "channel": "📘・Channel",
