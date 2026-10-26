@@ -684,6 +684,21 @@ test('tools embeds localize their titles, descriptions, and review labels', () =
   }
 });
 
+test('giveaway lifecycle events use localized response keys', () => {
+  const expectations = {
+    'src/events/giveaway/giveawayEnded.js': ['giveawayEvents.endedTitle', 'giveawayEvents.wonDescription'],
+    'src/events/giveaway/giveawayRerolled.js': ['giveawayEvents.endedTitle', 'giveawayEvents.wonDescription'],
+    'src/events/giveaway/giveawayReactionAdded.js': ['giveawayEvents.entryApproved'],
+    'src/events/giveaway/endedGiveawayReactionAdded.js': ['giveawayEvents.endedEntry']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+    assert.doesNotMatch(source, /Congratulations|Your entry into|unfortunately ended|Giveaway ended/, file);
+  }
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
