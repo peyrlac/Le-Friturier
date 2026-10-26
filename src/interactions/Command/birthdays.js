@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.birthdays',
     data: new SlashCommandBuilder()
         .setName('birthdays')
         .setDescription('Afficher ou enregistrer un anniversaire')
@@ -34,14 +35,6 @@ module.exports = {
                 .addNumberOption(option => option.setName('month').setDescription('Le numéro de mois qui est votre anniversaire').setMinValue(1).setMaxValue(12).setRequired(true))
         )
     ,
-
-    localizations: {
-        name: { fr: 'birthdays', en: 'birthdays' },
-        description: {
-            fr: 'Afficher ou enregistrer un anniversaire',
-            en: 'View or save a birthday'
-        }
-    },
 
     /** 
      * @param {Client} client
