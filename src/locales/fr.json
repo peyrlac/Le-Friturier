@@ -1752,7 +1752,7 @@
         "withdraw": { "description": "Retirer votre argent", "options": { "amount": { "description": "Entrez un montant" } } },
         "work": { "description": "Aller travailler" },
         "yearly": { "description": "Récupérer votre récompense annuelle" },
-        "leaderboard": { "description": "Voir le classement économique", "options": { "type": { "description": "Type de classement souhaité" } } }
+        "leaderboard": { "description": "Voir le classement économique", "options": { "type": { "description": "Type de classement souhaité", "choices": { "money": { "name": "Argent" }, "bank": { "name": "Banque" } } } } }
       }
     },
     "casino": {

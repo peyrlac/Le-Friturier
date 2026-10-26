@@ -1765,7 +1765,7 @@
         "withdraw": { "description": "Withdraw your money", "options": { "amount": { "description": "Enter an amount" } } },
         "work": { "description": "Go to work" },
         "yearly": { "description": "Claim your yearly money" },
-        "leaderboard": { "description": "See the economy leaderboard", "options": { "type": { "description": "The leaderboard type that you want" } } }
+        "leaderboard": { "description": "See the economy leaderboard", "options": { "type": { "description": "The leaderboard type that you want", "choices": { "money": { "name": "Money" }, "bank": { "name": "Bank" } } } } }
       }
     },
     "casino": {
