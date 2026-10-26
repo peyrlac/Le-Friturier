@@ -736,6 +736,15 @@
   "activities": {
     "notInVoice": "You are not in a voice channel."
   },
+  "voice": {
+    "notInVoice": "You are not in a voice channel.",
+    "cannotEdit": "You cannot edit this channel.",
+    "channel": "Channel",
+    "limitUpdated": "The channel limit is now **{limit}** members.",
+    "locked": "The channel was locked successfully.",
+    "renamed": "The channel was renamed to `{name}`.",
+    "unlocked": "The channel was unlocked successfully."
+  },
   "features": {
     "enabled": "The {feature} feature is enabled.",
     "disabled": "The {feature} feature is disabled.",

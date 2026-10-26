@@ -723,6 +723,15 @@
   "activities": {
     "notInVoice": "Vous n’êtes pas dans un salon vocal."
   },
+  "voice": {
+    "notInVoice": "Vous n’êtes pas dans un salon vocal.",
+    "cannotEdit": "Vous ne pouvez pas modifier ce salon.",
+    "channel": "Salon",
+    "limitUpdated": "La limite du salon est maintenant de **{limit}** membres.",
+    "locked": "Le salon a été verrouillé avec succès.",
+    "renamed": "Le salon a été renommé en `{name}`.",
+    "unlocked": "Le salon a été déverrouillé avec succès."
+  },
   "features": {
     "enabled": "La fonctionnalité {feature} est activée.",
     "disabled": "La fonctionnalité {feature} est désactivée.",
