@@ -1673,7 +1673,27 @@
     },
     "music": {
       "name": "music",
-      "description": "Play music in the bot"
+      "description": "Play music in the bot",
+      "subcommands": {
+        "help": { "description": "Get information about the music category commands" },
+        "bassboost": { "description": "Set the bassboost level", "options": { "level": { "description": "The level of the bassboost", "choices": { "0": { "name": "0" }, "1": { "name": "1" }, "2": { "name": "2" }, "3": { "name": "3" } } } } },
+        "play": { "description": "Start the music", "options": { "song": { "description": "Enter a song name/url" } } },
+        "clear": { "description": "Delete the music queue" },
+        "loop": { "description": "Loop the music" },
+        "lyrics": { "description": "Get the lyrics of the current song", "options": { "song": { "description": "Enter a song name" } } },
+        "playing": { "description": "See which song is playing now" },
+        "pause": { "description": "Pause the music" },
+        "previous": { "description": "Play previous song" },
+        "queue": { "description": "See the music queue" },
+        "resume": { "description": "Resume the music" },
+        "remove": { "description": "Remove a song from the queue", "options": { "number": { "description": "Song number" } } },
+        "seek": { "description": "Seek the current playing music", "options": { "time": { "description": "New song time" } } },
+        "shuffle": { "description": "Shuffle the music" },
+        "skip": { "description": "Skip the current song" },
+        "skipto": { "description": "Skip to a new song", "options": { "number": { "description": "Song number" } } },
+        "stop": { "description": "Stop the music" },
+        "volume": { "description": "Set the music volume", "options": { "amount": { "description": "New volume number" } } }
+      }
     },
     "radio": {
       "name": "radio",
