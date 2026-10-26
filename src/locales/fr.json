@@ -1794,6 +1794,18 @@
       "description": "Publier des messages prédéfinis",
       "options": { "message": { "description": "Sélectionner un message" } }
     },
+    "soundboard": {
+      "name": "soundboard",
+      "description": "Jouer tous les sons du bot",
+      "subcommands": { "help": { "description": "Obtenir des informations sur les commandes du soundboard" } },
+      "subcommandGroups": {
+        "windows": { "description": "Jouer les sons Windows du bot", "subcommands": { "windowserror": { "description": "Jouer le son d’erreur Windows" }, "windowsshutdown": { "description": "Jouer le son d’arrêt Windows" }, "windowsstartup": { "description": "Jouer le son de démarrage Windows" } } },
+        "earrape": { "description": "Jouer les sons earrape du bot", "subcommands": { "reee": { "description": "Jouer le son reee" }, "defaultdance": { "description": "Jouer le son defaultdance" }, "startup": { "description": "Jouer le son startup" }, "thomas": { "description": "Jouer le son thomas" }, "wegothim": { "description": "Jouer le son wegothim" } } },
+        "songs": { "description": "Jouer les sons musicaux du bot", "subcommands": { "dancememe": { "description": "Jouer le son dancememe" }, "despacito": { "description": "Jouer le son despacito" }, "elevator": { "description": "Jouer le son elevator" }, "rickastley": { "description": "Jouer le son rickastley" }, "running": { "description": "Jouer le son running" }, "tobecontinued": { "description": "Jouer le son tobecontinued" } } },
+        "discord": { "description": "Jouer les sons Discord du bot", "subcommands": { "discordcall": { "description": "Jouer le son d’appel Discord" }, "discordjoin": { "description": "Jouer le son d’arrivée dans un appel Discord" }, "discordleave": { "description": "Jouer le son de départ d’un appel Discord" }, "discordnotification": { "description": "Jouer le son de notification Discord" } } },
+        "memes": { "description": "Jouer les sons de mèmes du bot", "subcommands": { "fbi": { "description": "Jouer le son fbi" }, "jeff": { "description": "Jouer le son jeff" }, "lambo": { "description": "Jouer le son lambo" }, "missionfailed": { "description": "Jouer le son missionfailed" }, "moaning": { "description": "Jouer le son moaning" }, "nani": { "description": "Jouer le son nani" }, "nyancat": { "description": "Jouer le son nyancat" }, "ohh": { "description": "Jouer le son ohh" }, "rimshot": { "description": "Jouer le son rimshot" }, "roblox": { "description": "Jouer le son roblox" }, "shotdown": { "description": "Jouer le son shotdown" }, "spongebob": { "description": "Jouer le son spongebob" }, "wow": { "description": "Jouer le son wow" }, "yeet": { "description": "Jouer le son yeet" } } }
+      }
+    },
     "move": {
       "name": "déplacer",
       "description": "Déplacer des membres entre les salons vocaux",
