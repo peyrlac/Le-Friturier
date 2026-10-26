@@ -7,5 +7,5 @@ module.exports = async (client, interaction, args) => {
 
     client.soundboard(interaction.guild.id, interaction, "https://www.myinstants.com/media/sounds/shotdown.mp3");
 
-    client.succNormal({ key: 'soundboard.started', variables: { sound: "shotdown" }, type: 'editreply' }, interaction);
+    client.succNormal({ key: 'soundboard.started', variables: { sound: await client.t(interaction, 'soundboard.sounds.shotdown') }, type: 'editreply' }, interaction);
 };
