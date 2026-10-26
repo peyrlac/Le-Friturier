@@ -1,11 +1,12 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('invite')
-        .setDescription('Get an invite to the bot'),
+        .setName(getCommandMetadata('commandMetadata.invite.name'))
+        .setDescription(getCommandMetadata('commandMetadata.invite.description')),
 
     /** 
      * @param {Client} client
