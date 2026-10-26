@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.triggers',
     data: new SlashCommandBuilder()
         .setName('triggers')
         .setDescription('Déclenche une réponse à certains mots')
@@ -70,34 +71,6 @@ module.exports = {
                 .setName('documentation')
                 .setDescription('Documentation sur comment faire un triggers')
         ),
-
-    localizations: {
-        name: { fr: 'triggers', en: 'triggers' },
-        description: { fr: 'Déclencher des réponses sur certains mots', en: 'Trigger responses to matching messages' },
-        subcommands: {
-            add: {
-                description: { fr: 'Ajouter un trigger', en: 'Add a trigger' },
-                options: {
-                    alias: { description: { fr: 'Alias du trigger', en: 'Trigger alias' } },
-                    type: { description: { fr: 'Type de réponse', en: 'Response type' } },
-                    regex: { description: { fr: 'Filtre regex', en: 'Regex filter' } },
-                    regexflags: { description: { fr: 'Flags regex additionnels', en: 'Additional regex flags' } },
-                    response: { description: { fr: 'Réponse du bot', en: 'Bot response' } },
-                    isactive: { description: { fr: 'Statut du trigger', en: 'Trigger status' } },
-                    mention: { description: { fr: 'Mentionner lors de la réponse', en: 'Mention when responding' } },
-                    replied: { description: { fr: 'Format de la réponse', en: 'Response format' } },
-                    emotes: { description: { fr: 'Emotes ajoutées lors de la réaction', en: 'Emotes added to the reaction' } },
-                    timedeletion: { description: { fr: 'Délai avant suppression', en: 'Delay before deletion' } }
-                }
-            },
-            remove: {
-                description: { fr: 'Retirer un trigger', en: 'Remove a trigger' },
-                options: { alias: { description: { fr: 'Alias du trigger', en: 'Trigger alias' } } }
-            },
-            list: { description: { fr: 'Voir tous les triggers', en: 'List all triggers' } },
-            documentation: { description: { fr: 'Consulter la documentation des triggers', en: 'View trigger documentation' } }
-        }
-    },
 
     /** 
      * @param {Client} client

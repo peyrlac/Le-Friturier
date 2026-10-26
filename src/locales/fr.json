@@ -1054,6 +1054,16 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "triggers": {
+      "name": "triggers",
+      "description": "Déclencher des réponses sur certains mots",
+      "subcommands": {
+        "add": { "description": "Ajouter un trigger", "options": { "alias": { "description": "Alias du trigger" }, "type": { "description": "Type de réponse" }, "regex": { "description": "Filtre regex" }, "regexflags": { "description": "Flags regex additionnels" }, "response": { "description": "Réponse du bot" }, "isactive": { "description": "Statut du trigger" }, "mention": { "description": "Mentionner lors de la réponse" }, "replied": { "description": "Format de la réponse" }, "emotes": { "description": "Emotes ajoutées lors de la réaction" }, "timedeletion": { "description": "Délai avant suppression" } } },
+        "remove": { "description": "Retirer un trigger", "options": { "alias": { "description": "Alias du trigger" } } },
+        "list": { "description": "Voir tous les triggers" },
+        "documentation": { "description": "Consulter la documentation des triggers" }
+      }
+    },
     "automod": {
       "name": "automod",
       "description": "Gérer la modération automatique",

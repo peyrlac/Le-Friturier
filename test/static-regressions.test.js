@@ -603,6 +603,12 @@ test('automod metadata is sourced from the locale catalogs', () => {
   assert.doesNotMatch(source, /localizations:\s*\{/);
 });
 
+test('triggers metadata is sourced from the locale catalogs', () => {
+  const source = read('src/interactions/Command/triggers.js');
+  assert.match(source, /localizationKey:\s*['"]commandMetadata\.triggers['"]/);
+  assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],
