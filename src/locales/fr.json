@@ -869,6 +869,13 @@
     "emojiAdded": "Emoji ajouté avec succès au serveur.",
     "emojiNotFound": "Emoji introuvable !"
   },
+  "report": {
+    "bugSent": "Le signalement de bug a été envoyé aux développeurs !",
+    "userSent": "Le signalement utilisateur a été envoyé aux développeurs !"
+  },
+  "levels": {
+    "disabled": "Le système de niveaux est désactivé !"
+  },
   "announcement": {
     "title": "📢・Annonce !",
     "sent": "L'annonce a été envoyée avec succès !",
