@@ -256,7 +256,7 @@ test('afk and activities expose localized metadata', () => {
     }
   });
 
-  assert.deepEqual(resolveCommandLocalizations(activities), {
+  assert.deepEqual({ ...resolveCommandLocalizations(activities), options: { activity: (({ choices, ...activity }) => activity)(resolveCommandLocalizations(activities).options.activity) } }, {
     name: { fr: 'activités', en: 'activities' },
     description: { fr: 'Démarrer une activité', en: 'Start an activity' },
     options: { activity: { description: { fr: 'Activité à démarrer', en: 'Activity to start' } } }
@@ -562,6 +562,23 @@ test('serializes localized setup choice names from command metadata', () => {
   assert.deepEqual(deletionChoices.find(choice => choice.value === 'customvoice').name_localizations, {
     fr: 'Voix personnalisée',
     'en-US': 'Custom voice'
+  });
+});
+
+test('serializes localized activity choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/activities');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const choices = command.data.toJSON().options[0].choices;
+
+  assert.deepEqual(choices.find(choice => choice.value === 'checkers').name_localizations, {
+    fr: 'Dames dans le parc',
+    'en-US': 'Checkers in the Park'
+  });
+  assert.deepEqual(choices.find(choice => choice.value === 'poker').name_localizations, {
+    fr: 'Soirée poker',
+    'en-US': 'Poker Night'
   });
 });
 

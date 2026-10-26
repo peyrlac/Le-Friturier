@@ -1712,7 +1712,7 @@
     "activities": {
       "name": "activities",
       "description": "Start an activity",
-      "options": { "activity": { "description": "Activity to start" } }
+      "options": { "activity": { "description": "Activity to start", "choices": { "betrayal": { "name": "Betrayal.io" }, "checkers": { "name": "Checkers in the Park" }, "chess": { "name": "Chess in the Park" }, "doodlecrew": { "name": "Doodle Crew" }, "fishington": { "name": "Fishington.io" }, "letterleague": { "name": "Letter League" }, "ocho": { "name": "Ocho" }, "poker": { "name": "Poker Night" }, "sketchheads": { "name": "Sketch Heads" }, "spellcast": { "name": "Spell Cast" }, "wordsnacks": { "name": "Word Snacks" }, "watchtogether": { "name": "Watch Together" } } } }
     },
     "economy": {
       "name": "economy",
