@@ -839,6 +839,11 @@ test('music command descriptions are sourced from locale metadata', () => {
   assert.doesNotMatch(source, /\.setDescription\(['"]/);
 });
 
+test('moderation command descriptions are sourced from locale metadata', () => {
+  const source = read('src/interactions/Command/moderation.js');
+  assert.doesNotMatch(source, /\.setDescription\(['"]/);
+});
+
 test('music and radio metadata is sourced from the locale catalogs', () => {
   for (const name of ['music', 'radio']) {
     const source = read(`src/interactions/Command/${name}.js`);
