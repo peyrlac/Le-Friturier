@@ -1952,6 +1952,18 @@
         "leaderboard": { "description": "See the invite leaderboard" }
       }
     },
+    "reactionroles": {
+      "name": "reaction roles",
+      "description": "Manage the server reaction roles",
+      "subcommands": {
+        "help": { "description": "Get information about the reaction roles category commands" },
+        "add": { "description": "Add a reaction role", "options": { "category": { "description": "Category name for your reaction roles group" }, "role": { "description": "Select a role" }, "emoji": { "description": "Enter an emoji" } } },
+        "delete": { "description": "Delete a reaction roles category", "options": { "category": { "description": "Category name for your reaction roles group" } } },
+        "list": { "description": "Show all reaction roles categories from this guild" },
+        "button": { "description": "Show all reaction roles with buttons", "options": { "category": { "description": "Category name for your reaction roles group" }, "channel": { "description": "Channel where the reaction roles should come" } } },
+        "menu": { "description": "Show all reaction roles in a menu", "options": { "category": { "description": "Category name for your reaction roles group" }, "channel": { "description": "Channel where the reaction roles should come" } } }
+      }
+    },
     "suggestions": {
       "name": "suggestions",
       "description": "Manage the suggestions",

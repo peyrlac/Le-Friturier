@@ -1939,6 +1939,18 @@
         "leaderboard": { "description": "Voir le classement des invitations" }
       }
     },
+    "reactionroles": {
+      "name": "rôles-réaction",
+      "description": "Gérer les rôles-réaction du serveur",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de rôles-réaction" },
+        "add": { "description": "Ajouter un rôle-réaction", "options": { "category": { "description": "Nom de la catégorie du groupe de rôles-réaction" }, "role": { "description": "Sélectionnez un rôle" }, "emoji": { "description": "Saisissez un emoji" } } },
+        "delete": { "description": "Supprimer une catégorie de rôles-réaction", "options": { "category": { "description": "Nom de la catégorie du groupe de rôles-réaction" } } },
+        "list": { "description": "Afficher toutes les catégories de rôles-réaction de ce serveur" },
+        "button": { "description": "Afficher tous les rôles-réaction avec des boutons", "options": { "category": { "description": "Nom de la catégorie du groupe de rôles-réaction" }, "channel": { "description": "Salon où les rôles-réaction doivent être envoyés" } } },
+        "menu": { "description": "Afficher tous les rôles-réaction dans un menu", "options": { "category": { "description": "Nom de la catégorie du groupe de rôles-réaction" }, "channel": { "description": "Salon où les rôles-réaction doivent être envoyés" } } }
+      }
+    },
     "suggestions": {
       "name": "suggestions",
       "description": "Gérer les suggestions",
