@@ -64,6 +64,27 @@ test('all static response keys exist in both locale catalogs', () => {
   assert.deepEqual(missing, []);
 });
 
+test('all native command metadata keys exist in both locale catalogs', () => {
+  const missing = [];
+  const metadataPattern = /\blocalizationKey:\s*['"]([^'"]+)['"]/g;
+
+  for (const file of filesIn('src/interactions/Command')) {
+    const source = fs.readFileSync(path.join(root, file), 'utf8');
+    let match;
+    while ((match = metadataPattern.exec(source))) {
+      const key = match[1];
+      if (!localeValue(fr, key) || !localeValue(en, key)) missing.push(`${file}: ${key}`);
+    }
+  }
+
+  assert.deepEqual(missing, []);
+});
+
+test('legacy trigger documentation implementation remains removed', () => {
+  const source = fs.readFileSync(path.join(root, 'src/commands/triggers/documentation.js'), 'utf8');
+  assert.doesNotMatch(source, /legacyDocumentation/);
+});
+
 test('every translated string keeps the same interpolation placeholders', () => {
   const mismatches = [];
 
