@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 const { FEATURE_REGISTRY } = require('../../handlers/features');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     localizationKey: 'commandMetadata.config',
@@ -18,8 +19,8 @@ module.exports = {
                     .setDescription('Choisissez une langue')
                     .setRequired(true)
                     .addChoices(
-                        { name: 'Français', value: 'fr' },
-                        { name: 'English', value: 'en' },
+                        { name: getCommandMetadata('commandMetadata.config.subcommands.language.options.language.choices.fr.name'), value: 'fr' },
+                        { name: getCommandMetadata('commandMetadata.config.subcommands.language.options.language.choices.en.name'), value: 'en' },
                     )
                 )
         )
@@ -81,8 +82,8 @@ module.exports = {
                         .setDescription('Type de message de ticket')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'open', value: 'open' },
-                            { name: 'closeDM', value: 'close' }
+                            { name: getCommandMetadata('commandMetadata.config.subcommands.ticketmessage.options.type.choices.open.name'), value: 'open' },
+                            { name: getCommandMetadata('commandMetadata.config.subcommands.ticketmessage.options.type.choices.close.name'), value: 'close' }
                         )
                 )
                 .addStringOption(option => option.setName("message").setDescription("Entrez un message pour le billet").setRequired(true))
