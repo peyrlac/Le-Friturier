@@ -2085,6 +2085,34 @@
         }
       }
     },
+    "levels": {
+      "name": "niveaux",
+      "description": "Voir le système de niveaux",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de niveaux" },
+        "setlevel": { "description": "Définir un nouveau niveau pour un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "level": { "description": "Saisissez un nouveau niveau" } } },
+        "deletereward": { "description": "Supprimer une récompense de niveau", "options": { "level": { "description": "Saisissez un niveau" } } },
+        "createreward": { "description": "Créer une récompense de niveau", "options": { "level": { "description": "Saisissez un niveau" }, "role": { "description": "Le rôle de cette récompense" } } },
+        "setxp": { "description": "Définir une nouvelle expérience pour un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Saisissez une quantité d'expérience" } } },
+        "rank": { "description": "Voir votre rang actuel", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
+        "rewards": { "description": "Afficher toutes les récompenses de niveau" },
+        "leaderboard": { "description": "Voir le classement des niveaux" }
+      }
+    },
+    "messages": {
+      "name": "messages",
+      "description": "Voir le système de messages",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de messages" },
+        "add": { "description": "Ajouter des messages à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Saisissez une quantité de messages" } } },
+        "deletereward": { "description": "Supprimer une récompense de messages", "options": { "amount": { "description": "Saisissez une quantité de messages" } } },
+        "createreward": { "description": "Créer une récompense de messages", "options": { "amount": { "description": "Saisissez une quantité de messages" }, "role": { "description": "Le rôle de cette récompense" } } },
+        "remove": { "description": "Retirer des messages à un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" }, "amount": { "description": "Saisissez une quantité de messages" } } },
+        "show": { "description": "Voir vos messages", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
+        "rewards": { "description": "Afficher toutes les récompenses de messages" },
+        "leaderboard": { "description": "Voir le classement des messages" }
+      }
+    },
     "search": {
       "name": "recherche",
       "description": "Rechercher quelque chose sur Internet",

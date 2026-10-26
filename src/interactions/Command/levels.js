@@ -2,58 +2,59 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const Schema = require("../../database/models/functions");
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('levels')
-        .setDescription('View the level system')
+        .setDescription(getCommandMetadata('commandMetadata.levels.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the levels category commands')
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('setlevel')
-                .setDescription('Set a new level for a user')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('level').setDescription('Enter a new level').setMinValue(0).setMaxValue(1000).setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.setlevel.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.setlevel.options.user.description')).setRequired(true))
+                .addNumberOption(option => option.setName('level').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.setlevel.options.level.description')).setMinValue(0).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('deletereward')
-                .setDescription('Delete a level reward')
-                .addNumberOption(option => option.setName('level').setDescription('Enter a level').setMinValue(0).setMaxValue(1000).setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.deletereward.description'))
+                .addNumberOption(option => option.setName('level').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.deletereward.options.level.description')).setMinValue(0).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('createreward')
-                .setDescription('Create a level reward')
-                .addNumberOption(option => option.setName('level').setDescription('Enter a level').setMinValue(0).setMaxValue(1000).setRequired(true))
-                .addRoleOption(option => option.setName('role').setDescription('The role for this reward').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.createreward.description'))
+                .addNumberOption(option => option.setName('level').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.createreward.options.level.description')).setMinValue(0).setMaxValue(1000).setRequired(true))
+                .addRoleOption(option => option.setName('role').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.createreward.options.role.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('setxp')
-                .setDescription('Set a new xp for a user')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of xp').setMinValue(1).setMaxValue(1000000000).setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.setxp.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.setxp.options.user.description')).setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.setxp.options.amount.description')).setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('rank')
-                .setDescription('See your current rank')
-                .addUserOption(option => option.setName('user').setDescription('Select a user'))
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.rank.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.levels.subcommands.rank.options.user.description')))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('rewards')
-                .setDescription('Show all level rewards')
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.rewards.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('leaderboard')
-                .setDescription('See the level leaderboard')
+                .setDescription(getCommandMetadata('commandMetadata.levels.subcommands.leaderboard.description'))
         )
     ,
 
