@@ -12,5 +12,5 @@ module.exports = async (client, interaction, args) => {
             .setColor(client.config.colors.normal)
             .setFooter({ text: `👍 ${json.data.children[i].data.ups} | 💬 ${json.data.children[i].data.num_comments}` })
         interaction.editReply({ embeds: [embed] })
-    }).catch({})
+    }).catch(() => {})
 }
