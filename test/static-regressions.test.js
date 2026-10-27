@@ -1098,6 +1098,19 @@ test('autosetup game and ticket panels use localization keys', () => {
   assert.doesNotMatch(ticketPanel, /Cliquez sur .* pour ouvrir un ticket|title: ["`]Tickets/);
 });
 
+test('guild channel and emoji information embeds use localization keys', () => {
+  const channel = read('src/commands/guild/channelinfo.js');
+  const emojis = read('src/commands/guild/emojis.js');
+  for (const key of ['guild.channelInfo.title', 'guild.channelInfo.description', 'guild.channelInfo.type', 'guild.channelInfo.id', 'guild.channelInfo.createdAt', 'guild.channelInfo.topic', 'guild.channelInfo.nsfw', 'guild.channelInfo.parent', 'guild.channelInfo.notAvailable']) {
+    assert.match(channel, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+  for (const key of ['guild.emojis.title', 'guild.emojis.description', 'guild.emojis.animated', 'guild.emojis.standard']) {
+    assert.match(emojis, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+  assert.doesNotMatch(channel, /Channel information about|Made on|Subject|Parent/);
+  assert.doesNotMatch(emojis, /Emoji's!|Animated \[|Standard \[/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

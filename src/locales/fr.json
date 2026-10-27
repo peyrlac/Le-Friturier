@@ -1196,7 +1196,24 @@
     "inviteNotFound": "Impossible de trouver ce serveur.",
     "inviteInfoTitle": "📨・Informations de l'invitation",
     "emojiAdded": "Emoji ajouté avec succès au serveur.",
-    "emojiNotFound": "Emoji introuvable !"
+    "emojiNotFound": "Emoji introuvable !",
+    "channelInfo": {
+      "title": "ℹ・Informations du salon",
+      "description": "Informations du salon : <#{channel}>",
+      "type": "Type",
+      "id": "Identifiant",
+      "createdAt": "Créé le",
+      "topic": "Sujet",
+      "nsfw": "NSFW",
+      "parent": "Parent",
+      "notAvailable": "N/D"
+    },
+    "emojis": {
+      "title": "😛・Emojis !",
+      "description": "{count} emojis - {guild}",
+      "animated": "Animés [{count}]",
+      "standard": "Standards [{count}]"
+    }
   },
   "report": {
     "bugSent": "Le signalement de bug a été envoyé aux développeurs !",

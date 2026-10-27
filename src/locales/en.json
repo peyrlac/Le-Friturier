@@ -1209,7 +1209,24 @@
     "inviteNotFound": "I couldn't find the server.",
     "inviteInfoTitle": "📨・Invite information",
     "emojiAdded": "Emoji successfully added to the server.",
-    "emojiNotFound": "Emoji not found!"
+    "emojiNotFound": "Emoji not found!",
+    "channelInfo": {
+      "title": "ℹ・Channel information",
+      "description": "Channel information about: <#{channel}>",
+      "type": "Type",
+      "id": "ID",
+      "createdAt": "Made on",
+      "topic": "Topic",
+      "nsfw": "NSFW",
+      "parent": "Parent",
+      "notAvailable": "N/A"
+    },
+    "emojis": {
+      "title": "😛・Emojis!",
+      "description": "{count} emojis - {guild}",
+      "animated": "Animated [{count}]",
+      "standard": "Standard [{count}]"
+    }
   },
   "report": {
     "bugSent": "Bug successfully sent to the developers!",
