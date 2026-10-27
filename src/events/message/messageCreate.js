@@ -307,7 +307,7 @@ module.exports = async (client, message) => {
   // Prefix
   var guildSettings = await Functions.findOne({ Guild: message.guild.id });
   if (!guildSettings) {
-    new Functions({
+    await new Functions({
       Guild: message.guild.id,
       Prefix: client.config.discord.prefix,
     }).save();
@@ -316,12 +316,13 @@ module.exports = async (client, message) => {
   }
 
   if (!guildSettings || !guildSettings.Prefix) {
-    Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
-      data.Prefix = client.config.discord.prefix;
-      data.save();
-    });
+    guildSettings = await Functions.findOneAndUpdate(
+      { Guild: message.guild.id },
+      { $set: { Prefix: client.config.discord.prefix } },
+      { new: true }
+    );
 
-    guildSettings = await Functions.findOne({ Guild: message.guild.id });
+    guildSettings ??= await Functions.findOne({ Guild: message.guild.id });
   }
 
   if (!guildSettings || !guildSettings.Prefix) {
