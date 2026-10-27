@@ -115,7 +115,7 @@ module.exports = (client) => {
                 const player = client.player.players.get(interaction.guild.id);
                 if (!player) return;
 
-                player.stop();
+                player.skip();
 
                 const track = player.queue.current;
 
@@ -155,7 +155,7 @@ module.exports = (client) => {
                         },
                         {
                             name: `${client.emotes.normal.clock}┆Ends at`,
-                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                            value: `<t:${((Date.now() / 1000) + (track.length / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
@@ -213,7 +213,7 @@ module.exports = (client) => {
                         },
                         {
                             name: `${client.emotes.normal.clock}┆Ends at`,
-                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                            value: `<t:${((Date.now() / 1000) + (track.length / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {

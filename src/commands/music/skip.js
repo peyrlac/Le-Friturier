@@ -19,7 +19,7 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction);
 
-    player.stop();
+    player.skip();
 
     client.succNormal({
         text: `A sauté la musique!`,

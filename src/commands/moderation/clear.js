@@ -20,7 +20,7 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction);
 
-    interaction.channel.bulkDelete(amount + 1).then(() => {
+    interaction.channel.bulkDelete(amount).then(() => {
         client.succNormal({
             text: `I have successfully deleted the messages`,
             fields: [
