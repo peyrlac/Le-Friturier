@@ -7,14 +7,14 @@ module.exports = async (client, interaction) => {
 
     if (!channel || channel.type !== ChannelType.GuildVoice) {
         return client.errNormal({
-            error: `Selected channel is not a valid voice channel.`,
+            key: 'move.invalidChannel',
             type: 'editreply'
         }, interaction);
     }
 
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MoveMembers)) {
         return client.errNormal({
-            error: `The bot does not have permission to move members.`,
+            key: 'move.movePermission',
             type: 'editreply'
         }, interaction);
     }
@@ -28,7 +28,8 @@ module.exports = async (client, interaction) => {
 
     if (membersToKick.length === 0) {
         return client.errNormal({
-            error: `No members to remove from \`${channel.name}\`.`,
+            key: 'move.noMembersChannel',
+            variables: { channel: channel.name },
             type: 'editreply'
         }, interaction);
     }
@@ -46,7 +47,8 @@ module.exports = async (client, interaction) => {
     const kickedCount = results.filter(Boolean).length;
 
     return client.succNormal({
-        text: `🧹 Kicked ${kickedCount} member(s) from \`${channel.name}\`${excludedUser ? ` (excluding ${excludedUser.tag})` : ''}.`,
+        key: 'move.kicked',
+        variables: { count: kickedCount, channel: channel.name, excluded: excludedUser ? ` (excluding ${excludedUser.tag})` : '' },
         type: 'editreply'
     }, interaction);
 };
