@@ -180,12 +180,12 @@ module.exports = async (client, interaction) => {
                 if (interaction.member.roles.cache.get(roleid)) {
                     interaction.guild.members.cache.get(interaction.user.id).roles.remove(roleid).catch(error => { })
 
-                    interaction.reply({ content: `<@&${roleid}> was removed!`, ephemeral: true });
+                    interaction.reply({ content: `<@&${roleid}> was removed!`, flags: Discord.MessageFlags.Ephemeral });
                 }
                 else {
                     interaction.guild.members.cache.get(interaction.user.id).roles.add(roleid).catch(error => { })
 
-                    interaction.reply({ content: `<@&${roleid}> was added!`, ephemeral: true });
+                    interaction.reply({ content: `<@&${roleid}> was added!`, flags: Discord.MessageFlags.Ephemeral });
                 }
             })
         }
@@ -221,7 +221,7 @@ module.exports = async (client, interaction) => {
                         if ((i + 1) === interaction.values.length) {
                             interaction.reply({
                                 content: `I have updated the following roles for you: ${roles}`,
-                                ephemeral: true,
+                                flags: Discord.MessageFlags.Ephemeral,
                             });
                         }
                     }
@@ -277,7 +277,7 @@ module.exports = async (client, interaction) => {
             if (!event || event.creatorId !== interaction.user.id) {
                 return interaction.reply({
                     content: "❌ Seul le créateur de l'événement peut modifier les paramètres de rappel.",
-                    ephemeral: true
+                    flags: Discord.MessageFlags.Ephemeral
                 });
             }
 
@@ -352,14 +352,14 @@ module.exports = async (client, interaction) => {
                 content: enableReminders ? 
                     '🔔 Les rappels ont été réactivés pour cet événement.' :
                     '🔕 Les rappels ont été désactivés pour cet événement.',
-                ephemeral: true
+                flags: Discord.MessageFlags.Ephemeral
             });
 
         } catch (error) {
             console.error('Erreur lors de la configuration des rappels:', error);
             await interaction.reply({
                 content: "❌ Une erreur est survenue lors de la modification des paramètres de rappel.",
-                ephemeral: true
+                flags: Discord.MessageFlags.Ephemeral
             });
         }
     }
@@ -382,7 +382,7 @@ module.exports = async (client, interaction) => {
             if (!event || event.creatorId !== interaction.user.id) {
                 return interaction.reply({
                     content: "❌ Seul le créateur de l'événement peut configurer les rappels.",
-                    ephemeral: true
+                    flags: Discord.MessageFlags.Ephemeral
                 });
             }
 
@@ -467,14 +467,14 @@ module.exports = async (client, interaction) => {
             // Envoyer une confirmation éphémère
             await interaction.followUp({
                 content: "✅ Les rappels ont été configurés pour cet événement.",
-                ephemeral: true
+                flags: Discord.MessageFlags.Ephemeral
             });
 
         } catch (error) {
             console.error('Erreur lors de la configuration des rappels:', error);
             await interaction.reply({
                 content: "❌ Une erreur est survenue lors de la configuration des rappels.",
-                ephemeral: true
+                flags: Discord.MessageFlags.Ephemeral
             });
         }
     }
