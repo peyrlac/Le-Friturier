@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/music");
 
 module.exports = {
+    localizationKey: 'commandMetadata.radio',
     data: new SlashCommandBuilder()
         .setName('radio')
         .setDescription('Playing radio in Bot')
@@ -28,11 +29,6 @@ module.exports = {
                 .setName('playing')
                 .setDescription('Show what is playing now'),
         ),
-    localizations: {
-        name: { fr: 'radio', en: 'radio' },
-        description: { fr: 'Écouter la radio dans le bot', en: 'Play radio in the bot' }
-    },
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction

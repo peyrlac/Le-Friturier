@@ -1054,6 +1054,14 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "music": {
+      "name": "musique",
+      "description": "Lire de la musique dans le bot"
+    },
+    "radio": {
+      "name": "radio",
+      "description": "Écouter la radio dans le bot"
+    },
     "moderation": {
       "name": "modération",
       "description": "Gérer la modération du serveur"

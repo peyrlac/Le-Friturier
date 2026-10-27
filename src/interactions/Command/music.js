@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.music',
     data: new SlashCommandBuilder()
         .setName('music')
         .setDescription('Playing music in Bot')
@@ -113,11 +114,6 @@ module.exports = {
                 .setDescription('Set the music volume')
                 .addNumberOption(option => option.setName('amount').setDescription('New volume number').setMinValue(0).setMaxValue(100))
         ),
-    localizations: {
-        name: { fr: 'musique', en: 'music' },
-        description: { fr: 'Lire de la musique dans le bot', en: 'Play music in the bot' }
-    },
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
