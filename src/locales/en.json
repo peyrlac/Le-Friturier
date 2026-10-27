@@ -824,6 +824,11 @@
     "recovered": "🤗‡Recovered",
     "deaths": "💀‡Deaths"
   },
+  "soundboard": {
+    "notInVoice": "You're not in a voice channel!",
+    "notSameVoice": "You are not in the same voice channel!",
+    "started": "Soundboard started! Playing **{sound}**"
+  },
   "notepad": {
     "noNotes": "No notes found!"
   },

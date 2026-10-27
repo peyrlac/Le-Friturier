@@ -811,6 +811,11 @@
     "recovered": "🤗‡Guérisons",
     "deaths": "💀‡Décès"
   },
+  "soundboard": {
+    "notInVoice": "Vous n'êtes pas dans un salon vocal !",
+    "notSameVoice": "Vous n'êtes pas dans le même salon vocal !",
+    "started": "Le soundboard a démarré ! Lecture de **{sound}**"
+  },
   "notepad": {
     "noNotes": "Aucune note trouvée !"
   },
