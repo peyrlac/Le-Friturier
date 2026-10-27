@@ -61,6 +61,16 @@
   "messageEvents": {
     "cannotDM": "Je ne peux pas vous envoyer de message privé ; vos messages privés sont peut-être désactivés."
   },
+  "spoiler": {
+    "noPermission": "Vous ne possédez pas la permission requise `Gérer les messages` pour effectuer cette action.",
+    "prompt": "Ajoutez un contexte pour mieux décrire le spoiler ou écrivez `annuler`.",
+    "cancelled": "Vous avez annulé la mise en spoiler du message !",
+    "uploaded": "Téléversement automatique d'une image transformée en spoiler",
+    "imagePost": "**{author}** a publié une image spoiler à propos de **{context}**\n",
+    "textPost": "**{author}** a écrit un spoiler à propos de **{context}**\n",
+    "author": "Spoiler",
+    "missingContext": "Vous n'avez pas fourni le contexte requis. Comment savoir de quoi parle le spoiler sinon ?"
+  },
   "starboard": {
     "cannotStarOwn": "Vous ne pouvez pas mettre une étoile à vos propres messages.\n\nMessage : {message}",
     "cannotStarBot": "Vous ne pouvez pas mettre une étoile aux messages des bots.\n\nMessage : {message}",

@@ -1300,6 +1300,26 @@ test('interactive embed prompts use localization keys', () => {
   assert.doesNotMatch(source, /Please enter a title|Please enter a description|Incorrect thumbnail link|Incorrect image link|Incorrect url/);
 });
 
+test('spoiler context menu responses use localization keys', () => {
+  const source = read('src/interactions/ContextMenu/spoiler.js');
+  const keys = [
+    'spoiler.noPermission',
+    'spoiler.prompt',
+    'spoiler.cancelled',
+    'spoiler.uploaded',
+    'spoiler.imagePost',
+    'spoiler.textPost',
+    'spoiler.author',
+    'spoiler.missingContext'
+  ];
+
+  for (const key of keys) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+
+  assert.doesNotMatch(source, /Tu ne possèdes pas la permission requise|Ajoute un contexte pour mieux décrire|Tu as annulé la mise en spoiler|Automatic upload of an image turned into a spoiler/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
