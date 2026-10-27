@@ -107,6 +107,19 @@
       "unpaused": "Giveaway unpaused!",
       "rerolled": "Giveaway rerolled."
     },
+    "tickets": {
+      "setupRequired": "Set up tickets first.",
+      "notTicket": "This is not a ticket.",
+      "alreadyClaimed": "The ticket has already been claimed.",
+      "ownTicket": "You are not allowed to claim your own ticket.",
+      "claimedBy": "You will now be assisted by <@!{user}>.",
+      "alreadyClosed": "The ticket is already closed.",
+      "closedBy": "Ticket closed by <@!{user}>.",
+      "notClaimed": "The ticket is not claimed.",
+      "notClaimedByYou": "You have not claimed this ticket.",
+      "availableAgain": "This ticket can now be claimed again!",
+      "deleteCountdown": "Delete this ticket in **5 seconds**."
+    },
     "music": {
       "notInVoice": "You are not in a voice channel!",
       "notSameVoice": "You are not in the same voice channel!",
