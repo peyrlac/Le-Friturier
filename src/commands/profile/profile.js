@@ -1,8 +1,10 @@
 const model = require('../../database/models/badge');
 const Schema = require('../../database/models/profile');
 const CreditsSchema = require("../../database/models/votecredits");
+const localizedProfile = require('./profileLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedProfile(client, interaction, args);
 
     const badgeFlags = {
         DEVELOPER: client.emotes.badges.developer,
@@ -175,4 +177,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
