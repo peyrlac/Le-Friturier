@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
-
-    let list = `
+    const list = await client.t(interaction, 'triggers.documentation');
+    /*
+    let legacyDocumentation = `
     Comment créer un trigger ?
 
     1. Le filtre Regex
@@ -29,9 +30,10 @@ module.exports = async (client, interaction, args) => {
     La partie après le premier / jusqu'au prochain / ira dans Regex (/ non inclus), ce qui vient après le 2e / ira dans RegexFlags (/ non inclus).\n
     \n\n
     `;
+    */
 
     await client.embed({
-        title: "📃・Liste des triggers",
+        title: await client.t(interaction, 'triggers.documentationTitle'),
         desc: list,
         type: 'editreply'
     }, interaction)

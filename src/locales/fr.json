@@ -732,6 +732,25 @@
     "renamed": "Le salon a été renommé en `{name}`.",
     "unlocked": "Le salon a été déverrouillé avec succès."
   },
+  "triggers": {
+    "listTitle": "Liste des triggers",
+    "documentationTitle": "Documentation des triggers",
+    "documentation": "Un trigger détecte un motif avec une expression régulière.\n\n**Alias** identifie le trigger.\n**Type** définit l’action du bot.\n**Réponse** est le message envoyé.\n**Mention** contrôle le ping.\n**RegexFlags** contient les flags facultatifs.",
+    "noData": "Aucune donnée de trigger disponible.",
+    "status": "Statut",
+    "type": "Type",
+    "regex": "Regex",
+    "regexFlags": "Flags regex",
+    "response": "Réponse",
+    "emotes": "Emotes",
+    "mention": "Mention",
+    "replied": "Message suivi",
+    "typeUnknown": "Inconnu",
+    "typeReply": "Répond",
+    "typeReplyDelete": "Répond puis supprime",
+    "typeDelete": "Supprime",
+    "typeReact": "Ajoute une réaction"
+  },
   "features": {
     "enabled": "La fonctionnalité {feature} est activée.",
     "disabled": "La fonctionnalité {feature} est désactivée.",

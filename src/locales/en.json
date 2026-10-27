@@ -745,6 +745,25 @@
     "renamed": "The channel was renamed to `{name}`.",
     "unlocked": "The channel was unlocked successfully."
   },
+  "triggers": {
+    "listTitle": "Trigger list",
+    "documentationTitle": "Trigger documentation",
+    "documentation": "A trigger detects a pattern with a regular expression.\n\n**Alias** identifies the trigger.\n**Type** defines the bot action.\n**Response** is the message sent.\n**Mention** controls the ping.\n**RegexFlags** contains optional flags.",
+    "noData": "No trigger data is available.",
+    "status": "Status",
+    "type": "Type",
+    "regex": "Regex",
+    "regexFlags": "Regex flags",
+    "response": "Response",
+    "emotes": "Emotes",
+    "mention": "Mention",
+    "replied": "Follow-up message",
+    "typeUnknown": "Unknown",
+    "typeReply": "Reply",
+    "typeReplyDelete": "Reply then delete",
+    "typeDelete": "Delete",
+    "typeReact": "Add a reaction"
+  },
   "features": {
     "enabled": "The {feature} feature is enabled.",
     "disabled": "The {feature} feature is disabled.",
