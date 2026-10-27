@@ -1992,6 +1992,9 @@
         "menu": { "description": "Afficher les rôles réaction dans un menu", "options": { "category": { "description": "Nom de la catégorie" }, "channel": { "description": "Salon où envoyer les rôles" } } }
       }
     },
+    "spoiler": {
+      "name": "Mettre en spoiler"
+    },
     "autosetup": {
       "name": "configurationauto",
       "description": "Configurer automatiquement le bot",

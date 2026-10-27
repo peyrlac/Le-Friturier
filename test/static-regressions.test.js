@@ -513,6 +513,11 @@ test('reaction role interaction responses use the active locale', () => {
   assert.doesNotMatch(source, /was \$\{hasRole \? 'removed' : 'added'\}|I have updated the following roles for you/);
 });
 
+test('spoiler context menu exposes localized native metadata', () => {
+  const source = read('src/interactions/ContextMenu/spoiler.js');
+  assert.match(source, /localizationKey:\s*['"]commandMetadata\.spoiler['"]/);
+});
+
 test('move commands use localization keys for all user-facing responses', () => {
   const files = ['all.js', 'group.js', 'random.js', 'empty.js', 'split.js', 'regroup.js', 'emergency-meeting.js'];
   for (const file of files) {
