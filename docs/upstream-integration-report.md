@@ -3,6 +3,8 @@
 ## Intégré sélectivement
 
 - Passage de Discord.js vers `14.27.x`, sans fusion de la migration V11.
+- Support `pinned channel` de la branche `upgrade` confirmé déjà présent dans `src/handlers/functions/channelSorter.js` et `src/events/client/clientReady.js`, y compris les threads et les forums.
+- `package-lock.json` resynchronisé avec les dépendances sélectionnées de la branche d’intégration ; `npm ci --dry-run` confirme sa cohérence.
 - Remplacement des réponses `fetchReply` par `withResponse` lorsque le résultat est réellement utilisé.
 - Utilisation de `MessageFlags.Ephemeral` pour les réponses différées concernées.
 - Correctifs musique : saut de piste, durée et progression.
@@ -13,6 +15,7 @@
 ## Non intégré volontairement
 
 - Fusion complète de `upstream/main`.
+- Fusion complète de `upgrade`, car elle supprime le socle i18n et les modules async/localisés déjà intégrés ; les parties pinned channel utiles sont déjà identiques localement.
 - Migration V11 des centaines de fichiers, car elle remplace ou renomme des fonctionnalités locales.
 - Réécriture globale de toutes les commandes avant stabilisation du socle i18n.
 - `npm audit fix --force`, car il impose des changements cassants dans des dépendances historiques (`sourcebin`, giveaways et puppeteer).
