@@ -1660,7 +1660,27 @@
     },
     "music": {
       "name": "musique",
-      "description": "Lire de la musique dans le bot"
+      "description": "Lire de la musique dans le bot",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie musique" },
+        "bassboost": { "description": "Définir le niveau des basses", "options": { "level": { "description": "Niveau des basses", "choices": { "0": { "name": "0" }, "1": { "name": "1" }, "2": { "name": "2" }, "3": { "name": "3" } } } } },
+        "play": { "description": "Démarrer la musique", "options": { "song": { "description": "Saisir le nom ou l’URL d’une chanson" } } },
+        "clear": { "description": "Supprimer la file musicale" },
+        "loop": { "description": "Répéter la musique" },
+        "lyrics": { "description": "Obtenir les paroles de la chanson actuelle", "options": { "song": { "description": "Saisir le nom d’une chanson" } } },
+        "playing": { "description": "Voir la chanson en cours de lecture" },
+        "pause": { "description": "Mettre la musique en pause" },
+        "previous": { "description": "Lire la chanson précédente" },
+        "queue": { "description": "Voir la file musicale" },
+        "resume": { "description": "Reprendre la musique" },
+        "remove": { "description": "Retirer une chanson de la file", "options": { "number": { "description": "Numéro de la chanson" } } },
+        "seek": { "description": "Avancer dans la musique en cours", "options": { "time": { "description": "Nouveau temps de lecture" } } },
+        "shuffle": { "description": "Mélanger la musique" },
+        "skip": { "description": "Passer la chanson actuelle" },
+        "skipto": { "description": "Passer à une nouvelle chanson", "options": { "number": { "description": "Numéro de la chanson" } } },
+        "stop": { "description": "Arrêter la musique" },
+        "volume": { "description": "Définir le volume de la musique", "options": { "amount": { "description": "Nouveau volume" } } }
+      }
     },
     "radio": {
       "name": "radio",
