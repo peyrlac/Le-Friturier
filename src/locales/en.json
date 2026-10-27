@@ -339,6 +339,14 @@
         "failure": "You were caught carrying out the crime: {crime}."
       },
       "work": { "success": "You worked as a {job} and earned **{amount}** coins!" },
+      "addItem": {
+        "alreadyExists": "This role is already in the store!",
+        "success": "The role was added to the store!"
+      },
+      "deleteItem": {
+        "success": "The role was deleted from the store.",
+        "notFound": "This role is not in the store!"
+      },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",

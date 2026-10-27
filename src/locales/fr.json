@@ -320,6 +320,14 @@
         "failure": "Vous avez été arrêté pendant le crime : {crime}."
       },
       "work": { "success": "Vous avez travaillé comme {job} et gagné **{amount}** pièces !" },
+      "addItem": {
+        "alreadyExists": "Ce rôle est déjà dans la boutique !",
+        "success": "Le rôle a été ajouté à la boutique !"
+      },
+      "deleteItem": {
+        "success": "Le rôle a été supprimé de la boutique.",
+        "notFound": "Ce rôle n'est pas dans la boutique !"
+      },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",
