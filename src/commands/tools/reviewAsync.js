@@ -2,7 +2,7 @@ const Schema = require("../../database/models/reviewChannels");
 
 module.exports = async (client, interaction, args) => {
     const stars = interaction.options.getNumber('stars');
-    const message = interaction.options.getString('message') || 'Not given';
+    const message = interaction.options.getString('message') || await client.t(interaction, 'review.notGiven');
 
     if (stars < 1 || stars > 5) {
         return client.errNormal({ key: 'review.starsInvalid', type: 'editreply' }, interaction);
@@ -22,11 +22,11 @@ module.exports = async (client, interaction, args) => {
     await client.succNormal({ key: 'review.submitted', type: 'editreply' }, interaction);
 
     return client.embed({
-        title: `Review・${interaction.user.tag}`,
+        title: await client.t(interaction, 'review.title', { user: interaction.user.tag }),
         descKey: 'review.newReview',
         fields: [
-            { name: 'Stars', value: totalStars, inline: true },
-            { name: 'Note', value: message, inline: true }
+            { name: await client.t(interaction, 'review.stars'), value: totalStars, inline: true },
+            { name: await client.t(interaction, 'review.note'), value: message, inline: true }
         ]
     }, channel);
 };

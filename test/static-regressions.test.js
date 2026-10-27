@@ -670,6 +670,20 @@ test('family overview localizes its embed labels and empty states', () => {
   assert.doesNotMatch(source, /Cette personne n['’]est pas mari|Cette personne n['’]a pas de parents|FrÃ¨res\/Soeurs|Famille de/, 'family overview literals');
 });
 
+test('tools embeds localize their titles, descriptions, and review labels', () => {
+  const expectations = {
+    'src/commands/tools/qrcode.js': ['tools.qrcodeTitle'],
+    'src/commands/tools/encode.js': ['tools.encodeTitle', 'tools.encodeDescription', 'tools.input', 'tools.output'],
+    'src/commands/tools/mcskin.js': ['tools.mcskinTitle', 'tools.mcskinUsage'],
+    'src/commands/tools/reviewAsync.js': ['review.title', 'review.stars', 'review.note', 'review.notGiven']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replace('.', '\\.')}`), `${file}: ${key}`);
+  }
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
