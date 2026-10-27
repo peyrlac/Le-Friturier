@@ -36,6 +36,11 @@
         "wordRemoved": "Le mot **{word}** a été retiré de la liste noire.",
         "title": "Mots sur liste noire",
         "words": "{words}"
+        ,"channelExists": "Le canal {channel} est déjà dans la liste blanche.",
+        "channelMissing": "Le canal {channel} n'est pas dans la liste blanche.",
+        "channelField": "📘・Canal",
+        "channelAdded": "Le canal {channel} a été ajouté à la liste blanche.",
+        "channelRemoved": "Le canal {channel} a été retiré de la liste blanche."
       },
       "serverstats": {
         "channel": "📘・Salon",
