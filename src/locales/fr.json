@@ -628,8 +628,11 @@
     "unwarnTitle": "🔨・Retrait d'avertissement",
     "unwarnDescription": "Un avertissement vous a été retiré sur **{guild}**.",
     "unwarnSuccess": "L'avertissement a été retiré avec succès.",
+    "warnTitle": "🔨・Avertissement",
+    "warnDescription": "Vous avez reçu un avertissement sur **{guild}**.",
     "moderator": "👤┆Modérateur",
-    "user": "👤┆Utilisateur"
+    "user": "👤┆Utilisateur",
+    "reason": "📄┆Motif"
   },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",

@@ -641,8 +641,11 @@
     "unwarnTitle": "🔨・Unwarn",
     "unwarnDescription": "A warning was removed from you in **{guild}**.",
     "unwarnSuccess": "The user's warning was successfully removed.",
+    "warnTitle": "🔨・Warn",
+    "warnDescription": "You've been warned in **{guild}**.",
     "moderator": "👤┆Moderator",
-    "user": "👤┆User"
+    "user": "👤┆User",
+    "reason": "📄┆Reason"
   },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
