@@ -884,6 +884,15 @@ test('giveaway reroll event uses an async winner callback', () => {
   assert.match(source, /async \(member\)/);
 });
 
+test('localized command names remain valid Discord identifiers', () => {
+  for (const locale of ['fr', 'en']) {
+    const catalog = JSON.parse(read(`src/locales/${locale}.json`));
+    for (const metadata of Object.values(catalog.commandMetadata)) {
+      if (typeof metadata.name === 'string') assert.doesNotMatch(metadata.name, /\s/);
+    }
+  }
+});
+
 test('music and radio metadata is sourced from the locale catalogs', () => {
   for (const name of ['music', 'radio']) {
     const source = read(`src/interactions/Command/${name}.js`);

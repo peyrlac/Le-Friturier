@@ -2117,7 +2117,7 @@
       }
     },
     "stickymessages": {
-      "name": "messages persistants",
+      "name": "messages-persistants",
       "description": "Gérer les messages persistants",
       "subcommands": {
         "help": { "description": "Obtenir des informations sur les commandes de messages persistants" },
@@ -2191,12 +2191,12 @@
       }
     },
     "spoiler": {
-      "name": "Mettre en spoiler"
+      "name": "mettre-en-spoiler"
     },
     "warn": { "name": "Avertir" },
-    "unwarn": { "name": "Retirer l’avertissement" },
+    "unwarn": { "name": "retirer-avertissement" },
     "warnings": { "name": "Avertissements" },
-    "userinfo": { "name": "Informations utilisateur" },
+    "userinfo": { "name": "informations-utilisateur" },
     "autosetup": {
       "name": "configurationauto",
       "description": "Configurer automatiquement le bot",

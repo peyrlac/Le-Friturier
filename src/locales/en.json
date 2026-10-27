@@ -2130,7 +2130,7 @@
       }
     },
     "stickymessages": {
-      "name": "sticky messages",
+      "name": "sticky-messages",
       "description": "Manage the sticky messages",
       "subcommands": {
         "help": { "description": "Get information about the sticky messages category commands" },
@@ -2191,12 +2191,12 @@
       }
     },
     "spoiler": {
-      "name": "Mark as spoiler"
+      "name": "mark-as-spoiler"
     },
     "warn": { "name": "Warn" },
     "unwarn": { "name": "Unwarn" },
     "warnings": { "name": "Warnings" },
-    "userinfo": { "name": "User info" },
+    "userinfo": { "name": "user-info" },
     "autosetup": {
       "name": "autosetup",
       "description": "Configure the bot automatically",
