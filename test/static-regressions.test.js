@@ -1228,6 +1228,7 @@ test('event reminder setup uses the active locale for its user-facing copy', () 
   const source = read('src/events/client/interactionCreate.js');
   const keys = [
     'events.reminderCreatorOnly',
+    'events.reminderUpdateCreatorOnly',
     'events.reminders.enable',
     'events.reminders.disable',
     'events.reminders.deleteEvent',
@@ -1240,16 +1241,26 @@ test('event reminder setup uses the active locale for its user-facing copy', () 
     'events.reminders.unavailable',
     'events.reminders.availableFooter',
     'events.reminders.unavailableFooter',
+    'events.reminders.enabledDescription',
+    'events.reminders.disabledDescription',
+    'events.reminders.reenabled',
+    'events.reminders.disabled',
+    'events.reminders.updateError',
     'events.reminders.deletedMessage',
     'events.reminders.configured',
-    'events.reminders.setupError'
+    'events.reminders.setupError',
+    'events.reminders.infoNotFound',
+    'events.reminders.eventNotFound',
+    'events.reminders.deleteCreatorOnly',
+    'events.reminders.deleted',
+    'events.reminders.deleteError'
   ];
 
   for (const key of keys) {
     assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
   }
 
-  assert.doesNotMatch(source, /Activer les rappels|Désactiver les rappels|Configuration de l'événement|Les rappels ont été configurés/);
+  assert.doesNotMatch(source, /Activer les rappels|Désactiver les rappels|Configuration de l'événement|Les rappels ont été configurés|modifier les paramètres de rappel|Impossible de trouver les informations de l'événement|L'événement a été supprimé/);
 });
 
 test('activity launch responses use localization keys', () => {

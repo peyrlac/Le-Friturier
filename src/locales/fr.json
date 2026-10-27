@@ -1262,6 +1262,7 @@
     "listTitle": "Liste des participants ({count})",
     "fetchError": "❌ Une erreur est survenue lors de la récupération des participants.",
     "reminderCreatorOnly": "❌ Seul le créateur de l'événement peut configurer les rappels.",
+    "reminderUpdateCreatorOnly": "❌ Seul le créateur de l'événement peut modifier les paramètres de rappel.",
     "reminders": {
       "enable": "Activer les rappels",
       "disable": "Désactiver les rappels",
@@ -1271,13 +1272,23 @@
       "inviteTitle": "📝 Inviter des participants",
       "invite": "N'oubliez pas de mentionner (@) les rôles ou les personnes que vous souhaitez inviter dans ce fil de discussion.",
       "automaticTitle": "⏰ Rappels automatiques",
+      "enabledDescription": "Les rappels sont activés. Ils seront envoyés automatiquement avant l'événement.",
+      "disabledDescription": "Les rappels sont désactivés. Vous pouvez les réactiver à tout moment.",
       "available": "Par défaut, des rappels seront envoyés :\n• 1 mois avant\n• 1 semaine avant\n• 1 jour avant\n\nUtilisez les boutons ci-dessous pour gérer les rappels.",
       "unavailable": "Les rappels ne sont pas disponibles car l'événement est trop proche.",
       "availableFooter": "Vous pouvez configurer les rappels à tout moment",
       "unavailableFooter": "Les rappels ne sont pas disponibles pour cet événement",
+      "reenabled": "🔔 Les rappels ont été réactivés pour cet événement.",
+      "disabled": "🔕 Les rappels ont été désactivés pour cet événement.",
+      "updateError": "❌ Une erreur est survenue lors de la modification des paramètres de rappel.",
       "deletedMessage": "Ce message se supprimera <t:{timestamp}:R>",
       "configured": "✅ Les rappels ont été configurés pour cet événement.",
-      "setupError": "❌ Une erreur est survenue lors de la configuration des rappels."
+      "setupError": "❌ Une erreur est survenue lors de la configuration des rappels.",
+      "infoNotFound": "❌ Impossible de trouver les informations de l'événement.",
+      "eventNotFound": "❌ L'événement n'existe plus.",
+      "deleteCreatorOnly": "❌ Seul le créateur de l'événement peut le supprimer.",
+      "deleted": "✅ L'événement a été supprimé avec succès.",
+      "deleteError": "❌ Une erreur est survenue lors de la suppression de l'événement."
     }
   },
   "suggestions": {
