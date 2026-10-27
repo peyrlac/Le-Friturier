@@ -1952,6 +1952,19 @@
         "leaderboard": { "description": "See the invite leaderboard" }
       }
     },
+    "move": {
+      "name": "move",
+      "description": "Move members from a voice channel to another voice channel",
+      "subcommands": {
+        "all": { "description": "Move all members from a voice channel to another voice channel", "options": { "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_user": { "description": "User excepted" } } },
+        "group": { "description": "Move members of a role from a voice channel to another voice channel", "options": { "role": { "description": "Role to move" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "excepted_streamers": { "description": "Exclude streamers?" } } },
+        "random": { "description": "Move a random number of members from a voice channel to another voice channel", "options": { "amount": { "description": "Number of members to move (randomly selected)" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" } } },
+        "emergency-meeting": { "description": "Move all members from every voice channel to another voice channel", "options": { "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_channel": { "description": "Excepted voice channel" } } },
+        "empty": { "description": "Kick all members from a voice channel", "options": { "from": { "description": "Voice channel" }, "excepted_user": { "description": "User excepted" } } },
+        "split": { "description": "Split a voice channel into multiple defined voice channels", "options": { "from": { "description": "Starting voice channel" }, "to_a": { "description": "Voice channel A" }, "to_b": { "description": "Voice channel B" }, "to_c": { "description": "Voice channel C" }, "to_d": { "description": "Voice channel D" } } },
+        "regroup": { "description": "Regroup members from multiple defined voice channels into one voice channel", "options": { "from_a": { "description": "Starting voice channel A" }, "from_b": { "description": "Starting voice channel B" }, "to": { "description": "Destination voice channel" }, "from_c": { "description": "Starting voice channel C" }, "from_d": { "description": "Starting voice channel D" } } }
+      }
+    },
     "reactionroles": {
       "name": "reaction roles",
       "description": "Manage the server reaction roles",

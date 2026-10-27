@@ -1939,6 +1939,19 @@
         "leaderboard": { "description": "Voir le classement des invitations" }
       }
     },
+    "move": {
+      "name": "déplacer",
+      "description": "Déplacer des membres d’un salon vocal vers un autre salon vocal",
+      "subcommands": {
+        "all": { "description": "Déplacer tous les membres d’un salon vocal vers un autre salon vocal", "options": { "from": { "description": "Salon vocal de départ" }, "to": { "description": "Salon vocal de destination" }, "exclude_streamers": { "description": "Exclure les streameurs ?" }, "excepted_user": { "description": "Utilisateur exempté" } } },
+        "group": { "description": "Déplacer les membres d’un rôle d’un salon vocal vers un autre salon vocal", "options": { "role": { "description": "Rôle à déplacer" }, "from": { "description": "Salon vocal de départ" }, "to": { "description": "Salon vocal de destination" }, "excepted_streamers": { "description": "Exclure les streameurs ?" } } },
+        "random": { "description": "Déplacer un nombre aléatoire de membres d’un salon vocal vers un autre salon vocal", "options": { "amount": { "description": "Nombre de membres à déplacer (sélection aléatoire)" }, "from": { "description": "Salon vocal de départ" }, "to": { "description": "Salon vocal de destination" }, "exclude_streamers": { "description": "Exclure les streameurs ?" } } },
+        "emergency-meeting": { "description": "Déplacer tous les membres de tous les salons vocaux vers un autre salon vocal", "options": { "to": { "description": "Salon vocal de destination" }, "exclude_streamers": { "description": "Exclure les streameurs ?" }, "excepted_channel": { "description": "Salon vocal exempté" } } },
+        "empty": { "description": "Expulser tous les membres d’un salon vocal", "options": { "from": { "description": "Salon vocal" }, "excepted_user": { "description": "Utilisateur exempté" } } },
+        "split": { "description": "Diviser un salon vocal en plusieurs salons vocaux définis", "options": { "from": { "description": "Salon vocal de départ" }, "to_a": { "description": "Salon vocal A" }, "to_b": { "description": "Salon vocal B" }, "to_c": { "description": "Salon vocal C" }, "to_d": { "description": "Salon vocal D" } } },
+        "regroup": { "description": "Regrouper les membres de plusieurs salons vocaux définis dans un seul salon vocal", "options": { "from_a": { "description": "Salon vocal de départ A" }, "from_b": { "description": "Salon vocal de départ B" }, "to": { "description": "Salon vocal de destination" }, "from_c": { "description": "Salon vocal de départ C" }, "from_d": { "description": "Salon vocal de départ D" } } }
+      }
+    },
     "reactionroles": {
       "name": "rôles-réaction",
       "description": "Gérer les rôles-réaction du serveur",
