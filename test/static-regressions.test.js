@@ -41,6 +41,11 @@ test('automod command descriptions are sourced from locale metadata', () => {
   assert.doesNotMatch(source, /\.setDescription\(['\"]/);
 });
 
+test('setup command descriptions are sourced from locale metadata', () => {
+  const source = read('src/interactions/Command/setup.js');
+  assert.doesNotMatch(source, /\.setDescription\(['\"]/);
+});
+
 test('music progress bars remain bounded for streams and completed tracks', () => {
   const createProgressBar = require('../src/handlers/music/createProgressBar');
 
