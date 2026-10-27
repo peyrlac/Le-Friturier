@@ -117,6 +117,7 @@
       "shuffled": "The queue was shuffled!",
       "queueTooShort": "The queue does not contain that many songs.",
       "removed": "**{song}** was removed from the queue."
+      ,"lyricsNotFound": "No lyrics found for {song} :x:"
     },
     "economy": {
       "balance": {
