@@ -48,6 +48,31 @@ test('exposes the supported locale contract', () => {
     assert.equal(DEFAULT_LOCALE, 'fr');
 });
 
+test('client translations use the guild locale and fall back to French', async () => {
+    const initializeI18n = require('../src/handlers/i18n');
+    const Functions = require('../src/database/models/functions');
+    const originalFindOne = Functions.findOne;
+
+    Functions.findOne = () => ({
+        select: () => ({
+            lean: async () => ({ Language: 'en' })
+        })
+    });
+
+    try {
+        const client = {};
+        initializeI18n(client);
+
+        assert.equal(
+            await client.t({ guild: { id: 'guild-en' } }, 'common.success'),
+            'Operation completed successfully.'
+        );
+    }
+    finally {
+        Functions.findOne = originalFindOne;
+    }
+});
+
 test('exposes the config language subcommand with both supported choices', () => {
     const command = require('../src/interactions/Command/config');
     const language = command.data.toJSON().options.find(option => option.name === 'language');
