@@ -238,6 +238,23 @@ test('profile wave localizes fields and select placeholders', () => {
   assert.doesNotMatch(gender, /Nothing selected/);
 });
 
+test('profile collection additions localize their field labels', () => {
+  const fields = {
+    food: 'food',
+    artist: 'artists',
+    hobby: 'hobbies',
+    pet: 'pets',
+    song: 'songs',
+    movie: 'movies',
+    actor: 'actors'
+  };
+
+  for (const [command, field] of Object.entries(fields)) {
+    const source = read(`src/commands/profile/add${command}.js`);
+    assert.match(source, new RegExp(`profile\\.fields\\.${field}`), command);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
