@@ -10,6 +10,7 @@
 - Correctifs musique : saut de piste, durée et progression.
 - Suppression du comportement obsolète lié au message de vérification.
 - Mises à jour ciblées de `axios`, `dotenv`, `moment-timezone`, `dompurify` et `libsodium-wrappers`.
+- Suppression des dépendances directes inutilisées `request` et `src`, puis régénération de `package-lock.json` ; `src` et sa branche `underscore` vulnérable ne sont plus installés.
 - Durcissement des options numériques, des appels HTTP et des opérations économiques atomiques.
 
 ## Non intégré volontairement
@@ -35,4 +36,4 @@
 
 ## Audit npm au 25 octobre 2026
 
-`npm audit --omit=dev --audit-level=high` signale actuellement 39 vulnérabilités de production (12 modérées, 22 hautes et 5 critiques). Les dépendances directes ciblées ont été mises à jour, mais plusieurs alertes proviennent de dépendances historiques imbriquées (`request`, `weather-js`, `sourcebin`, les plugins `erela`, `puppeteer` et `discord-giveaways`). `npm audit fix --force` est volontairement exclu car il propose des changements cassants ; les correctifs sans migration seront traités séparément lorsque leur impact applicatif sera vérifié.
+`npm audit --omit=dev --audit-level=high` signale actuellement 37 vulnérabilités de production (12 modérées, 22 hautes et 3 critiques). Les dépendances directes ciblées ont été mises à jour et les correctifs non cassants ont été appliqués, mais plusieurs alertes proviennent encore de dépendances historiques imbriquées (`request` via `weather-js`, `sourcebin`, les plugins `erela`, `puppeteer` et `discord-giveaways`). `npm audit fix --force` est volontairement exclu car il propose des changements cassants ; les trois alertes critiques restantes nécessitent une migration ou le remplacement de ces dépendances historiques.
