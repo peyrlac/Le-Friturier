@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-const forHumans = require("../../assets/utils/forhumans.js");
+const createProgressBar = require('../../handlers/music/createProgressBar');
 
 module.exports = async (client, interaction, args) => {
     const player = client.player.players.get(interaction.guild.id);
@@ -43,36 +43,6 @@ module.exports = async (client, interaction, args) => {
         ],
         type: 'editreply'
     }, interaction)
-}
-
-async function createProgressBar(total, current, size = 10, line = '▬', slider = '🔘') {
-    if (current > total) {
-        const bar = line.repeat(size + 2);
-        const percentage = (current / total) * 100;
-        return [bar, percentage];
-    } else {
-        const percentage = current / total;
-        const progress = Math.round((size * percentage));
-
-        if (progress > 1 && progress < 10) {
-            const emptyProgress = size - progress;
-            const progressText = line.repeat(progress).replace(/.$/, slider);
-            const emptyProgressText = line.repeat(emptyProgress);
-            const bar = progressText + emptyProgressText;
-            return [bar];
-        }
-        else if (progress < 1 || progress == 1) {
-            const emptyProgressText = line.repeat(9);
-            const bar = "🔘" + emptyProgressText;
-            return [bar];
-        }
-
-        else if (progress > 10 || progress == 10) {
-            const emptyProgressText = line.repeat(9);
-            const bar = emptyProgressText + "🔘";
-            return [bar];
-        }
-    }
 }
 
 function format(millis) {
