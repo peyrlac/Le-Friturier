@@ -5,31 +5,31 @@ module.exports = async (client, interaction, args) => {
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Vous n'êtes pas dans un canal vocal!`,
+        key: 'music.notInVoice',
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Vous n'êtes pas dans le même canal vocal!`,
+        key: 'music.notSameVoice',
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.current) return client.errNormal({
-        error: "Il n'y a pas de chansons qui jouent dans ce serveur",
+        key: 'music.noSongs',
         type: 'editreply'
     }, interaction);
 
     if (player.queue.size <= 1) return client.errNormal({
-        error: `Il n'y a qu'une seule chanson dans la file d'attente!`,
+        key: 'music.queueTooShort',
         type: 'editreply'
     }, interaction);
 
     player.queue.clear()
 
     client.succNormal({
-        text: "La file d'attente vient d'être ** supprimée **!",
+        key: 'music.queueCleared',
         type: 'editreply'
     }, interaction);
 }
 
- 
+
