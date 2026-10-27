@@ -345,7 +345,10 @@
       },
       "ticketpanel": {
         "success": "The ticket panel was set up successfully.",
-        "missingSetup": "Run the ticket setup first."
+        "missingSetup": "Run the ticket setup first.",
+        "title": "Tickets",
+        "description": "Click 🎫 to open a ticket",
+        "button": "Tickets"
       }
     },
     "bot": {
@@ -1915,6 +1918,17 @@
         "check": { "description": "See your thanks", "options": { "user": { "description": "Select a user" } } },
         "thanks": { "description": "Thank a user", "options": { "user": { "description": "Select a user" } } }
       }
+    }
+  },
+  "autosetup": {
+    "games": {
+      "countingTitle": "🔢・Counting",
+      "countingDescription": "Counting starts here! The first number is **1**.",
+      "guessNumberTitle": "🔢・Guess the number",
+      "guessNumberDescription": "Guess the number between **1** and **10,000**!",
+      "guessWordTitle": "💬・Guess the word",
+      "guessWordDescription": "Put the letters in the right position!",
+      "word": "🔀┆Word"
     }
   },
   "features": {

@@ -1085,6 +1085,19 @@ test('economy balance and shop embeds use localization keys', () => {
   assert.doesNotMatch(deleteItem, />Role/);
 });
 
+test('autosetup game and ticket panels use localization keys', () => {
+  const games = read('src/commands/autosetup/games.js');
+  const ticketPanel = read('src/commands/autosetup/ticketpanelAsync.js');
+  for (const key of ['autosetup.games.countingTitle', 'autosetup.games.countingDescription', 'autosetup.games.guessNumberTitle', 'autosetup.games.guessNumberDescription', 'autosetup.games.guessWordTitle', 'autosetup.games.guessWordDescription', 'autosetup.games.word']) {
+    assert.match(games, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+  for (const key of ['setup.ticketpanel.title', 'setup.ticketpanel.description', 'setup.ticketpanel.button']) {
+    assert.match(ticketPanel, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+  assert.doesNotMatch(games, /C'est le début du comptage|Devinez le nombre entre|Mettez les lettres/);
+  assert.doesNotMatch(ticketPanel, /Cliquez sur .* pour ouvrir un ticket|title: ["`]Tickets/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

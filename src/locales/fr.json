@@ -337,7 +337,10 @@
       },
       "ticketpanel": {
         "success": "Le panneau de tickets a \u00e9t\u00e9 configur\u00e9 avec succ\u00e8s.",
-        "missingSetup": "Configurez d'abord les tickets."
+        "missingSetup": "Configurez d'abord les tickets.",
+        "title": "Tickets",
+        "description": "Cliquez sur 🎫 pour ouvrir un ticket",
+        "button": "Tickets"
       }
     },
     "bot": {
@@ -1915,6 +1918,17 @@
         "check": { "description": "Voir vos remerciements", "options": { "user": { "description": "Sélectionnez un utilisateur" } } },
         "thanks": { "description": "Remercier un utilisateur", "options": { "user": { "description": "Sélectionnez un utilisateur" } } }
       }
+    }
+  },
+  "autosetup": {
+    "games": {
+      "countingTitle": "🔢・Compte",
+      "countingDescription": "C'est le début du comptage ! Le premier numéro est **1**.",
+      "guessNumberTitle": "🔢・Devinez le nombre",
+      "guessNumberDescription": "Devinez le nombre entre **1** et **10 000** !",
+      "guessWordTitle": "💬・Devinez le mot",
+      "guessWordDescription": "Mettez les lettres dans la bonne position !",
+      "word": "🔀┆Mot"
     }
   },
   "features": {

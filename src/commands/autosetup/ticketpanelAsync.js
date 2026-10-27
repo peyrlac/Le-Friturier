@@ -14,14 +14,14 @@ module.exports = async (client, interaction, args) => {
 
     const button = new Discord.ButtonBuilder()
         .setCustomId('Bot_openticket')
-        .setLabel("Tickets")
+        .setLabel(await client.t(interaction, 'setup.ticketpanel.button'))
         .setStyle(Discord.ButtonStyle.Primary)
         .setEmoji('🎫');
     const row = new Discord.ActionRowBuilder().addComponents(button);
 
     await client.embed({
-        title: "Tickets",
-        desc: "Cliquez sur 🎫 pour ouvrir un ticket",
+        title: await client.t(interaction, 'setup.ticketpanel.title'),
+        desc: await client.t(interaction, 'setup.ticketpanel.description'),
         components: [row]
     }, channel);
 
