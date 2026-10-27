@@ -2,8 +2,10 @@ const Discord = require("discord.js");
 
 const Schema = require("../../database/models/functions");
 const Schema2 = require("../../database/models/channelList");
+const localizedAntiad = require('./antiadLocalized');
 
 module.exports = (client) => {
+    return localizedAntiad(client);
     client.on(Discord.Events.MessageCreate, async (message) => {
         if (message.channel.type === Discord.ChannelType.DM || message.author.bot) return;
         Schema.findOne({ Guild: message.guild.id }, async (err, data) => {

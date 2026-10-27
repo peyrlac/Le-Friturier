@@ -27,6 +27,12 @@
     }
   },
     "commands": {
+      "security": {
+        "moderationTitle": "❌・Modération",
+        "invitesBlocked": "Les liens Discord ne sont pas autorisés sur ce serveur.",
+        "linksBlocked": "Les liens ne sont pas autorisés sur ce serveur.",
+        "spamBlocked": "Le spam n'est pas autorisé sur ce serveur."
+      },
       "automod": {
         "wordExists": "Le mot **{word}** existe déjà dans la liste noire.",
         "wordMissing": "Le mot **{word}** n'existe pas dans la liste noire.",

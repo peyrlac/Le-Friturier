@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/functions");
+const localizedAntispam = require('./antispamLocalized');
 
 const usersMap = new Map();
 const LIMIT = 5;
@@ -8,6 +9,7 @@ const TIME = 10000;
 const DIFF = 3000;
 
 module.exports = async (client) => {
+    return localizedAntispam(client);
     client.on(Discord.Events.MessageCreate, async (message) => {
         if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
