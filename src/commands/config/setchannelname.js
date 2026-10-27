@@ -22,20 +22,16 @@ module.exports = async (client, interaction, args) => {
         }, interaction)
     }
 
-    Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
-            data.ChannelTemplate = name
-            data.save();
-        }
-        else {
-            new Schema({
-                Guild: interaction.guild.id,
-                ChannelTemplate: name
-            }).save();
-        }
+    const data = await Schema.findOne({ Guild: interaction.guild.id });
+    if (data) {
+        data.ChannelTemplate = name;
+        await data.save();
+    } else {
+        await new Schema({ Guild: interaction.guild.id, ChannelTemplate: name }).save();
+    }
 
-        client.succNormal({
-            text: `Le nom du canal a été défini avec succès`,
+        return client.succNormal({
+            key: 'commands.config.setchannelname.success',
             fields: [
                 {
                     name: `💬┆Nom`,
@@ -45,7 +41,5 @@ module.exports = async (client, interaction, args) => {
             ],
             type: 'editreply'
         }, interaction)
-    })
 }
 
- 

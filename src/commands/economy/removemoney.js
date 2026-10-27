@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
 
-const Schema = require("../../database/models/economy");
-
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
         flags: [Discord.PermissionsBitField.Flags.Administrator],
@@ -15,21 +13,19 @@ module.exports = async (client, interaction, args) => {
 
     if (!user || !amount) return client.errUsage({ usage: "addmoney [user] [amount]", type: 'editreply' }, interaction);
 
-    if (isNaN(amount)) return client.errNormal({ error: "Enter a valid number!", type: 'editreply' }, interaction);
+    if (isNaN(amount)) return client.errNormal({ key: 'economy.removeMoney.invalid', type: 'editreply' }, interaction);
 
     if (user.bot) return client.errNormal({
-        error: "You cannot remove money from a bot!",
+        key: 'economy.removeMoney.bot',
         type: 'editreply'
     }, interaction);
 
-    client.removeMoney(interaction, user, parseInt(amount));
-
-    setTimeout(() => {
-        Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-            if (data) {
+    const updated = await client.removeMoney(interaction, user, parseInt(amount));
+    if (updated) {
 
                 client.succNormal({
-                    text: `Removed money from a user!`,
+                    key: 'economy.removeMoney.success',
+                    variables: { amount },
                     fields: [
                         {
                             name: `👤┆User`,
@@ -44,11 +40,7 @@ module.exports = async (client, interaction, args) => {
                     ],
                     type: 'editreply'
                 }, interaction);
-            }
-            else {
-                client.errNormal({ error: `This user doesn't have any money!`, type: 'editreply' }, interaction);
-            }
-        }, 500)
-    })
+    } else {
+        return client.errNormal({ key: 'economy.removeMoney.insufficient', type: 'editreply' }, interaction);
+    }
 }
- 

@@ -4,35 +4,29 @@ module.exports = async (client, interaction, args) => {
 
     const pet = interaction.options.getString('pet');
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
             if (data && data.Pets) {
                 if (data.Pets.includes(pet)) {
-                    return client.errNormal({ error: `That pet is already exists in your database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ key: 'profile.itemAlreadyExists', variables: { item: pet }, type: 'editreply' }, interaction);
                 }
                 data.Pets.push(pet);
-                data.save();
+                await data.save();
             }
             else {
-                data.Pets = pet;
-                data.save();
+                data.Pets = [pet];
+                await data.save();
             }
-            client.succNormal({
-                text: "Added your pet",
+            return client.succNormal({
+                key: 'profile.itemAdded',
+                variables: { item: pet },
                 fields: [{
-                    name: "🐶┆Pet",
+                    name: await client.t(interaction, 'profile.fields.pets'),
                     value: `\`\`\`${pet}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
-
 }
 
- 

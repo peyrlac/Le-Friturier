@@ -1,19 +1,19 @@
 const Discord = require('discord.js');
 
-module.exports = async (client, interaction, args) => {    
+module.exports = async (client, interaction, args) => {
     const text = interaction.options.getString('text');
 
-    if (text.length >= 2000) return client.errNormal({ 
-        error: "You may not use more than 2000 characters!", 
-        type: 'editreply' 
+    if (text.length >= 2000) return client.errNormal({
+        key: 'fun.sayTooLong',
+        type: 'editreply'
     }, interaction);
 
-    await interaction.channel.send({ content: client.removeMentions(text) }).then(() => {
+    await interaction.followUp({ content: client.removeMentions(text) }).then(() => {
         client.succNormal({
-            text: `Message sent successfully`,
+            key: 'fun.messageSent',
             type: 'ephemeraledit'
         }, interaction)
     })
 }
 
- 
+

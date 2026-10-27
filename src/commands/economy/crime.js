@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     let user = interaction.user;
     let timeout = 600000;
 
-    Schema2.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, dataTime) => {
+    const dataTime = await Schema2.findOne({ Guild: interaction.guild.id, User: user.id });
         if (dataTime && dataTime.Crime !== null && timeout - (Date.now() - dataTime.Crime) > 0) {
             let time = (dataTime.Crime / 1000 + timeout / 1000).toFixed(0);
             return client.errWait({
@@ -27,7 +27,8 @@ module.exports = async (client, interaction, args) => {
             if (result2 > 7) {
 
                 client.succNormal({
-                    text: `Your crime went successfully!`,
+                    key: 'economy.crime.success',
+                    variables: { crime: replies[result], amount },
                     fields: [
                         {
                             name: `🦹‍♂️┆Crime`,
@@ -43,15 +44,15 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction);
 
-                client.addMoney(interaction, user, amount);
+                await client.addMoney(interaction, user, amount);
 
                 if (dataTime) {
                     dataTime.Crime = Date.now();
-                    dataTime.save();
+                    await dataTime.save();
                 }
 
                 else {
-                    new Schema2({
+                    await new Schema2({
                         Guild: interaction.guild.id,
                         User: user.id,
                         Crime: Date.now()
@@ -59,14 +60,14 @@ module.exports = async (client, interaction, args) => {
                 }
             }
             else {
-                client.errNormal({ error: `You were caught carrying out the crime ${replies[result]}`, type: 'editreply' }, interaction);
+                client.errNormal({ key: 'economy.crime.failure', variables: { crime: replies[result] }, type: 'editreply' }, interaction);
 
                 if (dataTime) {
                     dataTime.Crime = Date.now();
-                    dataTime.save();
+                    await dataTime.save();
                 }
                 else {
-                    new Schema2({
+                    await new Schema2({
                         Guild: interaction.guild.id,
                         User: user.id,
                         Crime: Date.now()
@@ -74,7 +75,4 @@ module.exports = async (client, interaction, args) => {
                 }
             }
         }
-    })
 }
-
- 

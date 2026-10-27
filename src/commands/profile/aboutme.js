@@ -4,27 +4,24 @@ module.exports = async (client, interaction, args) => {
 
     const aboutme = interaction.options.getString('text');
 
-    if (aboutme.length > 1024) return client.errNormal({ error: "Your about me cannot be longer than 1024 characters", type: 'editreply' }, interaction);
+    if (aboutme.length > 1024) return client.errNormal({ key: 'profile.aboutMeTooLong', type: 'editreply' }, interaction);
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (data) {
             data.Aboutme = aboutme;
-            data.save();
+            await data.save();
 
             client.succNormal({
-                text: "Your about me is set",
+                key: 'profile.aboutMeSuccess',
+                variables: { aboutme },
                 fields: [{
-                    name: "📘┆About Me",
+                    name: await client.t(interaction, 'profile.fields.aboutMe'),
                     value: `\`\`\`${aboutme}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
+    } else {
+        return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
+    }
 }
-
- 

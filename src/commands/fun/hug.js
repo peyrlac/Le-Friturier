@@ -1,4 +1,4 @@
-const axios = require('axios');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -9,17 +9,17 @@ module.exports = async (client, interaction, args) => {
 
     let response, data;
     try {
-        response = await axios.get(url);
-        data = response.data;
+        data = await getJson(url);
     } catch (e) {
-        return client.errNormal({ error: "An error occured!", type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'errors.generic', type: 'editreply' }, interaction);
     }
 
     client.embed({
-        title: `${interaction.user.tag} hugs ${user.tag}`,
+        titleKey: 'fun.hugTitle',
+        variables: { from: interaction.user.tag, to: user.tag },
         image: `${data.link}`,
         type: 'editreply'
     }, interaction);
 }
 
-     
+

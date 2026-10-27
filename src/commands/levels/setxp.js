@@ -20,8 +20,9 @@ module.exports = async (client, interaction, args) => {
 
         const user = await client.setXP(target.id, interaction.guild.id, xp);
 
-        client.succNormal({ 
-            text: `XP has been modified successfully`,
+        return client.succNormal({
+            key: 'config.levels.xpUpdated',
+            variables: { xp: user.xp, user: target.tag },
             fields: [
                 {
                     name: "🆕┆New XP",
@@ -39,10 +40,9 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         client.errNormal({
-            error: "Levels are disabled in this guild!",
+            key: 'config.levels.disabled',
             type: 'editreply'
         }, interaction);
     }
 }
 
- 

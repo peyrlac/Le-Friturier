@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `Vérifier que le panneau a été créé avec succès`,
+            key: 'commands.config.setverify.success',
             fields: [
                 {
                     name: `📘┆Canal`,
@@ -62,4 +62,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

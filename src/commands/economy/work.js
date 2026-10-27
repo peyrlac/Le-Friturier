@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
   let user = interaction.user;
   let timeout = 600000;
 
-  Schema2.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, dataTime) => {
+  const dataTime = await Schema2.findOne({ Guild: interaction.guild.id, User: user.id });
     if (dataTime && dataTime.Work !== null && timeout - (Date.now() - dataTime.Work) > 0) {
       let time = (dataTime.Work / 1000 + timeout / 1000).toFixed(0);
       return client.errWait({
@@ -21,18 +21,17 @@ module.exports = async (client, interaction, args) => {
       let result = Math.floor((Math.random() * replies.length));
       let amount = Math.floor(Math.random() * 100) + 1;
 
-      client.succNormal({ text: `You worked as a ${replies[result]} and earned: **${client.emotes.economy.coins} $${amount}**`, type: 'editreply' }, interaction);
-
       client.succNormal({
-        text: `You've wokred and earned some money!`,
+        key: 'economy.work.success',
+        variables: { job: replies[result], amount },
         fields: [
           {
-            name: `🦹‍♂️┆Crime`,
+            name: `🦹‍♂️┆${await client.t(interaction, 'economy.job')}`,
             value: `${replies[result]}`,
             inline: true
           },
           {
-            name: `${client.emotes.economy.coins}┆Earned`,
+            name: `${client.emotes.economy.coins}┆${await client.t(interaction, 'economy.earned')}`,
             value: `$${amount}`,
             inline: true
           }
@@ -42,19 +41,16 @@ module.exports = async (client, interaction, args) => {
 
       if (dataTime) {
         dataTime.Work = Date.now();
-        dataTime.save();
+        await dataTime.save();
       }
       else {
-        new Schema2({
+        await new Schema2({
           Guild: interaction.guild.id,
           User: user.id,
           Work: Date.now()
         }).save();
       }
 
-      client.addMoney(interaction, user, amount);
+      await client.addMoney(interaction, user, amount);
     }
-  })
 }
-
- 

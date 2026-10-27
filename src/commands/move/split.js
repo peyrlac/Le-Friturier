@@ -13,21 +13,21 @@ module.exports = async (client, interaction) => {
     // --- Vérifications ---
     if (!fromChannel || fromChannel.type !== ChannelType.GuildVoice) {
         return client.errNormal({
-            error: `The starting channel must be a voice channel.`,
+            key: 'move.invalidFrom',
             type: 'editreply'
         }, interaction);
     }
 
     if (targetChannels.length < 2) {
         return client.errNormal({
-            error: `Please specify at least two target voice channels.`,
+            key: 'move.minTargets',
             type: 'editreply'
         }, interaction);
     }
 
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MoveMembers)) {
         return client.errNormal({
-            error: `I do not have permission to move members.`,
+            key: 'move.movePermission',
             type: 'editreply'
         }, interaction);
     }
@@ -38,7 +38,8 @@ module.exports = async (client, interaction) => {
 
     if (membersToMove.length === 0) {
         return client.errNormal({
-            error: `There are no members to move in \`${fromChannel.name}\`.`,
+            key: 'move.noMembersFrom',
+            variables: { channel: fromChannel.name },
             type: 'editreply'
         }, interaction);
     }
@@ -63,7 +64,8 @@ module.exports = async (client, interaction) => {
     const movedCount = results.filter(Boolean).length;
 
     return client.succNormal({
-        text: `🔀 Split completed: ${movedCount} member(s) moved from \`${fromChannel.name}\` to ${targetChannels.length} voice channel(s).`,
+        key: 'move.split',
+        variables: { count: movedCount, from: fromChannel.name, targets: targetChannels.length },
         type: 'editreply'
     }, interaction);
 };

@@ -13,21 +13,21 @@ module.exports = async (client, interaction) => {
     // --- Vérifications ---
     if (!destinationChannel || destinationChannel.type !== ChannelType.GuildVoice) {
         return client.errNormal({
-            error: `The destination must be a voice channel.`,
+            key: 'move.invalidDestination',
             type: 'editreply'
         }, interaction);
     }
 
     if (sourceChannels.length < 2) {
         return client.errNormal({
-            error: `At least two source voice channels must be provided.`,
+            key: 'move.minSources',
             type: 'editreply'
         }, interaction);
     }
 
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.MoveMembers)) {
         return client.errNormal({
-            error: `I do not have permission to move members.`,
+            key: 'move.movePermission',
             type: 'editreply'
         }, interaction);
     }
@@ -41,7 +41,7 @@ module.exports = async (client, interaction) => {
 
     if (membersToMove.length === 0) {
         return client.errNormal({
-            error: `No members found to move (they may already be in the destination).`,
+            key: 'move.noMembersDestination',
             type: 'editreply'
         }, interaction);
     }
@@ -61,7 +61,8 @@ module.exports = async (client, interaction) => {
 
     // --- Confirmation ---
     return client.succNormal({
-        text: `🔁 Regrouped ${movedCount} member(s) into \`${destinationChannel.name}\`.`,
+        key: 'move.regroup',
+        variables: { count: movedCount, destination: destinationChannel.name },
         type: 'editreply'
     }, interaction);
 };

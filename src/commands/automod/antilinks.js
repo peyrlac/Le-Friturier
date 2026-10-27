@@ -17,10 +17,12 @@ module.exports = async (client, interaction, args) => {
         }).save();
     }
 
-    client.succNormal({
-        text: `Anti Links est maintenant **${boolean ? 'activé' : 'désactivé'}** dans ce serveur`,
+    const feature = await client.t(interaction, 'automod.antiLinks');
+    return client.succNormal({
+        key: boolean ? 'automod.protectionEnabled' : 'automod.protectionDisabled',
+        variables: { feature },
         type: 'editreply'
     }, interaction);
 }
 
- 
+

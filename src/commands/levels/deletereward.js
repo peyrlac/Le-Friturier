@@ -12,11 +12,12 @@ module.exports = async (client, interaction, args) => {
 
     if (perms == false) return;
     
-    Schema.findOne({ Guild: interaction.guild.id, Level: level }, async (err, data) => {
-        if (data) {
-            Schema.findOneAndDelete({ Guild: interaction.guild.id, Level: level }).then(() => {
-                client.succNormal({
-                    text: `Level reward removed`,
+    const data = await Schema.findOne({ Guild: interaction.guild.id, Level: level });
+    if (data) {
+            await Schema.findOneAndDelete({ Guild: interaction.guild.id, Level: level });
+                return client.succNormal({
+                    key: 'config.levels.rewardRemoved',
+                    variables: { level },
                     fields: [
                         {
                             name: "🆙┆Level",
@@ -26,15 +27,7 @@ module.exports = async (client, interaction, args) => {
                     ],
                     type: 'editreply'
                 }, interaction);
-            })
-        }
-        else {
-            return client.errNormal({
-                error: "No level reward found at this level!",
-                type: 'editreply'
-            }, interaction);
-        }
-    })
+    }
+    return client.errNormal({ key: 'config.levels.rewardNotFound', variables: { level }, type: 'editreply' }, interaction);
 }
 
- 

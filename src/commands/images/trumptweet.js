@@ -1,20 +1,24 @@
-const fetch = require('node-fetch');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
-    const tweet = interaction.options.getString('text');
+    let tweet = interaction.options.getString('text');
 
     if (tweet.length > 68) tweet = tweet.slice(0, 65) + "...";
 
-    const res = await fetch("https://nekobot.xyz/api/imagegen?type=trumptweet&text=" + tweet);
+    try {
+    const json = await getJson(`https://nekobot.xyz/api/imagegen?type=trumptweet&text=${encodeURIComponent(tweet)}`);
 
-    const img = (await res.json()).message;
+    const img = json.message;
 
     client.embed({
-        title: `🖼・Trump tweet`,
+        titleKey: 'images.trumpTweetTitle',
         image: img,
         type: 'editreply'
-    }, interaction)
+    }, interaction);
+    } catch (error) {
+        return client.errNormal({ key: 'images.generateError', type: 'editreply' }, interaction);
+    }
 }
 
- 
+

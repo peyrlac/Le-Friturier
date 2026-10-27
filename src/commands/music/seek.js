@@ -1,23 +1,23 @@
 const Discord = require('discord.js');
 
-const forHumans = require("../../assets/utils/forhumans.js");
+const createProgressBar = require('../../handlers/music/createProgressBar');
 
 module.exports = async (client, interaction, args) => {
     const player = client.player.players.get(interaction.guild.id);
 
     const channel = interaction.member.voice.channel;
     if (!channel) return client.errNormal({
-        error: `Vous n'êtes pas dans un canal vocal!`,
+        key: 'music.notInVoice',
         type: 'editreply'
     }, interaction);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Vous n'êtes pas dans le même canal vocal!`,
+        key: 'music.notSameVoice',
         type: 'editreply'
     }, interaction);
 
     if (!player || !player.queue.current) return client.errNormal({
-        error: "Il n'y a pas de chansons qui jouent dans ce serveur",
+        key: 'music.noSongs',
         type: 'editreply'
     }, interaction);
 
@@ -30,7 +30,8 @@ module.exports = async (client, interaction, args) => {
     const bar = await createProgressBar(musicLength, nowTime);
 
     client.succNormal({
-        text: `Cherché la chanson à: ${format(Number(number) * 1000)}`,
+        key: 'music.seeked',
+        variables: { time: format(Number(number) * 1000) },
         fields: [
             {
                 name: `${client.emotes.normal.music}┆Progrès`,
@@ -42,36 +43,6 @@ module.exports = async (client, interaction, args) => {
         ],
         type: 'editreply'
     }, interaction)
-}
-
-async function createProgressBar(total, current, size = 10, line = '▬', slider = '🔘') {
-    if (current > total) {
-        const bar = line.repeat(size + 2);
-        const percentage = (current / total) * 100;
-        return [bar, percentage];
-    } else {
-        const percentage = current / total;
-        const progress = Math.round((size * percentage));
-
-        if (progress > 1 && progress < 10) {
-            const emptyProgress = size - progress;
-            const progressText = line.repeat(progress).replace(/.$/, slider);
-            const emptyProgressText = line.repeat(emptyProgress);
-            const bar = progressText + emptyProgressText;
-            return [bar];
-        }
-        else if (progress < 1 || progress == 1) {
-            const emptyProgressText = line.repeat(9);
-            const bar = "🔘" + emptyProgressText;
-            return [bar];
-        }
-
-        else if (progress > 10 || progress == 10) {
-            const emptyProgressText = line.repeat(9);
-            const bar = emptyProgressText + "🔘";
-            return [bar];
-        }
-    }
 }
 
 function format(millis) {
@@ -86,4 +57,4 @@ function format(millis) {
     }
 }
 
- 
+

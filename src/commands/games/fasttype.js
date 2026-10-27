@@ -75,8 +75,9 @@ module.exports = async (client, interaction, args) => {
             });
 
             await client.embed({
-                title: `💬・FastType`,
-                desc: `Type the below in ${ms(timeLength, { long: true })}! \n${sentence}`,
+                titleKey: 'games.fastTypeTitle',
+                descKey: 'games.fastTypePrompt',
+                variables: { time: ms(timeLength, { long: true }), sentence },
                 type: 'editreply'
             }, interaction)
 
@@ -89,7 +90,7 @@ module.exports = async (client, interaction, args) => {
                 });
             } catch (ex) {
                 client.errNormal({
-                    error: "Time\'s up!",
+                    key: 'games.fastTypeTimeout',
                     type: 'editreply'
                 }, interaction)
                 inGame.delete(interaction.user.id)
@@ -99,7 +100,7 @@ module.exports = async (client, interaction, args) => {
             if (['cancel', 'end'].includes(msg.first().content.toLowerCase().trim())) {
                 msg.first().delete();
                 client.succNormal({
-                    text: "Ended!",
+                    key: 'games.fastTypeEnded',
                     type: 'editreply'
                 }, interaction)
                 inGame.delete(interaction.user.id)
@@ -107,13 +108,14 @@ module.exports = async (client, interaction, args) => {
             } else if (msg.first().content.toLowerCase().trim() === ogSentence.toLowerCase()) {
                 msg.first().delete();
                 client.succNormal({
-                    text: `You did it in ${ms(Date.now() - time, { long: true })}!`,
+                    key: 'games.fastTypeCompletedIn',
+                    variables: { time: ms(Date.now() - time, { long: true }) },
                     type: 'editreply'
                 }, interaction)
                 break;
             } else {
                 client.errNormal({
-                    error: "Unfortunately you didn't succeed!",
+                    key: 'games.fastTypeFailed',
                     type: 'editreply'
                 }, interaction)
                 inGame.delete(interaction.user.id)
@@ -121,7 +123,7 @@ module.exports = async (client, interaction, args) => {
             }
 
             if (i === 25) {
-                client.succNormal({ text: `You did it!`, type: 'editreply' }, interaction)
+                client.succNormal({ key: 'games.fastTypeCompleted', type: 'editreply' }, interaction)
                 inGame.delete(interaction.user.id)
                 break
             }
@@ -131,4 +133,4 @@ module.exports = async (client, interaction, args) => {
     start()
 }
 
- 
+

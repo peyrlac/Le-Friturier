@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
-const DIG = require("discord-image-generation");
-
 module.exports = async (client, interaction, args) => {
+    const DIG = require("discord-image-generation");
     const user = interaction.options.getUser('user') || interaction.user;
 
     let avatar = interaction.user.displayAvatarURL({ dynamic: false, size: 1024, extension: 'png' });
@@ -13,4 +12,4 @@ module.exports = async (client, interaction, args) => {
     interaction.editReply({ files: [attach], embeds: [embed] });
 }
 
- 
+
