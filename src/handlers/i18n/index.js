@@ -128,6 +128,15 @@ function applyCommandLocalizations(command) {
             const child = children.find(option => option.name === name);
             applyBuilderLocalizations(child, childValues);
         }
+
+        if (Array.isArray(target.choices) && values.choices) {
+            for (const choice of target.choices) {
+                const choiceValues = values.choices[choice.value];
+                if (choiceValues?.name) {
+                    choice.name_localizations = serializeLocales(choiceValues.name);
+                }
+            }
+        }
     };
 
     applyBuilderLocalizations(builder, localizations);

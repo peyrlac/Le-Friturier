@@ -400,6 +400,23 @@ test('serializes subcommand and option localizations for Discord', () => {
     });
 });
 
+test('serializes localized choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/message');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const choices = command.data.toJSON().options.find(option => option.name === 'message').choices;
+
+  assert.deepEqual(choices.find(choice => choice.value === 'information').name_localizations, {
+    fr: 'Information',
+    'en-US': 'Information'
+  });
+  assert.deepEqual(choices.find(choice => choice.value === 'rules').name_localizations, {
+    fr: 'Règles',
+    'en-US': 'Rules'
+  });
+});
+
 test('serverstats publishes localized subcommand descriptions', () => {
     const command = require('../src/interactions/Command/serverstats');
     applyCommandLocalizations(command);
