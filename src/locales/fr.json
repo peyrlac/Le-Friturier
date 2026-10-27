@@ -1939,6 +1939,26 @@
         "leaderboard": { "description": "Voir le classement des invitations" }
       }
     },
+    "suggestions": {
+      "name": "suggestions",
+      "description": "Gérer les suggestions",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de suggestions" },
+        "accept": { "description": "Accepter une suggestion", "options": { "id": { "description": "Identifiant du message de suggestion" } } },
+        "deny": { "description": "Refuser une suggestion", "options": { "id": { "description": "Identifiant du message de suggestion" } } },
+        "send": { "description": "Envoyer une suggestion", "options": { "suggestion": { "description": "Votre suggestion" } } }
+      }
+    },
+    "stickymessages": {
+      "name": "messages persistants",
+      "description": "Gérer les messages persistants",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de messages persistants" },
+        "stick": { "description": "Épingler un message dans un salon", "options": { "channel": { "description": "Sélectionnez un salon" }, "message": { "description": "Votre message persistant" } } },
+        "messages": { "description": "Afficher tous les messages persistants de votre serveur" },
+        "unstick": { "description": "Retirer un message persistant d’un salon", "options": { "channel": { "description": "Sélectionnez un salon" } } }
+      }
+    },
     "notepad": {
       "name": "bloc-notes",
       "description": "Gérer vos notes",
