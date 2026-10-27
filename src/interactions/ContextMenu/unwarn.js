@@ -32,8 +32,8 @@ module.exports = {
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
-            if (data) {
+        const data = await Schema.findOne({ Guild: interaction.guild.id, User: member.id });
+        if (data) {
                 const menu = new Discord.StringSelectMenuBuilder()
                     .setCustomId('unwarn')
                     .setPlaceholder('Select a warning to remove');
@@ -46,7 +46,7 @@ module.exports = {
                     })
                 });
                 // Create a new message with the menu
-                client.embed({
+                await client.embed({
                     title: `🔨・Unwarn`,
                     desc: `Select a warning to remove from **${member.user.tag}**`,
                     components: [new Discord.ActionRowBuilder().addComponents(menu)],
@@ -61,9 +61,9 @@ module.exports = {
                     if (i.customId === 'unwarn') {
                         // Remove the warning from the database
                         data.Warnings.splice(data.Warnings.findIndex(element => element.Case == i.values[0]), 1);
-                        data.save();
+                        await data.save();
                         // Remove the menu from the message
-                        i.update({
+                        await i.update({
                             components: []
                         });
                         // Send a success message
@@ -93,11 +93,10 @@ module.exports = {
                     }
                 });
             } else {
-                client.errNormal({
+                return client.errNormal({
                     error: "User has no warnings!",
                     type: 'ephemeraledit'
                 }, interaction);
             }
-        })
     },
 };
