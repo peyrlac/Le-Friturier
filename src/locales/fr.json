@@ -883,6 +883,15 @@
     "verificationUnavailable": "La vérification est désactivée sur ce serveur ou vous utilisez le mauvais salon !"
   },
   "family": {
+    "viewTitle": "👪・Famille de {user}",
+    "partner": "Partenaire",
+    "noPartner": "Cette personne n’est pas mariée",
+    "parents": "Parents",
+    "noParents": "Cette personne n’a pas de parents",
+    "siblings": "Frères/Sœurs",
+    "noSiblings": "Cette personne n’a pas de frères et sœurs",
+    "children": "Enfants",
+    "noChildren": "Cette personne n’a pas d’enfants",
     "selfAdoption": "Tu ne peux pas t’adopter toi-même.",
     "botAdoption": "Tu ne peux pas adopter un robot.",
     "relativeAdoption": "Tu ne peux pas adopter un membre de ta famille !",

@@ -896,6 +896,15 @@
     "verificationUnavailable": "Verify is disabled in this server, or you are using the wrong channel!"
   },
   "family": {
+    "viewTitle": "👪・{user}'s Family",
+    "partner": "Partner",
+    "noPartner": "This person is not married",
+    "parents": "Parents",
+    "noParents": "This person has no parents",
+    "siblings": "Siblings",
+    "noSiblings": "This person has no siblings",
+    "children": "Children",
+    "noChildren": "This person has no children",
     "selfAdoption": "You cannot adopt yourself.",
     "botAdoption": "You cannot adopt a bot.",
     "relativeAdoption": "You cannot adopt a member of your family!",
