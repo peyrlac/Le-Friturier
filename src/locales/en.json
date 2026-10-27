@@ -1067,6 +1067,11 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "bot": {
+      "name": "bot",
+      "description": "Get information about the bot",
+      "subcommands": { "feature": { "description": "Manage global feature switches" } }
+    },
     "birthdays": {
       "name": "birthdays",
       "description": "View or save a birthday",

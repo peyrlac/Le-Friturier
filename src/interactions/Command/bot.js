@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const { FEATURE_REGISTRY } = require('../../handlers/features');
 
 module.exports = {
+    localizationKey: 'commandMetadata.bot',
     data: new SlashCommandBuilder()
         .setName('bot')
         .setDescription('Informations sur le bot')
@@ -91,14 +92,6 @@ module.exports = {
                     .setDescription('Activer la fonctionnalité')
                     .setRequired(false))
         ),
-    localizations: {
-        name: { fr: 'bot', en: 'bot' },
-        description: { fr: 'Obtenir des informations sur le bot', en: 'Get information about the bot' },
-        subcommands: {
-            feature: { description: { fr: 'Gérer les arrêts globaux des fonctionnalités', en: 'Manage global feature switches' } }
-        }
-    },
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction

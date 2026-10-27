@@ -1054,6 +1054,11 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "bot": {
+      "name": "bot",
+      "description": "Obtenir des informations sur le bot",
+      "subcommands": { "feature": { "description": "Gérer les arrêts globaux des fonctionnalités" } }
+    },
     "birthdays": {
       "name": "birthdays",
       "description": "Afficher ou enregistrer un anniversaire",
