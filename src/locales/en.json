@@ -1108,7 +1108,11 @@
     "nowAfk": "{user} is now AFK! **Reason:** {reason}"
   },
   "activities": {
-    "notInVoice": "You are not in a voice channel."
+    "notInVoice": "You are not in a voice channel.",
+    "startFailed": "Could not start **{name}**!",
+    "startButton": "Start activity",
+    "title": "{icon}・Activities",
+    "description": "Click on the **button** to start **{name}** in **{channel}**."
   },
   "voice": {
     "notInVoice": "You are not in a voice channel.",

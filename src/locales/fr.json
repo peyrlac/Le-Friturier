@@ -1095,7 +1095,11 @@
     "nowAfk": "{user} est maintenant AFK ! **Raison :** {reason}"
   },
   "activities": {
-    "notInVoice": "Vous n’êtes pas dans un salon vocal."
+    "notInVoice": "Vous n'êtes pas dans un salon vocal.",
+    "startFailed": "Impossible de démarrer **{name}** !",
+    "startButton": "Démarrer l'activité",
+    "title": "{icon}・Activités",
+    "description": "Cliquez sur le **bouton** pour démarrer **{name}** dans **{channel}**."
   },
   "voice": {
     "notInVoice": "Vous n’êtes pas dans un salon vocal.",

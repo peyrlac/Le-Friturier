@@ -1252,6 +1252,20 @@ test('event reminder setup uses the active locale for its user-facing copy', () 
   assert.doesNotMatch(source, /Activer les rappels|Désactiver les rappels|Configuration de l'événement|Les rappels ont été configurés/);
 });
 
+test('activity launch responses use localization keys', () => {
+  const source = read('src/handlers/functions/functions.js');
+  for (const key of [
+    'activities.startFailed',
+    'activities.startButton',
+    'activities.title',
+    'activities.description'
+  ]) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+
+  assert.doesNotMatch(source, /Could not start \*\*\$\{name\}\*\*!|Start activity|Click on the \*\*button\*\*/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
