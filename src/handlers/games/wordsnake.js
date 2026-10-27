@@ -6,8 +6,8 @@ module.exports = async (client) => {
   client.on(Discord.Events.MessageCreate, async (message) => {
     if (message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
 
-    Schema.findOne({ Guild: message.guild.id, Channel: message.channel.id }, async (err, data) => {
-      if (data) {
+    const data = await Schema.findOne({ Guild: message.guild.id, Channel: message.channel.id });
+    if (data) {
         try {
           if (!data.lastWord || data.lastWord == " ") {
             message.react(client.emotes.normal.check);
@@ -15,7 +15,7 @@ module.exports = async (client) => {
             var word = message.content;
 
             data.lastWord = word;
-            data.save();
+            await data.save();
             return;
           }
 
@@ -28,7 +28,7 @@ module.exports = async (client) => {
             var word = message.content.replace(" ", "");
 
             data.lastWord = word;
-            data.save();
+            await data.save();
             return;
           }
           else {
@@ -38,7 +38,6 @@ module.exports = async (client) => {
         catch (err) {
           console.log(err);
         }
-      }
-    })
+    }
   }).setMaxListeners(0);
 }
