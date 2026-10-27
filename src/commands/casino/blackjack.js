@@ -5,12 +5,12 @@ const Schema = require("../../database/models/economy");
 module.exports = async (client, interaction, args) => {
     let user = interaction.user;
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
             let money = parseInt(interaction.options.getNumber('amount'));
 
             if (!money) return client.errUsage({ usage: "blackjack [amount]", type: 'editreply' }, interaction);
-            if (money > data.Money) return client.errNormal({ error: `Vous pariez plus que vous ne l'avez fait!`, type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ key: 'casino.blackjack.insufficient', type: 'editreply' }, interaction);
 
             var numCardsPulled = 0;
             var gameOver = false;
@@ -85,11 +85,11 @@ module.exports = async (client, interaction, args) => {
             async function bet(outcome) {
                 if (outcome === "win") {
                     data.Money += money;
-                    data.save();
+                    await data.save();
                 }
                 if (outcome === "lose") {
                     data.Money -= money;
-                    data.save();
+                    await data.save();
                 }
             }
 
@@ -321,7 +321,6 @@ module.exports = async (client, interaction, args) => {
             await loop();
         }
         else {
-            client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+            client.errNormal({ key: 'casino.blackjack.noAccount', type: 'editreply' }, interaction);
         }
-    })
 }

@@ -340,6 +340,10 @@
         "win": "Vous avez gagné **{coins} ${amount}**",
         "lose": "Vous avez perdu **{coins} ${amount}**"
       },
+      "blackjack": {
+        "insufficient": "Vous pariez plus que vous ne possédez !",
+        "noAccount": "Vous n'avez pas encore d'argent."
+      },
       "slots": {
         "usage": "slots [montant]",
         "insufficient": "Vous pariez plus que vous ne possédez !",
