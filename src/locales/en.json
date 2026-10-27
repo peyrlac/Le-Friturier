@@ -1692,7 +1692,24 @@
     },
     "tickets": {
       "name": "tickets",
-      "description": "Manage tickets in your server"
+      "description": "Manage tickets in your server",
+      "subcommands": {
+        "help": { "description": "Get information about the tickets category commands" },
+        "add": { "description": "Add a user to a ticket", "options": { "user": { "description": "Select a user" } } },
+        "claim": { "description": "Claim a ticket" },
+        "close": { "description": "Close a ticket" },
+        "delete": { "description": "Delete a ticket" },
+        "information": { "description": "Information about a ticket" },
+        "lower": { "description": "Lower a ticket" },
+        "create": { "description": "Create a ticket", "options": { "reason": { "description": "Reason to open a ticket" } } },
+        "notice": { "description": "Send a notice to a ticket" },
+        "open": { "description": "Reopen a ticket" },
+        "raise": { "description": "Raise a ticket" },
+        "remove": { "description": "Remove a user from a ticket", "options": { "user": { "description": "Select a user" } } },
+        "rename": { "description": "Rename a ticket", "options": { "name": { "description": "New ticket name" } } },
+        "transcript": { "description": "Transcript a ticket" },
+        "unclaim": { "description": "Unclaim a ticket" }
+      }
     },
     "bot": {
       "name": "bot",

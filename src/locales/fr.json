@@ -1679,7 +1679,24 @@
     },
     "tickets": {
       "name": "tickets",
-      "description": "Gérer les tickets du serveur"
+      "description": "Gérer les tickets du serveur",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie tickets" },
+        "add": { "description": "Ajouter un utilisateur à un ticket", "options": { "user": { "description": "Sélectionner un utilisateur" } } },
+        "claim": { "description": "Prendre en charge un ticket" },
+        "close": { "description": "Fermer un ticket" },
+        "delete": { "description": "Supprimer un ticket" },
+        "information": { "description": "Obtenir des informations sur un ticket" },
+        "lower": { "description": "Abaisser un ticket" },
+        "create": { "description": "Créer un ticket", "options": { "reason": { "description": "Raison d’ouverture du ticket" } } },
+        "notice": { "description": "Envoyer une notification dans un ticket" },
+        "open": { "description": "Rouvrir un ticket" },
+        "raise": { "description": "Élever un ticket" },
+        "remove": { "description": "Retirer un utilisateur d’un ticket", "options": { "user": { "description": "Sélectionner un utilisateur" } } },
+        "rename": { "description": "Renommer un ticket", "options": { "name": { "description": "Nouveau nom du ticket" } } },
+        "transcript": { "description": "Créer la transcription d’un ticket" },
+        "unclaim": { "description": "Ne plus prendre en charge un ticket" }
+      }
     },
     "bot": {
       "name": "bot",

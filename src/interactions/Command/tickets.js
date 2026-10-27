@@ -1,6 +1,7 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 const ticketSchema = require("../../database/models/tickets");
 const ticketChannels = require("../../database/models/ticketChannels");
@@ -8,86 +9,86 @@ const ticketChannels = require("../../database/models/ticketChannels");
 module.exports = {
     localizationKey: 'commandMetadata.tickets',
     data: new SlashCommandBuilder()
-        .setName('tickets')
-        .setDescription('Manage tickets in your server')
+        .setName(getCommandMetadata('commandMetadata.tickets.name'))
+        .setDescription(getCommandMetadata('commandMetadata.tickets.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the tickets category commands')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('add')
-                .setDescription('Add a user to a ticket')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.add.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.add.options.user.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('claim')
-                .setDescription('Claim a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.claim.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('close')
-                .setDescription('Close a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.close.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('delete')
-                .setDescription('Delete a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.delete.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('information')
-                .setDescription('Information about a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.information.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('lower')
-                .setDescription('Lower a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.lower.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('create')
-                .setDescription('Create a ticket')
-                .addStringOption(option => option.setName('reason').setDescription('Reason to open a ticket'))
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.create.description'))
+                .addStringOption(option => option.setName('reason').setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.create.options.reason.description')))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('notice')
-                .setDescription('Send a notice to a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.notice.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('open')
-                .setDescription('Reopen a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.open.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('raise')
-                .setDescription('Raise a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.raise.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
-                .setDescription('Remove a user from a ticket')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.remove.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.remove.options.user.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('rename')
-                .setDescription('Rename a ticket')
-                .addStringOption(option => option.setName('name').setDescription('New ticket name').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.rename.description'))
+                .addStringOption(option => option.setName('name').setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.rename.options.name.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('transcript')
-                .setDescription('Transcript a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.transcript.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('unclaim')
-                .setDescription('Unclaim a ticket')
+                .setDescription(getCommandMetadata('commandMetadata.tickets.subcommands.unclaim.description'))
         )
     ,
     /** 
