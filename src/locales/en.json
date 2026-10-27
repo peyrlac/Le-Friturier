@@ -1677,6 +1677,11 @@
       "description": "Manage the bot setups",
       "subcommands": {
         "channelsorter": { "options": { "mode": { "choices": { "automatic": { "name": "Automatic" }, "manual": { "name": "Manual" }, "hybrid": { "name": "Hybrid" } } }, "pinned-order": { "choices": { "first": { "name": "Pinned first" }, "last": { "name": "Pinned last" } } } } },
+        "customvoice": { "options": { "theme": { "choices": { "default": { "name": "Default" }, "ocean": { "name": "Ocean Theme" }, "gaming": { "name": "Gaming Theme" }, "aprilfools": { "name": "April Fools" } } } } },
+        "logs": { "options": { "setup": { "choices": { "serverLogs": { "name": "Server logs" }, "levelLogs": { "name": "Level logs" }, "boostLogs": { "name": "Boost logs" } } } } },
+        "fun": { "options": { "setup": { "choices": { "birthdays": { "name": "Birthdays" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Reviews" }, "suggestions": { "name": "Suggestions" }, "starboard": { "name": "Starboard" } } } } },
+        "games": { "options": { "setup": { "choices": { "counting": { "name": "Counting" }, "gtn": { "name": "Guess the number" }, "gtw": { "name": "Guess the word" }, "wordsnake": { "name": "Word snake" } } } } },
+        "welcomechannels": { "options": { "setup": { "choices": { "welcomechannel": { "name": "Welcome channel" }, "leavechannel": { "name": "Leave channel" } } } } },
         "deletesetup": { "options": { "setup": { "choices": { "tickets": { "name": "Tickets" }, "customvoice": { "name": "Custom voice" }, "serverlogs": { "name": "Server logs" }, "levellogs": { "name": "Level logs" }, "boostlogs": { "name": "Boost logs" }, "birthdays": { "name": "Birthdays" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Reviews" }, "suggestions": { "name": "Suggestions" }, "counting": { "name": "Counting" }, "gtn": { "name": "Guess the number" }, "gtw": { "name": "Guess the word" }, "welcomechannel": { "name": "Welcome channel" }, "leavechannel": { "name": "Leave channel" }, "welcomerole": { "name": "Welcome role" }, "wordsnake": { "name": "Word snake" }, "channelsorter": { "name": "Channel sorter" } } } } }
       }
     },
@@ -1687,7 +1692,7 @@
     "bot": {
       "name": "bot",
       "description": "Get information about the bot",
-      "subcommands": { "feature": { "description": "Manage global feature switches" } }
+      "subcommands": { "feature": { "description": "Manage global feature switches", "options": { "action": { "choices": { "list": { "name": "List" }, "set": { "name": "Set" }, "reset": { "name": "Reset" } } } } } }
     },
     "birthdays": {
       "name": "birthdays",

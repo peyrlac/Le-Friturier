@@ -45,8 +45,8 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.developers.subcommands.credits.options.type.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Add', value: 'add' },
-                            { name: 'Remove', value: 'remove' }
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.credits.options.type.choices.add.name'), value: 'add' },
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.credits.options.type.choices.remove.name'), value: 'remove' }
                         )
                 )
                 .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.developers.subcommands.credits.options.user.description')).setRequired(true))
@@ -61,13 +61,13 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Information', value: 'information' },
-                            { name: 'Rules', value: 'rules' },
-                            { name: 'Applications', value: 'applications' },
-                            { name: 'Booster perks', value: 'boosterperks' },
-                            { name: 'Links', value: 'links' },
-                            { name: 'Rewards', value: 'rewards' },
-                            { name: 'Our bots', value: 'ourbots' }
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.choices.information.name'), value: 'information' },
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.choices.rules.name'), value: 'rules' },
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.choices.applications.name'), value: 'applications' },
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.choices.boosterperks.name'), value: 'boosterperks' },
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.choices.links.name'), value: 'links' },
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.choices.rewards.name'), value: 'rewards' },
+                            { name: getCommandMetadata('commandMetadata.developers.subcommands.args.options.message.choices.ourbots.name'), value: 'ourbots' }
                         )
                 )
         )

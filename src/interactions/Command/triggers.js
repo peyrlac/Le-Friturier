@@ -18,10 +18,10 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Répond', value: '1' },
-                            { name: 'Répond puis supprime', value: '2' },
-                            { name: 'Supprime', value: '3' },
-                            { name: 'Ajoute une réaction', value: '4' }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.1.name'), value: '1' },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.2.name'), value: '2' },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.3.name'), value: '3' },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.4.name'), value: '4' }
                         )
                 )
                 .addStringOption(option => option.setName('regex').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.regex.description')).setRequired(true))
@@ -32,8 +32,8 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.isactive.description'))
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Activé (par défaut)', value: "true" },
-                            { name: 'Désactivé', value: "false" }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.isactive.choices.true.name'), value: "true" },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.isactive.choices.false.name'), value: "false" }
                         )
                 )
                 .addStringOption(option => 
@@ -41,8 +41,8 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.mention.description'))
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Mentionne (par défaut)', value: "true" },
-                            { name: 'Ne mentionne pas', value: "false" }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.mention.choices.true.name'), value: "true" },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.mention.choices.false.name'), value: "false" }
                         )
                 )
                 .addStringOption(option => 
@@ -50,8 +50,8 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.replied.description'))
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Message suivi (par défaut)', value: "true" },
-                            { name: 'Message seul', value: "false" }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.replied.choices.true.name'), value: "true" },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.replied.choices.false.name'), value: "false" }
                         )
                 )
                 .addStringOption(option => option.setName('emotes').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.emotes.description')).setRequired(false))

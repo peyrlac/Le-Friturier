@@ -44,9 +44,9 @@ module.exports = {
                         .setDescription(getCommandMetadata('commandMetadata.games.subcommands.rps.options.option.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: '🪨 Rock', value: 'rock' },
-                            { name: '📃 Paper', value: 'paper' },
-                            { name: '✂️ Scissors', value: 'scissors' }
+                            { name: getCommandMetadata('commandMetadata.games.subcommands.rps.options.option.choices.rock.name'), value: 'rock' },
+                            { name: getCommandMetadata('commandMetadata.games.subcommands.rps.options.option.choices.paper.name'), value: 'paper' },
+                            { name: getCommandMetadata('commandMetadata.games.subcommands.rps.options.option.choices.scissors.name'), value: 'scissors' }
                         )
                 )
         )

@@ -14,6 +14,23 @@ test('prefix fallback uses the configured discord prefix', () => {
   assert.match(source, /client\.config\.discord\.prefix/);
 });
 
+test('native command choices do not keep user-facing labels in JavaScript', () => {
+  const commands = [
+    'bot', 'developers', 'games', 'message', 'report', 'setup', 'triggers'
+  ];
+
+  for (const command of commands) {
+    const source = read(`src/interactions/Command/${command}.js`);
+    const lines = source.split(/\r?\n/);
+    lines.forEach((line, index) => {
+      if (!/^\s*\{\s*name:\s*['\"][^'\"]+['\"],\s*value:/.test(line)) return;
+      const context = lines.slice(Math.max(0, index - 8), index).join('\n');
+      assert.doesNotMatch(context, /\.addChoices\(/,
+        `${command} still contains a hardcoded native choice label`);
+    });
+  }
+});
+
 test('music progress bars remain bounded for streams and completed tracks', () => {
   const createProgressBar = require('../src/handlers/music/createProgressBar');
 

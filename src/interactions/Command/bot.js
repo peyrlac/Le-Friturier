@@ -2,6 +2,7 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const { FEATURE_REGISTRY } = require('../../handlers/features');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     localizationKey: 'commandMetadata.bot',
@@ -78,9 +79,9 @@ module.exports = {
                     .setDescription('Action à effectuer')
                     .setRequired(true)
                     .addChoices(
-                        { name: 'Lister', value: 'list' },
-                        { name: 'Modifier', value: 'set' },
-                        { name: 'Réinitialiser', value: 'reset' }
+                        { name: getCommandMetadata('commandMetadata.bot.subcommands.feature.options.action.choices.list.name'), value: 'list' },
+                        { name: getCommandMetadata('commandMetadata.bot.subcommands.feature.options.action.choices.set.name'), value: 'set' },
+                        { name: getCommandMetadata('commandMetadata.bot.subcommands.feature.options.action.choices.reset.name'), value: 'reset' }
                     ))
                 .addStringOption(option => option
                     .setName('feature')
