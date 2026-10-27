@@ -134,6 +134,15 @@ test('giveaway manager messages use localization keys', () => {
   }
 });
 
+test('radio commands use localization keys for user-facing responses', () => {
+  for (const file of ['src/commands/radio/play.js', 'src/commands/radio/playing.js', 'src/commands/radio/stop.js']) {
+    const source = read(file);
+
+    assert.match(source, /commands\.radio\./, file);
+    assert.doesNotMatch(source, /Started radio|Radio stopped|Informations radio|La radio a commencé/, file);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

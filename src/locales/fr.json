@@ -523,6 +523,26 @@
       "startedInVoice": "La musique a commencé dans <#{channel}> !",
       "skippedTo": "Musique passée à **{number}**."
     },
+    "radio": {
+      "noVoiceChannel": "Vous n'êtes pas dans un canal vocal !",
+      "startedTitle": "📻・Radio démarrée",
+      "startedDescription": "La radio a démarré avec succès.\nPour faire partir le bot : `rleave`",
+      "startedBy": "👤┆Démarrée par",
+      "channel": "📺┆Canal",
+      "station": "🎶┆Station de radio",
+      "guild": "⚙️┆Serveur",
+      "startedLogTitle": "📻・Radio démarrée",
+      "startedLogDescription": "La radio a démarré avec succès",
+      "stoppedTitle": "📻・La radio s'est arrêtée",
+      "stoppedDescription": "La radio s'est arrêtée avec succès.\nPour faire rejoindre le bot : `rplay`",
+      "stoppedBy": "👤┆Arrêtée par",
+      "stoppedLogTitle": "📻・Radio arrêtée",
+      "stoppedLogDescription": "La radio s'est arrêtée avec succès",
+      "infoTitle": "📻・Informations radio",
+      "infoDescription": "Toutes les informations sur la radio dans ce serveur",
+      "listeners": "👤┆Auditeurs",
+      "connectedChannel": "📺┆Canal connecté"
+    },
     "economy": {
       "withdraw": {
         "invalid": "Saisissez un nombre valide !",
