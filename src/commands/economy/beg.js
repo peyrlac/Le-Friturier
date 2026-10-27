@@ -18,7 +18,8 @@ module.exports = async (client, interaction, args) => {
     } else {
 
             client.succNormal({
-                text: `You've begged for some money!`,
+                key: 'economy.beg.success',
+                variables: { amount },
                 fields: [
                     {
                         name: `${client.emotes.economy.coins}┆Amount`,
@@ -34,7 +35,7 @@ module.exports = async (client, interaction, args) => {
                 await dataTime.save();
             }
             else {
-                new Schema({
+                await new Schema({
                     Guild: interaction.guild.id,
                     User: user.id,
                     Beg: Date.now()
@@ -44,5 +45,3 @@ module.exports = async (client, interaction, args) => {
             await client.addMoney(interaction, user, amount);
     }
 }
-
- 

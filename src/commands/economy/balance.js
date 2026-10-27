@@ -11,8 +11,8 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction);
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
 
             let total = data.Money + data.Bank;
 
@@ -45,7 +45,4 @@ module.exports = async (client, interaction, args) => {
                 key: 'commands.economy.balance.empty', type: 'editreply'
             }, interaction);
         }
-    })
 }
-
-
