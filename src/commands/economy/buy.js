@@ -33,8 +33,6 @@ module.exports = async (client, interaction, args) => {
         titleKey: 'economy.buy.storeTitle',
         descKey: 'economy.buy.storeDescription',
         variables: { guild: interaction.guild.name },
-        title: `🛒・${interaction.guild.name}'s Store`,
-        desc: `Choose a item from the menu to buy`,
         components: [select],
         type: 'editreply'
     }, interaction)
@@ -71,7 +69,7 @@ module.exports = async (client, interaction, args) => {
                 key: 'economy.buy.success',
                 fields: [
                     {
-                        name: `📘┆Item`,
+                        name: await client.t(i, 'economy.buy.item'),
                         value: `Fishingrod`
                     }
                 ],
@@ -104,7 +102,7 @@ module.exports = async (client, interaction, args) => {
             key: 'economy.buy.success',
             fields: [
                 {
-                    name: `📘┆Item`,
+                    name: await client.t(i, 'economy.buy.item'),
                     value: `<@&${role}>`
                 }
             ],

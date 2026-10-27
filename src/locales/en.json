@@ -714,7 +714,8 @@
       },
       "deleteItem": {
         "success": "The role was deleted from the store.",
-        "notFound": "This role is not in the store!"
+        "notFound": "This role is not in the store!",
+        "role": "\ud83d\uded2┆Role"
       },
       "removeMoney": {
         "invalid": "Enter a valid number!",
@@ -728,7 +729,8 @@
         "storeDescription": "Choose an item from the menu to buy.",
         "insufficient": "You don't have enough money to buy this!",
         "success": "The purchase has been successfully completed.",
-        "roleError": "I can't add <@&{role}> to you!"
+        "roleError": "I can't add <@&{role}> to you!",
+        "item": "\ud83d\udcd8┆Item"
       },
       "rob": {
         "bot": "You cannot rob a bot!",
@@ -744,7 +746,8 @@
         "description": "Current balance of `{user}`",
         "wallet": "Wallet",
         "bank": "Bank",
-        "total": "Total"
+        "total": "Total",
+        "title": "{coins}・Balance"
       },
       "deposit": {
         "usage": "deposit [amount]",
