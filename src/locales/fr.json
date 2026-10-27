@@ -20,7 +20,14 @@
         "botNoPermission": "Le bot n'a pas les permissions requises.",
         "invalidArguments": "Les arguments fournis sont incorrects.",
         "alreadyPerformed": "Vous avez déjà effectué cette action.",
-        "unsupportedLanguage": "Cette langue n'est pas prise en charge."
+        "unsupportedLanguage": "Cette langue n'est pas prise en charge.",
+        "moderation": {
+            "clearTooMany": "Je ne peux pas supprimer plus de 100 messages à la fois !",
+            "clearTooFew": "Je ne peux pas supprimer moins d'un message !",
+            "clearFailed": "Une erreur est survenue lors de la suppression des messages dans ce salon.",
+            "cannotModerate": "Vous ne pouvez pas modérer un autre modérateur.",
+            "warnSuccess": "L'utilisateur a reçu un avertissement."
+        }
     },
     "commands": {
         "config": {

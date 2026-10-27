@@ -12,7 +12,7 @@ module.exports = async (client, interaction, args) => {
   const reason = interaction.options.getString('reason') || 'Not given';
 
   if (member.permissions.has(Discord.PermissionsBitField.Flags.BanMembers) || member.permissions.has(Discord.PermissionsBitField.Flags.BanMembers)) return client.errNormal({
-    error: "You can't ban a moderator",
+    key: "errors.moderation.cannotModerate",
     type: 'editreply'
   }, interaction);
 

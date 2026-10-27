@@ -19,7 +19,14 @@
     "botNoPermission": "The bot does not have the required permissions.",
     "invalidArguments": "The provided arguments are invalid.",
     "alreadyPerformed": "You have already performed this action.",
-    "unsupportedLanguage": "This language is not supported."
+    "unsupportedLanguage": "This language is not supported.",
+    "moderation": {
+      "clearTooMany": "I cannot delete more than 100 messages at a time!",
+      "clearTooFew": "I cannot delete less than 1 message!",
+      "clearFailed": "There was an error trying to delete messages in this channel.",
+      "cannotModerate": "You cannot moderate another moderator.",
+      "warnSuccess": "The user has received a warning."
+    }
     },
     "commands": {
         "config": {
