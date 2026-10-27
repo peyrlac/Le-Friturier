@@ -95,4 +95,5 @@ Pour chaque vague : remplacer les textes par des clés, traduire les description
 - Le runtime de référence est Node 20 : `canvas@2.11.2` y dispose d’un binaire Windows précompilé ; Node 24/22 n’en disposent pas dans cette version.
 - Le bot de test atteint Discord et ses commandes ont été publiées sur les deux serveurs de laboratoire ; les scénarios d’interaction restent à exécuter manuellement.
 - Le démarrage complet fonctionne avec `MONGO_DNS_SERVERS=1.1.1.1,8.8.8.8` lorsque le résolveur système ne résout pas le SRV Atlas ; les interactions manuelles restent à exécuter.
+- Lavalink est désormais entièrement explicite via `LAVALINK_*` ; `LAVALINK_ENABLED=false` permet au bot de test de démarrer sans nœud musical.
 - La comparaison finale avec `upstream/main` couvre 634 fichiers ; la migration V11 complète reste volontairement non fusionnée.

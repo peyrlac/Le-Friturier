@@ -9,6 +9,24 @@ const Facebook = require("erela.js-facebook");
 const Deezer = require("erela.js-deezer");
 const AppleMusic = require("erela.js-apple");
 
+function createLavalinkNodes() {
+    if (process.env.LAVALINK_ENABLED === 'false') return [];
+
+    const host = String(process.env.LAVALINK_HOST || '').trim();
+    if (!host) return [];
+
+    const port = Number.parseInt(process.env.LAVALINK_PORT, 10);
+
+    return [{
+        host,
+        port: Number.isInteger(port) ? port : 2333,
+        password: process.env.LAVALINK_PASSWORD || '',
+        secure: process.env.LAVALINK_SECURE === 'true'
+    }];
+}
+
+const lavalinkNodes = createLavalinkNodes();
+
 // Discord client
 const client = new Discord.Client({
     allowedMentions: {
@@ -66,13 +84,7 @@ if (clientID && clientSecret) {
                 clientSecret,
             })
         ],
-        nodes: [
-            {
-                host: process.env.LAVALINK_HOST || "lava.link",
-                port: parseInt(process.env.LAVALINK_PORT) || 80,
-                password: process.env.LAVALINK_PASSWORD || "CorwinDev"
-            },
-        ],
+        nodes: lavalinkNodes,
         send(id, payload) {
             const guild = client.guilds.cache.get(id);
             if (guild) guild.shard.send(payload);
@@ -87,19 +99,7 @@ if (clientID && clientSecret) {
             new Deezer(),
             new Facebook(),
         ],
-        nodes: [
-            {
-                host: process.env.LAVALINK_HOST || "lava.link",
-                port: parseInt(process.env.LAVALINK_PORT) || 80,
-                password: process.env.LAVALINK_PASSWORD || "CorwinDev",
-                secure: Boolean(process.env.LAVALINK_SECURE) || false
-            },
-            {
-                host: "lavalink.techpoint.world",
-                port: 80,
-                password: "techpoint"
-            },
-        ],
+        nodes: lavalinkNodes,
         send(id, payload) {
             const guild = client.guilds.cache.get(id);
             if (guild) guild.shard.send(payload);
