@@ -840,6 +840,20 @@ test('roulette dynamic titles use localization keys', () => {
   assert.doesNotMatch(source, /Multiplicateur:/);
 });
 
+test('remaining bot panels use localization keys', () => {
+  const expectations = {
+    'src/commands/bot/links.js': ['botResponses.linksTitle', 'botResponses.linksDescription', 'botResponses.linksPlaceholder', 'botResponses.supportServer', 'botResponses.inviteBot', 'botResponses.communityServer', 'botResponses.topgg'],
+    'src/commands/bot/vote.js': ['botResponses.voteTitle', 'botResponses.voteButton'],
+    'src/commands/bot/ping.js': ['botResponses.pingTitle', 'botResponses.botLatency', 'botResponses.apiLatency', 'botResponses.databaseLatency']
+  };
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+  }
+  assert.doesNotMatch(read('src/commands/bot/links.js'), /Rien de sélectionné|Serveur d'assistance|Get access to all Bot links/);
+  assert.doesNotMatch(read('src/commands/bot/vote.js'), /Vote for me/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
