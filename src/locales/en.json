@@ -1038,6 +1038,37 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "economy": {
+      "name": "economy",
+      "description": "Play the economy game in your server",
+      "subcommands": {
+        "help": { "description": "Get information about the economy category commands" },
+        "additem": { "description": "Add a role item to the economy store", "options": { "role": { "description": "Select a role" }, "amount": { "description": "Enter an amount" } } },
+        "addmoney": { "description": "Add money to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount" } } },
+        "balance": { "description": "See your balance", "options": { "user": { "description": "The user whose balance you want to see" } } },
+        "beg": { "description": "Beg for money" },
+        "buy": { "description": "Buy items in the bot store" },
+        "clear": { "description": "Clear the economy" },
+        "crime": { "description": "Commit a crime" },
+        "daily": { "description": "Claim your daily money" },
+        "deleteitem": { "description": "Delete a role item from the economy store", "options": { "role": { "description": "Select a role" } } },
+        "deposit": { "description": "Deposit money to the bank", "options": { "amount": { "description": "Enter an amount" } } },
+        "fish": { "description": "Fish some fish" },
+        "hourly": { "description": "Claim your hourly money" },
+        "hunt": { "description": "Hunt some animals" },
+        "monthly": { "description": "Claim your monthly money" },
+        "pay": { "description": "Pay a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount" } } },
+        "present": { "description": "Get a weekly present" },
+        "removemoney": { "description": "Remove money from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount" } } },
+        "rob": { "description": "Rob a user", "options": { "user": { "description": "Select a user" } } },
+        "store": { "description": "Show the store of this guild" },
+        "weekly": { "description": "Claim your weekly money" },
+        "withdraw": { "description": "Withdraw your money", "options": { "amount": { "description": "Enter an amount" } } },
+        "work": { "description": "Go to work" },
+        "yearly": { "description": "Claim your yearly money" },
+        "leaderboard": { "description": "See the economy leaderboard", "options": { "type": { "description": "The leaderboard type that you want" } } }
+      }
+    },
     "casino": {
       "name": "casino",
       "description": "Play casino games",
