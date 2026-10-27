@@ -2085,6 +2085,34 @@
         }
       }
     },
+    "levels": {
+      "name": "levels",
+      "description": "View the level system",
+      "subcommands": {
+        "help": { "description": "Get information about the levels category commands" },
+        "setlevel": { "description": "Set a new level for a user", "options": { "user": { "description": "Select a user" }, "level": { "description": "Enter a new level" } } },
+        "deletereward": { "description": "Delete a level reward", "options": { "level": { "description": "Enter a level" } } },
+        "createreward": { "description": "Create a level reward", "options": { "level": { "description": "Enter a level" }, "role": { "description": "The role for this reward" } } },
+        "setxp": { "description": "Set a new xp for a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of xp" } } },
+        "rank": { "description": "See your current rank", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all level rewards" },
+        "leaderboard": { "description": "See the level leaderboard" }
+      }
+    },
+    "messages": {
+      "name": "messages",
+      "description": "View the message system",
+      "subcommands": {
+        "help": { "description": "Get information about the message category commands" },
+        "add": { "description": "Add messages to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "deletereward": { "description": "Delete a message reward", "options": { "amount": { "description": "Enter an amount of messages" } } },
+        "createreward": { "description": "Create a message reward", "options": { "amount": { "description": "Enter an amount of messages" }, "role": { "description": "The role for this reward" } } },
+        "remove": { "description": "Remove messages from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "show": { "description": "See your messages", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all message rewards" },
+        "leaderboard": { "description": "See the message leaderboard" }
+      }
+    },
     "search": {
       "name": "search",
       "description": "Search something on the Internet",
