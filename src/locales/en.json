@@ -1067,6 +1067,17 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "birthdays": {
+      "name": "birthdays",
+      "description": "View or save a birthday",
+      "subcommands": {
+        "help": { "description": "Get information about birthday commands" },
+        "check": { "description": "Check your birthday" },
+        "delete": { "description": "Delete your birthday" },
+        "list": { "description": "See all birthdays" },
+        "set": { "description": "Set your birthday", "options": { "day": { "description": "The day number of your birthday" }, "month": { "description": "The month number of your birthday" } } }
+      }
+    },
     "afk": {
       "name": "afk",
       "description": "Manage your AFK status",

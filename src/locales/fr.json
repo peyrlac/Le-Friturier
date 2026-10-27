@@ -1054,6 +1054,17 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "birthdays": {
+      "name": "birthdays",
+      "description": "Afficher ou enregistrer un anniversaire",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie des anniversaires" },
+        "check": { "description": "Vérifier votre anniversaire" },
+        "delete": { "description": "Supprimer votre anniversaire" },
+        "list": { "description": "Voir tous les anniversaires" },
+        "set": { "description": "Définir votre anniversaire", "options": { "day": { "description": "Numéro du jour de votre anniversaire" }, "month": { "description": "Numéro du mois de votre anniversaire" } } }
+      }
+    },
     "afk": {
       "name": "afk",
       "description": "Gérer son statut AFK",
