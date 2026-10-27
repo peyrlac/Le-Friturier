@@ -14,64 +14,61 @@ module.exports = async (client, interaction, args) => {
     let type = 'reply';
     if (interaction.isCommand()) type = 'editreply';
 
-    ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id }, async (err, ticketData) => {
-        if (ticketData) {
-            if (ticketData.resolved == false) return client.errNormal({
-                key: 'tickets.alreadyOpen',
-                type: 'ephemeraledit'
-            }, interaction);
+    const ticketData = await ticketChannels.findOne({
+        Guild: interaction.guild.id,
+        channelID: interaction.channel.id
+    });
 
-            ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-                if (data) {
-                    const ticketCategory = interaction.guild.channels.cache.get(data.Category);
+    if (!ticketData) return;
 
-                    if (ticketCategory == undefined) {
-                        return client.errNormal({
-                            key: 'tickets.setupRequired',
-                            type: type
-                        }, interaction);
-                    }
+    if (ticketData.resolved == false) return client.errNormal({
+        key: 'tickets.alreadyOpen',
+        type: 'ephemeraledit'
+    }, interaction);
 
-                    if (interaction.channel.parentId == ticketCategory.id) {
-                        client.users.fetch(ticketData.creator).then(usr => {
-                            interaction.channel.permissionOverwrites.edit(usr, {
-                                ViewChannel: true,
-                                SendMessages: true,
-                                AttachFiles: true,
-                                ReadMessageHistory: true,
-                                AddReactions: true
-                            });
+    const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
+    if (!data) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: type
+        }, interaction);
+    }
 
-                            var ticketid = String(ticketData.TicketID).padStart(4, 0);
-                            interaction.channel.setName(`ticket-${ticketid}`);
-                        })
+    const ticketCategory = interaction.guild.channels.cache.get(data.Category);
+    if (ticketCategory == undefined) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: type
+        }, interaction);
+    }
 
-                        ticketData.resolved = false;
-                        ticketData.save();
+    if (interaction.channel.parentId != ticketCategory.id) {
+        return client.errNormal({
+            key: 'tickets.notTicket',
+            type: type
+        }, interaction);
+    }
 
-                        return client.simpleEmbed({
-                            descKey: 'tickets.opened',
-                            variables: { user: interaction.user.id },
-                            type: type
-                        }, interaction)
-                    }
-                    else {
-                        client.errNormal({
-                            key: 'tickets.notTicket',
-                            type: type
-                        }, interaction);
+    const user = await client.users.fetch(ticketData.creator);
+    await interaction.channel.permissionOverwrites.edit(user, {
+        ViewChannel: true,
+        SendMessages: true,
+        AttachFiles: true,
+        ReadMessageHistory: true,
+        AddReactions: true
+    });
 
-                    }
-                }
-                else {
-                    return client.errNormal({
-                        key: 'tickets.setupRequired',
-                        type: type
-                    }, interaction);
-                }
-            })
-        }
-    })
+    const ticketid = String(ticketData.TicketID).padStart(4, 0);
+    await interaction.channel.setName(`ticket-${ticketid}`);
+
+    ticketData.resolved = false;
+    await ticketData.save();
+
+    return client.simpleEmbed({
+        descKey: 'tickets.opened',
+        variables: { user: interaction.user.id },
+        type: type
+    }, interaction);
 }
 
 
