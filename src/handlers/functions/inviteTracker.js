@@ -1,14 +1,15 @@
 const Discord = require("discord.js");
 
 module.exports = async (client) => {
-    const guildInvites = new Map();
+const logger = require('../logger');
+const guildInvites = new Map();
 
     client.on(Discord.Events.InviteCreate, async invite => {
         try {
             await refreshGuildInvites(invite.guild);
         }
         catch (error) {
-            console.error('Failed to refresh invites after invite creation', error);
+            logger.error('INVITES', 'Échec du rafraîchissement après création d’une invitation', error);
         }
     })
 
@@ -16,7 +17,7 @@ module.exports = async (client) => {
         setTimeout(() => {
             client.guilds.cache.forEach(guild => {
                 refreshGuildInvites(guild).catch(error => {
-                    console.error(`Failed to cache invites for guild ${guild.id}`, error);
+                    logger.error('INVITES', `Échec de mise en cache pour la guild ${guild.id}`, error);
                 });
             });
         }, 1000);
@@ -26,7 +27,7 @@ module.exports = async (client) => {
         try {
             await refreshGuildInvites(guild);
         } catch (error) {
-            console.error(`Failed to cache invites for new guild ${guild.id}`, error);
+            logger.error('INVITES', `Échec de mise en cache pour la nouvelle guild ${guild.id}`, error);
         }
     });
 
@@ -43,7 +44,7 @@ module.exports = async (client) => {
 
             client.emit("inviteJoin", member, usedInvite, usedInvite.inviter);
         } catch (error) {
-            console.error(`Failed to resolve invite for member ${member.id}`, error);
+            logger.error('INVITES', `Échec de résolution de l’invitation pour ${member.id}`, error);
             return client.emit("inviteJoin", member, null, null);
         }
     });
@@ -51,7 +52,10 @@ module.exports = async (client) => {
     async function refreshGuildInvites(guild) {
         if (!guild || !guild.invites) return new Map();
 
-        const fetchedInvites = await guild.invites.fetch();
+        const fetchedInvites = await guild.invites.fetch().catch(error => {
+            if (error.code === 50013 || error.code === 10003) return [];
+            throw error;
+        });
         const codeUses = new Map();
         fetchedInvites.forEach(invite => codeUses.set(invite.code, invite.uses || 0));
         guildInvites.set(guild.id, codeUses);

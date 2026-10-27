@@ -1,20 +1,33 @@
 const Discord = require('discord.js');
 const voiceRoles = require("../../database/models/voiceRoles");
-const chalk = require('chalk');
+const logger = require('../../handlers/logger');
 
 module.exports = async (client) => {
-    console.log(chalk.blue(chalk.bold(`Voice Cleanup`)), (chalk.white(`>>`)), chalk.green(`Lancement de la vérification...`));
+    logger.info('VOICE', 'Lancement de la vérification');
+    const startedAt = Date.now();
+    let guildsProcessed = 0;
+    let voiceRulesProcessed = 0;
+    let rolesAdded = 0;
+    let rolesRemoved = 0;
+    const processedGuilds = [];
+    const roleChanges = [];
 
     try {
         // Attendre que tous les shards soient prêts
         await client.shard.fetchClientValues('guilds.cache.size');
         
         for (const [guildId, guild] of client.guilds.cache) {
+            guildsProcessed++;
+            processedGuilds.push({
+                id: guildId,
+                name: guild.name || 'Serveur sans nom',
+            });
             try {
                 const voiceRoleEntries = await voiceRoles.find({ Guild: guildId });
                 if (!voiceRoleEntries.length) continue;
 
                 for (const entry of voiceRoleEntries) {
+                    voiceRulesProcessed++;
                     const voiceChannel = guild.channels.cache.get(entry.VoiceChannel);
                     const role = guild.roles.cache.get(entry.Role);
 
@@ -26,9 +39,9 @@ module.exports = async (client) => {
                     // Récupération sécurisée des membres
                     let members;
                     try {
-                        members = await guild.members.fetch({ force: false }); // Utilise le cache si possible
+                        members = guild.members.cache;
                     } catch (error) {
-                        console.error(chalk.blue(chalk.bold(`Voice Cleanup`)), (chalk.white(`>>`)), chalk.red(`Erreur fetchMembers pour ${guildId}:`), error.message);
+                        logger.warn('VOICE', `Impossible de lire les membres de ${guildId}; utilisation du cache`, error.message);
                         continue;
                     }
 
@@ -39,17 +52,43 @@ module.exports = async (client) => {
                         const isInVoice = membersInVoice.has(member.id);
 
                         if (isInVoice && !hasRole) {
-                            member.roles.add(role).catch(console.error);
+                            member.roles.add(role).catch(error => logger.warn('VOICE', `Impossible d’ajouter le rôle ${role.id}`, error.message));
+                            rolesAdded++;
+                            roleChanges.push({
+                                guildId,
+                                guildName: guild.name || 'Serveur sans nom',
+                                memberId: member.id,
+                                memberName: member.displayName || member.user?.username || 'Membre sans nom',
+                                roleId: role.id,
+                                action: 'add',
+                            });
                         } else if (!isInVoice && hasRole) {
-                            member.roles.remove(role).catch(console.error);
+                            member.roles.remove(role).catch(error => logger.warn('VOICE', `Impossible de retirer le rôle ${role.id}`, error.message));
+                            rolesRemoved++;
+                            roleChanges.push({
+                                guildId,
+                                guildName: guild.name || 'Serveur sans nom',
+                                memberId: member.id,
+                                memberName: member.displayName || member.user?.username || 'Membre sans nom',
+                                roleId: role.id,
+                                action: 'remove',
+                            });
                         }
                     });
                 }
             } catch (guildError) {
-                console.error(chalk.blue(chalk.bold(`Voice Cleanup`)), (chalk.white(`>>`)), chalk.red(`Erreur sur le serveur ${guildId}:`), guildError.message);
+                logger.error('VOICE', `Erreur sur le serveur ${guildId}`, guildError.message);
             }
         }
+        logger.success('VOICE', `Nettoyage terminé en ${Date.now() - startedAt} ms`, {
+            guildsProcessed,
+            voiceRulesProcessed,
+            rolesAdded,
+            rolesRemoved,
+            guilds: processedGuilds,
+            roleChanges,
+        });
     } catch (globalError) {
-        console.error(chalk.blue(chalk.bold(`Voice Cleanup`)), (chalk.white(`>>`)), chalk.red(`Erreur globale:`), globalError.message);
+        logger.error('VOICE', 'Erreur globale', globalError.message);
     }
 };

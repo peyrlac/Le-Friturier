@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const chalk = require('chalk');
+const logger = require('../../handlers/logger');
 const Schema = require('../../database/models/channelActivity');
 const voiceCleanup = require('../../assets/utils/voiceCleanup');
 const { model: AnnouncementChannels, clearOldEventsFromDatabase } = require('../../database/models/announcement-channels');
@@ -25,11 +25,11 @@ module.exports = async (client) => {
             )
         ]);
     } catch (error) {
-        console.error('Erreur lors de la migration des configurations du Channel Sorter:', error);
+        logger.error('SYSTEM', 'Échec de migration des configurations du Channel Sorter', error);
     }
 
     // Debug: confirm clientReady handler started
-    console.log(chalk.blue(chalk.bold('System')), chalk.white('>>'), chalk.green('clientReady handler start'));
+    logger.info('SYSTEM', 'Handler clientReady démarré');
 
     const startLogs = new Discord.WebhookClient({
         id: client.webhooks.startLogs.id,
@@ -38,42 +38,39 @@ module.exports = async (client) => {
 
     // Nettoyage des anciens événements et vérification des rappels sont indépendants.
     const cleanupPromise = (async () => {
-        console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Starting event cleanup...`));
+        logger.info('EVENTS', 'Nettoyage des événements démarré');
         try {
             await clearOldEventsFromDatabase(client);
-            console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.green(`Event cleanup completed successfully`));
+            logger.success('EVENTS', 'Nettoyage des événements terminé');
         } catch (error) {
-            console.error(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Error during event cleanup:`));
-            console.error(error);
+            logger.error('EVENTS', 'Échec du nettoyage des événements', error);
         }
     })();
 
     const remindersPromise = reminderManager.checkEventReminders(client).catch(error => {
-        console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Erreur lors de la vérification initiale des rappels:`));
-        console.error(error);
+        logger.error('EVENTS', 'Échec de la vérification initiale des rappels', error);
     });
 
     await Promise.all([cleanupPromise, remindersPromise]);
 
-    console.log(`\u001b[0m`);
-    console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`Shard #${client.shard.ids[0] + 1}`), chalk.green(`is ready!`));
-    console.log(chalk.blue(chalk.bold(`Bot`)), (chalk.white(`>>`)), chalk.green(`Started on`), chalk.red(`${client.guilds.cache.size}`), chalk.green(`servers!`));
+    logger.success('SYSTEM', `Shard #${client.shard.ids[0] + 1} prêt`);
+    logger.success('SYSTEM', `Bot connecté sur ${client.guilds.cache.size} serveur(s)`);
 
     // Cleanup voice role
     try {
         await voiceCleanup(client);
     } catch (err) {
-        console.error(chalk.blue(chalk.bold('Voice Cleanup')), chalk.white('>>'), chalk.red('voiceCleanup threw an error but startup will continue:'), err);
+        logger.error('VOICE', 'Le nettoyage vocal a échoué, le démarrage continue', err);
     }
 
     // Debug: run an initial tracking pass immediately to verify the scheduler and fetches
     try {
-        console.log(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), chalk.green('Running initial trackAllVoiceActivity now'));
+        logger.info('STATISTICS', 'Synchronisation initiale de l’activité vocale');
         // createManager returns a StatisticsManager instance whose method accepts (client)
         await statisticsManager.trackAllVoiceActivity(client);
-        console.log(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), chalk.green('Initial trackAllVoiceActivity completed'));
+        logger.success('STATISTICS', 'Synchronisation initiale de l’activité vocale terminée');
     } catch (err) {
-        console.error(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), chalk.red('Initial trackAllVoiceActivity failed:'), err);
+        logger.error('STATISTICS', 'Échec de la synchronisation initiale de l’activité vocale', err);
     }
 
     let embed = new Discord.EmbedBuilder()
@@ -158,11 +155,11 @@ module.exports = async (client) => {
                 if (randomText && typeof randomText.name === 'string' && typeof randomText.type === 'number') {
                     client.user.setPresence({ activities: [{ name: randomText.name, type: randomText.type }], status: 'online' });
                 } else {
-                    console.error('Invalid activity format or type:', randomText);
+                    logger.warn('SYSTEM', 'Format ou type d’activité invalide', randomText);
                 }
             })
             .catch(error => {
-                console.error('Error in interval:', error);
+                logger.error('SYSTEM', 'Erreur dans l’intervalle d’activité', error);
             });
     }, 60000);
 
