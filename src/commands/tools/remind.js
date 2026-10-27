@@ -3,6 +3,8 @@ const Schema = require("../../database/models/reminder");
 const ms = require("ms");
 
 module.exports = async (client, interaction, args) => {
+    return require('./remindAsync')(client, interaction, args);
+
 
     const time = interaction.options.getString('time');
     const text = interaction.options.getString('message');
@@ -50,5 +52,3 @@ module.exports = async (client, interaction, args) => {
     }, endtime - new Date().getTime());
 
 }
-
- 
