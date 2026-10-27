@@ -1074,6 +1074,15 @@
     "alreadyGiven": "Vous avez déjà remercié cet utilisateur !",
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
+  "giveawayEvents": {
+    "endedTitle": "🎉・Giveaway terminé",
+    "wonDescription": "Félicitations {user} ! Vous avez gagné le giveaway !",
+    "prize": "🎁┆Prix",
+    "giveaway": "🥳┆Giveaway",
+    "viewLink": "Voir le giveaway",
+    "entryApproved": "Votre participation à [ce giveaway]({link}) a été approuvée.",
+    "endedEntry": "Le giveaway est malheureusement terminé ! Vous ne pouvez plus participer."
+  },
   "commandMetadata": {
     "profile": {
       "name": "profil",

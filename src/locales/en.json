@@ -1087,6 +1087,15 @@
     "alreadyGiven": "You already thanked this user!",
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
+  "giveawayEvents": {
+    "endedTitle": "🎉・Giveaway ended",
+    "wonDescription": "Congratulations {user}! You won the giveaway!",
+    "prize": "🎁┆Prize",
+    "giveaway": "🥳┆Giveaway",
+    "viewLink": "View giveaway",
+    "entryApproved": "Your entry into [this giveaway]({link}) has been approved.",
+    "endedEntry": "The giveaway has unfortunately ended! You cannot participate anymore."
+  },
   "commandMetadata": {
     "profile": {
       "name": "profile",
