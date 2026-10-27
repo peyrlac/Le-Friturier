@@ -28,7 +28,8 @@ module.exports = async (client, interaction, args) => {
     };
 
     client.simpleEmbed({
-        title: `${client.emotes.animated.loading}┆Loading...`,
+        titleKey: 'games.wouldYouRatherLoading',
+        variables: { loading: client.emotes.animated.loading },
         type: 'editreply'
     }, interaction).then(async msg => {
 
@@ -62,45 +63,48 @@ module.exports = async (client, interaction, args) => {
             },
         };
 
+        const optionA = await client.t(interaction, 'games.wouldYouRatherOptionA');
+        const optionB = await client.t(interaction, 'games.wouldYouRatherOptionB');
+
         let btn = new Discord.ButtonBuilder()
             .setStyle(Discord.ButtonStyle.Primary)
-            .setLabel("Option A")
+            .setLabel(optionA)
             .setCustomId(id1);
         let btn2 = new Discord.ButtonBuilder()
             .setStyle(Discord.ButtonStyle.Primary)
-            .setLabel("Option B")
+            .setLabel(optionB)
             .setCustomId(id2);
 
         let row = new Discord.ActionRowBuilder()
             .addComponents(btn, btn2);
 
         client.embed({
-            title: `🤔・Would you rather...`,
+            titleKey: 'games.wouldYouRatherTitle',
             desc: `**A)** ${decode(res.questions[0])} \n**B)** ${decode(res.questions[1])}`,
             components: [row],
             type: 'editreply'
         }, interaction).then(async (m) => {
             const collector = interaction.channel.createMessageComponentCollector({ componentType: Discord.ComponentType.Button });
 
-            collector.on('collect', (btn) => {
+            collector.on('collect', async (btn) => {
                 if (btn.user.id !== interaction.user.id) return;
 
                 btn.deferUpdate();
                 if (btn.customId === id1) {
                     btn = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Primary)
-                        .setLabel(`Option A (${res.percentage['1']})`)
+                        .setLabel(`${optionA} (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Secondary)
-                        .setLabel(`Option B (${res.percentage['2']})`)
+                        .setLabel(`${optionB} (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: `🤔・Would you rather...`,
+                        titleKey: 'games.wouldYouRatherTitle',
                         desc: `**A) ${decode(res.questions[0])} (${res.percentage['1']})** \nB) ${decode(res.questions[1])} (${res.percentage['2']})`,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'
@@ -108,18 +112,18 @@ module.exports = async (client, interaction, args) => {
                 } else if (btn.customId === id2) {
                     btn = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Secondary)
-                        .setLabel(`Option A (${res.percentage['1']})`)
+                        .setLabel(`${optionA} (${res.percentage['1']})`)
                         .setCustomId(id1)
                         .setDisabled(true);
                     btn2 = new Discord.ButtonBuilder()
                         .setStyle(Discord.ButtonStyle.Primary)
-                        .setLabel(`Option B (${res.percentage['2']})`)
+                        .setLabel(`${optionB} (${res.percentage['2']})`)
                         .setCustomId(id2)
                         .setDisabled(true);
                     collector.stop();
 
                     client.embed({
-                        title: `🤔・Would you rather...`,
+                        titleKey: 'games.wouldYouRatherTitle',
                         desc: `A) ${decode(res.questions[0])} (${res.percentage['1']}) \n**B) ${decode(res.questions[1])} (${res.percentage['2']})**`,
                         components: [{ type: 1, components: [btn, btn2] }],
                         type: 'editreply'

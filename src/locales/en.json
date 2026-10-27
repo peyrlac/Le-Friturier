@@ -190,7 +190,11 @@
       "snakeScore": "GG, you scored **{score}** points!"
       ,"triviaTitle": "Trivia",
       "triviaCorrect": "GG, it was **{answer}**. You gave the correct answer in **{time}**.",
-      "triviaIncorrect": "Better luck next time! The correct answer was **{answer}**."
+      "triviaIncorrect": "Better luck next time! The correct answer was **{answer}**.",
+      "wouldYouRatherLoading": "{loading}┆Loading...",
+      "wouldYouRatherTitle": "🤔・Would you rather...",
+      "wouldYouRatherOptionA": "Option A",
+      "wouldYouRatherOptionB": "Option B"
     },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",
