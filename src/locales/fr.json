@@ -27,6 +27,14 @@
     }
   },
     "commands": {
+      "triggers": {
+        "invalidEmoji": "Emoji introuvable dans ce serveur !",
+        "saved": "Le trigger **{alias}** a été enregistré.",
+        "removed": "Le trigger **{alias}** a été supprimé.",
+        "notFound": "Le trigger **{alias}** n'existe pas.",
+        "noData": "Ce serveur ne possède aucune donnée de trigger.",
+        "alias": "🎯・Trigger"
+      },
       "notes": {
         "codeCollision": "Le code de note est déjà utilisé, veuillez réessayer.",
         "added": "Note ajoutée ! Utilisez `/notepad notes` pour voir vos notes.",
