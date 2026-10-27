@@ -23,9 +23,13 @@
 ## Points à vérifier avant fusion
 
 - Comparer les commits upstream restants avec les fichiers locaux `interactionCreate.js`, `embed.js`, musique et vérification.
-- Relancer `npm test` et le chargement de toutes les commandes.
+- `npm test` passe actuellement avec 30 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
+- Les scans statiques confirment `0` callback Mongoose legacy et `0` occurrence `.catch({})`.
+- Les deux fichiers `pinned channel` ont le même blob Git que `upgrade` : `channelSorter.js` et `clientReady.js`.
 - Tester manuellement `withResponse`, les réponses éphémères et `/config language`.
 - Revoir les vulnérabilités transitives restantes et décider lesquelles nécessitent une migration indépendante.
+
+`main` et `upgrade` n'ont pas de merge-base commun avec cette branche ; la comparaison finale doit donc rester une comparaison directe des arbres et des fichiers ciblés, sans fusion automatique.
 
 ## Audit npm au 25 octobre 2026
 

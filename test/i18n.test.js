@@ -84,6 +84,44 @@ test('exposes the config language subcommand with both supported choices', () =>
     ]);
 });
 
+test('config language persists the selected locale before replying', async () => {
+    const command = require('../src/commands/config/language');
+    const Functions = require('../src/database/models/functions');
+    const originalFindOneAndUpdate = Functions.findOneAndUpdate;
+    let update;
+    let response;
+
+    Functions.findOneAndUpdate = async (...args) => {
+        update = args;
+        return { Guild: 'guild', Language: 'en' };
+    };
+
+    try {
+        const client = {
+            checkUserPerms: async () => true,
+            succNormal: async payload => {
+                response = payload;
+                return payload;
+            },
+            errNormal: async payload => payload,
+        };
+        const interaction = {
+            guild: { id: 'guild' },
+            options: { getString: () => 'en' },
+        };
+
+        await command(client, interaction);
+
+        assert.equal(update[0].Guild, 'guild');
+        assert.deepEqual(update[1], { $set: { Language: 'en' } });
+        assert.equal(response.key, 'commands.config.language.success');
+        assert.equal(response.variables.language, 'English');
+    }
+    finally {
+        Functions.findOneAndUpdate = originalFindOneAndUpdate;
+    }
+});
+
 test('serializes native command localizations for Discord', () => {
     const command = require('../src/interactions/Command/config');
     applyCommandLocalizations(command);
