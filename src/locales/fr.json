@@ -870,6 +870,23 @@
       "verifiedDeveloper": "👨‍💻・Développeur de bot vérifié"
     }
   },
+  "botResponses": {
+    "donateTitle": "{bot}・Faire un don",
+    "donateDescription": "_____\n\nCliquez sur le bouton ci-dessous pour ouvrir la page de soutien.\n**Le don est facultatif.**",
+    "donateButton": "CorwinDev GitHub",
+    "supportTitle": "❓・Support",
+    "supportDescription": "Rendez votre serveur encore meilleur avec le bot !",
+    "supportButton": "Serveur de support",
+    "ownerTitle": "📘・Informations du propriétaire",
+    "ownerName": "👑・Nom du propriétaire",
+    "ownerTag": "🏷・Identifiant Discord",
+    "organization": "🏢・Organisation",
+    "website": "🌐・Site web",
+    "uptimeTitle": "{arrow}・Disponibilité",
+    "uptimeDescription": "Consultez la disponibilité du bot.",
+    "uptimeDuration": "⌛・Durée de disponibilité",
+    "uptimeSince": "⏰・Depuis"
+  },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",
     "promptAction": "Quelle action doit être associée à cette commande ?",
