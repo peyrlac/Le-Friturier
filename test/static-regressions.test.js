@@ -255,6 +255,28 @@ test('profile collection additions localize their field labels', () => {
   }
 });
 
+test('profile collection removals and serverstats time use shared localization', () => {
+  const fields = {
+    food: 'food',
+    artist: 'artists',
+    hobby: 'hobbies',
+    pet: 'pets',
+    song: 'songs',
+    movie: 'movies',
+    actor: 'actors'
+  };
+
+  for (const [command, field] of Object.entries(fields)) {
+    const source = read(`src/commands/profile/del${command}.js`);
+    assert.match(source, new RegExp(`profile\\.fields\\.${field}`), command);
+  }
+
+  const time = read('src/commands/serverstats/time.js');
+  assert.match(time, /serverstats\.timeCreated/);
+  assert.doesNotMatch(time, /Timezone is not valid|Voice channel count created/);
+  assert.doesNotMatch(time, /const time = interaction\.options/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

@@ -23,7 +23,7 @@ module.exports = async (client, interaction, args) => {
                 key: 'profile.itemRemoved',
                 variables: { item: hobby },
                 fields: [{
-                    name: "⚽┆Hobby",
+                    name: await client.t(interaction, 'profile.fields.hobbies'),
                     value: `\`\`\`${hobby}\`\`\``,
                     inline: true,
                 }],
