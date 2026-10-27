@@ -342,6 +342,14 @@
         "success": "L'achat a été effectué avec succès.",
         "roleError": "Je ne peux pas vous attribuer <@&{role}>."
       },
+      "rob": {
+        "bot": "Vous ne pouvez pas voler un bot !",
+        "minimumWallet": "Vous devez avoir au moins 200 pièces dans votre portefeuille !",
+        "emptyTarget": "{user} n'a rien que vous puissiez voler !",
+        "success": "Vous avez volé un utilisateur et vous vous êtes échappé !",
+        "user": "Utilisateur",
+        "amount": "Montant volé"
+      },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",

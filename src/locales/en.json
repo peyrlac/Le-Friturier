@@ -361,6 +361,14 @@
         "success": "The purchase has been successfully completed.",
         "roleError": "I can't add <@&{role}> to you!"
       },
+      "rob": {
+        "bot": "You cannot rob a bot!",
+        "minimumWallet": "You need at least 200 coins in your wallet to rob someone!",
+        "emptyTarget": "{user} does not have anything you can rob!",
+        "success": "You robbed a user and got away!",
+        "user": "User",
+        "amount": "Robbed"
+      },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",
