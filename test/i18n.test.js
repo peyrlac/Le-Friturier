@@ -242,7 +242,7 @@ test('afk and activities expose localized metadata', () => {
   const activities = require('../src/interactions/Command/activities');
   const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
-  assert.deepEqual(afk.localizations, {
+  assert.deepEqual(resolveCommandLocalizations(afk), {
     name: { fr: 'afk', en: 'afk' },
     description: { fr: 'Gérer son statut AFK', en: 'Manage your AFK status' },
     subcommands: {

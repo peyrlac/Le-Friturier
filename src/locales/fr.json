@@ -1054,6 +1054,15 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "afk": {
+      "name": "afk",
+      "description": "Gérer son statut AFK",
+      "subcommands": {
+        "help": { "description": "Voir l’aide de la catégorie AFK" },
+        "set": { "description": "Se mettre en AFK", "options": { "reason": { "description": "Raison de votre AFK" } } },
+        "list": { "description": "Afficher les utilisateurs AFK" }
+      }
+    },
     "activities": {
       "name": "activités",
       "description": "Démarrer une activité",
