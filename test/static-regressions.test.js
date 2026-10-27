@@ -196,6 +196,25 @@ test('tools command exposes localized top-level metadata', () => {
   });
 });
 
+test('tools response wave uses translation keys', () => {
+  const files = [
+    'src/commands/tools/anagram.js',
+    'src/commands/tools/button.js',
+    'src/commands/tools/decode.js',
+    'src/commands/tools/emojify.js'
+  ];
+
+  for (const file of files) {
+    const source = read(file);
+    assert.match(source, /tools\.[A-Za-z]+/, file);
+  }
+
+  assert.doesNotMatch(read('src/commands/tools/anagram.js'), /No word found|I formed a word/);
+  assert.doesNotMatch(read('src/commands/tools/button.js'), /cannot be longer than 50|Click the button/);
+  assert.doesNotMatch(read('src/commands/tools/decode.js'), /only decode binary|I have decoded/);
+  assert.doesNotMatch(read('src/commands/tools/emojify.js'), /cannot be longer than 4096/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
