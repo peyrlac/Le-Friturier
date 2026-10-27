@@ -251,27 +251,30 @@ module.exports = async (client, message) => {
 
   // Sticky messages
   try {
-    Schema.findOne(
-      { Guild: message.guild.id, Channel: message.channel.id },
-      async (err, data) => {
-        if (!data) return;
-
-        const lastStickyMessage = await message.channel.messages
-          .fetch(data.LastMessage)
-          .catch(() => { });
-        if (!lastStickyMessage) return;
+    const stickyData = await Schema.findOne({
+      Guild: message.guild.id,
+      Channel: message.channel.id
+    });
+    if (stickyData) {
+      const lastStickyMessage = await message.channel.messages
+        .fetch(stickyData.LastMessage)
+        .catch(() => null);
+      if (lastStickyMessage) {
         await lastStickyMessage.delete({ timeout: 1000 });
 
         const newMessage = await client.simpleEmbed(
-          { desc: `${data.Content}` },
+          { desc: `${stickyData.Content}` },
           message.channel
         );
 
-        data.LastMessage = newMessage.id;
-        data.save();
+        stickyData.LastMessage = newMessage.id;
+        await stickyData.save();
       }
-    );
-  } catch { }
+    }
+  }
+  catch (error) {
+    console.error(error);
+  }
 
   // Prefix
   var guildSettings = await Functions.findOne({ Guild: message.guild.id });
