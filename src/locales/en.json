@@ -32,7 +32,14 @@
       "cannotModerate": "You cannot moderate another moderator.",
       "warnSuccess": "The user has received a warning.",
       "warningRemoved": "The warning has been successfully removed.",
-      "noWarnings": "User has no warnings."
+      "noWarnings": "User has no warnings.",
+      "banNotified": "The specified user has been successfully banned and successfully received a notification!",
+      "banNotNotified": "The given user has been successfully banned, but has not received a notification!",
+      "kickNotified": "The specified user has been successfully kicked and successfully received a notification!",
+      "kickNotNotified": "The given user has been successfully kicked, but has not received a notification!",
+      "timeoutAlready": "{user} has already timed out!",
+      "timeoutSuccess": "{user} successfully timed out **{time} minutes**.",
+      "timeoutFailed": "I can't timeout {user}."
     }
     },
     "tools": {

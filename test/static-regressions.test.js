@@ -526,6 +526,22 @@ test('developer bot-ban responses use localization keys', () => {
   assert.doesNotMatch(source, /You cannot ban yourself|has not been banned from the bot|Interdiction du bot|UNCANN/i);
 });
 
+test('moderation action responses use localization keys', () => {
+  const expectations = {
+    'src/commands/moderation/ban.js': ['errors.moderation.banNotified', 'errors.moderation.banNotNotified'],
+    'src/commands/moderation/kick.js': ['errors.moderation.kickNotified', 'errors.moderation.kickNotNotified'],
+    'src/commands/moderation/softban.js': ['errors.moderation.banNotified', 'errors.moderation.banNotNotified'],
+    'src/commands/moderation/tempban.js': ['errors.moderation.banNotified', 'errors.moderation.banNotNotified'],
+    'src/commands/moderation/timeout.js': ['errors.moderation.timeoutAlready', 'errors.moderation.timeoutSuccess', 'errors.moderation.timeoutFailed']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), `${file}: ${key}`);
+    assert.doesNotMatch(source, /successfully banned|successfully kicked|already timed out|can't timeout/i, file);
+  }
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],

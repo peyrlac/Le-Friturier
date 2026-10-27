@@ -30,7 +30,14 @@
       "cannotModerate": "Vous ne pouvez pas mod\u00e9rer un autre mod\u00e9rateur.",
       "warnSuccess": "L'utilisateur a re\u00e7u un avertissement.",
       "warningRemoved": "L'avertissement a été supprimé avec succès.",
-      "noWarnings": "Cet utilisateur n'a aucun avertissement."
+      "noWarnings": "Cet utilisateur n'a aucun avertissement.",
+      "banNotified": "L'utilisateur indiqué a été banni et a reçu une notification avec succès !",
+      "banNotNotified": "L'utilisateur indiqué a été banni, mais n'a pas reçu de notification !",
+      "kickNotified": "L'utilisateur indiqué a été expulsé et a reçu une notification avec succès !",
+      "kickNotNotified": "L'utilisateur indiqué a été expulsé, mais n'a pas reçu de notification !",
+      "timeoutAlready": "{user} est déjà réduit au silence !",
+      "timeoutSuccess": "{user} a été réduit au silence pendant **{time} minutes**.",
+      "timeoutFailed": "Impossible de réduire {user} au silence."
     }
   },
   "tools": {
