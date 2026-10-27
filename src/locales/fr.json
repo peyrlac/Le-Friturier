@@ -90,7 +90,13 @@
       "stankRate": "Tu es malodorant à {result}% !",
       "stankRateTitle": "Taux de puanteur",
       "christmas": "Noël",
-      "christmasDays": "Plus que {days} jours avant Noël."
+      "christmasDays": "Plus que {days} jours avant Noël.",
+      "asciiTitle": "Ascii",
+      "asciiTooLong": "Veuillez fournir un texte de moins de 2000 caractères !",
+      "sayTooLong": "Vous ne pouvez pas utiliser plus de 2000 caractères !",
+      "messageSent": "Message envoyé avec succès.",
+      "sudoTooLong": "Vous ne pouvez pas utiliser plus de 2000 caractères !",
+      "sudoSent": "Le message sudo a été envoyé !"
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
