@@ -292,6 +292,16 @@ test('profile and serverstats commands expose localized top-level metadata', () 
   assert.equal(serverstats.localizations.name.en, 'serverstats');
 });
 
+test('core category commands expose localized top-level metadata', () => {
+  for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
+    const command = require(path.join(root, `src/interactions/Command/${name}.js`));
+    assert.ok(command.localizations?.name?.fr, name);
+    assert.ok(command.localizations?.name?.en, name);
+    assert.ok(command.localizations?.description?.fr, name);
+    assert.ok(command.localizations?.description?.en, name);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

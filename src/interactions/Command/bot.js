@@ -67,6 +67,10 @@ module.exports = {
                 .setDescription('Envoyez votre opinion sur le bot aux développeurs')
                 .addStringOption(option => option.setName("feedback").setDescription("Vos réactions").setRequired(true))
         ),
+    localizations: {
+        name: { fr: 'bot', en: 'bot' },
+        description: { fr: 'Obtenir des informations sur le bot', en: 'Get information about the bot' }
+    },
 
     /** 
      * @param {Client} client
