@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = (client, giveaway, winners) => {
-    winners.forEach((member) => {
+    winners.forEach(async (member) => {
         client.embed({
             title: await client.t(member, 'giveawayEvents.endedTitle'),
             desc: await client.t(member, 'giveawayEvents.wonDescription', { user: member.user.username }),
