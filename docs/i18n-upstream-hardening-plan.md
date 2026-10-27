@@ -94,5 +94,5 @@ Pour chaque vague : remplacer les textes par des clés, traduire les description
 - Les vagues giveaways et radio utilisent désormais les clés fr/en pour leurs réponses ; les catalogues fr/en sont alignés et les validations runtime ainsi que les vagues restantes restent à clôturer.
 - Le runtime de référence est Node 20 : `canvas@2.11.2` y dispose d’un binaire Windows précompilé ; Node 24/22 n’en disposent pas dans cette version.
 - Le bot de test atteint Discord et ses commandes ont été publiées sur les deux serveurs de laboratoire ; les scénarios d’interaction restent à exécuter manuellement.
-- Le démarrage complet reste dépendant de MongoDB : l’hôte Atlas fourni par l’environnement répond actuellement `ENOTFOUND`.
+- Le démarrage complet fonctionne avec `MONGO_DNS_SERVERS=1.1.1.1,8.8.8.8` lorsque le résolveur système ne résout pas le SRV Atlas ; les interactions manuelles restent à exécuter.
 - La comparaison finale avec `upstream/main` couvre 634 fichiers ; la migration V11 complète reste volontairement non fusionnée.

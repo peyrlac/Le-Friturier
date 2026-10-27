@@ -1,9 +1,17 @@
 const mongoose = require('mongoose');
 const chalk = require('chalk');
+const dns = require('node:dns');
 
 async function connect() {
     mongoose.set('strictQuery', false);
     try {
+        const dnsServers = (process.env.MONGO_DNS_SERVERS || '')
+            .split(',')
+            .map(server => server.trim())
+            .filter(Boolean);
+
+        if (dnsServers.length) dns.setServers(dnsServers);
+
         console.log(chalk.blue(chalk.bold(`Database`)), (chalk.white(`>>`)), chalk.red(`MongoDB`), chalk.green(`is connecting...`))
         await mongoose.connect(process.env.MONGO_TOKEN, {
             useNewUrlParser: true,

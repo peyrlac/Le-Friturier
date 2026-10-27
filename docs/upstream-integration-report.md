@@ -42,7 +42,8 @@
 - Le Gateway Discord répond ; le bot voit 2 serveurs de laboratoire.
 - 51 commandes ont été publiées globalement et sur les 2 serveurs de test, dont `/config language`.
 - Le loader ignore désormais les modules utilitaires non-factories (`http/index.js` et `serverstats/createStatsChannel.js`) ; le healthcheck utilise un chemin temporaire portable.
-- Le démarrage complet reste bloqué par la résolution DNS de MongoDB Atlas (`cluster0.omsiudb.mongodb.net` → `ENOTFOUND`) ; les interactions Discord nécessitant la persistance ne sont donc pas encore validées manuellement.
+- Le démarrage complet a été validé avec `MONGO_DNS_SERVERS=1.1.1.1,8.8.8.8` : MongoDB est connecté, le bot devient prêt sur 2 serveurs et les commandes/événements sont chargés. Les scénarios d’interaction restent à exécuter manuellement.
+- Les erreurs restantes du serveur de test sont limitées aux permissions de lecture des invites et à la résolution du nœud Lavalink `lava.link`; elles n’empêchent pas le Gateway ni les commandes non musicales.
 
 `main` et `upgrade` n'ont pas de merge-base commun avec cette branche ; la comparaison finale doit donc rester une comparaison directe des arbres et des fichiers ciblés, sans fusion automatique.
 
