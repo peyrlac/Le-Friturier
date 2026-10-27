@@ -334,6 +334,14 @@
         "success": "L'argent a été retiré de l'utilisateur.",
         "insufficient": "Cet utilisateur n'a pas assez d'argent."
       },
+      "buy": {
+        "noShop": "Aucune boutique n'est configurée sur ce serveur.",
+        "storeTitle": "🛒・Boutique de {guild}",
+        "storeDescription": "Choisissez un article dans le menu pour l'acheter.",
+        "insufficient": "Vous n'avez pas assez d'argent pour cet achat.",
+        "success": "L'achat a été effectué avec succès.",
+        "roleError": "Je ne peux pas vous attribuer <@&{role}>."
+      },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",

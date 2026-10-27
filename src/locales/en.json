@@ -353,6 +353,14 @@
         "success": "Money was removed from the user.",
         "insufficient": "This user doesn't have enough money."
       },
+      "buy": {
+        "noShop": "No shop is configured in this server.",
+        "storeTitle": "🛒・{guild}'s Store",
+        "storeDescription": "Choose an item from the menu to buy.",
+        "insufficient": "You don't have enough money to buy this!",
+        "success": "The purchase has been successfully completed.",
+        "roleError": "I can't add <@&{role}> to you!"
+      },
       "balance": {
         "bot": "You cannot view a bot's balance!",
         "empty": "This user does not have any money yet.",
