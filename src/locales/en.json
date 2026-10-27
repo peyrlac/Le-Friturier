@@ -97,6 +97,14 @@
         "success": "Your feedback was sent to the developers successfully."
       }
     },
+    "music": {
+      "notInVoice": "You are not in a voice channel!",
+      "notSameVoice": "You are not in the same voice channel!",
+      "noSongs": "There are no songs currently playing.",
+      "paused": "The music has been paused.",
+      "resumed": "The music has resumed.",
+      "searching": "Searching..."
+    },
     "economy": {
       "balance": {
         "bot": "You cannot view a bot's balance!",
