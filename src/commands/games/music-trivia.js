@@ -14,13 +14,13 @@ module.exports = async (client, interaction, args) => {
     if (!number || isNaN(number)) return client.errUsage({ usage: "music-trivia [amount of numbers]", type: 'editreply' }, interaction);
 
     const channel = interaction.member.voice.channel;
-    if (!channel) return client.errNormal({ error: `You're not in a voice channel!`, type: 'editreply' }, interaction);
+    if (!channel) return client.errNormal({ key: 'errors.notInVoice', type: 'editreply' }, interaction);
 
-    if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return client.errNormal({ error: `You are not in the same voice channel!`, type: 'editreply' }, interaction);
+    if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return client.errNormal({ key: 'errors.notSameVoice', type: 'editreply' }, interaction);
 
-    if (interaction.client.playerManager.get(interaction.guild.id)) return client.errNormal({ error: `You can't use this while a track is playing!`, type: 'editreply' }, interaction);
+    if (interaction.client.playerManager.get(interaction.guild.id)) return client.errNormal({ key: 'games.musicTriviaTrackPlaying', type: 'editreply' }, interaction);
 
-    if (interaction.client.triviaManager.get(interaction.guildId)) return client.errNormal({ error: `There is already a trivia in play!`, type: 'editreply' }, interaction);
+    if (interaction.client.triviaManager.get(interaction.guildId)) return client.errNormal({ key: 'games.musicTriviaAlreadyPlaying', type: 'editreply' }, interaction);
 
     const jsonSongs = fs.readFileSync(
         './src/config/data/musictrivia.json',
@@ -56,7 +56,6 @@ module.exports = async (client, interaction, args) => {
 
     handleSubscription(interaction, triviaPlayer, client);
 }
-
 async function handleSubscription(interaction, player, client) {
     const queue = player.queue;
     let voiceChannel = queue[0].channel;
@@ -79,8 +78,9 @@ async function handleSubscription(interaction, player, client) {
     player.process(player.queue);
 
     client.embed({
-        title: `🎶・Music Quiz`,
-        desc: `Get ready! Vote skip the song by entering the word 'skip'. Good luck! \n\n**Songs in queue:** ${queue.length} \n**Time to play:** 30 seconds`,
+        titleKey: 'games.musicTriviaTitle',
+        descKey: 'games.musicTriviaDescription',
+        variables: { queueLength: queue.length },
         type: 'editreply'
     }, interaction);
 }
@@ -98,5 +98,3 @@ function getRandom(arr, n) {
     }
     return result;
 }
-
- 

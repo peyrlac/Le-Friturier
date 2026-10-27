@@ -178,7 +178,12 @@
       "wouldYouRatherOptionB": "Option B",
       "willYouPressTitle": "🤔・Appuieras-tu sur le bouton ?",
       "willYouPressYes": "Oui",
-      "willYouPressNo": "Non"
+      "willYouPressNo": "Non",
+      "cancel": "Annuler",
+      "musicTriviaTitle": "🎶・Quiz musical",
+      "musicTriviaDescription": "Préparez-vous ! Votez pour passer la chanson en entrant le mot `skip`. Bonne chance !\n\n**Chansons en file d'attente :** {queueLength}\n**Temps de jeu :** 30 secondes",
+      "musicTriviaTrackPlaying": "Vous ne pouvez pas utiliser ceci pendant la lecture d'une chanson !",
+      "musicTriviaAlreadyPlaying": "Un quiz musical est déjà en cours !"
     },
     "images": {
       "remoteDataError": "Impossible de récupérer les données distantes.",

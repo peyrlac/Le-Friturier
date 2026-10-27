@@ -197,7 +197,12 @@
       "wouldYouRatherOptionB": "Option B",
       "willYouPressTitle": "🤔・Will you press the button?",
       "willYouPressYes": "Yes",
-      "willYouPressNo": "No"
+      "willYouPressNo": "No",
+      "cancel": "Cancel",
+      "musicTriviaTitle": "🎶・Music Quiz",
+      "musicTriviaDescription": "Get ready! Vote to skip the song by entering the word `skip`. Good luck!\n\n**Songs in queue:** {queueLength}\n**Time to play:** 30 seconds",
+      "musicTriviaTrackPlaying": "You can't use this while a track is playing!",
+      "musicTriviaAlreadyPlaying": "There is already a music trivia in play!"
     },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",
