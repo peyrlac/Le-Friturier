@@ -21,6 +21,7 @@
     "invalidArguments": "Les arguments fournis sont incorrects.",
     "alreadyPerformed": "Vous avez d\u00e9j\u00e0 effectu\u00e9 cette action.",
     "unsupportedLanguage": "Cette langue n'est pas prise en charge.",
+    "channelNotFound": "Salon introuvable.",
     "moderation": {
       "clearTooMany": "Je ne peux pas supprimer plus de 100 messages \u00e0 la fois !",
       "clearTooFew": "Je ne peux pas supprimer moins d'un message !",
@@ -39,6 +40,24 @@
       "timeoutSuccess": "{user} a été réduit au silence pendant **{time} minutes**.",
       "timeoutFailed": "Impossible de réduire {user} au silence."
     }
+  },
+  "embed": {
+    "channelNotFound": "Salon introuvable.",
+    "sent": "Embed envoyé avec succès dans {channel}."
+  },
+  "messageEvents": {
+    "cannotDM": "Je ne peux pas vous envoyer de message privé ; vos messages privés sont peut-être désactivés."
+  },
+  "starboard": {
+    "cannotStarOwn": "Vous ne pouvez pas mettre une étoile à vos propres messages.\n\nMessage : {message}",
+    "cannotStarBot": "Vous ne pouvez pas mettre une étoile aux messages des bots.\n\nMessage : {message}",
+    "noChannel": "Aucun salon Starboard trouvé ! Configurez le salon prévu à cet effet.",
+    "emptyMessage": "Vous ne pouvez pas mettre une étoile à un message vide.",
+    "title": "⭐・Starboard",
+    "stars": "⭐┇Étoiles",
+    "message": "🗨️┇Message",
+    "jump": "[Accéder au message]({url})",
+    "author": "👤┇Auteur"
   },
   "tools": {
     "qrcodeTitle": "📱・QR Code",
@@ -2051,6 +2070,12 @@
       "guessWordTitle": "💬・Devinez le mot",
       "guessWordDescription": "Mettez les lettres dans la bonne position !",
       "word": "🔀┆Mot"
+    },
+    "aprilfools": {
+      "success": "Configuration du poisson d'avril terminée !",
+      "error": "Une erreur s'est produite lors de la configuration !",
+      "textChannel": "📝┆Salon textuel",
+      "voiceChannel": "🔊┆Salon vocal"
     }
   },
   "features": {

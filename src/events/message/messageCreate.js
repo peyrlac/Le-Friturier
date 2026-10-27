@@ -396,7 +396,7 @@ module.exports = async (client, message) => {
       return message.author.send({ content: cmdx.Responce }).catch((e) => {
         client.errNormal(
           {
-            error: "I can't DM you, maybe you have DM turned off!",
+            key: 'messageEvents.cannotDM',
           },
           message.channel
         );

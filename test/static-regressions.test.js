@@ -1179,6 +1179,51 @@ test('developer links, rewards, and bots panels use localization keys', () => {
   assert.doesNotMatch(source, /See all the links from Bot Network|Role Rewards|Outside of a community we also maintain|What is Bot\?|How do I invite the bots\?/);
 });
 
+test('remaining hardcoded interaction responses use localization keys', () => {
+  const sources = {
+    developers: read('src/interactions/Command/developers.js'),
+    embed: read('src/interactions/Command/embed.js'),
+    aprilfools: read('src/commands/autosetup/aprilfools.js'),
+    starboard: read('src/events/message/messageReactionAdd.js'),
+    directMessages: read('src/events/message/messageCreate.js')
+  };
+
+  const expected = {
+    developers: ['errors.developerOnly'],
+    embed: ['embed.channelNotFound', 'embed.sent'],
+    aprilfools: [
+      'autosetup.aprilfools.success',
+      'autosetup.aprilfools.error',
+      'autosetup.aprilfools.textChannel',
+      'autosetup.aprilfools.voiceChannel'
+    ],
+    starboard: [
+      'starboard.cannotStarOwn',
+      'starboard.cannotStarBot',
+      'starboard.noChannel',
+      'starboard.emptyMessage',
+      'starboard.title',
+      'starboard.stars',
+      'starboard.message',
+      'starboard.author',
+      'starboard.jump'
+    ],
+    directMessages: ['messageEvents.cannotDM']
+  };
+
+  for (const [name, keys] of Object.entries(expected)) {
+    for (const key of keys) {
+      assert.match(sources[name], new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), `${name}: ${key}`);
+    }
+  }
+
+  assert.doesNotMatch(sources.developers, /Only Bot developers are allowed/);
+  assert.doesNotMatch(sources.embed, /Channel not found|Embed successfully sent/);
+  assert.doesNotMatch(sources.aprilfools, /Configuration du poisson d'avril terminée|Une erreur s'est produite/);
+  assert.doesNotMatch(sources.starboard, /You cannot star your own messages|No star channel found/);
+  assert.doesNotMatch(sources.directMessages, /I can't DM you, maybe you have DM turned off/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

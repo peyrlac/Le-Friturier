@@ -23,6 +23,7 @@
     "invalidArguments": "The provided arguments are invalid.",
     "alreadyPerformed": "You have already performed this action.",
     "unsupportedLanguage": "This language is not supported.",
+    "channelNotFound": "Channel not found.",
     "moderation": {
       "clearTooMany": "I cannot delete more than 100 messages at a time!",
       "clearTooFew": "I cannot delete less than 1 message!",
@@ -41,6 +42,24 @@
       "timeoutSuccess": "{user} successfully timed out **{time} minutes**.",
       "timeoutFailed": "I can't timeout {user}."
     }
+    },
+    "embed": {
+      "channelNotFound": "Channel not found.",
+      "sent": "Embed successfully sent in {channel}."
+    },
+    "messageEvents": {
+      "cannotDM": "I can't DM you; your direct messages may be turned off."
+    },
+    "starboard": {
+      "cannotStarOwn": "You cannot star your own messages.\n\nMessage: {message}",
+      "cannotStarBot": "You cannot star bot messages.\n\nMessage: {message}",
+      "noChannel": "No starboard channel found! Run the channel setup.",
+      "emptyMessage": "You cannot star an empty message.",
+      "title": "⭐・Starboard",
+      "stars": "⭐┇Stars",
+      "message": "🗨️┇Message",
+      "jump": "[Jump to the message]({url})",
+      "author": "👤┇Author"
     },
     "tools": {
     "qrcodeTitle": "📱・QR Code",
@@ -2051,6 +2070,12 @@
       "guessWordTitle": "💬・Guess the word",
       "guessWordDescription": "Put the letters in the right position!",
       "word": "🔀┆Word"
+    },
+    "aprilfools": {
+      "success": "April Fools configuration completed!",
+      "error": "An error occurred while configuring April Fools!",
+      "textChannel": "📝┆Text channel",
+      "voiceChannel": "🔊┆Voice channel"
     }
   },
   "features": {

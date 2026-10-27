@@ -91,7 +91,7 @@ module.exports = {
         }
 
         return client.errNormal({
-            error: 'Only Bot developers are allowed to do this',
+            key: 'errors.developerOnly',
             type: 'ephemeral'
         }, interaction)
     },
