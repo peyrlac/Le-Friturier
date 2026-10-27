@@ -11,7 +11,7 @@ module.exports = async (client, interaction, args) => {
         const target = interaction.options.getUser('user') || interaction.user;
         const user = await client.fetchLevels(target.id, interaction.guild.id);
         if(!user || !user.xp) return client.errNormal({
-            error: "This user has no levels!",
+            key: 'levels.noLevels',
             type: 'editreply'
         }, interaction);
         let xpRequired = client.xpFor(user.level + 1);
@@ -35,7 +35,7 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         client.errNormal({
-            error: "Levels are disabled in this guild!",
+            key: 'levels.disabled',
             type: 'editreply'
         }, interaction);
     }
