@@ -602,6 +602,26 @@
       "connectedChannel": "📺┆Connected channel"
     },
     "economy": {
+      "reset": {
+        "confirmTitle": "⏰・Reset economy",
+        "confirmDescription": "Are you sure you want to reset the economy?",
+        "success": "The economy has been successfully reset in this guild!",
+        "cancelled": "The economy reset has been cancelled!",
+        "timeout": "Time's up! Cancelled the economy reset!"
+      },
+      "leaderboard": {
+        "noData": "No data found!",
+        "moneyTitle": "🪙・Money - {guild}",
+        "bankTitle": "🏦・Bank - {guild}"
+      },
+      "store": {
+        "notFound": "No store found in this guild!",
+        "title": "🛒・{guild}'s Store",
+        "description": "Choose an item from the menu to buy.",
+        "entry": "**<@&{role}>** - {amount} coins\n**To buy:** `buy {role}`",
+        "defaultTitle": "🛒・Bot's Store",
+        "defaultDescription": "**Fishing rod** - 100 coins\n**To buy:** `buy fishingrod`"
+      },
       "withdraw": {
         "invalid": "Enter a valid number!",
         "negative": "You cannot withdraw negative money!",

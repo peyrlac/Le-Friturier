@@ -303,6 +303,24 @@ test('message and context profile common responses use localization keys', () =>
   assert.doesNotMatch(profile, /No profile found! Open a profile with \/profile create/);
 });
 
+test('economy reset, leaderboard, and store use localization keys', () => {
+  const clear = read('src/commands/economy/clear.js');
+  const leaderboard = read('src/commands/economy/leaderboard.js');
+  const store = read('src/commands/economy/store.js');
+
+  for (const key of ['economy.reset.confirmTitle', 'economy.reset.confirmDescription', 'economy.reset.success', 'economy.reset.cancelled', 'economy.reset.timeout']) {
+    const escapedKey = key.split('.').join('\\.');
+    assert.match(clear, new RegExp(`(?:key:\\s*|client\\.t\\(interaction,\\s*)['"]${escapedKey}['"]`), key);
+  }
+  assert.match(leaderboard, /economy\.leaderboard\.noData/);
+  assert.match(leaderboard, /economy\.leaderboard\.(moneyTitle|bankTitle)/);
+  assert.match(store, /economy\.store\.notFound/);
+  assert.match(store, /economy\.store\.(title|description|entry)/);
+  assert.doesNotMatch(clear, /Reset economy|Are you sure you want to reset|economy has been successfully reset|economy reset has been cancelled|Time's up/);
+  assert.doesNotMatch(leaderboard, /No data found|Money - \$\{|Bank - \$\{/);
+  assert.doesNotMatch(store, /No store found in this guild|Bot's Store|To buy/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

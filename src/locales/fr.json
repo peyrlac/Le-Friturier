@@ -589,6 +589,26 @@
       "connectedChannel": "📺┆Canal connecté"
     },
     "economy": {
+      "reset": {
+        "confirmTitle": "⏰・Réinitialiser l’économie",
+        "confirmDescription": "Voulez-vous vraiment réinitialiser l’économie ?",
+        "success": "L’économie a été réinitialisée avec succès sur ce serveur !",
+        "cancelled": "La réinitialisation de l’économie a été annulée !",
+        "timeout": "Le délai est écoulé ! Réinitialisation de l’économie annulée."
+      },
+      "leaderboard": {
+        "noData": "Aucune donnée trouvée !",
+        "moneyTitle": "🪙・Argent - {guild}",
+        "bankTitle": "🏦・Banque - {guild}"
+      },
+      "store": {
+        "notFound": "Aucune boutique trouvée sur ce serveur !",
+        "title": "🛒・Boutique de {guild}",
+        "description": "Choisissez un article dans le menu pour l’acheter.",
+        "entry": "**<@&{role}>** - {amount} pièces\n**À acheter avec :** `buy {role}`",
+        "defaultTitle": "🛒・Boutique du bot",
+        "defaultDescription": "**Canne à pêche** - 100 pièces\n**À acheter avec :** `buy fishingrod`"
+      },
       "withdraw": {
         "invalid": "Saisissez un nombre valide !",
         "negative": "Vous ne pouvez pas retirer une somme négative !",
