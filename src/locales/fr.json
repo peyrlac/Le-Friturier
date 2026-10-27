@@ -1750,8 +1750,8 @@
         "eval": { "description": "Obtenir le résultat d’un morceau de code", "options": { "code": { "description": "Votre code" } } },
         "badge": { "description": "Gérer les badges du bot", "options": { "new": { "description": "Sélectionner une valeur booléenne" }, "user": { "description": "Sélectionner un utilisateur" }, "badge": { "description": "Choisir votre badge" } } },
         "ban": { "description": "Gérer les bannissements du bot", "options": { "new": { "description": "Sélectionner une valeur booléenne" }, "user": { "description": "Sélectionner un utilisateur" } } },
-        "credits": { "description": "Gérer les crédits du bot", "options": { "type": { "description": "Type de crédits" }, "user": { "description": "Sélectionner un utilisateur" }, "amount": { "description": "Montant de crédits" } } },
-        "args": { "description": "Publier des messages prédéfinis", "options": { "message": { "description": "Sélectionner un message" } } },
+        "credits": { "description": "Gérer les crédits du bot", "options": { "type": { "description": "Type de crédits", "choices": { "add": { "name": "Ajouter" }, "remove": { "name": "Retirer" } } }, "user": { "description": "Sélectionner un utilisateur" }, "amount": { "description": "Montant de crédits" } } },
+        "args": { "description": "Publier des messages prédéfinis", "options": { "message": { "description": "Sélectionner un message", "choices": { "information": { "name": "Informations" }, "rules": { "name": "Règles" }, "applications": { "name": "Candidatures" }, "boosterperks": { "name": "Avantages booster" }, "links": { "name": "Liens" }, "rewards": { "name": "Récompenses" }, "ourbots": { "name": "Nos bots" } } } } },
         "servers": { "description": "Voir tous les serveurs de ce shard" }
       }
     },

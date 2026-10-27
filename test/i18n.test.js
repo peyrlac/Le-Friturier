@@ -449,6 +449,26 @@ test('serializes localized report choice names from command metadata', () => {
   });
 });
 
+test('serializes localized developer choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/developers');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const credits = command.data.toJSON().options.find(option => option.name === 'credits').options;
+  const creditChoices = credits.find(option => option.name === 'type').choices;
+  const panelChoices = command.data.toJSON().options.find(option => option.name === 'args').options
+    .find(option => option.name === 'message').choices;
+
+  assert.deepEqual(creditChoices.find(choice => choice.value === 'add').name_localizations, {
+    fr: 'Ajouter',
+    'en-US': 'Add'
+  });
+  assert.deepEqual(panelChoices.find(choice => choice.value === 'ourbots').name_localizations, {
+    fr: 'Nos bots',
+    'en-US': 'Our bots'
+  });
+});
+
 test('serverstats publishes localized subcommand descriptions', () => {
     const command = require('../src/interactions/Command/serverstats');
     applyCommandLocalizations(command);
