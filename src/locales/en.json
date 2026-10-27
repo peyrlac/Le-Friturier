@@ -97,6 +97,16 @@
         "success": "Your feedback was sent to the developers successfully."
       }
     },
+    "giveaway": {
+      "notInGuild": "This message ID is not from this guild.",
+      "notFound": "I can't find the giveaway for {messageID}!",
+      "deleted": "The giveaway has been successfully removed.",
+      "updated": "The giveaway will be updated in less than {seconds} seconds.",
+      "ended": "The giveaway will end in less than {seconds} seconds.",
+      "paused": "Giveaway paused!",
+      "unpaused": "Giveaway unpaused!",
+      "rerolled": "Giveaway rerolled."
+    },
     "music": {
       "notInVoice": "You are not in a voice channel!",
       "notSameVoice": "You are not in the same voice channel!",

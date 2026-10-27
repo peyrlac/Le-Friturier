@@ -78,6 +78,16 @@
       },
       "feedback": { "success": "Votre avis a \u00e9t\u00e9 envoy\u00e9 aux d\u00e9veloppeurs avec succ\u00e8s." }
     },
+    "giveaway": {
+      "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
+      "notFound": "Impossible de trouver le giveaway pour {messageID} !",
+      "deleted": "Le giveaway a été supprimé avec succès.",
+      "updated": "Le giveaway sera mis à jour dans moins de {seconds} secondes.",
+      "ended": "Le giveaway se terminera dans moins de {seconds} secondes.",
+      "paused": "Le giveaway est en pause !",
+      "unpaused": "Le giveaway n'est plus en pause !",
+      "rerolled": "Les gagnants du giveaway ont été retirés au sort."
+    },
     "music": {
       "notInVoice": "Vous n'êtes pas dans un canal vocal !",
       "notSameVoice": "Vous n'êtes pas dans le même canal vocal !",
