@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/messageRewards");
+const localizedDeleteReward = require('./deleterewardLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedDeleteReward(client, interaction, args);
     let messages = interaction.options.getNumber('amount');
 
     const perms = await client.checkUserPerms({
@@ -37,4 +39,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 

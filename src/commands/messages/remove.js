@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/messages");
+const localizedRemove = require('./removeLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedRemove(client, interaction, args);
     let user = interaction.options.getUser('user');
     let amount = interaction.options.getNumber('amount');
 
@@ -38,4 +40,3 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 
- 
