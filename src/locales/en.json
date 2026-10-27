@@ -34,6 +34,8 @@
         "statusSuccess": "Your status is now: {status}",
         "invalidAge": "No valid number was provided.",
         "ageSuccess": "Your age is now: {age}",
+        "aboutMeTooLong": "Your about me cannot be longer than 1024 characters.",
+        "aboutMeSuccess": "Your about me has been updated.",
         "notFound": "No profile found! Open one with `createprofile`."
       },
         "config": {
