@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.guild',
     data: new SlashCommandBuilder()
         .setName('guild')
         .setDescription('Manage the guild')

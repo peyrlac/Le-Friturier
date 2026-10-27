@@ -853,6 +853,135 @@
       "name": "voice",
       "description": "Manage voice channels"
     },
+    "developers": {
+      "name": "developers",
+      "description": "Commands for the Bot developers",
+      "subcommands": {
+        "help": { "description": "Get information about the developers category commands" },
+        "eval": { "description": "Get the result of a piece of code", "options": { "code": { "description": "Your code" } } },
+        "badge": { "description": "Manage the bot badges", "options": { "new": { "description": "Select a boolean" }, "user": { "description": "Select a user" }, "badge": { "description": "Choose your badge" } } },
+        "ban": { "description": "Manage the bot bans", "options": { "new": { "description": "Select a boolean" }, "user": { "description": "Select a user" } } },
+        "credits": { "description": "Manage the bot credits", "options": { "type": { "description": "The type of credits" }, "user": { "description": "Select a user" }, "amount": { "description": "Amount of credits" } } },
+        "args": { "description": "Post preset messages", "options": { "message": { "description": "Select a message" } } },
+        "servers": { "description": "See all servers from this shard" }
+      }
+    },
+    "games": {
+      "name": "games",
+      "description": "Play games in Bot",
+      "subcommands": {
+        "help": { "description": "Get information about the games category commands" },
+        "8ball": { "description": "Ask the bot a question", "options": { "question": { "description": "The question you want to ask" } } },
+        "fasttype": { "description": "Learn to type faster" },
+        "music-trivia": { "description": "Play music trivia", "options": { "number": { "description": "The amount of songs" } } },
+        "roll": { "description": "Roll a die" },
+        "rps": { "description": "Play rock paper scissors against the bot", "options": { "option": { "description": "Choose what you want" } } },
+        "skipword": { "description": "Skip the current word" },
+        "snake": { "description": "Playing the game snake" },
+        "trivia": { "description": "Play Trivia" },
+        "willyoupressthebutton": { "description": "Play Will You Press The Button" },
+        "wouldyourather": { "description": "Play Would You Rather" }
+      }
+    },
+    "guild": {
+      "name": "guild",
+      "description": "Manage the guild",
+      "subcommands": {
+        "help": { "description": "Get information about the guild category commands" },
+        "channelinfo": { "description": "Get information about a channel", "options": { "channel": { "description": "Select a channel" } } },
+        "members": { "description": "See how many members there are in this server" },
+        "oldestmember": { "description": "Get the oldest account creation date in the guild" },
+        "roleinfo": { "description": "Get info about a role", "options": { "role": { "description": "Select a role" } } },
+        "info": { "description": "Get all info about the current server" },
+        "stealemoji": { "description": "Steal an emoji", "options": { "emoji": { "description": "Enter an emoji to steal" }, "role": { "description": "Select a role" } } },
+        "youngestmember": { "description": "Get the youngest account creation date in the guild" },
+        "userinfo": { "description": "Get all info about a user", "options": { "user": { "description": "Select a user" } } },
+        "inviteinfo": { "description": "Get all info about a invite", "options": { "invite": { "description": "Enter a invite code" } } },
+        "emojis": { "description": "See the guild emojis" }
+      }
+    },
+    "message": {
+      "name": "message",
+      "description": "Post preset messages",
+      "options": { "message": { "description": "Select a message" } }
+    },
+    "move": {
+      "name": "move",
+      "description": "Move members from a voice channel to another voice channel",
+      "subcommands": {
+        "all": { "description": "Move all members from a voice channel to another voice channel", "options": { "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_user": { "description": "User excepted" } } },
+        "group": { "description": "Move members of a role from a voice channel to another voice channel", "options": { "role": { "description": "Role to move" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "excepted_streamers": { "description": "Exclude streamers?" } } },
+        "random": { "description": "Move a random number of members from a voice channel to another voice channel", "options": { "amount": { "description": "Number of members to move (randomly selected)" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" } } },
+        "emergency-meeting": { "description": "Move all members from every voice channel to another voice channel", "options": { "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_channel": { "description": "Excepted voice channel" } } },
+        "empty": { "description": "Kick all members from a voice channel", "options": { "from": { "description": "Voice channel" }, "excepted_user": { "description": "User excepted" } } },
+        "split": { "description": "Split a voice channel into multiple defined voice channels", "options": { "from": { "description": "Starting voice channel" }, "to_a": { "description": "Voice channel A" }, "to_b": { "description": "Voice channel B" }, "to_c": { "description": "Voice channel C" }, "to_d": { "description": "Voice channel D" } } },
+        "regroup": { "description": "Regroup members from multiple defined voice channels into one voice channel", "options": { "from_a": { "description": "Starting voice channel A" }, "from_b": { "description": "Starting voice channel B" }, "to": { "description": "Destination voice channel" }, "from_c": { "description": "Starting voice channel C" }, "from_d": { "description": "Starting voice channel D" } } }
+      }
+    },
+    "soundboard": {
+      "name": "soundboard",
+      "description": "Play all the sounds in Bot",
+      "subcommands": { "help": { "description": "Get information about the soundboard category commands" } },
+      "subcommandGroups": {
+        "windows": { "description": "Play the windows sounds in Bot", "subcommands": { "windowserror": { "description": "Play the windows error sound" }, "windowsshutdown": { "description": "Play the windows shutdown sound" }, "windowsstartup": { "description": "Play the windows startup sound" } } },
+        "earrape": { "description": "Play the earrape sounds in Bot", "subcommands": { "reee": { "description": "Play the reee sound" }, "defaultdance": { "description": "Play the defaultdance sound" }, "startup": { "description": "Play the startup sound" }, "thomas": { "description": "Play the thomas sound" }, "wegothim": { "description": "Play the wegothim sound" } } },
+        "songs": { "description": "Play the song sounds in Bot", "subcommands": { "dancememe": { "description": "Play the dancememe sound" }, "despacito": { "description": "Play the despacito sound" }, "elevator": { "description": "Play the elevator sound" }, "rickastley": { "description": "Play the rickastley sound" }, "running": { "description": "Play the running sound" }, "tobecontinued": { "description": "Play the tobecontinued sound" } } },
+        "discord": { "description": "Play the discord sounds in Bot", "subcommands": { "discordcall": { "description": "Play the discord call sound" }, "discordjoin": { "description": "Play the discord voice call join sound" }, "discordleave": { "description": "Play the discord voice call leave sound" }, "discordnotification": { "description": "Play the discord notification sound" } } },
+        "memes": { "description": "Play the meme sounds in Bot", "subcommands": { "fbi": { "description": "Play the fbi sound" }, "jeff": { "description": "Play the jeff sound" }, "lambo": { "description": "Play the lambo sound" }, "missionfailed": { "description": "Play the missionfailed sound" }, "moaning": { "description": "Play the moaning sound" }, "nani": { "description": "Play the nani sound" }, "nyancat": { "description": "Play the nyancat sound" }, "ohh": { "description": "Play the ohh sound" }, "rimshot": { "description": "Play the rimshot sound" }, "roblox": { "description": "Play the roblox sound" }, "shotdown": { "description": "Play the shotdown sound" }, "spongebob": { "description": "Play the spongebob sound" }, "wow": { "description": "Play the wow sound" }, "yeet": { "description": "Play the yeet sound" } } }
+      }
+    },
+    "images": {
+      "name": "images",
+      "description": "See all the images in Bot",
+      "subcommands": { "help": { "description": "Get information about the image category commands" } },
+      "subcommandGroups": {
+        "memes": {
+          "description": "See all the memes in Bot",
+          "subcommands": {
+            "clyde": { "description": "Get a custom clyde message", "options": { "text": { "description": "Enter a text" } } },
+            "drake": { "description": "Create a drake meme", "options": { "text1": { "description": "Enter a text" }, "text2": { "description": "Enter a text" } } },
+            "meme": { "description": "Get a random meme" },
+            "pooh": { "description": "Create a pooh meme", "options": { "text1": { "description": "Enter a text" }, "text2": { "description": "Enter a text" } } },
+            "trumptweet": { "description": "Display a custom tweet from Donald Trump with the message provided", "options": { "text": { "description": "Enter a text" } } },
+            "tweet": { "description": "Tweet something on twitter", "options": { "text": { "description": "Enter a text" } } },
+            "wasted": { "description": "GTA wasted overlay" }
+          }
+        },
+        "animals": {
+          "description": "See all the animal images in Bot",
+          "subcommands": {
+            "bird": { "description": "Get a random bird" }, "cat": { "description": "Get a random cat" }, "dog": { "description": "Get a random dog" }, "fox": { "description": "Get a random fox" }, "koala": { "description": "Get a random koala" }, "panda": { "description": "Get a random panda" }, "redpanda": { "description": "Get a random redpanda" }
+          }
+        },
+        "user": {
+          "description": "See all the user images in Bot",
+          "subcommands": {
+            "ad": { "description": "Generate an ad image", "options": { "user": { "description": "The user you want the ad from" } } },
+            "avatar": { "description": "See a users avatar", "options": { "user": { "description": "The user you want the avatar from" } } },
+            "banner": { "description": "See a users banner", "options": { "user": { "description": "The user you want the banner from" } } },
+            "bed": { "description": "Create a bed meme", "options": { "user": { "description": "The user you want to sleep with" } } },
+            "blur": { "description": "Give a blurred image", "options": { "user": { "description": "The user you want the blurred image from" } } },
+            "burn": { "description": "Give a burned image", "options": { "user": { "description": "The user you want the burned image from" } } },
+            "clown": { "description": "Generate a clown image", "options": { "user": { "description": "The user you want to make a clown" } } },
+            "colorify": { "description": "Generate a colorify image", "options": { "user": { "description": "The user you want the colorified image from" } } },
+            "darkness": { "description": "Give a darkness image", "options": { "user": { "description": "The user you want the darkness image from" } } },
+            "facepalm": { "description": "Generate a facepalm image", "options": { "user": { "description": "The user you want to make a facepalm" } } },
+            "greyscale": { "description": "Make an image more grey", "options": { "user": { "description": "The user you want to make more gray" } } },
+            "invert": { "description": "Invert an image", "options": { "user": { "description": "The user you want the inverted image from" } } },
+            "kiss": { "description": "Kiss a user", "options": { "user": { "description": "The user you want to kiss" } } },
+            "podium": { "description": "Make a user podium", "options": { "user1": { "description": "The first podium user" }, "user2": { "description": "The second podium user" }, "user3": { "description": "The third podium user" } } },
+            "spank": { "description": "Spank a user", "options": { "user": { "description": "The user you want to spank" } } },
+            "wanted": { "description": "Wanted a user", "options": { "user": { "description": "The user you want to wanted" } } }
+          }
+        },
+        "extra": {
+          "description": "See all the extra images in Bot",
+          "subcommands": {
+            "car": { "description": "Get a random car" }, "glass": { "description": "Overlay a glass texture over an image" }, "image": { "description": "Show an image in an embed", "options": { "channel": { "description": "Channel where the embed should be" }, "image-url": { "description": "Enter an image URL" } } }, "triggered": { "description": "Trigger yourself" }, "wallpaper": { "description": "Get a wallpaper from HDQWalls", "options": { "name": { "description": "Enter a name" } } }
+          }
+        }
+      }
+    },
     "announcement": {
       "name": "announcement",
       "description": "Manage server announcements",

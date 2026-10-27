@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const model = require('../../database/models/badge');
 
 module.exports = {
+    localizationKey: 'commandMetadata.message',
     data: new SlashCommandBuilder()
         .setName('message')
         .setDescription('Post preset messages')

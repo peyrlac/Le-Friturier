@@ -273,10 +273,27 @@ test('voice exposes localized metadata and supports localized channel responses'
 });
 
 test('family, search, and thanks expose metadata keys backed by locale JSON', () => {
-  for (const name of ['famille', 'search', 'thanks', 'announcement', 'autosetup', 'invite', 'notepad', 'report', 'suggestions', 'commands', 'embed', 'event', 'help', 'stickymessages', 'invites', 'levels', 'messages', 'reactionroles']) {
+  for (const name of ['famille', 'search', 'thanks', 'announcement', 'autosetup', 'invite', 'notepad', 'report', 'suggestions', 'commands', 'embed', 'event', 'help', 'stickymessages', 'invites', 'levels', 'messages', 'reactionroles', 'developers', 'games', 'guild', 'images', 'message', 'move', 'soundboard']) {
     const command = require(`../src/interactions/Command/${name}`);
     assert.equal(typeof command.localizationKey, 'string');
     assert.ok(resolveCommandLocalizations(command));
+  }
+});
+
+test('remaining native commands localize every subcommand, group, and option description', () => {
+  const commandNames = ['developers', 'games', 'guild', 'images', 'message', 'move', 'soundboard'];
+
+  const assertLocalized = (node, path) => {
+    assert.deepEqual(Object.keys(node.description_localizations || {}).sort(), ['en-US', 'fr'], `${path} description`);
+    for (const child of node.options || []) {
+      assertLocalized(child, `${path}.${child.name}`);
+    }
+  };
+
+  for (const name of commandNames) {
+    const command = require(`../src/interactions/Command/${name}`);
+    applyCommandLocalizations(command);
+    assertLocalized(command.data.toJSON(), name);
   }
 });
 

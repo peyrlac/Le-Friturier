@@ -2,6 +2,7 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.soundboard',
 
     // Meme Images
 

@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.games',
     data: new SlashCommandBuilder()
         .setName('games')
         .setDescription('Play games in Bot')
