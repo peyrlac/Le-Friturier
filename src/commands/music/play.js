@@ -2,20 +2,20 @@ const Discord = require('discord.js');
 
 module.exports = async (client, interaction, args) => {
     if (!interaction.member.voice.channel) return client.errNormal({
-        error: `Vous n'êtes pas dans un canal vocal!`,
+        key: 'music.notInVoice',
         type: 'editreply'
     }, interaction);
 
     let channel = interaction.member.voice ? interaction.member.voice.channel : null;
     if (!channel) return client.errNormal({
-        error: `Le canal n'existe pas!`,
+        key: 'music.channelMissing',
         type: 'editreply'
     }, interaction);
 
     let player = client.player.players.get(interaction.guild.id);
 
     if (player && (channel.id !== player?.voiceChannel)) return client.errNormal({
-        error: `Vous n'êtes pas dans le même canal vocal!`,
+        key: 'music.notSameVoice',
         type: 'editreply'
     }, interaction);
 
@@ -28,7 +28,7 @@ module.exports = async (client, interaction, args) => {
         });
 
         if (!channel.joinable) return client.errNormal({
-            error: `Ce canal n'est pas joignable`,
+            key: 'music.notJoinable',
             type: 'editreply'
         }, interaction);
         player.connect()
@@ -46,7 +46,7 @@ module.exports = async (client, interaction, args) => {
     var query = interaction.options.getString('song');
 
     client.simpleEmbed({
-        desc: `🔎┆Recherche...`,
+        descKey: 'music.searching',
         type: 'editreply'
     }, interaction)
 
@@ -55,7 +55,7 @@ module.exports = async (client, interaction, args) => {
     if (res.loadType === 'LOAD_FAILED') {
         if (!player.queue.current) player.destroy();
         return client.errNormal({
-            error: `Erreur d'obtention de la musique.S'il vous plait, réessayez dans quelques minutes`,
+            key: 'music.loadFailed',
             type: 'editreply'
         }, interaction);
     }
@@ -64,7 +64,7 @@ module.exports = async (client, interaction, args) => {
         case 'NO_MATCHES': {
             if (!player.queue.current) player.destroy()
             await client.errNormal({
-                error: `Aucune musique n'a été trouvée`,
+                key: 'music.noMatches',
                 type: 'editreply'
             }, interaction);
             break;
@@ -81,7 +81,7 @@ module.exports = async (client, interaction, args) => {
                 client.embed({
                     title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: `The song has been added to the queue!`,
+                    descKey: 'music.songQueued',
                     thumbnail: track.thumbnail,
                     fields: [
                         {
@@ -91,7 +91,7 @@ module.exports = async (client, interaction, args) => {
                         },
                         {
                             name: `${client.emotes.normal.clock}┆Ends at`,
-                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                            value: `<t:${((Date.now() / 1000) + (track.length / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
@@ -162,12 +162,12 @@ module.exports = async (client, interaction, args) => {
                 .join('\n');
 
             client.embed({
-                title: `🔍・Search Results`,
+                titleKey: 'music.searchResults',
                 desc: results,
                 fields: [
                     {
-                        name: `❓┆Cancel search?`,
-                        value: `Press \`cancel\` to stop the search`,
+                        name: `❓┆${await client.t(interaction, 'music.cancelSearch')}`,
+                        value: await client.t(interaction, 'music.cancelSearchHint'),
                         inline: true
                     }
                 ],
@@ -182,7 +182,7 @@ module.exports = async (client, interaction, args) => {
                 row.components.forEach((button) => button.setDisabled(true));
                 row2.components.forEach((button) => button.setDisabled(true));
                 return client.errNormal({
-                    error: `You didn't provide a selection`,
+                    key: 'music.selectionMissing',
                     type: 'editreply',
                     components: [row, row2]
                 }, interaction)
@@ -194,12 +194,13 @@ module.exports = async (client, interaction, args) => {
 
             if (first.toLowerCase() === 'cancel') {
                 if (!player.queue.current) player.destroy();
-                return interaction.channel.send('Cancelled selection.');
+                return interaction.followUp({ content: await client.t(interaction, 'music.selectionCancelled') });
             }
 
             const index = Number(first) - 1;
             if (index < 0 || index > max - 1) return client.errNormal({
-                error: `The number you provided too small or too big (1-${max})`,
+                key: 'music.invalidSelection',
+                variables: { max },
                 type: 'editreply'
             }, interaction)
 
@@ -213,7 +214,7 @@ module.exports = async (client, interaction, args) => {
                 client.embed({
                     title: `${client.emotes.normal.music}・${track.title}`,
                     url: track.uri,
-                    desc: `The song has been added to the queue!`,
+                    descKey: 'music.songQueued',
                     thumbnail: track.thumbnail,
                     fields: [
                         {
@@ -223,7 +224,7 @@ module.exports = async (client, interaction, args) => {
                         },
                         {
                             name: `${client.emotes.normal.clock}┆Ends at`,
-                            value: `<t:${((Date.now() / 1000) + (track.duration / 1000)).toFixed(0)}:f>`,
+                            value: `<t:${((Date.now() / 1000) + (track.length / 1000)).toFixed(0)}:f>`,
                             inline: true
                         },
                         {
@@ -239,4 +240,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

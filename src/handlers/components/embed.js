@@ -8,6 +8,11 @@ const Discord = require('discord.js');
 
 const Schema = require("../../database/models/functions");
 
+async function translate(client, interaction, key, variables, fallback) {
+    if (key && client.t) return client.t(interaction, key, variables);
+    return fallback;
+}
+
 module.exports = (client) => {
     client.templateEmbed = function () {
         return new Discord.EmbedBuilder()
@@ -31,14 +36,20 @@ module.exports = (client) => {
     client.errNormal = async function ({
         embed: embed = client.templateEmbed(),
         error: error,
+        key: key,
+        variables: variables = {},
+        titleKey: titleKey = 'common.errorTitle',
+        descriptionKey: descriptionKey = 'errors.generic',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`Something went wrong!`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, variables, 'Erreur !')}`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, variables, 'Une erreur est survenue !'))
+        const translatedError = await translate(client, interaction, key, variables, error);
+        error = translatedError;
         embed.addFields( 
-            { name: "💬┆Error comment", value: `\`\`\`${error}\`\`\``},
+            { name: await translate(client, interaction, 'common.errorComment', variables, "Détail de l'erreur"), value: `\`\`\`${error}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -54,14 +65,16 @@ module.exports = (client) => {
     client.errUsage = async function ({
         embed: embed = client.templateEmbed(),
         usage: usage,
+        titleKey: titleKey = 'common.errorTitle',
+        descriptionKey: descriptionKey = 'errors.invalidArguments',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`You did not provide the correct arguments`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, 'Les arguments fournis sont incorrects'))
         embed.addFields(
-            { name: "💬┆Required arguments", value: `\`\`\`${usage}\`\`\``},    
+            { name: await translate(client, interaction, 'common.requiredArguments', {}, 'Arguments requis'), value: `\`\`\`${usage}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -78,14 +91,16 @@ module.exports = (client) => {
     client.errMissingPerms = async function ({
         embed: embed = client.templateEmbed(),
         perms: perms,
+        titleKey: titleKey = 'common.errorTitle',
+        descriptionKey: descriptionKey = 'errors.noPermission',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`You don't have the right permissions`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, "Vous n'avez pas les permissions requises"))
         embed.addFields(
-            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+            { name: await translate(client, interaction, 'common.requiredPermission', {}, 'Permission requise'), value: `\`\`\`${perms}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -102,14 +117,16 @@ module.exports = (client) => {
     client.errNoPerms = async function ({
         embed: embed = client.templateEmbed(),
         perms: perms,
+        titleKey: titleKey = 'common.errorTitle',
+        descriptionKey: descriptionKey = 'errors.botNoPermission',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`I don't have the right permissions`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, "Le bot n'a pas les permissions requises"))
         embed.addFields(
-            { name: "🔑┆Required Permission", value: `\`\`\`${perms}\`\`\``},
+            { name: await translate(client, interaction, 'common.requiredPermission', {}, 'Permission requise'), value: `\`\`\`${perms}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -126,14 +143,16 @@ module.exports = (client) => {
     client.errWait = async function ({
         embed: embed = client.templateEmbed(),
         time: time,
+        titleKey: titleKey = 'common.errorTitle',
+        descriptionKey: descriptionKey = 'errors.alreadyPerformed',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Error!`)
-        embed.setDescription(`You've already done this once`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
+        embed.setDescription(await translate(client, interaction, descriptionKey, {}, 'Vous avez déjà effectué cette action'))
         embed.addFields(
-            { name: "⏰┆Try again on", value: `<t:${time}:f>`},
+            { name: await translate(client, interaction, 'common.tryAgainAt', {}, 'Réessayez à'), value: `<t:${time}:f>`},
         )
         embed.setColor(client.config.colors.error)
 
@@ -153,13 +172,17 @@ module.exports = (client) => {
     client.succNormal = async function ({
         embed: embed = client.templateEmbed(),
         text: text,
+        key: key,
+        variables: variables = {},
+        titleKey: titleKey = 'common.successTitle',
         fields: fields,
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.check}・Success!`)
-        embed.setDescription(`${text}`)
+        embed.setTitle(`${client.emotes.normal.check}・${await translate(client, interaction, titleKey, variables, 'Succes !')}`)
+        const translatedText = await translate(client, interaction, key, variables, text);
+        embed.setDescription(`${translatedText}`)
         embed.setColor(client.config.colors.succes)
 
         if (fields) embed.addFields(fields);
@@ -181,6 +204,9 @@ module.exports = (client) => {
         embed: embed = client.templateEmbed(),
         title: title,
         desc: desc,
+        titleKey: titleKey,
+        descKey: descKey,
+        variables: variables = {},
         color: color,
         image: image,
         author: author,
@@ -195,9 +221,11 @@ module.exports = (client) => {
         if (interaction.guild == undefined) interaction.guild = { id: "0" };
         const functiondata = await Schema.findOne({ Guild: interaction.guild.id })
 
-        if (title) embed.setTitle(title);
-        if (desc && desc.length >= 2048) embed.setDescription(desc.substr(0, 2044) + "...");
-        else if (desc) embed.setDescription(desc);
+        const translatedTitle = await translate(client, interaction, titleKey, variables, title);
+        const translatedDesc = await translate(client, interaction, descKey, variables, desc);
+        if (translatedTitle) embed.setTitle(translatedTitle);
+        if (translatedDesc && translatedDesc.length >= 2048) embed.setDescription(translatedDesc.substr(0, 2044) + "...");
+        else if (translatedDesc) embed.setDescription(translatedDesc);
         if (image) embed.setImage(image);
         if (thumbnail) embed.setThumbnail(thumbnail);
         if (fields) embed.addFields(fields);
@@ -217,6 +245,9 @@ module.exports = (client) => {
     client.simpleEmbed = async function ({
         title: title,
         desc: desc,
+        titleKey: titleKey,
+        descKey: descKey,
+        variables: variables = {},
         color: color,
         image: image,
         author: author,
@@ -232,9 +263,11 @@ module.exports = (client) => {
         let embed = new Discord.EmbedBuilder()
             .setColor(client.config.colors.normal)
 
-        if (title) embed.setTitle(title);
-        if (desc && desc.length >= 2048) embed.setDescription(desc.substr(0, 2044) + "...");
-        else if (desc) embed.setDescription(desc);
+        const translatedTitle = await translate(client, interaction, titleKey, variables, title);
+        const translatedDesc = await translate(client, interaction, descKey, variables, desc);
+        if (translatedTitle) embed.setTitle(translatedTitle);
+        if (translatedDesc && translatedDesc.length >= 2048) embed.setDescription(translatedDesc.substr(0, 2044) + "...");
+        else if (translatedDesc) embed.setDescription(translatedDesc);
         if (image) embed.setImage(image);
         if (thumbnail) embed.setThumbnail(thumbnail);
         if (fields) embed.addFields(fields);
@@ -262,58 +295,79 @@ module.exports = (client) => {
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
-            }).catch(e => { });
+                withResponse: true
+            }).catch(error => {
+                console.error('Failed to edit interaction response', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "editreply") {
             return await interaction.editReply({
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
-            }).catch(e => { });
+                withResponse: true
+            }).catch(error => {
+                console.error('Failed to edit interaction reply', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "reply") {
             return await interaction.reply({
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
-            }).catch(e => { });
+                withResponse: true
+            }).catch(error => {
+                console.error('Failed to send interaction reply', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "update") {
             return await interaction.update({
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
-            }).catch(e => { });
+                withResponse: true
+            }).catch(error => {
+                console.error('Failed to update interaction', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "ephemeraledit") {
             return await interaction.editReply({
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true,
-                ephemeral: true
-            }).catch(e => { });
+                withResponse: true,
+                flags: Discord.MessageFlags.Ephemeral
+            }).catch(error => {
+                console.error('Failed to edit ephemeral interaction reply', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "ephemeral") {
             return await interaction.reply({
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true,
-                ephemeral: true
-            }).catch(e => { });
+                withResponse: true,
+                flags: Discord.MessageFlags.Ephemeral
+            }).catch(error => {
+                console.error('Failed to send ephemeral interaction reply', error);
+                return null;
+            });
         }
         else {
             return await interaction.send({
                 embeds: embeds,
                 content: content,
                 components: components,
-                fetchReply: true
-            }).catch(e => { });
+                withResponse: true
+            }).catch(error => {
+                console.error('Failed to send channel response', error);
+                return null;
+            });
         }
     }
 }

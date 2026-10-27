@@ -1,74 +1,76 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
+    localizationKey: 'commandMetadata.triggers',
     data: new SlashCommandBuilder()
         .setName('triggers')
-        .setDescription('Déclenche une réponse à certains mots')
+        .setDescription(getCommandMetadata('commandMetadata.triggers.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('add')
-                .setDescription('Ajouter un trigger')
-                .addStringOption(option => option.setName('alias').setDescription('Alias du trigger').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.description'))
+                .addStringOption(option => option.setName('alias').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.alias.description')).setRequired(true))
                 .addStringOption(option => 
                     option.setName('type')
-                        .setDescription('Type de réponse')
+                        .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.description'))
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Répond', value: '1' },
-                            { name: 'Répond puis supprime', value: '2' },
-                            { name: 'Supprime', value: '3' },
-                            { name: 'Ajoute une réaction', value: '4' }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.1.name'), value: '1' },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.2.name'), value: '2' },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.3.name'), value: '3' },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.type.choices.4.name'), value: '4' }
                         )
                 )
-                .addStringOption(option => option.setName('regex').setDescription('Filtre regex').setRequired(true))
-                .addStringOption(option => option.setName('regexflags').setDescription('Flags regex additionnels').setRequired(true))
-                .addStringOption(option => option.setName('response').setDescription('Message de réponse du bot').setRequired(false))
+                .addStringOption(option => option.setName('regex').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.regex.description')).setRequired(true))
+                .addStringOption(option => option.setName('regexflags').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.regexflags.description')).setRequired(true))
+                .addStringOption(option => option.setName('response').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.response.description')).setRequired(false))
                 .addStringOption(option => 
                     option.setName('isactive')
-                        .setDescription('Status du trigger')
+                        .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.isactive.description'))
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Activé (par défaut)', value: "true" },
-                            { name: 'Désactivé', value: "false" }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.isactive.choices.true.name'), value: "true" },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.isactive.choices.false.name'), value: "false" }
                         )
                 )
                 .addStringOption(option => 
                     option.setName('mention')
-                        .setDescription('Mentionne lors de la réponse')
+                        .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.mention.description'))
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Mentionne (par défaut)', value: "true" },
-                            { name: 'Ne mentionne pas', value: "false" }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.mention.choices.true.name'), value: "true" },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.mention.choices.false.name'), value: "false" }
                         )
                 )
                 .addStringOption(option => 
                     option.setName('replied')
-                        .setDescription('Manière dont est affiché la réponse')
+                        .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.replied.description'))
                         .setRequired(false)
                         .addChoices(
-                            { name: 'Message suivi (par défaut)', value: "true" },
-                            { name: 'Message seul', value: "false" }
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.replied.choices.true.name'), value: "true" },
+                            { name: getCommandMetadata('commandMetadata.triggers.subcommands.add.options.replied.choices.false.name'), value: "false" }
                         )
                 )
-                .addStringOption(option => option.setName('emotes').setDescription('Emotes ajoutées lors de la réaction').setRequired(false))
-                .addNumberOption(option => option.setName('timedeletion').setDescription('Temps avant suppression (par défaut 1000ms si option active').setRequired(false))
+                .addStringOption(option => option.setName('emotes').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.emotes.description')).setRequired(false))
+                .addNumberOption(option => option.setName('timedeletion').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.add.options.timedeletion.description')).setMinValue(0).setMaxValue(604800000).setRequired(false))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
-                .setDescription('Retirer un trigger')
-                .addStringOption(option => option.setName('alias').setDescription('Alias du trigger').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.remove.description'))
+                .addStringOption(option => option.setName('alias').setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.remove.options.alias.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('list')
-                .setDescription('Voir tous les triggers')
+                .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.list.description'))
         ).addSubcommand(subcommand =>
             subcommand
                 .setName('documentation')
-                .setDescription('Documentation sur comment faire un triggers')
+                .setDescription(getCommandMetadata('commandMetadata.triggers.subcommands.documentation.description'))
         ),
 
     /** 
@@ -78,7 +80,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         const perms = await client.checkUserPerms({
             flags: [Discord.PermissionsBitField.Flags.ManageMessages],
             perms: [Discord.PermissionsBitField.Flags.ManageMessages]

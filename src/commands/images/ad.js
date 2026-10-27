@@ -10,6 +10,8 @@ module.exports = async (client, interaction, args) => {
     const image = await pop.ad(userAvatar);
     let attach = new Discord.AttachmentBuilder(image, { name: "ad.png" });
 
-    const embed = client.templateEmbed().setImage("attachment://ad.png");
+    const embed = client.templateEmbed()
+        .setTitle(await client.t(interaction, 'images.adTitle'))
+        .setImage("attachment://ad.png");
     interaction.editReply({ files: [attach], embeds: [embed] });
 }

@@ -23,17 +23,17 @@ module.exports = async (client, interaction, args) => {
     }
     
     let fields = [{
-                name: `Partenaire`,
-                value: `${data && data.Partner ? `<@!${data.Partner}>` : `Cette personne n'est pas mariée`}`
+                name: await client.t(interaction, 'family.partner'),
+                value: `${data && data.Partner ? `<@!${data.Partner}>` : await client.t(interaction, 'family.noPartner')}`
             },
             {
-                name: `Parents`,
-                value: `${data && data.Parent.length > 0 ? `${temp.join(", ")}` : `Cette personne n'a pas de parents`}`
+                name: await client.t(interaction, 'family.parents'),
+                value: `${data && data.Parent.length > 0 ? `${temp.join(", ")}` : await client.t(interaction, 'family.noParents')}`
             }
         ];
 
         // Check siblings
-        let temp3 = `Cette personne n'a pas de frères et soeurs`;
+        let temp3 = await client.t(interaction, 'family.noSiblings');
         if (data && data.Parent.length > 0) {
             let temp3 = new Set();
             const parentPromises = data.Parent.map(async parent => {
@@ -53,19 +53,18 @@ module.exports = async (client, interaction, args) => {
         }
     
         fields.push({
-            name: `Frères/Soeurs`,
+            name: await client.t(interaction, 'family.siblings'),
             value: temp3
         });
         fields.push({
-            name: `Enfants`,
-            value: `${data && data.Children.length > 0 ? `${temp2.join(", ")}` : `Cette personne n'a pas d'enfants`}`
+            name: await client.t(interaction, 'family.children'),
+            value: `${data && data.Children.length > 0 ? `${temp2.join(", ")}` : await client.t(interaction, 'family.noChildren')}`
         });
     client.embed({
-        title: `👪・Famille de ${target.username}`,
+        title: await client.t(interaction, 'family.viewTitle', { user: target.username }),
         thumbnail: target.avatarURL({ size: 1024 }),
         fields: fields,
         type: 'editreply'
     }, interaction, false)
 }
 
- 

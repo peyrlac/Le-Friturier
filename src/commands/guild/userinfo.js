@@ -1,12 +1,10 @@
 const Discord = require('discord.js');
-const axios = require("axios");
-
 const model = require('../../database/models/badge');
 
 module.exports = async (client, interaction, args) => {
   const member = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
   if(!member) return client.errNormal({
-    error: "This user is not in this guild!",
+    key: 'guild.userNotFound',
     type: 'editreply'
   }, interaction);
   const badgeFlags = {
@@ -53,6 +51,7 @@ module.exports = async (client, interaction, args) => {
   const userFlags = member.user.flags ? member.user.flags.toArray() : [];
 
   return client.embed({
+    titleKey: 'guild.userInfoTitle',
     title: `👤・User information`,
     desc: `Information about ${member.user.username}`,
     thumbnail: member.user.displayAvatarURL({ dynamic: true, size: 1024 }),
@@ -108,4 +107,4 @@ module.exports = async (client, interaction, args) => {
   }, interaction)
 }
 
-   
+

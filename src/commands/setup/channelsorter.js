@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     
     if (category.type !== Discord.ChannelType.GuildCategory) {
         return client.errNormal({
-            error: "The selected channel must be a category!",
+            key: 'commands.setup.channelsorter.invalidChannel',
             type: 'editreply'
         }, interaction);
     }
@@ -27,7 +27,7 @@ module.exports = async (client, interaction, args) => {
     );
 
     client.succNormal({
-        text: `Channel sorting has been successfully configured!`,
+        key: 'commands.setup.channelsorter.success',
         fields: [
             {
                 name: `📘┆Category`,

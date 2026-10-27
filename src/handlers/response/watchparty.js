@@ -96,11 +96,11 @@ module.exports = async (client) => {
           
                   const response = await axios.get("https://www.netflix.com/browse", { headers });
           
-                  if (!response.ok) {
+                  if (response.status < 200 || response.status >= 300) {
                       throw new Error(`Failed to fetch data: ${response.status} ${response.statusText}`);
                   }
           
-                  const text = await response.text();
+                  const text = response.data;
                   const buildMatch = text.match(buildRegex);
           
                   if (!buildMatch) {

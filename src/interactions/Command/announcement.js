@@ -1,29 +1,30 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder, ChannelType } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('announcement')
-        .setDescription('Gérer les annonces du serveur')
+        .setName(getCommandMetadata('commandMetadata.announcement.name'))
+        .setDescription(getCommandMetadata('commandMetadata.announcement.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Obtenez des informations sur les commandes de la catégorie d\'annonce')
+                .setDescription(getCommandMetadata('commandMetadata.announcement.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('create')
-                .setDescription('Make an announcement')
-                .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
-                .addStringOption(option => option.setName('message').setDescription('Your announcement message').setRequired(true)),
+                .setDescription(getCommandMetadata('commandMetadata.announcement.subcommands.create.description'))
+                .addChannelOption(option => option.setName('channel').setDescription(getCommandMetadata('commandMetadata.announcement.subcommands.create.options.channel.description')).setRequired(true).addChannelTypes(ChannelType.GuildText).addChannelTypes(ChannelType.GuildNews))
+                .addStringOption(option => option.setName('message').setDescription(getCommandMetadata('commandMetadata.announcement.subcommands.create.options.message.description')).setRequired(true)),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('edit')
-                .setDescription('Modifier une annonce')
-                .addStringOption(option => option.setName('id').setDescription('ID de l\'annonce que vous souhaitez changer').setRequired(true))
-                .addStringOption(option => option.setName('message').setDescription('Votre message d\'annonce').setRequired(true)),
+                .setDescription(getCommandMetadata('commandMetadata.announcement.subcommands.edit.description'))
+                .addStringOption(option => option.setName('id').setDescription(getCommandMetadata('commandMetadata.announcement.subcommands.edit.options.id.description')).setRequired(true))
+                .addStringOption(option => option.setName('message').setDescription(getCommandMetadata('commandMetadata.announcement.subcommands.edit.options.message.description')).setRequired(true)),
         )
     ,
 
@@ -33,9 +34,10 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.announcement',
+
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         const perms = await client.checkUserPerms({
             flags: [Discord.PermissionsBitField.Flags.ManageMessages],
             perms: [Discord.PermissionsBitField.Flags.ManageMessages]

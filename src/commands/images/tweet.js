@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -6,21 +6,22 @@ module.exports = async (client, interaction, args) => {
     const text = interaction.options.getString('text');
 
     try {
-        fetch(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user}&text=${text}`)
+        await getJson(`https://nekobot.xyz/api/imagegen?type=tweet&username=${encodeURIComponent(user)}&text=${encodeURIComponent(text)}`)
 
-            .then((res) => res.json()).catch({})
+
             .then(async (json) => {
 
                 client.embed({
-                    title: `🖼・Tweet`,
+                    titleKey: 'images.tweetTitle',
                     image: json.message,
                     type: 'editreply'
                 }, interaction)
 
-            }).catch({})
+            }).catch(() => client.errNormal({ key: 'images.remoteDataError', type: 'editreply' }, interaction))
+    } catch (error) {
+        return client.errNormal({ key: 'images.generateError', type: 'editreply' }, interaction);
     }
-    catch { }
 
 }
 
- 
+

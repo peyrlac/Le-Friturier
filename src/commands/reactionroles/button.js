@@ -1,5 +1,3 @@
-const Discord = require('discord.js');
-
 const Schema = require("../../database/models/reactionRoles");
 
 module.exports = async (client, interaction, args) => {
@@ -9,11 +7,11 @@ module.exports = async (client, interaction, args) => {
     const lower = category.toLowerCase();
     const upper = lower.charAt(0).toUpperCase() + lower.substring(1);
 
-    Schema.findOne({ Guild: interaction.guild.id, Category: category }, async (err, data) => {
-        if (!data) return client.errNormal({ 
-            error: `No data found!`,
-            type: 'editreply'
-        }, interaction);
+    const data = await Schema.findOne({ Guild: interaction.guild.id, Category: category });
+    if (!data) return client.errNormal({
+        key: 'reactionroles.noData',
+        type: 'editreply'
+    }, interaction);
 
         const mapped = Object.keys(data.Roles)
             .map((value, index) => {
@@ -25,20 +23,21 @@ module.exports = async (client, interaction, args) => {
         const reactions = Object.values(data.Roles).map((val) => val[1].raw);
         var sendComponents = await client.buttonReactions("id", reactions)
 
-        client.embed({
-            title: `${upper}・Roles`,
-            desc: `_____ \n\nChoose your roles by pressing the button! \n\n${mapped}`,
-            components: sendComponents
-        }, channel).then((msg) => {
-            data.Message = msg.id;
-            data.save();
-        })
+    const msg = await client.embed({
+        titleKey: 'reactionroles.panelTitle',
+        descKey: 'reactionroles.panelDescription',
+        variables: { category: upper, roles: mapped },
+        title: `${upper}・Roles`,
+        desc: `_____ \n\nChoose your roles by pressing the button! \n\n${mapped}`,
+        components: sendComponents
+    }, channel);
+    data.Message = msg.id;
+    await data.save();
 
-        client.succNormal({ 
-            text: "Reaction panel successfully created!",
-            type: 'ephemeraledit'
-        }, interaction);
-    })
+    return client.succNormal({
+        key: 'reactionroles.panelCreated',
+        type: 'ephemeraledit'
+    }, interaction);
 }
 
- 
+

@@ -1,4 +1,4 @@
-const chalk = require('chalk');
+const logger = require('../logger');
 
 class StatisticsManager {
     constructor() {
@@ -8,9 +8,9 @@ class StatisticsManager {
         const envUrl = process.env.STATS_API_URL || process.env.STATS_API_BASE;
 
         if (!envUrl && process.env.NODE_ENV === 'production') {
-            console.error(chalk.red('Environment variable STATS_API_URL is not set.'));
-            console.error(chalk.yellow('In production, set STATS_API_URL to your API public URL (e.g. https://api.example.com/api).'));
-            console.error(chalk.yellow('Falling back to http://localhost:3001/api for now (development default).'));
+            logger.error('STATISTICS', 'La variable STATS_API_URL est absente en production');
+            logger.warn('STATISTICS', 'Configurez STATS_API_URL avec l’URL publique de l’API');
+            logger.warn('STATISTICS', 'Fallback développement : http://localhost:3001/api');
         }
 
         const baseUrl = envUrl || 'http://localhost:3001/api';
@@ -18,15 +18,15 @@ class StatisticsManager {
             ? baseUrl
             : `http://${baseUrl}`;
 
-        console.log(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), chalk.green('Using API URL:'), chalk.yellow(this.API_BASE_URL));
+        logger.info('STATISTICS', `API utilisée : ${this.API_BASE_URL}`);
 
         // Set up fetch
         this.fetch = global.fetch;
         try {
             this.fetch = require('node-fetch');
-            console.log(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), chalk.green('Using node-fetch'));
+            logger.info('STATISTICS', 'Transport HTTP : node-fetch');
         } catch {
-            console.log(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), chalk.yellow('Using global fetch'));
+            logger.info('STATISTICS', 'Transport HTTP : fetch global');
         }
 
         // Error management
@@ -54,13 +54,11 @@ class StatisticsManager {
                 errorMessage = error.message || 'Unknown error';
             }
 
-            console.error(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), 
-                chalk.red(errorMessage), 
-                this.errorCount > this.ERROR_THRESHOLD ? chalk.yellow('(Further errors will be rate limited)') : '');
+            logger.error('STATISTICS', errorMessage,
+                this.errorCount > this.ERROR_THRESHOLD ? '(Les erreurs suivantes seront limitées)' : '');
             
             if (this.errorCount === 1) {
-                console.log(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), 
-                    chalk.yellow('Check if the statistics server is running and the URL is correct in .env'));
+                logger.warn('STATISTICS', 'Vérifiez que le serveur de statistiques fonctionne et que l’URL .env est correcte');
             }
         }
     }
@@ -117,7 +115,7 @@ class StatisticsManager {
                     if (!response.ok) {
                         let text = '';
                         try { text = await response.text(); } catch (e) { text = '<no body>'; }
-                        console.error(chalk.blue(chalk.bold('Statistics')), chalk.white('>>'), chalk.red(`API responded ${response.status} ${response.statusText} for /voice/${guildId}: ${text}`));
+                        logger.error('STATISTICS', `API ${response.status} ${response.statusText} pour /voice/${guildId}: ${text}`);
                     }
                     
                     if (this.errorCount > 0) {

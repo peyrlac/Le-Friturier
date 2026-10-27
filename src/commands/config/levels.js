@@ -15,19 +15,18 @@ module.exports = async (client, interaction, args) => {
     const data = await Schema.findOne({ Guild: interaction.guild.id });
     if (data) {
         data.Levels = boolean;
-        data.save();
+        await data.save();
     }
     else {
-        new Schema({
+        await new Schema({
             Guild: interaction.guild.id,
             Levels: boolean,
         }).save();
     }
 
-    client.succNormal({
-        text: `Les niveaux sont maintenant**${boolean ? 'activé' : 'désactivé'}** dans ce serveur`,
+    return client.succNormal({
+        key: boolean ? 'commands.config.levels.enabled' : 'commands.config.levels.disabled',
         type: 'editreply'
     }, interaction);
 }
 
- 

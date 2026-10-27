@@ -2,25 +2,27 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const model = require('../../database/models/badge');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
+    localizationKey: 'commandMetadata.message',
     data: new SlashCommandBuilder()
         .setName('message')
-        .setDescription('Post preset messages')
+        .setDescription(getCommandMetadata('commandMetadata.message.description'))
         .addStringOption(option =>
             option.setName('message')
-                .setDescription('Select a message')
+                .setDescription(getCommandMetadata('commandMetadata.message.options.message.description'))
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Information', value: 'information' },
-                    { name: 'Rules', value: 'rules' },
-                    { name: 'Applications', value: 'applications' },
-                    { name: 'Helpdesk', value: 'helpdesk' },
-                    { name: 'Network', value: 'network' },
-                    { name: 'Bot-Info', value: 'botinfo' },
-                    { name: 'Bot-Badges', value: 'badges' },
-                    { name: 'Bot-Béta', value: 'beta' },
-                    { name: 'Bot-Credits', value: 'credits' }
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.information.name'), value: 'information' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.rules.name'), value: 'rules' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.applications.name'), value: 'applications' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.helpdesk.name'), value: 'helpdesk' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.network.name'), value: 'network' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.botinfo.name'), value: 'botinfo' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.badges.name'), value: 'badges' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.beta.name'), value: 'beta' },
+                    { name: getCommandMetadata('commandMetadata.message.options.message.choices.credits.name'), value: 'credits' }
                 )
         )
     ,
@@ -32,14 +34,14 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
-        model.findOne({ User: interaction.user.id }, async (err, data) => {
-            if (data && data.FLAGS.includes("DEVELOPER")) {
+        await interaction.deferReply();
+        const data = await model.findOne({ User: interaction.user.id });
+        if (data && data.FLAGS.includes("DEVELOPER")) {
 
                 const message = interaction.options.getString('message');
 
                 client.succNormal({
-                    text: `Message has been sent successfully!`,
+                    key: 'fun.messageSent',
                     type: 'ephemeraledit'
                 }, interaction);
 
@@ -457,10 +459,8 @@ module.exports = {
 
                 }
             }
-            else {
-                return client.errNormal({ text: "Only Bot 2 developers are allowed to do this", editreply: true }, interaction);
-            }
-        })
+
+        return client.errNormal({ key: 'errors.developerOnly', editreply: true }, interaction);
     },
 };
 

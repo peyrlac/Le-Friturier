@@ -6,11 +6,12 @@ module.exports = async (client, interaction, args) => {
     const song = interaction.options.getString('song');
 
     const r = await pop.itunes(song).catch(e => {
-        return client.errNormal({ 
-            error: "Song not found!",
+        return client.errNormal({
+            key: 'search.songNotFound',
             type: 'editreply'
         }, interaction)
     });
+    if (!r) return;
 
     client.embed({
         title: `🎶・${r.name}`,
@@ -18,37 +19,37 @@ module.exports = async (client, interaction, args) => {
         url: r.url,
         fields: [
             {
-                name: "💬┇Name",
+                name: await client.t(interaction, 'search.song.name'),
                 value: `${r.name}`,
                 inline: true,
             },
             {
-                name: "🎤┇Artist",
+                name: await client.t(interaction, 'search.song.artist'),
                 value: `${r.artist}`,
                 inline: true,
             },
             {
-                name: "📁┇Album",
+                name: await client.t(interaction, 'search.song.album'),
                 value: `${r.album}`,
                 inline: true,
             },
             {
-                name: "🎼┇Length",
+                name: await client.t(interaction, 'search.song.length'),
                 value: `${r.length}`,
                 inline: true,
             },
             {
-                name: "🏷️┇Genre",
+                name: await client.t(interaction, 'search.song.genre'),
                 value: `${r.genre}`,
                 inline: true,
             },
             {
-                name: "💵┇Price",
+                name: await client.t(interaction, 'search.song.price'),
                 value: `${r.price}`,
                 inline: true,
             },
             {
-                name: "⏰┇Release Date",
+                name: await client.t(interaction, 'search.song.releaseDate'),
                 value: `<t:${Math.round(new Date(r.release_date).getTime() / 1000)}>`,
                 inline: true,
             },
@@ -57,4 +58,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
- 
+

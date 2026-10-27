@@ -7,16 +7,16 @@ module.exports = async (client, interaction, args) => {
     let encode = text.split("").map(x => x.charCodeAt(0).toString(2)).join(" ");
 
     client.embed({
-        title: `${client.emotes.normal.check}・Success!`,
-        desc: `I converted text to binary text`,
+        title: `${client.emotes.normal.check}・${await client.t(interaction, 'tools.encodeTitle')}`,
+        desc: await client.t(interaction, 'tools.encodeDescription'),
         fields: [
             {
-                name: "📥┇Input",
+                name: await client.t(interaction, 'tools.input'),
                 value: `\`\`\`${text}\`\`\``,
                 inline: false,
             },
             {
-                name: "📤┇Output",
+                name: await client.t(interaction, 'tools.output'),
                 value: `\`\`\`${encode}\`\`\``,
                 inline: false,
             },
@@ -26,4 +26,3 @@ module.exports = async (client, interaction, args) => {
 
 }
 
- 

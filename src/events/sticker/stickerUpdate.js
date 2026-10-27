@@ -5,19 +5,19 @@ module.exports = async (client, oldSticker, newSticker) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `😜・Sticker updated`,
-        desc: `A sticker has been updated`,
+        title: await client.t(newSticker, 'auditEvents.stickerUpdatedTitle'),
+        desc: await client.t(newSticker, 'auditEvents.stickerUpdatedDescription'),
         fields: [
             {
-                name: `> Before`,
+                name: await client.t(newSticker, 'auditEvents.before'),
                 value: `- ${oldSticker.name}`
             },
             {
-                name: `> After`,
+                name: await client.t(newSticker, 'auditEvents.after'),
                 value: `- ${newSticker.name}`
             },
             {
-                name: `> ID`,
+                name: await client.t(newSticker, 'auditEvents.id'),
                 value: `- ${newSticker.id}`
             }
         ]

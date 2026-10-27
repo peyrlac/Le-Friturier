@@ -1,45 +1,40 @@
 const Schema = require('../../database/models/profile');
 
 module.exports = async (client, interaction, args) => {
-
-    const joined = interaction.options.getString('bday');
+    const joined = interaction.options.getString('bday', true);
     const split = joined.trim().split("/");
 
     let [day, month] = split;
 
-    if (!day || !month) return client.errUsage({ usage: "setbday [day]/[month]", type: 'editreply' }, interaction);
+    if (!day || !month) return client.errUsage({ usage: await client.t(interaction, 'profile.bdayUsage'), type: 'editreply' }, interaction);
 
     if (isNaN(day) || isNaN(month)) {
-        return client.errNormal({ error: "The date you gave is not a valid number", type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'profile.bdayInvalidNumber', type: 'editreply' }, interaction);
     }
 
     day = parseInt(day);
     month = parseInt(month);
 
-    if (!day || day > 31) return client.errNormal({ error: "Wrong day format!", type: 'editreply' }, interaction);
-    if (!month || month > 12) return client.errNormal({ error: "Wrong month format!", type: 'editreply' }, interaction);
+    if (!day || day < 1 || day > 31) return client.errNormal({ key: 'profile.bdayInvalidDay', type: 'editreply' }, interaction);
+    if (!month || month < 1 || month > 12) return client.errNormal({ key: 'profile.bdayInvalidMonth', type: 'editreply' }, interaction);
 
     const bday = `${day}/${month}`;
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
-            data.Birthday = bday;
-            data.save();
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
-            client.succNormal({
-                text: "Your birthday is set",
-                fields: [{
-                    name: "🎂┆Bday",
-                    value: `\`\`\`${bday}\`\`\``,
-                    inline: true,
-                }],
-                type: 'editreply'
-            }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
+    data.Birthday = bday;
+    await data.save();
+
+    return client.succNormal({
+        key: 'profile.bdaySuccess',
+        variables: { bday },
+        fields: [{
+            name: await client.t(interaction, 'profile.bdayField'),
+            value: `\`\`\`${bday}\`\`\``,
+            inline: true,
+        }],
+        type: 'editreply'
+    }, interaction);
 }
 
- 

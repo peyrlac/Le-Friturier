@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 const { decode } = require('html-entities');
 
 module.exports = async (client, interaction, args) => {
@@ -95,7 +95,7 @@ module.exports = async (client, interaction, args) => {
 
     const question = {};
 
-    await fetch(`https://opentdb.com/api.php?amount=1&type=multiple&difficulty=hard`).then((res) => res.json()).then(async (res) => {
+    await getJson(`https://opentdb.com/api.php?amount=1&type=multiple&difficulty=hard`).then(async (res) => {
         const q = [];
         q.push(res.results[0]);
         question.question = res.results[0].question;
@@ -146,7 +146,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     await client.embed({
-        title: `🕹️・Trivia`,
+        titleKey: 'games.triviaTitle',
         fields: [
             {
                 name: `${decode(question.question)}`,
@@ -214,8 +214,9 @@ module.exports = async (client, interaction, args) => {
                 const time = convertTime(Date.now() - gameCreatedAt);
 
                 await client.embed({
-                    title: `🕹️・Trivia`,
-                    desc: `GG, It was **${question.options[question.correct]}**. You gave the correct answer in **${time}**.`,
+                    titleKey: 'games.triviaTitle',
+                    descKey: 'games.triviaCorrect',
+                    variables: { answer: question.options[question.correct], time },
                     components: [{ type: 1, components: [fbtn1, fbtn2, fbtn3, fbtn4] }],
                     type: 'editreply'
                 }, interaction)
@@ -306,8 +307,9 @@ module.exports = async (client, interaction, args) => {
                 }
 
                 await client.embed({
-                    title: `🕹️・Trivia`,
-                    desc: `Better luck next time! The correct answer was **${question.options[question.correct]}**.`,
+                    titleKey: 'games.triviaTitle',
+                    descKey: 'games.triviaIncorrect',
+                    variables: { answer: question.options[question.correct] },
                     components: [{ type: 1, components: [fbtn1, fbtn2, fbtn3, fbtn4] }],
                     type: 'editreply'
                 }, interaction)
@@ -356,8 +358,9 @@ module.exports = async (client, interaction, args) => {
                 }
 
                 client.embed({
-                    title: `🕹️・Trivia`,
-                    desc: `Better luck next time! The correct answer was **${question.options[question.correct]}**.`,
+                    titleKey: 'games.triviaTitle',
+                    descKey: 'games.triviaIncorrect',
+                    variables: { answer: question.options[question.correct] },
                     components: [{ type: 1, components: [fbtn1, fbtn2, fbtn3, fbtn4] }],
                     type: 'editreply'
                 }, interaction)
@@ -366,4 +369,4 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
+

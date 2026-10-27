@@ -58,14 +58,14 @@ module.exports = async (client, interaction, args) => {
         }
 
         client.succNormal({
-            text: `Configuration du poisson d'avril terminée !`,
+            key: 'autosetup.aprilfools.success',
             fields: [
                 {
-                    name: `📝┆Salon textuel`,
+                    name: await client.t(interaction, 'autosetup.aprilfools.textChannel'),
                     value: `${textChannel}`
                 },
                 {
-                    name: `🔊┆Salon vocal`,
+                    name: await client.t(interaction, 'autosetup.aprilfools.voiceChannel'),
                     value: `${voiceChannel}`
                 }
             ],
@@ -75,7 +75,7 @@ module.exports = async (client, interaction, args) => {
     } catch (error) {
         console.error(error);
         client.errNormal({
-            error: "Une erreur s'est produite lors de la configuration !",
+            key: 'autosetup.aprilfools.error',
             type: 'editreply'
         }, interaction);
     }

@@ -1,5 +1,4 @@
-const Discord = require('discord.js');
-const axios = require('axios');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -7,21 +6,22 @@ module.exports = async (client, interaction, args) => {
     let currency = interaction.options.getString('currency');
 
     try {
-        const { data } = await axios.get(
-            `https://api.coingecko.com/api/v3/simple/price?ids=${coin}&vs_currencies=${currency}`
+        const data = await getJson(
+            `https://api.coingecko.com/api/v3/simple/price?ids=${encodeURIComponent(coin)}&vs_currencies=${encodeURIComponent(currency)}`
         );
 
-        if (!data[coin][currency]) return;
+        if (!data[coin]?.[currency]) return client.errNormal({ key: 'search.invalidInputs', type: 'editreply' }, interaction);
 
         client.embed({ 
-            title: `💹・Crypto stats`, 
-            desc: `The current price of **1 ${coin}** = **${data[coin][currency]} ${currency}**`, 
+            titleKey: 'search.cryptoTitle',
+            descKey: 'search.cryptoDescription',
+            variables: { coin, amount: data[coin][currency], currency },
             type: 'editreply' 
         }, interaction);
     }
     catch {
         client.errNormal({ 
-            error: "Please check your inputs!", 
+            key: 'search.invalidInputs',
             type: 'editreply' 
         }, interaction);
     }

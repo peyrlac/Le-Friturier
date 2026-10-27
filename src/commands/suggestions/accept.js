@@ -42,13 +42,13 @@ module.exports = async (client, interaction, args) => {
                             value: `${embedData.description}`
                         }
                     ],
-                }, user).catch({})
+                }, user).catch(() => {})
             }
         }
         catch { }
 
         client.succNormal({
-            text: "Suggestion successfully accepted",
+            key: 'suggestions.accepted',
             fields: [
                 {
                     name: `💬┆Suggestion`,
@@ -60,10 +60,10 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         client.errNormal({
-            error: `No suggestion channel set! Please do the setup`,
+            key: 'suggestions.notConfigured',
             type: 'editreply'
         }, interaction);
     }
 }
 
- 
+

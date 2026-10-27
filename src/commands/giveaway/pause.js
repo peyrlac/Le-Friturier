@@ -4,18 +4,19 @@ const ms = require('ms');
 module.exports = async (client, interaction, args) => {
     const messageID = interaction.options.getString('message');
     const giveaway = client.giveawaysManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === messageID);
-    if (!giveaway) return client.errNormal({ error: "This message ID is not from this guild", type: 'editreply' }, interaction)
+    if (!giveaway) return client.errNormal({ key: 'giveaway.notInGuild', type: 'editreply' }, interaction)
     client.giveawaysManager.pause(messageID).then(() => {
-        client.succNormal({ 
-            text: `Giveaway paused!`, 
-            type: 'editreply' 
+        client.succNormal({
+            key: 'giveaway.paused',
+            type: 'editreply'
         }, interaction);
     }).catch((err) => {
-        client.errNormal({ 
-            error: `I can't find the giveaway for ${messageID}!`, 
-            type: 'editreply' 
+        client.errNormal({
+            key: 'giveaway.notFound',
+            variables: { messageID },
+            type: 'editreply'
         }, interaction)
     });
 }
 
- 
+

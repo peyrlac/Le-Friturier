@@ -1,18 +1,12 @@
 const Schema = require('../../database/models/profile');
 
 module.exports = async (client, interaction, args) => {
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
-            return client.errNormal({ error: "You already have a Bot profile", type: "editreply" }, interaction);
-        }
-        else {
-            new Schema({
-                User: interaction.user.id
-            }).save();
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (data) {
+        return client.errNormal({ key: 'profile.alreadyExists', type: 'editreply' }, interaction);
+    }
 
-            client.succNormal({ text: "Profile created! View your profile by running \`profile\`", type: "editreply" }, interaction);
-        }
-    })
+    await new Schema({ User: interaction.user.id }).save();
+    return client.succNormal({ key: 'profile.created', type: 'editreply' }, interaction);
 }
 
- 

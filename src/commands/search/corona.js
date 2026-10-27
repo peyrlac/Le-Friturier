@@ -1,41 +1,39 @@
-const Discord = require('discord.js');
-const fetch = require('node-fetch');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
     let countries = interaction.options.getString('country');
 
-    fetch(`https://covid19.mathdro.id/api/countries/${countries}`)
-        .then(response => response.json())
-        .then(data => {
+    try {
+        const data = await getJson(`https://covid19.mathdro.id/api/countries/${countries}`);
             let confirmed = data.confirmed.value.toLocaleString()
             let recovered = data.recovered.value.toLocaleString()
             let deaths = data.deaths.value.toLocaleString()
 
 
             return client.embed({
-                title: `💉・COVID-19 - ${countries}`,
+                title: await client.t(interaction, 'search.coronaTitle', { country: countries }),
                 fields: [{
-                    name: "✅┇Confirmed Cases",
+                    name: await client.t(interaction, 'search.confirmed'),
                     value: `${confirmed}`,
                     inline: true,
                 },
                 {
-                    name: "🤗┇Recovered",
+                    name: await client.t(interaction, 'search.recovered'),
                     value: `${recovered}`,
                     inline: true,
                 },
                 {
-                    name: "💀┇Deaths",
+                    name: await client.t(interaction, 'search.deaths'),
                     value: `${deaths}`,
                     inline: true,
                 },
                 ], type: 'editreply'
             }, interaction);
 
-        }).catch(e => {
-            return client.errNormal({ error: `Invalid country provided!`, type: 'editreply' }, interaction);
-        })
+    } catch (error) {
+        return client.errNormal({ key: 'search.invalidCountry', type: 'editreply' }, interaction);
+    }
 }
 
  

@@ -4,35 +4,31 @@ module.exports = async (client, interaction, args) => {
 
     const artist = interaction.options.getString('artist');
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) {
+        return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
+    }
 
             if (data && data.Artists) {
                 if (data.Artists.includes(artist)) {
-                    return client.errNormal({ error: `That artist is already exists in your database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ key: 'profile.itemAlreadyExists', variables: { item: artist }, type: 'editreply' }, interaction);
                 }
                 data.Artists.push(artist);
-                data.save();
+                await data.save();
             }
             else {
-                data.Artists = artist;
-                data.save();
+                data.Artists = [artist];
+                await data.save();
             }
-            client.succNormal({
-                text: "Added your artist",
+            return client.succNormal({
+                key: 'profile.itemAdded',
+                variables: { item: artist },
                 fields: [{
-                    name: "🎤┆Artist",
+                    name: await client.t(interaction, 'profile.fields.artists'),
                     value: `\`\`\`${artist}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
-
 }
 
- 

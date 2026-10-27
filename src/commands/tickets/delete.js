@@ -14,44 +14,46 @@ module.exports = async (client, interaction, args) => {
     let type = 'reply';
     if (interaction.isCommand()) type = 'editreply';
 
-    ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
-            const ticketCategory = interaction.guild.channels.cache.get(data.Category);
+    const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
+    if (!data) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: type
+        }, interaction);
+    }
 
-            if (ticketCategory == undefined) {
-                return client.errNormal({
-                    error: "Do the ticket setup!",
-                    type: type
-                }, interaction)
-            }
+    const ticketCategory = interaction.guild.channels.cache.get(data.Category);
+    if (ticketCategory == undefined) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: type
+        }, interaction);
+    }
 
-            if (interaction.channel.parentId == ticketCategory.id) {
-                client.simpleEmbed({
-                    desc: `Delete this ticket in **5s**`,
-                    type: type
-                }, interaction).then(msg => setTimeout(() => {
-                    interaction.channel.delete();
-                    ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id }, async (err, data) => {
-                        if (data) {
-                            var remove = await ticketChannels.deleteOne({ Guild: interaction.guild.id, channelID: interaction.channel.id });
-                        }
-                    })
-                }, 5000));
-            }
-            else {
-                client.errNormal({
-                    error: "This is not a ticket!",
-                    type: type
-                }, interaction);
-            }
+    if (interaction.channel.parentId != ticketCategory.id) {
+        return client.errNormal({
+            key: 'tickets.notTicket',
+            type: type
+        }, interaction);
+    }
+
+    await client.simpleEmbed({
+        descKey: 'tickets.deleteCountdown',
+        type: type
+    }, interaction);
+
+    setTimeout(async () => {
+        try {
+            await interaction.channel.delete();
+            await ticketChannels.deleteOne({
+                Guild: interaction.guild.id,
+                channelID: interaction.channel.id
+            });
         }
-        else {
-            return client.errNormal({
-                error: "Do the ticket setup!",
-                type: type
-            }, interaction)
+        catch (error) {
+            console.error(error);
         }
-    })
+    }, 5000);
 }
 
- 
+

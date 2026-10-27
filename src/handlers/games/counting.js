@@ -37,8 +37,7 @@ module.exports = async (client) => {
           try {
             client.errNormal(
               {
-                error:
-                  "You cannot count twice in a row! Count starts again from 1",
+                key: 'gameEvents.countTwice',
                 type: "reply",
               },
               message
@@ -62,7 +61,8 @@ module.exports = async (client) => {
             try {
               client.errNormal(
                 {
-                  error: `The correct number was ${countData.Count}! Count starts again from 1`,
+                  key: 'gameEvents.countWrong',
+                  variables: { count: countData.Count },
                   type: "reply",
                 },
                 message

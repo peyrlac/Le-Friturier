@@ -14,37 +14,30 @@ module.exports = async (client, interaction, args) => {
     let type = 'reply';
     if (interaction.isCommand()) type = 'editreply';
 
-    ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id }, async (err, ticketData) => {
-        if (ticketData) {
-            ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
+    const ticketData = await ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id });
+    if (ticketData) {
+            const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
                 if (data) {
                     const ticketCategory = interaction.guild.channels.cache.get(data.Category);
 
                     if (ticketCategory == undefined) {
                         return client.errNormal({
-                            error: "Do the setup!",
+                            key: 'tickets.setupRequired',
                             type: type
                         }, interaction);
                     }
 
                     if (interaction.channel.parentId == ticketCategory.id) {
-                        return client.simpleEmbed({
-                            desc: `${client.emotes.animated.loading}・Transcript saving...`,
+                        await client.simpleEmbed({
+                            descKey: 'tickets.transcriptSaving',
                             type: type
-                        }, interaction).then(async (editMsg) => {
-                            client.transcript(interaction, interaction.channel).then(() => {
-
-                                return client.simpleEmbed({
-                                    desc: `Transcript saved`,
-                                    type: 'editreply'
-                                }, interaction)
-
-                            })
-                        });
+                        }, interaction);
+                        await client.transcript(interaction, interaction.channel);
+                        return client.simpleEmbed({ descKey: 'tickets.transcriptSaved', type: 'editreply' }, interaction);
                     }
                     else {
-                        client.errNormal({
-                            error: "This is not a ticket!",
+                        return client.errNormal({
+                            key: 'tickets.notTicket',
                             type: type
                         }, interaction);
 
@@ -52,13 +45,11 @@ module.exports = async (client, interaction, args) => {
                 }
                 else {
                     return client.errNormal({
-                        error: "Do the setup!",
+                        key: 'tickets.setupRequired',
                         type: type
                     }, interaction);
                 }
-            })
-        }
-    })
-}
+            }
+    }
 
- 
+

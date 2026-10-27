@@ -13,24 +13,27 @@ module.exports = async (client, interaction, args) => {
 
     if (perms == false) return;
 
-    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    let data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
     if (data) {
         data.Invites += amount;
         data.Total += amount;
-        data.save();
+        await data.save();
     }
     else {
-        new Schema({
+        const created = new Schema({
             Guild: interaction.guild.id,
             User: user.id,
             Invites: amount,
             Total: amount,
             Left: 0
-        }).save();
+        });
+        await created.save();
+        data = created;
     }
 
-    client.succNormal({
-        text: `Added **${amount}** invites to ${user}`,
+    return client.succNormal({
+        key: 'invites.added',
+        variables: { amount, user },
         fields: [
             {
                 name: "📨┆Total invites",
@@ -42,4 +45,3 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 
- 

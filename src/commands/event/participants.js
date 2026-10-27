@@ -21,14 +21,14 @@ module.exports = async (client, interaction, args) => {
                 console.log(`Found event ID ${eventId} from thread ${interaction.channel.id}`);
             } else {
                 return client.errNormal({
-                    error: '❌ Ce thread n\'est pas associé à un événement. Veuillez fournir l\'ID de l\'événement.',
+                    key: 'events.noThread',
                     type: 'reply',
                     ephemeral: true
                 }, interaction);
             }
         } else if (!eventId) {
             return client.errNormal({
-                error: '❌ Veuillez fournir l\'ID de l\'événement ou utiliser cette commande dans le thread de l\'événement.',
+                key: 'events.idRequired',
                 type: 'reply',
                 ephemeral: true
             }, interaction);
@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
 
         if (!event) {
             return client.errNormal({
-                error: '❌ Événement non trouvé. Vérifiez l\'ID fourni.',
+                key: 'events.notFound',
                 type: 'reply',
                 ephemeral: true
             }, interaction);
@@ -108,15 +108,17 @@ module.exports = async (client, interaction, args) => {
         // Vérifier s'il y a des participants à afficher
         if (participantsList.length === 0) {
             return client.embed({
-                title: `📅 ${fullEvent.name}`,
-                desc: 'Aucun participant disponible.',
+                titleKey: 'events.eventTitle',
+                variables: { name: fullEvent.name },
+                descKey: 'events.noParticipants',
                 type: 'editreply'
             }, interaction);
         }
 
         // Envoyer la réponse avec un embed
         return client.embed({
-            title: `Liste des participants (${participantsList.length})`,
+            titleKey: 'events.listTitle',
+            variables: { count: participantsList.length },
             desc: participantsList.join('\n'),
             type: 'editreply'
         }, interaction);
@@ -124,9 +126,9 @@ module.exports = async (client, interaction, args) => {
     } catch (error) {
         console.error('Erreur lors de la récupération des participants:', error);
         return client.errNormal({
-            error: '❌ Une erreur est survenue lors de la récupération des participants.',
+            key: 'events.fetchError',
             type: 'reply',
             ephemeral: true
         }, interaction);
     }
-}; 
+};

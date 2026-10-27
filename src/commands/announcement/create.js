@@ -4,16 +4,16 @@ module.exports = async (client, interaction, args) => {
     const message = interaction.options.getString('message');
     const channel = interaction.options.getChannel('channel');
 
-    client.embed({ 
-        title: `📢・Annonce!`, 
-        desc: message 
+    client.embed({
+        titleKey: 'announcement.title',
+        desc: message
     }, channel);
 
     client.succNormal({
-        text: `L'annonce a été envoyée avec succès!`,
+        key: 'announcement.sent',
         fields: [
             {
-                name: `📘┆Canal`,
+                name: await client.t(interaction, 'announcement.channel'),
                 value: `${channel} (${channel.name})`
             }
         ],
@@ -21,4 +21,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 
- 
+

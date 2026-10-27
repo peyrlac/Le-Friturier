@@ -15,40 +15,34 @@ module.exports = async (client, interaction, args) => {
 
     if (!user || !amount) return client.errUsage({ usage: "addmoney [user] [amount]", type: 'editreply' }, interaction);
 
-    if (isNaN(amount)) return client.errNormal({ error: "Enter a valid number!", type: 'editreply' }, interaction);
+    if (isNaN(amount)) return client.errNormal({ key: 'economy.addMoney.invalid', type: 'editreply' }, interaction);
 
     if (user.bot) return client.errNormal({
-        error: "You cannot add money to a bot!",
+        key: 'economy.addMoney.bot',
         type: 'editreply'
     }, interaction);
 
     client.addMoney(interaction, user, parseInt(amount));
 
-    setTimeout(() => {
-        Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-            if (data) {
-
-                client.succNormal({
-                    text: `Added money to a user!`,
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
+                return client.succNormal({
+                    key: 'economy.addMoney.success',
                     fields: [
                         {
-                            name: `👤┆User`,
+                            name: await client.t(interaction, 'economy.addMoney.user'),
                             value: `<@!${user.id}>`,
                             inline: true
                         },
                         {
-                            name: `${client.emotes.economy.coins}┆Amount`,
+                            name: `${client.emotes.economy.coins}┆${await client.t(interaction, 'economy.addMoney.amount')}`,
                             value: `$${amount}`,
                             inline: true
                         }
                     ],
                     type: 'editreply'
                 }, interaction);
-            }
-            else {
-                client.errNormal({ error: `This user doesn't have any money!`, type: 'editreply' }, interaction);
-            }
-        }, 500)
-    })
+    }
+    return client.errNormal({ key: 'economy.addMoney.noMoney', type: 'editreply' }, interaction);
 }
  

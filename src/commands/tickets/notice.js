@@ -14,51 +14,48 @@ module.exports = async (client, interaction, args) => {
     let type = 'reply';
     if (interaction.isCommand()) type = 'editreply';
 
-    ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id }, async (err, ticketData) => {
-        if (ticketData) {
-            if (interaction.user.id !== ticketData.creator) {
-                ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-                    if (data) {
-                        const ticketCategory = interaction.guild.channels.cache.get(data.Category);
+    const ticketData = await ticketChannels.findOne({
+        Guild: interaction.guild.id,
+        channelID: interaction.channel.id
+    });
+    if (!ticketData) return;
 
-                        if (ticketCategory == undefined) {
-                            return client.errNormal({
-                                error: "Do the setup!",
-                                type: type
-                            }, interaction);
-                        }
+    if (interaction.user.id === ticketData.creator) {
+        return client.errNormal({
+            key: 'tickets.ownNotice',
+            type: 'ephemeral'
+        }, interaction);
+    }
 
-                        if (interaction.channel.parentId == ticketCategory.id) {
-                            client.simpleEmbed({
-                                desc: `Hey <@!${ticketData.creator}>, \n\nCan we still help you? \nIf there is no response within **24 hours**, we will close this ticket \n\n- Team ${interaction.guild.name}`,
-                                content: `<@!${ticketData.creator}>`,
-                                type: type
-                            }, interaction)
-                        }
-                        else {
-                            client.errNormal({
-                                error: "This is not a ticket!",
-                                type: type
-                            }, interaction);
+    const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
+    if (!data) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: type
+        }, interaction);
+    }
 
-                        }
-                    }
-                    else {
-                        return client.errNormal({
-                            error: "Do the setup!",
-                            type: type
-                        }, interaction);
-                    }
-                })
-            }
-            else {
-                return client.errNormal({
-                    error: "You are not allowed to notice your own ticket!",
-                    type: 'ephemeral'
-                }, interaction)
-            }
-        }
-    })
+    const ticketCategory = interaction.guild.channels.cache.get(data.Category);
+    if (ticketCategory == undefined) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: type
+        }, interaction);
+    }
+
+    if (interaction.channel.parentId != ticketCategory.id) {
+        return client.errNormal({
+            key: 'tickets.notTicket',
+            type: type
+        }, interaction);
+    }
+
+    return client.simpleEmbed({
+        descKey: 'tickets.notice',
+        variables: { user: ticketData.creator, guild: interaction.guild.name },
+        content: `<@!${ticketData.creator}>`,
+        type: type
+    }, interaction);
 }
 
- 
+

@@ -81,7 +81,7 @@ module.exports = async (client, interaction, args) => {
 
         // Envoyer un message de confirmation
         client.succNormal({
-            text: `Custom voice system has been set up successfully!`,
+            key: 'commands.setup.customvoice.success',
             fields: [
                 {
                     name: `📘┆Category`,
@@ -102,7 +102,7 @@ module.exports = async (client, interaction, args) => {
     } catch (error) {
         console.error(error);
         client.errNormal({
-            error: `An error occurred while setting up the custom voice system!`,
+            key: 'commands.setup.customvoice.error',
             type: 'editreply'
         }, interaction);
     }

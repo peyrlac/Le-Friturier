@@ -9,7 +9,7 @@ module.exports = async (client, interaction) => {
     // Vérification permission correcte
     if (!interaction.guild.members.me.permissions.has(PermissionsBitField.Flags.ManageChannels)) {
         return client.errNormal({
-            error: `The bot does not have permission to manage channels.`,
+            key: 'move.managePermission',
             type: 'editreply'
         }, interaction);
     }
@@ -22,7 +22,7 @@ module.exports = async (client, interaction) => {
 
     if (!startChannels.size) {
         return client.errNormal({
-            error: `No eligible voice channels found.`,
+            key: 'move.noEligibleChannels',
             type: 'editreply'
         }, interaction);
     }
@@ -39,7 +39,7 @@ module.exports = async (client, interaction) => {
 
     if (membersToMove.length === 0) {
         return client.errNormal({
-            error: `No members to move according to the criteria.`,
+            key: 'move.noMembersCriteria',
             type: 'editreply'
         }, interaction);
     }
@@ -57,7 +57,8 @@ module.exports = async (client, interaction) => {
     const movedCount = results.filter(Boolean).length;
 
     return client.succNormal({
-        text: `📢 Emergency meeting! ${movedCount} member(s) moved to \`${endChannel.name}\`.`,
+        key: 'move.emergency',
+        variables: { count: movedCount, destination: endChannel.name },
         type: 'editreply'
     }, interaction);
 };

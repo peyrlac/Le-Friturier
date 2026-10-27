@@ -17,17 +17,19 @@ module.exports = async (client, interaction, args) => {
     if (data) {
         data.Invites -= amount;
         data.Total -= amount;
-        data.save();
+        await data.save();
     }
     else {
         return client.errNormal({
-            error: `No invite data found for ${user}`,
+            key: 'invites.noData',
+            variables: { user },
             type: 'editreply'
         }, interaction);
     }
 
-    client.succNormal({
-        text: `Removed **${amount}** invites from ${user}`,
+    return client.succNormal({
+        key: 'invites.removed',
+        variables: { amount, user },
         fields: [
             {
                 name: "📨┆Total invites",
@@ -39,4 +41,3 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 
- 

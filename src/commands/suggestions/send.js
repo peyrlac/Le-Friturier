@@ -10,6 +10,7 @@ module.exports = async (client, interaction, args) => {
         const channel = interaction.guild.channels.cache.get(data.Channel);
 
         client.embed({
+            titleKey: 'suggestions.title',
             title: `💡・Suggestion`,
             desc: `${suggestionQuery}`,
             author: {
@@ -18,7 +19,7 @@ module.exports = async (client, interaction, args) => {
             }
         }, channel).then((msg) => {
             client.succNormal({
-                text: `Suggestion successfully submitted!`,
+                key: 'suggestions.submitted',
                 fields: [
                     {
                         name: `💬┇Suggestion`,
@@ -38,17 +39,17 @@ module.exports = async (client, interaction, args) => {
             msg.react(client.emotes.normal.arrowDown);
         }).catch((e) => {
             return client.errNormal({
-                error: `No suggestion channel set! Please do the setup`,
+                key: 'suggestions.notConfigured',
                 type: 'editreply'
             }, interaction)
         })
     }
     else {
         client.errNormal({
-            error: `No suggestion channel set! Please do the setup`,
+            key: 'suggestions.notConfigured',
             type: 'editreply'
         }, interaction);
     }
 }
 
- 
+

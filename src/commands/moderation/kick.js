@@ -12,7 +12,7 @@ module.exports = async (client, interaction, args) => {
   const reason = interaction.options.getString('reason') || 'Not given';
 
   if (member.permissions.has(Discord.PermissionsBitField.Flags.KickMembers) || member.permissions.has(Discord.PermissionsBitField.Flags.KickMembers)) return client.errNormal({
-    error: "You can't kick a moderator",
+    key: "errors.moderation.cannotModerate",
     type: 'editreply'
   }, interaction);
 
@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
   }, member).then(function () {
     member.kick(reason)
     client.succNormal({
-      text: "The specified user has been successfully kicked and successfully received a notification!",
+      key: 'errors.moderation.kickNotified',
       fields: [
         {
           name: "👤┆Kicked user",
@@ -52,10 +52,9 @@ module.exports = async (client, interaction, args) => {
   }).catch(function () {
     member.kick(reason)
     client.succNormal({
-      text: "The given user has been successfully kicked, but has not received a notification!",
+      key: 'errors.moderation.kickNotNotified',
       type: 'editreply'
     }, interaction);
   });
 }
 
- 

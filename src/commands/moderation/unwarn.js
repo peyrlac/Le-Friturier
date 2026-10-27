@@ -1,57 +1,55 @@
 const Discord = require('discord.js');
+const Schema = require('../../database/models/warnings');
 
-const Schema = require("../../database/models/warnings");
-
-module.exports = async (client, interaction, args) => {
+module.exports = async (client, interaction) => {
     const perms = await client.checkUserPerms({
         flags: [Discord.PermissionsBitField.Flags.ManageMessages],
         perms: [Discord.PermissionsBitField.Flags.ManageMessages]
     }, interaction);
 
-    if (perms == false) return;
+    if (perms === false) return;
 
-    var member = interaction.options.getUser('user');
-    var Case = interaction.options.getInteger('case');
+    const member = interaction.options.getUser('user', true);
+    const caseNumber = interaction.options.getInteger('case', true);
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: member.id });
 
-    Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
-        if (data) {
-            var warn = data.Warnings.find(x => x.Case == Case);
-            if (!warn) {
-                client.errNormal({
-                    error: "This user doesn't have a warning with this case number!",
-                    type: 'editreply'
-                }, interaction);
-                return;
-            }
-            data.Warnings.splice(data.Warnings.indexOf(warn), 1);
-            data.save();
-        }
-        else {
-            client.errNormal({ 
-                error: "User has no warnings!", 
-                type: 'editreply'
-            }, interaction);
-        }
-    })
+    if (!data) return client.errNormal({ key: 'moderation.noWarnings', variables: { user: member.tag }, type: 'editreply' }, interaction);
 
-    client.embed({
-        title: `🔨・Unwarn`,
-        desc: `You've been unwarned in **${interaction.guild.name}**`,
+    const warning = data.Warnings.find(item => item.Case === caseNumber);
+    if (!warning) {
+        return client.errNormal({
+            key: 'moderation.caseNotFound',
+            variables: { case: caseNumber },
+            type: 'editreply'
+        }, interaction);
+    }
+
+    data.Warnings.splice(data.Warnings.indexOf(warning), 1);
+    await data.save();
+
+    try {
+        await client.embed({
+        titleKey: 'moderation.unwarnTitle',
+        descKey: 'moderation.unwarnDescription',
+        variables: { guild: interaction.guild.name },
         fields: [
             {
-                name: "👤┆Moderator",
+                name: await client.t(interaction, 'moderation.moderator'),
                 value: interaction.user.tag,
                 inline: true
             },
         ]
-    }, member).catch(() => {})
+        }, member);
+    } catch (error) {
+        console.error(`Unable to notify ${member.id} about removed warning ${caseNumber}:`, error);
+    }
 
     client.emit('warnRemove', member, interaction.user)
     client.succNormal({
-        text: `The user's warning has been successfully removed`,
+        key: 'moderation.unwarnSuccess',
         fields: [
             {
-                name: "👤┆User",
+                name: await client.t(interaction, 'moderation.user'),
                 value: `${member}`,
                 inline: true
             }
@@ -60,4 +58,3 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 
- 

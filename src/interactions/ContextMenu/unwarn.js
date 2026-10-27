@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/warnings");
 
 module.exports = {
+    localizationKey: 'commandMetadata.unwarn',
     data: new ContextMenuCommandBuilder()
         .setName('Unwarn')
         .setType(2),
@@ -23,32 +24,32 @@ module.exports = {
 
         if (perms == false) {
             client.errNormal({
-                error: "You don't have the required permissions to use this command!",
+                key: 'errors.noPermission',
                 type: 'ephemeral'
             }, interaction);
             return;
         }
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
-            if (data) {
+        const data = await Schema.findOne({ Guild: interaction.guild.id, User: member.id });
+        if (data) {
                 const menu = new Discord.StringSelectMenuBuilder()
                     .setCustomId('unwarn')
-                    .setPlaceholder('Select a warning to remove');
+                    .setPlaceholder(await client.t(interaction, 'moderation.selectWarning'));
                 // Get all warnings and add them to a stringselectmenu 
-                data.Warnings.forEach(element => {
+                for (const element of data.Warnings) {
                     menu.addOptions({
                         label: `Case ${element.Case}`,
                         value: element.Case.toString(),
-                        description: "Reason: " + element.Reason
-                    })
-                });
+                        description: `${await client.t(interaction, 'moderation.reason')}: ${element.Reason}`
+                    });
+                }
                 // Create a new message with the menu
-                client.embed({
-                    title: `🔨・Unwarn`,
-                    desc: `Select a warning to remove from **${member.user.tag}**`,
+                await client.embed({
+                    title: await client.t(interaction, 'moderation.unwarnTitle'),
+                    desc: await client.t(interaction, 'moderation.unwarnDescription', { guild: interaction.guild.name }),
                     components: [new Discord.ActionRowBuilder().addComponents(menu)],
                     type: 'ephemeraledit'
                 }, interaction);
@@ -61,17 +62,17 @@ module.exports = {
                     if (i.customId === 'unwarn') {
                         // Remove the warning from the database
                         data.Warnings.splice(data.Warnings.findIndex(element => element.Case == i.values[0]), 1);
-                        data.save();
+                        await data.save();
                         // Remove the menu from the message
-                        i.update({
+                        await i.update({
                             components: []
                         });
                         // Send a success message
                         client.succNormal({
-                            text: `The warning has been successfully removed`,
+                            key: 'errors.moderation.warningRemoved',
                             fields: [
                                 {
-                                    name: "👤┆User",
+                                    name: await client.t(interaction, 'moderation.user'),
                                     value: `${member}`,
                                     inline: true
                                 }
@@ -80,11 +81,11 @@ module.exports = {
                         }, interaction);
                         client.emit('warnRemove', member, interaction.user)
                         client.embed({
-                            title: `🔨・Unwarn`,
-                            desc: `You've been unwarned in **${interaction.guild.name}**`,
+                            title: await client.t(member, 'moderation.unwarnTitle'),
+                            desc: await client.t(member, 'moderation.unwarnDescription', { guild: interaction.guild.name }),
                             fields: [
                                 {
-                                    name: "👤┆Moderator",
+                                    name: await client.t(member, 'moderation.moderator'),
                                     value: interaction.user.tag,
                                     inline: true
                                 },
@@ -93,11 +94,10 @@ module.exports = {
                     }
                 });
             } else {
-                client.errNormal({
-                    error: "User has no warnings!",
+                return client.errNormal({
+                    key: 'errors.moderation.noWarnings',
                     type: 'ephemeraledit'
                 }, interaction);
             }
-        })
     },
 };

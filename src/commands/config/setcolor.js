@@ -21,25 +21,20 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (!isHexColor(color)) return client.errNormal({
-        error: "Vous n'avez pas précisé de couleur hexadécimale!Exemple: FF0000",
+        key: 'commands.config.setcolor.invalid',
         type: 'editreply'
     }, interaction)
 
-    Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
-            data.Color = `#${color}`;
-            data.save();
-        }
-        else {
-            new Schema({
-                Guild: interaction.guild.id,
-                Color: `#${color}`
-            }).save();
-        }
-    })
+    const data = await Schema.findOne({ Guild: interaction.guild.id });
+    if (data) {
+        data.Color = `#${color}`;
+        await data.save();
+    } else {
+        await new Schema({ Guild: interaction.guild.id, Color: `#${color}` }).save();
+    }
 
-    client.succNormal({
-        text: `La couleur intégrée a été ajustée avec succès`,
+    return client.succNormal({
+        key: 'commands.config.setcolor.success',
         fields: [
             {
                 name: `🎨┆New color`,
@@ -57,4 +52,3 @@ function isHexColor(hex) {
         && !isNaN(Number('0x' + hex))
 }
 
- 

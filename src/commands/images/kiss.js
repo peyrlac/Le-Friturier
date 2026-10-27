@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
-const DIG = require("discord-image-generation");
-
 module.exports = async (client, interaction, args) => {
+    const DIG = require("discord-image-generation");
 
     const member = interaction.options.getUser('user');
 

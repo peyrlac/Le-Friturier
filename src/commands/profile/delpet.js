@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
     const pet = interaction.options.getString('pet');
     const user = { User: interaction.user.id }
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
             if (data && data.Pets) {
                 if (!data.Pets.includes(pet)) {
-                    return client.errNormal({ error: `That pet doesn't exist in the database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ key: 'profile.itemNotFound', variables: { item: pet }, type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Pets.filter((target) => target !== pet);
@@ -19,21 +19,15 @@ module.exports = async (client, interaction, args) => {
                     Pets: filtered
                 });
             }
-            client.succNormal({
-                text: "Removed your pet",
+            return client.succNormal({
+                key: 'profile.itemRemoved',
+                variables: { item: pet },
                 fields: [{
-                    name: "🐶┆Pet",
+                    name: await client.t(interaction, 'profile.fields.pets'),
                     value: `\`\`\`${pet}\`\`\``,
                     inline: true,
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
-
 }
 
- 

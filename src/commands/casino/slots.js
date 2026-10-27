@@ -7,13 +7,13 @@ const Schema = require("../../database/models/economy");
 module.exports = async (client, interaction, args) => {
     let user = interaction.user;
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-        if (data) {
-            let money = parseInt(interaction.options.getNumber('amount'));
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
+        let money = parseInt(interaction.options.getNumber('amount'));
             let win = false;
 
-            if (!money) return client.errUsage({ usage: "slots [amount]", type: 'editreply' }, interaction);
-            if (money > data.Money) return client.errNormal({ error: `Vous pariez plus que vous avez!`, type: 'editreply' }, interaction);
+            if (!money) return client.errUsage({ usage: await client.t(interaction, 'commands.casino.slots.usage'), type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ key: 'commands.casino.slots.insufficient', type: 'editreply' }, interaction);
 
             let number = []
             for (i = 0; i < 3; i++) { number[i] = Math.floor(Math.random() * slotItems.length); }
@@ -46,31 +46,29 @@ module.exports = async (client, interaction, args) => {
             if (win) {
 
                 client.embed({
-                    title: `🎰・Slots`,
-                    desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`,
+                    titleKey: 'commands.casino.slots.title',
+                    descKey: 'commands.casino.slots.win',
+                    variables: { amount: `${client.emotes.economy.coins} $${money}` },
                     color: client.config.colors.succes, 
                     components: [row], 
                     type: 'editreply'
                 }, interaction)
 
-                data.Money += money;
-                data.save();
+                await client.addMoney(interaction, user, money);
             } else {
 
                 client.embed({
-                    title: `🎰・Slots`,
-                    desc: `Tu as perdu **${client.emotes.economy.coins} $${money}**`,
+                    titleKey: 'commands.casino.slots.title',
+                    descKey: 'commands.casino.slots.lose',
+                    variables: { amount: `${client.emotes.economy.coins} $${money}` },
                     components: [row], 
                     color: client.config.colors.error, 
                     type: 'editreply'
                 }, interaction)
 
-                data.Money -= money;
-                data.save();
+                await client.removeMoney(interaction, user, money);
             }
-        }
-        else {
-            client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
-        }
-    })
+    } else {
+        return client.errNormal({ key: 'commands.casino.slots.empty', type: 'editreply' }, interaction);
+    }
 }

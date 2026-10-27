@@ -21,9 +21,8 @@ module.exports = async (client, interaction, args) => {
     });
 
     client.succNormal({ 
-        text: `Les commentaires ont été envoyés avec succès aux développeurs`,
+        key: 'commands.bot.feedback.success',
         type: 'editreply'
     }, interaction);
 }
 
- 

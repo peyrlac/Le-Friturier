@@ -1,11 +1,34 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const { Manager } = require("erela.js");
 const Spotify = require("erela.js-spotify");
 const Facebook = require("erela.js-facebook");
 const Deezer = require("erela.js-deezer");
 const AppleMusic = require("erela.js-apple");
+const Functions = require('./database/models/functions');
+const GlobalFeatures = require('./database/models/globalFeatures');
+const { installFeatureManager } = require('./handlers/features');
+
+function createLavalinkNodes() {
+    if (process.env.LAVALINK_ENABLED === 'false') return [];
+
+    const host = String(process.env.LAVALINK_HOST || '').trim();
+    if (!host) return [];
+
+    const port = Number.parseInt(process.env.LAVALINK_PORT, 10);
+
+    return [{
+        host,
+        port: Number.isInteger(port) ? port : 2333,
+        password: process.env.LAVALINK_PASSWORD || '',
+        secure: process.env.LAVALINK_SECURE === 'true'
+    }];
+}
+
+const lavalinkNodes = createLavalinkNodes();
 
 // Discord client
 const client = new Discord.Client({
@@ -64,13 +87,7 @@ if (clientID && clientSecret) {
                 clientSecret,
             })
         ],
-        nodes: [
-            {
-                host: process.env.LAVALINK_HOST || "lava.link",
-                port: parseInt(process.env.LAVALINK_PORT) || 80,
-                password: process.env.LAVALINK_PASSWORD || "CorwinDev"
-            },
-        ],
+        nodes: lavalinkNodes,
         send(id, payload) {
             const guild = client.guilds.cache.get(id);
             if (guild) guild.shard.send(payload);
@@ -85,19 +102,7 @@ if (clientID && clientSecret) {
             new Deezer(),
             new Facebook(),
         ],
-        nodes: [
-            {
-                host: process.env.LAVALINK_HOST || "lava.link",
-                port: parseInt(process.env.LAVALINK_PORT) || 80,
-                password: process.env.LAVALINK_PASSWORD || "CorwinDev",
-                secure: Boolean(process.env.LAVALINK_SECURE) || false
-            },
-            {
-                host: "lavalink.techpoint.world",
-                port: 80,
-                password: "techpoint"
-            },
-        ],
+        nodes: lavalinkNodes,
         send(id, payload) {
             const guild = client.guilds.cache.get(id);
             if (guild) guild.shard.send(payload);
@@ -119,6 +124,21 @@ client.config = require('./config/bot');
 client.changelogs = require('./config/changelogs');
 client.emotes = require("./config/emojis.json");
 client.webhooks = require("./config/webhooks.json");
+installFeatureManager(client, {
+    readGuild: async guildId => Functions.findOne({ Guild: guildId }).select('Features').lean(),
+    readGlobal: async () => GlobalFeatures.findOne({ Key: 'global' }).select('Features').lean(),
+    writeGuild: async (document, guildId) => Functions.findOneAndUpdate(
+        { Guild: guildId },
+        { $set: { Features: document.Features || {} } },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+    ),
+    writeGlobal: async document => GlobalFeatures.findOneAndUpdate(
+        { Key: 'global' },
+        { $set: { Features: document.Features || {} } },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+    ),
+    logger: console,
+});
 const webHooksArray = ['startLogs', 'shardLogs', 'errorLogs', 'dmLogs', 'voiceLogs', 'serverLogs', 'serverLogs2', 'commandLogs', 'consoleLogs', 'warnLogs', 'voiceErrorLogs', 'creditLogs', 'evalLogs', 'interactionLogs'];
 // Check if .env webhook_id and webhook_token are set
 if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {
@@ -145,9 +165,13 @@ const warnLogs = new Discord.WebhookClient({
 });
 
 // Load handlers
-fs.readdirSync('./src/handlers').forEach((dir) => {
+fs.readdirSync('./src/handlers', { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .forEach(({ name: dir }) => {
     fs.readdirSync(`./src/handlers/${dir}`).forEach((handler) => {
-        require(`./handlers/${dir}/${handler}`)(client);
+        if (dir === 'serverstats' && handler === 'createStatsChannel.js') return;
+        const handlerModule = require(`./handlers/${dir}/${handler}`);
+        if (typeof handlerModule === 'function') handlerModule(client);
     });
 });
 
@@ -226,9 +250,10 @@ client.on(Discord.ShardEvents.Error, error => {
 
 // Healthcheck : créer un fichier pour indiquer que le bot est actif
 // Ce fichier sera vérifié par le Docker healthcheck
-const healthcheckFile = '/tmp/bot-alive';
+const healthcheckFile = path.join(os.tmpdir(), 'bot-alive');
 function updateHealthcheck() {
     try {
+        fs.mkdirSync(path.dirname(healthcheckFile), { recursive: true });
         fs.writeFileSync(healthcheckFile, new Date().toISOString(), 'utf8');
     } catch (err) {
         console.error('Erreur lors de la mise à jour du healthcheck:', err);

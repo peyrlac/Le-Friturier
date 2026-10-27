@@ -1,7 +1,7 @@
 # FriturierBot Dockerfile
 FROM node:20-alpine
 
-# Installer les dépendances système nécessaires pour canvas et puppeteer
+# Installer les dépendances système nécessaires pour canvas et Chromium
 RUN apk add --no-cache \
     python3 \
     make \
@@ -17,11 +17,16 @@ RUN apk add --no-cache \
     harfbuzz \
     ca-certificates \
     ttf-freefont \
-    font-noto-emoji
+    font-noto-emoji \
+    dumb-init
 
-# Variables d'environnement pour Puppeteer
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
+# Variables d'environnement pour les dépendances et Chromium Alpine
+ENV NODE_ENV=production \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
+    NPM_CONFIG_AUDIT=false \
+    NPM_CONFIG_FUND=false \
+    NPM_CONFIG_UPDATE_NOTIFIER=false
 
 # Définir le répertoire de travail
 WORKDIR /usr/src/app
@@ -29,8 +34,8 @@ WORKDIR /usr/src/app
 # Copier les fichiers package.json et package-lock.json
 COPY package*.json ./
 
-# Installer les dépendances
-RUN npm install --omit=dev
+# Installer exactement les dépendances verrouillées
+RUN npm ci --omit=dev
 
 # Copier le reste de l'application
 COPY . .
@@ -49,6 +54,10 @@ USER nodejs
 HEALTHCHECK --interval=60s --timeout=10s --start-period=120s --retries=3 \
   CMD node -e "require('fs').existsSync('/tmp/bot-alive') || process.exit(1)"
 
+# Transmettre correctement SIGTERM au processus Node lors de l'arrêt du conteneur
+STOPSIGNAL SIGTERM
+
 # Démarrer le bot
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["node", ".", "--trace-warnings"]
 

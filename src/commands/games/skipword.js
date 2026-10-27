@@ -5,35 +5,39 @@ const Schema = require("../../database/models/guessWord");
 module.exports = async (client, interaction, args) => {
     let wordList = client.config.wordList;
 
-    Schema.findOne({ Guild: interaction.guild.id, Channel: interaction.channel.id }, async (err, data) => {
-        if (data) {
-            try {
-                wordList = wordList.split("\n");
-                var word = wordList[Math.floor(Math.random() * wordList.length)];
-                var shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
+    const data = await Schema.findOne({ Guild: interaction.guild.id, Channel: interaction.channel.id });
+    if (!data) {
+        return client.errNormal({
+            key: 'games.skipWordWrongChannel',
+            type: 'editreply'
+        }, interaction);
+    }
 
-                data.Word = word;
-                data.save();
+    try {
+        wordList = wordList.split("\n");
+        const word = wordList[Math.floor(Math.random() * wordList.length)];
+        const shuffled = word.split('').sort(function () { return 0.5 - Math.random() }).join('');
 
-                client.succNormal({ 
-                    text: `Word skipped successfully!`,
-                    type: 'ephemeral'
-                }, interaction);
+        data.Word = word;
+        await data.save();
 
-                return client.embed({ 
-                    title: `💬・Guess the word`, 
-                    desc: `Put the letters in the right position! \n\n🔀 ${shuffled.toLowerCase()}`,
-                }, interaction.channel)
-            }
-            catch { }
-        }
-        else {
-            client.errNormal({
-                error: "You are not in the right channel!",
-                type: 'editreply'
-            }, interaction)
-        }
-    })
+        await client.succNormal({
+            key: 'games.skipWordSkipped',
+            type: 'ephemeral'
+        }, interaction);
+
+        return client.embed({
+            titleKey: 'games.skipWordTitle',
+            descKey: 'games.skipWordDescription',
+            variables: { word: shuffled.toLowerCase() },
+        }, interaction.channel);
+    }
+    catch (error) {
+        return client.errNormal({
+            key: 'errors.generic',
+            type: 'ephemeral'
+        }, interaction);
+    }
 }
 
- 
+

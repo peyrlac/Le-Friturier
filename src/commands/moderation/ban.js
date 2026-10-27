@@ -12,7 +12,7 @@ module.exports = async (client, interaction, args) => {
   const reason = interaction.options.getString('reason') || 'Not given';
 
   if (member.permissions.has(Discord.PermissionsBitField.Flags.BanMembers) || member.permissions.has(Discord.PermissionsBitField.Flags.BanMembers)) return client.errNormal({
-    error: "You can't ban a moderator",
+    key: "errors.moderation.cannotModerate",
     type: 'editreply'
   }, interaction);
 
@@ -34,7 +34,7 @@ module.exports = async (client, interaction, args) => {
   }, member).then(function () {
     member.ban({ reason: reason })
     client.succNormal({
-      text: "The specified user has been successfully banned and successfully received a notification!",
+      key: 'errors.moderation.banNotified',
       fields: [
         {
           name: "👤┆Banned user",
@@ -52,7 +52,7 @@ module.exports = async (client, interaction, args) => {
   }).catch(function () {
     member.ban({ reason: reason })
     client.succNormal({
-      text: "The given user has been successfully banned, but has not received a notification!",
+      key: 'errors.moderation.banNotNotified',
       type: 'editreply'
     }, interaction);
   });

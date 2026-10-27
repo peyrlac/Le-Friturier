@@ -13,21 +13,15 @@ module.exports = async (client, interaction, args) => {
     const amount = interaction.options.getNumber('amount');
 
     if (type == "add") {
-        Schema.findOne({ User: user.id }, async (err, data) => {
-            if (data) {
-                data.Credits += amount;
-                data.save();
-            }
-            else {
-                new Schema({
-                    User: user.id,
-                    Credits: amount
-                }).save();
-            }
-        })
+        await Schema.findOneAndUpdate(
+            { User: user.id },
+            { $inc: { Credits: amount } },
+            { upsert: true, new: true, setDefaultsOnInsert: true }
+        );
 
-        client.succNormal({
-            text: `Ajoutée **${amount} crédits ** à ${user}`,
+        await client.succNormal({
+            key: 'developerCredits.added',
+            variables: { amount, user },
             type: 'editreply'
         }, interaction);
 
@@ -40,21 +34,21 @@ module.exports = async (client, interaction, args) => {
             )
             .setColor(client.config.colors.normal)
             .setTimestamp();
-        webhookClientLogs.send({
+        await webhookClientLogs.send({
             username: 'Crédits de bot',
             embeds: [embedLogs],
         });
     }
     else if (type == "remove") {
-        Schema.findOne({ User: user.id }, async (err, data) => {
-            if (data) {
-                data.Credits -= amount;
-                data.save();
-            }
-        })
+        const data = await Schema.findOne({ User: user.id });
+        if (data) {
+            data.Credits -= amount;
+            await data.save();
+        }
 
-        client.succNormal({
-            text: `Supprimé **${amount} crédits ** de ${user}`,
+        await client.succNormal({
+            key: 'developerCredits.removed',
+            variables: { amount, user },
             type: 'editreply'
         }, interaction);
 
@@ -67,11 +61,11 @@ module.exports = async (client, interaction, args) => {
             )
             .setColor(client.config.colors.normal)
             .setTimestamp();
-        webhookClientLogs.send({
+        await webhookClientLogs.send({
             username: 'Crédits de bot',
             embeds: [embedLogs],
         });
     }
 }
 
- 
+

@@ -1,37 +1,39 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
+    localizationKey: 'commandMetadata.birthdays',
     data: new SlashCommandBuilder()
-        .setName('birthdays')
-        .setDescription('Afficher ou enregistrer un anniversaire')
+        .setName(getCommandMetadata('commandMetadata.birthdays.name'))
+        .setDescription(getCommandMetadata('commandMetadata.birthdays.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Obtenez des informations sur les commandes de la catégorie des anniversaires')
+                .setDescription(getCommandMetadata('commandMetadata.birthdays.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('check')
-                .setDescription('Vérifiez votre anniversaire')
+                .setDescription(getCommandMetadata('commandMetadata.birthdays.subcommands.check.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('delete')
-                .setDescription('Supprimez votre anniversaire')
+                .setDescription(getCommandMetadata('commandMetadata.birthdays.subcommands.delete.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('list')
-                .setDescription('Venez voir tous les anniversaires')
+                .setDescription(getCommandMetadata('commandMetadata.birthdays.subcommands.list.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('set')
-                .setDescription('Définissez votre anniversaire')
-                .addNumberOption(option => option.setName('day').setDescription('Le numéro de jour qui est votre anniversaire').setRequired(true))
-                .addNumberOption(option => option.setName('month').setDescription('Le numéro de mois qui est votre anniversaire').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.birthdays.subcommands.set.description'))
+                .addNumberOption(option => option.setName('day').setDescription(getCommandMetadata('commandMetadata.birthdays.subcommands.set.options.day.description')).setMinValue(1).setMaxValue(31).setRequired(true))
+                .addNumberOption(option => option.setName('month').setDescription(getCommandMetadata('commandMetadata.birthdays.subcommands.set.options.month.description')).setMinValue(1).setMaxValue(12).setRequired(true))
         )
     ,
 
@@ -42,7 +44,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);
     },
 };

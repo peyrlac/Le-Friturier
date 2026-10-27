@@ -3,11 +3,10 @@ const { model: AnnouncementChannels, getActivityEmoji } = require('../../databas
 const { ReminderManager, createManager } = require('../functions/eventReminders');
 const { generateCalendarLinks } = require('../../assets/utils/calendar');
 const Discord = require('discord.js');
+const reminderManager = createManager();
 
 module.exports = async (client) => {
     // Créer une instance du ReminderManager
-    const reminderManager = createManager();
-    
     client.on(Events.GuildScheduledEventCreate, async (event) => {
         if(event.entityMetadata && event.entityMetadata.location) {
             try {
@@ -292,7 +291,6 @@ module.exports = async (client) => {
 
                     // Si la date a changé, mettre à jour le timestamp et réinitialiser les rappels
                     if (oldEvent.scheduledStartTimestamp !== newEvent.scheduledStartTimestamp) {
-                        const reminderManager = createManager();
                         const updatedReminders = reminderManager.initializeReminderState(newEvent.scheduledStartTimestamp);
                         
                         updates['EventThreads.$.scheduledStartTimestamp'] = newEvent.scheduledStartTimestamp;

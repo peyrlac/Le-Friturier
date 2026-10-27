@@ -1,0 +1,51 @@
+# Format: Type|texte
+# Variables disponibles: {guilds}, {users}, {membersInVoice}, {channels}, {commands}, {version}, {uptime}, {shard}, {time}, {date}
+Watching|si aucune rebellion ne se forme
+Listening|le crépitement de la friture
+Watching|si de nouveaux sons sur la soundboard ont été ajoutés
+Watching|si on a encore banni un random
+Watching|s'il y a un anniversaire aujourd'hui
+Watching|si une soirée cinéma s'organise
+Watching|si y'a des packs opening pokemon
+Watching|si Richard a fait son $p
+Watching|si Eliott a mis sa robe de juge
+Watching|si Pierre bidouille quelque chose
+Watching|si Lisa a bu son camfé
+Watching|si Mathias et Charlotte profitent du soleil
+Watching|si Clara a arrosé ses plantes
+Watching|si Aurélie a fini son livre
+Watching|si Thomas a ajouté un nouveau film à sa liste
+Watching|si Max a gagné son tournoi
+Watching|si Richard a trouvé le chemin de l'Hosaku
+Watching|si Diana est arrivée B1
+Watching|si Thibault fait un marathon
+Watching|si Sou cuisine de bonnes choses
+Watching|si Eliott et Mathieu ont ouvert le café jazz
+Watching|si Zoric a gravi l'Everest
+Watching|si Baptiste est loup
+Watching|si Ben et Laura sont en festival
+Watching|si Davy sait toujours dessiner des bateaux
+Watching|si Théo est toujours aussi magnifique
+Watching|si Peter est toujours suspicious
+Watching|si le Conseil des Frites complote
+Watching|si un coup d'État se prépare
+Watching|si Alain approuve les décisions du peuple
+Watching|si la monarchie tient toujours debout
+Watching|si quelqu'un a volé la couronne
+Watching|si les citoyens respectent la Constitution
+Watching|si les ambassadeurs sont en mission
+Watching|si le peuple réclame des élections
+Watching|si une nouvelle loi doit être votée
+Watching|si le Royaume est en état d'alerte
+Watching|si la frite nationale est en danger
+Watching|si les frontières du Royaume sont sécurisées
+Watching|si les élites préparent une révolution
+Watching|si le trésor royal contient encore des patates
+Watching|si un nouveau citoyen mérite sa nationalité
+Watching|si le Conseil des Frites est en réunion
+Watching|si un procès politique se prépare
+Watching|si les opposants sont toujours en liberté
+Listening|les doléances du peuple
+Listening|les débats du Conseil des Frites
+Listening|l'hymne national du Royaume
+Watching|{guilds} serveurs

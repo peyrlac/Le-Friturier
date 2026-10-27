@@ -1,23 +1,25 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
+    localizationKey: 'commandMetadata.music',
     data: new SlashCommandBuilder()
-        .setName('music')
-        .setDescription('Playing music in Bot')
+        .setName(getCommandMetadata('commandMetadata.music.name'))
+        .setDescription(getCommandMetadata('commandMetadata.music.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the music category commands')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('bassboost')
-                .setDescription('Set the bassboost level')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.bassboost.description'))
                 .addStringOption(option =>
                     option.setName('level')
-                        .setDescription('The level of the bassboost')
+                        .setDescription(getCommandMetadata('commandMetadata.music.subcommands.bassboost.options.level.description'))
                         .setRequired(true)
                         .addChoices(
                             { name: '0', value: '0' },
@@ -30,90 +32,89 @@ module.exports = {
         .addSubcommand(subcommand =>
             subcommand
                 .setName('play')
-                .setDescription('Start the music')
-                .addStringOption(option => option.setName('song').setDescription('Enter a song name/url').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.play.description'))
+                .addStringOption(option => option.setName('song').setDescription(getCommandMetadata('commandMetadata.music.subcommands.play.options.song.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('clear')
-                .setDescription('Delete the music queue')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.clear.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('loop')
-                .setDescription('Loop the music')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.loop.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('lyrics')
-                .setDescription('Get the lyrics of the current song')
-                .addStringOption(option => option.setName('song').setDescription('Enter a song name'))
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.lyrics.description'))
+                .addStringOption(option => option.setName('song').setDescription(getCommandMetadata('commandMetadata.music.subcommands.lyrics.options.song.description')))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('playing')
-                .setDescription('See which song is playing now')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.playing.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('pause')
-                .setDescription('Pause the music')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.pause.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('previous')
-                .setDescription('Play previous song')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.previous.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('queue')
-                .setDescription('See the music queue')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.queue.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('resume')
-                .setDescription('Resume the music')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.resume.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('remove')
-                .setDescription('Remove a song from the queue')
-                .addNumberOption(option => option.setName('number').setDescription('Song number').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.remove.description'))
+                .addNumberOption(option => option.setName('number').setDescription(getCommandMetadata('commandMetadata.music.subcommands.remove.options.number.description')).setMinValue(1).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('seek')
-                .setDescription('Seek the current playing music')
-                .addNumberOption(option => option.setName('time').setDescription('New song time').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.seek.description'))
+                .addNumberOption(option => option.setName('time').setDescription(getCommandMetadata('commandMetadata.music.subcommands.seek.options.time.description')).setMinValue(0).setMaxValue(86400).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('shuffle')
-                .setDescription('Shuffle the music')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.shuffle.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('skip')
-                .setDescription('Skip the current song')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.skip.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('skipto')
-                .setDescription('Skip to a new song')
-                .addNumberOption(option => option.setName('number').setDescription('Song number').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.skipto.description'))
+                .addNumberOption(option => option.setName('number').setDescription(getCommandMetadata('commandMetadata.music.subcommands.skipto.options.number.description')).setMinValue(1).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('stop')
-                .setDescription('Stop the music')
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.stop.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('volume')
-                .setDescription('Set the music volume')
-                .addNumberOption(option => option.setName('amount').setDescription('New volume number'))
+                .setDescription(getCommandMetadata('commandMetadata.music.subcommands.volume.description'))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.music.subcommands.volume.options.amount.description')).setMinValue(0).setMaxValue(100))
         ),
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
@@ -121,7 +122,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         client.checkBotPerms({
             flags: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak],
             perms: [Discord.PermissionsBitField.Flags.Connect, Discord.PermissionsBitField.Flags.Speak]
