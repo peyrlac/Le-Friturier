@@ -10,7 +10,8 @@ const Schema = new mongoose.Schema({
     AntiInvite: { type: Boolean, default: false },
     AntiLinks: { type: Boolean, default: false },
     Prefix: String,
-    Color: String 
+    Color: String,
+    Features: { type: mongoose.Schema.Types.Mixed, default: () => ({}) }
 });
 
 module.exports = mongoose.model("functions", Schema);
