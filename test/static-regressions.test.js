@@ -251,8 +251,10 @@ test('fun command exposes localized top-level metadata', () => {
 test('tools command exposes localized top-level metadata', () => {
   const command = require(path.join(root, 'src/interactions/Command/tools.js'));
   const { resolveCommandLocalizations } = require('../src/handlers/i18n');
+  const toolsLocalizations = resolveCommandLocalizations(command);
+  const { subcommands: _toolsSubcommands, ...toolsRoot } = toolsLocalizations;
 
-  assert.deepEqual(resolveCommandLocalizations(command), {
+  assert.deepEqual(toolsRoot, {
     name: { fr: 'outils', en: 'tools' },
     description: {
       fr: 'Utiliser les outils du bot',
@@ -841,6 +843,11 @@ test('music command descriptions are sourced from locale metadata', () => {
 
 test('moderation command descriptions are sourced from locale metadata', () => {
   const source = read('src/interactions/Command/moderation.js');
+  assert.doesNotMatch(source, /\.setDescription\(['"]/);
+});
+
+test('tools command descriptions are sourced from locale metadata', () => {
+  const source = read('src/interactions/Command/tools.js');
   assert.doesNotMatch(source, /\.setDescription\(['"]/);
 });
 

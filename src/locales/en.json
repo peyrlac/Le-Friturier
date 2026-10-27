@@ -1621,7 +1621,28 @@
         "time": { "description": "Keep track of your current time zone", "options": { "timezone": { "description": "The timezone you want to set (e.g. Europe/Amsterdam)" } } }
       }
     },
-    "tools": { "name": "tools", "description": "Use the bot tools" },
+    "tools": {
+      "name": "tools",
+      "description": "Use the bot tools",
+      "subcommands": {
+        "help": { "description": "Get information about the tools category commands" },
+        "anagram": { "description": "Form a word with certain letters", "options": { "word": { "description": "The word you want to form" } } },
+        "button": { "description": "Create a button", "options": { "url": { "description": "The url for the button" }, "text": { "description": "The text for the button" } } },
+        "calculator": { "description": "Calculate a sum" },
+        "decode": { "description": "Decode binary code to text", "options": { "code": { "description": "The binary code you want to decode" } } },
+        "emojify": { "description": "Convert text to emojis", "options": { "text": { "description": "The text you want to convert" } } },
+        "encode": { "description": "Encode text to binary code", "options": { "text": { "description": "The text you want to encode" } } },
+        "enlarge": { "description": "Enlarge an emoji", "options": { "emoji": { "description": "The emoji you want to enlarge" } } },
+        "mcskin": { "description": "See the skin of a minecraft user", "options": { "name": { "description": "The username of the player" } } },
+        "mcstatus": { "description": "See the status of a minecraft server", "options": { "ip": { "description": "The ip of the mc server" } } },
+        "pwdgen": { "description": "Generate a password" },
+        "qrcode": { "description": "Sends a qrcode photo of text you have given", "options": { "text": { "description": "The text you want to convert" } } },
+        "remind": { "description": "Set a reminder", "options": { "time": { "description": "The time for your reminder" }, "message": { "description": "The message for your reminder" } } },
+        "sourcebin": { "description": "Upload code to source bin", "options": { "language": { "description": "The language of your code" }, "code": { "description": "Your code" } } },
+        "url": { "description": "Make a shortend url", "options": { "site": { "description": "The link to the website" }, "code": { "description": "The code for the url" } } },
+        "review": { "description": "Write a review", "options": { "stars": { "description": "The number of stars (max 5)" }, "message": { "description": "A small description with the review" } } }
+      }
+    },
     "fun": {
       "name": "fun",
       "description": "Run fun commands in the bot"
