@@ -113,3 +113,11 @@ test('moderation wave uses translation keys for common responses', () => {
     assert.match(read(file), /key:\s*["'][^"']+\.[^"']+/i, file);
   }
 });
+
+test('warnings command uses async persistence and localized responses', () => {
+  const source = read('src/commands/moderation/warnings.js');
+
+  assert.doesNotMatch(source, /findOne\([^\n]*,\s*async\s*\(err/);
+  assert.match(source, /Schema\.findOne\([\s\S]*?\);/);
+  assert.match(source, /(?:key|titleKey|descKey):\s*['"][^'"]+/);
+});

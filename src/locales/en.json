@@ -630,6 +630,14 @@
     "submitted": "Your review has been successfully submitted.",
     "newReview": "A new review has been published."
   },
+  "moderation": {
+    "warningsTitle": "⚠️・Warnings",
+    "warningsDescription": "Warnings for **{user}**",
+    "warningCase": "Warning **{case}**",
+    "warningDetails": "Reason: {reason}\nModerator {moderator}",
+    "total": "Total",
+    "noWarnings": "User {user} has no warnings."
+  },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
     "promptAction": "Which action should be attached to this command?",
