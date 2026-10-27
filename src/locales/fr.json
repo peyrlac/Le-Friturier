@@ -1689,7 +1689,27 @@
     },
     "moderation": {
       "name": "modération",
-      "description": "Gérer la modération du serveur"
+      "description": "Gérer la modération du serveur",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie modération" },
+        "ban": { "description": "Bannir un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" }, "reason": { "description": "Raison du bannissement" } } },
+        "clear": { "description": "Supprimer des messages", "options": { "amount": { "description": "Nombre de messages" } } },
+        "clearuser": { "description": "Supprimer les messages d’un utilisateur dans un salon", "options": { "user": { "description": "Sélectionner un utilisateur" } } },
+        "demote": { "description": "Rétrograder un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" } } },
+        "kick": { "description": "Expulser un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" }, "reason": { "description": "Raison de l’expulsion" } } },
+        "lock": { "description": "Verrouiller un salon", "options": { "channel": { "description": "Sélectionner un salon" } } },
+        "lockdown": { "description": "Verrouiller tous les salons" },
+        "nuke": { "description": "Réinitialiser un salon" },
+        "softban": { "description": "Bannir temporairement un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" }, "reason": { "description": "Raison du bannissement" } } },
+        "timeout": { "description": "Mettre un utilisateur en timeout", "options": { "user": { "description": "Sélectionner un utilisateur" }, "time": { "description": "Nombre de minutes" }, "reason": { "description": "Raison du timeout" } } },
+        "tempban": { "description": "Bannir temporairement un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" }, "time": { "description": "Nombre de minutes" }, "reason": { "description": "Raison du bannissement" } } },
+        "unlock": { "description": "Déverrouiller un salon", "options": { "channel": { "description": "Sélectionner un salon" } } },
+        "unban": { "description": "Débannir un utilisateur", "options": { "user": { "description": "Saisir l’identifiant d’un utilisateur" } } },
+        "banlist": { "description": "Obtenir la liste des utilisateurs bannis" },
+        "warn": { "description": "Avertir un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" }, "reason": { "description": "Raison de l’avertissement" } } },
+        "unwarn": { "description": "Retirer l’avertissement d’un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" }, "case": { "description": "Saisir un numéro de dossier" } } },
+        "warnings": { "description": "Voir les avertissements d’un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" } } }
+      }
     },
     "setup": {
       "name": "configuration",

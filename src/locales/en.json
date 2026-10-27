@@ -1702,7 +1702,27 @@
     },
     "moderation": {
       "name": "moderation",
-      "description": "Manage all server moderation"
+      "description": "Manage all server moderation",
+      "subcommands": {
+        "help": { "description": "Get information about the moderation category commands" },
+        "ban": { "description": "Ban a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the ban" } } },
+        "clear": { "description": "Clear messages", "options": { "amount": { "description": "Amount of messages" } } },
+        "clearuser": { "description": "Clear user messages in a channel", "options": { "user": { "description": "Select a user" } } },
+        "demote": { "description": "Demote a user", "options": { "user": { "description": "Select a user" } } },
+        "kick": { "description": "Kick a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the kick" } } },
+        "lock": { "description": "Lock a channel", "options": { "channel": { "description": "Select a channel" } } },
+        "lockdown": { "description": "Lock all channels" },
+        "nuke": { "description": "Nuke a channel" },
+        "softban": { "description": "Softban a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the ban" } } },
+        "timeout": { "description": "Timeout a user", "options": { "user": { "description": "Select a user" }, "time": { "description": "Number of minutes" }, "reason": { "description": "Reason for the time out" } } },
+        "tempban": { "description": "Temp ban a user", "options": { "user": { "description": "Select a user" }, "time": { "description": "Number of minutes" }, "reason": { "description": "The reason for the ban" } } },
+        "unlock": { "description": "Unlock a channel", "options": { "channel": { "description": "Select a channel" } } },
+        "unban": { "description": "Unban a user", "options": { "user": { "description": "Give a user id" } } },
+        "banlist": { "description": "Get all banned users" },
+        "warn": { "description": "Warn a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the warn" } } },
+        "unwarn": { "description": "Unwarn a user", "options": { "user": { "description": "Select a user" }, "case": { "description": "Give a case number" } } },
+        "warnings": { "description": "See a users warnings", "options": { "user": { "description": "Select a user" } } }
+      }
     },
     "setup": {
       "name": "setup",
