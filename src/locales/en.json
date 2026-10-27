@@ -909,6 +909,21 @@
     "resetSuccess": "Your family has been destroyed!",
     "resetTimeout": "The time limit expired. Your family was not changed."
   },
+  "moderationExtras": {
+    "emptyBanlist": "This server has no bans.",
+    "banlistTitle": "🔧・Banlist - {guild}",
+    "banEntry": "{user}・**Reason:** {reason}",
+    "reason": "Reason",
+    "noReason": "No reason",
+    "unbanned": "The specified user has been successfully unbanned!",
+    "userNotFound": "I could not find the user!",
+    "demoteTitle": "🔨・Demote",
+    "demoteNotice": "You've been demoted from **{guild}**",
+    "moderator": "👤┆Moderator",
+    "user": "👤┆User",
+    "demoted": "User successfully demoted",
+    "demoteFailed": "I can't demote the user."
+  },
   "guild": {
     "userNotFound": "This user is not in this guild!",
     "userInfoTitle": "👤・User information",
@@ -1023,6 +1038,17 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "casino": {
+      "name": "casino",
+      "description": "Play casino games",
+      "subcommands": {
+        "help": { "description": "Get information about casino commands" },
+        "blackjack": { "description": "Play a game of blackjack to win money", "options": { "amount": { "description": "Enter an amount" } } },
+        "crash": { "description": "More risk, more reward", "options": { "amount": { "description": "Enter an amount" } } },
+        "roulette": { "description": "Play roulette", "options": { "color": { "description": "Enter a color" }, "amount": { "description": "Enter an amount" } } },
+        "slots": { "description": "Play slot machines", "options": { "amount": { "description": "Enter an amount" } } }
+      }
+    },
     "voice": {
       "name": "voice",
       "description": "Manage voice channels"

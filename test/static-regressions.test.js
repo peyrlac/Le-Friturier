@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
+const initializeI18n = require('../src/handlers/i18n');
 
 const root = path.resolve(__dirname, '..');
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -517,13 +518,34 @@ test('developer credit responses use localization keys', () => {
   assert.doesNotMatch(source, /succNormal\(\{\s*text:/);
 });
 
+test('advanced moderation responses use localization keys', () => {
+  const expectations = {
+    'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],
+    'src/commands/moderation/unban.js': ['moderationExtras.unbanned', 'moderationExtras.userNotFound'],
+    'src/commands/moderation/demote.js': ['moderationExtras.demoteTitle', 'moderationExtras.demoteNotice', 'moderationExtras.demoted', 'moderationExtras.demoteFailed']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), `${file}: ${key}`);
+    assert.doesNotMatch(source, /This server has no bans|successfully unbanned|I could not find the user|User successfully demoted|I can't demote the user/i, file);
+  }
+});
+
+test('casino command metadata is sourced from the locale catalogs', () => {
+  const source = read('src/interactions/Command/casino.js');
+  assert.match(source, /localizationKey:\s*['"]commandMetadata\.casino['"]/);
+  assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));
-    assert.ok(command.localizations?.name?.fr, name);
-    assert.ok(command.localizations?.name?.en, name);
-    assert.ok(command.localizations?.description?.fr, name);
-    assert.ok(command.localizations?.description?.en, name);
+    const localizations = initializeI18n.resolveCommandLocalizations(command);
+    assert.ok(localizations?.name?.fr, name);
+    assert.ok(localizations?.name?.en, name);
+    assert.ok(localizations?.description?.fr, name);
+    assert.ok(localizations?.description?.en, name);
   }
 });
 

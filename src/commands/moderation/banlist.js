@@ -9,17 +9,17 @@ module.exports = async (client, interaction, args) => {
   if (perms == false) return;
 
   interaction.guild.bans.fetch().then(async banned => {
-    let list = banned.map(banUser => `${banUser.user.tag}・**Reason:** ${banUser.reason || 'No reason'}`);
+    const list = await Promise.all(banned.map(async banUser => `${banUser.user.tag}・**${await client.t(interaction, 'moderationExtras.reason')} :** ${banUser.reason || await client.t(interaction, 'moderationExtras.noReason')}`));
 
     if (list.length == 0) return client.errNormal({
-      error: `This server has no bans`,
+      key: 'moderationExtras.emptyBanlist',
       type: 'editreply'
     }, interaction)
 
-    await client.createLeaderboard(`🔧・Banlist - ${interaction.guild.name}`, list, interaction);
+    const title = await client.t(interaction, 'moderationExtras.banlistTitle', { guild: interaction.guild.name });
+    await client.createLeaderboard(title, list, interaction);
   }).catch(error => {
     console.log(error)
   })
 }
 
- 

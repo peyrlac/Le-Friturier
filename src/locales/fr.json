@@ -896,6 +896,21 @@
     "resetSuccess": "Ta famille a été décimée !",
     "resetTimeout": "Le délai est dépassé. La famille n'a pas été modifiée."
   },
+  "moderationExtras": {
+    "emptyBanlist": "Ce serveur n'a aucune exclusion.",
+    "banlistTitle": "🔧・Liste des exclusions - {guild}",
+    "banEntry": "{user}・**Motif :** {reason}",
+    "reason": "Motif",
+    "noReason": "Aucun motif",
+    "unbanned": "L'utilisateur indiqué a été débanni avec succès !",
+    "userNotFound": "Impossible de trouver l'utilisateur !",
+    "demoteTitle": "🔨・Rétrogradation",
+    "demoteNotice": "Vous avez été rétrogradé sur **{guild}**",
+    "moderator": "👤┆Modérateur",
+    "user": "👤┆Utilisateur",
+    "demoted": "Utilisateur rétrogradé avec succès",
+    "demoteFailed": "Impossible de rétrograder l'utilisateur."
+  },
   "guild": {
     "userNotFound": "Cet utilisateur ne se trouve pas sur ce serveur !",
     "userInfoTitle": "👤・Informations utilisateur",
@@ -1010,6 +1025,17 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "casino": {
+      "name": "casino",
+      "description": "Jouer aux jeux du casino",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de catégorie de casino" },
+        "blackjack": { "description": "Jouer à un jeu de blackjack pour gagner de l'argent", "options": { "amount": { "description": "Entrez un montant" } } },
+        "crash": { "description": "Plus de risques, plus de récompense", "options": { "amount": { "description": "Entrez un montant" } } },
+        "roulette": { "description": "Jouer à la roulette", "options": { "color": { "description": "Entrez une couleur" }, "amount": { "description": "Entrez un montant" } } },
+        "slots": { "description": "Jouer aux machines à sous", "options": { "amount": { "description": "Entrez un montant" } } }
+      }
+    },
     "voice": {
       "name": "vocal",
       "description": "Gérer les salons vocaux"

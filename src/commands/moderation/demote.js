@@ -10,13 +10,14 @@ module.exports = async (client, interaction, args) => {
 
   const member = await interaction.guild.members.fetch(interaction.options.getUser('user').id);
 
-  member.roles.remove(member.roles.highest.id).then(r => {
+  member.roles.remove(member.roles.highest.id).then(async r => {
     client.embed({
-      title: `🔨・Demote`,
-      desc: `You've been demoted from **${interaction.guild.name}**`,
+      titleKey: 'moderationExtras.demoteTitle',
+      descKey: 'moderationExtras.demoteNotice',
+      variables: { guild: interaction.guild.name },
       fields: [
         {
-          name: "👤┆Moderator",
+          name: await client.t(interaction, 'moderationExtras.moderator'),
           value: interaction.user.tag,
           inline: true
         },
@@ -24,9 +25,9 @@ module.exports = async (client, interaction, args) => {
     }, member).catch(() => { })
 
     client.succNormal({
-      text: `User successfully demoted`, fields: [
+      key: 'moderationExtras.demoted', fields: [
         {
-          name: "👤┆User",
+          name: await client.t(interaction, 'moderationExtras.user'),
           value: `${member}`,
           inline: true
         }
@@ -35,10 +36,9 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
   }).catch(e => {
     client.errNormal({
-      error: "I can't demote the user",
+      key: 'moderationExtras.demoteFailed',
       type: 'editreply'
     }, interaction)
   });
 }
 
- 
