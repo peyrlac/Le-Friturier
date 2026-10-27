@@ -36,6 +36,11 @@
         "ageSuccess": "Your age is now: {age}",
         "aboutMeTooLong": "Your about me cannot be longer than 1024 characters.",
         "aboutMeSuccess": "Your about me has been updated.",
+        "genderPrompt": "Select a gender",
+        "genderSuccess": "Your gender is now: {gender}",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "genderOther": "Other",
         "notFound": "No profile found! Open one with `createprofile`."
       },
         "config": {
