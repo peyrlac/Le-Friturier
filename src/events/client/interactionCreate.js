@@ -190,7 +190,11 @@ module.exports = async (client, interaction) => {
             }
 
             return interaction.reply({
-                content: `<@&${roleid}> was ${hasRole ? 'removed' : 'added'}!`,
+                content: await client.t(
+                    interaction,
+                    hasRole ? 'reactionroles.roleRemoved' : 'reactionroles.roleAdded',
+                    { role: `<@&${roleid}>` }
+                ),
                 flags: Discord.MessageFlags.Ephemeral
             });
         }
@@ -218,7 +222,9 @@ module.exports = async (client, interaction) => {
             }
 
             return interaction.reply({
-                content: `I have updated the following roles for you: ${roles.join(' ')}`,
+                content: await client.t(interaction, 'reactionroles.rolesUpdated', {
+                    roles: roles.join(' ')
+                }),
                 flags: Discord.MessageFlags.Ephemeral
             });
         }

@@ -903,7 +903,10 @@
     "panelDescription": "_____\n\nChoose your roles by pressing the button!\n\n{roles}",
     "panelCreated": "Reaction role panel created!",
     "deleted": "**{category}** successfully deleted!",
-    "listTitle": "📃・Reaction roles"
+    "listTitle": "📃・Reaction roles",
+    "roleAdded": "The role {role} was added to you!",
+    "roleRemoved": "The role {role} was removed from you!",
+    "rolesUpdated": "I have updated the following roles for you: {roles}"
   },
   "moderation": {
     "channelLocked": "Channel locked successfully!",

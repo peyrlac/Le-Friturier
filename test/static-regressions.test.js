@@ -507,6 +507,12 @@ test('reaction roles responses use localization keys', () => {
   }
 });
 
+test('reaction role interaction responses use the active locale', () => {
+  const source = read('src/events/client/interactionCreate.js');
+  assert.match(source, /reactionroles\.(roleAdded|roleRemoved|rolesUpdated)/);
+  assert.doesNotMatch(source, /was \$\{hasRole \? 'removed' : 'added'\}|I have updated the following roles for you/);
+});
+
 test('move commands use localization keys for all user-facing responses', () => {
   const files = ['all.js', 'group.js', 'random.js', 'empty.js', 'split.js', 'regroup.js', 'emergency-meeting.js'];
   for (const file of files) {
