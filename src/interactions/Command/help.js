@@ -3,11 +3,12 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const moment = require("moment");
 require("moment-duration-format");
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('help')
-        .setDescription('Get help with the bot'),
+        .setName(getCommandMetadata('commandMetadata.help.name'))
+        .setDescription(getCommandMetadata('commandMetadata.help.description')),
 
     /** 
      * @param {Client} client
