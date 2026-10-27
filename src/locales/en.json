@@ -847,6 +847,41 @@
     "reason": "📄┆Reason"
       ,"selectWarning": "Select a warning to remove"
   },
+  "userinfo": {
+    "title": "👤・User information",
+    "description": "Information about {user}",
+    "username": "Username",
+    "discriminator": "Discriminator",
+    "nickname": "Nickname",
+    "noNickname": "No nickname",
+    "id": "ID",
+    "flagsLabel": "Discord flags",
+    "noFlags": "None",
+    "badges": "Bot badges",
+    "noBadges": "None",
+    "discordJoinedAt": "Discord account created at",
+    "serverJoinedAt": "Server joined at",
+    "roles": "Roles [{count}]",
+    "noRoles": "None",
+    "unknownFlag": "Unknown Discord flag",
+    "flags": {
+      "activeDeveloper": "👨‍💻・Active Developer",
+      "bugHunter": "🐛・Discord Bug Hunter",
+      "certifiedModerator": "👮‍♂️・Certified Moderator",
+      "houseBravery": "🏠・House Bravery Member",
+      "houseBrilliance": "🏠・House Brilliance Member",
+      "houseBalance": "🏠・House Balance Member",
+      "hypeSquadEvents": "🏠・HypeSquad Events",
+      "earlySupporter": "👑・Early Supporter",
+      "partner": "👑・Partner",
+      "quarantined": "🔒・Quarantined",
+      "spammer": "🔒・Spammer",
+      "discordStaff": "👨‍💼・Discord Staff",
+      "discordTeam": "👨‍💼・Discord Team",
+      "verifiedBot": "🤖・Verified Bot",
+      "verifiedDeveloper": "👨‍💻・Verified Bot Developer"
+    }
+  },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
     "promptAction": "Which action should be attached to this command?",

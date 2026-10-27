@@ -760,6 +760,28 @@ test('warning context menus use localized moderation labels', () => {
   assert.doesNotMatch(read('src/interactions/ContextMenu/unwarn.js'), /Select a warning|You've been unwarned/);
 });
 
+test('userinfo context menu uses localized profile labels', () => {
+  const source = read('src/interactions/ContextMenu/userinfo.js');
+  for (const key of [
+    'userinfo.title',
+    'userinfo.description',
+    'userinfo.username',
+    'userinfo.discriminator',
+    'userinfo.nickname',
+    'userinfo.noNickname',
+    'userinfo.id',
+    'userinfo.flagsLabel',
+    'userinfo.noFlags',
+    'userinfo.badges',
+    'userinfo.noBadges',
+    'userinfo.discordJoinedAt',
+    'userinfo.serverJoinedAt',
+    'userinfo.roles',
+    'userinfo.noRoles'
+  ]) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  assert.doesNotMatch(source, /User information|Information about|No nickname|Discord joined at|Server joined at/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);

@@ -834,6 +834,41 @@
     "reason": "📄┆Motif"
       ,"selectWarning": "Sélectionnez un avertissement à retirer"
   },
+  "userinfo": {
+    "title": "👤・Informations utilisateur",
+    "description": "Informations sur {user}",
+    "username": "Nom d'utilisateur",
+    "discriminator": "Discriminateur",
+    "nickname": "Surnom",
+    "noNickname": "Aucun surnom",
+    "id": "Identifiant",
+    "flagsLabel": "Badges Discord",
+    "noFlags": "Aucun",
+    "badges": "Badges du bot",
+    "noBadges": "Aucun",
+    "discordJoinedAt": "Compte Discord créé le",
+    "serverJoinedAt": "Arrivée sur le serveur le",
+    "roles": "Rôles [{count}]",
+    "noRoles": "Aucun",
+    "unknownFlag": "Badge Discord inconnu",
+    "flags": {
+      "activeDeveloper": "👨‍💻・Développeur actif",
+      "bugHunter": "🐛・Chasseur de bugs Discord",
+      "certifiedModerator": "👮‍♂️・Modérateur certifié",
+      "houseBravery": "🏠・Maison Bravoure",
+      "houseBrilliance": "🏠・Maison Brillance",
+      "houseBalance": "🏠・Maison Équilibre",
+      "hypeSquadEvents": "🏠・Événements HypeSquad",
+      "earlySupporter": "👑・Ancien soutien",
+      "partner": "👑・Partenaire",
+      "quarantined": "🔒・Compte isolé",
+      "spammer": "🔒・Spammeur",
+      "discordStaff": "👨‍💼・Équipe Discord",
+      "discordTeam": "👨‍💼・Équipe Discord",
+      "verifiedBot": "🤖・Bot vérifié",
+      "verifiedDeveloper": "👨‍💻・Développeur de bot vérifié"
+    }
+  },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",
     "promptAction": "Quelle action doit être associée à cette commande ?",
