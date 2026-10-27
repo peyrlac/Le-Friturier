@@ -429,7 +429,11 @@
       "tweetTitle": "Tweet",
       "trumpTweetTitle": "Tweet de Trump",
       "generateError": "Impossible de générer l'image demandée.",
-      "generatedImageTitle": "Image générée"
+      "generatedImageTitle": "Image générée",
+      "adTitle": "Publicité",
+      "bedTitle": "Meme du lit",
+      "blurTitle": "Image floutée",
+      "burnTitle": "Image brûlée"
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
