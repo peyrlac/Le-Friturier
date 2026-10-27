@@ -854,6 +854,19 @@ test('remaining bot panels use localization keys', () => {
   assert.doesNotMatch(read('src/commands/bot/vote.js'), /Vote for me/);
 });
 
+test('bot info embed uses localized labels', () => {
+  const source = read('src/commands/bot/info.js');
+  for (const key of [
+    'botInfo.title', 'botInfo.description', 'botInfo.information', 'botInfo.general',
+    'botInfo.botName', 'botInfo.botId', 'botInfo.shards', 'botInfo.owner', 'botInfo.developer',
+    'botInfo.commands', 'botInfo.guilds', 'botInfo.currentGuilds', 'botInfo.members',
+    'botInfo.voiceChannels', 'botInfo.channels', 'botInfo.createdAt', 'botInfo.system',
+    'botInfo.uptime', 'botInfo.apiLatency', 'botInfo.botVersion', 'botInfo.nodeVersion',
+    'botInfo.discordVersion', 'botInfo.memory', 'botInfo.links'
+  ]) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  assert.doesNotMatch(source, /BOT INFORMATION|Bot est un bot|Nom de bot|Vitesse de l'API/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
