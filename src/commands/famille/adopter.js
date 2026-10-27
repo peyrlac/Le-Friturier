@@ -7,12 +7,12 @@ module.exports = async (client, interaction, args) => {
     const author = interaction.user;
 
     if (author.id == target.id) return client.errNormal({
-        error: "Tu ne peux pas t'adopter toi-même",
+        key: 'family.selfAdoption',
         type: 'editreply'
     }, interaction);
 
     if (target.bot) return client.errNormal({
-        error: "Tu ne peux pas adopter un robot",
+        key: 'family.botAdoption',
         type: 'editreply'
     }, interaction);
 
@@ -22,7 +22,7 @@ module.exports = async (client, interaction, args) => {
 
     if (familyMember || familyMember2 || familyMember3) {
         return client.errNormal({
-            error: `Tu ne peux pas adopter un membre de ta famille !`,
+            key: 'family.relativeAdoption',
             type: 'editreply'
         }, interaction);
     }
@@ -30,7 +30,7 @@ module.exports = async (client, interaction, args) => {
     const checkAdopt = await Schema.findOne({ Guild: interaction.guild.id, Children: target.id });
     if (checkAdopt) {
         return client.errNormal({
-            error: `Cette personne a déjà été adoptée !`,
+            key: 'family.alreadyAdopted',
             type: 'editreply'
         }, interaction);
     }
@@ -48,8 +48,8 @@ module.exports = async (client, interaction, args) => {
         );
 
     await client.embed({
-        title: `👪・Adoption`,
-        desc: `${author} a demandé d'adopter ${target} ! \n${target}, clique sur un des boutons`,
+        title: await client.t(interaction, 'family.adoptionTitle'),
+        desc: await client.t(interaction, 'family.adoptionDescription', { author, target }),
         components: [row],
         content: `${target}`,
         image: 'https://media2.giphy.com/media/y7XmH8QgILhS5tXCCk/giphy.gif',
@@ -97,8 +97,8 @@ module.exports = async (client, interaction, args) => {
             }
 
             return client.embed({
-                title: `👪・Adoption acceptée`,
-                desc: `${author} est maintenant l'heureux parent de ${target}! 🎉`,
+                title: await client.t(interaction, 'family.adoptionAcceptedTitle'),
+                desc: await client.t(interaction, 'family.adoptionAcceptedDescription', { author, target }),
                 components: [],
                 image: 'https://media1.giphy.com/media/xUySTUZ8A2RJBQitEc/giphy.gif',
                 type: 'editreply'
@@ -106,8 +106,8 @@ module.exports = async (client, interaction, args) => {
         }
 
         return client.embed({
-            title: `👪・Adoption refusée`,
-            desc: `${target} ne veut pas être adopté.e par ${author}`,
+            title: await client.t(interaction, 'family.adoptionDeclinedTitle'),
+            desc: await client.t(interaction, 'family.adoptionDeclinedDescription', { author, target }),
             components: [],
             image: 'https://media0.giphy.com/media/ISOckXUybVfQ4/giphy.gif',
             type: 'editreply'
@@ -115,8 +115,8 @@ module.exports = async (client, interaction, args) => {
     }
     catch {
         return client.embed({
-            title: `👪・Adoption refusée`,
-            desc: `${target} n'a pas répondu ! L'adoption a été annulée`,
+            title: await client.t(interaction, 'family.adoptionTimeoutTitle'),
+            desc: await client.t(interaction, 'family.adoptionTimeoutDescription', { target }),
             components: [],
             image: 'https://media.tenor.com/-Rngjigx2HAAAAAd/alone.gif',
             type: 'editreply'

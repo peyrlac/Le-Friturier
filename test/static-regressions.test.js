@@ -321,6 +321,20 @@ test('economy reset, leaderboard, and store use localization keys', () => {
   assert.doesNotMatch(store, /No store found in this guild|Bot's Store|To buy/);
 });
 
+test('remaining family adoption and divorce responses use localization keys', () => {
+  const adoption = read('src/commands/famille/adopter.js');
+  const divorce = read('src/commands/famille/divorcer.js');
+
+  for (const key of ['family.selfAdoption', 'family.botAdoption', 'family.relativeAdoption', 'family.alreadyAdopted', 'family.adoptionTitle', 'family.adoptionDescription', 'family.adoptionAcceptedTitle', 'family.adoptionAcceptedDescription', 'family.adoptionDeclinedTitle', 'family.adoptionDeclinedDescription', 'family.adoptionTimeoutTitle', 'family.adoptionTimeoutDescription']) {
+    assert.match(adoption, new RegExp(key.replaceAll('.', '\\.') ), key);
+  }
+  for (const key of ['family.selfDivorce', 'family.botDivorce', 'family.notMarried', 'family.divorceTitle', 'family.divorceDescription']) {
+    assert.match(divorce, new RegExp(key.replaceAll('.', '\\.') ), key);
+  }
+  assert.doesNotMatch(adoption, /Tu ne peux pas|Cette personne a déjà|Adoption acceptée|Adoption refusée|n'a pas répondu/);
+  assert.doesNotMatch(divorce, /Tu ne peux pas|Tu n'es pas marrier|Divorcés|viennent de divorcer/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));
