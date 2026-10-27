@@ -148,7 +148,8 @@
       "imageSent": "L'image a été envoyée avec succès dans {channel}.",
       "tweetTitle": "Tweet",
       "trumpTweetTitle": "Tweet de Trump",
-      "generateError": "Impossible de générer l'image demandée."
+      "generateError": "Impossible de générer l'image demandée.",
+      "generatedImageTitle": "Image générée"
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",

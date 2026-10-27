@@ -167,7 +167,8 @@
       "imageSent": "The image was successfully sent to {channel}.",
       "tweetTitle": "Tweet",
       "trumpTweetTitle": "Trump tweet",
-      "generateError": "Unable to generate the requested image."
+      "generateError": "Unable to generate the requested image.",
+      "generatedImageTitle": "Generated image"
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",
