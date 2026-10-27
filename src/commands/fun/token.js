@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
-    fetch(
+    return getJson(
         `https://some-random-api.com/bottoken?id=${interaction.user.id}`
     )
-        .then((res) => res.json()).catch(() => {})
+
         .then(async (json) => {
 
             client.embed({
@@ -14,8 +14,8 @@ module.exports = async (client, interaction, args) => {
                 desc: json.token,
                 type: 'editreply',
             }, interaction);
-        }).catch(() => {})
+        }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
 
 }
 
- 
+

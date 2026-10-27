@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -6,9 +6,9 @@ module.exports = async (client, interaction, args) => {
     const text = interaction.options.getString('text');
 
     try {
-        fetch(`https://nekobot.xyz/api/imagegen?type=tweet&username=${user}&text=${text}`)
+        await getJson(`https://nekobot.xyz/api/imagegen?type=tweet&username=${encodeURIComponent(user)}&text=${encodeURIComponent(text)}`)
 
-            .then((res) => res.json()).catch(() => {})
+
             .then(async (json) => {
 
                 client.embed({
@@ -17,10 +17,11 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
 
-            }).catch(() => {})
+            }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
+    } catch (error) {
+        return client.errNormal({ error: 'Unable to generate the tweet image.', type: 'editreply' }, interaction);
     }
-    catch { }
 
 }
 
- 
+
