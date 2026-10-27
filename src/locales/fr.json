@@ -130,6 +130,14 @@
       "hackPranked": "Canular",
       "hackRemoteError": "Impossible de récupérer les données distantes."
     },
+    "games": {
+      "rollTitle": "Lancer de dé",
+      "rolled": "Vous avez obtenu {result}.",
+      "rpsTitle": "Pierre-papier-ciseaux",
+      "rpsWin": "J'ai choisi {result}, vous gagnez !",
+      "rpsLose": "J'ai choisi {result}, je gagne !",
+      "rpsDraw": "J'ai choisi {result}, égalité !"
+    },
     "images": {
       "remoteDataError": "Impossible de récupérer les données distantes.",
       "birdTitle": "Oiseau aléatoire",
