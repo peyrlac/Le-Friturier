@@ -25,6 +25,27 @@ function localeValue(source, key) {
   return getValue(source, key) ?? getValue(source, key.startsWith('commands.') ? key : `commands.${key}`);
 }
 
+function placeholders(value) {
+  return [...String(value).matchAll(/\{([^{}]+)\}/g)].map(match => match[1]);
+}
+
+function sourceFiles() {
+  return [
+    ...filesIn('src/commands'),
+    ...filesIn('src/interactions/Command'),
+    ...filesIn('src/events'),
+    ...filesIn('src/handlers')
+  ];
+}
+
+function variableNames(objectSource) {
+  return objectSource
+    .split(',')
+    .map(part => part.trim())
+    .map(part => part.match(/^([A-Za-z_$][\w$]*)\s*(?::|$)/)?.[1])
+    .filter(Boolean);
+}
+
 test('all static response keys exist in both locale catalogs', () => {
   const files = [...filesIn('src/commands'), ...filesIn('src/interactions/Command')];
   const keyPattern = /\b(?:key|descKey|titleKey):[ \t]*['"]([^'"]+)['"]|client\.t\([^,]+,[ \t]*['"]([^'"]+)['"]/g;
@@ -44,7 +65,6 @@ test('all static response keys exist in both locale catalogs', () => {
 });
 
 test('every translated string keeps the same interpolation placeholders', () => {
-  const placeholders = value => [...String(value).matchAll(/\{([^{}]+)\}/g)].map(match => match[1]).sort();
   const mismatches = [];
 
   function walk(french, english, prefix = '') {
@@ -62,4 +82,24 @@ test('every translated string keeps the same interpolation placeholders', () => 
 
   walk(fr, en);
   assert.deepEqual(mismatches, []);
+});
+
+test('translation calls provide every interpolation variable required by the catalog', () => {
+  const missing = [];
+  const usagePattern = /(?:key|descKey|titleKey):\s*['"]([^'"]+)['"][\s\S]{0,500}?variables:\s*\{([^{}]*)\}/g;
+
+  for (const file of sourceFiles()) {
+    const source = fs.readFileSync(path.join(root, file), 'utf8');
+    let match;
+    while ((match = usagePattern.exec(source))) {
+      const key = match[1];
+      const required = new Set(placeholders(localeValue(fr, key)));
+      const provided = new Set(variableNames(match[2]));
+      for (const variable of required) {
+        if (!provided.has(variable)) missing.push(`${file}: ${key} requires {${variable}}`);
+      }
+    }
+  }
+
+  assert.deepEqual(missing, []);
 });
