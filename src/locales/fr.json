@@ -290,6 +290,22 @@
       "skippedTo": "Musique passée à **{number}**."
     },
     "economy": {
+      "withdraw": {
+        "invalid": "Saisissez un nombre valide !",
+        "negative": "Vous ne pouvez pas retirer une somme négative !",
+        "emptyBank": "Il ne reste plus d'argent dans la banque !",
+        "noAccount": "Vous n'avez pas d'argent à retirer.",
+        "success": "Vous avez retiré de l'argent de votre banque !",
+        "amount": "Montant"
+      },
+      "fish": {
+        "noRod": "Vous devez acheter une canne à pêche !",
+        "rodBroken": "Votre canne à pêche est cassée ! Allez-en acheter une nouvelle !",
+        "success": "Vous avez pêché et obtenu : {fish}"
+      },
+      "hunt": {
+        "success": "Vous avez chassé et obtenu : {animal}"
+      },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",

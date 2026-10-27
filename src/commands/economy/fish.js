@@ -36,45 +36,36 @@ module.exports = async (client, interaction, args) => {
 
     const userItems = await itemSchema.findOne({ Guild: interaction.guild.id, User: user.id });
 
-    if (!userItems || userItems.FishingRod == false) return client.errNormal({ error: "You have to buy a fishing rod!", type: 'editreply' }, interaction);
+    if (!userItems || userItems.FishingRod == false) return client.errNormal({ key: 'economy.fish.noRod', type: 'editreply' }, interaction);
 
     if (userItems) {
         if (userItems.FishingRodUsage >= randrod) {
             userItems.FishingRod = false;
-            userItems.save();
+            await userItems.save();
 
-            return client.errNormal({ error: "Your fishing rod has broken! Go buy a new one!", type: 'editreply' }, interaction);
+            return client.errNormal({ key: 'economy.fish.rodBroken', type: 'editreply' }, interaction);
         }
     }
 
-    Schema2.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, dataTime) => {
-        if (dataTime && dataTime.Fish !== null && timeout - (Date.now() - dataTime.Fish) > 0) {
-            let time = (dataTime.Fish / 1000 + timeout / 1000).toFixed(0);
+    const dataTime = await Schema2.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (dataTime && dataTime.Fish !== null && timeout - (Date.now() - dataTime.Fish) > 0) {
+        let time = (dataTime.Fish / 1000 + timeout / 1000).toFixed(0);
 
-            return client.errWait({ time: time, type: 'editreply' }, interaction);
-        }
-        else {
-            client.succNormal({ text: `You've fished and gotten a ${fishToWin}`, type: 'editreply' }, interaction);
+        return client.errWait({ time: time, type: 'editreply' }, interaction);
+    }
 
-            if (userItems) {
-                userItems.FishingRodUsage += 1;
-                userItems.save();
-            }
+    client.succNormal({ key: 'economy.fish.success', variables: { fish: fishToWin }, type: 'editreply' }, interaction);
 
-            if (dataTime) {
-                dataTime.Fish = Date.now();
-                dataTime.save();
-            }
-            else {
-                new Schema2({
-                    Guild: message.guild.id,
-                    User: user.id,
-                    Fish: Date.now()
-                }).save();
-            }
-        }
-    })
+    if (userItems) {
+        userItems.FishingRodUsage += 1;
+        await userItems.save();
+    }
+
+    if (dataTime) {
+        dataTime.Fish = Date.now();
+        await dataTime.save();
+    } else {
+        await new Schema2({ Guild: interaction.guild.id, User: user.id, Fish: Date.now() }).save();
+    }
 
 }
-
- 

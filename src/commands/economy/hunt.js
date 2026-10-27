@@ -34,29 +34,20 @@ module.exports = async (client, interaction, args) => {
 
     let huntToWin = hunt[randn];
 
-    Schema2.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, dataTime) => {
-        if (dataTime && dataTime.Hunt !== null && timeout - (Date.now() - dataTime.Hunt) > 0) {
-            let time = (dataTime.Hunt / 1000 + timeout / 1000).toFixed(0);
+    const dataTime = await Schema2.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (dataTime && dataTime.Hunt !== null && timeout - (Date.now() - dataTime.Hunt) > 0) {
+        let time = (dataTime.Hunt / 1000 + timeout / 1000).toFixed(0);
 
-            return client.errWait({ time: time, type: 'editreply' }, interaction);
-        }
-        else {
-            client.succNormal({ text: `You've hunted and gotten a ${huntToWin}`, type: 'editreply' }, interaction);
+        return client.errWait({ time: time, type: 'editreply' }, interaction);
+    }
 
-            if (dataTime) {
-                dataTime.Hunt = Date.now();
-                dataTime.save();
-            }
-            else {
-                new Schema2({
-                    Guild: interaction.guild.id,
-                    User: user.id,
-                    Hunt: Date.now()
-                }).save();
-            }
-        }
-    })
+    client.succNormal({ key: 'economy.hunt.success', variables: { animal: huntToWin }, type: 'editreply' }, interaction);
+
+    if (dataTime) {
+        dataTime.Hunt = Date.now();
+        await dataTime.save();
+    } else {
+        await new Schema2({ Guild: interaction.guild.id, User: user.id, Hunt: Date.now() }).save();
+    }
 
 }
-
- 
