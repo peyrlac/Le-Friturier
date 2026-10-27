@@ -309,12 +309,14 @@ module.exports = async (client, interaction) => {
                 .addComponents(
                     new Discord.ButtonBuilder()
                         .setCustomId(enableReminders ? 'event_reminders_disable' : 'event_reminders_enable')
-                        .setLabel(enableReminders ? 'Désactiver les rappels' : 'Activer les rappels')
+                        .setLabel(enableReminders ?
+                            await client.t(interaction, 'events.reminders.disable') :
+                            await client.t(interaction, 'events.reminders.enable'))
                         .setStyle(enableReminders ? Discord.ButtonStyle.Secondary : Discord.ButtonStyle.Success)
                         .setEmoji(enableReminders ? '🔕' : '🔔'),
                     new Discord.ButtonBuilder()
                         .setCustomId('event_delete')
-                        .setLabel('Supprimer l\'événement')
+                        .setLabel(await client.t(interaction, 'events.reminders.deleteEvent'))
                         .setStyle(Discord.ButtonStyle.Danger)
                         .setEmoji('🗑️')
                 );
@@ -375,7 +377,7 @@ module.exports = async (client, interaction) => {
             const event = await interaction.guild.scheduledEvents.fetch(eventThread.eventId).catch(() => null);
             if (!event || event.creatorId !== interaction.user.id) {
                 return interaction.reply({
-                    content: "❌ Seul le créateur de l'événement peut configurer les rappels.",
+                    content: await client.t(interaction, 'events.reminderCreatorOnly'),
                     flags: Discord.MessageFlags.Ephemeral
                 });
             }
@@ -412,12 +414,12 @@ module.exports = async (client, interaction) => {
                     .addComponents(
                         new Discord.ButtonBuilder()
                             .setCustomId('event_reminders_enable')
-                            .setLabel('Activer les rappels')
+                            .setLabel(await client.t(interaction, 'events.reminders.enable'))
                             .setStyle(Discord.ButtonStyle.Success)
                             .setEmoji('🔔'),
                         new Discord.ButtonBuilder()
                             .setCustomId('event_reminders_disable')
-                            .setLabel('Désactiver les rappels')
+                            .setLabel(await client.t(interaction, 'events.reminders.disable'))
                             .setStyle(Discord.ButtonStyle.Secondary)
                             .setEmoji('🔕')
                     );
@@ -426,27 +428,27 @@ module.exports = async (client, interaction) => {
 
             const welcomeEmbed = new Discord.EmbedBuilder()
                 .setColor(0x0099FF)
-                .setTitle('🎉 Configuration de l\'événement')
-                .setDescription(`Bienvenue dans le fil de discussion de ton événement **${event.name}** !`)
+                .setTitle(await client.t(interaction, 'events.reminders.title'))
+                .setDescription(await client.t(interaction, 'events.reminders.welcome', { event: event.name }))
                 .addFields(
                     { 
-                        name: '📝 Inviter des participants', 
-                        value: 'N\'oubliez pas de mentionner (@) les rôles ou les personnes que vous souhaitez inviter dans ce fil de discussion.' 
+                        name: await client.t(interaction, 'events.reminders.inviteTitle'),
+                        value: await client.t(interaction, 'events.reminders.invite')
                     },
                     { 
-                        name: '⏰ Rappels automatiques', 
+                        name: await client.t(interaction, 'events.reminders.automaticTitle'),
                         value: hasAvailableReminders ? 
-                            'Par défaut, des rappels seront envoyés :\n• 1 mois avant\n• 1 semaine avant\n• 1 jour avant\n\nUtilisez les boutons ci-dessous pour gérer les rappels.' :
-                            'Les rappels ne sont pas disponibles car l\'événement est trop proche.'
+                            await client.t(interaction, 'events.reminders.available') :
+                            await client.t(interaction, 'events.reminders.unavailable')
                     }
                 )
                 .setFooter(hasAvailableReminders ? 
-                    { text: 'Vous pouvez configurer les rappels à tout moment' } :
-                    { text: 'Les rappels ne sont pas disponibles pour cet événement' }
+                    { text: await client.t(interaction, 'events.reminders.availableFooter') } :
+                    { text: await client.t(interaction, 'events.reminders.unavailableFooter') }
                 );
 
             const welcomeMessage = await thread.send({
-                content: `Ce message se supprimera <t:${Math.floor((Date.now() + 60000) / 1000)}:R>`,
+                content: await client.t(interaction, 'events.reminders.deletedMessage', { timestamp: Math.floor((Date.now() + 60000) / 1000) }),
                 embeds: [welcomeEmbed],
                 components: components
             });
@@ -460,14 +462,14 @@ module.exports = async (client, interaction) => {
 
             // Envoyer une confirmation éphémère
             await interaction.followUp({
-                content: "✅ Les rappels ont été configurés pour cet événement.",
+                content: await client.t(interaction, 'events.reminders.configured'),
                 flags: Discord.MessageFlags.Ephemeral
             });
 
         } catch (error) {
             console.error('Erreur lors de la configuration des rappels:', error);
             await interaction.reply({
-                content: "❌ Une erreur est survenue lors de la configuration des rappels.",
+                content: await client.t(interaction, 'events.reminders.setupError'),
                 flags: Discord.MessageFlags.Ephemeral
             });
         }
