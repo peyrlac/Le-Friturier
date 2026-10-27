@@ -93,6 +93,11 @@
       "maxVolume": "Le volume ne peut pas dépasser 1000 %.",
       "volumeSet": "Volume réglé sur **{amount}%**",
       "seeked": "Lecture avancée à : {time}"
+      ,"loop": "La boucle est **{status}** pour la chanson actuelle.",
+      "shuffleInsufficient": "Il n'y a pas assez de chansons pour mélanger la file.",
+      "shuffled": "La file d'attente a été mélangée !",
+      "queueTooShort": "La file d'attente ne contient pas autant de chansons.",
+      "removed": "**{song}** a été retirée de la file d'attente."
     },
     "economy": {
       "balance": {

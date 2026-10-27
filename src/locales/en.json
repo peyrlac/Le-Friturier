@@ -112,6 +112,11 @@
       "maxVolume": "Volume cannot exceed 1000%.",
       "volumeSet": "Volume set to **{amount}%**",
       "seeked": "Playback moved to: {time}"
+      ,"loop": "Looping is **{status}** for the current song.",
+      "shuffleInsufficient": "There are not enough songs to shuffle the queue.",
+      "shuffled": "The queue was shuffled!",
+      "queueTooShort": "The queue does not contain that many songs.",
+      "removed": "**{song}** was removed from the queue."
     },
     "economy": {
       "balance": {
