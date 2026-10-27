@@ -1,0 +1,25 @@
+const FEATURE_REGISTRY = {
+    config: { key: 'config', labelKey: 'features.config.label', category: 'commands', defaultEnabled: true, alwaysOn: true, surfaces: ['command'] },
+    bot: { key: 'bot', labelKey: 'features.bot.label', category: 'commands', defaultEnabled: true, alwaysOn: true, surfaces: ['command'] },
+    music: { key: 'music', labelKey: 'features.music.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    radio: { key: 'radio', labelKey: 'features.radio.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    casino: { key: 'casino', labelKey: 'features.casino.label', category: 'commands', defaultEnabled: true, surfaces: ['command'] },
+    economy: { key: 'economy', labelKey: 'features.economy.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    tickets: { key: 'tickets', labelKey: 'features.tickets.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    giveaway: { key: 'giveaway', labelKey: 'features.giveaway.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    moderation: { key: 'moderation', labelKey: 'features.moderation.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    setup: { key: 'setup', labelKey: 'features.setup.label', category: 'commands', defaultEnabled: true, surfaces: ['command'] },
+    fun: { key: 'fun', labelKey: 'features.fun.label', category: 'commands', defaultEnabled: true, surfaces: ['command'] },
+    images: { key: 'images', labelKey: 'features.images.label', category: 'commands', defaultEnabled: true, surfaces: ['command'] },
+    games: { key: 'games', labelKey: 'features.games.label', category: 'commands', defaultEnabled: true, surfaces: ['command'] },
+    tools: { key: 'tools', labelKey: 'features.tools.label', category: 'commands', defaultEnabled: true, surfaces: ['command'] },
+    profile: { key: 'profile', labelKey: 'features.profile.label', category: 'commands', defaultEnabled: true, surfaces: ['command'] },
+    levels: { key: 'levels', labelKey: 'features.levels.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    invites: { key: 'invites', labelKey: 'features.invites.label', category: 'commands', defaultEnabled: true, surfaces: ['command', 'event'] },
+    triggers: { key: 'triggers', labelKey: 'features.triggers.label', category: 'triggers', defaultEnabled: true, surfaces: ['trigger'] },
+    welcome: { key: 'welcome', labelKey: 'features.welcome.label', category: 'events', defaultEnabled: true, surfaces: ['event'] },
+    antiSpam: { key: 'antiSpam', labelKey: 'features.antiSpam.label', category: 'events', defaultEnabled: true, surfaces: ['event'] },
+    voiceCleanup: { key: 'voiceCleanup', labelKey: 'features.voiceCleanup.label', category: 'events', defaultEnabled: true, surfaces: ['event'] },
+};
+
+module.exports = FEATURE_REGISTRY;

@@ -177,6 +177,18 @@ test('config language rejects locales outside the supported set', async () => {
     }
 });
 
+test('config exposes grouped feature controls and bot exposes global feature controls', () => {
+    const config = require('../src/interactions/Command/config');
+    const bot = require('../src/interactions/Command/bot');
+    const featureGroup = config.data.toJSON().options.find(option => option.name === 'feature');
+    const botFeature = bot.data.toJSON().options.find(option => option.name === 'feature');
+
+    assert.equal(featureGroup.type, 2);
+    assert.deepEqual(featureGroup.options.map(option => option.name), ['list', 'set', 'reset']);
+    assert.equal(botFeature.type, 1);
+    assert.equal(botFeature.options.find(option => option.name === 'action').required, true);
+});
+
 test('serializes native command localizations for Discord', () => {
     const command = require('../src/interactions/Command/config');
     applyCommandLocalizations(command);

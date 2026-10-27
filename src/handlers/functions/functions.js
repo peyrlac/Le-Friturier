@@ -4,6 +4,15 @@ const { getJson } = require('../http');
 const Functions = require("../../database/models/functions");
 const VoiceSchema = require("../../database/models/voiceChannels");
 
+function resolveSubcommandPath(interaction) {
+    const command = interaction.commandName;
+    const group = typeof interaction.options?.getSubcommandGroup === 'function'
+        ? interaction.options.getSubcommandGroup()
+        : null;
+    const subcommand = interaction.options.getSubcommand();
+    return [command, group, subcommand].filter(Boolean).join('/');
+}
+
 module.exports = async (client) => {
     //----------------------------------------------------------------//
     //                         Permissions                            //
@@ -76,22 +85,23 @@ module.exports = async (client) => {
     }
 
     client.loadSubcommands = async function (client, interaction, args) {
+        const subcommandPath = resolveSubcommandPath(interaction);
         try {
             const data = await Functions.findOne({ Guild: interaction.guild.id });
 
             if (data.Beta == true) {
-                return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}-beta`)(client, interaction, args).catch(err => {
+                return require(`${process.cwd()}/src/commands/${subcommandPath}-beta`)(client, interaction, args).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
                 })
             }
             else {
-                return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`)(client, interaction, args).catch(err => {
+                return require(`${process.cwd()}/src/commands/${subcommandPath}`)(client, interaction, args).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
                 })
             }
         }
         catch {
-            return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`)(client, interaction, args).catch(err => {
+            return require(`${process.cwd()}/src/commands/${subcommandPath}`)(client, interaction, args).catch(err => {
                 client.emit("errorCreate", err, interaction.commandName, interaction)
             })
         }
@@ -240,5 +250,7 @@ module.exports = async (client) => {
             })
     }
 }
+
+module.exports.resolveSubcommandPath = resolveSubcommandPath;
 
  

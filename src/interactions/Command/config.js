@@ -2,6 +2,7 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
+const { FEATURE_REGISTRY } = require('../../handlers/features');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -85,7 +86,34 @@ module.exports = {
                 )
                 .addStringOption(option => option.setName("message").setDescription("Entrez un message pour le billet").setRequired(true))
         )
-    ,
+        .addSubcommandGroup(group =>
+            group
+                .setName('feature')
+                .setDescription('Gérer les fonctionnalités du serveur')
+                .addSubcommand(subcommand => subcommand
+                    .setName('list')
+                    .setDescription('Afficher l’état des fonctionnalités'))
+                .addSubcommand(subcommand => subcommand
+                    .setName('set')
+                    .setDescription('Activer ou désactiver une fonctionnalité')
+                    .addStringOption(option => option
+                        .setName('feature')
+                        .setDescription('Fonctionnalité à modifier')
+                        .setRequired(true)
+                        .addChoices(...Object.keys(FEATURE_REGISTRY).map(name => ({ name, value: name }))))
+                    .addBooleanOption(option => option
+                        .setName('enabled')
+                        .setDescription('Activer la fonctionnalité')
+                        .setRequired(true)))
+                .addSubcommand(subcommand => subcommand
+                    .setName('reset')
+                    .setDescription('Réinitialiser une fonctionnalité')
+                    .addStringOption(option => option
+                        .setName('feature')
+                        .setDescription('Fonctionnalité à réinitialiser')
+                        .setRequired(true)
+                        .addChoices(...Object.keys(FEATURE_REGISTRY).map(name => ({ name, value: name })))))
+        ),
 
     /** 
      * @param {Client} client
@@ -98,6 +126,17 @@ module.exports = {
         description: {
             fr: 'Ajustez le bot à votre goût',
             en: 'Customize the bot to your liking'
+        },
+        subcommandGroups: {
+            feature: {
+                name: { fr: 'fonctionnalité', en: 'feature' },
+                description: { fr: 'Gérer les fonctionnalités du serveur', en: 'Manage server features' },
+                subcommands: {
+                    list: { description: { fr: 'Afficher l’état des fonctionnalités', en: 'List feature statuses' } },
+                    set: { description: { fr: 'Activer ou désactiver une fonctionnalité', en: 'Enable or disable a feature' } },
+                    reset: { description: { fr: 'Réinitialiser une fonctionnalité', en: 'Reset a feature' } }
+                }
+            }
         }
     },
 

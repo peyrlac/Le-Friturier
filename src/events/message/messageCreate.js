@@ -27,6 +27,10 @@ module.exports = async (client, message) => {
 
   if (message.author.bot) return;
 
+  const featureEnabled = async (feature) =>
+    typeof client.isFeatureEnabled !== 'function' ||
+    await client.isFeatureEnabled(feature, message.guild?.id);
+
   if (message.channel.type === Discord.ChannelType.DM) {
     let embedLogs = new Discord.EmbedBuilder()
       .setTitle(`💬・New DM message!`)
@@ -50,7 +54,7 @@ module.exports = async (client, message) => {
 
   // Levels
   const levelSettings = await Functions.findOne({ Guild: message.guild.id });
-  if (levelSettings?.Levels == true) {
+  if (levelSettings?.Levels == true && await featureEnabled('levels')) {
         const randomXP = Math.floor(Math.random() * 9) + 1;
         const hasLeveledUp = await client.addXP(
           message.author.id,
@@ -217,7 +221,7 @@ module.exports = async (client, message) => {
 
   // Chat bot
   const chatSettings = await chatBotSchema.findOne({ Guild: message.guild.id });
-  if (chatSettings && message.channel.id === chatSettings.Channel) {
+  if (chatSettings && message.channel.id === chatSettings.Channel && await featureEnabled('triggers')) {
     try {
       if (process.env.OPENAI) {
         const response = await request('https://api.openai.com/v1/chat/completions', {
@@ -250,7 +254,7 @@ module.exports = async (client, message) => {
   }
 
   // Sticky messages
-  try {
+  if (await featureEnabled('triggers')) try {
     const stickyData = await Schema.findOne({
       Guild: message.guild.id,
       Channel: message.channel.id
@@ -275,6 +279,8 @@ module.exports = async (client, message) => {
   catch (error) {
     console.error(error);
   }
+
+  if (!(await featureEnabled('triggers'))) return;
 
   // Prefix
   var guildSettings = await Functions.findOne({ Guild: message.guild.id });

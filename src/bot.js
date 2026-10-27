@@ -8,6 +8,9 @@ const Spotify = require("erela.js-spotify");
 const Facebook = require("erela.js-facebook");
 const Deezer = require("erela.js-deezer");
 const AppleMusic = require("erela.js-apple");
+const Functions = require('./database/models/functions');
+const GlobalFeatures = require('./database/models/globalFeatures');
+const { installFeatureManager } = require('./handlers/features');
 
 function createLavalinkNodes() {
     if (process.env.LAVALINK_ENABLED === 'false') return [];
@@ -121,6 +124,21 @@ client.config = require('./config/bot');
 client.changelogs = require('./config/changelogs');
 client.emotes = require("./config/emojis.json");
 client.webhooks = require("./config/webhooks.json");
+installFeatureManager(client, {
+    readGuild: async guildId => Functions.findOne({ Guild: guildId }).select('Features').lean(),
+    readGlobal: async () => GlobalFeatures.findOne({ Key: 'global' }).select('Features').lean(),
+    writeGuild: async (document, guildId) => Functions.findOneAndUpdate(
+        { Guild: guildId },
+        { $set: { Features: document.Features || {} } },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+    ),
+    writeGlobal: async document => GlobalFeatures.findOneAndUpdate(
+        { Key: 'global' },
+        { $set: { Features: document.Features || {} } },
+        { upsert: true, new: true, setDefaultsOnInsert: true }
+    ),
+    logger: console,
+});
 const webHooksArray = ['startLogs', 'shardLogs', 'errorLogs', 'dmLogs', 'voiceLogs', 'serverLogs', 'serverLogs2', 'commandLogs', 'consoleLogs', 'warnLogs', 'voiceErrorLogs', 'creditLogs', 'evalLogs', 'interactionLogs'];
 // Check if .env webhook_id and webhook_token are set
 if (process.env.WEBHOOK_ID && process.env.WEBHOOK_TOKEN) {

@@ -57,7 +57,10 @@ module.exports = async (client, interaction) => {
             }, interaction);
         }
 
-                const cmd = client.commands.get(interaction.commandName);
+    const cmd = client.commands.get(interaction.commandName);
+    if (cmd && typeof client.requireFeature === 'function' && !(await client.requireFeature(interaction, cmd.data.name))) {
+      return;
+    }
                 if (!cmd){
                     const cmdd = await Commands.findOne({
                         Guild: interaction.guild.id,

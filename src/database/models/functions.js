@@ -15,6 +15,10 @@ const Schema = new mongoose.Schema({
         type: String,
         enum: ['fr', 'en'],
         default: 'fr'
+    },
+    Features: {
+        type: mongoose.Schema.Types.Mixed,
+        default: () => ({})
     }
 });
 
