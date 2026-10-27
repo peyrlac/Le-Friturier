@@ -4,6 +4,7 @@ const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.setup',
     data: new SlashCommandBuilder()
         .setName('setup')
         .setDescription('Manage the Bot setups')
@@ -181,11 +182,6 @@ module.exports = {
                 )
         )
     ,
-    localizations: {
-        name: { fr: 'configuration', en: 'setup' },
-        description: { fr: 'Gérer la configuration du bot', en: 'Manage the bot setups' }
-    },
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
