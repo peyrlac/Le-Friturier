@@ -49,14 +49,14 @@ module.exports = async (client, interaction) => {
 
     // Commands
     if (interaction.isCommand() || interaction.isUserContextMenuCommand()) {
-        banSchema.findOne({ User: interaction.user.id }, async (err, data) => {
-            if (data) {
-                return client.errNormal({
-                    error: "You have been banned by the developers of this bot",
-                    type: 'ephemeral'
-                }, interaction);
-            }
-            else {
+        const data = await banSchema.findOne({ User: interaction.user.id });
+        if (data) {
+            return client.errNormal({
+                error: "You have been banned by the developers of this bot",
+                type: 'ephemeral'
+            }, interaction);
+        }
+
                 const cmd = client.commands.get(interaction.commandName);
                 if (!cmd){
                     const cmdd = await Commands.findOne({
@@ -108,11 +108,9 @@ module.exports = async (client, interaction) => {
                     }, interaction)
                 }
 
-                if(cmd) cmd.run(client, interaction, interaction.options._hoistedOptions).catch(err => {
+                if (cmd) return cmd.run(client, interaction, interaction.options._hoistedOptions).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
-                })
-            }
-        })
+                });
     }
 
     // Verify system
