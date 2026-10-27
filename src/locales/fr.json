@@ -1012,6 +1012,13 @@
     "added": "Ajout de **{amount} crédits** à {user}.",
     "removed": "Retrait de **{amount} crédits** de {user}."
   },
+  "developerAdmin": {
+    "banSelf": "Vous ne pouvez pas bannir votre propre compte du bot.",
+    "alreadyBanned": "<@!{user}> ({userId}) a déjà été banni du bot.",
+    "banned": "<@!{user}> ({userId}) a été banni du bot.",
+    "notBanned": "<@!{user}> ({userId}) n’est pas banni du bot.",
+    "unbanned": "<@!{user}> ({userId}) a été débanni du bot."
+  },
   "fun": {
     "tokenTitle": "🤖・Token du bot",
     "tokenUnavailable": "Impossible de récupérer les données distantes."

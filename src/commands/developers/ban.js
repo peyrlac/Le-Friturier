@@ -14,7 +14,7 @@ module.exports = async (client, interaction, args) => {
     if (boolean == true) {
         if (member.id === interaction.user.id) { // add the check here
             return client.errNormal({
-                error: `You cannot ban yourself from the bot`,
+                key: 'developerAdmin.banSelf',
                 type: `editreply`
             }, interaction);
         }
@@ -22,7 +22,8 @@ module.exports = async (client, interaction, args) => {
         const data = await Schema.findOne({ User: member.id });
         if (data) {
             return client.errNormal({
-                error: `<@!${member.id}> (${member.id}) a déjà été banni du bot`,
+                key: 'developerAdmin.alreadyBanned',
+                variables: { user: member.id, userId: member.id },
                 type: `editreply`
             }, interaction);
         }
@@ -32,7 +33,8 @@ module.exports = async (client, interaction, args) => {
         }).save();
 
         await client.succNormal({
-            text: `<@!${member.id}> (${member.id}) Interdiction du bot`,
+            key: 'developerAdmin.banned',
+            variables: { user: member.id, userId: member.id },
             type: 'editreply'
         }, interaction)
 
@@ -54,14 +56,16 @@ module.exports = async (client, interaction, args) => {
         const data = await Schema.findOne({ User: member.id });
         if (!data) {
             return client.errNormal({
-                error: `<@!${member.id}> (${member.id}) has not been banned from the bot`,
+                key: 'developerAdmin.notBanned',
+                variables: { user: member.id, userId: member.id },
                 type: `editreply`
             }, interaction);
         }
 
         await Schema.findOneAndDelete({ User: member.id });
         await client.succNormal({
-            text: `<@!${member.id}> (${member.id}) UNCANNÉ DU BOT`,
+            key: 'developerAdmin.unbanned',
+            variables: { user: member.id, userId: member.id },
             type: 'editreply'
         }, interaction)
 
