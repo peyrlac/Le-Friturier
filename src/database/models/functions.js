@@ -11,15 +11,7 @@ const Schema = new mongoose.Schema({
     AntiLinks: { type: Boolean, default: false },
     Prefix: String,
     Color: String,
-    Language: {
-        type: String,
-        enum: ['fr', 'en'],
-        default: 'fr'
-    },
-    Features: {
-        type: mongoose.Schema.Types.Mixed,
-        default: () => ({})
-    }
+    Features: { type: mongoose.Schema.Types.Mixed, default: () => ({}) }
 });
 
 module.exports = mongoose.model("functions", Schema);
