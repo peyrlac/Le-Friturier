@@ -130,6 +130,10 @@
       "loveNameTwo": "Name 2",
       "loveResult": "Result",
       "loveMatch": "**{user1}** and **{user2}** match **{result}%**!"
+      ,"factTitle": "Random Fact",
+      "rickrollTitle": "Rickroll",
+      "gifTitle": "{query} Gif",
+      "roastTitle": "Roast"
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",
