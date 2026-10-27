@@ -188,6 +188,9 @@
       "fastTypeCompleted": "You did it!"
       ,"snakeTitle": "Snake",
       "snakeScore": "GG, you scored **{score}** points!"
+      ,"triviaTitle": "Trivia",
+      "triviaCorrect": "GG, it was **{answer}**. You gave the correct answer in **{time}**.",
+      "triviaIncorrect": "Better luck next time! The correct answer was **{answer}**."
     },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",

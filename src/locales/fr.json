@@ -169,6 +169,9 @@
       "fastTypeCompleted": "Vous avez réussi !"
       ,"snakeTitle": "Snake",
       "snakeScore": "Bien joué, vous avez marqué **{score}** points !"
+      ,"triviaTitle": "Trivia",
+      "triviaCorrect": "Bien joué ! C'était **{answer}**. Vous avez répondu correctement en **{time}**.",
+      "triviaIncorrect": "Dommage ! La bonne réponse était **{answer}**."
     },
     "images": {
       "remoteDataError": "Impossible de récupérer les données distantes.",
