@@ -98,7 +98,18 @@
       "shuffled": "La file d'attente a été mélangée !",
       "queueTooShort": "La file d'attente ne contient pas autant de chansons.",
       "removed": "**{song}** a été retirée de la file d'attente."
-      ,"lyricsNotFound": "Aucune parole trouvée pour {song} :x:"
+      ,"lyricsNotFound": "Aucune parole trouvée pour {song} :x:",
+      "channelMissing": "Le canal vocal n'existe pas.",
+      "notJoinable": "Ce canal vocal n'est pas joignable.",
+      "loadFailed": "Impossible de charger la musique. Veuillez réessayer dans quelques minutes.",
+      "noMatches": "Aucune musique n'a été trouvée.",
+      "songQueued": "La musique a été ajoutée à la file d'attente !",
+      "searchResults": "Résultats de recherche",
+      "cancelSearch": "Annuler la recherche ?",
+      "cancelSearchHint": "Appuyez sur `cancel` pour arrêter la recherche.",
+      "selectionMissing": "Vous n'avez pas fourni de sélection.",
+      "selectionCancelled": "Sélection annulée.",
+      "invalidSelection": "Le nombre fourni est trop petit ou trop grand (1-{max})."
     },
     "economy": {
       "balance": {
