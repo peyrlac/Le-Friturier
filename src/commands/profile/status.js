@@ -15,7 +15,7 @@ module.exports = async (client, interaction, args) => {
                 key: 'profile.statusSuccess',
                 variables: { status },
                 fields: [{
-                    name: "😎┆Status",
+                    name: await client.t(interaction, 'profile.fields.status'),
                     value: `\`\`\`${status}\`\`\``,
                     inline: true,
                 }],

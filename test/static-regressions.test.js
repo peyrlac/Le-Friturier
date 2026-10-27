@@ -277,6 +277,11 @@ test('profile collection removals and serverstats time use shared localization',
   assert.doesNotMatch(time, /const time = interaction\.options/);
 });
 
+test('profile text updates localize their field labels', () => {
+  assert.match(read('src/commands/profile/aboutme.js'), /profile\.fields\.aboutMe/);
+  assert.match(read('src/commands/profile/status.js'), /profile\.fields\.status/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
