@@ -160,6 +160,13 @@
       "skipWordTitle": "Devinez le mot",
       "skipWordDescription": "Placez les lettres dans le bon ordre !\n\n🔀 {word}",
       "skipWordWrongChannel": "Vous n'êtes pas dans le bon salon !"
+      ,"fastTypeTitle": "FastType",
+      "fastTypePrompt": "Recopiez le texte ci-dessous en {time} !\n{sentence}",
+      "fastTypeTimeout": "Temps écoulé !",
+      "fastTypeEnded": "Partie terminée !",
+      "fastTypeCompletedIn": "Réussi en {time} !",
+      "fastTypeFailed": "Malheureusement, vous n'avez pas réussi !",
+      "fastTypeCompleted": "Vous avez réussi !"
     },
     "images": {
       "remoteDataError": "Impossible de récupérer les données distantes.",

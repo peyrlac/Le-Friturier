@@ -179,6 +179,13 @@
       "skipWordTitle": "Guess the word",
       "skipWordDescription": "Put the letters in the right position!\n\n🔀 {word}",
       "skipWordWrongChannel": "You are not in the right channel!"
+      ,"fastTypeTitle": "FastType",
+      "fastTypePrompt": "Type the below in {time}!\n{sentence}",
+      "fastTypeTimeout": "Time's up!",
+      "fastTypeEnded": "Ended!",
+      "fastTypeCompletedIn": "You did it in {time}!",
+      "fastTypeFailed": "Unfortunately you didn't succeed!",
+      "fastTypeCompleted": "You did it!"
     },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",
