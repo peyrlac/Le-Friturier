@@ -9,6 +9,8 @@ const DIFF = 3000;
 module.exports = (client) => {
     client.on(Discord.Events.MessageCreate, async message => {
         if (!message.guild || message.author.bot || message.channel.type === Discord.ChannelType.DM) return;
+        if (typeof client.isFeatureEnabled === 'function' &&
+            !(await client.isFeatureEnabled('antiSpam', message.guild.id))) return;
         const config = await Functions.findOne({ Guild: message.guild.id });
         if (!config?.AntiSpam) return;
 

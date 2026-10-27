@@ -428,6 +428,15 @@ test('event participants uses localized success and error responses', () => {
   assert.doesNotMatch(source, /Événement non trouvé|Aucun participant disponible|Une erreur est survenue lors de la récupération/i);
 });
 
+test('direct message handlers honor their feature kill switches', () => {
+  const triggers = read('src/handlers/response/triggers.js');
+  const antispam = read('src/handlers/security/antispamLocalized.js');
+
+  assert.match(triggers, /isFeatureEnabled\(['"]triggers['"],\s*message\.guild\.id\)/);
+  assert.match(triggers, /isFeatureEnabled\(['"]triggers['"],\s*newMessage\.guild\.id\)/);
+  assert.match(antispam, /isFeatureEnabled\(['"]antiSpam['"],\s*message\.guild\.id\)/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

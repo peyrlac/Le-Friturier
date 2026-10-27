@@ -5,6 +5,8 @@ module.exports = async (client) => {
     client.on(Discord.Events.MessageCreate, async (message) => {
         if (message.channel.type === Discord.ChannelType.DM) return;
         if (message.author.bot) return;
+        if (typeof client.isFeatureEnabled === 'function' &&
+            !(await client.isFeatureEnabled('triggers', message.guild.id))) return;
         try {
             const data = await Triggers.findOne({ Guild: message.guild.id });
 
@@ -62,6 +64,8 @@ module.exports = async (client) => {
         if (!oldMessage || !newMessage || oldMessage.content === newMessage.content || newMessage.channel.type === Discord.ChannelType.DM) return;
       
         try {
+          if (typeof client.isFeatureEnabled === 'function' &&
+              !(await client.isFeatureEnabled('triggers', newMessage.guild.id))) return;
           const triggers = await Triggers.findOne({ Guild: newMessage.guild.id });
           if (!triggers) return;
       
