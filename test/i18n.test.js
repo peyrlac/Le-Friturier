@@ -301,11 +301,13 @@ test('remaining native commands localize every subcommand, group, and option des
 
 test('triggers exposes localized metadata for its management surface', () => {
   const command = require('../src/interactions/Command/triggers');
+  const { resolveCommandLocalizations } = require('../src/handlers/i18n');
+  const localizations = resolveCommandLocalizations(command);
 
-  assert.equal(command.localizations.name.fr, 'triggers');
-  assert.equal(command.localizations.name.en, 'triggers');
-  assert.equal(command.localizations.description.en, 'Trigger responses to matching messages');
-  assert.deepEqual(command.localizations.subcommands.add.options, {
+  assert.equal(localizations.name.fr, 'triggers');
+  assert.equal(localizations.name.en, 'triggers');
+  assert.equal(localizations.description.en, 'Trigger responses to matching messages');
+  assert.deepEqual(localizations.subcommands.add.options, {
     alias: { description: { fr: 'Alias du trigger', en: 'Trigger alias' } },
     type: { description: { fr: 'Type de réponse', en: 'Response type' } },
     regex: { description: { fr: 'Filtre regex', en: 'Regex filter' } },
