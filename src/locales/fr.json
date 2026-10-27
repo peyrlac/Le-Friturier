@@ -78,6 +78,20 @@
       },
       "feedback": { "success": "Votre avis a \u00e9t\u00e9 envoy\u00e9 aux d\u00e9veloppeurs avec succ\u00e8s." }
     },
+    "fun": {
+      "cleverRate": "Tu es malin à {result}% !",
+      "cleverRateTitle": "Taux d'intelligence",
+      "epicGamerRate": "Tu es un joueur épique à {result}% !",
+      "epicGamerRateTitle": "Taux de joueur épique",
+      "gayRate": "Tu es gay à {result}% !",
+      "gayRateTitle": "Taux gay",
+      "simpRate": "Tu es simp à {result}% !",
+      "simpRateTitle": "Taux de simp",
+      "stankRate": "Tu es malodorant à {result}% !",
+      "stankRateTitle": "Taux de puanteur",
+      "christmas": "Noël",
+      "christmasDays": "Plus que {days} jours avant Noël."
+    },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
       "notFound": "Impossible de trouver le giveaway pour {messageID} !",
