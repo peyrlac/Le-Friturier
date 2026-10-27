@@ -602,8 +602,20 @@
       },
       "work": { "success": "Vous avez travaillé comme {job} et gagné **{amount}** pièces !" },
       "addItem": {
+        "invalid": "Saisissez un nombre valide !",
+        "everyone": "Vous ne pouvez pas ajouter le rôle @everyone à la boutique !",
         "alreadyExists": "Ce rôle est déjà dans la boutique !",
-        "success": "Le rôle a été ajouté à la boutique !"
+        "success": "Le rôle a été ajouté à la boutique !",
+        "role": "Rôle",
+        "amount": "Montant"
+      },
+      "addMoney": {
+        "invalid": "Saisissez un nombre valide !",
+        "bot": "Vous ne pouvez pas ajouter de l’argent à un bot !",
+        "success": "L’argent a été ajouté à l’utilisateur.",
+        "noMoney": "Cet utilisateur ne possède pas encore d’argent.",
+        "user": "Utilisateur",
+        "amount": "Montant"
       },
       "deleteItem": {
         "success": "Le rôle a été supprimé de la boutique.",
@@ -653,6 +665,7 @@
         "invalid": "Saisissez un nombre valide !",
         "negative": "Vous ne pouvez pas déposer une somme négative !",
         "insufficient": "Vous n'avez pas assez d'argent.",
+        "noMoney": "Vous n'avez pas d'argent à déposer.",
         "success": "Vous avez déposé de l'argent dans votre banque !"
       }
     },

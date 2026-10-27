@@ -38,7 +38,7 @@ module.exports = async (client, interaction, args) => {
                 type: 'editreply'
             }, interaction);
     } else {
-        return client.errNormal({ text: `You don't have any money to deposit!`, type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'commands.economy.deposit.noMoney', type: 'editreply' }, interaction);
     }
 }
  

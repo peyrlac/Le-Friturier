@@ -15,9 +15,9 @@ module.exports = async (client, interaction, args) => {
 
     if (!role || !amount) return client.errUsage({ usage: "additem [role] [amount]", type: 'editreply' }, interaction);
 
-    if (isNaN(amount)) return client.errNormal({ error: "Enter a valid number!", type: 'editreply' }, interaction);
+    if (isNaN(amount)) return client.errNormal({ key: 'economy.addItem.invalid', type: 'editreply' }, interaction);
 
-    if(role == interaction.guild.roles.everyone) return client.errNormal({ error: "You cannot add the everyone role to the store!", type: 'editreply' }, interaction);
+    if(role == interaction.guild.roles.everyone) return client.errNormal({ key: 'economy.addItem.everyone', type: 'editreply' }, interaction);
 
     const storeData = await store.findOne({ Guild: interaction.guild.id, Role: role.id });
     if (storeData) {
@@ -35,12 +35,12 @@ module.exports = async (client, interaction, args) => {
                 variables: { amount },
                 fields: [
                     {
-                        name: `🛒┆Role`,
+                        name: `${await client.t(interaction, 'economy.addItem.role')}`,
                         value: `<@&${role.id}>`,
                         inline: true
                     },
                     {
-                        name: `${client.emotes.economy.coins}┆Amount`,
+                        name: `${client.emotes.economy.coins}┆${await client.t(interaction, 'economy.addItem.amount')}`,
                         value: `$${amount}`,
                         inline: true
                     }
