@@ -38,6 +38,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.stickymessages',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         const perms = await client.checkUserPerms({

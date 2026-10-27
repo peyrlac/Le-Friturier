@@ -874,6 +874,42 @@
         }
       }
     },
+    "commands": {
+      "name": "custom-commands",
+      "description": "Create custom commands",
+      "subcommands": {
+        "help": { "description": "Get information about custom commands" },
+        "add": { "description": "Create a custom command", "options": { "command": { "description": "Command name" }, "text": { "description": "Command response" } } },
+        "delete": { "description": "Delete a custom command", "options": { "commande": { "description": "Command name" } } }
+      }
+    },
+    "embed": {
+      "name": "embed",
+      "description": "Generate an embed",
+      "options": { "channel": { "description": "Channel where the embed should be sent" } }
+    },
+    "event": {
+      "name": "event",
+      "description": "Event-related commands",
+      "subcommands": {
+        "help": { "description": "Get information about event commands" },
+        "participants": { "description": "See the participants of an event", "options": { "event_id": { "description": "Event ID" } } }
+      }
+    },
+    "help": {
+      "name": "help",
+      "description": "Get help with the bot"
+    },
+    "stickymessages": {
+      "name": "stickymessages",
+      "description": "Manage sticky messages",
+      "subcommands": {
+        "help": { "description": "Get information about sticky messages" },
+        "stick": { "description": "Stick a message in a channel", "options": { "channel": { "description": "Select a channel" }, "message": { "description": "Your sticky message" } } },
+        "messages": { "description": "Show all sticky messages from this server" },
+        "unstick": { "description": "Unstick a message from a channel", "options": { "channel": { "description": "Select a channel" } } }
+      }
+    },
     "autosetup": {
       "name": "autosetup",
       "description": "Configure the bot automatically",
