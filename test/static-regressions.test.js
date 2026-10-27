@@ -869,6 +869,16 @@ test('fun reverse response uses a localization key', () => {
   assert.doesNotMatch(source, /\btext:\s*`/);
 });
 
+test('HTTP server accepts a configurable port for isolated runtime tests', () => {
+  const source = read('src/index.js');
+  assert.match(source, /process\.env\.PORT/);
+});
+
+test('giveaway end event uses an async winner callback', () => {
+  const source = read('src/events/giveaway/giveawayEnded.js');
+  assert.match(source, /async \(member\)/);
+});
+
 test('music and radio metadata is sourced from the locale catalogs', () => {
   for (const name of ['music', 'radio']) {
     const source = read(`src/interactions/Command/${name}.js`);

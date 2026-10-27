@@ -8,7 +8,8 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use('/public',(req,res,next)=>{
 res.sendFile(path.join(__dirname,'text.html'));
 });
-app.listen(3000)
+const httpPort = Number.parseInt(process.env.PORT, 10) || 3000;
+app.listen(httpPort)
 
 const { getJson } = require('./handlers/http');
 // Check if is up to date
