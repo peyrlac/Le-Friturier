@@ -7,7 +7,7 @@ module.exports = async (client, interaction, args) => {
     const author = interaction.user;
 
     if (author.id == target.id) {
-        return client.errNormal({ error: "Tu ne peux pas te marier toi-même !", type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'family.selfMarriage', type: 'editreply' }, interaction);
     }
 
     const [authorPartner, targetPartner, targetIsChild, authorIsChild, authorData] = await Promise.all([
@@ -19,11 +19,11 @@ module.exports = async (client, interaction, args) => {
     ]);
 
     if (authorPartner || targetPartner) {
-        return client.errNormal({ error: "Quelqu'un dans le couple est déjà marié.e !", type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'family.alreadyMarried', type: 'editreply' }, interaction);
     }
 
     if (targetIsChild || authorIsChild || (authorData && Array.isArray(authorData.Children) && authorData.Children.includes(target.id))) {
-        return client.errNormal({ error: "Tu ne peux pas te marier avec un membre de ta famille !", type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'family.relativeMarriage', type: 'editreply' }, interaction);
     }
 
     const row = new Discord.ActionRowBuilder()
@@ -39,8 +39,8 @@ module.exports = async (client, interaction, args) => {
         );
 
     await client.embed({
-        title: '👰・Demande en mariage',
-        desc: `${author} a demandé en mariage ${target} ! \n${target}, clique sur un des boutons`,
+        title: await client.t(interaction, 'family.proposalTitle'),
+        desc: await client.t(interaction, 'family.proposalDescription', { author, target }),
         components: [row],
         content: `${target}`,
         image: 'https://media3.giphy.com/media/RjOtCFEUwmUiAavxOH/giphy.gif',
@@ -71,8 +71,8 @@ module.exports = async (client, interaction, args) => {
             ]);
 
             return client.embed({
-                title: '👰・Demande en mariage acceptée',
-                desc: `${author} et ${target} sont maintenant marié.es ! 👰🎉`,
+                title: await client.t(interaction, 'family.acceptedTitle'),
+                desc: await client.t(interaction, 'family.acceptedDescription', { author, target }),
                 components: [],
                 content: `${target}`,
                 image: 'https://media4.giphy.com/media/10wwy1cJ8j2aD6/giphy.gif',
@@ -81,8 +81,8 @@ module.exports = async (client, interaction, args) => {
         }
 
         return client.embed({
-            title: '👰・Demande en mariage refusée',
-            desc: `${target} aime quelqu'un d'autre ou préfère rester seul.e et a décidé.e de ne pas se marier avec ${author}`,
+            title: await client.t(interaction, 'family.declinedTitle'),
+            desc: await client.t(interaction, 'family.declinedDescription', { author, target }),
             components: [],
             content: `${target}`,
             image: 'https://media4.giphy.com/media/3ohs7SYIm3yiUbL0yc/giphy.gif',
@@ -91,8 +91,8 @@ module.exports = async (client, interaction, args) => {
     }
     catch {
         return client.embed({
-            title: '👰・Demande en marriage refusée',
-            desc: `${target} n'a pas répondu ! Le mariage est annulé`,
+            title: await client.t(interaction, 'family.timeoutTitle'),
+            desc: await client.t(interaction, 'family.timeoutDescription', { target }),
             components: [],
             content: `${target}`,
             image: 'https://media3.giphy.com/media/FKcC27kUBByAo/giphy.gif',

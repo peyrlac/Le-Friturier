@@ -18,8 +18,8 @@ module.exports = async (client, interaction, args) => {
         );
 
     client.embed({
-        title: `${client.emotes.normal.error}・Remise à zero`,
-        desc: `Es-tu sûr de vouloir décimer ta famille ?`,
+        title: await client.t(interaction, 'family.resetConfirmTitle'),
+        desc: await client.t(interaction, 'family.resetConfirmDescription'),
         components: [row],
         type: 'editreply'
     }, interaction);
@@ -34,32 +34,25 @@ module.exports = async (client, interaction, args) => {
                 var remove = await Schema.findOne({ Guild: interaction.guild.id, User: interaction.author.id });
                 const parent = await Schema.findOne({ Guild: interaction.guild.id, Parent: interaction.author.id });
                 const partner = await Schema.findOne({ Guild: interaction.guild.id, Partner: interaction.author.id });
-                //const children = await Schema.findOne({ Guild: interaction.guild.id, Children: interaction.author.id });
-                
-                /*if (children) {
-                    for (let i = 0;children.Children.length > 0; i++) {
-                        children.Children[i].Parent = " ";
-                        children.Children[i].save();
-                    };
-                }*/
+
                 if (remove) {
                     remove.Parent = [];
                     remove.Children = [];
                     remove.Partner = null;
-                    remove.save();
+                    await remove.save();
                 }
-                
+
                 if (parent) {
                     parent.Parent = " ";
-                    parent.save();
+                    await parent.save();
                 }
 
                 if (partner) {
                     partner.Partner = " ";
-                    partner.save();
+                    await partner.save();
                 }
 
-                client.succNormal({ text: `Ta famille a été décimée !`, type: 'editreply' }, interaction);
+                client.succNormal({ key: 'family.resetSuccess', type: 'editreply' }, interaction);
             }
 
             if (i.customId == "family_stop") {
@@ -67,9 +60,9 @@ module.exports = async (client, interaction, args) => {
             }
         })
         .catch((err) => {
-            console.log(err)
-            client.errNormal({ error: "Time's up! Chargement de la backup!", type: 'editreply' }, interaction);
+            console.log(err);
+            client.errNormal({ key: 'family.resetTimeout', type: 'editreply' }, interaction);
         });
-}
+};
 
  

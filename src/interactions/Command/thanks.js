@@ -31,6 +31,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.thanks',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);

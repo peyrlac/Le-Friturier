@@ -12,7 +12,7 @@ module.exports = async (client, interaction, args) => {
 
 
             return client.embed({
-                title: `💉・COVID-19 - ${countries}`,
+                title: await client.t(interaction, 'search.coronaTitle', { country: countries }),
                 fields: [{
                     name: "✅┇Confirmed Cases",
                     value: `${confirmed}`,
@@ -32,7 +32,7 @@ module.exports = async (client, interaction, args) => {
             }, interaction);
 
     } catch (error) {
-        return client.errNormal({ error: `Invalid country provided!`, type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'search.invalidCountry', type: 'editreply' }, interaction);
     }
 }
 

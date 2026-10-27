@@ -105,6 +105,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.search',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);
