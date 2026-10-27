@@ -1807,6 +1807,18 @@
       "description": "Post preset messages",
       "options": { "message": { "description": "Select a message" } }
     },
+    "soundboard": {
+      "name": "soundboard",
+      "description": "Play all the sounds in Bot",
+      "subcommands": { "help": { "description": "Get information about the soundboard category commands" } },
+      "subcommandGroups": {
+        "windows": { "description": "Play the windows sounds in Bot", "subcommands": { "windowserror": { "description": "Play the windows error sound" }, "windowsshutdown": { "description": "Play the windows shutdown sound" }, "windowsstartup": { "description": "Play the windows startup sound" } } },
+        "earrape": { "description": "Play the earrape sounds in Bot", "subcommands": { "reee": { "description": "Play the reee sound" }, "defaultdance": { "description": "Play the defaultdance sound" }, "startup": { "description": "Play the startup sound" }, "thomas": { "description": "Play the thomas sound" }, "wegothim": { "description": "Play the wegothim sound" } } },
+        "songs": { "description": "Play the song sounds in Bot", "subcommands": { "dancememe": { "description": "Play the dancememe sound" }, "despacito": { "description": "Play the despacito sound" }, "elevator": { "description": "Play the elevator sound" }, "rickastley": { "description": "Play the rickastley sound" }, "running": { "description": "Play the running sound" }, "tobecontinued": { "description": "Play the tobecontinued sound" } } },
+        "discord": { "description": "Play the discord sounds in Bot", "subcommands": { "discordcall": { "description": "Play the discord call sound" }, "discordjoin": { "description": "Play the discord voice call join sound" }, "discordleave": { "description": "Play the discord voice call leave sound" }, "discordnotification": { "description": "Play the discord notification sound" } } },
+        "memes": { "description": "Play the meme sounds in Bot", "subcommands": { "fbi": { "description": "Play the fbi sound" }, "jeff": { "description": "Play the jeff sound" }, "lambo": { "description": "Play the lambo sound" }, "missionfailed": { "description": "Play the missionfailed sound" }, "moaning": { "description": "Play the moaning sound" }, "nani": { "description": "Play the nani sound" }, "nyancat": { "description": "Play the nyancat sound" }, "ohh": { "description": "Play the ohh sound" }, "rimshot": { "description": "Play the rimshot sound" }, "roblox": { "description": "Play the roblox sound" }, "shotdown": { "description": "Play the shotdown sound" }, "spongebob": { "description": "Play the spongebob sound" }, "wow": { "description": "Play the wow sound" }, "yeet": { "description": "Play the yeet sound" } } }
+      }
+    },
     "move": {
       "name": "move",
       "description": "Move members from a voice channel to another voice channel",
