@@ -776,6 +776,7 @@
         "noAccount": "You don't have any money yet."
       },
       "slots": {
+        "title": "🎰・Slots",
         "usage": "slots [amount]",
         "insufficient": "You are betting more than you own!",
         "win": "You won {amount}.",

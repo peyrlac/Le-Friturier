@@ -46,7 +46,7 @@ module.exports = async (client, interaction, args) => {
             if (win) {
 
                 client.embed({
-                    title: `🎰・Slots`,
+                    titleKey: 'commands.casino.slots.title',
                     descKey: 'commands.casino.slots.win',
                     variables: { amount: `${client.emotes.economy.coins} $${money}` },
                     color: client.config.colors.succes, 
@@ -58,7 +58,7 @@ module.exports = async (client, interaction, args) => {
             } else {
 
                 client.embed({
-                    title: `🎰・Slots`,
+                    titleKey: 'commands.casino.slots.title',
                     descKey: 'commands.casino.slots.lose',
                     variables: { amount: `${client.emotes.economy.coins} $${money}` },
                     components: [row], 

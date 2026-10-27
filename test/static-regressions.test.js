@@ -782,6 +782,12 @@ test('userinfo context menu uses localized profile labels', () => {
   assert.doesNotMatch(source, /User information|Information about|No nickname|Discord joined at|Server joined at/);
 });
 
+test('slots responses use a localized title', () => {
+  const source = read('src/commands/casino/slots.js');
+  assert.match(source, /titleKey:\s*['"]commands\.casino\.slots\.title['"]/);
+  assert.doesNotMatch(source, /Slots/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
