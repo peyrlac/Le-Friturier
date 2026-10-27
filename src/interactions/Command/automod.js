@@ -2,6 +2,7 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const { ChannelType } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     localizationKey: 'commandMetadata.automod',
@@ -40,8 +41,8 @@ module.exports = {
                         .setDescription('Que voulez-vous faire avec la chaîne?')
                         .setRequired(true)
                         .addChoices(
-                            { name: 'Add', value: 'add' },
-                            { name: 'Remove', value: 'remove' }
+                            { name: getCommandMetadata('commandMetadata.automod.subcommands.linkschannel.options.type.choices.add.name'), value: 'add' },
+                            { name: getCommandMetadata('commandMetadata.automod.subcommands.linkschannel.options.type.choices.remove.name'), value: 'remove' }
                         )
                 )
                 .addChannelOption(option => option.setName('channel').setDescription('Select a channel').setRequired(true).addChannelTypes(ChannelType.GuildText))

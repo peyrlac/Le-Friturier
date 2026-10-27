@@ -1654,7 +1654,7 @@
         "antiinvite": { "description": "Enable or disable anti-invite protection", "options": { "active": { "description": "Enable protection" } } },
         "antilinks": { "description": "Enable or disable anti-links protection", "options": { "active": { "description": "Enable protection" } } },
         "antispam": { "description": "Enable or disable anti-spam protection", "options": { "active": { "description": "Enable protection" } } },
-        "linkschannel": { "description": "Manage channels allowed to contain links", "options": { "type": { "description": "Action to perform" }, "channel": { "description": "Target channel" } } }
+        "linkschannel": { "description": "Manage channels allowed to contain links", "options": { "type": { "description": "Action to perform", "choices": { "add": { "name": "Add" }, "remove": { "name": "Remove" } } }, "channel": { "description": "Target channel" } } }
       },
       "subcommandGroups": {
         "blacklist": { "description": "Manage the blacklist", "subcommands": { "display": { "description": "Display the blacklist" }, "add": { "description": "Add a word to the blacklist", "options": { "word": { "description": "Word to add" } } }, "remove": { "description": "Remove a word from the blacklist", "options": { "word": { "description": "Word to remove" } } } } }

@@ -1641,7 +1641,7 @@
         "antiinvite": { "description": "Activer ou désactiver l’anti-invitation", "options": { "active": { "description": "Activer la protection" } } },
         "antilinks": { "description": "Activer ou désactiver l’anti-liens", "options": { "active": { "description": "Activer la protection" } } },
         "antispam": { "description": "Activer ou désactiver l’anti-spam", "options": { "active": { "description": "Activer la protection" } } },
-        "linkschannel": { "description": "Gérer les salons autorisés pour les liens", "options": { "type": { "description": "Action à effectuer" }, "channel": { "description": "Salon concerné" } } }
+        "linkschannel": { "description": "Gérer les salons autorisés pour les liens", "options": { "type": { "description": "Action à effectuer", "choices": { "add": { "name": "Ajouter" }, "remove": { "name": "Supprimer" } } }, "channel": { "description": "Salon concerné" } } }
       },
       "subcommandGroups": {
         "blacklist": { "description": "Gérer la liste noire", "subcommands": { "display": { "description": "Afficher la liste noire" }, "add": { "description": "Ajouter un mot à la liste noire", "options": { "word": { "description": "Mot à ajouter" } } }, "remove": { "description": "Supprimer un mot de la liste noire", "options": { "word": { "description": "Mot à supprimer" } } } } }
