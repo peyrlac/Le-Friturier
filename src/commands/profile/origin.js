@@ -1,30 +1,24 @@
 const Schema = require('../../database/models/profile');
 
 module.exports = async (client, interaction, args) => {
-
-    const country = interaction.options.getString('country');
-
+    const country = interaction.options.getString('country', true);
     if (country.length > 50) return client.errNormal({ key: 'profile.originTooLong', type: 'editreply' }, interaction);
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
-            data.Orgin = country;
-            data.save();
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
-            client.succNormal({
-                key: 'profile.originSuccess',
-                variables: { country },
-                fields: [{
-                    name: "🌍┆Country",
-                    value: `\`\`\`${country}\`\`\``,
-                    inline: true,
-                }],
-                type: 'editreply'
-            }, interaction);
-        }
-        else {
-            return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
-        }
-    })
+    data.Orgin = country;
+    await data.save();
+
+    return client.succNormal({
+        key: 'profile.originSuccess',
+        variables: { country },
+        fields: [{
+            name: await client.t(interaction, 'profile.originField'),
+            value: `\`\`\`${country}\`\`\``,
+            inline: true,
+        }],
+        type: 'editreply'
+    }, interaction);
 }
 
