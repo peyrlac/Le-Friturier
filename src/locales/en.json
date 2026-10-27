@@ -41,6 +41,7 @@
         "genderMale": "Male",
         "genderFemale": "Female",
         "genderOther": "Other",
+        "genderPlaceholder": "Select an option",
         "notFound": "No profile found! Open one with `createprofile`."
       },
         "config": {
