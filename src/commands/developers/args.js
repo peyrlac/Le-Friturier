@@ -43,59 +43,59 @@ module.exports = async (client, interaction, args) => {
             image: `https://cdn.discordapp.com/attachments/843487478881976381/874742702393131038/Bot_banner_rules.jpg`
         }, interaction.channel).then(async () => {
             await client.embed({
-                title: `📃・Règles`,
+                title: await client.t(interaction, 'developers.args.rules.title'),
                 thumbnail: client.user.avatarURL({ size: 1024 }),
-                desc: `_____ \n\nCe sont nos règles de serveur.Veuillez vous en tenir à cela pour le garder amusant pour tout le monde.Les administrateurs et les mods seront dénoncés / coups de pied / interdiction par discrétion`,
+                desc: await client.t(interaction, 'developers.args.rules.description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `1. être respectueux`,
-                desc: `Vous devez respecter tous les utilisateurs, quel que soit votre goût envers eux.Traitez les autres comme vous voulez être traité.`,
+                title: await client.t(interaction, 'developers.args.rules.rule1Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule1Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `2. Aucune langue inappropriée`,
-                desc: `L'utilisation de blasphèmes doit être maintenue au minimum.Cependant, tout langage désobligeant vers tout utilisateur est interdit.`,
+                title: await client.t(interaction, 'developers.args.rules.rule2Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule2Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `3. Pas de spam`,
-                desc: `N'envoyez pas beaucoup de petits messages les uns après les autres.Ne perturbez pas la conversation par le spam.`,
+                title: await client.t(interaction, 'developers.args.rules.rule3Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule3Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `4. Pas de matériel pornographique / adulte / autre NSFW`,
-                desc: `Il s'agit d'un serveur communautaire et non destiné à partager ce type de matériel.`,
+                title: await client.t(interaction, 'developers.args.rules.rule4Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule4Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `5. Aucune publicité`,
-                desc: `Nous ne tolérons aucun type de publicités, que ce soit pour d'autres communautés ou flux.Vous pouvez publier votre contenu dans la chaîne multimédia s'il est pertinent et fournit une valeur réelle (vidéo / art)`,
+                title: await client.t(interaction, 'developers.args.rules.rule5Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule5Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `6. Pas de noms offensifs et d'images de profil`,
-                desc: `Il vous sera demandé de changer votre nom ou votre image si le personnel le juge inapproprié.`,
+                title: await client.t(interaction, 'developers.args.rules.rule6Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule6Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `7. Raid des serveurs`,
-                desc: `Les raids ou les mentions de raids ne sont pas autorisés.`,
+                title: await client.t(interaction, 'developers.args.rules.rule7Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule7Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `8. Menaces directes et indirectes`,
-                desc: `Les menaces pour les autres utilisateurs des DDO, la mort, le DOX, les abus et d'autres menaces malveillantes sont absolument interdites et interdites.`,
+                title: await client.t(interaction, 'developers.args.rules.rule8Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule8Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `9. Suivez les directives de la communauté Discord`,
-                desc: `Vous pouvez les trouver ici: https://discordapp.com/guidelines`,
+                title: await client.t(interaction, 'developers.args.rules.rule9Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule9Description'),
             }, interaction.channel)
 
             await client.embed({
-                title: `10. Do not join voice chat channels without permissions of the people already in there`,
-                desc: `If you see that they have a free spot it is alright to join and ask whether they have an open spot, but leave if your presence is not wanted by whoever was there first`,
+                title: await client.t(interaction, 'developers.args.rules.rule10Title'),
+                desc: await client.t(interaction, 'developers.args.rules.rule10Description'),
             }, interaction.channel)
         })
     }
