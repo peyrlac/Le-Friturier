@@ -54,33 +54,32 @@ module.exports = {
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
         var caseNumber; 
-        await Case.findOne({ Guild: interaction.guild.id }).then(async data => {
-            if(!data) {
-                new Case({
-                    Guild: interaction.guild.id,
-                    Case: 1
-                }).save();
-                caseNumber = 1;
-            }
-            else {
-                data.Case += 1;
-                data.save();
-                caseNumber = data.Case;
-            }
-        });
+        const caseData = await Case.findOne({ Guild: interaction.guild.id });
+        if (!caseData) {
+            await new Case({
+                Guild: interaction.guild.id,
+                Case: 1
+            }).save();
+            caseNumber = 1;
+        }
+        else {
+            caseData.Case += 1;
+            await caseData.save();
+            caseNumber = caseData.Case;
+        }
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
-            if (data) {
+        const data = await Schema.findOne({ Guild: interaction.guild.id, User: member.id });
+        if (data) {
                 data.Warnings.push({
                     Moderator: interaction.user.id,
                     Reason: submitted.fields.getTextInputValue("reason"),
                     Date: Date.now(),
                     Case: caseNumber
                 });
-                data.save();
+                await data.save();
             }
             else {
-                new Schema({
+                await new Schema({
                     Guild: interaction.guild.id,
                     User: member.id,
                     Warnings: [{
@@ -91,7 +90,6 @@ module.exports = {
                     }]
                 }).save();
             }
-        })
 
         client.embed({
             title: `🔨・Warn`,
