@@ -38,17 +38,18 @@ module.exports = (client) => {
         error: error,
         key: key,
         variables: variables = {},
+        titleKey: titleKey = 'common.errorTitle',
         descriptionKey: descriptionKey = 'errors.generic',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, variables, 'Erreur !')}`)
         embed.setDescription(await translate(client, interaction, descriptionKey, variables, 'Une erreur est survenue !'))
         const translatedError = await translate(client, interaction, key, variables, error);
         error = translatedError;
         embed.addFields( 
-            { name: "💬┆Error comment", value: `\`\`\`${error}\`\`\``},
+            { name: await translate(client, interaction, 'common.errorComment', variables, "Détail de l'erreur"), value: `\`\`\`${error}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -64,15 +65,16 @@ module.exports = (client) => {
     client.errUsage = async function ({
         embed: embed = client.templateEmbed(),
         usage: usage,
+        titleKey: titleKey = 'common.errorTitle',
         descriptionKey: descriptionKey = 'errors.invalidArguments',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
         embed.setDescription(await translate(client, interaction, descriptionKey, {}, 'Les arguments fournis sont incorrects'))
         embed.addFields(
-            { name: "💬┆Required arguments", value: `\`\`\`${usage}\`\`\``},    
+            { name: await translate(client, interaction, 'common.requiredArguments', {}, 'Arguments requis'), value: `\`\`\`${usage}\`\`\``},
         )
         embed.setColor(client.config.colors.error)
 
@@ -89,12 +91,13 @@ module.exports = (client) => {
     client.errMissingPerms = async function ({
         embed: embed = client.templateEmbed(),
         perms: perms,
+        titleKey: titleKey = 'common.errorTitle',
         descriptionKey: descriptionKey = 'errors.noPermission',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
         embed.setDescription(await translate(client, interaction, descriptionKey, {}, "Vous n'avez pas les permissions requises"))
         embed.addFields(
             { name: await translate(client, interaction, 'common.requiredPermission', {}, 'Permission requise'), value: `\`\`\`${perms}\`\`\``},
@@ -114,12 +117,13 @@ module.exports = (client) => {
     client.errNoPerms = async function ({
         embed: embed = client.templateEmbed(),
         perms: perms,
+        titleKey: titleKey = 'common.errorTitle',
         descriptionKey: descriptionKey = 'errors.botNoPermission',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
         embed.setDescription(await translate(client, interaction, descriptionKey, {}, "Le bot n'a pas les permissions requises"))
         embed.addFields(
             { name: await translate(client, interaction, 'common.requiredPermission', {}, 'Permission requise'), value: `\`\`\`${perms}\`\`\``},
@@ -139,15 +143,16 @@ module.exports = (client) => {
     client.errWait = async function ({
         embed: embed = client.templateEmbed(),
         time: time,
+        titleKey: titleKey = 'common.errorTitle',
         descriptionKey: descriptionKey = 'errors.alreadyPerformed',
         type: type,
         content: content,
         components: components
     }, interaction) {
-        embed.setTitle(`${client.emotes.normal.error}・Erreur !`)
+        embed.setTitle(`${client.emotes.normal.error}・${await translate(client, interaction, titleKey, {}, 'Erreur !')}`)
         embed.setDescription(await translate(client, interaction, descriptionKey, {}, 'Vous avez déjà effectué cette action'))
         embed.addFields(
-            { name: "⏰┆Try again on", value: `<t:${time}:f>`},
+            { name: await translate(client, interaction, 'common.tryAgainAt', {}, 'Réessayez à'), value: `<t:${time}:f>`},
         )
         embed.setColor(client.config.colors.error)
 
