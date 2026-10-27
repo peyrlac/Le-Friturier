@@ -324,6 +324,14 @@ test('automod protection responses use the active server locale', () => {
   }
 });
 
+test('voice command responses use the active server locale', () => {
+  for (const file of ['limit.js', 'lock.js', 'rename.js', 'unlock.js']) {
+    const source = read(`src/commands/voice/${file}`);
+    assert.match(source, /voice\.(notInVoice|cannotEdit|limitUpdated|locked|renamed|unlocked)/, file);
+    assert.doesNotMatch(source, /You're not in a voice channel|You cannot edit this channel|succesfully/i, file);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

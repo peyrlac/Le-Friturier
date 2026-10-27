@@ -260,6 +260,28 @@ test('afk and activities expose localized metadata', () => {
   });
 });
 
+test('voice exposes localized metadata and supports localized channel responses', () => {
+  const command = require('../src/interactions/Command/voice');
+
+  assert.deepEqual(command.localizations, {
+    name: { fr: 'vocal', en: 'voice' },
+    description: { fr: 'Gérer les salons vocaux', en: 'Manage voice channels' },
+    subcommands: {
+      help: { description: { fr: 'Voir l’aide de la catégorie vocale', en: 'View voice category help' } },
+      limit: {
+        description: { fr: 'Modifier la limite de votre salon vocal', en: 'Change your voice channel limit' },
+        options: { limit: { description: { fr: 'Limite de membres', en: 'Member limit' } } }
+      },
+      lock: { description: { fr: 'Verrouiller votre salon vocal', en: 'Lock your voice channel' } },
+      rename: {
+        description: { fr: 'Renommer votre salon vocal', en: 'Rename your voice channel' },
+        options: { name: { description: { fr: 'Nouveau nom du salon', en: 'New channel name' } } }
+      },
+      unlock: { description: { fr: 'Déverrouiller votre salon vocal', en: 'Unlock your voice channel' } }
+    }
+  });
+});
+
 test('serializes native command localizations for Discord', () => {
     const command = require('../src/interactions/Command/config');
     applyCommandLocalizations(command);
