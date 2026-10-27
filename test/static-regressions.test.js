@@ -922,6 +922,19 @@ test('help panel support and invite handlers use localization keys', () => {
   assert.doesNotMatch(read('src/handlers/helppanel/invite.js'), /Nothing selected|Make your server even better/);
 });
 
+test('guess game handlers use localization keys', () => {
+  const expectations = {
+    'src/handlers/games/guessWord.js': ['gameEvents.guessWordTitle', 'gameEvents.guessWordWon', 'gameEvents.guessedBy', 'gameEvents.correctWord', 'gameEvents.guessWordInstruction', 'gameEvents.word'],
+    'src/handlers/games/guessNumber.js': ['gameEvents.guessNumberTitle', 'gameEvents.guessNumberWon', 'gameEvents.guessedBy', 'gameEvents.correctNumber', 'gameEvents.guessNumberInstruction']
+  };
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+  }
+  assert.doesNotMatch(read('src/handlers/games/guessWord.js'), /Guess the word|The word is guessed|Correct word/);
+  assert.doesNotMatch(read('src/handlers/games/guessNumber.js'), /Guess the number|The number is guessed|Correct number/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);

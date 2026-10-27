@@ -1004,6 +1004,18 @@
     "moderator": "> Modérateur",
     "reason": "> Motif"
   },
+  "gameEvents": {
+    "guessWordTitle": "💬・Devinez le mot",
+    "guessWordWon": "Le mot a été trouvé et vaut {amount} $.",
+    "guessedBy": "👤・Trouvé par",
+    "correctWord": "💬・Mot correct",
+    "guessWordInstruction": "Placez les lettres dans le bon ordre !",
+    "word": "🔀・Mot",
+    "guessNumberTitle": "🔢・Devinez le nombre",
+    "guessNumberWon": "Le nombre a été trouvé et vaut {amount} $.",
+    "correctNumber": "🔢・Nombre correct",
+    "guessNumberInstruction": "Devinez le nombre entre **1** et **10 000** !"
+  },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",
     "promptAction": "Quelle action doit être associée à cette commande ?",

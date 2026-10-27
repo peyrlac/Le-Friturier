@@ -1017,6 +1017,18 @@
     "moderator": "> Moderator",
     "reason": "> Reason"
   },
+  "gameEvents": {
+    "guessWordTitle": "💬・Guess the word",
+    "guessWordWon": "The word was guessed and is worth ${amount}.",
+    "guessedBy": "👤・Guessed by",
+    "correctWord": "💬・Correct word",
+    "guessWordInstruction": "Put the letters in the right position!",
+    "word": "🔀・Word",
+    "guessNumberTitle": "🔢・Guess the number",
+    "guessNumberWon": "The number was guessed and is worth ${amount}.",
+    "correctNumber": "🔢・Correct number",
+    "guessNumberInstruction": "Guess the number between **1** and **10,000**!"
+  },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",
     "promptAction": "Which action should be attached to this command?",

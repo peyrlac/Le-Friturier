@@ -20,16 +20,16 @@ module.exports = async (client) => {
         client.addMoney(message, message.author, amount);
 
         client.embed({
-          title: `🔢・Guess the number`,
-          desc: `The number is guessed and has a value of $${amount}`,
+          title: await client.t(message, 'gameEvents.guessNumberTitle'),
+          desc: await client.t(message, 'gameEvents.guessNumberWon', { amount }),
           fields: [
             {
-              name: `👤┇Guessed by`,
+              name: await client.t(message, 'gameEvents.guessedBy'),
               value: `${message.author} (${message.author.tag})`,
               inline: true
             },
             {
-              name: `🔢┇Correct number`,
+              name: await client.t(message, 'gameEvents.correctNumber'),
               value: `${data.Number}`,
               inline: true
             }
@@ -40,8 +40,8 @@ module.exports = async (client) => {
         data.save();
 
         client.embed({
-          title: `🔢・Guess the number`,
-          desc: `Guess the number between **1** and **10.000**!`
+          title: await client.t(message, 'gameEvents.guessNumberTitle'),
+          desc: await client.t(message, 'gameEvents.guessNumberInstruction')
         }, message.channel)
       }
       else if (userNumber > number) {
