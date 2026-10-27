@@ -65,9 +65,13 @@ module.exports = async (client, interaction, args) => {
                                 }
                             ]
                         }, usr)
-                        client.transcript(interaction, usr).catch(() => { });
+                        client.transcript(interaction, usr).catch(error => {
+                            console.error('Failed to create ticket transcript', error);
+                        });
                     }
-                    catch (err) { }
+                    catch (error) {
+                        console.error('Failed to process ticket transcript recipient', error);
+                    }
                 })
 
                 if (logsChannel) {

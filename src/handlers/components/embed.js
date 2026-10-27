@@ -291,7 +291,10 @@ module.exports = (client) => {
                 content: content,
                 components: components,
                 withResponse: true
-            }).catch(e => { });
+            }).catch(error => {
+                console.error('Failed to edit interaction response', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "editreply") {
             return await interaction.editReply({
@@ -299,7 +302,10 @@ module.exports = (client) => {
                 content: content,
                 components: components,
                 withResponse: true
-            }).catch(e => { });
+            }).catch(error => {
+                console.error('Failed to edit interaction reply', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "reply") {
             return await interaction.reply({
@@ -307,7 +313,10 @@ module.exports = (client) => {
                 content: content,
                 components: components,
                 withResponse: true
-            }).catch(e => { });
+            }).catch(error => {
+                console.error('Failed to send interaction reply', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "update") {
             return await interaction.update({
@@ -315,7 +324,10 @@ module.exports = (client) => {
                 content: content,
                 components: components,
                 withResponse: true
-            }).catch(e => { });
+            }).catch(error => {
+                console.error('Failed to update interaction', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "ephemeraledit") {
             return await interaction.editReply({
@@ -324,7 +336,10 @@ module.exports = (client) => {
                 components: components,
                 withResponse: true,
                 flags: Discord.MessageFlags.Ephemeral
-            }).catch(e => { });
+            }).catch(error => {
+                console.error('Failed to edit ephemeral interaction reply', error);
+                return null;
+            });
         }
         else if (type && type.toLowerCase() == "ephemeral") {
             return await interaction.reply({
@@ -333,7 +348,10 @@ module.exports = (client) => {
                 components: components,
                 withResponse: true,
                 flags: Discord.MessageFlags.Ephemeral
-            }).catch(e => { });
+            }).catch(error => {
+                console.error('Failed to send ephemeral interaction reply', error);
+                return null;
+            });
         }
         else {
             return await interaction.send({
@@ -341,7 +359,10 @@ module.exports = (client) => {
                 content: content,
                 components: components,
                 withResponse: true
-            }).catch(e => { });
+            }).catch(error => {
+                console.error('Failed to send channel response', error);
+                return null;
+            });
         }
     }
 }

@@ -132,7 +132,9 @@ module.exports = async (client, interaction) => {
 
                             client.succNormal({
                                 text: "You have been successfully verified!"
-                            }, interaction.user).catch(error => { })
+                            }, interaction.user).catch(error => {
+                                console.error('Failed to send verification confirmation', error);
+                            })
 
                             var verifyUser = interaction.guild.members.cache.get(interaction.user.id);
                             verifyUser.roles.add(data.Role);
