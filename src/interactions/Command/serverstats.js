@@ -1,92 +1,95 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('serverstats')
-        .setDescription('Manage the server stats')
+        .setName(getCommandMetadata('commandMetadata.serverstats.name'))
+        .setDescription(getCommandMetadata('commandMetadata.serverstats.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the server stats category commands')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('boosts')
-                .setDescription('Keep track of the boost count')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.boosts.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('tier')
-                .setDescription('Keep track of the boost tier count')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.tier.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('channels')
-                .setDescription('Keep track of the channel count')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.channels.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('stage-channels')
-                .setDescription('Keep track of the stage channel count')
+                .setDescription(getCommandMetadata("commandMetadata.serverstats.subcommands.stage-channels.description"))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('text-channels')
-                .setDescription('Keep track of the text channel count')
+                .setDescription(getCommandMetadata("commandMetadata.serverstats.subcommands.text-channels.description"))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('voice-channels')
-                .setDescription('Keep track of the voice channel count')
+                .setDescription(getCommandMetadata("commandMetadata.serverstats.subcommands.voice-channels.description"))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('news-channels')
-                .setDescription('Keep track of the news channel count')
+                .setDescription(getCommandMetadata("commandMetadata.serverstats.subcommands.news-channels.description"))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('members')
-                .setDescription('Keep track of the member count')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.members.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('bots')
-                .setDescription('Keep track of the bots count')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.bots.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('roles')
-                .setDescription('Keep track of the role count')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.roles.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('emoji')
-                .setDescription('Keep track of the emoji\'s count')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.emoji.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('static-emoji')
-                .setDescription('Keep track of the static emoji\'s count')
+                .setDescription(getCommandMetadata("commandMetadata.serverstats.subcommands.static-emoji.description"))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('animated-emoji')
-                .setDescription('Keep track of the animated emoji\'s count')
+                .setDescription(getCommandMetadata("commandMetadata.serverstats.subcommands.animated-emoji.description"))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('time')
-                .setDescription('Keep track of your current time zone')
+                .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.time.description'))
                 .addStringOption(option =>
                     option.setName('timezone')
-                        .setDescription('The timezone you want to set (e.g. Europe/Amsterdam)')
+                        .setDescription(getCommandMetadata('commandMetadata.serverstats.subcommands.time.options.timezone.description'))
                         .setRequired(true)
                 )
         )
     ,
+
+    localizationKey: 'commandMetadata.serverstats',
 
     /** 
      * @param {Client} client
@@ -95,7 +98,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         const perms = await client.checkPerms({
             flags: [Discord.PermissionsBitField.Flags.ManageChannels],
             perms: [Discord.PermissionsBitField.Flags.ManageChannels]

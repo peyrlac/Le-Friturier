@@ -1,162 +1,163 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
+    localizationKey: 'commandMetadata.economy',
     data: new SlashCommandBuilder()
-        .setName('economy')
-        .setDescription('Play the economy game in your server')
+        .setName(getCommandMetadata('commandMetadata.economy.name'))
+        .setDescription(getCommandMetadata('commandMetadata.economy.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the economy category commands')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('additem')
-                .setDescription('Add a role item to the economy store')
-                .addRoleOption(option => option.setName('role').setDescription('Select a role').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.additem.description'))
+                .addRoleOption(option => option.setName('role').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.additem.options.role.description')).setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.additem.options.amount.description')).setMinValue(1).setMaxValue(1000000000).setRequired(true))
 
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('addmoney')
-                .setDescription('Add money to a user')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.addmoney.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.addmoney.options.user.description')).setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.addmoney.options.amount.description')).setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('balance')
-                .setDescription('See your balance')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(false))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.balance.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.balance.options.user.description')).setRequired(false))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('beg')
-                .setDescription('Beg for money')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.beg.description'))
         )
         .addSubcommand((subcommand) =>
             subcommand
                 .setName('buy')
-                .setDescription('Buy items in the Bot store')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.buy.description'))
 
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('clear')
-                .setDescription('Clear the economy')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.clear.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('crime')
-                .setDescription('Commit a crime')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.crime.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('daily')
-                .setDescription('Claim your daily money')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.daily.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('deleteitem')
-                .setDescription('Delete a role item from the economy store')
-                .addRoleOption(option => option.setName('role').setDescription('Select a role').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.deleteitem.description'))
+                .addRoleOption(option => option.setName('role').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.deleteitem.options.role.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('deposit')
-                .setDescription('Deposit money to the bank')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.deposit.description'))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.deposit.options.amount.description')).setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('fish')
-                .setDescription('Fish some fish')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.fish.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('hourly')
-                .setDescription('Claim your hourly money')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.hourly.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('hunt')
-                .setDescription('Hunt some animals')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.hunt.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('monthly')
-                .setDescription('Claim your monthly money')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.monthly.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('pay')
-                .setDescription('Pay a user')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.pay.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.pay.options.user.description')).setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.pay.options.amount.description')).setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('present')
-                .setDescription('Get a weekly present')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.present.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('removemoney')
-                .setDescription('Remove money from a user')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.removemoney.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.removemoney.options.user.description')).setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.removemoney.options.amount.description')).setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('rob')
-                .setDescription('Rob a user')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.rob.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.rob.options.user.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('store')
-                .setDescription('Show the store of this guild')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.store.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('weekly')
-                .setDescription('Claim your weekly money')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.weekly.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('withdraw')
-                .setDescription('Withdraw your money')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.withdraw.description'))
+                .addNumberOption(option => option.setName('amount').setDescription(getCommandMetadata('commandMetadata.economy.subcommands.withdraw.options.amount.description')).setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('work')
-                .setDescription('Go to work')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.work.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('yearly')
-                .setDescription('Claim your yearly money')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.yearly.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('leaderboard')
-                .setDescription('See the economy leaderboard')
+                .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.leaderboard.description'))
                 .addStringOption(option =>
                     option.setName('type')
-                        .setDescription('The leaderboard type that you want')
+                        .setDescription(getCommandMetadata('commandMetadata.economy.subcommands.leaderboard.options.type.description'))
                         .setRequired(true)
                         .addChoices(
-                            {name: 'Money', value: 'money'},
-                            {name: 'Bank', value: 'bank'}
+                            { name: getCommandMetadata('commandMetadata.economy.subcommands.leaderboard.options.type.choices.money.name'), value: 'money' },
+                            { name: getCommandMetadata('commandMetadata.economy.subcommands.leaderboard.options.type.choices.bank.name'), value: 'bank' }
                         )
                 )
         )
     ,
-
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
@@ -164,7 +165,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);
     },
 };

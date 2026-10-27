@@ -5,23 +5,23 @@ module.exports = async (client, emoji) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `😛・Emoji created`,
-        desc: `An emoji has been created`,
+        title: await client.t(emoji, 'auditEvents.emojiCreatedTitle'),
+        desc: await client.t(emoji, 'auditEvents.emojiCreatedDescription'),
         fields: [
             {
-                name: `> Emoji`,
+                name: await client.t(emoji, 'auditEvents.emoji'),
                 value: `- ${emoji}`
             },
             {
-                name: `> Name`,
+                name: await client.t(emoji, 'auditEvents.name'),
                 value: `- ${emoji.name}`
             },
             {
-                name: `> ID`,
+                name: await client.t(emoji, 'auditEvents.id'),
                 value: `- ${emoji.id}`
             },
             {
-                name: `> Url`,
+                name: await client.t(emoji, 'auditEvents.url'),
                 value: `- ${emoji.url}`
             }
         ]

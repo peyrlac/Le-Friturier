@@ -1,39 +1,41 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
+    localizationKey: 'commandMetadata.soundboard',
 
     // Meme Images
 
     data: new SlashCommandBuilder()
         .setName('soundboard')
-        .setDescription('Play all the sounds in Bot')
+        .setDescription(getCommandMetadata('commandMetadata.soundboard.description'))
 
         .addSubcommand((subcommand) =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the soundboard category commands')
+                .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommands.help.description'))
         )
         
         // Windows Sounds
         .addSubcommandGroup((group) =>
             group
                 .setName('windows')
-                .setDescription('Play the windows sounds in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.windows.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('windowserror')
-                        .setDescription('Play the windows error sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.windows.subcommands.windowserror.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('windowsshutdown')
-                        .setDescription('Play the windows shutdown sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.windows.subcommands.windowsshutdown.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('windowsstartup')
-                        .setDescription('Play the windows startup sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.windows.subcommands.windowsstartup.description'))
                 )
         )
 
@@ -42,31 +44,31 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('earrape')
-                .setDescription('Play the earrape sounds in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.earrape.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('reee')
-                        .setDescription('Play the reee sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.earrape.subcommands.reee.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('defaultdance')
-                        .setDescription('Play the defaultdance sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.earrape.subcommands.defaultdance.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('startup')
-                        .setDescription('Play the startup sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.earrape.subcommands.startup.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('thomas')
-                        .setDescription('Play the thomas sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.earrape.subcommands.thomas.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('wegothim')
-                        .setDescription('Play the wegothim sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.earrape.subcommands.wegothim.description'))
                 )
         )
 
@@ -75,36 +77,36 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('songs')
-                .setDescription('Play the song sounds in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.songs.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('dancememe')
-                        .setDescription('Play the dancememe sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.songs.subcommands.dancememe.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('despacito')
-                        .setDescription('Play the despacito sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.songs.subcommands.despacito.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('elevator')
-                        .setDescription('Play the elevator sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.songs.subcommands.elevator.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('rickastley')
-                        .setDescription('Play the rickastley sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.songs.subcommands.rickastley.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('running')
-                        .setDescription('Play the running sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.songs.subcommands.running.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('tobecontinued')
-                        .setDescription('Play the tobecontinued sound')
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.songs.subcommands.tobecontinued.description'))
                 )
         )
 
@@ -113,24 +115,24 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('discord')
-                .setDescription('Play the discord sounds in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.discord.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('discordcall')
-                        .setDescription('Play the discord call sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.discord.subcommands.discordcall.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('discordjoin')
-                        .setDescription('Play the discord voice call join sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.discord.subcommands.discordjoin.description')),
                 )
                 .addSubcommand((subcommand) =>
-                    subcommand.setName('discordleave').setDescription('Play the discord voice call leave sound')
+                    subcommand.setName('discordleave').setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.discord.subcommands.discordleave.description'))
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('discordnotification')
-                        .setDescription('Play the discord notification sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.discord.subcommands.discordnotification.description')),
                 )
         )
 
@@ -139,76 +141,76 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('memes')
-                .setDescription('Play the meme sounds in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.description'))
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('fbi')
-                        .setDescription('Play the fbi sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.fbi.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('jeff')
-                        .setDescription('Play the jeff sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.jeff.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('lambo')
-                        .setDescription('Play the lambo sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.lambo.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('missionfailed')
-                        .setDescription('Play the missionfailed sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.missionfailed.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('moaning')
-                        .setDescription('Play themoaning sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.moaning.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('nani')
-                        .setDescription('Play the nani sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.nani.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('nyancat')
-                        .setDescription('Play the nyancat sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.nyancat.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('ohh')
-                        .setDescription('Play the ohh sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.ohh.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('rimshot')
-                        .setDescription('Play the rimshot sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.rimshot.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('roblox')
-                        .setDescription('Play the roblox sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.roblox.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('shotdown')
-                        .setDescription('Play the shotdown sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.shotdown.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('spongebob')
-                        .setDescription('Play the spongebob sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.spongebob.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('wow')
-                        .setDescription('Play the wow sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.wow.description')),
                 )
                 .addSubcommand((subcommand) =>
                     subcommand
                         .setName('yeet')
-                        .setDescription('Play the yeet sound'),
+                        .setDescription(getCommandMetadata('commandMetadata.soundboard.subcommandGroups.memes.subcommands.yeet.description')),
                 )
         ),
 
@@ -219,7 +221,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);
     },
 };

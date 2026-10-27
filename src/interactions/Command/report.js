@@ -1,23 +1,24 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('report')
-        .setDescription('Report a bug or user to the developers')
+        .setDescription(getCommandMetadata('commandMetadata.report.description'))
         .addStringOption(option =>
             option.setName('type')
-                .setDescription('The type of your report')
+                .setDescription(getCommandMetadata('commandMetadata.report.options.type.description'))
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Bug', value: 'bug' },
-                    { name: 'User', value: 'user' }
+                    { name: getCommandMetadata('commandMetadata.report.options.type.choices.bug.name'), value: 'bug' },
+                    { name: getCommandMetadata('commandMetadata.report.options.type.choices.user.name'), value: 'user' }
                 )
         )
         .addStringOption(option =>
             option.setName('description')
-                .setDescription('Description with your report')
+                .setDescription(getCommandMetadata('commandMetadata.report.options.description.description'))
                 .setRequired(true)
         )
     ,
@@ -28,8 +29,10 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.report',
+
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         const webhookClient = new Discord.WebhookClient({
             id: client.webhooks.bugReportLogs.id,
             token: client.webhooks.bugReportLogs.token
@@ -53,7 +56,7 @@ module.exports = {
             });
 
             client.succNormal({
-                text: `Bug successfully sent to the developers!`,
+                key: 'report.bugSent',
                 type: 'ephemeraledit'
             }, interaction);
         }
@@ -72,7 +75,7 @@ module.exports = {
             });
 
             client.succNormal({
-                text: `User report successfully sent to the developers!`,
+                key: 'report.userSent',
                 type: 'ephemeraledit'
             }, interaction);
         }

@@ -6,6 +6,7 @@ const Schema = require("../../database/models/warnings");
 const Case = require("../../database/models/warnCase");
 
 module.exports = {
+    localizationKey: 'commandMetadata.warn',
     data: new ContextMenuCommandBuilder()
         .setName('Warn')
         .setType(2),
@@ -22,21 +23,21 @@ module.exports = {
         }, interaction)
         if (perms === false) {
             client.errNormal({
-                error: `You don't have the required permissions to use this command!`,
+                key: 'errors.noPermission',
                 type: 'ephemeral'
             }, interaction);
             return;
         }
         // Create modal to give a reason
         const modal = new Discord.ModalBuilder()
-            .setTitle('Warn')
+            .setTitle(await client.t(interaction, 'moderation.warnTitle'))
             .setCustomId('warn')
             .addComponents(
                 new Discord.ActionRowBuilder().addComponents(
                     new Discord.TextInputBuilder()
                         .setCustomId('reason')
-                        .setPlaceholder('Reason')
-                        .setLabel('Reason')
+                        .setPlaceholder(await client.t(interaction, 'moderation.reason'))
+                        .setLabel(await client.t(interaction, 'moderation.reason'))
                         .setMinLength(1)
                         .setStyle(Discord.TextInputStyle.Short)
                         .setMaxLength(100)),
@@ -54,33 +55,32 @@ module.exports = {
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
         var caseNumber; 
-        await Case.findOne({ Guild: interaction.guild.id }).then(async data => {
-            if(!data) {
-                new Case({
-                    Guild: interaction.guild.id,
-                    Case: 1
-                }).save();
-                caseNumber = 1;
-            }
-            else {
-                data.Case += 1;
-                data.save();
-                caseNumber = data.Case;
-            }
-        });
+        const caseData = await Case.findOne({ Guild: interaction.guild.id });
+        if (!caseData) {
+            await new Case({
+                Guild: interaction.guild.id,
+                Case: 1
+            }).save();
+            caseNumber = 1;
+        }
+        else {
+            caseData.Case += 1;
+            await caseData.save();
+            caseNumber = caseData.Case;
+        }
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
-            if (data) {
+        const data = await Schema.findOne({ Guild: interaction.guild.id, User: member.id });
+        if (data) {
                 data.Warnings.push({
                     Moderator: interaction.user.id,
                     Reason: submitted.fields.getTextInputValue("reason"),
                     Date: Date.now(),
                     Case: caseNumber
                 });
-                data.save();
+                await data.save();
             }
             else {
-                new Schema({
+                await new Schema({
                     Guild: interaction.guild.id,
                     User: member.id,
                     Warnings: [{
@@ -91,19 +91,18 @@ module.exports = {
                     }]
                 }).save();
             }
-        })
 
         client.embed({
-            title: `🔨・Warn`,
-            desc: `You've been warned in **${interaction.guild.name}**`,
+            title: await client.t(interaction, 'moderation.warnTitle'),
+            desc: await client.t(interaction, 'moderation.warnDescription', { guild: interaction.guild.name }),
             fields: [
                 {
-                    name: "👤┆Moderator",
+                    name: await client.t(interaction, 'moderation.moderator'),
                     value: interaction.user.tag,
                     inline: true
                 },
                 {
-                    name: "📄┆Reason",
+                    name: await client.t(interaction, 'moderation.reason'),
                     value: submitted.fields.getTextInputValue("reason"),
                     inline: true
                 }
@@ -112,20 +111,20 @@ module.exports = {
 
         client.emit('warnAdd', member, interaction.user, submitted.fields.getTextInputValue("reason"));
         client.succNormal({
-            text: `User has received a warning!`,
+            key: 'errors.moderation.warnSuccess',
             fields: [
                 {
-                    name: "👤┆User",
+                    name: await client.t(submitted, 'moderation.user'),
                     value: `${member}`,
                     inline: true
                 },
                 {
-                    name: "👤┆Moderator",
+                    name: await client.t(submitted, 'moderation.moderator'),
                     value: `${interaction.user}`,
                     inline: true
                 },
                 {
-                    name: "📄┆Reason",
+                    name: await client.t(submitted, 'moderation.reason'),
                     value: submitted.fields.getTextInputValue("reason"),
                     inline: false
                 }

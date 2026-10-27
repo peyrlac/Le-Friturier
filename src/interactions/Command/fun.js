@@ -1,15 +1,17 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
+    localizationKey: 'commandMetadata.fun',
     data: new SlashCommandBuilder()
         .setName('fun')
-        .setDescription('Run fun commands in Bot')
+        .setDescription(getCommandMetadata('commandMetadata.fun.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the fun category commands')
+                .setDescription(getCommandMetadata('commandMetadata.fun.subcommands.help.description'))
         )
 
         // Meme Commands
@@ -17,52 +19,52 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('meme')
-                .setDescription('See all the fun meme commands in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.description'))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('confused')
-                        .setDescription('React with a Confused Nick Young meme')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.confused.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('cleverrate')
-                        .setDescription('See how much clever you are')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.cleverrate.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('dinochrome')
-                        .setDescription('Dinosaur in Chrome')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.dinochrome.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('epicgamerrate')
-                        .setDescription('See how much of an epic gamer you are')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.epicgamerrate.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('howgay')
-                        .setDescription('See how gay you are')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.howgay.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('roast')
-                        .setDescription('Roasts a user')
-                        .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.roast.description'))
+                        .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.fun.common.selectUser')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('simprate')
-                        .setDescription('See how simp you are')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.simprate.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('stankrate')
-                        .setDescription('See how stanky you are')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.stankrate.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('rickroll')
-                        .setDescription('Get a rickroll')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.meme.subcommands.rickroll.description'))
                 )
         )
 
@@ -71,38 +73,38 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('user')
-                .setDescription('See all the fun user commands in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.user.description'))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('hack')
-                        .setDescription('Hack your friends or enemies!')
-                        .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.user.subcommands.hack.description'))
+                        .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.fun.common.selectUser')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('hug')
-                        .setDescription('Give a hug to a user')
-                        .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.user.subcommands.hug.description'))
+                        .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.fun.common.selectUser')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('kill')
-                        .setDescription('Kill a user')
-                        .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.user.subcommands.kill.description'))
+                        .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.fun.common.selectUser')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('lovemeter')
-                        .setDescription('See how much you fit in with someone')
-                        .addUserOption(option => option.setName('user1').setDescription('Select a user').setRequired(true))
-                        .addUserOption(option => option.setName('user2').setDescription('Select a user').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.user.subcommands.lovemeter.description'))
+                        .addUserOption(option => option.setName('user1').setDescription(getCommandMetadata('commandMetadata.fun.common.selectUser')).setRequired(true))
+                        .addUserOption(option => option.setName('user2').setDescription(getCommandMetadata('commandMetadata.fun.common.selectUser')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('sudo')
-                        .setDescription('Say something like someone else')
-                        .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.user.subcommands.sudo.description'))
+                        .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.fun.common.selectUser')).setRequired(true))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.fun.common.enterText')).setRequired(true))
                 )
         )
 
@@ -111,30 +113,30 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('text')
-                .setDescription('See all the fun text commands in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.text.description'))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('ascii')
-                        .setDescription('Make ascii text')
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.text.subcommands.ascii.description'))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.fun.common.enterText')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('gif')
-                        .setDescription('Search a gif')
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.text.subcommands.gif.description'))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.fun.common.enterText')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('reverse')
-                        .setDescription('Reverse your text')
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.text.subcommands.reverse.description'))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.fun.common.enterText')).setRequired(true))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('say')
-                        .setDescription('Have the bot say something')
-                        .addStringOption(option => option.setName('text').setDescription('Enter a text').setRequired(true))
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.text.subcommands.say.description'))
+                        .addStringOption(option => option.setName('text').setDescription(getCommandMetadata('commandMetadata.fun.common.enterText')).setRequired(true))
                 )
         )
 
@@ -143,51 +145,51 @@ module.exports = {
         .addSubcommandGroup((group) =>
             group
                 .setName('extra')
-                .setDescription('See all the fun extra commands in Bot')
+                .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.description'))
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('birdfact')
-                        .setDescription('Get a random bird fact')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.birdfact.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('catfact')
-                        .setDescription('Get a random cat fact')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.catfact.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('dogfact')
-                        .setDescription('Get a random dog fact')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.dogfact.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('fact')
-                        .setDescription('Get a random fact')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.fact.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('koalafact')
-                        .setDescription('Get a random koalafact fact')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.koalafact.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('pandafact')
-                        .setDescription('Get a random pandafact fact')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.pandafact.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('token')
-                        .setDescription('Get my token')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.token.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('worldclock')
-                        .setDescription('Shows the world clock(s)')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.worldclock.description'))
                 )
                 .addSubcommand(subcommand =>
                     subcommand
                         .setName('xmas')
-                        .setDescription('See the number of days until Christmas')
+                        .setDescription(getCommandMetadata('commandMetadata.fun.subcommandGroups.extra.subcommands.xmas.description'))
                 )
         ),
 
@@ -198,7 +200,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);
     },
 };

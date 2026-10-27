@@ -1,8 +1,17 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../http');
 
 const Functions = require("../../database/models/functions");
 const VoiceSchema = require("../../database/models/voiceChannels");
+
+function resolveSubcommandPath(interaction) {
+    const command = interaction.commandName;
+    const group = typeof interaction.options?.getSubcommandGroup === 'function'
+        ? interaction.options.getSubcommandGroup()
+        : null;
+    const subcommand = interaction.options.getSubcommand();
+    return [command, group, subcommand].filter(Boolean).join('/');
+}
 
 module.exports = async (client) => {
     //----------------------------------------------------------------//
@@ -76,22 +85,23 @@ module.exports = async (client) => {
     }
 
     client.loadSubcommands = async function (client, interaction, args) {
+        const subcommandPath = resolveSubcommandPath(interaction);
         try {
             const data = await Functions.findOne({ Guild: interaction.guild.id });
 
             if (data.Beta == true) {
-                return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}-beta`)(client, interaction, args).catch(err => {
+                return require(`${process.cwd()}/src/commands/${subcommandPath}-beta`)(client, interaction, args).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
                 })
             }
             else {
-                return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`)(client, interaction, args).catch(err => {
+                return require(`${process.cwd()}/src/commands/${subcommandPath}`)(client, interaction, args).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
                 })
             }
         }
         catch {
-            return require(`${process.cwd()}/src/commands/${interaction.commandName}/${interaction.options.getSubcommand()}`)(client, interaction, args).catch(err => {
+            return require(`${process.cwd()}/src/commands/${subcommandPath}`)(client, interaction, args).catch(err => {
                 client.emit("errorCreate", err, interaction.commandName, interaction)
             })
         }
@@ -125,7 +135,7 @@ module.exports = async (client) => {
     }
 
     client.createLeaderboard = async function (title, lb, interaction) {
-        interaction.editReply({ embeds: [await client.generateEmbed(0, 0, lb, title, interaction)], fetchReply: true }).then(async msg => {
+        interaction.editReply({ embeds: [await client.generateEmbed(0, 0, lb, title, interaction)], withResponse: true }).then(async msg => {
             if (lb.length <= 10) return;
 
             let button1 = new Discord.ButtonBuilder()
@@ -196,7 +206,7 @@ module.exports = async (client) => {
     }
 
     client.generateActivity = function (id, name, channel, interaction) {
-        fetch(`https://discord.com/api/v10/channels/${channel.id}/invites`, {
+        getJson(`https://discord.com/api/v10/channels/${channel.id}/invites`, {
             method: "POST",
             body: JSON.stringify({
                 max_age: 86400,
@@ -210,24 +220,24 @@ module.exports = async (client) => {
                 "Authorization": `Bot ${client.token}`,
                 "Content-Type": "application/json"
             }
-        }).then(res => res.json())
-            .then(invite => {
-                if (invite.error || !invite.code) return client.errNormal({ 
-                    error: `Could not start **${name}**!`, 
+        }).then(async invite => {
+                if (invite.error || !invite.code) return client.errNormal({
+                    key: 'activities.startFailed',
+                    variables: { name },
                     type: 'editreply'
                 }, interaction);
 
                 const row = new Discord.ActionRowBuilder()
                     .addComponents(
                         new Discord.ButtonBuilder()
-                            .setLabel("Start activity")
+                            .setLabel(await client.t(interaction, 'activities.startButton'))
                             .setURL(`https://discord.gg/${invite.code}`)
                             .setStyle(Discord.ButtonStyle.Link),
                     );
 
                 client.embed({
-                    title: `${client.emotes.normal.tv}・Activities`,
-                    desc: `Click on the **button** to start **${name}** in **${channel.name}**`,
+                    title: await client.t(interaction, 'activities.title', { icon: client.emotes.normal.tv }),
+                    desc: await client.t(interaction, 'activities.description', { name, channel: channel.name }),
                     components: [row],
                     type: 'editreply'
                 }, interaction)
@@ -235,11 +245,14 @@ module.exports = async (client) => {
             .catch(e => {
                 console.log(e)
                 client.errNormal({
-                    error: `Could not start **${name}**!`,
+                    key: 'activities.startFailed',
+                    variables: { name },
                     type: 'editreply'
                 }, interaction);
             })
     }
 }
+
+module.exports.resolveSubcommandPath = resolveSubcommandPath;
 
  

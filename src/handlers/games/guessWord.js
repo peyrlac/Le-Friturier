@@ -21,16 +21,16 @@ module.exports = async (client) => {
         client.addMoney(message, message.author, amount);
 
         client.embed({
-          title: `💬・Guess the word`,
-          desc: `The word is guessed and has a value of $${amount}`,
+          title: await client.t(message, 'gameEvents.guessWordTitle'),
+          desc: await client.t(message, 'gameEvents.guessWordWon', { amount }),
           fields: [
             {
-              name: `👤┇Guessed by`,
+              name: await client.t(message, 'gameEvents.guessedBy'),
               value: `${message.author} (${message.author.tag})`,
               inline: true
             },
             {
-              name: `💬┇Correct word`,
+              name: await client.t(message, 'gameEvents.correctWord'),
               value: `${data.Word}`,
               inline: true
             }
@@ -41,11 +41,11 @@ module.exports = async (client) => {
         data.save();
 
         return client.embed({
-          title: `💬・Guess the word`,
-          desc: `Put the letters in the right position!`,
+          title: await client.t(message, 'gameEvents.guessWordTitle'),
+          desc: await client.t(message, 'gameEvents.guessWordInstruction'),
           fields: [
             {
-              name: `🔀┆Word`,
+              name: await client.t(message, 'gameEvents.word'),
               value: `${shuffled.toLowerCase()}`
             }
           ]

@@ -7,6 +7,7 @@ const Schema = require('../../database/models/profile');
 const CreditsSchema = require("../../database/models/votecredits");
 
 module.exports = {
+    localizationKey: 'commandMetadata.profile',
     data: new ContextMenuCommandBuilder()
         .setName('Bot profile')
         .setType(2),
@@ -60,9 +61,9 @@ module.exports = {
 
         const user = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ User: user.id }, async (err, data) => {
-            if (data) {
-                await interaction.deferReply({ fetchReply: true });
+        const data = await Schema.findOne({ User: user.id });
+        if (data) {
+                await interaction.deferReply();
                 let Badges = await model.findOne({ User: user.id });
 
                 let credits = 0;
@@ -186,9 +187,8 @@ module.exports = {
                 }, interaction);
             }
             else {
-                return client.errNormal({ error: "No profile found! Open a profile with /profile create", type: 'ephemeral' }, interaction);
+                return client.errNormal({ key: 'profile.notFound', type: 'ephemeral' }, interaction);
             }
-        })
     },
 };
 

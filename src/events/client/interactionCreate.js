@@ -8,9 +8,31 @@ const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
 const { model: AnnouncementChannels } = require("../../database/models/announcement-channels");
 const { ReminderManager, createManager } = require("../../handlers/functions/eventReminders");
+const reminderManager = createManager();
 
 module.exports = async (client, interaction) => {
-    const reminderManager = createManager();
+    if (interaction.isChatInputCommand() && interaction.commandName === 'config' && interaction.options.getSubcommand() === 'status') {
+        try {
+            await interaction.deferReply();
+        } catch (error) {
+            if (error.code === 10062) return;
+            throw error;
+        }
+
+        const statusWatchdog = setTimeout(() => {
+            if (interaction.deferred && !interaction.replied) {
+                interaction.editReply({
+                    content: '⚠️ La mise à jour de la présence prend trop de temps. Vérifie la connexion MongoDB et réessaie.',
+                }).catch(() => null);
+            }
+        }, 10000);
+
+        try {
+            return await require(`${process.cwd()}/src/commands/config/status.js`)(client, interaction);
+        } finally {
+            clearTimeout(statusWatchdog);
+        }
+    }
 
     /*
     if (
@@ -50,22 +72,25 @@ module.exports = async (client, interaction) => {
 
     // Commands
     if (interaction.isCommand() || interaction.isUserContextMenuCommand()) {
-        banSchema.findOne({ User: interaction.user.id }, async (err, data) => {
-            if (data) {
-                return client.errNormal({
-                    error: "You have been banned by the developers of this bot",
-                    type: 'ephemeral'
-                }, interaction);
-            }
-            else {
-                const cmd = client.commands.get(interaction.commandName);
+        const data = await banSchema.findOne({ User: interaction.user.id });
+        if (data) {
+            return client.errNormal({
+                key: 'router.banned',
+                type: 'ephemeral'
+            }, interaction);
+        }
+
+    const cmd = client.commands.get(interaction.commandName);
+    if (cmd && typeof client.requireFeature === 'function' && !(await client.requireFeature(interaction, cmd.data.name))) {
+      return;
+    }
                 if (!cmd){
                     const cmdd = await Commands.findOne({
                         Guild: interaction.guild.id,
                         Name: interaction.commandName,
                     });
                     if (cmdd) {
-                        return interaction.channel.send({ content: cmdd.Responce });
+                        return interaction.reply({ content: cmdd.Responce });
                     }
 
                     const cmdx = await CommandsSchema.findOne({
@@ -85,12 +110,12 @@ module.exports = async (client, interaction) => {
                                 interaction,
                             );
                         } else if (cmdx.Action == "DM") {
-                            await interaction.deferReply({ ephemeral: true });
-                            interaction.editReply({ content: "I have sent you something in your DMs" });
+                            await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
+                            interaction.editReply({ content: await client.t(interaction, 'router.dmSent') });
                             return interaction.user.send({ content: cmdx.Responce }).catch((e) => {
                                 client.errNormal(
                                     {
-                                        error: "I can't DM you, maybe you have DM turned off!",
+                                        key: 'router.cannotDM',
                                         type: 'ephemeral'
                                     },
                                     interaction,
@@ -103,17 +128,15 @@ module.exports = async (client, interaction) => {
                     const commands = interaction.client.commands.filter(x => x.data.name == interaction.commandName).map((x) => x.data.options.map((c) => '`' + c.name + '` - ' + c.description).join("\n"));
 
                     return client.embed({
-                        title: `❓・Help panel`,
-                        desc: `Get help with the commands in \`${interaction.commandName}\` \n\n${commands}`,
+                        title: await client.t(interaction, 'router.helpTitle'),
+                        desc: await client.t(interaction, 'router.helpDescription', { command: interaction.commandName, commands }),
                         type: 'reply'
                     }, interaction)
                 }
 
-                if(cmd) cmd.run(client, interaction, interaction.options._hoistedOptions).catch(err => {
+                if (cmd) return cmd.run(client, interaction, interaction.options._hoistedOptions).catch(err => {
                     client.emit("errorCreate", err, interaction.commandName, interaction)
-                })
-            }
-        })
+                });
     }
 
     // Verify system
@@ -125,7 +148,7 @@ module.exports = async (client, interaction) => {
             try {
                 var image = new Discord.AttachmentBuilder(captcha.JPEGStream, {name:"captcha.jpeg"});
 
-                interaction.reply({ files: [image], fetchReply: true }).then(function (msg) {
+                interaction.reply({ files: [image], withResponse: true }).then(function (msg) {
                     const filter = s => s.author.id == interaction.user.id;
 
                     interaction.channel.awaitMessages({ filter, max: 1 }).then(response => {
@@ -134,8 +157,10 @@ module.exports = async (client, interaction) => {
                             msg.delete();
 
                             client.succNormal({
-                                text: "You have been successfully verified!"
-                            }, interaction.user).catch(error => { })
+                                key: 'router.verificationSuccess'
+                            }, interaction.user).catch(error => {
+                                console.error('Failed to send verification confirmation', error);
+                            })
 
                             var verifyUser = interaction.guild.members.cache.get(interaction.user.id);
                             verifyUser.roles.add(data.Role);
@@ -145,7 +170,7 @@ module.exports = async (client, interaction) => {
                             msg.delete();
 
                             client.errNormal({
-                                error: "You have answered the captcha incorrectly!",
+                                key: 'router.captchaIncorrect',
                                 type: 'editreply'
                             }, interaction).then(msgError => {
                                 setTimeout(() => {
@@ -162,7 +187,7 @@ module.exports = async (client, interaction) => {
         }
         else {
             client.errNormal({
-                error: "Verify is disabled in this server! Or you are using the wrong channel!",
+                key: 'router.verificationUnavailable',
                 type: 'ephemeral'
             }, interaction);
         }
@@ -173,61 +198,58 @@ module.exports = async (client, interaction) => {
         var buttonID = interaction.customId.split("-");
 
         if (buttonID[0] == "reaction_button") {
-            reactionSchema.findOne({ Message: interaction.message.id }, async (err, data) => {
-                if (!data) return;
+            const data = await reactionSchema.findOne({ Message: interaction.message.id });
+            if (!data) return;
 
-                const [roleid] = data.Roles[buttonID[1]];
+            const [roleid] = data.Roles[buttonID[1]];
+            const member = interaction.guild.members.cache.get(interaction.user.id);
+            const hasRole = interaction.member.roles.cache.get(roleid);
 
-                if (interaction.member.roles.cache.get(roleid)) {
-                    interaction.guild.members.cache.get(interaction.user.id).roles.remove(roleid).catch(error => { })
+            if (hasRole) {
+                await member.roles.remove(roleid);
+            }
+            else {
+                await member.roles.add(roleid);
+            }
 
-                    interaction.reply({ content: `<@&${roleid}> was removed!`, ephemeral: true });
-                }
-                else {
-                    interaction.guild.members.cache.get(interaction.user.id).roles.add(roleid).catch(error => { })
-
-                    interaction.reply({ content: `<@&${roleid}> was added!`, ephemeral: true });
-                }
-            })
+            return interaction.reply({
+                content: await client.t(
+                    interaction,
+                    hasRole ? 'reactionroles.roleRemoved' : 'reactionroles.roleAdded',
+                    { role: `<@&${roleid}>` }
+                ),
+                flags: Discord.MessageFlags.Ephemeral
+            });
         }
     }
 
     // Reaction roles select
     if (interaction.isStringSelectMenu()) {
         if (interaction.customId == "reaction_select") {
-            reactionSchema.findOne(
-                { Message: interaction.message.id },
-                async (err, data) => {
-                    if (!data) return;
+            const data = await reactionSchema.findOne({ Message: interaction.message.id });
+            if (!data) return;
 
-                    let roles = "";
+            const member = interaction.guild.members.cache.get(interaction.user.id);
+            const roles = [];
 
-                    for (let i = 0; i < interaction.values.length; i++) {
-                        const [roleid] = data.Roles[interaction.values[i]];
+            for (const value of interaction.values) {
+                const [roleid] = data.Roles[value];
+                roles.push(`<@&${roleid}>`);
 
-                        roles += `<@&${roleid}> `;
-
-                        if (interaction.member.roles.cache.get(roleid)) {
-                            interaction.guild.members.cache
-                                .get(interaction.user.id)
-                                .roles.remove(roleid)
-                                .catch((error) => { });
-                        } else {
-                            interaction.guild.members.cache
-                                .get(interaction.user.id)
-                                .roles.add(roleid)
-                                .catch((error) => { });
-                        }
-
-                        if ((i + 1) === interaction.values.length) {
-                            interaction.reply({
-                                content: `I have updated the following roles for you: ${roles}`,
-                                ephemeral: true,
-                            });
-                        }
-                    }
+                if (interaction.member.roles.cache.get(roleid)) {
+                    await member.roles.remove(roleid);
                 }
-            );
+                else {
+                    await member.roles.add(roleid);
+                }
+            }
+
+            return interaction.reply({
+                content: await client.t(interaction, 'reactionroles.rolesUpdated', {
+                    roles: roles.join(' ')
+                }),
+                flags: Discord.MessageFlags.Ephemeral
+            });
         }
     }
     // Tickets
@@ -277,8 +299,8 @@ module.exports = async (client, interaction) => {
             const event = await interaction.guild.scheduledEvents.fetch(eventThread.eventId).catch(() => null);
             if (!event || event.creatorId !== interaction.user.id) {
                 return interaction.reply({
-                    content: "❌ Seul le créateur de l'événement peut modifier les paramètres de rappel.",
-                    ephemeral: true
+                    content: await client.t(interaction, 'events.reminderUpdateCreatorOnly'),
+                    flags: Discord.MessageFlags.Ephemeral
                 });
             }
 
@@ -316,12 +338,14 @@ module.exports = async (client, interaction) => {
                 .addComponents(
                     new Discord.ButtonBuilder()
                         .setCustomId(enableReminders ? 'event_reminders_disable' : 'event_reminders_enable')
-                        .setLabel(enableReminders ? 'Désactiver les rappels' : 'Activer les rappels')
+                        .setLabel(enableReminders ?
+                            await client.t(interaction, 'events.reminders.disable') :
+                            await client.t(interaction, 'events.reminders.enable'))
                         .setStyle(enableReminders ? Discord.ButtonStyle.Secondary : Discord.ButtonStyle.Success)
                         .setEmoji(enableReminders ? '🔕' : '🔔'),
                     new Discord.ButtonBuilder()
                         .setCustomId('event_delete')
-                        .setLabel('Supprimer l\'événement')
+                        .setLabel(await client.t(interaction, 'events.reminders.deleteEvent'))
                         .setStyle(Discord.ButtonStyle.Danger)
                         .setEmoji('🗑️')
                 );
@@ -332,14 +356,14 @@ module.exports = async (client, interaction) => {
             const newEmbed = new Discord.EmbedBuilder(embed.data)
                 .setFields(
                     { 
-                        name: '📝 Inviter des participants', 
-                        value: 'N\'oubliez pas de mentionner (@) les rôles ou les personnes que vous souhaitez inviter dans ce fil de discussion.' 
+                        name: await client.t(interaction, 'events.reminders.inviteTitle'),
+                        value: await client.t(interaction, 'events.reminders.invite')
                     },
                     { 
-                        name: '⏰ Rappels automatiques', 
+                        name: await client.t(interaction, 'events.reminders.automaticTitle'),
                         value: enableReminders ? 
-                            'Les rappels sont activés. Ils seront envoyés automatiquement avant l\'événement.' :
-                            'Les rappels sont désactivés. Vous pouvez les réactiver à tout moment.'
+                            await client.t(interaction, 'events.reminders.enabledDescription') :
+                            await client.t(interaction, 'events.reminders.disabledDescription')
                     }
                 );
 
@@ -351,16 +375,16 @@ module.exports = async (client, interaction) => {
             // Envoyer une confirmation éphémère
             await interaction.followUp({
                 content: enableReminders ? 
-                    '🔔 Les rappels ont été réactivés pour cet événement.' :
-                    '🔕 Les rappels ont été désactivés pour cet événement.',
-                ephemeral: true
+                    await client.t(interaction, 'events.reminders.reenabled') :
+                    await client.t(interaction, 'events.reminders.disabled'),
+                flags: Discord.MessageFlags.Ephemeral
             });
 
         } catch (error) {
             console.error('Erreur lors de la configuration des rappels:', error);
             await interaction.reply({
-                content: "❌ Une erreur est survenue lors de la modification des paramètres de rappel.",
-                ephemeral: true
+                content: await client.t(interaction, 'events.reminders.updateError'),
+                flags: Discord.MessageFlags.Ephemeral
             });
         }
     }
@@ -382,8 +406,8 @@ module.exports = async (client, interaction) => {
             const event = await interaction.guild.scheduledEvents.fetch(eventThread.eventId).catch(() => null);
             if (!event || event.creatorId !== interaction.user.id) {
                 return interaction.reply({
-                    content: "❌ Seul le créateur de l'événement peut configurer les rappels.",
-                    ephemeral: true
+                    content: await client.t(interaction, 'events.reminderCreatorOnly'),
+                    flags: Discord.MessageFlags.Ephemeral
                 });
             }
 
@@ -419,12 +443,12 @@ module.exports = async (client, interaction) => {
                     .addComponents(
                         new Discord.ButtonBuilder()
                             .setCustomId('event_reminders_enable')
-                            .setLabel('Activer les rappels')
+                            .setLabel(await client.t(interaction, 'events.reminders.enable'))
                             .setStyle(Discord.ButtonStyle.Success)
                             .setEmoji('🔔'),
                         new Discord.ButtonBuilder()
                             .setCustomId('event_reminders_disable')
-                            .setLabel('Désactiver les rappels')
+                            .setLabel(await client.t(interaction, 'events.reminders.disable'))
                             .setStyle(Discord.ButtonStyle.Secondary)
                             .setEmoji('🔕')
                     );
@@ -433,27 +457,27 @@ module.exports = async (client, interaction) => {
 
             const welcomeEmbed = new Discord.EmbedBuilder()
                 .setColor(0x0099FF)
-                .setTitle('🎉 Configuration de l\'événement')
-                .setDescription(`Bienvenue dans le fil de discussion de ton événement **${event.name}** !`)
+                .setTitle(await client.t(interaction, 'events.reminders.title'))
+                .setDescription(await client.t(interaction, 'events.reminders.welcome', { event: event.name }))
                 .addFields(
                     { 
-                        name: '📝 Inviter des participants', 
-                        value: 'N\'oubliez pas de mentionner (@) les rôles ou les personnes que vous souhaitez inviter dans ce fil de discussion.' 
+                        name: await client.t(interaction, 'events.reminders.inviteTitle'),
+                        value: await client.t(interaction, 'events.reminders.invite')
                     },
                     { 
-                        name: '⏰ Rappels automatiques', 
+                        name: await client.t(interaction, 'events.reminders.automaticTitle'),
                         value: hasAvailableReminders ? 
-                            'Par défaut, des rappels seront envoyés :\n• 1 mois avant\n• 1 semaine avant\n• 1 jour avant\n\nUtilisez les boutons ci-dessous pour gérer les rappels.' :
-                            'Les rappels ne sont pas disponibles car l\'événement est trop proche.'
+                            await client.t(interaction, 'events.reminders.available') :
+                            await client.t(interaction, 'events.reminders.unavailable')
                     }
                 )
                 .setFooter(hasAvailableReminders ? 
-                    { text: 'Vous pouvez configurer les rappels à tout moment' } :
-                    { text: 'Les rappels ne sont pas disponibles pour cet événement' }
+                    { text: await client.t(interaction, 'events.reminders.availableFooter') } :
+                    { text: await client.t(interaction, 'events.reminders.unavailableFooter') }
                 );
 
             const welcomeMessage = await thread.send({
-                content: `Ce message se supprimera <t:${Math.floor((Date.now() + 60000) / 1000)}:R>`,
+                content: await client.t(interaction, 'events.reminders.deletedMessage', { timestamp: Math.floor((Date.now() + 60000) / 1000) }),
                 embeds: [welcomeEmbed],
                 components: components
             });
@@ -467,15 +491,15 @@ module.exports = async (client, interaction) => {
 
             // Envoyer une confirmation éphémère
             await interaction.followUp({
-                content: "✅ Les rappels ont été configurés pour cet événement.",
-                ephemeral: true
+                content: await client.t(interaction, 'events.reminders.configured'),
+                flags: Discord.MessageFlags.Ephemeral
             });
 
         } catch (error) {
             console.error('Erreur lors de la configuration des rappels:', error);
             await interaction.reply({
-                content: "❌ Une erreur est survenue lors de la configuration des rappels.",
-                ephemeral: true
+                content: await client.t(interaction, 'events.reminders.setupError'),
+                flags: Discord.MessageFlags.Ephemeral
             });
         }
     }
@@ -487,7 +511,7 @@ module.exports = async (client, interaction) => {
 
         try {
             // Différer la réponse immédiatement
-            await interaction.deferReply({ ephemeral: true });
+            await interaction.deferReply({ flags: Discord.MessageFlags.Ephemeral });
 
             // Récupérer les données de l'événement
             const data = await AnnouncementChannels.findOne({
@@ -498,7 +522,7 @@ module.exports = async (client, interaction) => {
             const eventThread = data?.EventThreads?.find(et => et.threadId === thread.id);
             if (!eventThread) {
                 return interaction.editReply({
-                    content: "❌ Impossible de trouver les informations de l'événement.",
+                    content: await client.t(interaction, 'events.reminders.infoNotFound'),
                 });
             }
 
@@ -506,13 +530,13 @@ module.exports = async (client, interaction) => {
             const event = await interaction.guild.scheduledEvents.fetch(eventThread.eventId).catch(() => null);
             if (!event) {
                 return interaction.editReply({
-                    content: "❌ L'événement n'existe plus.",
+                    content: await client.t(interaction, 'events.reminders.eventNotFound'),
                 });
             }
 
             if (event.creatorId !== interaction.user.id) {
                 return interaction.editReply({
-                    content: "❌ Seul le créateur de l'événement peut le supprimer.",
+                    content: await client.t(interaction, 'events.reminders.deleteCreatorOnly'),
                 });
             }
 
@@ -543,7 +567,7 @@ module.exports = async (client, interaction) => {
 
             // Envoyer une confirmation
             await interaction.editReply({
-                content: "✅ L'événement a été supprimé avec succès.",
+                content: await client.t(interaction, 'events.reminders.deleted'),
             });
 
         } catch (error) {
@@ -551,7 +575,7 @@ module.exports = async (client, interaction) => {
             // Si l'interaction est toujours valide, essayer d'envoyer un message d'erreur
             try {
                 await interaction.editReply({
-                    content: "❌ Une erreur est survenue lors de la suppression de l'événement.",
+                    content: await client.t(interaction, 'events.reminders.deleteError'),
                 });
             } catch (replyError) {
                 console.error('Erreur lors de la réponse à l\'interaction:', replyError);

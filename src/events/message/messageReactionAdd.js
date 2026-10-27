@@ -12,16 +12,18 @@ module.exports = async (client, reaction, user) => {
       
     if (reaction.message.author.id === user.id)
       return client.errNormal({
-        error: `You cannot star your own messages\n\nMessage: ${reaction.message.cleanContent}`,
+        key: 'starboard.cannotStarOwn',
+        variables: { message: reaction.message.cleanContent },
       }, client.users.cache.get(user.id));
 
     if (reaction.message.author.bot) return client.errNormal({
-      error: `You cannot star bot messages\n\nMessage: ${reaction.message.cleanContent}`,
+      key: 'starboard.cannotStarBot',
+      variables: { message: reaction.message.cleanContent },
     }, client.users.cache.get(user.id));
 
     const starboardChannel = reaction.message.guild.channels.cache.get(data.Channel);
     if (!starboardChannel) return client.errNormal({
-      error: `No star channel found! Run the channel setup`,
+      key: 'starboard.noChannel',
     }, client.users.cache.get(user.id));
 
     const fetch = await starboardChannel.messages.fetch({ limit: 100 });
@@ -36,22 +38,22 @@ module.exports = async (client, reaction, user) => {
       const image = reaction.message.attachments.size > 0 ? await extension(reaction, reaction.message.attachments.first()?.url) : "";
       const starMsg = await starboardChannel.messages.fetch(stars.id);
       client.embed({
-        title: `⭐・Starboard`,
+        title: await client.t(reaction.message, 'starboard.title'),
         desc: foundStar.description,
         image: image,
         fields: [
           {
-            name: `⭐┇Stars`,
+            name: await client.t(reaction.message, 'starboard.stars'),
             value: `${reaction.count}`,
             inline: true
           },
           {
-            name: `🗨️┇Message`,
-            value: `[Jump to the message](${reaction.message.url})`,
+            name: await client.t(reaction.message, 'starboard.message'),
+            value: await client.t(reaction.message, 'starboard.jump', { url: reaction.message.url }),
             inline: true
           },
           {
-            name: `👤┇Author`,
+            name: await client.t(reaction.message, 'starboard.author'),
             value: `${reaction.message.author} (${reaction.message.author.tag})`,
             inline: true
           }
@@ -63,27 +65,27 @@ module.exports = async (client, reaction, user) => {
     if (!stars) {
       const image = reaction.message.attachments.size > 0 ? await extension(reaction, reaction.message.attachments.first()?.url) : "";
       if (image === "" && reaction.message.cleanContent.length < 1) return client.errNormal({
-        error: `You cannot star an empty message`,
+        key: 'starboard.emptyMessage',
         type: 'ephemeral'
       }, reaction.message);
 
       client.embed({
-        title: `⭐・Starboard`,
+        title: await client.t(reaction.message, 'starboard.title'),
         desc: reaction.message.cleanContent,
         image: image,
         fields: [
           {
-            name: `⭐┇Stars`,
+            name: await client.t(reaction.message, 'starboard.stars'),
             value: `${reaction.count}`,
             inline: true
           },
           {
-            name: `🗨️┇Message`,
-            value: `[Jump to the message](${reaction.message.url})`,
+            name: await client.t(reaction.message, 'starboard.message'),
+            value: await client.t(reaction.message, 'starboard.jump', { url: reaction.message.url }),
             inline: true
           },
           {
-            name: `👤┇Author`,
+            name: await client.t(reaction.message, 'starboard.author'),
             value: `${reaction.message.author} (${reaction.message.author.tag})`,
             inline: true
           }

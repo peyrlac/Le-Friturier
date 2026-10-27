@@ -11,7 +11,7 @@ const levelRewards = require("../../database/models/levelRewards");
 const levelLogs = require("../../database/models/levelChannels");
 const Commands = require("../../database/models/customCommand");
 const CommandsSchema = require("../../database/models/customCommandAdvanced");
-const fetch = require("node-fetch");
+const { request, getJson } = require("../../handlers/http");
 
 /**
  * 
@@ -26,6 +26,10 @@ module.exports = async (client, message) => {
   });
 
   if (message.author.bot) return;
+
+  const featureEnabled = async (feature) =>
+    typeof client.isFeatureEnabled !== 'function' ||
+    await client.isFeatureEnabled(feature, message.guild?.id);
 
   if (message.channel.type === Discord.ChannelType.DM) {
     let embedLogs = new Discord.EmbedBuilder()
@@ -49,9 +53,8 @@ module.exports = async (client, message) => {
   }
 
   // Levels
-  Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
-    if (data) {
-      if (data.Levels == true) {
+  const levelSettings = await Functions.findOne({ Guild: message.guild.id });
+  if (levelSettings?.Levels == true && await featureEnabled('levels')) {
         const randomXP = Math.floor(Math.random() * 9) + 1;
         const hasLeveledUp = await client.addXP(
           message.author.id,
@@ -107,71 +110,69 @@ module.exports = async (client, message) => {
               await message.channel.send({ content: levelMessage });
             }
           } else {
+            const levelUpMessage = await client.t(message, 'levels.up', {
+              user: `<@!${message.author.id}>`,
+              level: user.level,
+            });
+
             try {
               if (levelData) {
                 await client.channels.cache
                   .get(levelData.Channel)
                   .send({
-                    content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
+                    content: levelUpMessage,
                   })
                   .catch(() => { });
               } else {
-                message.channel.send({
-                  content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
+                await message.channel.send({
+                  content: levelUpMessage,
                 });
               }
             } catch {
-              message.channel.send({
-                content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
+              await message.channel.send({
+                content: levelUpMessage,
               });
             }
           }
 
-          levelRewards.findOne(
-            { Guild: message.guild.id, Level: user.level },
-            async (err, data) => {
-              if (data) {
-                message.guild.members.cache
-                  .get(message.author.id)
-                  .roles.add(data.Role)
-                  .catch((e) => { });
-              }
-            }
-          );
+          const levelReward = await levelRewards.findOne({
+            Guild: message.guild.id,
+            Level: user.level
+          });
+          if (levelReward) {
+            await message.guild.members.cache
+              .get(message.author.id)
+              .roles.add(levelReward.Role);
+          }
         }
-      }
-    }
-  });
+  }
 
   // Message tracker system
-  messagesSchema.findOne(
-    { Guild: message.guild.id, User: message.author.id },
-    async (err, data) => {
-      if (data) {
-        data.Messages += 1;
-        data.save();
+  const messageData = await messagesSchema.findOne({
+    Guild: message.guild.id,
+    User: message.author.id
+  });
+  if (messageData) {
+    messageData.Messages += 1;
+    await messageData.save();
 
-        messageRewards.findOne(
-          { Guild: message.guild.id, Messages: data.Messages },
-          async (err, data) => {
-            if (data) {
-              try {
-                message.guild.members.cache
-                  .get(message.author.id)
-                  .roles.add(data.Role);
-              } catch { }
-            }
-          }
-        );
-      } else {
-        new messagesSchema({
-          Guild: message.guild.id,
-          User: message.author.id,
-          Messages: 1,
-        }).save();
-      }
+    const reward = await messageRewards.findOne({
+      Guild: message.guild.id,
+      Messages: messageData.Messages
+    });
+    if (reward) {
+      await message.guild.members.cache
+        .get(message.author.id)
+        .roles.add(reward.Role);
     }
-  );
+  }
+  else {
+    await new messagesSchema({
+      Guild: message.guild.id,
+      User: message.author.id,
+      Messages: 1
+    }).save();
+  }
 
   // AFK system
   afk.findOne(
@@ -224,96 +225,72 @@ module.exports = async (client, message) => {
   });
 
   // Chat bot
-  chatBotSchema.findOne({ Guild: message.guild.id }, async (err, data) => {
-    if (!data) return;
-    if (message.channel.id !== data.Channel) return;
-    if (process.env.OPENAI) {
-      fetch(
-        `https://api.openai.com/v1/chat/completions`,
-        {
+  const chatSettings = await chatBotSchema.findOne({ Guild: message.guild.id });
+  if (chatSettings && message.channel.id === chatSettings.Channel && await featureEnabled('triggers')) {
+    try {
+      if (process.env.OPENAI) {
+        const response = await request('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + process.env.OPENAI,
+            'Authorization': 'Bearer ' + process.env.OPENAI
           },
           body: JSON.stringify({
-            'model': 'gpt-3.5-turbo',
-            'messages': [{
-              'role': 'user',
-              'content': message.content
-            }]
+            model: 'gpt-3.5-turbo',
+            messages: [{ role: 'user', content: message.content }]
           })
-        }
-      )
-        .catch(() => {
-        })
-        .then((res) => {
-          res.json().then((data) => {
-            if(data.error) return;
-            message.reply({ content: data.choices[0].message.content });
-          });
         });
-    } else {
-      try {
-        const input = message;
-        try {
-          fetch(
-            `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(input)}&uid=${message.author.id}`,
-          )
-            .catch(() => { console.log })
-            .then((res) => res.json())
-            .catch(() => { console.log})
-            .then(async (json) => {
-              console.log(json);
-              if (json) {
-                if (
-                  json.response !== " " ||
-                  json.response !== undefined ||
-                  json.response !== "" ||
-                  json.response !== null
-                ) {
-                  try {
-                    return message
-                      .reply({ content: json.response })
-                      .catch(() => { });
-                  } catch { }
-                }
-              }
-            })
-            .catch(() => { });
-        } catch { }
-      } catch { }
+        const data = await response.json();
+        const content = data.choices?.[0]?.message?.content;
+        if (content) await message.reply({ content });
+      }
+      else {
+        const data = await getJson(
+          `https://api.coreware.nl/fun/chat?msg=${encodeURIComponent(message.content)}&uid=${message.author.id}`
+        );
+        if (data?.response && data.response.trim()) {
+          await message.reply({ content: data.response });
+        }
+      }
     }
-  });
+    catch (error) {
+      console.error(error);
+    }
+  }
 
   // Sticky messages
-  try {
-    Schema.findOne(
-      { Guild: message.guild.id, Channel: message.channel.id },
-      async (err, data) => {
-        if (!data) return;
-
-        const lastStickyMessage = await message.channel.messages
-          .fetch(data.LastMessage)
-          .catch(() => { });
-        if (!lastStickyMessage) return;
+  if (await featureEnabled('triggers')) try {
+    const stickyData = await Schema.findOne({
+      Guild: message.guild.id,
+      Channel: message.channel.id
+    });
+    if (stickyData) {
+      const lastStickyMessage = await message.channel.messages
+        .fetch(stickyData.LastMessage)
+        .catch(() => null);
+      if (lastStickyMessage) {
         await lastStickyMessage.delete({ timeout: 1000 });
 
         const newMessage = await client.simpleEmbed(
-          { desc: `${data.Content}` },
+          { desc: `${stickyData.Content}` },
           message.channel
         );
 
-        data.LastMessage = newMessage.id;
-        data.save();
+        stickyData.LastMessage = newMessage.id;
+        await stickyData.save();
       }
-    );
-  } catch { }
+    }
+  }
+  catch (error) {
+    console.error(error);
+  }
+
+  if (!(await featureEnabled('triggers'))) return;
 
   // Prefix
   var guildSettings = await Functions.findOne({ Guild: message.guild.id });
   if (!guildSettings) {
-    new Functions({
+    await new Functions({
       Guild: message.guild.id,
       Prefix: client.config.discord.prefix,
     }).save();
@@ -322,16 +299,17 @@ module.exports = async (client, message) => {
   }
 
   if (!guildSettings || !guildSettings.Prefix) {
-    Functions.findOne({ Guild: message.guild.id }, async (err, data) => {
-      data.Prefix = client.config.discord.prefix;
-      data.save();
-    });
+    guildSettings = await Functions.findOneAndUpdate(
+      { Guild: message.guild.id },
+      { $set: { Prefix: client.config.discord.prefix } },
+      { new: true }
+    );
 
-    guildSettings = await Functions.findOne({ Guild: message.guild.id });
+    guildSettings ??= await Functions.findOne({ Guild: message.guild.id });
   }
 
   if (!guildSettings || !guildSettings.Prefix) {
-    var prefix = client.config.Discord.prefix;
+    var prefix = client.config.discord.prefix;
   } else {
     var prefix = guildSettings.Prefix;
   }
@@ -402,7 +380,7 @@ module.exports = async (client, message) => {
     Name: command,
   });
   if (cmd) {
-    return message.channel.send({ content: cmdx.Responce });
+    return message.channel.send({ content: cmd.Responce });
   }
 
   const cmdx = await CommandsSchema.findOne({
@@ -423,7 +401,7 @@ module.exports = async (client, message) => {
       return message.author.send({ content: cmdx.Responce }).catch((e) => {
         client.errNormal(
           {
-            error: "I can't DM you, maybe you have DM turned off!",
+            key: 'messageEvents.cannotDM',
           },
           message.channel
         );

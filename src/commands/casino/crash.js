@@ -6,12 +6,12 @@ module.exports = async (client, interaction, args) => {
     let user = interaction.user;
     var result = Math.ceil(Math.random() * 12);
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
             let money = parseInt(interaction.options.getNumber('amount'));
-            if (!money) return client.errUsage({ usage: "crash [amount]", type: 'editreply' }, interaction);
+            if (!money) return client.errUsage({ usage: await client.t(interaction, 'commands.casino.crash.usage'), type: 'editreply' }, interaction);
 
-            if (money > data.Money) return client.errNormal({ error: `Vous pariez plus que vous ne l'avez fait!`, type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ key: 'casino.crash.insufficient', type: 'editreply' }, interaction);
 
             const row = new Discord.ActionRowBuilder()
                 .addComponents(
@@ -31,46 +31,47 @@ module.exports = async (client, interaction, args) => {
                 )
 
             client.embed({
-                desc: `Crash a commencé par ${user}・Réagir 🛑 pour s'arrêter`,
+                desc: await client.t(interaction, 'commands.casino.crash.started', { user }),
                 fields: [
                     {
-                        name: `Multiplicateur`,
+                        name: await client.t(interaction, 'commands.casino.crash.multiplier'),
                         value: `1x`,
                         inline: true,
                     },
                     {
-                        name: `profit`,
+                        name: await client.t(interaction, 'commands.casino.crash.profit'),
                         value: `**0**`,
                         inline: true,
                     }
                 ],
                 components: [row],
                 type: 'editreply'
-            }, interaction).then(msg => {
+            }, interaction).then(async msg => {
                 let multiplier = 1;
                 let index = 0;
+                let profit = 0;
 
                 let times = result + 1;
                 let timer = 2000 * times;
 
-                setInterval(() => {
+                setInterval(async () => {
                     if (index === result + 1) { return }
                     else if (index === result) {
 
-                        Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-                            if (data) {
-                                data.Money -= money;
-                                data.save();
-                            }
-                        })
+                        const currentData = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+                        if (currentData) {
+                            currentData.Money -= money;
+                            await currentData.save();
+                        }
 
                         return client.embed({
-                            title: `Crash Résultats de ${user}`,
+                            titleKey: 'commands.casino.crash.results',
+                            variables: { user },
                             desc: `${msg}`,
                             type: 'edit',
                             fields: [
                                 {
-                                    name: `Perte`,
+                                    name: await client.t(interaction, 'commands.casino.crash.loss'),
                                     value: `**${money}**`,
                                     inline: false,
                                 }
@@ -83,19 +84,19 @@ module.exports = async (client, interaction, args) => {
                         multiplier += 0.20;
 
                         let calc = money * multiplier;
-                        let profit = calc - money;
+                        profit = calc - money;
 
                         client.embed({
-                            desc: `Crash a commencé par ${user}・Réagir 🛑 pour s'arrêter`,
+                            desc: await client.t(interaction, 'commands.casino.crash.started', { user }),
                             type: 'edit',
                             fields: [
                                 {
-                                    name: `Multiplicateur`,
+                                    name: await client.t(interaction, 'commands.casino.crash.multiplier'),
                                     value: `${multiplier.toFixed(1)}x`,
                                     inline: true,
                                 },
                                 {
-                                    name: `profit`,
+                                    name: await client.t(interaction, 'commands.casino.crash.profit'),
                                     value: `**$${profit.toFixed(2)}**`,
                                     inline: true,
                                 }
@@ -114,18 +115,17 @@ module.exports = async (client, interaction, args) => {
                             index = result + 1;
                             profit = money * multiplier;
 
-                            Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-                                if (data) {
-                                    data.Money += parseInt(profit);
-                                    data.save();
-                                }
-                            })
+                            const currentData = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+                            if (currentData) {
+                                currentData.Money += parseInt(profit);
+                                await currentData.save();
+                            }
 
                             return client.embed({
-                                desc: `Crash Résultats de ${user}`,
+                                desc: await client.t(interaction, 'commands.casino.crash.results', { user }),
                                 fields: [
                                     {
-                                        name: `Profit`,
+                                        name: await client.t(interaction, 'commands.casino.crash.profit'),
                                         value: `**$${profit.toFixed(2)}**`,
                                         inline: false,
                                     }
@@ -139,20 +139,17 @@ module.exports = async (client, interaction, args) => {
                     .catch(async () => {
                         index = result + 1;
 
-                        Schema.findOne({ Guild: interaction.guild.id, User: user.id },
-                            async (err, data) => {
-                                if (data) {
-                                    data.Money -= money;
-                                    data.save();
-                                }
-                            }
-                        )
+                        const currentData = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+                        if (currentData) {
+                            currentData.Money -= money;
+                            await currentData.save();
+                        }
                         return client.embed({
-                            desc: `Crash Résultats de ${user}`,
+                            desc: await client.t(interaction, 'commands.casino.crash.results', { user }),
                             type: 'edit',
                             fields: [
                                 {
-                                    name: `Perte`,
+                                    name: await client.t(interaction, 'commands.casino.crash.loss'),
                                     value: `**${money}**`,
                                     inline: false,
                                 }
@@ -165,7 +162,6 @@ module.exports = async (client, interaction, args) => {
 
         }
         else {
-            client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+            client.errNormal({ key: 'casino.crash.noAccount', type: 'editreply' }, interaction);
         }
-    })
 }

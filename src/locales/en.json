@@ -1,0 +1,2407 @@
+{
+    "common": {
+    "success": "Operation completed successfully.",
+    "errorTitle": "Error!",
+    "successTitle": "Success!",
+    "errorComment": "Error details",
+    "requiredArguments": "Required arguments",
+    "requiredPermission": "Required permission",
+    "tryAgainAt": "Try again at",
+    "notSpecified": "Not specified",
+    "languageNames": {
+      "fr": "French",
+      "en": "English"
+    }
+    },
+    "errors": {
+    "generic": "Something went wrong!",
+    "missingTranslation": "Missing translation.",
+    "noPermission": "You do not have permission to use this command.",
+    "developerOnly": "Only Bot 2 developers are allowed to use this command.",
+    "botNoPermission": "The bot does not have the required permissions.",
+    "userNotInGuild": "This user is not in this guild.",
+    "invalidArguments": "The provided arguments are invalid.",
+    "alreadyPerformed": "You have already performed this action.",
+    "unsupportedLanguage": "This language is not supported.",
+    "channelNotFound": "Channel not found.",
+    "moderation": {
+      "clearTooMany": "I cannot delete more than 100 messages at a time!",
+      "clearTooFew": "I cannot delete less than 1 message!",
+      "clearFailed": "There was an error trying to delete messages in this channel.",
+      "clearUserNone": "No recent messages from this user were found in this channel.",
+      "clearUserSuccess": "The user's recent messages were deleted.",
+      "cannotModerate": "You cannot moderate another moderator.",
+      "warnSuccess": "The user has received a warning.",
+      "warningRemoved": "The warning has been successfully removed.",
+      "noWarnings": "User has no warnings.",
+      "banNotified": "The specified user has been successfully banned and successfully received a notification!",
+      "banNotNotified": "The given user has been successfully banned, but has not received a notification!",
+      "kickNotified": "The specified user has been successfully kicked and successfully received a notification!",
+      "kickNotNotified": "The given user has been successfully kicked, but has not received a notification!",
+      "timeoutAlready": "{user} has already timed out!",
+      "timeoutSuccess": "{user} successfully timed out **{time} minutes**.",
+      "timeoutFailed": "I can't timeout {user}."
+    }
+    },
+    "embed": {
+      "channelNotFound": "Channel not found.",
+      "sent": "Embed successfully sent in {channel}.",
+      "prompts": {
+        "title": "Please enter a title",
+        "description": "Please enter a description",
+        "author": "Please enter an author",
+        "footer": "Please enter a footer",
+        "thumbnail": "Please enter a thumbnail",
+        "image": "Please enter an image",
+        "url": "Please enter a URL",
+        "color": "Please enter a color, e.g. #FF0000"
+      },
+      "invalidThumbnail": "Incorrect thumbnail link!",
+      "invalidImage": "Incorrect image link!",
+      "invalidUrl": "Incorrect URL!"
+    },
+    "messageEvents": {
+      "cannotDM": "I can't DM you; your direct messages may be turned off."
+    },
+    "spoiler": {
+      "noPermission": "You do not have the required `Manage Messages` permission to perform this action.",
+      "prompt": "Add context to better describe the spoiler or type `cancel`.",
+      "cancelled": "You cancelled hiding the message as a spoiler!",
+      "uploaded": "Automatically uploaded an image converted into a spoiler",
+      "imagePost": "**{author}** posted a spoiler image about **{context}**\n",
+      "textPost": "**{author}** wrote a spoiler about **{context}**\n",
+      "author": "Spoiler",
+      "missingContext": "You did not provide the required context. How could anyone know what the spoiler is about?"
+    },
+    "starboard": {
+      "cannotStarOwn": "You cannot star your own messages.\n\nMessage: {message}",
+      "cannotStarBot": "You cannot star bot messages.\n\nMessage: {message}",
+      "noChannel": "No starboard channel found! Run the channel setup.",
+      "emptyMessage": "You cannot star an empty message.",
+      "title": "⭐・Starboard",
+      "stars": "⭐┇Stars",
+      "message": "🗨️┇Message",
+      "jump": "[Jump to the message]({url})",
+      "author": "👤┇Author"
+    },
+    "tools": {
+    "qrcodeTitle": "📱・QR Code",
+    "encodeTitle": "Success!",
+    "encodeDescription": "I converted the text to binary",
+    "mcskinTitle": "🎮・Skin of {name}",
+    "mcskinUsage": "mcskin [player name]",
+      "noWordFound": "No word found.",
+      "remoteDataError": "Unable to retrieve remote data.",
+      "anagramTitle": "Anagram",
+      "anagramDescription": "I formed a word with the given letters.",
+      "words": "Word(s)",
+      "buttonTooLong": "Your button text cannot be longer than 50 characters.",
+      "buttonTitle": "Button",
+      "buttonDescription": "Click the button to open the link.",
+      "decodeInvalid": "You can only decode binary code.",
+      "decodeDescription": "I have decoded the code.",
+      "input": "Input",
+      "output": "Output",
+      "emojifyTooLong": "Your emojify text cannot be longer than 4096 characters.",
+      "emojifyTitle": "Emojify",
+      "invalidEmoji": "Please supply a valid emoji!",
+      "serverNotFound": "Can't find the server!",
+      "serverTitle": "📁・{ip}",
+      "online": "🟢┇Online",
+      "version": "🏷️┇Version",
+      "playersOnline": "👤┇Players online",
+      "remoteDataUnavailable": "Unable to retrieve remote data.",
+      "passwordSent": "I generated a password and sent it to your DM.",
+      "generatedPassword": "Your generated password",
+      "password": "🔑┇Password",
+      "length": "👣┇Length",
+      "reminderExists": "You already made this reminder!",
+      "reminderSet": "Your reminder is set!",
+      "reminderEndTime": "🕘‡End Time",
+      "reminder": "💭‡Reminder",
+      "reminderEnded": "🔔・Reminder",
+      "reminderEndedDescription": "Your reminder just ended!",
+      "sourcebinTitle": "💻・Random Code",
+      "sourcebinDescription": "This code was uploaded via the bot.",
+      "codePosted": "Your code has been posted!",
+      "shortenedUrlCreated": "Your shortened URL has been created!",
+      "remoteUrlError": "{error}",
+      "linkLabel": "🔗┇Link"
+    },
+    "commands": {
+      "messages": {
+        "added": "Added **{amount}** message(s) to {user}.",
+        "removed": "Removed **{amount}** message(s) from {user}.",
+        "noData": "No message data found for {user}.",
+        "total": "Total messages",
+        "title": "Messages",
+        "userField": "👤┆User",
+        "description": "**{user}** has **{count}** messages.",
+        "noLeaderboard": "No message data found.",
+        "leaderboardTitle": "💬・Messages - {guild}",
+        "leaderboardEntry": "**{rank}** | <@!{user}> - Messages: `{count}`",
+        "noRewards": "No message rewards found.",
+        "rewardsTitle": "💬・Message rewards - {guild}",
+        "rewardEntry": "**{count} messages** - <@&{role}>",
+        "rewardExists": "This message amount already has a reward.",
+        "rewardCreated": "Reward created for {messages} messages.",
+        "rewardRemoved": "Reward removed for {messages} messages.",
+        "rewardNotFound": "No reward found for {messages} messages.",
+        "role": "📘・Role"
+      },
+      "reactionroles": {
+        "emojiNotFound": "That emoji could not be found on this server.",
+        "created": "Reaction role created! Create a panel with one of the following commands.",
+        "menuPanel": "📘・Menu panel",
+        "buttonPanel": "📘・Button panel",
+        "noData": "No reaction role data found.",
+        "noRoles": "No valid roles found.",
+        "selectPlaceholder": "❌・Select an option",
+        "panelTitle": "{category}・Roles",
+        "panelDescription": "_____\n\nChoose your roles in the menu!\n\n{roles}",
+        "sendError": "I couldn't send the message. Check my permissions.",
+        "panelCreated": "Reaction role panel created!"
+      },
+      "triggers": {
+        "invalidEmoji": "That emoji could not be found on this server.",
+        "saved": "Trigger **{alias}** was saved.",
+        "removed": "Trigger **{alias}** was removed.",
+        "notFound": "Trigger **{alias}** does not exist.",
+        "noData": "This server has no trigger data.",
+        "alias": "🎯・Trigger"
+      },
+      "notes": {
+        "codeCollision": "The note code is already in use; please try again.",
+        "added": "Note added! Use `/notepad notes` to see all your notes.",
+        "edited": "Note edited!",
+        "notFound": "No note found.",
+        "deleteNotFound": "No note found with the id **#{id}**.",
+        "deleted": "Note **#{id}** has been deleted!"
+        ,"none": "No notes found!",
+        "leaderboardTitle": "📓・{user}'s notes",
+        "entry": "**Note ID: {id}**\n{note}\n"
+      },
+      "birthdays": {
+        "invalidDay": "The day format is invalid.",
+        "invalidMonth": "The month format is invalid.",
+        "of": "of",
+        "setSuccess": "Your birthday has been saved.",
+        "deleted": "Your birthday was deleted.",
+    "notFound": "No birthday found.",
+    "listEmpty": "No birthdays have been recorded.",
+    "listTitle": "🎂・Birthdays - {guild}",
+        "field": "🎂・Birthday",
+        "checkTitle": "🎂・Birthday check",
+        "checkDescription": "{user}'s birthday is on {birthday}.",
+        "months": { "1": "January", "2": "February", "3": "March", "4": "April", "5": "May", "6": "June", "7": "July", "8": "August", "9": "September", "10": "October", "11": "November", "12": "December" }
+      },
+      "security": {
+        "moderationTitle": "❌・Moderation",
+        "invitesBlocked": "Discord links are not allowed in this server.",
+        "linksBlocked": "Links are not allowed in this server.",
+        "spamBlocked": "Spamming is not allowed in this server."
+      },
+      "automod": {
+        "wordExists": "The word **{word}** already exists in the blacklist.",
+        "wordMissing": "The word **{word}** does not exist in the blacklist.",
+        "noData": "This server has no blacklist data.",
+        "wordField": "💬・Word",
+        "wordAdded": "The word **{word}** was added to the blacklist.",
+        "wordRemoved": "The word **{word}** was removed from the blacklist.",
+        "title": "Blacklisted words",
+        "words": "{words}"
+        ,"channelExists": "The channel {channel} is already allowlisted.",
+        "channelMissing": "The channel {channel} is not allowlisted.",
+        "channelField": "📘・Channel",
+        "channelAdded": "The channel {channel} was added to the allowlist.",
+        "channelRemoved": "The channel {channel} was removed from the allowlist.",
+        "protectionEnabled": "{feature} protection is now **enabled** on this server.",
+        "protectionDisabled": "{feature} protection is now **disabled** on this server.",
+        "antiInvite": "anti-invite",
+        "antiLinks": "anti-links",
+        "antiSpam": "anti-spam"
+      },
+      "serverstats": {
+        "channel": "📘・Channel",
+        "channelsCreated": "The channel count was created.",
+        "membersCreated": "The member count was created.",
+        "rolesCreated": "The role count was created.",
+        "boostsCreated": "The boost count was created.",
+        "botsCreated": "The bot count was created."
+        ,"animatedEmojisCreated": "The animated emoji count was created.",
+        "emojisCreated": "The emoji count was created.",
+        "newsChannelsCreated": "The news channel count was created.",
+        "stageChannelsCreated": "The stage channel count was created.",
+        "staticEmojisCreated": "The static emoji count was created.",
+        "textChannelsCreated": "The text channel count was created.",
+        "voiceChannelsCreated": "The voice channel count was created.",
+        "tierCreated": "The boost tier count was created.",
+        "invalidTimezone": "The timezone is invalid.",
+        "timeCreated": "The time count was created."
+      },
+      "invites": {
+        "added": "Added **{amount}** invite(s) to {user}.",
+        "removed": "Removed **{amount}** invite(s) from {user}.",
+        "noData": "No invite data found for {user}.",
+        "total": "Total invites",
+        "left": "Left",
+        "title": "Invites",
+        "description": "**{user}** has **{invites}** invite(s).",
+        "leaderboardTitle": "Invites - {guild}"
+        ,"leaderboardEntry": "**{rank}** | <@!{user}> - Invites: `{invites}`"
+      },
+      "profile": {
+        "statusTooLong": "Your status cannot be longer than 30 characters.",
+        "statusSuccess": "Your status is now: {status}",
+        "invalidAge": "No valid number was provided.",
+        "ageSuccess": "Your age is now: {age}",
+        "ageField": "Age",
+        "aboutMeTooLong": "Your about me cannot be longer than 1024 characters.",
+        "aboutMeSuccess": "Your about me has been updated.",
+        "genderPrompt": "Select a gender",
+        "genderSuccess": "Your gender is now: {gender}",
+        "genderMale": "Male",
+        "genderFemale": "Female",
+        "genderOther": "Other",
+        "genderPlaceholder": "Select an option",
+        "alreadyExists": "You already have a profile.",
+        "created": "Profile created! View it with the `profile` command.",
+        "deleted": "Your profile was deleted.",
+        "bdayUsage": "setbday [day]/[month]",
+        "bdayInvalidNumber": "The date provided does not contain valid numbers.",
+        "bdayInvalidDay": "The day format is invalid.",
+        "bdayInvalidMonth": "The month format is invalid.",
+        "bdaySuccess": "Your birthday has been saved.",
+        "bdayField": "Birthday",
+        "invalidColor": "You must provide a hexadecimal color, for example #ff0000.",
+        "colorSuccess": "Your favorite color has been saved.",
+        "colorField": "Color",
+        "originTooLong": "Your origin cannot be longer than 50 characters.",
+        "originSuccess": "Your origin has been saved.",
+        "originField": "Country",
+        "itemAlreadyExists": "{item} already exists in your profile.",
+        "itemNotFound": "{item} does not exist in your profile.",
+        "itemAdded": "{item} was added to your profile.",
+        "itemRemoved": "{item} was removed from your profile.",
+        "title": "{user}'s profile",
+        "notSet": "Not set",
+        "fields": {
+          "user": "User",
+          "discriminator": "Discriminator",
+          "id": "ID",
+          "gender": "Gender",
+          "age": "Age",
+          "birthday": "Birthday",
+          "color": "Favorite color",
+          "pets": "Favorite pets",
+          "food": "Favorite food",
+          "songs": "Favorite songs",
+          "artists": "Favorite artists",
+          "movies": "Favorite movies",
+          "actors": "Favorite actors",
+          "origin": "Origin",
+          "hobbies": "Hobbies",
+          "status": "Status",
+          "botBadges": "Bot badges",
+          "discordBadges": "Discord badges",
+          "credits": "Credits",
+          "aboutMe": "About me"
+        },
+        "notFound": "No profile found! Open one with `createprofile`."
+      },
+        "config": {
+            "language": {
+        "success": "The server language is now {language}.",
+        "description": "Choose the server language",
+        "optionDescription": "Choose a language"
+      },
+      "levels": {
+        "enabled": "Levels are now enabled in this server.",
+        "disabled": "Levels are now disabled in this server.",
+        "levelUpdated": "{user}'s level is now {level}.",
+        "xpUpdated": "{user}'s XP is now {xp}.",
+        "noLevels": "This user has no levels yet.",
+        "noData": "No level data found.",
+        "noRewards": "No level rewards found.",
+        "leaderboardTitle": "Levels - {guild}",
+        "leaderboardEntry": "**{rank}** | <@!{user}> - Level: `{level}` ({xp} XP)",
+        "rewardsTitle": "Level rewards - {guild}",
+        "rewardEntry": "**Level {level}** - <@&{role}>"
+        ,"rewardExists": "This level already has a reward.",
+        "rewardCreated": "Reward created for level {level}.",
+        "rewardRemoved": "Reward for level {level} removed.",
+        "rewardNotFound": "No reward found for level {level}."
+      },
+      "setcolor": {
+        "invalid": "You did not provide a hexadecimal color. Example: FF0000",
+        "success": "The embed color was updated successfully."
+      },
+      "setchannelname": {
+        "success": "The channel name was set successfully."
+      },
+      "setverify": {
+        "success": "The verification panel was created successfully."
+      },
+      "levelmessage": {
+        "success": "The level message was set successfully.",
+        "deleted": "The level message was deleted.",
+        "helpTitle": "Level message options",
+        "help": "Use the {user:username}, {user:tag}, {user:mention}, {user:level} and {user:xp} variables."
+      },
+      "welcomemessage": {
+        "success": "The welcome message was set successfully.",
+        "deleted": "The welcome message was deleted.",
+        "helpTitle": "Welcome message options",
+        "help": "Use the user, inviter and server variables available in the command help."
+      },
+      "leavemessage": {
+        "success": "The leave message was set successfully.",
+        "deleted": "The leave message was deleted.",
+        "helpTitle": "Leave message options",
+        "help": "Use the user, inviter and server variables available in the command help."
+      },
+      "messageField": "💬・Message"
+    },
+    "setup": {
+      "channel": "📘・Channel",
+      "role": "📘・Role",
+      "channelSuccess": "The channel was set up successfully!",
+      "roleSuccess": "The role was set up successfully!",
+      "channelsorter": {
+        "invalidChannel": "The selected channel must be a category.",
+        "success": "Channel sorting was configured successfully."
+      },
+      "deletesetup": {
+        "noConfig": "No channel sorter configuration was found.",
+        "selectionPrompt": "Select the category to remove from auto-sort:",
+        "removed": "Channel sorting was removed from the selected category.",
+        "cancelled": "No category selected within one minute; operation cancelled.",
+        "success": "The setup was deleted successfully."
+      },
+      "tickets": {
+        "success": "Tickets have been set up successfully."
+      },
+      "customvoice": {
+        "success": "The custom voice system was set up successfully.",
+        "error": "An error occurred while setting up the custom voice system."
+      },
+      "ticketpanel": {
+        "success": "The ticket panel was set up successfully.",
+        "missingSetup": "Run the ticket setup first.",
+        "title": "Tickets",
+        "description": "Click 🎫 to open a ticket",
+        "button": "Tickets"
+      }
+    },
+    "bot": {
+      "ping": {
+        "loading": "Calculating ping...",
+        "description": "See how quickly our bot responds."
+      },
+      "vote": {
+        "voted": "You have voted!",
+        "notVoted": "You have not voted!",
+        "error": "An error occurred while checking your vote."
+      },
+      "feedback": {
+        "success": "Your feedback was sent to the developers successfully."
+      }
+    },
+    "fun": {
+      "cleverRate": "You are {result}% clever!",
+      "cleverRateTitle": "Clever Rate",
+      "epicGamerRate": "You are {result}% epic gamer!",
+      "epicGamerRateTitle": "Epic Gamer Rate",
+      "gayRate": "You are {result}% gay!",
+      "gayRateTitle": "Gay Rate",
+      "simpRate": "You are {result}% simp!",
+      "simpRateTitle": "Simp Rate",
+      "stankRate": "You are {result}% stanky!",
+      "stankRateTitle": "Stank Rate",
+      "christmas": "Christmas",
+      "christmasDays": "{days} days until Christmas.",
+      "asciiTitle": "Ascii",
+      "asciiTooLong": "Please provide text shorter than 2000 characters!",
+      "sayTooLong": "You may not use more than 2000 characters!",
+      "messageSent": "Message sent successfully.",
+      "sudoTooLong": "You may not use more than 2000 characters!",
+      "sudoSent": "The sudo message was sent!",
+      "remoteDataError": "Unable to retrieve remote data.",
+      "birdFactTitle": "Random bird fact",
+      "catFactTitle": "Random cat fact",
+      "dogFactTitle": "Random dog fact",
+      "koalaFactTitle": "Random koala fact",
+      "pandaFactTitle": "Random panda fact"
+      ,"hugTitle": "{from} hugs {to}",
+      "loveTitle": "Love Meter",
+      "loveDescription": "See how much you match!",
+      "loveSameUser": "You cannot compare the same user twice!",
+      "loveNameOne": "Name 1",
+      "loveNameTwo": "Name 2",
+      "loveResult": "Result",
+      "loveMatch": "**{user1}** and **{user2}** match **{result}%**!"
+      ,"factTitle": "Random Fact",
+      "rickrollTitle": "Rickroll",
+      "gifTitle": "{query} Gif",
+      "roastTitle": "Roast"
+      ,"killTitle": "Kill",
+      "hackTitle": "Hacking",
+      "hackStarted": "The hack on {user} started...",
+      "hackSearchingUser": "Searching for user information...",
+      "hackSearchingIp": "Searching for IP address...",
+      "hackIpFound": "The user's IP address was found!",
+      "hackSearchingLogin": "Searching for Discord login...",
+      "hackLoginFound": "The user's Discord login was found!",
+      "hackSearchingToken": "Searching for Discord token...",
+      "hackTokenFound": "The user's Discord account token was found!",
+      "hackReporting": "Reporting account to Discord for breaking TOS...",
+      "hackSuccess": "{user} was successfully hacked. All the user's information was sent to your DM.",
+      "hackPranked": "Pranked",
+      "hackRemoteError": "Unable to retrieve remote data."
+    },
+    "games": {
+      "rollTitle": "Roll",
+      "rolled": "You rolled {result}.",
+      "rpsTitle": "Rock paper scissors",
+      "rpsWin": "I have {result}, you win!",
+      "rpsLose": "I have {result}, I win!",
+      "rpsDraw": "I have {result}, it's a draw!",
+      "eightBallTitle": "8ball",
+      "eightBallDescription": "See the answer to your question!",
+      "eightBallQuestion": "Your Question",
+      "eightBallAnswer": "Bot Answer",
+      "eightBallYes": "Yes!",
+      "eightBallUnfortunately": "Unfortunately not.",
+      "eightBallRight": "You are absolutely right!",
+      "eightBallNoSorry": "No, sorry.",
+      "eightBallAgree": "I agree.",
+      "eightBallNoIdea": "No idea!",
+      "eightBallNotSmart": "I am not that smart...",
+      "eightBallSourcesNo": "My sources say no!",
+      "eightBallCertain": "It is certain.",
+      "eightBallRely": "You can rely on it.",
+      "eightBallProbablyNo": "Probably not.",
+      "eightBallPointsNo": "Everything points to a no.",
+      "eightBallNoDoubt": "No doubt.",
+      "eightBallAbsolutely": "Absolutely.",
+      "eightBallDontKnow": "I do not know.",
+      "skipWordSkipped": "Word skipped successfully!",
+      "skipWordTitle": "Guess the word",
+      "skipWordDescription": "Put the letters in the right position!\n\n🔀 {word}",
+      "skipWordWrongChannel": "You are not in the right channel!"
+      ,"fastTypeTitle": "FastType",
+      "fastTypePrompt": "Type the below in {time}!\n{sentence}",
+      "fastTypeTimeout": "Time's up!",
+      "fastTypeEnded": "Ended!",
+      "fastTypeCompletedIn": "You did it in {time}!",
+      "fastTypeFailed": "Unfortunately you didn't succeed!",
+      "fastTypeCompleted": "You did it!"
+      ,"snakeTitle": "Snake",
+      "snakeScore": "GG, you scored **{score}** points!"
+      ,"triviaTitle": "Trivia",
+      "triviaCorrect": "GG, it was **{answer}**. You gave the correct answer in **{time}**.",
+      "triviaIncorrect": "Better luck next time! The correct answer was **{answer}**.",
+      "wouldYouRatherLoading": "{loading}┆Loading...",
+      "wouldYouRatherTitle": "🤔・Would you rather...",
+      "wouldYouRatherOptionA": "Option A",
+      "wouldYouRatherOptionB": "Option B",
+      "choiceA": "A",
+      "choiceB": "B",
+      "but": "But",
+      "willYouPressTitle": "🤔・Will you press the button?",
+      "willYouPressYes": "Yes",
+      "willYouPressNo": "No",
+      "cancel": "Cancel",
+      "musicTriviaTitle": "🎶・Music Quiz",
+      "musicTriviaDescription": "Get ready! Vote to skip the song by entering the word `skip`. Good luck!\n\n**Songs in queue:** {queueLength}\n**Time to play:** 30 seconds",
+      "musicTriviaTrackPlaying": "You can't use this while a track is playing!",
+      "musicTriviaAlreadyPlaying": "There is already a music trivia in play!"
+    },
+    "images": {
+      "remoteDataError": "Unable to retrieve remote data.",
+      "birdTitle": "Random Bird",
+      "catTitle": "Random Cat",
+      "dogTitle": "Random Dog",
+      "foxTitle": "Random Fox",
+      "koalaTitle": "Random Koala",
+      "pandaTitle": "Random Panda",
+      "redpandaTitle": "Random Redpanda"
+      ,"avatarTitle": "User avatar",
+      "bannerTitle": "User Banner",
+      "bannerNoBanner": "{user} doesn't have a banner but they do have an accent color.",
+      "bannerNoBannerNoAccent": "{user} doesn't have a banner or an accent color.",
+      "bannerError": "Unable to retrieve this user banner.",
+      "channelNotFound": "Channel not found.",
+      "imageSent": "The image was successfully sent to {channel}.",
+      "tweetTitle": "Tweet",
+      "trumpTweetTitle": "Trump tweet",
+      "generateError": "Unable to generate the requested image.",
+      "generatedImageTitle": "Generated image",
+      "adTitle": "Advertisement",
+      "bedTitle": "Bed meme",
+      "blurTitle": "Blurred image",
+      "burnTitle": "Burned image"
+    },
+    "giveaway": {
+      "notInGuild": "This message ID is not from this guild.",
+      "notFound": "I can't find the giveaway for {messageID}!",
+      "deleted": "The giveaway has been successfully removed.",
+      "updated": "The giveaway will be updated in less than {seconds} seconds.",
+      "ended": "The giveaway will end in less than {seconds} seconds.",
+      "paused": "Giveaway paused!",
+      "unpaused": "Giveaway unpaused!",
+    "rerolled": "Giveaway rerolled.",
+    "started": "Giveaway started in {channel}.",
+    "lastChance": "{error} **LAST CHANCE TO ENTER!** {error}",
+    "pausedMessage": "⚠️ **THIS GIVEAWAY IS PAUSED!** ⚠️",
+    "title": "{party} **GIVEAWAY** {party}",
+    "endedTitle": "{party} **GIVEAWAY ENDED** {party}",
+    "drawing": "{clock} - Ends at: **{timestamp}**!",
+    "inviteToParticipate": "React with 🥳 to enter the giveaway!\n",
+    "dropMessage": "Be the first to react with 🥳",
+    "winMessage": "Congratulations {winners}! You just won the **{this.prize}**!",
+    "footer": "Giveaway!",
+    "noWinner": "Giveaway canceled, not enough participants.\n",
+    "hostedBy": "{party} - Hosted by: {this.hostedBy}",
+    "winners": "🏆 - Winner(s)",
+    "endedAt": "Ends at:",
+    "units": {
+      "seconds": "seconds",
+      "minutes": "minutes",
+      "hours": "hours",
+      "days": "days",
+      "pluralS": false
+    }
+    },
+    "tickets": {
+      "notGiven": "Not given",
+      "openLogTitle": "📝・Open ticket",
+      "openLogDescription": "A new ticket has been created by {user} ({id}) in {channel}.",
+      "subject": "📄・Subject",
+      "createdAt": "⏰・Created at",
+      "transcriptMessage": "Here is the transcript for your ticket, please keep this if you ever want to refer to it!",
+      "closer": "👤┆Closer",
+      "server": "💬┆Server",
+      "date": "⏰┆Date",
+      "setupRequired": "Set up tickets first.",
+      "notTicket": "This is not a ticket.",
+      "alreadyClaimed": "The ticket has already been claimed.",
+      "ownTicket": "You are not allowed to claim your own ticket.",
+      "claimedBy": "You will now be assisted by <@!{user}>.",
+      "alreadyClosed": "The ticket is already closed.",
+      "closedBy": "Ticket closed by <@!{user}>.",
+      "notClaimed": "The ticket is not claimed.",
+      "notClaimedByYou": "You have not claimed this ticket.",
+      "availableAgain": "This ticket can now be claimed again!",
+      "deleteCountdown": "Delete this ticket in **5 seconds**.",
+      "messageSet": "The ticket message has been set successfully.",
+      "messageDataMissing": "No ticket message data was found!",
+      "messageType": "📘┆Message type",
+      "message": "💬┆Message",
+      "added": "{user} was added to the ticket.",
+      "lowered": "Ticket permissions were lowered by <@!{user}>.",
+      "raised": "Ticket permissions were raised by <@!{user}>.",
+      "renamed": "The channel name has changed to {name}.",
+      "operationFailed": "Something went wrong.",
+      "transcriptSaving": "Saving transcript...",
+      "transcriptSaved": "Transcript saved.",
+      "notice": "Hey <@!{user}>,\n\nCan we still help you?\nIf there is no response within **24 hours**, we will close this ticket.\n\n- Team {guild}",
+      "ownNotice": "You are not allowed to notice your own ticket.",
+      "alreadyOpen": "The ticket is already open.",
+      "limitReached": "Ticket limit reached. 1/1",
+      "progress": "Your ticket is being created...",
+      "created": "Ticket has been created.",
+      "defaultOpenMessage": "Thanks for creating a ticket!\nSupport will be with you shortly.\n\nClose • Claim • Save transcript • Send a notification",
+      "opened": "Ticket opened by <@!{user}>.",
+      "cannotRemoveCreator": "You cannot remove the ticket creator from this ticket.",
+      "removed": "{user} was removed from the ticket.",
+      "informationLoading": "Loading information...",
+      "informationTitle": "Information",
+      "ticketName": "Ticket name",
+      "channelId": "Channel ID",
+      "creator": "Creator",
+      "ticketId": "Ticket ID",
+      "closeSetupRequired": "Set up tickets first.",
+      "closed": "Ticket is closed.",
+      "closedPanel": "📝 - Save transcript\n🔓 - Reopen ticket\n⛔ - Delete ticket"
+    },
+    "music": {
+      "notInVoice": "You are not in a voice channel!",
+      "notSameVoice": "You are not in the same voice channel!",
+      "noSongs": "There are no songs currently playing.",
+      "paused": "The music has been paused.",
+      "resumed": "The music has resumed.",
+      "searching": "Searching...",
+      "skipped": "The song was skipped.",
+      "stopped": "The music was stopped.",
+      "queueEmpty": "There is no more music in the queue.",
+      "disconnected": "Music has stopped. I’m disconnected from the channel.",
+      "currentVolume": "Current volume is **{amount}%**",
+      "invalidNumber": "Please enter a valid number!",
+      "maxVolume": "Volume cannot exceed 1000%.",
+      "volumeSet": "Volume set to **{amount}%**",
+      "seeked": "Playback moved to: {time}"
+      ,"loop": "Looping is **{status}** for the current song.",
+      "shuffleInsufficient": "There are not enough songs to shuffle the queue.",
+      "shuffled": "The queue was shuffled!",
+      "queueTooShort": "The queue does not contain that many songs.",
+      "removed": "**{song}** was removed from the queue."
+      ,"lyricsNotFound": "No lyrics found for {song} :x:",
+      "channelMissing": "The voice channel does not exist.",
+      "notJoinable": "This voice channel is not joinable.",
+      "loadFailed": "The music could not be loaded. Please try again in a few minutes.",
+      "noMatches": "No music was found.",
+      "songQueued": "The song has been added to the queue!",
+      "searchResults": "Search Results",
+      "cancelSearch": "Cancel search?",
+      "cancelSearchHint": "Press `cancel` to stop the search.",
+      "selectionMissing": "You didn't provide a selection.",
+      "selectionCancelled": "Selection cancelled.",
+      "invalidSelection": "The number you provided is too small or too big (1-{max}).",
+      "bassboostLevel": "Bass boost level set to **{level}**.",
+      "queueCleared": "The queue has just been **cleared**!",
+      "previousUnavailable": "No song was played previously.",
+      "startedInVoice": "The music started in <#{channel}>!",
+      "requestedBy": "👤・Requested by",
+      "endsAt": "Ends at",
+      "author": "🎬・Author",
+      "skippedTo": "Skipped to song **{number}**."
+    },
+    "radio": {
+      "noVoiceChannel": "You are not in a voice channel!",
+      "startedTitle": "📻・Radio started",
+      "startedDescription": "The radio started successfully.\nTo make the bot leave: `rleave`",
+      "startedBy": "👤┆Started by",
+      "channel": "📺┆Channel",
+      "station": "🎶┆Radio station",
+      "guild": "⚙️┆Guild",
+      "startedLogTitle": "📻・Radio started",
+      "startedLogDescription": "The radio started successfully",
+      "stoppedTitle": "📻・The radio stopped",
+      "stoppedDescription": "The radio stopped successfully.\nTo make the bot join again: `rplay`",
+      "stoppedBy": "👤┆Stopped by",
+      "stoppedLogTitle": "📻・Radio stopped",
+      "stoppedLogDescription": "The radio stopped successfully",
+      "infoTitle": "📻・Radio information",
+      "infoDescription": "All radio information for this server",
+      "listeners": "👤┆Listeners",
+      "connectedChannel": "📺┆Connected channel"
+    },
+    "economy": {
+    "amount": "Amount",
+    "earned": "Earned",
+    "job": "Job",
+      "reset": {
+        "confirmTitle": "⏰・Reset economy",
+        "confirmDescription": "Are you sure you want to reset the economy?",
+        "success": "The economy has been successfully reset in this guild!",
+        "cancelled": "The economy reset has been cancelled!",
+        "timeout": "Time's up! Cancelled the economy reset!"
+      },
+      "leaderboard": {
+        "noData": "No data found!",
+        "moneyTitle": "🪙・Money - {guild}",
+        "bankTitle": "🏦・Bank - {guild}"
+      },
+      "store": {
+        "notFound": "No store found in this guild!",
+        "title": "🛒・{guild}'s Store",
+        "description": "Choose an item from the menu to buy.",
+        "entry": "**<@&{role}>** - {amount} coins\n**To buy:** `buy {role}`",
+        "defaultTitle": "🛒・Bot's Store",
+        "defaultDescription": "**Fishing rod** - 100 coins\n**To buy:** `buy fishingrod`"
+      },
+      "withdraw": {
+        "invalid": "Enter a valid number!",
+        "negative": "You cannot withdraw negative money!",
+        "emptyBank": "You have nothing left in the bank!",
+        "noAccount": "You don't have any money to withdraw!",
+        "success": "You've withdrawn money from your bank!",
+        "amount": "Amount"
+      },
+      "fish": {
+        "noRod": "You have to buy a fishing rod!",
+        "rodBroken": "Your fishing rod has broken! Go buy a new one!",
+        "success": "You've fished and gotten a {fish}"
+      },
+      "hunt": {
+        "success": "You've hunted and gotten a {animal}"
+      },
+      "daily": {
+        "success": "You've collected your daily reward!"
+      },
+      "hourly": { "success": "You've collected your hourly reward!" },
+      "weekly": { "success": "You've collected your weekly reward!" },
+      "monthly": { "success": "You've collected your monthly reward!" },
+      "yearly": { "success": "You've collected your yearly reward!" },
+      "present": { "success": "You've collected your present reward!" },
+      "beg": { "success": "You've begged and received **{amount}** coins!" },
+      "crime": {
+        "success": "Your crime went successfully! You earned **{amount}** coins.",
+        "failure": "You were caught carrying out the crime: {crime}."
+      },
+      "work": { "success": "You worked as a {job} and earned **{amount}** coins!" },
+      "addItem": {
+        "invalid": "Enter a valid number!",
+        "everyone": "You cannot add the @everyone role to the store!",
+        "alreadyExists": "This role is already in the store!",
+        "success": "The role was added to the store!",
+        "role": "Role",
+        "amount": "Amount"
+      },
+      "addMoney": {
+        "invalid": "Enter a valid number!",
+        "bot": "You cannot add money to a bot!",
+        "success": "Money was added to the user.",
+        "noMoney": "This user does not have any money yet.",
+        "user": "User",
+        "amount": "Amount"
+      },
+      "deleteItem": {
+        "success": "The role was deleted from the store.",
+        "notFound": "This role is not in the store!",
+        "role": "\ud83d\uded2┆Role"
+      },
+      "removeMoney": {
+        "invalid": "Enter a valid number!",
+        "bot": "You cannot remove money from a bot!",
+        "success": "Money was removed from the user.",
+        "insufficient": "This user doesn't have enough money."
+      },
+      "buy": {
+        "noShop": "No shop is configured in this server.",
+        "storeTitle": "🛒・{guild}'s Store",
+        "storeDescription": "Choose an item from the menu to buy.",
+        "insufficient": "You don't have enough money to buy this!",
+        "success": "The purchase has been successfully completed.",
+        "roleError": "I can't add <@&{role}> to you!",
+        "item": "\ud83d\udcd8┆Item"
+      },
+      "rob": {
+        "bot": "You cannot rob a bot!",
+        "minimumWallet": "You need at least 200 coins in your wallet to rob someone!",
+        "emptyTarget": "{user} does not have anything you can rob!",
+        "success": "You robbed a user and got away!",
+        "user": "User",
+        "amount": "Robbed"
+      },
+      "balance": {
+        "bot": "You cannot view a bot's balance!",
+        "empty": "This user does not have any money yet.",
+        "description": "Current balance of `{user}`",
+        "wallet": "Wallet",
+        "bank": "Bank",
+        "total": "Total",
+        "title": "{coins}・Balance"
+      },
+      "deposit": {
+        "usage": "deposit [amount]",
+        "invalid": "Enter a valid number!",
+        "negative": "You cannot deposit negative money!",
+        "insufficient": "You do not have enough money.",
+        "noMoney": "You don't have any money to deposit!",
+        "success": "You deposited money into your bank!"
+      },
+      "pay": {
+        "negative": "You cannot pay negative money!",
+        "self": "You cannot pay money to yourself!",
+        "insufficient": "You don't have that much money!",
+        "empty": "You don't have any money!",
+        "success": "You sent money to {user}.",
+        "user": "User",
+        "amount": "Amount"
+      }
+    },
+    "casino": {
+      "rouletteTitle": "🎰・Roulette",
+      "roulette": {
+        "usage": "roulette [color] [amount]",
+        "multiplier": "🎰・Multiplier: {multiplier}",
+        "insufficient": "You are betting more than you own!",
+        "invalidColour": "No valid colour was specified!",
+        "noAccount": "You don't have any money yet.",
+        "win": "You won **{coins} ${amount}**",
+        "lose": "You lost **{coins} ${amount}**"
+      },
+      "blackjack": {
+        "insufficient": "You are betting more than you own!",
+        "noAccount": "You don't have any money yet.",
+        "usage": "blackjack [amount]",
+        "title": "♦️・Blackjack",
+        "hit": "Hit",
+        "stand": "Stand",
+        "player": "You",
+        "dealer": "Dealer",
+        "dealerScore": "The dealer had {score}",
+        "outcome21": "Won! You have 21!",
+        "outcomePlayerBust": "Lost! You went over 21!",
+        "outcomeDealer21": "Lost! The dealer got 21!",
+        "outcomeDealerBust": "Won! The dealer went over 21!",
+        "outcomeWin": "Won! You beat the dealer!",
+        "outcomeLose": "Lost! The dealer won!",
+        "outcomeTie": "Draw!",
+        "instruction": "Use the Hit or Stand button.",
+        "goodLuck": "Good luck!",
+        "timeout": "Lost! The game timed out."
+      },
+      "crash": {
+        "insufficient": "You are betting more than you own!",
+        "noAccount": "You don't have any money yet.",
+        "usage": "crash [amount]",
+        "started": "Crash started by {user}・React 🛑 to stop",
+        "multiplier": "Multiplier",
+        "profit": "Profit",
+        "results": "Crash results for {user}",
+        "loss": "Loss"
+      },
+      "slots": {
+        "title": "🎰・Slots",
+        "usage": "slots [amount]",
+        "insufficient": "You are betting more than you own!",
+        "win": "You won {amount}.",
+        "lose": "You lost {amount}.",
+        "empty": "You do not have enough money to play."
+      }
+    }
+  },
+  "review": {
+    "title": "Review・{user}",
+    "stars": "Stars",
+    "note": "Note",
+    "notGiven": "Not given",
+    "starsInvalid": "Stars must be between 1 and 5.",
+    "noChannel": "No review channel is configured. Use `reviewchannel`.",
+    "submitted": "Your review has been successfully submitted.",
+    "newReview": "A new review has been published."
+  },
+  "move": {
+    "noStart": "You are not in a voice channel and no starting channel was specified.",
+    "sameChannel": "The starting and destination channels cannot be the same.",
+    "invalidChannels": "Both channels must be voice channels.",
+    "movePermission": "The bot does not have permission to move members.",
+    "noMembersCriteria": "No members to move according to the criteria.",
+    "insufficient": "Only {available} member(s) available, but {requested} requested.",
+    "moved": "{count} member(s) moved from `{from}` to `{to}`.",
+    "invalidChannel": "Selected channel is not a valid voice channel.",
+    "noMembersChannel": "No members to remove from `{channel}`.",
+    "kicked": "{count} member(s) kicked from `{channel}`{excluded}.",
+    "invalidFrom": "The starting channel must be a voice channel.",
+    "minTargets": "Please specify at least two target voice channels.",
+    "noMembersFrom": "There are no members to move in `{channel}`.",
+    "split": "Split completed: {count} member(s) moved from `{from}` to {targets} voice channel(s).",
+    "invalidDestination": "The destination must be a voice channel.",
+    "minSources": "At least two source voice channels must be provided.",
+    "noMembersDestination": "No members found to move (they may already be in the destination).",
+    "regroup": "{count} member(s) regrouped into `{destination}`.",
+    "managePermission": "The bot does not have permission to manage channels.",
+    "noEligibleChannels": "No eligible voice channels found.",
+    "emergency": "Emergency meeting! {count} member(s) moved to `{destination}`."
+  },
+  "reactionroles": {
+    "noData": "No reaction role data found.",
+    "panelTitle": "{category}・Roles",
+    "panelDescription": "_____\n\nChoose your roles by pressing the button!\n\n{roles}",
+    "panelCreated": "Reaction role panel created!",
+    "deleted": "**{category}** successfully deleted!",
+    "listTitle": "📃・Reaction roles",
+    "roleAdded": "The role {role} was added to you!",
+    "roleRemoved": "The role {role} was removed from you!",
+    "rolesUpdated": "I have updated the following roles for you: {roles}"
+  },
+  "moderation": {
+    "channelLocked": "Channel locked successfully!",
+    "channelUnlocked": "Channel unlocked successfully!",
+    "channelsLocked": "Channels locked successfully!",
+    "channel": "📘‡Channel",
+    "warningsTitle": "⚠️・Warnings",
+    "warningsDescription": "Warnings for **{user}**",
+    "warningCase": "Warning **{case}**",
+    "warningDetails": "Reason: {reason}\nModerator {moderator}",
+    "total": "Total",
+    "noWarnings": "User {user} has no warnings.",
+    "caseNotFound": "No warning matches case {case}.",
+    "unwarnTitle": "🔨・Unwarn",
+    "unwarnDescription": "A warning was removed from you in **{guild}**.",
+    "unwarnSuccess": "The user's warning was successfully removed.",
+    "warnTitle": "🔨・Warn",
+    "warnDescription": "You've been warned in **{guild}**.",
+    "moderator": "👤┆Moderator",
+    "user": "👤┆User",
+    "reason": "📄┆Reason"
+      ,"selectWarning": "Select a warning to remove"
+  },
+  "userinfo": {
+    "title": "👤・User information",
+    "description": "Information about {user}",
+    "username": "Username",
+    "discriminator": "Discriminator",
+    "nickname": "Nickname",
+    "noNickname": "No nickname",
+    "id": "ID",
+    "flagsLabel": "Discord flags",
+    "noFlags": "None",
+    "badges": "Bot badges",
+    "noBadges": "None",
+    "discordJoinedAt": "Discord account created at",
+    "serverJoinedAt": "Server joined at",
+    "roles": "Roles [{count}]",
+    "noRoles": "None",
+    "unknownFlag": "Unknown Discord flag",
+    "flags": {
+      "activeDeveloper": "👨‍💻・Active Developer",
+      "bugHunter": "🐛・Discord Bug Hunter",
+      "certifiedModerator": "👮‍♂️・Certified Moderator",
+      "houseBravery": "🏠・House Bravery Member",
+      "houseBrilliance": "🏠・House Brilliance Member",
+      "houseBalance": "🏠・House Balance Member",
+      "hypeSquadEvents": "🏠・HypeSquad Events",
+      "earlySupporter": "👑・Early Supporter",
+      "partner": "👑・Partner",
+      "quarantined": "🔒・Quarantined",
+      "spammer": "🔒・Spammer",
+      "discordStaff": "👨‍💼・Discord Staff",
+      "discordTeam": "👨‍💼・Discord Team",
+      "verifiedBot": "🤖・Verified Bot",
+      "verifiedDeveloper": "👨‍💻・Verified Bot Developer"
+    }
+  },
+  "botResponses": {
+    "donateTitle": "{bot}・Donate",
+    "donateDescription": "_____\n\nClick the button below to open the sponsor page.\n**Sponsoring is optional.**",
+    "donateButton": "CorwinDev GitHub",
+    "supportTitle": "❓・Support",
+    "supportDescription": "Make your server even better with the bot!",
+    "supportButton": "Support server",
+    "ownerTitle": "📘・Owner information",
+    "ownerName": "👑・Owner name",
+    "ownerTag": "🏷・Discord tag",
+    "organization": "🏢・Organization",
+    "website": "🌐・Website",
+    "uptimeTitle": "{arrow}・Uptime",
+    "uptimeDescription": "View the bot uptime.",
+    "uptimeDuration": "⌛・Uptime",
+    "uptimeSince": "⏰・Since",
+    "linksTitle": "🔗・Links",
+    "linksDescription": "Get access to all bot links and choose the one you need.",
+    "linksPlaceholder": "❌・Nothing selected",
+    "supportServer": "Support server",
+    "supportServerDescription": "Join the support server",
+    "inviteBot": "Invite the bot",
+    "inviteBotDescription": "Invite the bot to your server",
+    "communityServer": "Community server",
+    "communityServerDescription": "Join the community server!",
+    "topgg": "Top.gg",
+    "topggDescription": "View the Top.gg link",
+    "voteTitle": "📨・Vote",
+    "voteButton": "Vote for me",
+    "pingTitle": "{pong}・pong",
+    "botLatency": "🤖・Bot latency",
+    "apiLatency": "💻・API latency",
+    "databaseLatency": "📂・Database latency",
+    "changelogsTitle": "📃・Changelogs",
+    "changelogs": "_____",
+    "changelogEntry": "📃・Changelogs",
+    "changelogEntryValue": "15/03/2023: dependencies updated"
+  },
+  "botInfo": {
+    "title": "ℹ・Bot information",
+    "description": "____________________________",
+    "information": "ℹ️・Information",
+    "informationValue": "The bot helps you manage your server with more than 350 commands and many options.",
+    "general": "_____\n\n│General",
+    "botName": "🤖・Bot name",
+    "botId": "🆔・Bot ID",
+    "shards": "💻・Shards",
+    "shardsValue": "`{count}` shards",
+    "owner": "🔧・Bot owner",
+    "developer": "🔧・Bot developer",
+    "commands": "💻・Commands",
+    "commandsValue": "`{count}` commands",
+    "guilds": "🌐・Guilds",
+    "guildsValue": "`{count}` guilds",
+    "currentGuilds": "🌐・Guilds on this shard",
+    "members": "👥・Members",
+    "membersValue": "`{count}` members",
+    "voiceChannels": "🔊・Voice channels",
+    "channels": "📺・Channels",
+    "channelsValue": "`{count}` channels",
+    "createdAt": "📅・Created at",
+    "system": "_____\n\n│System",
+    "uptime": "🆙・Uptime",
+    "apiLatency": "⌛・API latency",
+    "botVersion": "🏷・Bot version",
+    "nodeVersion": "🏷・Node.js version",
+    "discordVersion": "📂・Discord.js version",
+    "memory": "💾・Bot memory",
+    "links": "🔗・Links",
+    "linksValue": "Add the bot: [[HERE]]({botInvite})\nSupport server: [[HERE]]({serverInvite})"
+  },
+  "helpResponses": {
+    "placeholder": "❌・Nothing selected",
+    "commands": "Commands",
+    "commandsDescription": "Show the bot commands!",
+    "invite": "Invite",
+    "inviteDescription": "Invite the bot to your server",
+    "support": "Support server",
+    "supportDescription": "Join the support server",
+    "changelogs": "Changelogs",
+    "changelogsDescription": "Show the bot changelogs",
+    "title": "❓・Help panel",
+    "description": "Welcome to the bot help panel! Choose an option from the menu.",
+    "menuBroken": "❌・Menu does not work?",
+    "menuBrokenValue": "Resend the command and report the issue if necessary.",
+    "bug": "🪲・Found a bug?",
+    "bugValue": "Report it with `/report bug`.",
+    "links": "🔗・Links",
+    "linksValue": "[Website](https://corwindev.nl/) | [Invite]({invite}) | [Vote](https://top.gg/bot/798144456528363550/vote)",
+    "inviteTitle": "📨・Invite",
+    "inviteDescription": "Make your server even better with the bot!",
+    "supportTitle": "❓・Support",
+    "supportPanelDescription": "Make your server even better with {bot}!",
+    "invitePanelDescription": "Make your server even better with the {bot} bot!"
+  },
+  "moderationEvents": {
+    "warnTitle": "🔨・Member warned",
+    "warnDescription": "A user has been warned.",
+    "unwarnTitle": "🔨・Member unwarned",
+    "unwarnDescription": "A user has been unwarned.",
+    "user": "> User",
+    "tag": "> Tag",
+    "id": "> ID",
+    "moderator": "> Moderator",
+    "reason": "> Reason"
+  },
+  "gameEvents": {
+    "guessWordTitle": "💬・Guess the word",
+    "guessWordWon": "The word was guessed and is worth ${amount}.",
+    "guessedBy": "👤・Guessed by",
+    "correctWord": "💬・Correct word",
+    "guessWordInstruction": "Put the letters in the right position!",
+    "word": "🔀・Word",
+    "guessNumberTitle": "🔢・Guess the number",
+    "guessNumberWon": "The number was guessed and is worth ${amount}.",
+    "correctNumber": "🔢・Correct number",
+    "guessNumberInstruction": "Guess the number between **1** and **10,000**!",
+    "countTwice": "You cannot count twice in a row! Count starts again from 1.",
+    "countWrong": "The correct number was {count}! Count starts again from 1."
+  },
+  "auditEvents": {
+    "emojiCreatedTitle": "\ud83d\ude1b・Emoji created",
+    "emojiCreatedDescription": "An emoji has been created.",
+    "emojiUpdatedTitle": "\ud83d\ude1b・Emoji updated",
+    "emojiUpdatedDescription": "An emoji has been updated.",
+    "emojiDeletedTitle": "\ud83d\ude1b・Emoji deleted",
+    "emojiDeletedDescription": "An emoji has been deleted.",
+    "stickerCreatedTitle": "\ud83d\ude1c・Sticker created",
+    "stickerCreatedDescription": "A sticker has been created.",
+    "stickerUpdatedTitle": "\ud83d\ude1c・Sticker updated",
+    "stickerUpdatedDescription": "A sticker has been updated.",
+    "stickerDeletedTitle": "\ud83d\ude1c・Sticker deleted",
+    "stickerDeletedDescription": "A sticker has been deleted.",
+    "roleCreatedTitle": "\ud83e\uddfb・Role created",
+    "roleCreatedDescription": "A role has been created.",
+    "roleDeletedTitle": "\ud83e\uddfb・Role deleted",
+    "roleDeletedDescription": "A role has been deleted.",
+    "roleColorUpdatedTitle": "\ud83e\uddfb・Role color updated",
+    "roleNameUpdatedTitle": "\ud83e\uddfb・Role name updated",
+    "rolePermissionsUpdatedTitle": "\ud83e\uddfb・Role permissions updated",
+    "roleUpdatedDescription": "A role has been updated.",
+    "emoji": "> Emoji",
+    "role": "> Role",
+    "name": "> Name",
+    "id": "> ID",
+    "url": "> URL",
+    "before": "> Before",
+    "after": "> After"
+    ,"color": "> Color",
+    "position": "> Position",
+    "timestamp": "> Timestamp",
+    "none": "None"
+  },
+  "customCommands": {
+    "duplicate": "This command name is already used by a custom server command.",
+    "promptAction": "Which action should be attached to this command?",
+    "added": "The command was added successfully.",
+    "notFound": "Unable to find this command.",
+    "removed": "The command was removed successfully."
+  },
+  "afk": {
+    "noData": "No AFK data is available.",
+    "reason": "Reason",
+    "title": "AFK users - {guild}",
+    "already": "You are already AFK.",
+    "setSuccess": "Your AFK status has been saved.",
+    "nowAfk": "{user} is now AFK! **Reason:** {reason}"
+  },
+  "activities": {
+    "notInVoice": "You are not in a voice channel.",
+    "startFailed": "Could not start **{name}**!",
+    "startButton": "Start activity",
+    "title": "{icon}・Activities",
+    "description": "Click on the **button** to start **{name}** in **{channel}**."
+  },
+  "voice": {
+    "notInVoice": "You are not in a voice channel.",
+    "cannotEdit": "You cannot edit this channel.",
+    "channel": "Channel",
+    "limitUpdated": "The channel limit is now **{limit}** members.",
+    "locked": "The channel was locked successfully.",
+    "renamed": "The channel was renamed to `{name}`.",
+    "unlocked": "The channel was unlocked successfully."
+  },
+  "voiceRoles": {
+    "noPermission": "You do not have permission to manage roles!",
+    "invalidChannel": "The selected channel must be a voice channel!",
+    "setupSuccess": "Voice role configuration succeeded!",
+    "noChannels": "No voice channels were found on this server!",
+    "progress": "Configuring {count} voice channels...",
+    "setupAllSuccess": "Voice role configuration completed!",
+    "channel": "📘┆Channel",
+    "role": "📘┆Role",
+    "configuredChannels": "📊┆Configured channels"
+  },
+  "triggers": {
+    "listTitle": "Trigger list",
+    "documentationTitle": "Trigger documentation",
+    "documentation": "A trigger detects a pattern with a regular expression.\n\n**Alias** identifies the trigger.\n**Type** defines the bot action.\n**Response** is the message sent.\n**Mention** controls the ping.\n**RegexFlags** contains optional flags.",
+    "noData": "No trigger data is available.",
+    "status": "Status",
+    "type": "Type",
+    "regex": "Regex",
+    "regexFlags": "Regex flags",
+    "response": "Response",
+    "emotes": "Emotes",
+    "mention": "Mention",
+    "replied": "Follow-up message",
+    "typeUnknown": "Unknown",
+    "typeReply": "Reply",
+    "typeReplyDelete": "Reply then delete",
+    "typeDelete": "Delete",
+    "typeReact": "Add a reaction"
+  },
+  "router": {
+    "banned": "You have been banned by the developers of this bot.",
+    "dmSent": "I have sent you something in your DMs.",
+    "cannotDM": "I can't DM you; your direct messages may be turned off.",
+    "helpTitle": "❓・Help panel",
+    "helpDescription": "Get help with the commands in `{command}`\\n\\n{commands}",
+    "verificationSuccess": "You have been successfully verified!",
+    "captchaIncorrect": "You have answered the captcha incorrectly!",
+    "verificationUnavailable": "Verify is disabled in this server, or you are using the wrong channel!"
+  },
+  "family": {
+    "viewTitle": "👪・{user}'s Family",
+    "partner": "Partner",
+    "noPartner": "This person is not married",
+    "parents": "Parents",
+    "noParents": "This person has no parents",
+    "siblings": "Siblings",
+    "noSiblings": "This person has no siblings",
+    "children": "Children",
+    "noChildren": "This person has no children",
+    "selfAdoption": "You cannot adopt yourself.",
+    "botAdoption": "You cannot adopt a bot.",
+    "relativeAdoption": "You cannot adopt a member of your family!",
+    "alreadyAdopted": "This person has already been adopted!",
+    "adoptionTitle": "👪・Adoption",
+    "adoptionDescription": "{author} asked to adopt {target}!\\n{target}, click one of the buttons",
+    "adoptionAcceptedTitle": "👪・Adoption accepted",
+    "adoptionAcceptedDescription": "{author} is now the happy parent of {target}! 🎉",
+    "adoptionDeclinedTitle": "👪・Adoption declined",
+    "adoptionDeclinedDescription": "{target} does not want to be adopted by {author}",
+    "adoptionTimeoutTitle": "👪・Adoption declined",
+    "adoptionTimeoutDescription": "{target} did not respond! The adoption was cancelled.",
+    "selfDivorce": "You cannot divorce yourself.",
+    "botDivorce": "You cannot divorce a bot.",
+    "notMarried": "You are not married at the moment.",
+    "divorceTitle": "👰・Divorced",
+    "divorceDescription": "{author} and {target} have just divorced.",
+    "selfMarriage": "You cannot marry yourself!",
+    "alreadyMarried": "Someone in the couple is already married!",
+    "relativeMarriage": "You cannot marry a member of your family!",
+    "proposalTitle": "👰・Marriage proposal",
+    "proposalDescription": "{author} proposed to {target}!\\n{target}, click one of the buttons",
+    "acceptedTitle": "👰・Marriage proposal accepted",
+    "acceptedDescription": "{author} and {target} are now married! 👰🎉",
+    "declinedTitle": "👰・Marriage proposal declined",
+    "declinedDescription": "{target} loves someone else or prefers to stay alone and decided not to marry {author}",
+    "timeoutTitle": "👰・Marriage proposal declined",
+    "timeoutDescription": "{target} did not respond! The marriage is cancelled",
+    "selfDisown": "You cannot disown yourself",
+    "botDisown": "You cannot disown a bot",
+    "noRelative": "You do not have any children or parents yet",
+    "disownedTitle": "👪・Disowned",
+    "disowned": "{author} disowned <@!{target}>",
+    "resetConfirmTitle": "❌・Reset family",
+    "resetConfirmDescription": "Are you sure you want to destroy your family?",
+    "resetSuccess": "Your family has been destroyed!",
+    "resetTimeout": "The time limit expired. Your family was not changed."
+  },
+  "moderationExtras": {
+    "emptyBanlist": "This server has no bans.",
+    "banlistTitle": "🔧・Banlist - {guild}",
+    "banEntry": "{user}・**Reason:** {reason}",
+    "reason": "Reason",
+    "noReason": "No reason",
+    "unbanned": "The specified user has been successfully unbanned!",
+    "userNotFound": "I could not find the user!",
+    "demoteTitle": "🔨・Demote",
+    "demoteNotice": "You've been demoted from **{guild}**",
+    "moderator": "👤┆Moderator",
+    "user": "👤┆User",
+    "demoted": "User successfully demoted",
+    "demoteFailed": "I can't demote the user."
+  },
+  "guild": {
+    "userNotFound": "This user is not in this guild!",
+    "userInfoTitle": "👤・User information",
+    "inviteNotFound": "I couldn't find the server.",
+    "inviteInfoTitle": "📨・Invite information",
+    "emojiAdded": "Emoji successfully added to the server.",
+    "emojiNotFound": "Emoji not found!",
+    "channelInfo": {
+      "title": "ℹ・Channel information",
+      "description": "Channel information about: <#{channel}>",
+      "type": "Type",
+      "id": "ID",
+      "createdAt": "Made on",
+      "topic": "Topic",
+      "nsfw": "NSFW",
+      "parent": "Parent",
+      "notAvailable": "N/A"
+    },
+    "emojis": {
+      "title": "😛・Emojis!",
+      "description": "{count} emojis - {guild}",
+      "animated": "Animated [{count}]",
+      "standard": "Standard [{count}]"
+    }
+  },
+  "report": {
+    "bugSent": "Bug successfully sent to the developers!",
+    "userSent": "User report successfully sent to the developers!"
+  },
+  "levels": {
+    "disabled": "The level system is disabled!",
+    "up": "**GG** {user}, you are now level **{level}**"
+  },
+  "announcement": {
+    "title": "📢・Announcement!",
+    "sent": "The announcement was sent successfully!",
+    "edited": "The announcement was edited successfully!",
+    "channel": "📘‡Channel"
+  },
+  "events": {
+    "name": "events",
+    "description": "Manage events",
+    "noThread": "❌ This thread is not associated with an event. Please provide the event ID.",
+    "idRequired": "❌ Please provide the event ID or use this command in the event thread.",
+    "notFound": "❌ Event not found. Check the provided ID.",
+    "noParticipants": "No participants available.",
+    "eventTitle": "📅 {name}",
+    "listTitle": "Participants list ({count})",
+    "fetchError": "❌ An error occurred while retrieving the participants.",
+    "reminderCreatorOnly": "❌ Only the event creator can configure reminders.",
+    "reminderUpdateCreatorOnly": "❌ Only the event creator can modify reminder settings.",
+    "reminders": {
+      "enable": "Enable reminders",
+      "disable": "Disable reminders",
+      "deleteEvent": "Delete event",
+      "title": "🎉 Event configuration",
+      "welcome": "Welcome to the discussion thread for your event **{event}**!",
+      "inviteTitle": "📝 Invite participants",
+      "invite": "Remember to mention (@) the roles or people you want to invite to this discussion thread.",
+      "automaticTitle": "⏰ Automatic reminders",
+      "enabledDescription": "Reminders are enabled. They will be sent automatically before the event.",
+      "disabledDescription": "Reminders are disabled. You can enable them again at any time.",
+      "available": "By default, reminders will be sent:\n• 1 month before\n• 1 week before\n• 1 day before\n\nUse the buttons below to manage reminders.",
+      "unavailable": "Reminders are not available because the event is too soon.",
+      "availableFooter": "You can configure reminders at any time",
+      "unavailableFooter": "Reminders are not available for this event",
+      "reenabled": "🔔 Reminders have been re-enabled for this event.",
+      "disabled": "🔕 Reminders have been disabled for this event.",
+      "updateError": "❌ An error occurred while updating reminder settings.",
+      "deletedMessage": "This message will be deleted <t:{timestamp}:R>",
+      "configured": "✅ Reminders have been configured for this event.",
+      "setupError": "❌ An error occurred while configuring reminders.",
+      "infoNotFound": "❌ Could not find the event information.",
+      "eventNotFound": "❌ The event no longer exists.",
+      "deleteCreatorOnly": "❌ Only the event creator can delete it.",
+      "deleted": "✅ The event was deleted successfully.",
+      "deleteError": "❌ An error occurred while deleting the event."
+    }
+  },
+  "suggestions": {
+    "title": "💡・Suggestion",
+    "accepted": "Suggestion successfully accepted",
+    "denied": "Suggestion successfully denied",
+    "submitted": "Suggestion successfully submitted!",
+    "notConfigured": "No suggestion channel set! Please do the setup.",
+    "suggestionField": "💬‡Suggestion",
+    "channelField": "📘‡Channel"
+  },
+  "stickymessages": {
+    "title": "💬・Sticky messages",
+    "created": "Sticky message created",
+    "deleted": "Sticky message deleted",
+    "notFound": "No message found!",
+    "noData": "No data found!",
+    "message": "💬‡Message",
+    "channel": "📘‡Channel"
+  },
+  "search": {
+    "invalidCountry": "Invalid country provided!",
+    "docsNotFound": "Could not find that documentation!",
+    "coronaTitle": "💉・COVID-19 - {country}",
+    "confirmed": "✅‡Confirmed cases",
+    "recovered": "🤗‡Recovered",
+    "deaths": "💀‡Deaths",
+    "linkResult": "I have found the following for: `{name}`",
+    "linkLabel": "🔗┇Link",
+    "viewLink": "Click here to see the link",
+    "cryptoTitle": "💹・Crypto stats",
+    "cryptoDescription": "The current price of **1 {coin}** = **{amount} {currency}**",
+    "invalidInputs": "Please check your inputs!",
+    "githubNotFound": "No account found with the username: {name}",
+    "github": { "name": "💬‡Name", "company": "🧑‍💼‡Company", "bio": "💬‡Bio", "repositories": "📁‡Public Repositories", "createdAt": "⏰‡Created At" },
+    "colorNotFound": "Color not found!",
+    "colorTitle": "🎨・Color info",
+    "hex": "Hex",
+    "rgb": "RGB",
+    "songNotFound": "Song not found!",
+    "song": { "name": "💬‡Name", "artist": "🎤‡Artist", "album": "📁‡Album", "length": "🎼‡Length", "genre": "🏷️‡Genre", "price": "💵‡Price", "releaseDate": "⏰‡Release Date" },
+    "packageNotFound": "Package not found!",
+    "package": { "name": "💬‡Name", "version": "🏷️‡Version", "description": "📃‡Description", "keywords": "⌨️‡Keywords", "author": "💻‡Author", "downloads": "📁‡Downloads", "lastPublish": "⏰‡Last publish" },
+    "applicationNotFound": "Application not found!",
+    "application": { "name": "💬‡Name", "description": "📃‡Description", "developers": "💻‡Developers", "publishers": "☁‡Publishers", "price": "🪙‡Price" },
+    "translateSuccess": "Success!",
+    "translateDescription": "I have translated the following",
+    "translateInput": "📥 - Input",
+    "translateOutput": "📤 - Output",
+    "invalidLanguage": "Please provide a valid ISO language code!",
+    "invalidLocation": "**Invalid** location",
+    "weatherTitle": "☀️・Weather - {skytext}",
+    "weatherDescription": "Weather forecast for {location}",
+    "weather": { "timezone": "Timezone", "degreeType": "Degree Type", "celsius": "Celsius", "temperature": "Temperature", "wind": "Wind", "feelsLike": "Feels like", "humidity": "Humidity" }
+  },
+  "soundboard": {
+    "sounds": {
+      "dancememe": "dance meme",
+      "defaultdance": "default dance",
+      "despacito": "despacito",
+      "discordcall": "discord call",
+      "discordjoin": "discord join",
+      "discordleave": "discord leave",
+      "discordnotification": "discord notification",
+      "elevator": "elevator",
+      "fbi": "fbi",
+      "jeff": "jeff",
+      "lambo": "lambo",
+      "missionfailed": "mission failed",
+      "moaning": "moaning",
+      "nani": "nani",
+      "nyancat": "nyancat",
+      "ohh": "ohh",
+      "reee": "reee",
+      "rickastley": "rick astley",
+      "rimshot": "rimshot",
+      "roblox": "roblox",
+      "running": "running",
+      "shotdown": "shotdown",
+      "spongebob": "spongebob",
+      "startup": "start up",
+      "thomas": "thomas",
+      "tobecontinued": "to be continued",
+      "wegothim": "we got him",
+      "windowserror": "windows error",
+      "windowsshutdown": "windows shutdown",
+      "windowsstartup": "windows startup",
+      "wow": "wow",
+      "yeet": "yeet"
+    },
+    "notInVoice": "You're not in a voice channel!",
+    "notSameVoice": "You are not in the same voice channel!",
+    "started": "Soundboard started! Playing **{sound}**"
+  },
+  "developers": {
+    "args": {
+      "sent": "The message was sent successfully!",
+      "information": {
+        "title": "ℹ️・Information",
+        "description": "_____",
+        "welcomeTitle": "👋┆Welcome to {guild}!",
+        "welcome": "Welcome to our meeting place! Meet new people here, play games, and participate in seasonal events! We bring everyone together and try to make this a comfortable place for everyone. Welcome and have fun!",
+        "whatTitle": "❓┆What can I do here?",
+        "what": "- Meet new people!\n- Play many fun games!\n- Discover the seasons!\n- Participate in events!\n- Choose your own roles on the server!",
+        "helpTitle": "🎫┆How can I get help when needed?",
+        "help": "You can open a ticket! We are happy to help with your questions and support your server.",
+        "helpUsTitle": "⚙️┆I want to help improve the bot!",
+        "helpUs": "- Check the applications to see which positions are available!\n- Open a ticket and ask how you can help!\n\nWe wish you a great time here!"
+      },
+      "rules": {
+      "title": "📃・Rules",
+      "description": "_____\n\nThese are our server rules. Please follow them so everyone can enjoy the community.",
+      "rule1Title": "1. Be respectful",
+      "rule1Description": "Respect every user, regardless of your opinion of them. Treat others as you would like to be treated.",
+      "rule2Title": "2. No inappropriate language",
+      "rule2Description": "Keep profanity to a minimum. Any insulting language toward another user is forbidden.",
+      "rule3Title": "3. No spamming",
+      "rule3Description": "Do not send many small messages in a row or disrupt the conversation with spam.",
+      "rule4Title": "4. No pornographic, adult, or other NSFW material",
+      "rule4Description": "This community server is not intended for sharing this type of material.",
+      "rule5Title": "5. No advertising",
+      "rule5Description": "We do not allow advertising for other communities or feeds. You may post relevant content in the media channel.",
+      "rule6Title": "6. No offensive names or profile images",
+      "rule6Description": "You will be asked to change your name or image if staff considers it inappropriate.",
+      "rule7Title": "7. Server raids",
+      "rule7Description": "Raids and mentions of raids are not allowed.",
+      "rule8Title": "8. Direct and indirect threats",
+      "rule8Description": "Threats, abuse, doxxing, and other malicious behavior are strictly forbidden.",
+      "rule9Title": "9. Follow the Discord Community Guidelines",
+      "rule9Description": "You can find them here: https://discordapp.com/guidelines",
+      "rule10Title": "10. Do not join voice channels without permission",
+      "rule10Description": "If there is a free spot, ask whether you may join first and leave if your presence is not wanted."
+      },
+      "links": {
+        "title": "🔗・Links",
+        "description": "_____ \n\nSee all the links from Bot Network!",
+        "servers": "▬▬│Servers│▬▬"
+      },
+      "rewards": {
+        "title": "😜・Role Rewards",
+        "description": "_____ \n\nDo you want some extras on the server or want to stand out more? Look below for the rewards.",
+        "levelsTitle": "🏆┆Levels",
+        "specialTitle": "🥳┆Special",
+        "economyTitle": "💰┆Economy"
+      },
+      "ourbots": {
+        "title": "🤖・Our bots",
+        "description": "_____ \n\nOutside our community, we also maintain two public bots designed to make your server better!",
+        "botTitle": "📘┆What is Bot?",
+        "bot": "Bot lets you run your entire server! With more than 400 commands, it offers many options to improve your server. And the best part? Everything is **free** to use!",
+        "bot2Title": "🎶┆What is Bot 2?",
+        "bot2": "Bot 2 was created for music. This way, you never get in each other's way when someone is already listening. It also includes a soundboard and a radio system.",
+        "inviteTitle": "📨┆How do I invite the bots?",
+        "invite": "You can invite the bots with `/invite` or by clicking the links below.\n\n**Bot** - [Invite here]({botInvite})",
+        "helpTitle": "🎫┆How do I get help?",
+        "help": "You can create a ticket in <#820308164322656327>! We are happy to answer your questions and support you on your server."
+      },
+      "boosterperks": {
+        "title": "💎・Booster Perks",
+        "description": "_____\n\nMore options on the server? Become a real Booster and enjoy many benefits.",
+        "field1Title": "😛┆Use external stickers",
+        "field1": "Use stickers from other servers.",
+        "field2Title": "🔊┆Send TTS messages",
+        "field2": "Send messages with an attached sound.",
+        "field3Title": "🤔┆Access the hidden lounge",
+        "field3": "Access a private lounge to chat with other boosters.",
+        "field4Title": "📛┆Change your nickname",
+        "field4": "Change your name on the server to stand out.",
+        "field5Title": "💭┆Create public or private threads",
+        "field5": "Create a thread in our text channels.",
+        "field6Title": "🎉┆Private giveaways",
+        "field6": "Get access to exclusive giveaways.",
+        "field7Title": "📂┆Send files in any channel",
+        "field7": "Send files in every channel where you can talk.",
+        "field8Title": "📊┆Access the promotional channel",
+        "field8": "Promote your server in a dedicated channel.",
+        "field9Title": "😜┆Custom role of your choice",
+        "field9": "Create a custom role that you can manage yourself.",
+        "field10Title": "💎┆Get the Booster role and badge",
+        "field10": "Stand out with the Booster role and badge.",
+        "field11Title": "💻┆Access beta updates",
+        "field11": "Let your server test updates before they are released."
+      },
+      "applications": {
+      "title": "💼・Applications",
+      "description": "_____\n\nWhat could be more fun than working with the best bot/server? We regularly have positions available.\n\nBut what can you expect?",
+      "field1Title": "👥┆A great team",
+      "field1": "The bot team always has a pleasant atmosphere and treats everyone equally!",
+      "field2Title": "🥳┆Access to the beta program",
+      "field2": "Get access to unreleased bot features with your own server and become a real tester!",
+      "field3Title": "📛┆A great role and badge",
+      "field3": "You will receive a server role and a team badge in the userinfo command.",
+      "field4Title": "📖┆Learn and grow",
+      "field4": "We give you the opportunity to learn, improve in your position, and potentially grow into the management team.",
+      "field5Title": "📘┆What do the roles mean?",
+      "field5": "**Moderator**\nHelp keep the server fun and organized.\n\n**Marketing**\nHelp the community grow.\n\n**Organization**\nWork with the team on new events.",
+      "field6Title": "📃┆Apply?",
+      "field6": "Create a ticket to receive your application form!"
+      }
+    },
+    "badgeNotFound": "I cannot find that badge.",
+    "badgeAlreadyAssigned": "This user already has that badge!",
+    "badgeAdded": "Added the {badge} ({flag}) badge!",
+    "badgeMissing": "The user doesn't have that badge.",
+    "badgeRemovedLast": "Removed the {badge} ({flag}) badge; the user has no badges left.",
+    "badgeRemoved": "Removed the {badge} ({flag}) badge!",
+    "tokenRefusal": "I'm not going to send my token!",
+    "evalTitle": "💻・Eval",
+    "input": "📥┇Input",
+    "output": "📥┇Output",
+    "error": "📥┇Error!"
+  },
+  "developerCredits": {
+    "added": "Added **{amount} credits** to {user}.",
+    "removed": "Removed **{amount} credits** from {user}."
+  },
+  "developerAdmin": {
+    "banSelf": "You cannot ban yourself from the bot.",
+    "alreadyBanned": "<@!{user}> ({userId}) has already been banned from the bot.",
+    "banned": "<@!{user}> ({userId}) has been banned from the bot.",
+    "notBanned": "<@!{user}> ({userId}) has not been banned from the bot.",
+    "unbanned": "<@!{user}> ({userId}) has been unbanned from the bot."
+  },
+  "fun": {
+    "reverse": "{text}",
+    "tokenTitle": "🤖・Bot token",
+    "tokenUnavailable": "Unable to retrieve remote data."
+  },
+  "notepad": {
+    "noNotes": "No notes found!"
+  },
+  "thanks": {
+    "self": "You cannot thank yourself!",
+    "alreadyGiven": "You already thanked this user!",
+    "success": "You thanked <@{user}>! They now have {received} thanks."
+  },
+  "giveawayEvents": {
+    "endedTitle": "🎉・Giveaway ended",
+    "wonDescription": "Congratulations {user}! You won the giveaway!",
+    "prize": "🎁┆Prize",
+    "giveaway": "🥳┆Giveaway",
+    "viewLink": "View giveaway",
+    "entryApproved": "Your entry into [this giveaway]({link}) has been approved.",
+    "endedEntry": "The giveaway has unfortunately ended! You cannot participate anymore."
+  },
+  "commandMetadata": {
+    "profile": {
+      "name": "profile",
+      "description": "Create and manage your profile",
+      "subcommands": {
+        "help": { "description": "Get information about the profile category commands" },
+        "create": { "description": "Create your profile" },
+        "delete": { "description": "Delete your profile" },
+        "profile": { "description": "See your profile", "options": { "user": { "description": "The user you want the profile from" } } },
+        "aboutme": { "description": "Set your about me", "options": { "text": { "description": "Enter a about me" } } },
+        "age": { "description": "Set your age", "options": { "number": { "description": "Enter a number" } } },
+        "bday": { "description": "Set your bday", "options": { "bday": { "description": "Enter a bday" } } },
+        "color": { "description": "Set your favorite color", "options": { "color": { "description": "The color you want to set" } } },
+        "gender": { "description": "Set your gender" },
+        "origin": { "description": "Set your origin", "options": { "country": { "description": "Enter a country" } } },
+        "status": { "description": "Set your status", "options": { "text": { "description": "Enter a status" } } }
+      },
+      "subcommandGroups": {
+        "actor": { "description": "Set your favorite actor", "subcommands": { "addactor": { "description": "The actor you want to add", "options": { "actor": { "description": "The actor you want to add" } } }, "delactor": { "description": "The actor you want to remove", "options": { "actor": { "description": "The actor you want to remove" } } } } },
+        "artist": { "description": "Set your favorite artist", "subcommands": { "addartist": { "description": "The artist you want to add", "options": { "artist": { "description": "The artist you want to add" } } }, "delartist": { "description": "The artist you want to remove", "options": { "artist": { "description": "The artist you want to remove" } } } } },
+        "food": { "description": "Set your favorite food", "subcommands": { "addfood": { "description": "The food you want to add", "options": { "food": { "description": "The food you want to add" } } }, "delfood": { "description": "The food you want to remove", "options": { "food": { "description": "The food you want to remove" } } } } },
+        "movie": { "description": "Set your favorite movie", "subcommands": { "addmovie": { "description": "The movie you want to add", "options": { "movie": { "description": "The movie you want to add" } } }, "delmovie": { "description": "The movie you want to remove", "options": { "movie": { "description": "The movie you want to remove" } } } } },
+        "pet": { "description": "Set your favorite pet", "subcommands": { "addpet": { "description": "The pet you want to add", "options": { "pet": { "description": "The pet you want to add" } } }, "delpet": { "description": "The pet you want to remove", "options": { "pet": { "description": "The pet you want to remove" } } } } },
+        "song": { "description": "Set your favorite song", "subcommands": { "addsong": { "description": "The song you want to add", "options": { "song": { "description": "The song you want to add" } } }, "delsong": { "description": "The song you want to remove", "options": { "song": { "description": "The song you want to remove" } } } } },
+        "hobbies": { "description": "Set your favorite hobby", "subcommands": { "addhobby": { "description": "The hobby you want to add", "options": { "hobby": { "description": "The hobby you want to add" } } }, "delhobby": { "description": "The hobby you want to remove", "options": { "hobby": { "description": "The hobby you want to remove" } } } } }
+      }
+    },
+    "serverstats": {
+      "name": "serverstats",
+      "description": "Manage the server stats",
+      "subcommands": {
+        "help": { "description": "Get information about the server stats category commands" },
+        "boosts": { "description": "Keep track of the boost count" },
+        "tier": { "description": "Keep track of the boost tier count" },
+        "channels": { "description": "Keep track of the channel count" },
+        "stage-channels": { "description": "Keep track of the stage channel count" },
+        "text-channels": { "description": "Keep track of the text channel count" },
+        "voice-channels": { "description": "Keep track of the voice channel count" },
+        "news-channels": { "description": "Keep track of the news channel count" },
+        "members": { "description": "Keep track of the member count" },
+        "bots": { "description": "Keep track of the bots count" },
+        "roles": { "description": "Keep track of the role count" },
+        "emoji": { "description": "Keep track of the emoji's count" },
+        "static-emoji": { "description": "Keep track of the static emoji's count" },
+        "animated-emoji": { "description": "Keep track of the animated emoji's count" },
+        "time": { "description": "Keep track of your current time zone", "options": { "timezone": { "description": "The timezone you want to set (e.g. Europe/Amsterdam)" } } }
+      }
+    },
+    "tools": {
+      "name": "tools",
+      "description": "Use the bot tools",
+      "subcommands": {
+        "help": { "description": "Get information about the tools category commands" },
+        "anagram": { "description": "Form a word with certain letters", "options": { "word": { "description": "The word you want to form" } } },
+        "button": { "description": "Create a button", "options": { "url": { "description": "The url for the button" }, "text": { "description": "The text for the button" } } },
+        "calculator": { "description": "Calculate a sum" },
+        "decode": { "description": "Decode binary code to text", "options": { "code": { "description": "The binary code you want to decode" } } },
+        "emojify": { "description": "Convert text to emojis", "options": { "text": { "description": "The text you want to convert" } } },
+        "encode": { "description": "Encode text to binary code", "options": { "text": { "description": "The text you want to encode" } } },
+        "enlarge": { "description": "Enlarge an emoji", "options": { "emoji": { "description": "The emoji you want to enlarge" } } },
+        "mcskin": { "description": "See the skin of a minecraft user", "options": { "name": { "description": "The username of the player" } } },
+        "mcstatus": { "description": "See the status of a minecraft server", "options": { "ip": { "description": "The ip of the mc server" } } },
+        "pwdgen": { "description": "Generate a password" },
+        "qrcode": { "description": "Sends a qrcode photo of text you have given", "options": { "text": { "description": "The text you want to convert" } } },
+        "remind": { "description": "Set a reminder", "options": { "time": { "description": "The time for your reminder" }, "message": { "description": "The message for your reminder" } } },
+        "sourcebin": { "description": "Upload code to source bin", "options": { "language": { "description": "The language of your code" }, "code": { "description": "Your code" } } },
+        "url": { "description": "Make a shortend url", "options": { "site": { "description": "The link to the website" }, "code": { "description": "The code for the url" } } },
+        "review": { "description": "Write a review", "options": { "stars": { "description": "The number of stars (max 5)" }, "message": { "description": "A small description with the review" } } }
+      }
+    },
+    "fun": {
+      "name": "fun",
+      "description": "Run fun commands in the bot",
+      "subcommands": {
+        "help": { "description": "Get information about the fun category commands" }
+      },
+      "common": { "selectUser": "Select a user", "enterText": "Enter a text" },
+      "subcommandGroups": {
+        "meme": { "description": "See all the fun meme commands in Bot", "subcommands": { "confused": { "description": "React with a Confused Nick Young meme" }, "cleverrate": { "description": "See how much clever you are" }, "dinochrome": { "description": "Dinosaur in Chrome" }, "epicgamerrate": { "description": "See how much of an epic gamer you are" }, "howgay": { "description": "See how gay you are" }, "roast": { "description": "Roast a user", "options": { "user": { "description": "Select a user" } } }, "simprate": { "description": "See how simp you are" }, "stankrate": { "description": "See how stanky you are" }, "rickroll": { "description": "Get a rickroll" } } },
+        "user": { "description": "See all the fun user commands in Bot", "subcommands": { "hack": { "description": "Hack your friends or enemies!", "options": { "user": { "description": "Select a user" } } }, "hug": { "description": "Give a hug to a user", "options": { "user": { "description": "Select a user" } } }, "kill": { "description": "Kill a user", "options": { "user": { "description": "Select a user" } } }, "lovemeter": { "description": "See how much you fit in with someone", "options": { "user1": { "description": "Select a user" }, "user2": { "description": "Select a user" } } }, "sudo": { "description": "Say something like someone else", "options": { "user": { "description": "Select a user" }, "text": { "description": "Enter a text" } } } } },
+        "text": { "description": "See all the fun text commands in Bot", "subcommands": { "ascii": { "description": "Make ascii text", "options": { "text": { "description": "Enter a text" } } }, "gif": { "description": "Search a gif", "options": { "text": { "description": "Enter a text" } } }, "reverse": { "description": "Reverse your text", "options": { "text": { "description": "Enter a text" } } }, "say": { "description": "Have the bot say something", "options": { "text": { "description": "Enter a text" } } } } },
+        "extra": { "description": "See all the fun extra commands in Bot", "subcommands": { "birdfact": { "description": "Get a random bird fact" }, "catfact": { "description": "Get a random cat fact" }, "dogfact": { "description": "Get a random dog fact" }, "fact": { "description": "Get a random fact" }, "koalafact": { "description": "Get a random koalafact fact" }, "pandafact": { "description": "Get a random pandafact fact" }, "token": { "description": "Get my token" }, "worldclock": { "description": "Shows the world clock(s)" }, "xmas": { "description": "See the number of days until Christmas" } } }
+      }
+    },
+    "giveaway": {
+      "name": "giveaway",
+      "description": "Host a giveaway in your server",
+      "subcommands": {
+        "help": { "description": "Get information about the giveaway category commands" },
+        "start": { "description": "Start a giveaway", "options": { "channel": { "description": "Channel where the giveaway should be" }, "duration": { "description": "Duration of the giveaway" }, "winners": { "description": "The number of giveaway winners" }, "prize": { "description": "The giveaway prize" } } },
+        "drop": { "description": "Start a drop giveaway", "options": { "channel": { "description": "Channel where the giveaway should be" }, "duration": { "description": "Duration of the giveaway" }, "winners": { "description": "The number of giveaway winners" }, "prize": { "description": "The giveaway prize" } } },
+        "reroll": { "description": "Reroll a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "end": { "description": "End a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "edit": { "description": "Edit the time of a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "delete": { "description": "Delete a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "pause": { "description": "Pause a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "unpause": { "description": "Unpause a giveaway", "options": { "message": { "description": "Giveaway message ID" } } }
+      }
+    },
+    "config": {
+      "name": "config",
+      "description": "Customize the bot to your liking",
+      "subcommandGroups": { "feature": { "name": "feature", "description": "Manage server features", "subcommands": { "list": { "description": "List feature statuses" }, "set": { "description": "Enable or disable a feature", "options": { "feature": { "description": "Feature to modify" }, "enabled": { "description": "Enable the feature" } } }, "reset": { "description": "Reset a feature", "options": { "feature": { "description": "Feature to reset" } } } } } },
+      "subcommands": { "language": { "description": "Choose the server language", "options": { "language": { "description": "Choose a language", "choices": { "fr": { "name": "French" }, "en": { "name": "English" } } } } }, "help": { "description": "Get information about the configuration category commands" }, "levels": { "description": "Enable / disable levels", "options": { "boolean": { "description": "Select a boolean" } } }, "setcolor": { "description": "Set a custom embedded color", "options": { "color": { "description": "Enter a hexadecimal color" } } }, "setverify": { "description": "Set up the verification panel", "options": { "enable": { "description": "Select a boolean" }, "channel": { "description": "Select a channel" }, "role": { "description": "Select a role" } } }, "setchannelname": { "description": "Set a custom channel name for server statistics", "options": { "name": { "description": "Enter a channel name or send HELP for arguments" } } }, "levelmessage": { "description": "Set the bot level message", "options": { "message": { "description": "Enter a level message or send HELP for arguments" } } }, "welcomemessage": { "description": "Set the welcome message", "options": { "message": { "description": "Enter a welcome message or send HELP for arguments" } } }, "leavemessage": { "description": "Set the leave message", "options": { "message": { "description": "Enter a leave message or send HELP for arguments" } } }, "ticketmessage": { "description": "Set the bot ticket message", "options": { "type": { "description": "Ticket message type", "choices": { "open": { "name": "Open" }, "close": { "name": "Close by DM" } } }, "message": { "description": "Enter a message for the ticket" } } } }
+    },
+    "triggers": {
+      "name": "triggers",
+      "description": "Trigger responses to matching messages",
+      "subcommands": {
+        "add": { "description": "Add a trigger", "options": { "alias": { "description": "Trigger alias" }, "type": { "description": "Response type", "choices": { "1": { "name": "Reply" }, "2": { "name": "Reply then delete" }, "3": { "name": "Delete" }, "4": { "name": "Add a reaction" } } }, "regex": { "description": "Regex filter" }, "regexflags": { "description": "Additional regex flags" }, "response": { "description": "Bot response" }, "isactive": { "description": "Trigger status", "choices": { "true": { "name": "Enabled (default)" }, "false": { "name": "Disabled" } } }, "mention": { "description": "Mention when responding", "choices": { "true": { "name": "Mention (default)" }, "false": { "name": "Do not mention" } } }, "replied": { "description": "Response format", "choices": { "true": { "name": "Replied message (default)" }, "false": { "name": "Message only" } } }, "emotes": { "description": "Emotes added to the reaction" }, "timedeletion": { "description": "Delay before deletion" } } },
+        "remove": { "description": "Remove a trigger", "options": { "alias": { "description": "Trigger alias" } } },
+        "list": { "description": "List all triggers" },
+        "documentation": { "description": "View trigger documentation" }
+      }
+    },
+    "automod": {
+      "name": "automod",
+      "description": "Manage automatic moderation",
+      "subcommands": {
+        "help": { "description": "View automatic moderation help" },
+        "antiinvite": { "description": "Enable or disable anti-invite protection", "options": { "active": { "description": "Enable protection" } } },
+        "antilinks": { "description": "Enable or disable anti-links protection", "options": { "active": { "description": "Enable protection" } } },
+        "antispam": { "description": "Enable or disable anti-spam protection", "options": { "active": { "description": "Enable protection" } } },
+        "linkschannel": { "description": "Manage channels allowed to contain links", "options": { "type": { "description": "Action to perform", "choices": { "add": { "name": "Add" }, "remove": { "name": "Remove" } } }, "channel": { "description": "Target channel" } } }
+      },
+      "subcommandGroups": {
+        "blacklist": { "description": "Manage the blacklist", "subcommands": { "display": { "description": "Display the blacklist" }, "add": { "description": "Add a word to the blacklist", "options": { "word": { "description": "Word to add" } } }, "remove": { "description": "Remove a word from the blacklist", "options": { "word": { "description": "Word to remove" } } } } }
+      }
+    },
+    "music": {
+      "name": "music",
+      "description": "Play music in the bot",
+      "subcommands": {
+        "help": { "description": "Get information about the music category commands" },
+        "bassboost": { "description": "Set the bassboost level", "options": { "level": { "description": "The level of the bassboost", "choices": { "0": { "name": "0" }, "1": { "name": "1" }, "2": { "name": "2" }, "3": { "name": "3" } } } } },
+        "play": { "description": "Start the music", "options": { "song": { "description": "Enter a song name/url" } } },
+        "clear": { "description": "Delete the music queue" },
+        "loop": { "description": "Loop the music" },
+        "lyrics": { "description": "Get the lyrics of the current song", "options": { "song": { "description": "Enter a song name" } } },
+        "playing": { "description": "See which song is playing now" },
+        "pause": { "description": "Pause the music" },
+        "previous": { "description": "Play previous song" },
+        "queue": { "description": "See the music queue" },
+        "resume": { "description": "Resume the music" },
+        "remove": { "description": "Remove a song from the queue", "options": { "number": { "description": "Song number" } } },
+        "seek": { "description": "Seek the current playing music", "options": { "time": { "description": "New song time" } } },
+        "shuffle": { "description": "Shuffle the music" },
+        "skip": { "description": "Skip the current song" },
+        "skipto": { "description": "Skip to a new song", "options": { "number": { "description": "Song number" } } },
+        "stop": { "description": "Stop the music" },
+        "volume": { "description": "Set the music volume", "options": { "amount": { "description": "New volume number" } } }
+      }
+    },
+    "radio": {
+      "name": "radio",
+      "description": "Play radio in the bot",
+      "subcommands": { "help": { "description": "Get information about the radio category commands" }, "play": { "description": "Start the radio" }, "stop": { "description": "Stop the radio" }, "playing": { "description": "Show what is playing now" } }
+    },
+    "moderation": {
+      "name": "moderation",
+      "description": "Manage all server moderation",
+      "subcommands": {
+        "help": { "description": "Get information about the moderation category commands" },
+        "ban": { "description": "Ban a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the ban" } } },
+        "clear": { "description": "Clear messages", "options": { "amount": { "description": "Amount of messages" } } },
+        "clearuser": { "description": "Clear user messages in a channel", "options": { "user": { "description": "Select a user" } } },
+        "demote": { "description": "Demote a user", "options": { "user": { "description": "Select a user" } } },
+        "kick": { "description": "Kick a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the kick" } } },
+        "lock": { "description": "Lock a channel", "options": { "channel": { "description": "Select a channel" } } },
+        "lockdown": { "description": "Lock all channels" },
+        "nuke": { "description": "Nuke a channel" },
+        "softban": { "description": "Softban a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the ban" } } },
+        "timeout": { "description": "Timeout a user", "options": { "user": { "description": "Select a user" }, "time": { "description": "Number of minutes" }, "reason": { "description": "Reason for the time out" } } },
+        "tempban": { "description": "Temp ban a user", "options": { "user": { "description": "Select a user" }, "time": { "description": "Number of minutes" }, "reason": { "description": "The reason for the ban" } } },
+        "unlock": { "description": "Unlock a channel", "options": { "channel": { "description": "Select a channel" } } },
+        "unban": { "description": "Unban a user", "options": { "user": { "description": "Give a user id" } } },
+        "banlist": { "description": "Get all banned users" },
+        "warn": { "description": "Warn a user", "options": { "user": { "description": "Select a user" }, "reason": { "description": "The reason for the warn" } } },
+        "unwarn": { "description": "Unwarn a user", "options": { "user": { "description": "Select a user" }, "case": { "description": "Give a case number" } } },
+        "warnings": { "description": "See a users warnings", "options": { "user": { "description": "Select a user" } } }
+      }
+    },
+    "setup": {
+      "name": "setup",
+      "description": "Manage the bot setups",
+      "subcommands": {
+        "help": { "description": "Get information about setup category commands" },
+        "channelsorter": { "description": "Configure automatic channel sorting", "options": { "category": { "description": "Select a category" }, "mode": { "description": "Choose how channels should be arranged", "choices": { "automatic": { "name": "Automatic" }, "manual": { "name": "Manual" }, "hybrid": { "name": "Hybrid" } } }, "pinned-order": { "description": "Choose whether pinned channels come first or last", "choices": { "first": { "name": "Pinned first" }, "last": { "name": "Pinned last" } } } } },
+        "tickets": { "description": "Set up tickets", "options": { "category": { "description": "Select the ticket category" }, "role": { "description": "Select the support role" }, "channel": { "description": "Ticket panel channel" }, "logs": { "description": "Ticket logs channel" } } },
+        "customvoice": { "description": "Set up the custom voice channel system", "options": { "category": { "description": "Select the channel category" }, "channel": { "description": "Select the creation channel" }, "theme": { "description": "Select the voice channel theme", "choices": { "default": { "name": "Default" }, "ocean": { "name": "Ocean Theme" }, "gaming": { "name": "Gaming Theme" }, "aprilfools": { "name": "April Fools" } } } } },
+        "logs": { "description": "Set up server logs", "options": { "setup": { "description": "Choose the setup you want", "choices": { "serverLogs": { "name": "Server logs" }, "levelLogs": { "name": "Level logs" }, "boostLogs": { "name": "Boost logs" } } }, "channel": { "description": "The channel for the logs" } } },
+        "fun": { "description": "Set up fun server channels", "options": { "setup": { "description": "Choose the setup you want", "choices": { "birthdays": { "name": "Birthdays" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Reviews" }, "suggestions": { "name": "Suggestions" }, "starboard": { "name": "Starboard" } } }, "channel": { "description": "The feature channel" } } },
+        "games": { "description": "Set up game channels", "options": { "setup": { "description": "Choose the setup you want", "choices": { "counting": { "name": "Counting" }, "gtn": { "name": "Guess the number" }, "gtw": { "name": "Guess the word" }, "wordsnake": { "name": "Word snake" } } }, "channel": { "description": "The game channel" } } },
+        "welcomechannels": { "description": "Set up welcome channels", "options": { "setup": { "description": "Choose the setup you want", "choices": { "welcomechannel": { "name": "Welcome channel" }, "leavechannel": { "name": "Leave channel" } } }, "channel": { "description": "The channel you want" } } },
+        "welcomerole": { "description": "Set up the welcome role", "options": { "role": { "description": "The role you want" } } },
+        "ticketpanel": { "description": "Set up the ticket panel", "options": { "name": { "description": "The ticket panel name" }, "description": { "description": "The ticket panel description" } } },
+        "deletesetup": { "description": "Delete a bot setup", "options": { "setup": { "description": "Choose the setup to delete", "choices": { "tickets": { "name": "Tickets" }, "customvoice": { "name": "Custom voice" }, "serverlogs": { "name": "Server logs" }, "levellogs": { "name": "Level logs" }, "boostlogs": { "name": "Boost logs" }, "birthdays": { "name": "Birthdays" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Reviews" }, "suggestions": { "name": "Suggestions" }, "counting": { "name": "Counting" }, "gtn": { "name": "Guess the number" }, "gtw": { "name": "Guess the word" }, "welcomechannel": { "name": "Welcome channel" }, "leavechannel": { "name": "Leave channel" }, "welcomerole": { "name": "Welcome role" }, "wordsnake": { "name": "Word snake" }, "channelsorter": { "name": "Channel sorter" } } } } }
+      }
+    },
+    "tickets": {
+      "name": "tickets",
+      "description": "Manage tickets in your server",
+      "subcommands": {
+        "help": { "description": "Get information about the tickets category commands" },
+        "add": { "description": "Add a user to a ticket", "options": { "user": { "description": "Select a user" } } },
+        "claim": { "description": "Claim a ticket" },
+        "close": { "description": "Close a ticket" },
+        "delete": { "description": "Delete a ticket" },
+        "information": { "description": "Information about a ticket" },
+        "lower": { "description": "Lower a ticket" },
+        "create": { "description": "Create a ticket", "options": { "reason": { "description": "Reason to open a ticket" } } },
+        "notice": { "description": "Send a notice to a ticket" },
+        "open": { "description": "Reopen a ticket" },
+        "raise": { "description": "Raise a ticket" },
+        "remove": { "description": "Remove a user from a ticket", "options": { "user": { "description": "Select a user" } } },
+        "rename": { "description": "Rename a ticket", "options": { "name": { "description": "New ticket name" } } },
+        "transcript": { "description": "Transcript a ticket" },
+        "unclaim": { "description": "Unclaim a ticket" }
+      }
+    },
+    "bot": {
+      "name": "bot",
+      "description": "Get information about the bot",
+      "subcommands": {
+        "help": { "description": "Get information about the bot category commands" },
+        "info": { "description": "Get information about the bot" },
+        "ping": { "description": "See the bot ping in milliseconds" },
+        "changelogs": { "description": "Get the bot changelogs" },
+        "donate": { "description": "Get the bot donation link" },
+        "links": { "description": "Get a message with all bot links" },
+        "owner": { "description": "Get information about the owner" },
+        "socials": { "description": "Get the bot social links" },
+        "support": { "description": "Get an invitation to the support server" },
+        "uptime": { "description": "Show the bot uptime" },
+        "vote": { "description": "See if you have voted" },
+        "feedback": { "description": "Send your feedback about the bot to the developers", "options": { "feedback": { "description": "Your feedback" } } },
+        "feature": { "description": "Manage global feature switches", "options": { "action": { "description": "Action to perform", "choices": { "list": { "name": "List" }, "set": { "name": "Set" }, "reset": { "name": "Reset" } } }, "feature": { "description": "Feature to modify" }, "enabled": { "description": "Enable the feature" } } }
+      }
+    },
+    "birthdays": {
+      "name": "birthdays",
+      "description": "View or save a birthday",
+      "subcommands": {
+        "help": { "description": "Get information about birthday commands" },
+        "check": { "description": "Check your birthday" },
+        "delete": { "description": "Delete your birthday" },
+        "list": { "description": "See all birthdays" },
+        "set": { "description": "Set your birthday", "options": { "day": { "description": "The day number of your birthday" }, "month": { "description": "The month number of your birthday" } } }
+      }
+    },
+    "afk": {
+      "name": "afk",
+      "description": "Manage your AFK status",
+      "subcommands": {
+        "help": { "description": "View AFK category help" },
+        "set": { "description": "Set your AFK status", "options": { "reason": { "description": "Reason for your AFK status" } } },
+        "list": { "description": "List AFK users" }
+      }
+    },
+    "activities": {
+      "name": "activities",
+      "description": "Start an activity",
+      "options": { "activity": { "description": "Activity to start", "choices": { "betrayal": { "name": "Betrayal.io" }, "checkers": { "name": "Checkers in the Park" }, "chess": { "name": "Chess in the Park" }, "doodlecrew": { "name": "Doodle Crew" }, "fishington": { "name": "Fishington.io" }, "letterleague": { "name": "Letter League" }, "ocho": { "name": "Ocho" }, "poker": { "name": "Poker Night" }, "sketchheads": { "name": "Sketch Heads" }, "spellcast": { "name": "Spell Cast" }, "wordsnacks": { "name": "Word Snacks" }, "watchtogether": { "name": "Watch Together" } } } }
+    },
+    "economy": {
+      "name": "economy",
+      "description": "Play the economy game in your server",
+      "subcommands": {
+        "help": { "description": "Get information about the economy category commands" },
+        "additem": { "description": "Add a role item to the economy store", "options": { "role": { "description": "Select a role" }, "amount": { "description": "Enter an amount" } } },
+        "addmoney": { "description": "Add money to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount" } } },
+        "balance": { "description": "See your balance", "options": { "user": { "description": "The user whose balance you want to see" } } },
+        "beg": { "description": "Beg for money" },
+        "buy": { "description": "Buy items in the bot store" },
+        "clear": { "description": "Clear the economy" },
+        "crime": { "description": "Commit a crime" },
+        "daily": { "description": "Claim your daily money" },
+        "deleteitem": { "description": "Delete a role item from the economy store", "options": { "role": { "description": "Select a role" } } },
+        "deposit": { "description": "Deposit money to the bank", "options": { "amount": { "description": "Enter an amount" } } },
+        "fish": { "description": "Fish some fish" },
+        "hourly": { "description": "Claim your hourly money" },
+        "hunt": { "description": "Hunt some animals" },
+        "monthly": { "description": "Claim your monthly money" },
+        "pay": { "description": "Pay a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount" } } },
+        "present": { "description": "Get a weekly present" },
+        "removemoney": { "description": "Remove money from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount" } } },
+        "rob": { "description": "Rob a user", "options": { "user": { "description": "Select a user" } } },
+        "store": { "description": "Show the store of this guild" },
+        "weekly": { "description": "Claim your weekly money" },
+        "withdraw": { "description": "Withdraw your money", "options": { "amount": { "description": "Enter an amount" } } },
+        "work": { "description": "Go to work" },
+        "yearly": { "description": "Claim your yearly money" },
+        "leaderboard": { "description": "See the economy leaderboard", "options": { "type": { "description": "The leaderboard type that you want", "choices": { "money": { "name": "Money" }, "bank": { "name": "Bank" } } } } }
+      }
+    },
+    "casino": {
+      "name": "casino",
+      "description": "Play casino games",
+      "subcommands": {
+        "help": { "description": "Get information about casino commands" },
+        "blackjack": { "description": "Play a game of blackjack to win money", "options": { "amount": { "description": "Enter an amount" } } },
+        "crash": { "description": "More risk, more reward", "options": { "amount": { "description": "Enter an amount" } } },
+        "roulette": { "description": "Play roulette", "options": { "color": { "description": "Enter a color" }, "amount": { "description": "Enter an amount" } } },
+        "slots": { "description": "Play slot machines", "options": { "amount": { "description": "Enter an amount" } } }
+      }
+    },
+    "voice": {
+      "name": "voice",
+      "description": "Manage voice channels",
+      "subcommands": { "help": { "description": "Get information about the voice category commands" }, "limit": { "description": "Limit your custom voice channel", "options": { "limit": { "description": "Enter a limit" } } }, "lock": { "description": "Lock your custom voice channel" }, "rename": { "description": "Rename your custom voice channel", "options": { "name": { "description": "New voice name" } } }, "unlock": { "description": "Unlock your custom voice channel" } }
+    },
+    "developers": {
+      "name": "developers",
+      "description": "Commands for the Bot developers",
+      "subcommands": {
+        "help": { "description": "Get information about the developers category commands" },
+        "eval": { "description": "Get the result of a piece of code", "options": { "code": { "description": "Your code" } } },
+        "badge": { "description": "Manage the bot badges", "options": { "new": { "description": "Select a boolean" }, "user": { "description": "Select a user" }, "badge": { "description": "Choose your badge" } } },
+        "ban": { "description": "Manage the bot bans", "options": { "new": { "description": "Select a boolean" }, "user": { "description": "Select a user" } } },
+        "credits": { "description": "Manage the bot credits", "options": { "type": { "description": "The type of credits", "choices": { "add": { "name": "Add" }, "remove": { "name": "Remove" } } }, "user": { "description": "Select a user" }, "amount": { "description": "Amount of credits" } } },
+        "args": { "description": "Post preset messages", "options": { "message": { "description": "Select a message", "choices": { "information": { "name": "Information" }, "rules": { "name": "Rules" }, "applications": { "name": "Applications" }, "boosterperks": { "name": "Booster perks" }, "links": { "name": "Links" }, "rewards": { "name": "Rewards" }, "ourbots": { "name": "Our bots" } } } } },
+        "servers": { "description": "See all servers from this shard" }
+      }
+    },
+    "games": {
+      "name": "games",
+      "description": "Play games in Bot",
+      "subcommands": {
+        "help": { "description": "Get information about the games category commands" },
+        "8ball": { "description": "Ask the bot a question", "options": { "question": { "description": "The question you want to ask" } } },
+        "fasttype": { "description": "Learn to type faster" },
+        "music-trivia": { "description": "Play music trivia", "options": { "number": { "description": "The amount of songs" } } },
+        "roll": { "description": "Roll a die" },
+        "rps": { "description": "Play rock paper scissors against the bot", "options": { "option": { "description": "Choose what you want", "choices": { "rock": { "name": "🪨 Rock" }, "paper": { "name": "📃 Paper" }, "scissors": { "name": "✂️ Scissors" } } } } },
+        "skipword": { "description": "Skip the current word" },
+        "snake": { "description": "Playing the game snake" },
+        "trivia": { "description": "Play Trivia" },
+        "willyoupressthebutton": { "description": "Play Will You Press The Button" },
+        "wouldyourather": { "description": "Play Would You Rather" }
+      }
+    },
+    "guild": {
+      "name": "guild",
+      "description": "Manage the guild",
+      "subcommands": {
+        "help": { "description": "Get information about the guild category commands" },
+        "channelinfo": { "description": "Get information about a channel", "options": { "channel": { "description": "Select a channel" } } },
+        "members": { "description": "See how many members there are in this server" },
+        "oldestmember": { "description": "Get the oldest account creation date in the guild" },
+        "roleinfo": { "description": "Get info about a role", "options": { "role": { "description": "Select a role" } } },
+        "info": { "description": "Get all info about the current server" },
+        "stealemoji": { "description": "Steal an emoji", "options": { "emoji": { "description": "Enter an emoji to steal" }, "role": { "description": "Select a role" } } },
+        "youngestmember": { "description": "Get the youngest account creation date in the guild" },
+        "userinfo": { "description": "Get all info about a user", "options": { "user": { "description": "Select a user" } } },
+        "inviteinfo": { "description": "Get all info about a invite", "options": { "invite": { "description": "Enter a invite code" } } },
+        "emojis": { "description": "See the guild emojis" }
+      }
+    },
+    "message": {
+      "name": "message",
+      "description": "Post preset messages",
+      "options": { "message": { "description": "Select a message", "choices": { "information": { "name": "Information" }, "rules": { "name": "Rules" }, "applications": { "name": "Applications" }, "helpdesk": { "name": "Helpdesk" }, "network": { "name": "Network" }, "botinfo": { "name": "Bot-Info" }, "badges": { "name": "Bot-Badges" }, "beta": { "name": "Bot-Beta" }, "credits": { "name": "Bot-Credits" } } } }
+    },
+    "soundboard": {
+      "name": "soundboard",
+      "description": "Play all the sounds in Bot",
+      "subcommands": { "help": { "description": "Get information about the soundboard category commands" } },
+      "subcommandGroups": {
+        "windows": { "description": "Play the windows sounds in Bot", "subcommands": { "windowserror": { "description": "Play the windows error sound" }, "windowsshutdown": { "description": "Play the windows shutdown sound" }, "windowsstartup": { "description": "Play the windows startup sound" } } },
+        "earrape": { "description": "Play the earrape sounds in Bot", "subcommands": { "reee": { "description": "Play the reee sound" }, "defaultdance": { "description": "Play the defaultdance sound" }, "startup": { "description": "Play the startup sound" }, "thomas": { "description": "Play the thomas sound" }, "wegothim": { "description": "Play the wegothim sound" } } },
+        "songs": { "description": "Play the song sounds in Bot", "subcommands": { "dancememe": { "description": "Play the dancememe sound" }, "despacito": { "description": "Play the despacito sound" }, "elevator": { "description": "Play the elevator sound" }, "rickastley": { "description": "Play the rickastley sound" }, "running": { "description": "Play the running sound" }, "tobecontinued": { "description": "Play the tobecontinued sound" } } },
+        "discord": { "description": "Play the discord sounds in Bot", "subcommands": { "discordcall": { "description": "Play the discord call sound" }, "discordjoin": { "description": "Play the discord voice call join sound" }, "discordleave": { "description": "Play the discord voice call leave sound" }, "discordnotification": { "description": "Play the discord notification sound" } } },
+        "memes": { "description": "Play the meme sounds in Bot", "subcommands": { "fbi": { "description": "Play the fbi sound" }, "jeff": { "description": "Play the jeff sound" }, "lambo": { "description": "Play the lambo sound" }, "missionfailed": { "description": "Play the missionfailed sound" }, "moaning": { "description": "Play the moaning sound" }, "nani": { "description": "Play the nani sound" }, "nyancat": { "description": "Play the nyancat sound" }, "ohh": { "description": "Play the ohh sound" }, "rimshot": { "description": "Play the rimshot sound" }, "roblox": { "description": "Play the roblox sound" }, "shotdown": { "description": "Play the shotdown sound" }, "spongebob": { "description": "Play the spongebob sound" }, "wow": { "description": "Play the wow sound" }, "yeet": { "description": "Play the yeet sound" } } }
+      }
+    },
+    "move": {
+      "name": "move",
+      "description": "Move members from a voice channel to another voice channel",
+      "subcommands": {
+        "all": { "description": "Move all members from a voice channel to another voice channel", "options": { "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_user": { "description": "User excepted" } } },
+        "group": { "description": "Move members of a role from a voice channel to another voice channel", "options": { "role": { "description": "Role to move" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "excepted_streamers": { "description": "Exclude streamers?" } } },
+        "random": { "description": "Move a random number of members from a voice channel to another voice channel", "options": { "amount": { "description": "Number of members to move (randomly selected)" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" } } },
+        "emergency-meeting": { "description": "Move all members from every voice channel to another voice channel", "options": { "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_channel": { "description": "Excepted voice channel" } } },
+        "empty": { "description": "Kick all members from a voice channel", "options": { "from": { "description": "Voice channel" }, "excepted_user": { "description": "User excepted" } } },
+        "split": { "description": "Split a voice channel into multiple defined voice channels", "options": { "from": { "description": "Starting voice channel" }, "to_a": { "description": "Voice channel A" }, "to_b": { "description": "Voice channel B" }, "to_c": { "description": "Voice channel C" }, "to_d": { "description": "Voice channel D" } } },
+        "regroup": { "description": "Regroup members from multiple defined voice channels into one voice channel", "options": { "from_a": { "description": "Starting voice channel A" }, "from_b": { "description": "Starting voice channel B" }, "to": { "description": "Destination voice channel" }, "from_c": { "description": "Starting voice channel C" }, "from_d": { "description": "Starting voice channel D" } } }
+      }
+    },
+    "soundboard": {
+      "name": "soundboard",
+      "description": "Play all the sounds in Bot",
+      "subcommands": { "help": { "description": "Get information about the soundboard category commands" } },
+      "subcommandGroups": {
+        "windows": { "description": "Play the windows sounds in Bot", "subcommands": { "windowserror": { "description": "Play the windows error sound" }, "windowsshutdown": { "description": "Play the windows shutdown sound" }, "windowsstartup": { "description": "Play the windows startup sound" } } },
+        "earrape": { "description": "Play the earrape sounds in Bot", "subcommands": { "reee": { "description": "Play the reee sound" }, "defaultdance": { "description": "Play the defaultdance sound" }, "startup": { "description": "Play the startup sound" }, "thomas": { "description": "Play the thomas sound" }, "wegothim": { "description": "Play the wegothim sound" } } },
+        "songs": { "description": "Play the song sounds in Bot", "subcommands": { "dancememe": { "description": "Play the dancememe sound" }, "despacito": { "description": "Play the despacito sound" }, "elevator": { "description": "Play the elevator sound" }, "rickastley": { "description": "Play the rickastley sound" }, "running": { "description": "Play the running sound" }, "tobecontinued": { "description": "Play the tobecontinued sound" } } },
+        "discord": { "description": "Play the discord sounds in Bot", "subcommands": { "discordcall": { "description": "Play the discord call sound" }, "discordjoin": { "description": "Play the discord voice call join sound" }, "discordleave": { "description": "Play the discord voice call leave sound" }, "discordnotification": { "description": "Play the discord notification sound" } } },
+        "memes": { "description": "Play the meme sounds in Bot", "subcommands": { "fbi": { "description": "Play the fbi sound" }, "jeff": { "description": "Play the jeff sound" }, "lambo": { "description": "Play the lambo sound" }, "missionfailed": { "description": "Play the missionfailed sound" }, "moaning": { "description": "Play the moaning sound" }, "nani": { "description": "Play the nani sound" }, "nyancat": { "description": "Play the nyancat sound" }, "ohh": { "description": "Play the ohh sound" }, "rimshot": { "description": "Play the rimshot sound" }, "roblox": { "description": "Play the roblox sound" }, "shotdown": { "description": "Play the shotdown sound" }, "spongebob": { "description": "Play the spongebob sound" }, "wow": { "description": "Play the wow sound" }, "yeet": { "description": "Play the yeet sound" } } }
+      }
+    },
+    "images": {
+      "name": "images",
+      "description": "See all the images in Bot",
+      "subcommands": { "help": { "description": "Get information about the image category commands" } },
+      "subcommandGroups": {
+        "memes": {
+          "description": "See all the memes in Bot",
+          "subcommands": {
+            "clyde": { "description": "Get a custom clyde message", "options": { "text": { "description": "Enter a text" } } },
+            "drake": { "description": "Create a drake meme", "options": { "text1": { "description": "Enter a text" }, "text2": { "description": "Enter a text" } } },
+            "meme": { "description": "Get a random meme" },
+            "pooh": { "description": "Create a pooh meme", "options": { "text1": { "description": "Enter a text" }, "text2": { "description": "Enter a text" } } },
+            "trumptweet": { "description": "Display a custom tweet from Donald Trump with the message provided", "options": { "text": { "description": "Enter a text" } } },
+            "tweet": { "description": "Tweet something on twitter", "options": { "text": { "description": "Enter a text" } } },
+            "wasted": { "description": "GTA wasted overlay" }
+          }
+        },
+        "animals": {
+          "description": "See all the animal images in Bot",
+          "subcommands": {
+            "bird": { "description": "Get a random bird" }, "cat": { "description": "Get a random cat" }, "dog": { "description": "Get a random dog" }, "fox": { "description": "Get a random fox" }, "koala": { "description": "Get a random koala" }, "panda": { "description": "Get a random panda" }, "redpanda": { "description": "Get a random redpanda" }
+          }
+        },
+        "user": {
+          "description": "See all the user images in Bot",
+          "subcommands": {
+            "ad": { "description": "Generate an ad image", "options": { "user": { "description": "The user you want the ad from" } } },
+            "avatar": { "description": "See a users avatar", "options": { "user": { "description": "The user you want the avatar from" } } },
+            "banner": { "description": "See a users banner", "options": { "user": { "description": "The user you want the banner from" } } },
+            "bed": { "description": "Create a bed meme", "options": { "user": { "description": "The user you want to sleep with" } } },
+            "blur": { "description": "Give a blurred image", "options": { "user": { "description": "The user you want the blurred image from" } } },
+            "burn": { "description": "Give a burned image", "options": { "user": { "description": "The user you want the burned image from" } } },
+            "clown": { "description": "Generate a clown image", "options": { "user": { "description": "The user you want to make a clown" } } },
+            "colorify": { "description": "Generate a colorify image", "options": { "user": { "description": "The user you want the colorified image from" } } },
+            "darkness": { "description": "Give a darkness image", "options": { "user": { "description": "The user you want the darkness image from" } } },
+            "facepalm": { "description": "Generate a facepalm image", "options": { "user": { "description": "The user you want to make a facepalm" } } },
+            "greyscale": { "description": "Make an image more grey", "options": { "user": { "description": "The user you want to make more gray" } } },
+            "invert": { "description": "Invert an image", "options": { "user": { "description": "The user you want the inverted image from" } } },
+            "kiss": { "description": "Kiss a user", "options": { "user": { "description": "The user you want to kiss" } } },
+            "podium": { "description": "Make a user podium", "options": { "user1": { "description": "The first podium user" }, "user2": { "description": "The second podium user" }, "user3": { "description": "The third podium user" } } },
+            "spank": { "description": "Spank a user", "options": { "user": { "description": "The user you want to spank" } } },
+            "wanted": { "description": "Wanted a user", "options": { "user": { "description": "The user you want to wanted" } } }
+          }
+        },
+        "extra": {
+          "description": "See all the extra images in Bot",
+          "subcommands": {
+            "car": { "description": "Get a random car" }, "glass": { "description": "Overlay a glass texture over an image" }, "image": { "description": "Show an image in an embed", "options": { "channel": { "description": "Channel where the embed should be" }, "image-url": { "description": "Enter an image URL" } } }, "triggered": { "description": "Trigger yourself" }, "wallpaper": { "description": "Get a wallpaper from HDQWalls", "options": { "name": { "description": "Enter a name" } } }
+          }
+        }
+      }
+    },
+    "announcement": {
+      "name": "announcement",
+      "description": "Manage server announcements",
+      "subcommands": {
+        "help": { "description": "Get information about announcement commands" },
+        "create": {
+          "description": "Make an announcement",
+          "options": {
+            "channel": { "description": "Select a channel" },
+            "message": { "description": "Your announcement message" }
+          }
+        },
+        "edit": {
+          "description": "Edit an announcement",
+          "options": {
+            "id": { "description": "ID of the announcement to change" },
+            "message": { "description": "Your announcement message" }
+          }
+        }
+      }
+    },
+    "commands": {
+      "name": "custom-commands",
+      "description": "Create custom commands",
+      "subcommands": {
+        "help": { "description": "Get information about custom commands" },
+        "add": { "description": "Create a custom command", "options": { "command": { "description": "Command name" }, "text": { "description": "Command response" } } },
+        "delete": { "description": "Delete a custom command", "options": { "commande": { "description": "Command name" } } }
+      }
+    },
+    "embed": {
+      "name": "embed",
+      "description": "Generate an embed",
+      "options": { "channel": { "description": "Channel where the embed should be sent" } }
+    },
+    "event": {
+      "name": "event",
+      "description": "Event-related commands",
+      "subcommands": {
+        "help": { "description": "Get information about event commands" },
+        "participants": { "description": "See the participants of an event", "options": { "event_id": { "description": "Event ID" } } }
+      }
+    },
+    "help": {
+      "name": "help",
+      "description": "Get help with the bot"
+    },
+    "stickymessages": {
+      "name": "stickymessages",
+      "description": "Manage sticky messages",
+      "subcommands": {
+        "help": { "description": "Get information about sticky messages" },
+        "stick": { "description": "Stick a message in a channel", "options": { "channel": { "description": "Select a channel" }, "message": { "description": "Your sticky message" } } },
+        "messages": { "description": "Show all sticky messages from this server" },
+        "unstick": { "description": "Unstick a message from a channel", "options": { "channel": { "description": "Select a channel" } } }
+      }
+    },
+    "invites": {
+      "name": "invites",
+      "description": "View the invite system",
+      "subcommands": {
+        "help": { "description": "Get information about invite commands" },
+        "add": { "description": "Add invites to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of invites" } } },
+        "remove": { "description": "Remove invites from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of invites" } } },
+        "show": { "description": "See your invites", "options": { "user": { "description": "Select a user" } } },
+        "leaderboard": { "description": "See the invite leaderboard" }
+      }
+    },
+    "move": {
+      "name": "move",
+      "description": "Move members from a voice channel to another voice channel",
+      "subcommands": {
+        "all": { "description": "Move all members from a voice channel to another voice channel", "options": { "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_user": { "description": "User excepted" } } },
+        "group": { "description": "Move members of a role from a voice channel to another voice channel", "options": { "role": { "description": "Role to move" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "excepted_streamers": { "description": "Exclude streamers?" } } },
+        "random": { "description": "Move a random number of members from a voice channel to another voice channel", "options": { "amount": { "description": "Number of members to move (randomly selected)" }, "from": { "description": "Starting voice channel" }, "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" } } },
+        "emergency-meeting": { "description": "Move all members from every voice channel to another voice channel", "options": { "to": { "description": "Destination voice channel" }, "exclude_streamers": { "description": "Exclude streamers?" }, "excepted_channel": { "description": "Excepted voice channel" } } },
+        "empty": { "description": "Kick all members from a voice channel", "options": { "from": { "description": "Voice channel" }, "excepted_user": { "description": "User excepted" } } },
+        "split": { "description": "Split a voice channel into multiple defined voice channels", "options": { "from": { "description": "Starting voice channel" }, "to_a": { "description": "Voice channel A" }, "to_b": { "description": "Voice channel B" }, "to_c": { "description": "Voice channel C" }, "to_d": { "description": "Voice channel D" } } },
+        "regroup": { "description": "Regroup members from multiple defined voice channels into one voice channel", "options": { "from_a": { "description": "Starting voice channel A" }, "from_b": { "description": "Starting voice channel B" }, "to": { "description": "Destination voice channel" }, "from_c": { "description": "Starting voice channel C" }, "from_d": { "description": "Starting voice channel D" } } }
+      }
+    },
+    "reactionroles": {
+      "name": "reaction roles",
+      "description": "Manage the server reaction roles",
+      "subcommands": {
+        "help": { "description": "Get information about the reaction roles category commands" },
+        "add": { "description": "Add a reaction role", "options": { "category": { "description": "Category name for your reaction roles group" }, "role": { "description": "Select a role" }, "emoji": { "description": "Enter an emoji" } } },
+        "delete": { "description": "Delete a reaction roles category", "options": { "category": { "description": "Category name for your reaction roles group" } } },
+        "list": { "description": "Show all reaction roles categories from this guild" },
+        "button": { "description": "Show all reaction roles with buttons", "options": { "category": { "description": "Category name for your reaction roles group" }, "channel": { "description": "Channel where the reaction roles should come" } } },
+        "menu": { "description": "Show all reaction roles in a menu", "options": { "category": { "description": "Category name for your reaction roles group" }, "channel": { "description": "Channel where the reaction roles should come" } } }
+      }
+    },
+    "suggestions": {
+      "name": "suggestions",
+      "description": "Manage the suggestions",
+      "subcommands": {
+        "help": { "description": "Get information about the suggestions category commands" },
+        "accept": { "description": "Accept a suggestion", "options": { "id": { "description": "Suggestion message ID" } } },
+        "deny": { "description": "Deny a suggestion", "options": { "id": { "description": "Suggestion message ID" } } },
+        "send": { "description": "Send a suggestion", "options": { "suggestion": { "description": "Your suggestion" } } }
+      }
+    },
+    "stickymessages": {
+      "name": "sticky-messages",
+      "description": "Manage the sticky messages",
+      "subcommands": {
+        "help": { "description": "Get information about the sticky messages category commands" },
+        "stick": { "description": "Stick a message in a channel", "options": { "channel": { "description": "Select a channel" }, "message": { "description": "Your sticky message" } } },
+        "messages": { "description": "Show all your guild sticky messages" },
+        "unstick": { "description": "Unstick a message in a channel", "options": { "channel": { "description": "Select a channel" } } }
+      }
+    },
+    "notepad": {
+      "name": "notepad",
+      "description": "Manage your notes",
+      "subcommands": {
+        "help": { "description": "Get information about the notes category commands" },
+        "add": { "description": "Add a note to your notepad", "options": { "note": { "description": "Your note" } } },
+        "delete": { "description": "Delete a note from your notepad", "options": { "id": { "description": "Note id" } } },
+        "edit": { "description": "Edit a note from your notepad", "options": { "id": { "description": "Note id" }, "note": { "description": "New note" } } },
+        "notes": { "description": "Show all your notes" }
+      }
+    },
+    "levels": {
+      "name": "levels",
+      "description": "View the level system",
+      "subcommands": {
+        "help": { "description": "Get information about level commands" },
+        "setlevel": { "description": "Set a new level for a user", "options": { "user": { "description": "Select a user" }, "level": { "description": "Enter a new level" } } },
+        "deletereward": { "description": "Delete a level reward", "options": { "level": { "description": "Enter a level" } } },
+        "createreward": { "description": "Create a level reward", "options": { "level": { "description": "Enter a level" }, "role": { "description": "The role for this reward" } } },
+        "setxp": { "description": "Set new XP for a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of XP" } } },
+        "rank": { "description": "See your current rank", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all level rewards" },
+        "leaderboard": { "description": "See the level leaderboard" }
+      }
+    },
+    "messages": {
+      "name": "messages",
+      "description": "View the message system",
+      "subcommands": {
+        "help": { "description": "Get information about message commands" },
+        "add": { "description": "Add messages to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "deletereward": { "description": "Delete a message reward", "options": { "amount": { "description": "Enter an amount of messages" } } },
+        "createreward": { "description": "Create a message reward", "options": { "amount": { "description": "Enter an amount of messages" }, "role": { "description": "The role for this reward" } } },
+        "remove": { "description": "Remove messages from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "show": { "description": "See your messages", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all message rewards" },
+        "leaderboard": { "description": "See the message leaderboard" }
+      }
+    },
+    "reactionroles": {
+      "name": "reactionroles",
+      "description": "Manage the server reaction roles",
+      "subcommands": {
+        "help": { "description": "Get information about reaction roles" },
+        "add": { "description": "Add a reaction role", "options": { "category": { "description": "Category name" }, "role": { "description": "Select a role" }, "emoji": { "description": "Enter an emoji" } } },
+        "delete": { "description": "Delete a reaction role category", "options": { "category": { "description": "Category name" } } },
+        "list": { "description": "Show all reaction role categories" },
+        "button": { "description": "Show reaction roles with buttons", "options": { "category": { "description": "Category name" }, "channel": { "description": "Channel where reaction roles should be sent" } } },
+        "menu": { "description": "Show reaction roles in a menu", "options": { "category": { "description": "Category name" }, "channel": { "description": "Channel where reaction roles should be sent" } } }
+      }
+    },
+    "spoiler": {
+      "name": "mark-as-spoiler"
+    },
+    "warn": { "name": "Warn" },
+    "unwarn": { "name": "Unwarn" },
+    "warnings": { "name": "Warnings" },
+    "userinfo": { "name": "user-info" },
+    "autosetup": {
+      "name": "autosetup",
+      "description": "Configure the bot automatically",
+      "subcommands": {
+        "help": { "description": "Get information about automatic setup commands" },
+        "aprilfools": { "description": "Configure April Fools" },
+        "logs": { "description": "Set up server logs", "options": { "setup": { "description": "Choose the setup you want", "choices": { "serverLogs": { "name": "Server logs" }, "levelLogs": { "name": "Level logs" }, "boostLogs": { "name": "Boost logs" } } } } },
+        "fun": { "description": "Set up fun server channels", "options": { "setup": { "description": "Choose the setup you want", "choices": { "birthdays": { "name": "Birthdays" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Reviews" }, "suggestions": { "name": "Suggestions" }, "starboard": { "name": "Starboard" } } } } },
+        "games": { "description": "Set up game channels", "options": { "setup": { "description": "Choose the setup you want", "choices": { "counting": { "name": "Counting" }, "gtn": { "name": "Guess the number" }, "gtw": { "name": "Guess the word" }, "wordsnake": { "name": "Word snake" } } } } },
+        "welcome": { "description": "Configure the welcome system", "options": { "setup": { "description": "Choose the setup you want", "choices": { "welcomechannel": { "name": "Welcome channel" }, "welcomerole": { "name": "Welcome role" }, "leavechannel": { "name": "Leave channel" } } } } },
+        "customvoice": { "description": "Set up custom voice channels" },
+        "ticketpanel": { "description": "Set up the ticket panel" }
+      }
+    },
+    "invite": {
+      "name": "invite",
+      "description": "Get an invite to the bot"
+    },
+    "notepad": {
+      "name": "notepad",
+      "description": "Manage your notes",
+      "subcommands": {
+        "help": { "description": "Get information about note commands" },
+        "add": { "description": "Add a note", "options": { "note": { "description": "Your note" } } },
+        "delete": { "description": "Delete a note", "options": { "id": { "description": "Note ID" } } },
+        "edit": { "description": "Edit a note", "options": { "id": { "description": "Note ID" }, "note": { "description": "New note" } } },
+        "notes": { "description": "Show all your notes" }
+      }
+    },
+    "report": {
+      "name": "report",
+      "description": "Report a bug or user to the developers",
+      "options": {
+        "type": { "description": "The type of your report", "choices": { "bug": { "name": "Bug" }, "user": { "name": "User" } } },
+        "description": { "description": "Description of your report" }
+      }
+    },
+    "events": {
+      "name": "events",
+      "description": "Manage events",
+      "noThread": "❌ This thread is not associated with an event. Please provide the event ID.",
+      "idRequired": "❌ Please provide the event ID or use this command in the event thread.",
+      "notFound": "❌ Event not found. Check the provided ID.",
+      "noParticipants": "No participants available.",
+      "eventTitle": "📅 {name}",
+      "listTitle": "Participants list ({count})",
+      "fetchError": "❌ An error occurred while retrieving the participants."
+    },
+    "suggestions": {
+      "name": "suggestions",
+      "description": "Manage suggestions",
+      "subcommands": {
+        "help": { "description": "Get information about suggestion commands" },
+        "accept": { "description": "Accept a suggestion", "options": { "id": { "description": "Suggestion message ID" } } },
+        "deny": { "description": "Deny a suggestion", "options": { "id": { "description": "Suggestion message ID" } } },
+        "send": { "description": "Send a suggestion", "options": { "suggestion": { "description": "Your suggestion" } } }
+      }
+    },
+    "famille": {
+      "name": "family",
+      "description": "Create your family",
+      "subcommands": {
+        "help": { "description": "Get information about family commands" },
+        "adopter": {
+          "description": "Adopt a member",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "supprimer": { "description": "Delete your family" },
+        "renier": {
+          "description": "Disown a child or parent",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "divorcer": {
+          "description": "Divorce your partner",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "voir": {
+          "description": "View a member’s family",
+          "options": { "membre": { "description": "Select a person" } }
+        },
+        "marier": {
+          "description": "Marry a person",
+          "options": { "membre": { "description": "Select a person" } }
+        }
+      }
+    },
+    "levels": {
+      "name": "levels",
+      "description": "View the level system",
+      "subcommands": {
+        "help": { "description": "Get information about the levels category commands" },
+        "setlevel": { "description": "Set a new level for a user", "options": { "user": { "description": "Select a user" }, "level": { "description": "Enter a new level" } } },
+        "deletereward": { "description": "Delete a level reward", "options": { "level": { "description": "Enter a level" } } },
+        "createreward": { "description": "Create a level reward", "options": { "level": { "description": "Enter a level" }, "role": { "description": "The role for this reward" } } },
+        "setxp": { "description": "Set a new xp for a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of xp" } } },
+        "rank": { "description": "See your current rank", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all level rewards" },
+        "leaderboard": { "description": "See the level leaderboard" }
+      }
+    },
+    "messages": {
+      "name": "messages",
+      "description": "View the message system",
+      "subcommands": {
+        "help": { "description": "Get information about the message category commands" },
+        "add": { "description": "Add messages to a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "deletereward": { "description": "Delete a message reward", "options": { "amount": { "description": "Enter an amount of messages" } } },
+        "createreward": { "description": "Create a message reward", "options": { "amount": { "description": "Enter an amount of messages" }, "role": { "description": "The role for this reward" } } },
+        "remove": { "description": "Remove messages from a user", "options": { "user": { "description": "Select a user" }, "amount": { "description": "Enter an amount of messages" } } },
+        "show": { "description": "See your messages", "options": { "user": { "description": "Select a user" } } },
+        "rewards": { "description": "Show all message rewards" },
+        "leaderboard": { "description": "See the message leaderboard" }
+      }
+    },
+    "search": {
+      "name": "search",
+      "description": "Search something on the Internet",
+      "subcommands": {
+        "help": { "description": "Get information about search commands" },
+        "bing": { "description": "Find something on Bing", "options": { "name": { "description": "Your search" } } },
+        "ddg": { "description": "Find something on DuckDuckGo", "options": { "name": { "description": "Your search" } } },
+        "google": { "description": "Find something on Google", "options": { "name": { "description": "Your search" } } },
+        "youtube": { "description": "Find something on YouTube", "options": { "name": { "description": "Your search" } } },
+        "corona": { "description": "See coronavirus statistics", "options": { "country": { "description": "Enter a country" } } },
+        "crypto": {
+          "description": "See the value of a cryptocurrency",
+          "options": {
+            "coin": { "description": "Enter a cryptocurrency" },
+            "currency": { "description": "Enter a currency" }
+          }
+        },
+        "docs": { "description": "See the discord.js documentation", "options": { "name": { "description": "Your search" } } },
+        "github": { "description": "Get information about a GitHub user", "options": { "name": { "description": "Enter a GitHub name" } } },
+        "hexcolour": { "description": "Get information about a color", "options": { "color": { "description": "Enter a hexadecimal color" } } },
+        "itunes": { "description": "Search for a song on iTunes", "options": { "song": { "description": "Enter a song name" } } },
+        "npm": { "description": "Get information about an NPM package", "options": { "name": { "description": "Enter a package name" } } },
+        "steam": { "description": "Get information about a Steam application", "options": { "name": { "description": "Enter a Steam application name" } } },
+        "translate": {
+          "description": "Translate some text",
+          "options": {
+            "language": { "description": "Enter a language" },
+            "text": { "description": "Enter some text" }
+          }
+        },
+        "weather": { "description": "See the current weather", "options": { "location": { "description": "Enter a location" } } }
+      }
+    },
+    "thanks": {
+      "name": "thanks",
+      "description": "Get an overview of the thanks system",
+      "subcommands": {
+        "help": { "description": "Get information about thanks commands" },
+        "check": { "description": "See your thanks", "options": { "user": { "description": "Select a user" } } },
+        "thanks": { "description": "Thank a user", "options": { "user": { "description": "Select a user" } } }
+      }
+    }
+  },
+  "autosetup": {
+    "games": {
+      "countingTitle": "🔢・Counting",
+      "countingDescription": "Counting starts here! The first number is **1**.",
+      "guessNumberTitle": "🔢・Guess the number",
+      "guessNumberDescription": "Guess the number between **1** and **10,000**!",
+      "guessWordTitle": "💬・Guess the word",
+      "guessWordDescription": "Put the letters in the right position!",
+      "word": "🔀┆Word"
+    },
+    "aprilfools": {
+      "success": "April Fools configuration completed!",
+      "error": "An error occurred while configuring April Fools!",
+      "textChannel": "📝┆Text channel",
+      "voiceChannel": "🔊┆Voice channel"
+    }
+  },
+  "features": {
+    "enabled": "The {feature} feature is enabled.",
+    "disabled": "The {feature} feature is disabled.",
+    "globallyDisabled": "The {feature} feature is disabled globally.",
+    "guildDisabled": "The {feature} feature is disabled on this server.",
+    "reset": "The {feature} feature is back to its default behavior.",
+    "listTitle": "Feature status",
+    "source": "Source: {source}",
+    "unknown": "This feature does not exist.",
+    "permission": "You need administrator permissions to change features.",
+    "ownerPermission": "This action is reserved for the bot owner.",
+    "music": { "label": "Music" },
+    "config": { "label": "Configuration" },
+    "bot": { "label": "Bot" },
+    "radio": { "label": "Radio" },
+    "casino": { "label": "Casino" },
+    "economy": { "label": "Economy" },
+    "tickets": { "label": "Tickets" },
+    "giveaway": { "label": "Giveaways" },
+    "moderation": { "label": "Moderation" },
+    "setup": { "label": "Server setup" },
+    "fun": { "label": "Fun" },
+    "images": { "label": "Images" },
+    "games": { "label": "Games" },
+    "tools": { "label": "Tools" },
+    "profile": { "label": "Profile" },
+    "levels": { "label": "Levels" },
+    "invites": { "label": "Invites" },
+    "triggers": { "label": "Triggers" },
+    "welcome": { "label": "Welcome" },
+    "antiSpam": { "label": "Anti-spam" },
+    "voiceCleanup": { "label": "Voice cleanup" }
+  }
+}

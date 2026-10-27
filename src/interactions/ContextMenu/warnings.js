@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/warnings");
 
 module.exports = {
+    localizationKey: 'commandMetadata.warnings',
     data: new ContextMenuCommandBuilder()
         .setName('Warnings')
         .setType(2),
@@ -22,31 +23,31 @@ module.exports = {
 
         if (perms == false){
             client.errNormal({
-                error: "You don't have the required permissions to use this command!",
+                key: 'errors.noPermission',
                 type: 'ephemeral'
             }, interaction);
             return;
         }
-        await interaction.deferReply({ ephemeral: false });
+        await interaction.deferReply();
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
-            if (data) {
+        const data = await Schema.findOne({ Guild: interaction.guild.id, User: member.id });
+        if (data) {
                 var fields = [];
-                data.Warnings.forEach(element => {
+                for (const element of data.Warnings) {
                     fields.push({
-                        name: "Warning **" + element.Case + "**",
-                        value: "Reason: " + element.Reason + "\nModerator <@!" + element.Moderator + ">",
+                        name: await client.t(interaction, 'moderation.warningCase', { case: element.Case }),
+                        value: await client.t(interaction, 'moderation.warningDetails', { reason: element.Reason, moderator: `<@!${element.Moderator}>` }),
                         inline: true
                     })
-                });
-                client.embed({
-                    title: `${client.emotes.normal.error}・Warnings`,
-                    desc: `The warnings of **${member.user.tag}**`,
+                }
+                return client.embed({
+                    title: await client.t(interaction, 'moderation.warningsTitle'),
+                    desc: await client.t(interaction, 'moderation.warningsDescription', { user: member.user.tag }),
                     fields: [
                         {
-                            name: "Total",
+                            name: await client.t(interaction, 'moderation.total'),
                             value: `${data.Warnings.length}`,
                         },
                         ...fields
@@ -55,14 +56,11 @@ module.exports = {
                 }, interaction)
             }
             else {
-                client.embed({
-                    title: `${client.emotes.normal.error}・Warnings`,
-                    desc: `User ${member.user.tag} has no warnings!`,
+                return client.embed({
+                    title: await client.t(interaction, 'moderation.warningsTitle'),
+                    desc: await client.t(interaction, 'moderation.noWarnings', { user: member.user.tag }),
                     type: 'editreply'
                 }, interaction)
             }
-        })
     },
 };
-
- 

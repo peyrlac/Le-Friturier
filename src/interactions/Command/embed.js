@@ -20,8 +20,10 @@ module.exports = {
    * @param {String[]} args
    */
 
-  run: async (client, interaction, args) => {
-    await interaction.deferReply({ fetchReply: true });
+    localizationKey: 'commandMetadata.embed',
+
+    run: async (client, interaction, args) => {
+        await interaction.deferReply();
     const perms = await client.checkPerms(
       {
         flags: [Discord.PermissionsBitField.Flags.ManageMessages],
@@ -118,9 +120,9 @@ module.exports = {
         i.deferUpdate();
 
         if (i.values == "title_embed") {
-          interaction.channel
-            .send({ content: "Please enter a title" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.title') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -141,9 +143,9 @@ module.exports = {
         }
 
         if (i.values == "description_embed") {
-          interaction.channel
-            .send({ content: "Please enter a description" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.description') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -164,9 +166,9 @@ module.exports = {
         }
 
         if (i.values == "author_embed") {
-          interaction.channel
-            .send({ content: "Please enter a author" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.author') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -190,9 +192,9 @@ module.exports = {
         }
 
         if (i.values == "footer_embed") {
-          interaction.channel
-            .send({ content: "Please enter a footer" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.footer') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -215,9 +217,9 @@ module.exports = {
         }
 
         if (i.values == "thumbnail_embed") {
-          interaction.channel
-            .send({ content: "Please enter a thumbnail" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.thumbnail') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -235,8 +237,8 @@ module.exports = {
                     !collected.first().content.includes("http://") &&
                     !collected.first().content.includes("https://")
                   )
-                    return interaction.channel.send({
-                      content: "Incorrect thumbnail link!",
+                    return interaction.followUp({
+                      content: await client.t(interaction, 'embed.invalidThumbnail'),
                     });
                   embed.setThumbnail(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -250,9 +252,9 @@ module.exports = {
         }
 
         if (i.values == "image_embed") {
-          interaction.channel
-            .send({ content: "Please enter a image" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.image') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -270,8 +272,8 @@ module.exports = {
                     !collected.first().content.includes("http://") &&
                     !collected.first().content.includes("https://")
                   )
-                    return interaction.channel.send({
-                      content: "Incorrect image link!",
+                    return interaction.followUp({
+                      content: await client.t(interaction, 'embed.invalidImage'),
                     });
                   embed.setImage(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -280,9 +282,9 @@ module.exports = {
         }
 
         if (i.values == "url_embed") {
-          interaction.channel
-            .send({ content: "Please enter a url" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.url') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -300,8 +302,8 @@ module.exports = {
                     !collected.first().content.includes("http://") &&
                     !collected.first().content.includes("https://")
                   )
-                    return interaction.channel.send({
-                      content: "Incorrect url!",
+                    return interaction.followUp({
+                      content: await client.t(interaction, 'embed.invalidUrl'),
                     });
                   embed.setURL(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -310,9 +312,9 @@ module.exports = {
         }
 
         if (i.values == "color_embed") {
-          interaction.channel
-            .send({ content: "Please enter a color. e.g. #FF0000" })
-            .then((message) => {
+          interaction
+            .followUp({ content: await client.t(interaction, 'embed.prompts.color') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -336,7 +338,7 @@ module.exports = {
         const channel = interaction.options.getChannel("channel");
         if (!channel)
           return client.errNormal(
-            { error: `Channel not found` },
+            { key: 'embed.channelNotFound' },
             collected.first().channel
           );
 
@@ -350,7 +352,8 @@ module.exports = {
 
             client.succNormal(
               {
-                text: `Embed successfully sent in ${channel}`,
+                key: 'embed.sent',
+                variables: { channel },
                 components: [],
                 type: "editreply",
               },

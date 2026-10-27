@@ -1,28 +1,30 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 const Schema = require("../../database/models/music");
 
 module.exports = {
+    localizationKey: 'commandMetadata.afk',
     data: new SlashCommandBuilder()
-        .setName('afk')
-        .setDescription('Réglez votre AFK')
+        .setName(getCommandMetadata('commandMetadata.afk.name'))
+        .setDescription(getCommandMetadata('commandMetadata.afk.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Obtenez des informations sur les commandes de la catégorie AFK')
+                .setDescription(getCommandMetadata('commandMetadata.afk.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('set')
-                .setDescription('Mettez-vous AFK')
-                .addStringOption(option => option.setName('reason').setDescription('La raison de votre AFK'))
+                .setDescription(getCommandMetadata('commandMetadata.afk.subcommands.set.description'))
+                .addStringOption(option => option.setName('reason').setDescription(getCommandMetadata('commandMetadata.afk.subcommands.set.options.reason.description')))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('list')
-                .setDescription('Afficher tous les utilisateurs AFK')
+                .setDescription(getCommandMetadata('commandMetadata.afk.subcommands.list.description'))
         )
     ,
 
@@ -33,7 +35,7 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply({ fetchReply: true });
+        await interaction.deferReply();
         client.loadSubcommands(client, interaction, args);
     },
 };
