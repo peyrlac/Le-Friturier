@@ -1540,6 +1540,7 @@
     "unbanned": "<@!{user}> ({userId}) a été débanni du bot."
   },
   "fun": {
+    "reverse": "{text}",
     "tokenTitle": "🤖・Token du bot",
     "tokenUnavailable": "Impossible de récupérer les données distantes."
   },

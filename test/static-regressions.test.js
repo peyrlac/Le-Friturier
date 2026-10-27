@@ -863,6 +863,12 @@ test('profile command descriptions are sourced from locale metadata', () => {
   assert.doesNotMatch(source, /\.setDescription\(['"]/);
 });
 
+test('fun reverse response uses a localization key', () => {
+  const source = read('src/commands/fun/reverse.js');
+  assert.match(source, /key:\s*['"]fun\.reverse['"]/);
+  assert.doesNotMatch(source, /\btext:\s*`/);
+});
+
 test('music and radio metadata is sourced from the locale catalogs', () => {
   for (const name of ['music', 'radio']) {
     const source = read(`src/interactions/Command/${name}.js`);
