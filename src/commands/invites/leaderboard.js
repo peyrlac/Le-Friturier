@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/invites");
+const localizedLeaderboard = require('./leaderboardLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedLeaderboard(client, interaction, args);
     const rawLeaderboard = await Schema.find({ Guild: interaction.guild.id }).sort(([['Invites', 'descending']]));
 
     if (!rawLeaderboard.length) return client.errNormal({
