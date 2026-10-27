@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
     let timeout = 3600000;
     let amount = 10;
 
-    Schema2.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, dataTime) => {
+    const dataTime = await Schema2.findOne({ Guild: interaction.guild.id, User: user.id });
         if (dataTime && dataTime.Hourly !== null && timeout - (Date.now() - dataTime.Hourly) > 0) {
             let time = (dataTime.Hourly / 1000 + timeout / 1000).toFixed(0);
             return client.errWait({
@@ -19,7 +19,8 @@ module.exports = async (client, interaction, args) => {
         else {
 
             client.succNormal({
-                text: `You've collected your hourly reward!`,
+                key: 'economy.hourly.success',
+                variables: { amount },
                 fields: [
                     {
                         name: `${client.emotes.economy.coins}┆Amount`,
@@ -32,19 +33,16 @@ module.exports = async (client, interaction, args) => {
 
             if (dataTime) {
                 dataTime.Hourly = Date.now();
-                dataTime.save();
+                await dataTime.save();
             }
             else {
-                new Schema2({
+                await new Schema2({
                     Guild: interaction.guild.id,
                     User: user.id,
                     Hourly: Date.now()
                 }).save();
             }
 
-            client.addMoney(interaction, user, amount);
+            await client.addMoney(interaction, user, amount);
         }
-    })
 }
-
- 
