@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/levelMessages");
+const localizedLevelMessage = require('./levelmessageLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedLevelMessage(client, interaction, args);
     const perms = await client.checkUserPerms({
         flags: [Discord.PermissionsBitField.Flags.ManageMessages],
         perms: [Discord.PermissionsBitField.Flags.ManageMessages]
@@ -67,4 +69,3 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 

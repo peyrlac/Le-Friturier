@@ -202,14 +202,24 @@
         "success": "The verification panel was created successfully."
       },
       "levelmessage": {
-        "success": "The level message was set successfully."
+        "success": "The level message was set successfully.",
+        "deleted": "The level message was deleted.",
+        "helpTitle": "Level message options",
+        "help": "Use the {user:username}, {user:tag}, {user:mention}, {user:level} and {user:xp} variables."
       },
       "welcomemessage": {
-        "success": "The welcome message was set successfully."
+        "success": "The welcome message was set successfully.",
+        "deleted": "The welcome message was deleted.",
+        "helpTitle": "Welcome message options",
+        "help": "Use the user, inviter and server variables available in the command help."
       },
       "leavemessage": {
-        "success": "The leave message was set successfully."
-      }
+        "success": "The leave message was set successfully.",
+        "deleted": "The leave message was deleted.",
+        "helpTitle": "Leave message options",
+        "help": "Use the user, inviter and server variables available in the command help."
+      },
+      "messageField": "💬・Message"
     },
     "setup": {
       "channel": "📘・Channel",
