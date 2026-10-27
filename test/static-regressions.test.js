@@ -727,6 +727,15 @@ test('ticket creation and closure embeds use localized labels', () => {
   assert.doesNotMatch(closeSource, /Here is the transcript|Closer|Ticket id|Claimed by/);
 });
 
+test('soundboard commands localize the sound names passed to responses', () => {
+  const files = fs.readdirSync(path.join(root, 'src/commands/soundboard')).filter(file => file.endsWith('.js'));
+  for (const file of files) {
+    const source = read(`src/commands/soundboard/${file}`);
+    assert.match(source, /variables:\s*\{\s*sound:\s*await client\.t\(interaction, ['"]soundboard\.sounds\./, file);
+    assert.doesNotMatch(source, /variables:\s*\{\s*sound:\s*["'][^"']+["']\s*\}/, file);
+  }
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
