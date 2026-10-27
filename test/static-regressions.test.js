@@ -346,6 +346,21 @@ test('moderation context menu common responses use localization keys', () => {
   assert.match(read('src/interactions/ContextMenu/userinfo.js'), /key:\s*['"]errors\.userNotInGuild['"]/);
 });
 
+test('localized levels and messages delegates contain no unreachable legacy implementation', () => {
+  for (const file of [
+    'src/commands/levels/leaderboard.js',
+    'src/commands/levels/rewards.js',
+    'src/commands/messages/add.js',
+    'src/commands/messages/leaderboard.js',
+    'src/commands/messages/remove.js',
+    'src/commands/messages/rewards.js'
+  ]) {
+    const source = read(file);
+    assert.doesNotMatch(source, /const Schema|No data found|No rewards found|Added \\\*\\\*|Removed \\\*\\\*/,
+      file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));
