@@ -110,3 +110,24 @@ test('soundboard responses use shared localized voice and playback keys', () => 
     assert.equal(typeof get(en, key), 'string', `Missing English locale key: ${key}`);
   }
 });
+
+test('developer and fun responses use localization keys', () => {
+  for (const file of ['src/commands/developers/eval.js', 'src/commands/fun/token.js']) {
+    const source = read(file);
+    assert.doesNotMatch(source, /client\.errNormal\(\{\s*error:/);
+    assert.doesNotMatch(source, /client\.succNormal\(\{\s*text:/);
+  }
+
+  for (const key of [
+    'developers.tokenRefusal',
+    'developers.evalTitle',
+    'developers.input',
+    'developers.output',
+    'developers.error',
+    'fun.tokenTitle',
+    'fun.tokenUnavailable'
+  ]) {
+    assert.equal(typeof get(fr, key), 'string', `Missing French locale key: ${key}`);
+    assert.equal(typeof get(en, key), 'string', `Missing English locale key: ${key}`);
+  }
+});

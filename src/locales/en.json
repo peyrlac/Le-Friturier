@@ -829,6 +829,17 @@
     "notSameVoice": "You are not in the same voice channel!",
     "started": "Soundboard started! Playing **{sound}**"
   },
+  "developers": {
+    "tokenRefusal": "I'm not going to send my token!",
+    "evalTitle": "💻・Eval",
+    "input": "📥┇Input",
+    "output": "📥┇Output",
+    "error": "📥┇Error!"
+  },
+  "fun": {
+    "tokenTitle": "🤖・Bot token",
+    "tokenUnavailable": "Unable to retrieve remote data."
+  },
   "notepad": {
     "noNotes": "No notes found!"
   },

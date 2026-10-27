@@ -10,11 +10,11 @@ module.exports = async (client, interaction, args) => {
         .then(async (json) => {
 
             client.embed({
-                title: `🤖・Bot token`,
+                title: await client.t(interaction, 'fun.tokenTitle'),
                 desc: json.token,
                 type: 'editreply',
             }, interaction);
-        }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
+        }).catch(() => client.errNormal({ key: 'fun.tokenUnavailable', type: 'editreply' }, interaction))
 
 }
 
