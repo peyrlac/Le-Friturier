@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
         const { data } = embed
 
         if (data && !data.error) {
-            interaction.editreply({ embeds: [data] })
+            interaction.editReply({ embeds: [data] })
         } else {
             client.errNormal({ 
                 error: "Could not find that documentation!", 

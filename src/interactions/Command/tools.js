@@ -102,7 +102,7 @@ module.exports = {
             subcommand
                 .setName('review')
                 .setDescription('Write a review')
-                .addNumberOption(option => option.setName('stars').setDescription('The number of stars (max 5)').setRequired(true))
+                .addNumberOption(option => option.setName('stars').setDescription('The number of stars (max 5)').setMinValue(1).setMaxValue(5).setRequired(true))
                 .addStringOption(option => option.setName('message').setDescription('A small description with the review'))
         )
     ,

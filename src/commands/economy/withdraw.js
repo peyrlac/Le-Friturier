@@ -13,15 +13,18 @@ module.exports = async (client, interaction, args) => {
 
     if (amount < 0) return client.errNormal({ error: `You can't withdraw negative money!`, type: 'editreply' }, interaction);
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-        if (data) {
-            if (data.Bank === 0) return client.errNormal({ error: `You have nothing left in the bank!`, type: 'editreply' }, interaction);
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
+        if (data.Bank === 0) return client.errNormal({ error: `You have nothing left in the bank!`, type: 'editreply' }, interaction);
 
             let money = parseInt(amount);
 
-            data.Money += money;
-            data.Bank -= money;
-            data.save();
+            const updated = await Schema.findOneAndUpdate(
+                { _id: data._id, Bank: { $gte: money } },
+                { $inc: { Money: money, Bank: -money } },
+                { new: true }
+            );
+            if (!updated) return client.errNormal({ error: `You have nothing left in the bank!`, type: 'editreply' }, interaction);
 
             client.succNormal({
                 text: `You've have withdrawn some money from your bank!`,
@@ -34,10 +37,8 @@ module.exports = async (client, interaction, args) => {
                 ],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            client.errNormal({ text: `You don't have any money to withdraw!`, type: 'editreply' }, interaction);
-        }
-    })
+    } else {
+        return client.errNormal({ text: `You don't have any money to withdraw!`, type: 'editreply' }, interaction);
+    }
 }
  

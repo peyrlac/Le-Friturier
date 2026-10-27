@@ -5,9 +5,9 @@ const Schema = require("../../database/models/economy");
 module.exports = async (client, interaction, args) => {
     let user = interaction.user;
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-        if (data) {
-            function isOdd(num) {
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
+        function isOdd(num) {
                 if ((num % 2) == 0) return false;
                 else if ((num % 2) == 1) return true;
             }
@@ -29,38 +29,32 @@ module.exports = async (client, interaction, args) => {
             if (random == 0 && colour == 2) { // Green
                 money *= 15
 
-                data.Money += money;
-                data.save();
+                await client.addMoney(interaction, user, money);
 
                 client.embed({ title: `🎰・Multiplicateur: 15x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else if (isOdd(random) && colour == 1) { // Red
                 money = parseInt(money * 1.5)
-                data.Money += money;
-                data.save();
+                await client.addMoney(interaction, user, money);
 
                 client.embed({ title: `🎰・Multiplicateur: 1.5x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else if (!isOdd(random) && colour == 0) { // Black
                 money = parseInt(money * 2)
-                data.Money += money;
-                data.save();
+                await client.addMoney(interaction, user, money);
 
                 client.embed({ title: `🎰・Multiplicateur: 2x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else { // Wrong
-                data.Money -= money;
-                data.save();
+                await client.removeMoney(interaction, user, money);
 
                 client.embed({ title: `🎰・Multiplicateur: 0x`, desc: `Tu as perdu **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
-        }
-        else {
-            client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
-        }
-    })
+    } else {
+        return client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+    }
 }

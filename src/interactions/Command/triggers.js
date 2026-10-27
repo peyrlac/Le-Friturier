@@ -53,7 +53,7 @@ module.exports = {
                         )
                 )
                 .addStringOption(option => option.setName('emotes').setDescription('Emotes ajoutées lors de la réaction').setRequired(false))
-                .addNumberOption(option => option.setName('timedeletion').setDescription('Temps avant suppression (par défaut 1000ms si option active').setRequired(false))
+                .addNumberOption(option => option.setName('timedeletion').setDescription('Temps avant suppression (par défaut 1000ms si option active').setMinValue(0).setMaxValue(604800000).setRequired(false))
         )
         .addSubcommand(subcommand =>
             subcommand

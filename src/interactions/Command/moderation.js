@@ -23,7 +23,7 @@ module.exports = {
             subcommand
                 .setName('clear')
                 .setDescription('Clear messages')
-                .addNumberOption(option => option.setName('amount').setDescription('Amount of messages').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Amount of messages').setMinValue(1).setMaxValue(100).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
@@ -72,7 +72,7 @@ module.exports = {
                 .setName('timeout')
                 .setDescription('Timeout a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('time').setDescription('Number of minutes').setRequired(true))
+                .addNumberOption(option => option.setName('time').setDescription('Number of minutes').setMinValue(1).setMaxValue(10080).setRequired(true))
                 .addStringOption(option => option.setName('reason').setDescription('Reason for the time out').setRequired(true))
         )
         .addSubcommand(subcommand =>
@@ -80,7 +80,7 @@ module.exports = {
                 .setName('tempban')
                 .setDescription('Temp ban a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('time').setDescription('Number of minutes').setRequired(true))
+                .addNumberOption(option => option.setName('time').setDescription('Number of minutes').setMinValue(1).setMaxValue(10080).setRequired(true))
                 .addStringOption(option => option.setName('reason').setDescription('The reason for the ban'))
         )
         .addSubcommand(subcommand =>
@@ -112,7 +112,7 @@ module.exports = {
                 .setName('unwarn')
                 .setDescription('Unwarn a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addIntegerOption(option => option.setName('case').setDescription('Give a case number').setRequired(true))
+                .addIntegerOption(option => option.setName('case').setDescription('Give a case number').setMinValue(1).setMaxValue(1000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand

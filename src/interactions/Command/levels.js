@@ -17,19 +17,19 @@ module.exports = {
                 .setName('setlevel')
                 .setDescription('Set a new level for a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('level').setDescription('Enter a new level').setRequired(true))
+                .addNumberOption(option => option.setName('level').setDescription('Enter a new level').setMinValue(0).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('deletereward')
                 .setDescription('Delete a level reward')
-                .addNumberOption(option => option.setName('level').setDescription('Enter a level').setRequired(true))
+                .addNumberOption(option => option.setName('level').setDescription('Enter a level').setMinValue(0).setMaxValue(1000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('createreward')
                 .setDescription('Create a level reward')
-                .addNumberOption(option => option.setName('level').setDescription('Enter a level').setRequired(true))
+                .addNumberOption(option => option.setName('level').setDescription('Enter a level').setMinValue(0).setMaxValue(1000).setRequired(true))
                 .addRoleOption(option => option.setName('role').setDescription('The role for this reward').setRequired(true))
         )
         .addSubcommand(subcommand =>
@@ -37,7 +37,7 @@ module.exports = {
                 .setName('setxp')
                 .setDescription('Set a new xp for a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of xp').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of xp').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand

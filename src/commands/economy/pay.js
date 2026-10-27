@@ -16,16 +16,20 @@ module.exports = async (client, interaction, args) => {
         }, interaction)
     }
 
-    Schema.findOne({ Guild: interaction.guild.id, User: interaction.user.id }, async (err, data) => {
-        if (data) {
-            if (data.Money < parseInt(amount)) return client.errNormal({ error: `You don't have that much money!`, type: 'editreply' }, interaction);
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: interaction.user.id });
+    if (data) {
+        if (data.Money < parseInt(amount)) return client.errNormal({ error: `You don't have that much money!`, type: 'editreply' }, interaction);
 
             let money = parseInt(amount);
 
-            data.Money -= money;
-            data.save();
+            const updated = await Schema.findOneAndUpdate(
+                { _id: data._id, Money: { $gte: money } },
+                { $inc: { Money: -money } },
+                { new: true }
+            );
+            if (!updated) return client.errNormal({ error: `You don't have that much money!`, type: 'editreply' }, interaction);
 
-            client.addMoney(interaction, user, money);
+            await client.addMoney(interaction, user, money);
 
             client.succNormal({
                 text: `You have payed some money to a user!`,
@@ -43,11 +47,9 @@ module.exports = async (client, interaction, args) => {
                 ],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            client.errNormal({ text: `You don't have any money!`, type: 'editreply' }, interaction);
-        }
-    })
+    } else {
+        return client.errNormal({ text: `You don't have any money!`, type: 'editreply' }, interaction);
+    }
 }
 
  

@@ -66,6 +66,7 @@ module.exports = {
                 .setDescription('Number of members to move (randomly selected)')
                 .setDescriptionLocalization('fr', 'Nombre de membres à déplacer (sélection aléatoire)')
                 .setMinValue(1)
+                .setMaxValue(99)
                 .setRequired(true)
             )
             .addChannelOption(option => option.setName('from')

@@ -48,7 +48,7 @@ module.exports = {
                         )
                 )
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Amount of credits').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Amount of credits').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand

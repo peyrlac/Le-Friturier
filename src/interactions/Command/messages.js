@@ -16,19 +16,19 @@ module.exports = {
                 .setName('add')
                 .setDescription('Add messages to a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setMinValue(1).setMaxValue(1000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('deletereward')
                 .setDescription('Delete a message reward')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setMinValue(1).setMaxValue(1000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('createreward')
                 .setDescription('Create a message reward')
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setMinValue(1).setMaxValue(1000000).setRequired(true))
                 .addRoleOption(option => option.setName('role').setDescription('The role for this reward').setRequired(true))
         )
         .addSubcommand(subcommand =>
@@ -36,7 +36,7 @@ module.exports = {
                 .setName('remove')
                 .setDescription('Remove messages to a user')
                 .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Enter a amount of messages').setMinValue(1).setMaxValue(1000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand

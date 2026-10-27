@@ -8,15 +8,14 @@ module.exports = async (client, interaction, args) => {
     let timeout = 180000;
     let amount = 5;
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, dataTime) => {
-        if (dataTime && dataTime.Beg !== null && timeout - (Date.now() - dataTime.Beg) > 0) {
-            let time = (dataTime.Beg / 1000 + timeout / 1000).toFixed(0);
-            return client.errWait({
-                time: time,
-                type: 'editreply'
-            }, interaction);
-        }
-        else {
+    const dataTime = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (dataTime && dataTime.Beg !== null && timeout - (Date.now() - dataTime.Beg) > 0) {
+        let time = (dataTime.Beg / 1000 + timeout / 1000).toFixed(0);
+        return client.errWait({
+            time: time,
+            type: 'editreply'
+        }, interaction);
+    } else {
 
             client.succNormal({
                 text: `You've begged for some money!`,
@@ -32,7 +31,7 @@ module.exports = async (client, interaction, args) => {
 
             if (dataTime) {
                 dataTime.Beg = Date.now();
-                dataTime.save();
+                await dataTime.save();
             }
             else {
                 new Schema({
@@ -42,9 +41,8 @@ module.exports = async (client, interaction, args) => {
                 }).save();
             }
 
-            client.addMoney(interaction, user, amount);
-        }
-    })
+            await client.addMoney(interaction, user, amount);
+    }
 }
 
  

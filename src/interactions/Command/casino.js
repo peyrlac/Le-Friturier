@@ -15,26 +15,26 @@ module.exports = {
             subcommand
                 .setName('blackjack')
                 .setDescription('Jouez à un jeu de blackjack pour gagner de l\'argent')
-                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('crash')
                 .setDescription('Plus de risques, plus de récompense')
-                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('roulette')
                 .setDescription('Jouer à la roulette')
                 .addStringOption(option => option.setName('color').setDescription('Entrez dans une couleur hexagonale').setRequired(true))
-                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('slots')
                 .setDescription('Jouer à des créneaux')
-                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setRequired(true))
+                .addNumberOption(option => option.setName('amount').setDescription('Entrez un montant').setMinValue(1).setMaxValue(1000000000).setRequired(true))
         )
     ,
 

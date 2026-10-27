@@ -24,11 +24,9 @@ module.exports = async (client, interaction, args) => {
 
     client.addMoney(interaction, user, parseInt(amount));
 
-    setTimeout(() => {
-        Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-            if (data) {
-
-                client.succNormal({
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
+                return client.succNormal({
                     text: `Added money to a user!`,
                     fields: [
                         {
@@ -44,11 +42,7 @@ module.exports = async (client, interaction, args) => {
                     ],
                     type: 'editreply'
                 }, interaction);
-            }
-            else {
-                client.errNormal({ error: `This user doesn't have any money!`, type: 'editreply' }, interaction);
-            }
-        }, 500)
-    })
+    }
+    return client.errNormal({ error: `This user doesn't have any money!`, type: 'editreply' }, interaction);
 }
  

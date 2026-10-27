@@ -7,9 +7,9 @@ const Schema = require("../../database/models/economy");
 module.exports = async (client, interaction, args) => {
     let user = interaction.user;
 
-    Schema.findOne({ Guild: interaction.guild.id, User: user.id }, async (err, data) => {
-        if (data) {
-            let money = parseInt(interaction.options.getNumber('amount'));
+    const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
+    if (data) {
+        let money = parseInt(interaction.options.getNumber('amount'));
             let win = false;
 
             if (!money) return client.errUsage({ usage: "slots [amount]", type: 'editreply' }, interaction);
@@ -53,8 +53,7 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
 
-                data.Money += money;
-                data.save();
+                await client.addMoney(interaction, user, money);
             } else {
 
                 client.embed({
@@ -65,12 +64,9 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction)
 
-                data.Money -= money;
-                data.save();
+                await client.removeMoney(interaction, user, money);
             }
-        }
-        else {
-            client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
-        }
-    })
+    } else {
+        return client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+    }
 }

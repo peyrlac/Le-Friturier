@@ -14,7 +14,7 @@ module.exports = {
             subcommand
                 .setName('limit')
                 .setDescription('Limit your custom voice channel')
-                .addNumberOption(option => option.setName('limit').setDescription('Enter a limit').setRequired(true))
+                .addNumberOption(option => option.setName('limit').setDescription('Enter a limit').setMinValue(1).setMaxValue(99).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
