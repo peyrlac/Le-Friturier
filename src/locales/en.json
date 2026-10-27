@@ -790,7 +790,13 @@
       },
       "crash": {
         "insufficient": "You are betting more than you own!",
-        "noAccount": "You don't have any money yet."
+        "noAccount": "You don't have any money yet.",
+        "usage": "crash [amount]",
+        "started": "Crash started by {user}・React 🛑 to stop",
+        "multiplier": "Multiplier",
+        "profit": "Profit",
+        "results": "Crash results for {user}",
+        "loss": "Loss"
       },
       "slots": {
         "title": "🎰・Slots",
