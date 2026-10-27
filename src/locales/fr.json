@@ -328,6 +328,12 @@
         "success": "Le rôle a été supprimé de la boutique.",
         "notFound": "Ce rôle n'est pas dans la boutique !"
       },
+      "removeMoney": {
+        "invalid": "Saisissez un nombre valide !",
+        "bot": "Vous ne pouvez pas retirer de l'argent à un bot !",
+        "success": "L'argent a été retiré de l'utilisateur.",
+        "insufficient": "Cet utilisateur n'a pas assez d'argent."
+      },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",
