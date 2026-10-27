@@ -25,15 +25,16 @@
 ## Points à vérifier avant fusion
 
 - Comparer les commits upstream restants avec les fichiers locaux `interactionCreate.js`, `embed.js`, musique et vérification.
-- `npm test` passe actuellement avec 57 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
+- `npm test` passe actuellement avec 60 tests verts, dont le chargement des commandes classiques et des 45 commandes natives.
 - Les tests i18n couvrent également les titres/libellés des helpers centraux, le rejet des langues non supportées et le contrat `withResponse`/`MessageFlags.Ephemeral`.
 - Les catalogues fr/en sont structurellement alignés ; l’unique clé française absente de l’anglais (`common.onlyFrench`) est volontaire et couvre le fallback.
 - La vague giveaways (`start` et `drop`) utilise désormais les clés fr/en pour tous les messages du manager et sa confirmation de lancement.
 - La vague radio (`play`, `playing`, `stop`) utilise désormais les clés fr/en et gère l’absence de canal vocal sans accès nul.
+- Les métadonnées Discord des catégories principales (`economy`, `casino`, `tickets`, `music`, `radio`, `giveaway`, `moderation`, `setup`, `bot`) sont localisées ; les builders imbriqués de profil et statistiques sont également couverts.
 - Les scans statiques confirment `0` callback Mongoose legacy et `0` occurrence `.catch({})`.
 - Les deux fichiers `pinned channel` ont le même blob Git que `upgrade` : `channelSorter.js` et `clientReady.js`.
 - Les arbres Git de `main` et `upgrade` sont également identiques ; aucune modification supplémentaire de `upgrade` ne peut être intégrée sélectivement pour cette feature.
-- Tester manuellement `withResponse`, les réponses éphémères et `/config language`.
+- Tester manuellement `withResponse`, les réponses éphémères et `/config language` ; le smoke test de `/config language` avec le bot de laboratoire est déjà passé avec persistance et restauration de `fr`.
 - Revoir les vulnérabilités transitives restantes et décider lesquelles nécessitent une migration indépendante.
 
 ## Validation runtime du bot de test
@@ -43,13 +44,13 @@
 - Le Gateway Discord répond ; le bot voit 2 serveurs de laboratoire.
 - 51 commandes ont été publiées globalement et sur les 2 serveurs de test, dont `/config language`.
 - Le loader ignore désormais les modules utilitaires non-factories (`http/index.js` et `serverstats/createStatsChannel.js`) ; le healthcheck utilise un chemin temporaire portable.
-- Le démarrage complet a été validé avec `MONGO_DNS_SERVERS=1.1.1.1,8.8.8.8` : MongoDB est connecté, le bot devient prêt sur 2 serveurs et les commandes/événements sont chargés. Les scénarios d’interaction restent à exécuter manuellement.
+- Le démarrage complet a été validé avec `MONGO_DNS_SERVERS=1.1.1.1,8.8.8.8` dans l’image Docker Node 20 : MongoDB est connecté, le bot devient prêt sur 2 serveurs, 45 commandes et 6 context menus sont chargés. Le runtime local Node 24 reste incompatible avec le binaire `canvas` compilé pour Node 20.
 - Les erreurs restantes du serveur de test sont limitées aux permissions de lecture des invites et à la résolution du nœud Lavalink `lava.link`; elles n’empêchent pas le Gateway ni les commandes non musicales.
 - Les nœuds Lavalink publics et le mot de passe en dur ont été supprimés ; `LAVALINK_ENABLED=false` valide désormais un démarrage propre sans dépendance musicale externe.
 
 `main` et `upgrade` n'ont pas de merge-base commun avec cette branche ; la comparaison finale doit donc rester une comparaison directe des arbres et des fichiers ciblés, sans fusion automatique.
 
-La comparaison avec `upstream/main` porte sur 634 fichiers ; les divergences de `interactionCreate.js`, `embed.js` et musique sont conservées volontairement, tandis que les fonctionnalités locales absentes d'upstream (`verification/delete.js`, `channelSorter.js`) restent intactes.
+La comparaison directe avec `upstream/main` porte sur 636 fichiers ; les divergences de `interactionCreate.js`, `embed.js` et musique sont conservées volontairement, tandis que les fonctionnalités locales absentes d'upstream (`verification/delete.js`, `channelSorter.js`) restent intactes.
 
 ## Audit npm au 25 octobre 2026
 
