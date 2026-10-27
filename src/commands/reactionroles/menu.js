@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/reactionRoles");
+const localizedMenu = require('./menuLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedMenu(client, interaction, args);
     const category = interaction.options.getString('category');
     const channel = interaction.options.getChannel('channel') || interaction.channel;
 
@@ -72,4 +74,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 

@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/reactionRoles");
+const localizedAdd = require('./addLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedAdd(client, interaction, args);
     const category = interaction.options.getString('category');
     const role = interaction.options.getRole('role');
     const emoji = interaction.options.getString('emoji');
@@ -61,4 +63,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
