@@ -165,7 +165,9 @@ const warnLogs = new Discord.WebhookClient({
 });
 
 // Load handlers
-fs.readdirSync('./src/handlers').forEach((dir) => {
+fs.readdirSync('./src/handlers', { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .forEach(({ name: dir }) => {
     fs.readdirSync(`./src/handlers/${dir}`).forEach((handler) => {
         if (dir === 'serverstats' && handler === 'createStatsChannel.js') return;
         const handlerModule = require(`./handlers/${dir}/${handler}`);
