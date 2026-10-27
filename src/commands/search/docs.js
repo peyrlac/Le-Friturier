@@ -1,5 +1,4 @@
-const Discord = require('discord.js');
-const axios = require('axios');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -9,19 +8,19 @@ module.exports = async (client, interaction, args) => {
         name
     )}`;
 
-    axios.get(uri).then((embed) => {
-        const { data } = embed
-
+    try {
+        const data = await getJson(uri);
         if (data && !data.error) {
-            interaction.editReply({ embeds: [data] })
+            return interaction.editReply({ embeds: [data] })
         } else {
-            client.errNormal({ 
+            return client.errNormal({
                 error: "Could not find that documentation!", 
                 type: 'editreply' 
             }, interaction)
         }
-    }).catch((err) => {
-    })
+    } catch {
+        return client.errNormal({ error: "Could not find that documentation!", type: 'editreply' }, interaction);
+    }
 }
 
  

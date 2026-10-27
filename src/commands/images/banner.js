@@ -1,15 +1,12 @@
-const Discord = require('discord.js');
-const axios = require("axios");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
   const user = interaction.options.getUser('user') || interaction.user;
 
-  axios.get(`https://discord.com/api/users/${user.id}`, {
-    headers: {
-      Authorization: `Bot ${client.token}`,
-    },
-  }).then(res => {
-    const { banner, accent_color } = res.data;
+  try {
+    const { banner, accent_color } = await getJson(`https://discord.com/api/users/${user.id}`, {
+      headers: { Authorization: `Bot ${client.token}` },
+    });
 
     if (banner) {
       const extension = banner.startsWith("a_") ? ".gif" : ".png";
@@ -40,7 +37,9 @@ module.exports = async (client, interaction, args) => {
         }, interaction)
       }
     }
-  })
+  } catch {
+    return client.errNormal({ error: 'Unable to retrieve this user banner.', type: 'editreply' }, interaction);
+  }
 }
 
  

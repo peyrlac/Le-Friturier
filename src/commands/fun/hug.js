@@ -1,4 +1,4 @@
-const axios = require('axios');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -9,8 +9,7 @@ module.exports = async (client, interaction, args) => {
 
     let response, data;
     try {
-        response = await axios.get(url);
-        data = response.data;
+        data = await getJson(url);
     } catch (e) {
         return client.errNormal({ error: "An error occured!", type: 'editreply' }, interaction);
     }
