@@ -487,6 +487,20 @@ test('channel moderation responses use localization keys', () => {
   }
 });
 
+test('reaction roles responses use localization keys', () => {
+  const expectations = {
+    'src/commands/reactionroles/button.js': ['reactionroles.noData', 'reactionroles.panelTitle', 'reactionroles.panelDescription', 'reactionroles.panelCreated'],
+    'src/commands/reactionroles/delete.js': ['reactionroles.noData', 'reactionroles.deleted'],
+    'src/commands/reactionroles/list.js': ['reactionroles.noData', 'reactionroles.listTitle']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), `${file}: ${key}`);
+    assert.doesNotMatch(source, /No data found|Reaction panel successfully created|successfully deleted/i, file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

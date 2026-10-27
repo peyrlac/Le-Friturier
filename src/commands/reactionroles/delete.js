@@ -5,14 +5,15 @@ module.exports = async (client, interaction, args) => {
 
     const data = await Schema.findOne({ Guild: interaction.guild.id, Category: category });
     if (!data) return client.errNormal({
-        error: `No data found!`,
+        key: 'reactionroles.noData',
         type: 'editreply'
     }, interaction);
 
     await Schema.deleteOne({ Guild: interaction.guild.id, Category: category });
 
     return client.succNormal({
-        text: `**${category}** successfully deleted!`,
+        key: 'reactionroles.deleted',
+        variables: { category },
         type: 'editreply'
     }, interaction);
 }

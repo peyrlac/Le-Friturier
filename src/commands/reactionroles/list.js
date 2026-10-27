@@ -4,11 +4,11 @@ const Schema = require("../../database/models/reactionRoles");
 
 module.exports = async (client, interaction, args) => {
     const reactions = await Schema.find({ Guild: interaction.guild.id });
-    if (!reactions) return client.errNormal({ 
-        error: `No data found!`,
+    if (reactions.length === 0) return client.errNormal({
+        key: 'reactionroles.noData',
         type: 'editreply'
     }, interaction);
-    
+
     let list = ``;
 
     for (var i = 0; i < reactions.length; i++) {
@@ -16,10 +16,11 @@ module.exports = async (client, interaction, args) => {
     }
 
     await client.embed({
+        titleKey: 'reactionroles.listTitle',
         title: "📃・Reaction roles",
         desc: list,
         type: 'editreply'
     }, interaction)
 }
 
- 
+
