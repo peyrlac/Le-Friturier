@@ -952,6 +952,21 @@ test('choice games localize structural labels', () => {
   assert.doesNotMatch(press, /\*\*But\*\*/);
 });
 
+test('emoji lifecycle events use localization keys', () => {
+  const expectations = {
+    'src/events/emoji/emojiCreate.js': ['auditEvents.emojiCreatedTitle', 'auditEvents.emojiCreatedDescription', 'auditEvents.emoji', 'auditEvents.name', 'auditEvents.id', 'auditEvents.url'],
+    'src/events/emoji/emojiUpdate.js': ['auditEvents.emojiUpdatedTitle', 'auditEvents.emojiUpdatedDescription', 'auditEvents.emoji', 'auditEvents.before', 'auditEvents.after', 'auditEvents.id'],
+    'src/events/emoji/emojiDelete.js': ['auditEvents.emojiDeletedTitle', 'auditEvents.emojiDeletedDescription', 'auditEvents.name', 'auditEvents.id']
+  };
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), `${file}: ${key}`);
+  }
+  assert.doesNotMatch(read('src/events/emoji/emojiCreate.js'), /Emoji created|An emoji has been created|> Emoji|> Name|> ID|> Url/);
+  assert.doesNotMatch(read('src/events/emoji/emojiUpdate.js'), /Emoji updated|An emoji has been updated|> Emoji|> Before|> After|> ID/);
+  assert.doesNotMatch(read('src/events/emoji/emojiDelete.js'), /Emoji deleted|An emoji has been deleted|> Name|> ID/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
