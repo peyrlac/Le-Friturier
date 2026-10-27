@@ -315,6 +315,15 @@ test('interaction routing gates disabled commands before execution', () => {
   assert.match(source, /requireFeature\(interaction, cmd\.data\.name\)[\s\S]*if \(cmd\) return cmd\.run/);
 });
 
+test('automod protection responses use the active server locale', () => {
+  for (const file of ['antiinvite.js', 'antilinks.js', 'antispam.js']) {
+    const source = read(`src/commands/automod/${file}`);
+    assert.match(source, /client\.t\(interaction, ['"]automod\.(antiInvite|antiLinks|antiSpam)['"]\)/, file);
+    assert.match(source, /automod\.protection(Enabled|Disabled)/, file);
+    assert.doesNotMatch(source, /est maintenant \*\*\$\{boolean \?/i, file);
+  }
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

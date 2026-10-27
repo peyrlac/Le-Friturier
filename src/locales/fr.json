@@ -130,7 +130,12 @@
         "channelMissing": "Le canal {channel} n'est pas dans la liste blanche.",
         "channelField": "📘・Canal",
         "channelAdded": "Le canal {channel} a été ajouté à la liste blanche.",
-        "channelRemoved": "Le canal {channel} a été retiré de la liste blanche."
+        "channelRemoved": "Le canal {channel} a été retiré de la liste blanche.",
+        "protectionEnabled": "La protection {feature} est maintenant **activée** sur ce serveur.",
+        "protectionDisabled": "La protection {feature} est maintenant **désactivée** sur ce serveur.",
+        "antiInvite": "anti-invitation",
+        "antiLinks": "anti-liens",
+        "antiSpam": "anti-spam"
       },
       "serverstats": {
         "channel": "📘・Salon",
