@@ -1,27 +1,28 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('thanks')
-        .setDescription('Get an overview of the thanks system')
+        .setDescription(getCommandMetadata('commandMetadata.thanks.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the thanks category commands')
+                .setDescription(getCommandMetadata('commandMetadata.thanks.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('check')
-                .setDescription('See your thanks')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.thanks.subcommands.check.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.thanks.subcommands.check.options.user.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('thanks')
-                .setDescription('Thanks a user')
-                .addUserOption(option => option.setName('user').setDescription('Select a user').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.thanks.subcommands.thanks.description'))
+                .addUserOption(option => option.setName('user').setDescription(getCommandMetadata('commandMetadata.thanks.subcommands.thanks.options.user.description')).setRequired(true))
         )
     ,
 
