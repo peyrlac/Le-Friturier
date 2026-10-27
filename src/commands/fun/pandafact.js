@@ -9,11 +9,11 @@ module.exports = async (client, interaction, args) => {
 
         .then(async (json) => {
             client.embed({
-                title: `💡・Random panda fact`,
+                titleKey: 'fun.pandaFactTitle',
                 desc: json.fact,
                 type: 'editreply',
             }, interaction);
-        }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
+        }).catch(() => client.errNormal({ key: 'fun.remoteDataError', type: 'editreply' }, interaction))
 }
 
 

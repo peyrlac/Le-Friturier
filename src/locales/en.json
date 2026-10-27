@@ -115,7 +115,13 @@
       "sayTooLong": "You may not use more than 2000 characters!",
       "messageSent": "Message sent successfully.",
       "sudoTooLong": "You may not use more than 2000 characters!",
-      "sudoSent": "The sudo message was sent!"
+      "sudoSent": "The sudo message was sent!",
+      "remoteDataError": "Unable to retrieve remote data.",
+      "birdFactTitle": "Random bird fact",
+      "catFactTitle": "Random cat fact",
+      "dogFactTitle": "Random dog fact",
+      "koalaFactTitle": "Random koala fact",
+      "pandaFactTitle": "Random panda fact"
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",
