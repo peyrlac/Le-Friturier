@@ -1,33 +1,34 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 const Schema = require("../../database/models/music");
 
 module.exports = {
     localizationKey: 'commandMetadata.radio',
     data: new SlashCommandBuilder()
-        .setName('radio')
-        .setDescription('Playing radio in Bot')
+        .setName(getCommandMetadata('commandMetadata.radio.name'))
+        .setDescription(getCommandMetadata('commandMetadata.radio.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the radio category commands')
+                .setDescription(getCommandMetadata('commandMetadata.radio.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('play')
-                .setDescription('Start the radio'),
+                .setDescription(getCommandMetadata('commandMetadata.radio.subcommands.play.description')),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('stop')
-                .setDescription('Stop the radio'),
+                .setDescription(getCommandMetadata('commandMetadata.radio.subcommands.stop.description')),
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('playing')
-                .setDescription('Show what is playing now'),
+                .setDescription(getCommandMetadata('commandMetadata.radio.subcommands.playing.description')),
         ),
     /** 
      * @param {Client} client

@@ -1653,7 +1653,8 @@
     },
     "radio": {
       "name": "radio",
-      "description": "Écouter la radio dans le bot"
+      "description": "Écouter la radio dans le bot",
+      "subcommands": { "help": { "description": "Obtenir des informations sur les commandes de catégorie radio" }, "play": { "description": "Démarrer la radio" }, "stop": { "description": "Arrêter la radio" }, "playing": { "description": "Voir ce qui est en cours de lecture" } }
     },
     "moderation": {
       "name": "modération",
