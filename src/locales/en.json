@@ -1782,7 +1782,8 @@
     },
     "voice": {
       "name": "voice",
-      "description": "Manage voice channels"
+      "description": "Manage voice channels",
+      "subcommands": { "help": { "description": "Get information about the voice category commands" }, "limit": { "description": "Limit your custom voice channel", "options": { "limit": { "description": "Enter a limit" } } }, "lock": { "description": "Lock your custom voice channel" }, "rename": { "description": "Rename your custom voice channel", "options": { "name": { "description": "New voice name" } } }, "unlock": { "description": "Unlock your custom voice channel" } }
     },
     "developers": {
       "name": "developers",
