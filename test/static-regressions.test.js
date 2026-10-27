@@ -184,6 +184,18 @@ test('fun command exposes localized top-level metadata', () => {
   });
 });
 
+test('tools command exposes localized top-level metadata', () => {
+  const command = require(path.join(root, 'src/interactions/Command/tools.js'));
+
+  assert.deepEqual(command.localizations, {
+    name: { fr: 'outils', en: 'tools' },
+    description: {
+      fr: 'Utiliser les outils du bot',
+      en: 'Use the bot tools'
+    }
+  });
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
