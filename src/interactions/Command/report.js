@@ -1,14 +1,15 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('report')
-        .setDescription('Report a bug or user to the developers')
+        .setDescription(getCommandMetadata('commandMetadata.report.description'))
         .addStringOption(option =>
             option.setName('type')
-                .setDescription('The type of your report')
+                .setDescription(getCommandMetadata('commandMetadata.report.options.type.description'))
                 .setRequired(true)
                 .addChoices(
                     { name: 'Bug', value: 'bug' },
@@ -17,7 +18,7 @@ module.exports = {
         )
         .addStringOption(option =>
             option.setName('description')
-                .setDescription('Description with your report')
+                .setDescription(getCommandMetadata('commandMetadata.report.options.description.description'))
                 .setRequired(true)
         )
     ,

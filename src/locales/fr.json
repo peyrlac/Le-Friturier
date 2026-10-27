@@ -1939,6 +1939,25 @@
         "leaderboard": { "description": "Voir le classement des invitations" }
       }
     },
+    "notepad": {
+      "name": "bloc-notes",
+      "description": "Gérer vos notes",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de notes" },
+        "add": { "description": "Ajouter une note à votre bloc-notes", "options": { "note": { "description": "Votre note" } } },
+        "delete": { "description": "Supprimer une note de votre bloc-notes", "options": { "id": { "description": "Identifiant de la note" } } },
+        "edit": { "description": "Modifier une note de votre bloc-notes", "options": { "id": { "description": "Identifiant de la note" }, "note": { "description": "Nouvelle note" } } },
+        "notes": { "description": "Afficher toutes vos notes" }
+      }
+    },
+    "report": {
+      "name": "signalement",
+      "description": "Signaler un bug ou un utilisateur aux développeurs",
+      "options": {
+        "type": { "description": "Le type de votre signalement" },
+        "description": { "description": "Description de votre signalement" }
+      }
+    },
     "levels": {
       "name": "niveaux",
       "description": "Voir le système de niveaux",

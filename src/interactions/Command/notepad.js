@@ -1,39 +1,40 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('notepad')
-        .setDescription('Manage your notes')
+        .setDescription(getCommandMetadata('commandMetadata.notepad.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('Get information about the search category commands')
+                .setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('add')
-                .setDescription('Add a note to your notepad')
-                .addStringOption(option => option.setName('note').setDescription('Your note').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.add.description'))
+                .addStringOption(option => option.setName('note').setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.add.options.note.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('delete')
-                .setDescription('Delete a note from your notepad')
-                .addStringOption(option => option.setName('id').setDescription('Note id').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.delete.description'))
+                .addStringOption(option => option.setName('id').setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.delete.options.id.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('edit')
-                .setDescription('Edit a note from your notepad')
-                .addStringOption(option => option.setName('id').setDescription('Note id').setRequired(true))
-                .addStringOption(option => option.setName('note').setDescription('New note').setRequired(true))
+                .setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.edit.description'))
+                .addStringOption(option => option.setName('id').setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.edit.options.id.description')).setRequired(true))
+                .addStringOption(option => option.setName('note').setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.edit.options.note.description')).setRequired(true))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('notes')
-                .setDescription('Show all your notes')
+                .setDescription(getCommandMetadata('commandMetadata.notepad.subcommands.notes.description'))
         )
     ,
 

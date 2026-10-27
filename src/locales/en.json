@@ -1952,6 +1952,25 @@
         "leaderboard": { "description": "See the invite leaderboard" }
       }
     },
+    "notepad": {
+      "name": "notepad",
+      "description": "Manage your notes",
+      "subcommands": {
+        "help": { "description": "Get information about the notes category commands" },
+        "add": { "description": "Add a note to your notepad", "options": { "note": { "description": "Your note" } } },
+        "delete": { "description": "Delete a note from your notepad", "options": { "id": { "description": "Note id" } } },
+        "edit": { "description": "Edit a note from your notepad", "options": { "id": { "description": "Note id" }, "note": { "description": "New note" } } },
+        "notes": { "description": "Show all your notes" }
+      }
+    },
+    "report": {
+      "name": "report",
+      "description": "Report a bug or user to the developers",
+      "options": {
+        "type": { "description": "The type of your report" },
+        "description": { "description": "Description with your report" }
+      }
+    },
     "levels": {
       "name": "levels",
       "description": "View the level system",
