@@ -86,6 +86,7 @@
         "deleted": "Votre anniversaire a été supprimé.",
     "notFound": "Aucun anniversaire trouvé.",
     "listEmpty": "Aucun anniversaire n'est enregistré.",
+    "listTitle": "🎂・Anniversaires - {guild}",
         "field": "🎂・Anniversaire",
         "checkTitle": "🎂・Vérification de l'anniversaire",
         "checkDescription": "L'anniversaire de {user} est le {birthday}.",

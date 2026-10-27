@@ -35,6 +35,14 @@ module.exports = {
         )
     ,
 
+    localizations: {
+        name: { fr: 'birthdays', en: 'birthdays' },
+        description: {
+            fr: 'Afficher ou enregistrer un anniversaire',
+            en: 'View or save a birthday'
+        }
+    },
+
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
