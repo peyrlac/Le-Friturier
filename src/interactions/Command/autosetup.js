@@ -95,6 +95,8 @@ module.exports = {
      * @param {CommandInteraction} interaction
      * @param {String[]} args
      */
+    localizationKey: 'commandMetadata.autosetup',
+
     run: async (client, interaction, args) => {
         await interaction.deferReply();
         const perms = await client.checkUserPerms({
