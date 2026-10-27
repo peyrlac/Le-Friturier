@@ -20,7 +20,8 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction);
 
-    interaction.channel.bulkDelete(amount).then(() => {
+    try {
+        await interaction.channel.bulkDelete(amount);
         client.succNormal({
             key: "common.success",
             fields: [
@@ -31,13 +32,14 @@ module.exports = async (client, interaction, args) => {
                 }
             ],
             type: 'ephemeraledit'
-        }, interaction)
-    }).catch(err => {
+        }, interaction);
+    }
+    catch (err) {
         client.errNormal({
             key: "errors.moderation.clearFailed",
             type: 'editreply'
         }, interaction);
-    });
+    }
 }
 
  
