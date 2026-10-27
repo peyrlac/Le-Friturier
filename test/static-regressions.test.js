@@ -188,8 +188,9 @@ test('fun command exposes localized top-level metadata', () => {
 
 test('tools command exposes localized top-level metadata', () => {
   const command = require(path.join(root, 'src/interactions/Command/tools.js'));
+  const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
-  assert.deepEqual(command.localizations, {
+  assert.deepEqual(resolveCommandLocalizations(command), {
     name: { fr: 'outils', en: 'tools' },
     description: {
       fr: 'Utiliser les outils du bot',
@@ -287,11 +288,14 @@ test('profile text updates localize their field labels', () => {
 test('profile and serverstats commands expose localized top-level metadata', () => {
   const profile = require(path.join(root, 'src/interactions/Command/profile.js'));
   const serverstats = require(path.join(root, 'src/interactions/Command/serverstats.js'));
+  const { resolveCommandLocalizations } = require('../src/handlers/i18n');
+  const profileLocalizations = resolveCommandLocalizations(profile);
+  const serverstatsLocalizations = resolveCommandLocalizations(serverstats);
 
-  assert.equal(profile.localizations.name.fr, 'profil');
-  assert.equal(profile.localizations.name.en, 'profile');
-  assert.equal(serverstats.localizations.name.fr, 'statistiques');
-  assert.equal(serverstats.localizations.name.en, 'serverstats');
+  assert.equal(profileLocalizations.name.fr, 'profil');
+  assert.equal(profileLocalizations.name.en, 'profile');
+  assert.equal(serverstatsLocalizations.name.fr, 'statistiques');
+  assert.equal(serverstatsLocalizations.name.en, 'serverstats');
 });
 
 test('message and context profile common responses use localization keys', () => {
@@ -648,6 +652,14 @@ test('economy command metadata is sourced from the locale catalogs', () => {
   const source = read('src/interactions/Command/economy.js');
   assert.match(source, /localizationKey:\s*['"]commandMetadata\.economy['"]/);
   assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
+test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
+  for (const name of ['profile', 'serverstats', 'tools']) {
+    const source = read(`src/interactions/Command/${name}.js`);
+    assert.match(source, new RegExp(`localizationKey:\\s*['"]commandMetadata\\.${name}['"]`), name);
+    assert.doesNotMatch(source, /localizations:\s*\{/);
+  }
 });
 
 test('core category commands expose localized top-level metadata', () => {
