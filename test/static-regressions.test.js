@@ -793,6 +793,12 @@ test('config metadata is sourced from the locale catalogs', () => {
   assert.doesNotMatch(source, /localizations:\s*\{/);
 });
 
+test('config command descriptions are resolved from the locale catalog', () => {
+  const source = read('src/interactions/Command/config.js');
+  assert.match(source, /getCommandMetadata\(/);
+  assert.doesNotMatch(source, /\.setDescription\((['"])[^'"\n]*\1\)/);
+});
+
 test('fun and giveaway metadata is sourced from the locale catalogs', () => {
   for (const name of ['fun', 'giveaway']) {
     const source = read(`src/interactions/Command/${name}.js`);
