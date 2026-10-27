@@ -3,8 +3,11 @@
   "version": "10.0.0",
   "description": "Discord Bot is a bot with which you can run your entire server! With no less than 400+ commands",
   "main": "./src/index.js",
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {
-        "test": "node --test test/*.test.js",
+    "test": "node --test test",
     "start": "node . --trace-warnings",
     "add-dev": "node src/dev.js"
   },
