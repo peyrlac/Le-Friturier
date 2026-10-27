@@ -6,11 +6,12 @@ module.exports = async (client, interaction, args) => {
     const song = interaction.options.getString('song');
 
     const r = await pop.itunes(song).catch(e => {
-        return client.errNormal({ 
-            error: "Song not found!",
+        return client.errNormal({
+            key: 'search.songNotFound',
             type: 'editreply'
         }, interaction)
     });
+    if (!r) return;
 
     client.embed({
         title: `🎶・${r.name}`,
@@ -57,4 +58,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction)
 }
 
- 
+

@@ -4,9 +4,9 @@ const weather = require('weather-js');
 module.exports = async (client, interaction, args) => {
     const country = interaction.options.getString('location');
 
-    weather.find({ search: country, degreeType: 'C' }, function (error, result) {
+    weather.find({ search: country, degreeType: 'C' }, async function (error, result) {
         if (result === undefined || result.length === 0) return client.errNormal({
-            error: "**Invalid** location",
+            key: 'search.invalidLocation',
             type: 'editreply'
         }, interaction);
 
@@ -14,37 +14,37 @@ module.exports = async (client, interaction, args) => {
         var location = result[0].location;
 
         client.embed({
-            title: `☀️・Weather - ${current.skytext}`,
-            desc: `Weather forecast for ${current.observationpoint}`,
+            title: await client.t(interaction, 'search.weatherTitle', { skytext: current.skytext }),
+            desc: await client.t(interaction, 'search.weatherDescription', { location: current.observationpoint }),
             thumbnail: current.imageUrl,
             fields: [
                 {
-                    name: "Timezone",
+                    name: await client.t(interaction, 'search.weather.timezone'),
                     value: `UTC${location.timezone}`,
                     inline: true,
                 },
                 {
-                    name: "Degree Type",
-                    value: `Celsius`,
+                    name: await client.t(interaction, 'search.weather.degreeType'),
+                    value: await client.t(interaction, 'search.weather.celsius'),
                     inline: true,
                 },
                 {
-                    name: "Temperature",
+                    name: await client.t(interaction, 'search.weather.temperature'),
                     value: `${current.temperature}°`,
                     inline: true,
                 },
                 {
-                    name: "Wind",
+                    name: await client.t(interaction, 'search.weather.wind'),
                     value: `${current.winddisplay}`,
                     inline: true,
                 },
                 {
-                    name: "Feels like",
+                    name: await client.t(interaction, 'search.weather.feelsLike'),
                     value: `${current.feelslike}°`,
                     inline: true,
                 },
                 {
-                    name: "Humidity",
+                    name: await client.t(interaction, 'search.weather.humidity'),
                     value: `${current.humidity}%`,
                     inline: true,
                 }
@@ -54,4 +54,4 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
+

@@ -377,6 +377,31 @@ test('music lifecycle events use localization keys', () => {
   }
 });
 
+test('search and tools response wave uses localization keys', () => {
+  const files = [
+    'src/commands/search/bing.js',
+    'src/commands/search/crypto.js',
+    'src/commands/search/ddg.js',
+    'src/commands/search/github.js',
+    'src/commands/search/google.js',
+    'src/commands/search/hexcolour.js',
+    'src/commands/search/itunes.js',
+    'src/commands/search/npm.js',
+    'src/commands/search/steam.js',
+    'src/commands/search/translate.js',
+    'src/commands/search/weather.js',
+    'src/commands/search/youtube.js',
+    'src/commands/tools/sourcebin.js',
+    'src/commands/tools/url.js'
+  ];
+
+  for (const file of files) {
+    const source = read(file);
+    assert.match(source, /(?:key|titleKey|descKey):\s*['"](?:search|tools)\./, file);
+    assert.doesNotMatch(source, /I have found the following|Please check your inputs|No account found|Color not found|Song not found|Package not found|Application not found|valid ISO language code|Invalid\*\* location|Your code has been posted|shortened url has been created/i, file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

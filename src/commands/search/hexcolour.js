@@ -8,7 +8,7 @@ module.exports = async (client, interaction, args) => {
         `https://some-random-api.com/canvas/rgb?hex=${color}`
     ).catch(e => {
         return client.errNormal({ 
-            error: "Color not found!",
+            key: 'search.colorNotFound',
             type: 'editreply'
         }, interaction)
     });
@@ -16,17 +16,17 @@ module.exports = async (client, interaction, args) => {
     if (!data) return;
 
     client.embed({
-        title: `🎨・Color info`,
+        titleKey: 'search.colorTitle',
         image: `https://some-random-api.com/canvas/colorviewer?hex=${color}`,
         color: `#${color}`,
         fields: [
             {
-                name: "Hex",
+                name: await client.t(interaction, 'search.hex'),
                 value: `#${color}`,
                 inline: true,
             },
             {
-                name: "RGB",
+                name: await client.t(interaction, 'search.rgb'),
                 value: `${data.r}, ${data.g}, ${data.b}`,
                 inline: true,
             }

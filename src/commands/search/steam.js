@@ -8,10 +8,11 @@ module.exports = async (client, interaction, args) => {
 
     const s = await pop.steam(name).catch(e => {
         return client.errNormal({
-            error: "Application not found!",
+            key: 'search.applicationNotFound',
             type: 'editreply'
         }, interaction)
     });
+    if (!s) return;
 
     await client.embed({
         title: `🎮・${s.name}`,
