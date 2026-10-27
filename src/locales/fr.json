@@ -1,102 +1,108 @@
 {
-    "common": {
-    "success": "Opération effectuée avec succès.",
-    "onlyFrench": "Texte disponible uniquement en français.",
+  "common": {
+    "success": "Op\u00e9ration effectu\u00e9e avec succ\u00e8s.",
+    "onlyFrench": "Texte disponible uniquement en fran\u00e7ais.",
     "errorTitle": "Erreur !",
-    "successTitle": "Succès !",
-    "errorComment": "Détail de l'erreur",
+    "successTitle": "Succ\u00e8s !",
+    "errorComment": "D\u00e9tail de l'erreur",
     "requiredArguments": "Arguments requis",
     "requiredPermission": "Permission requise",
-    "tryAgainAt": "Réessayez à",
-    "languageNames": {
-      "fr": "Français",
-      "en": "Anglais"
+    "tryAgainAt": "R\u00e9essayez \u00e0",
+    "languageNames": { "fr": "Fran\u00e7ais", "en": "Anglais" }
+  },
+  "errors": {
+    "generic": "Une erreur est survenue !",
+    "missingTranslation": "Traduction manquante.",
+    "noPermission": "Vous n'avez pas la permission d'utiliser cette commande.",
+    "botNoPermission": "Le bot n'a pas les permissions requises.",
+    "invalidArguments": "Les arguments fournis sont incorrects.",
+    "alreadyPerformed": "Vous avez d\u00e9j\u00e0 effectu\u00e9 cette action.",
+    "unsupportedLanguage": "Cette langue n'est pas prise en charge.",
+    "moderation": {
+      "clearTooMany": "Je ne peux pas supprimer plus de 100 messages \u00e0 la fois !",
+      "clearTooFew": "Je ne peux pas supprimer moins d'un message !",
+      "clearFailed": "Une erreur est survenue lors de la suppression des messages dans ce salon.",
+      "cannotModerate": "Vous ne pouvez pas mod\u00e9rer un autre mod\u00e9rateur.",
+      "warnSuccess": "L'utilisateur a re\u00e7u un avertissement."
     }
+  },
+  "commands": {
+    "config": {
+      "language": {
+        "success": "La langue du serveur est maintenant : {language}.",
+        "description": "Choisir la langue du serveur",
+        "optionDescription": "Choisissez une langue"
+      },
+      "levels": {
+        "enabled": "Les niveaux sont maintenant activ\u00e9s dans ce serveur.",
+        "disabled": "Les niveaux sont maintenant d\u00e9sactiv\u00e9s dans ce serveur."
+      },
+      "setcolor": {
+        "invalid": "Vous n'avez pas pr\u00e9cis\u00e9 de couleur hexad\u00e9cimale. Exemple : FF0000",
+        "success": "La couleur int\u00e9gr\u00e9e a \u00e9t\u00e9 ajust\u00e9e avec succ\u00e8s."
+      },
+      "setchannelname": { "success": "Le nom du canal a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." },
+      "setverify": { "success": "Le panneau de v\u00e9rification a \u00e9t\u00e9 cr\u00e9\u00e9 avec succ\u00e8s." },
+      "levelmessage": { "success": "Le message de niveau a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." },
+      "welcomemessage": { "success": "Le message de bienvenue a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." },
+      "leavemessage": { "success": "Le message de d\u00e9part a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." }
     },
-    "errors": {
-        "generic": "Une erreur est survenue !",
-        "missingTranslation": "Traduction manquante.",
-        "noPermission": "Vous n'avez pas la permission d'utiliser cette commande.",
-        "botNoPermission": "Le bot n'a pas les permissions requises.",
-        "invalidArguments": "Les arguments fournis sont incorrects.",
-        "alreadyPerformed": "Vous avez déjà effectué cette action.",
-        "unsupportedLanguage": "Cette langue n'est pas prise en charge.",
-        "moderation": {
-            "clearTooMany": "Je ne peux pas supprimer plus de 100 messages à la fois !",
-            "clearTooFew": "Je ne peux pas supprimer moins d'un message !",
-            "clearFailed": "Une erreur est survenue lors de la suppression des messages dans ce salon.",
-            "cannotModerate": "Vous ne pouvez pas modérer un autre modérateur.",
-            "warnSuccess": "L'utilisateur a reçu un avertissement."
-        }
+    "setup": {
+      "channelsorter": {
+        "invalidChannel": "Le salon s\u00e9lectionn\u00e9 doit \u00eatre une cat\u00e9gorie.",
+        "success": "Le tri des salons a \u00e9t\u00e9 configur\u00e9 avec succ\u00e8s."
+      },
+      "deletesetup": {
+        "noConfig": "Aucune configuration de tri des salons n'a \u00e9t\u00e9 trouv\u00e9e.",
+        "selectionPrompt": "S\u00e9lectionnez la cat\u00e9gorie \u00e0 retirer du tri automatique :",
+        "removed": "Le tri des salons a \u00e9t\u00e9 retir\u00e9 de la cat\u00e9gorie s\u00e9lectionn\u00e9e.",
+        "cancelled": "Aucune cat\u00e9gorie s\u00e9lectionn\u00e9e dans la minute, op\u00e9ration annul\u00e9e.",
+        "success": "La configuration a \u00e9t\u00e9 supprim\u00e9e avec succ\u00e8s."
+      },
+      "tickets": { "success": "Les tickets ont \u00e9t\u00e9 configur\u00e9s avec succ\u00e8s." },
+      "customvoice": {
+        "success": "Le syst\u00e8me de salons vocaux personnalis\u00e9s a \u00e9t\u00e9 configur\u00e9 avec succ\u00e8s.",
+        "error": "Une erreur est survenue lors de la configuration des salons vocaux personnalis\u00e9s."
+      },
+      "ticketpanel": {
+        "success": "Le panneau de tickets a \u00e9t\u00e9 configur\u00e9 avec succ\u00e8s.",
+        "missingSetup": "Configurez d'abord les tickets."
+      }
     },
-    "commands": {
-        "config": {
-            "language": {
-                "success": "La langue du serveur est maintenant : {language}.",
-                "description": "Choisir la langue du serveur",
-                "optionDescription": "Choisissez une langue"
-            },
-            "levels": {
-                "enabled": "Les niveaux sont maintenant activés dans ce serveur.",
-                "disabled": "Les niveaux sont maintenant désactivés dans ce serveur."
-            },
-            "setcolor": {
-                "invalid": "Vous n'avez pas précisé de couleur hexadécimale. Exemple : FF0000",
-                "success": "La couleur intégrée a été ajustée avec succès."
-            },
-            "setchannelname": {
-                "success": "Le nom du canal a été défini avec succès."
-            },
-            "setverify": {
-                "success": "Le panneau de vérification a été créé avec succès."
-            },
-            "levelmessage": {
-                "success": "Le message de niveau a été défini avec succès."
-            },
-            "welcomemessage": {
-                "success": "Le message de bienvenue a été défini avec succès."
-            },
-            "leavemessage": {
-                "success": "Le message de congé a été défini avec succès."
-            }
-        },
-        "setup": {
-            "channelsorter": {
-                "invalidChannel": "Le salon sélectionné doit être une catégorie.",
-                "success": "Le tri des salons a été configuré avec succès."
-            },
-            "deletesetup": {
-                "noConfig": "Aucune configuration de tri des salons n'a été trouvée.",
-                "selectionPrompt": "Sélectionnez la catégorie à retirer du tri automatique :",
-                "removed": "Le tri des salons a été retiré de la catégorie sélectionnée.",
-                "cancelled": "Aucune catégorie sélectionnée dans la minute, opération annulée.",
-                "success": "La configuration a été supprimée avec succès."
-            },
-            "tickets": {
-                "success": "Les tickets ont été configurés avec succès."
-            },
-            "customvoice": {
-                "success": "Le système de salons vocaux personnalisés a été configuré avec succès.",
-                "error": "Une erreur est survenue lors de la configuration des salons vocaux personnalisés."
-            },
-            "ticketpanel": {
-                "success": "Le panneau de tickets a été configuré avec succès.",
-                "missingSetup": "Configurez d'abord les tickets."
-            }
-        },
-        "bot": {
-            "ping": {
-                "loading": "Calcul du ping...",
-                "description": "Découvrez à quelle vitesse répond notre bot."
-            },
-            "vote": {
-                "voted": "Vous avez voté !",
-                "notVoted": "Vous n'avez pas voté !",
-                "error": "Une erreur est survenue lors de la vérification du vote."
-            },
-            "feedback": {
-                "success": "Votre avis a été envoyé aux développeurs avec succès."
-            }
-        }
+    "bot": {
+      "ping": { "loading": "Calcul du ping...", "description": "D\u00e9couvrez \u00e0 quelle vitesse r\u00e9pond notre bot." },
+      "vote": {
+        "voted": "Vous avez vot\u00e9 !",
+        "notVoted": "Vous n'avez pas vot\u00e9 !",
+        "error": "Une erreur est survenue lors de la v\u00e9rification du vote."
+      },
+      "feedback": { "success": "Votre avis a \u00e9t\u00e9 envoy\u00e9 aux d\u00e9veloppeurs avec succ\u00e8s." }
+    },
+    "economy": {
+      "balance": {
+        "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
+        "empty": "Cet utilisateur n'a pas encore d'argent.",
+        "description": "Solde actuel de `{user}`",
+        "wallet": "Portefeuille",
+        "bank": "Banque",
+        "total": "Total"
+      },
+      "deposit": {
+        "usage": "deposit [montant]",
+        "invalid": "Saisissez un nombre valide !",
+        "negative": "Vous ne pouvez pas déposer une somme négative !",
+        "insufficient": "Vous n'avez pas assez d'argent.",
+        "success": "Vous avez déposé de l'argent dans votre banque !"
+      }
+    },
+    "casino": {
+      "slots": {
+        "usage": "slots [montant]",
+        "insufficient": "Vous pariez plus que vous ne possédez !",
+        "win": "Vous avez gagné {amount}.",
+        "lose": "Vous avez perdu {amount}.",
+        "empty": "Vous n'avez pas assez d'argent pour jouer."
+      }
     }
+  }
 }

@@ -7,15 +7,15 @@ module.exports = async (client, interaction, args) => {
     let amount = interaction.options.getNumber('amount');
     let user = interaction.user;
 
-    if (!amount) return client.errUsage({ usage: "deposit [amount]", type: 'editreply' }, interaction);
+    if (!amount) return client.errUsage({ usage: await client.t(interaction, 'commands.economy.deposit.usage'), type: 'editreply' }, interaction);
 
-    if (isNaN(amount)) return client.errNormal({ error: "Enter a valid number!", type: 'editreply' }, interaction);
+    if (isNaN(amount)) return client.errNormal({ key: 'commands.economy.deposit.invalid', type: 'editreply' }, interaction);
 
-    if (amount < 0) return client.errNormal({ error: `You can't deposit negative money!`, type: 'editreply' }, interaction);
+    if (amount < 0) return client.errNormal({ key: 'commands.economy.deposit.negative', type: 'editreply' }, interaction);
 
     const data = await Schema.findOne({ Guild: interaction.guild.id, User: user.id });
     if (data) {
-        if (data.Money < parseInt(amount)) return client.errNormal({ error: `You don't have that much money!`, type: 'editreply' }, interaction);
+        if (data.Money < parseInt(amount)) return client.errNormal({ key: 'commands.economy.deposit.insufficient', type: 'editreply' }, interaction);
 
             let money = parseInt(amount);
 
@@ -24,10 +24,10 @@ module.exports = async (client, interaction, args) => {
                 { $inc: { Money: -money, Bank: money } },
                 { new: true }
             );
-            if (!updated) return client.errNormal({ error: `You don't have that much money!`, type: 'editreply' }, interaction);
+            if (!updated) return client.errNormal({ key: 'commands.economy.deposit.insufficient', type: 'editreply' }, interaction);
 
             client.succNormal({
-                text: `You've have deposited some money into your bank!`,
+                key: 'commands.economy.deposit.success',
                 fields: [
                     {
                         name: `${client.emotes.economy.coins}┆Amount`,
