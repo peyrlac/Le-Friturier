@@ -967,6 +967,21 @@ test('emoji lifecycle events use localization keys', () => {
   assert.doesNotMatch(read('src/events/emoji/emojiDelete.js'), /Emoji deleted|An emoji has been deleted|> Name|> ID/);
 });
 
+test('sticker lifecycle events use localization keys', () => {
+  const expectations = {
+    'src/events/sticker/stickerCreate.js': ['auditEvents.stickerCreatedTitle', 'auditEvents.stickerCreatedDescription', 'auditEvents.name', 'auditEvents.id', 'auditEvents.url'],
+    'src/events/sticker/stickerUpdate.js': ['auditEvents.stickerUpdatedTitle', 'auditEvents.stickerUpdatedDescription', 'auditEvents.before', 'auditEvents.after', 'auditEvents.id'],
+    'src/events/sticker/stickerDelete.js': ['auditEvents.stickerDeletedTitle', 'auditEvents.stickerDeletedDescription', 'auditEvents.name', 'auditEvents.id']
+  };
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), `${file}: ${key}`);
+  }
+  assert.doesNotMatch(read('src/events/sticker/stickerCreate.js'), /Sticker created|A sticker has been created|> Name|> ID|> Url/);
+  assert.doesNotMatch(read('src/events/sticker/stickerUpdate.js'), /Sticker updated|A sticker has been updated|> Before|> After|> ID/);
+  assert.doesNotMatch(read('src/events/sticker/stickerDelete.js'), /Sticker deleted|A sticker has been deleted|> Name|> ID/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
