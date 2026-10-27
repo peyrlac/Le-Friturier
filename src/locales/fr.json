@@ -1632,7 +1632,17 @@
     },
     "fun": {
       "name": "fun",
-      "description": "Exécuter les commandes amusantes du bot"
+      "description": "Exécuter les commandes amusantes du bot",
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie fun" }
+      },
+      "common": { "selectUser": "Sélectionner un utilisateur", "enterText": "Saisir un texte" },
+      "subcommandGroups": {
+        "meme": { "description": "Voir toutes les commandes de memes du bot", "subcommands": { "confused": { "description": "Réagir avec un meme Confused Nick Young" }, "cleverrate": { "description": "Voir votre niveau d’intelligence" }, "dinochrome": { "description": "Dinosaure dans Chrome" }, "epicgamerrate": { "description": "Voir votre niveau de gamer" }, "howgay": { "description": "Voir votre niveau de gay" }, "roast": { "description": "Insulter un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" } } }, "simprate": { "description": "Voir votre niveau de simp" }, "stankrate": { "description": "Voir votre niveau de puanteur" }, "rickroll": { "description": "Obtenir un rickroll" } } },
+        "user": { "description": "Voir toutes les commandes utilisateur du bot", "subcommands": { "hack": { "description": "Pirater vos amis ou ennemis !", "options": { "user": { "description": "Sélectionner un utilisateur" } } }, "hug": { "description": "Faire un câlin à un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" } } }, "kill": { "description": "Tuer un utilisateur", "options": { "user": { "description": "Sélectionner un utilisateur" } } }, "lovemeter": { "description": "Voir votre compatibilité avec quelqu’un", "options": { "user1": { "description": "Sélectionner un utilisateur" }, "user2": { "description": "Sélectionner un utilisateur" } } }, "sudo": { "description": "Parler comme quelqu’un d’autre", "options": { "user": { "description": "Sélectionner un utilisateur" }, "text": { "description": "Saisir un texte" } } } } },
+        "text": { "description": "Voir toutes les commandes texte du bot", "subcommands": { "ascii": { "description": "Créer un texte ASCII", "options": { "text": { "description": "Saisir un texte" } } }, "gif": { "description": "Rechercher un GIF", "options": { "text": { "description": "Saisir un texte" } } }, "reverse": { "description": "Inverser votre texte", "options": { "text": { "description": "Saisir un texte" } } }, "say": { "description": "Faire parler le bot", "options": { "text": { "description": "Saisir un texte" } } } } },
+        "extra": { "description": "Voir toutes les commandes supplémentaires du bot", "subcommands": { "birdfact": { "description": "Obtenir un fait aléatoire sur les oiseaux" }, "catfact": { "description": "Obtenir un fait aléatoire sur les chats" }, "dogfact": { "description": "Obtenir un fait aléatoire sur les chiens" }, "fact": { "description": "Obtenir un fait aléatoire" }, "koalafact": { "description": "Obtenir un fait aléatoire sur les koalas" }, "pandafact": { "description": "Obtenir un fait aléatoire sur les pandas" }, "token": { "description": "Obtenir mon token" }, "worldclock": { "description": "Afficher les fuseaux horaires du monde" }, "xmas": { "description": "Voir le nombre de jours avant Noël" } } }
+      }
     },
     "giveaway": {
       "name": "concours",

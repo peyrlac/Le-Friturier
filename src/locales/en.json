@@ -1645,7 +1645,17 @@
     },
     "fun": {
       "name": "fun",
-      "description": "Run fun commands in the bot"
+      "description": "Run fun commands in the bot",
+      "subcommands": {
+        "help": { "description": "Get information about the fun category commands" }
+      },
+      "common": { "selectUser": "Select a user", "enterText": "Enter a text" },
+      "subcommandGroups": {
+        "meme": { "description": "See all the fun meme commands in Bot", "subcommands": { "confused": { "description": "React with a Confused Nick Young meme" }, "cleverrate": { "description": "See how much clever you are" }, "dinochrome": { "description": "Dinosaur in Chrome" }, "epicgamerrate": { "description": "See how much of an epic gamer you are" }, "howgay": { "description": "See how gay you are" }, "roast": { "description": "Roast a user", "options": { "user": { "description": "Select a user" } } }, "simprate": { "description": "See how simp you are" }, "stankrate": { "description": "See how stanky you are" }, "rickroll": { "description": "Get a rickroll" } } },
+        "user": { "description": "See all the fun user commands in Bot", "subcommands": { "hack": { "description": "Hack your friends or enemies!", "options": { "user": { "description": "Select a user" } } }, "hug": { "description": "Give a hug to a user", "options": { "user": { "description": "Select a user" } } }, "kill": { "description": "Kill a user", "options": { "user": { "description": "Select a user" } } }, "lovemeter": { "description": "See how much you fit in with someone", "options": { "user1": { "description": "Select a user" }, "user2": { "description": "Select a user" } } }, "sudo": { "description": "Say something like someone else", "options": { "user": { "description": "Select a user" }, "text": { "description": "Enter a text" } } } } },
+        "text": { "description": "See all the fun text commands in Bot", "subcommands": { "ascii": { "description": "Make ascii text", "options": { "text": { "description": "Enter a text" } } }, "gif": { "description": "Search a gif", "options": { "text": { "description": "Enter a text" } } }, "reverse": { "description": "Reverse your text", "options": { "text": { "description": "Enter a text" } } }, "say": { "description": "Have the bot say something", "options": { "text": { "description": "Enter a text" } } } } },
+        "extra": { "description": "See all the fun extra commands in Bot", "subcommands": { "birdfact": { "description": "Get a random bird fact" }, "catfact": { "description": "Get a random cat fact" }, "dogfact": { "description": "Get a random dog fact" }, "fact": { "description": "Get a random fact" }, "koalafact": { "description": "Get a random koalafact fact" }, "pandafact": { "description": "Get a random pandafact fact" }, "token": { "description": "Get my token" }, "worldclock": { "description": "Shows the world clock(s)" }, "xmas": { "description": "See the number of days until Christmas" } } }
+      }
     },
     "giveaway": {
       "name": "giveaway",
