@@ -993,6 +993,10 @@
     "output": "📥┇Sortie",
     "error": "📥┇Erreur !"
   },
+  "developerCredits": {
+    "added": "Ajout de **{amount} crédits** à {user}.",
+    "removed": "Retrait de **{amount} crédits** de {user}."
+  },
   "fun": {
     "tokenTitle": "🤖・Token du bot",
     "tokenUnavailable": "Impossible de récupérer les données distantes."

@@ -20,7 +20,8 @@ module.exports = async (client, interaction, args) => {
         );
 
         await client.succNormal({
-            text: `Ajoutée **${amount} crédits ** à ${user}`,
+            key: 'developerCredits.added',
+            variables: { amount, user },
             type: 'editreply'
         }, interaction);
 
@@ -46,7 +47,8 @@ module.exports = async (client, interaction, args) => {
         }
 
         await client.succNormal({
-            text: `Supprimé **${amount} crédits ** de ${user}`,
+            key: 'developerCredits.removed',
+            variables: { amount, user },
             type: 'editreply'
         }, interaction);
 

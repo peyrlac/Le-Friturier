@@ -510,6 +510,13 @@ test('move commands use localization keys for all user-facing responses', () => 
   }
 });
 
+test('developer credit responses use localization keys', () => {
+  const source = read('src/commands/developers/credits.js');
+  assert.match(source, /developerCredits\.added/);
+  assert.match(source, /developerCredits\.removed/);
+  assert.doesNotMatch(source, /succNormal\(\{\s*text:/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));
