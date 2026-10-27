@@ -1633,7 +1633,8 @@
     "config": {
       "name": "config",
       "description": "Customize the bot to your liking",
-      "subcommandGroups": { "feature": { "name": "feature", "description": "Manage server features", "subcommands": { "list": { "description": "List feature statuses" }, "set": { "description": "Enable or disable a feature" }, "reset": { "description": "Reset a feature" } } } }
+      "subcommandGroups": { "feature": { "name": "feature", "description": "Manage server features", "subcommands": { "list": { "description": "List feature statuses" }, "set": { "description": "Enable or disable a feature" }, "reset": { "description": "Reset a feature" } } } },
+      "subcommands": { "language": { "options": { "language": { "choices": { "fr": { "name": "French" }, "en": { "name": "English" } } } } }, "ticketmessage": { "options": { "type": { "choices": { "open": { "name": "Open" }, "close": { "name": "Close by DM" } } } } } }
     },
     "triggers": {
       "name": "triggers",

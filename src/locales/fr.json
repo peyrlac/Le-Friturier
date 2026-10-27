@@ -1620,7 +1620,8 @@
     "config": {
       "name": "config",
       "description": "Ajustez le bot à votre goût",
-      "subcommandGroups": { "feature": { "name": "fonctionnalité", "description": "Gérer les fonctionnalités du serveur", "subcommands": { "list": { "description": "Afficher l’état des fonctionnalités" }, "set": { "description": "Activer ou désactiver une fonctionnalité" }, "reset": { "description": "Réinitialiser une fonctionnalité" } } } }
+      "subcommandGroups": { "feature": { "name": "fonctionnalité", "description": "Gérer les fonctionnalités du serveur", "subcommands": { "list": { "description": "Afficher l’état des fonctionnalités" }, "set": { "description": "Activer ou désactiver une fonctionnalité" }, "reset": { "description": "Réinitialiser une fonctionnalité" } } } },
+      "subcommands": { "language": { "options": { "language": { "choices": { "fr": { "name": "Français" }, "en": { "name": "Anglais" } } } } }, "ticketmessage": { "options": { "type": { "choices": { "open": { "name": "Ouverture" }, "close": { "name": "Fermeture par DM" } } } } } }
     },
     "triggers": {
       "name": "triggers",

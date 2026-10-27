@@ -102,7 +102,7 @@ test('exposes the config language subcommand with both supported choices', () =>
     assert.ok(language);
     assert.deepEqual(language.options[0].choices.map(({ name, value }) => ({ name, value })), [
         { name: 'Français', value: 'fr' },
-        { name: 'English', value: 'en' },
+        { name: 'Anglais', value: 'en' },
     ]);
 });
 
@@ -489,6 +489,25 @@ test('serializes localized trigger choice names from command metadata', () => {
   assert.deepEqual(activeChoices.find(choice => choice.value === 'false').name_localizations, {
     fr: 'Désactivé',
     'en-US': 'Disabled'
+  });
+});
+
+test('serializes localized config choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/config');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const languageChoices = command.data.toJSON().options.find(option => option.name === 'language').options[0].choices;
+  const ticketChoices = command.data.toJSON().options.find(option => option.name === 'ticketmessage').options
+    .find(option => option.name === 'type').choices;
+
+  assert.deepEqual(languageChoices.find(choice => choice.value === 'fr').name_localizations, {
+    fr: 'Français',
+    'en-US': 'French'
+  });
+  assert.deepEqual(ticketChoices.find(choice => choice.value === 'close').name_localizations, {
+    fr: 'Fermeture par DM',
+    'en-US': 'Close by DM'
   });
 });
 
