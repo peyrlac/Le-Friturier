@@ -15,7 +15,7 @@ module.exports = async (client, interaction, args) => {
     });
 
     client.succNormal({
-        text: "Channel locked successfully!",
+        key: 'moderation.channelLocked',
         fields: [
             {
                 name: `📘┆Channel`,
@@ -26,4 +26,4 @@ module.exports = async (client, interaction, args) => {
     }, interaction);
 }
 
- 
+

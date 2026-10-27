@@ -763,6 +763,10 @@
     "newReview": "A new review has been published."
   },
   "moderation": {
+    "channelLocked": "Channel locked successfully!",
+    "channelUnlocked": "Channel unlocked successfully!",
+    "channelsLocked": "Channels locked successfully!",
+    "channel": "📘‡Channel",
     "warningsTitle": "⚠️・Warnings",
     "warningsDescription": "Warnings for **{user}**",
     "warningCase": "Warning **{case}**",
