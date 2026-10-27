@@ -112,7 +112,16 @@
       "alreadyOpen": "Le ticket est déjà ouvert.",
       "opened": "Ticket rouvert par <@!{user}>.",
       "cannotRemoveCreator": "Vous ne pouvez pas retirer le créateur de ce ticket.",
-      "removed": "{user} a été retiré du ticket."
+      "removed": "{user} a été retiré du ticket.",
+      "informationLoading": "Chargement des informations...",
+      "informationTitle": "Informations",
+      "ticketName": "Nom du ticket",
+      "channelId": "Identifiant du salon",
+      "creator": "Créateur",
+      "ticketId": "Identifiant du ticket",
+      "closeSetupRequired": "Configurez les tickets d'abord.",
+      "closed": "Ticket fermé.",
+      "closedPanel": "📝 - Sauvegarder le transcript\n🔓 - Rouvrir le ticket\n⛔ - Supprimer le ticket"
     },
     "music": {
       "notInVoice": "Vous n'êtes pas dans un canal vocal !",

@@ -131,7 +131,16 @@
       "alreadyOpen": "The ticket is already open.",
       "opened": "Ticket opened by <@!{user}>.",
       "cannotRemoveCreator": "You cannot remove the ticket creator from this ticket.",
-      "removed": "{user} was removed from the ticket."
+      "removed": "{user} was removed from the ticket.",
+      "informationLoading": "Loading information...",
+      "informationTitle": "Information",
+      "ticketName": "Ticket name",
+      "channelId": "Channel ID",
+      "creator": "Creator",
+      "ticketId": "Ticket ID",
+      "closeSetupRequired": "Set up tickets first.",
+      "closed": "Ticket is closed.",
+      "closedPanel": "📝 - Save transcript\n🔓 - Reopen ticket\n⛔ - Delete ticket"
     },
     "music": {
       "notInVoice": "You are not in a voice channel!",
