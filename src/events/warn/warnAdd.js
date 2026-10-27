@@ -12,27 +12,27 @@ module.exports = async (client, user, mod, reason) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `🔨・Member warned`,
-        desc: `A user has been warned`,
+        title: await client.t(user, 'moderationEvents.warnTitle'),
+        desc: await client.t(user, 'moderationEvents.warnDescription'),
         fields: [
             {
-                name: `> User`,
+                name: await client.t(user, 'moderationEvents.user'),
                 value: `- ${user}`
             },
             {
-                name: `> Tag`,
+                name: await client.t(user, 'moderationEvents.tag'),
                 value: `- ${user.user.username}#${user.user.discriminator}`
             },
             {
-                name: `> ID`,
+                name: await client.t(user, 'moderationEvents.id'),
                 value: `${user.id}`
             },
             {
-                name: `> Moderator`,
+                name: await client.t(user, 'moderationEvents.moderator'),
                 value: `${mod} (${mod.id})`
             },
             {
-                name: `> Reason`,
+                name: await client.t(user, 'moderationEvents.reason'),
                 value: `${reason}`
             }
         ]

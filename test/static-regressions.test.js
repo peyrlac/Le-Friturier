@@ -896,6 +896,19 @@ test('music interaction responses use localization keys', () => {
   assert.doesNotMatch(source, /Music is currently paused|Music is currently resumed|Music is currently stopped|Requested By|Ends at/);
 });
 
+test('warning lifecycle events use localization keys', () => {
+  const expectations = {
+    'src/events/warn/warnAdd.js': ['moderationEvents.warnTitle', 'moderationEvents.warnDescription', 'moderationEvents.user', 'moderationEvents.tag', 'moderationEvents.id', 'moderationEvents.moderator', 'moderationEvents.reason'],
+    'src/events/warn/warnRemove.js': ['moderationEvents.unwarnTitle', 'moderationEvents.unwarnDescription', 'moderationEvents.user', 'moderationEvents.tag', 'moderationEvents.id', 'moderationEvents.moderator']
+  };
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+  }
+  assert.doesNotMatch(read('src/events/warn/warnAdd.js'), /Member warned|A user has been warned|> User/);
+  assert.doesNotMatch(read('src/events/warn/warnRemove.js'), /Member unwarned|A user has been unwarned|> User/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
