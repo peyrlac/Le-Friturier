@@ -845,6 +845,7 @@
     "moderator": "👤┆Moderator",
     "user": "👤┆User",
     "reason": "📄┆Reason"
+      ,"selectWarning": "Select a warning to remove"
   },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",

@@ -29,14 +29,14 @@ module.exports = {
         }
         // Create modal to give a reason
         const modal = new Discord.ModalBuilder()
-            .setTitle('Warn')
+            .setTitle(await client.t(interaction, 'moderation.warnTitle'))
             .setCustomId('warn')
             .addComponents(
                 new Discord.ActionRowBuilder().addComponents(
                     new Discord.TextInputBuilder()
                         .setCustomId('reason')
-                        .setPlaceholder('Reason')
-                        .setLabel('Reason')
+                        .setPlaceholder(await client.t(interaction, 'moderation.reason'))
+                        .setLabel(await client.t(interaction, 'moderation.reason'))
                         .setMinLength(1)
                         .setStyle(Discord.TextInputStyle.Short)
                         .setMaxLength(100)),
@@ -92,16 +92,16 @@ module.exports = {
             }
 
         client.embed({
-            title: `🔨・Warn`,
-            desc: `You've been warned in **${interaction.guild.name}**`,
+            title: await client.t(interaction, 'moderation.warnTitle'),
+            desc: await client.t(interaction, 'moderation.warnDescription', { guild: interaction.guild.name }),
             fields: [
                 {
-                    name: "👤┆Moderator",
+                    name: await client.t(interaction, 'moderation.moderator'),
                     value: interaction.user.tag,
                     inline: true
                 },
                 {
-                    name: "📄┆Reason",
+                    name: await client.t(interaction, 'moderation.reason'),
                     value: submitted.fields.getTextInputValue("reason"),
                     inline: true
                 }
@@ -113,17 +113,17 @@ module.exports = {
             key: 'errors.moderation.warnSuccess',
             fields: [
                 {
-                    name: "👤┆User",
+                    name: await client.t(submitted, 'moderation.user'),
                     value: `${member}`,
                     inline: true
                 },
                 {
-                    name: "👤┆Moderator",
+                    name: await client.t(submitted, 'moderation.moderator'),
                     value: `${interaction.user}`,
                     inline: true
                 },
                 {
-                    name: "📄┆Reason",
+                    name: await client.t(submitted, 'moderation.reason'),
                     value: submitted.fields.getTextInputValue("reason"),
                     inline: false
                 }
