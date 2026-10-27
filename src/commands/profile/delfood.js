@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
     const food = interaction.options.getString('food');
     const user = { User: interaction.user.id }
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
             if (data && data.Food) {
                 if (!data.Food.includes(food)) {
-                    return client.errNormal({ error: `That food doesn't exist in the database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ key: 'profile.itemNotFound', variables: { item: food }, type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Food.filter((target) => target !== food);
@@ -19,8 +19,9 @@ module.exports = async (client, interaction, args) => {
                     Food: filtered
                 });
             }
-            client.succNormal({
-                text: "Removed your food",
+            return client.succNormal({
+                key: 'profile.itemRemoved',
+                variables: { item: food },
                 fields: [{
                     name: "🥐┆Food",
                     value: `\`\`\`${food}\`\`\``,
@@ -28,12 +29,5 @@ module.exports = async (client, interaction, args) => {
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
-
 }
 
- 

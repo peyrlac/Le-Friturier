@@ -54,6 +54,10 @@
         "originTooLong": "Votre origine ne peut pas dépasser 50 caractères.",
         "originSuccess": "Votre origine a été enregistrée.",
         "originField": "Pays",
+        "itemAlreadyExists": "{item} existe déjà dans votre profil.",
+        "itemNotFound": "{item} n'existe pas dans votre profil.",
+        "itemAdded": "{item} a été ajouté à votre profil.",
+        "itemRemoved": "{item} a été retiré de votre profil.",
         "notFound": "Aucun profil trouvé ! Ouvrez-en un avec `createprofile`."
       },
     "config": {

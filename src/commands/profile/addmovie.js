@@ -4,22 +4,23 @@ module.exports = async (client, interaction, args) => {
 
     const movie = interaction.options.getString('movie');
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
             if (data && data.Movies) {
                 if (data.Movies.includes(movie)) {
-                    return client.errNormal({ error: `That movie is already exists in your database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ key: 'profile.itemAlreadyExists', variables: { item: movie }, type: 'editreply' }, interaction);
                 }
                 data.Movies.push(movie);
-                data.save();
+                await data.save();
             }
             else {
-                data.Movies = movie;
-                data.save();
+                data.Movies = [movie];
+                await data.save();
             }
-            client.succNormal({
-                text: "Added your movie",
+            return client.succNormal({
+                key: 'profile.itemAdded',
+                variables: { item: movie },
                 fields: [{
                     name: "🎬┆Movies",
                     value: `\`\`\`${movie}\`\`\``,
@@ -27,12 +28,5 @@ module.exports = async (client, interaction, args) => {
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
-
 }
 
- 

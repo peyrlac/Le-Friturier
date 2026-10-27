@@ -4,22 +4,23 @@ module.exports = async (client, interaction, args) => {
 
     const hobby = interaction.options.getString('hobby');
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
             if (data && data.Hobbys) {
                 if (data.Hobbys.includes(hobby)) {
-                    return client.errNormal({ error: `That hobby is already exists in your database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ key: 'profile.itemAlreadyExists', variables: { item: hobby }, type: 'editreply' }, interaction);
                 }
                 data.Hobbys.push(hobby);
-                data.save();
+                await data.save();
             }
             else {
-                data.Hobbys = hobby;
-                data.save();
+                data.Hobbys = [hobby];
+                await data.save();
             }
-            client.succNormal({
-                text: "Added your hobby",
+            return client.succNormal({
+                key: 'profile.itemAdded',
+                variables: { item: hobby },
                 fields: [{
                     name: "⚽┆Hobby",
                     value: `\`\`\`${hobby}\`\`\``,
@@ -27,12 +28,5 @@ module.exports = async (client, interaction, args) => {
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
-
 }
 
- 

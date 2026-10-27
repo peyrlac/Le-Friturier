@@ -5,12 +5,12 @@ module.exports = async (client, interaction, args) => {
     const actor = interaction.options.getString('actor');
     const user = { User: interaction.user.id }
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
-        if (data) {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
             if (data && data.Actors) {
                 if (!data.Actors.includes(actor)) {
-                    return client.errNormal({ error: `That actor doesn't exist in the database!`, type: 'editreply' }, interaction);
+                    return client.errNormal({ key: 'profile.itemNotFound', variables: { item: actor }, type: 'editreply' }, interaction);
                 }
 
                 const filtered = data.Actors.filter((target) => target !== actor);
@@ -19,8 +19,9 @@ module.exports = async (client, interaction, args) => {
                     Actors: filtered
                 });
             }
-            client.succNormal({
-                text: "Removed your actor",
+            return client.succNormal({
+                key: 'profile.itemRemoved',
+                variables: { item: actor },
                 fields: [{
                     name: "👨‍🎤┆Actor",
                     value: `\`\`\`${actor}\`\`\``,
@@ -28,12 +29,5 @@ module.exports = async (client, interaction, args) => {
                 }],
                 type: 'editreply'
             }, interaction);
-        }
-        else {
-            return client.errNormal({ error: "No profile found! Open a profile with createprofile", type:'editreply' }, interaction);
-        }
-    })
-
 }
 
- 
