@@ -543,6 +543,7 @@
       "skipped": "La musique a été passée.",
       "stopped": "La musique a été arrêtée.",
       "queueEmpty": "Il n'y a plus de musique dans la file d'attente.",
+      "disconnected": "La musique s’est arrêtée. Je suis déconnecté du salon vocal.",
       "currentVolume": "Le volume actuel est **{amount}%**",
       "invalidNumber": "Veuillez saisir un nombre valide !",
       "maxVolume": "Le volume ne peut pas dépasser 1000 %.",
