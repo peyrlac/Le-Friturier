@@ -174,7 +174,11 @@
       "eightBallPointsNo": "Everything points to a no.",
       "eightBallNoDoubt": "No doubt.",
       "eightBallAbsolutely": "Absolutely.",
-      "eightBallDontKnow": "I do not know."
+      "eightBallDontKnow": "I do not know.",
+      "skipWordSkipped": "Word skipped successfully!",
+      "skipWordTitle": "Guess the word",
+      "skipWordDescription": "Put the letters in the right position!\n\n🔀 {word}",
+      "skipWordWrongChannel": "You are not in the right channel!"
     },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",

@@ -155,7 +155,11 @@
       "eightBallPointsNo": "Tout indique que non.",
       "eightBallNoDoubt": "Sans aucun doute.",
       "eightBallAbsolutely": "Absolument.",
-      "eightBallDontKnow": "Je ne sais pas."
+      "eightBallDontKnow": "Je ne sais pas.",
+      "skipWordSkipped": "Mot passé avec succès !",
+      "skipWordTitle": "Devinez le mot",
+      "skipWordDescription": "Placez les lettres dans le bon ordre !\n\n🔀 {word}",
+      "skipWordWrongChannel": "Vous n'êtes pas dans le bon salon !"
     },
     "images": {
       "remoteDataError": "Impossible de récupérer les données distantes.",
