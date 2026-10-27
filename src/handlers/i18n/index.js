@@ -54,8 +54,29 @@ function initializeI18n(client) {
     };
 }
 
+function applyCommandLocalizations(command) {
+    const localizations = command?.localizations;
+    const builder = command?.data;
+    if (!localizations || !builder) return command;
+
+    const discordLocale = (locale) => locale === 'en' ? 'en-US' : locale;
+    const serializeLocales = (values) => Object.fromEntries(
+        Object.entries(values).map(([locale, value]) => [discordLocale(locale), value])
+    );
+
+    if (localizations.name && typeof builder.setNameLocalizations === 'function') {
+        builder.setNameLocalizations(serializeLocales(localizations.name));
+    }
+    if (localizations.description && typeof builder.setDescriptionLocalizations === 'function') {
+        builder.setDescriptionLocalizations(serializeLocales(localizations.description));
+    }
+
+    return command;
+}
+
 initializeI18n.createI18n = createI18n;
 initializeI18n.DEFAULT_LOCALE = DEFAULT_LOCALE;
 initializeI18n.SUPPORTED_LOCALES = SUPPORTED_LOCALES;
+initializeI18n.applyCommandLocalizations = applyCommandLocalizations;
 
 module.exports = initializeI18n;

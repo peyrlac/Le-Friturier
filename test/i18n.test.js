@@ -5,6 +5,7 @@ const {
     createI18n,
     SUPPORTED_LOCALES,
     DEFAULT_LOCALE,
+    applyCommandLocalizations,
 } = require('../src/handlers/i18n');
 
 test('translates keys in French and English with interpolation', () => {
@@ -56,6 +57,18 @@ test('exposes the config language subcommand with both supported choices', () =>
         { name: 'Français', value: 'fr' },
         { name: 'English', value: 'en' },
     ]);
+});
+
+test('serializes native command localizations for Discord', () => {
+    const command = require('../src/interactions/Command/config');
+    applyCommandLocalizations(command);
+    const data = command.data.toJSON();
+
+    assert.deepEqual(data.name_localizations, { fr: 'config', 'en-US': 'config' });
+    assert.deepEqual(data.description_localizations, {
+        fr: 'Ajustez le bot à votre goût',
+        'en-US': 'Customize the bot to your liking'
+    });
 });
 
 test('response helpers resolve a translation key before sending an embed', async () => {

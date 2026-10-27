@@ -3,6 +3,7 @@ const { REST } = require('discord.js');
 const { Routes } = require('discord.js');
 const chalk = require('chalk');
 const fs = require('fs');
+const { applyCommandLocalizations } = require('../i18n');
 
 module.exports = (client) => {
     const interactionLogs = new Discord.WebhookClient({
@@ -21,7 +22,7 @@ module.exports = (client) => {
         if (client.shard.ids[0] === 0) console.log(chalk.blue(chalk.bold(`System`)), (chalk.white(`>>`)), chalk.red(`${commandFiles.length}`), (chalk.green(`commands of`)), chalk.red(`${dirs}`), (chalk.green(`loaded`)));
 
         for (const file of commandFiles) {
-            const command = require(`${process.cwd()}/src/interactions/${dirs}/${file}`);
+            const command = applyCommandLocalizations(require(`${process.cwd()}/src/interactions/${dirs}/${file}`));
             client.commands.set(command.data.name, command);
             commands.push(command.data);
         };
