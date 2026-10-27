@@ -198,7 +198,7 @@ module.exports = async (client, interaction, args) => {
         `While performing colonoscopy on an elephant, ${user} gets their head stuck in the elephants rectum and chokes.`,
     ];
 
-    client.embed({ title: `🔫・Kill`, desc: `${kills[Math.floor(Math.random() * kills.length)]}`, type: 'editreply' }, interaction)
+    client.embed({ titleKey: 'fun.killTitle', desc: `${kills[Math.floor(Math.random() * kills.length)]}`, type: 'editreply' }, interaction)
 
 }
 
