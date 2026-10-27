@@ -306,6 +306,9 @@
       "hunt": {
         "success": "Vous avez chassé et obtenu : {animal}"
       },
+      "daily": {
+        "success": "Vous avez récupéré votre récompense quotidienne !"
+      },
       "balance": {
         "bot": "Vous ne pouvez pas consulter le solde d'un bot !",
         "empty": "Cet utilisateur n'a pas encore d'argent.",
