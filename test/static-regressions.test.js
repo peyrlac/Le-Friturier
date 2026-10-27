@@ -605,6 +605,14 @@ test('help command reads native metadata from the locale catalog', () => {
   assert.doesNotMatch(source, /setDescription\(['"`]/);
 });
 
+test('invite commands read native metadata from the locale catalog', () => {
+  for (const file of ['invite.js', 'invites.js']) {
+    const source = read(`src/interactions/Command/${file}`);
+    assert.match(source, /getCommandMetadata\(/, file);
+    assert.doesNotMatch(source, /setDescription\(['"`]/, file);
+  }
+});
+
 test('move commands use localization keys for all user-facing responses', () => {
   const files = ['all.js', 'group.js', 'random.js', 'empty.js', 'split.js', 'regroup.js', 'emergency-meeting.js'];
   for (const file of files) {
