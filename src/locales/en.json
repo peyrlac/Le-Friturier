@@ -194,7 +194,10 @@
       "wouldYouRatherLoading": "{loading}┆Loading...",
       "wouldYouRatherTitle": "🤔・Would you rather...",
       "wouldYouRatherOptionA": "Option A",
-      "wouldYouRatherOptionB": "Option B"
+      "wouldYouRatherOptionB": "Option B",
+      "willYouPressTitle": "🤔・Will you press the button?",
+      "willYouPressYes": "Yes",
+      "willYouPressNo": "No"
     },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",
