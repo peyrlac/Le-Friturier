@@ -156,6 +156,37 @@ module.exports = {
                 )
         )
     ,
+    localizations: {
+        name: { fr: 'économie', en: 'economy' },
+        description: { fr: 'Jouer au jeu économique du serveur', en: 'Play the economy game in your server' },
+        subcommands: {
+            help: { description: { fr: 'Voir les commandes économiques disponibles', en: 'Get information about the economy category commands' } },
+            additem: { description: { fr: 'Ajouter un rôle à la boutique', en: 'Add a role item to the economy store' }, options: { role: { description: { fr: 'Sélectionnez un rôle', en: 'Select a role' } }, amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
+            addmoney: { description: { fr: 'Ajouter de l’argent à un utilisateur', en: 'Add money to a user' }, options: { user: { description: { fr: 'Sélectionnez un utilisateur', en: 'Select a user' } }, amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
+            balance: { description: { fr: 'Voir votre solde', en: 'See your balance' }, options: { user: { description: { fr: 'Utilisateur dont voir le solde', en: 'The user whose balance you want to see' } } } },
+            beg: { description: { fr: 'Mendier de l’argent', en: 'Beg for money' } },
+            buy: { description: { fr: 'Acheter des articles dans la boutique', en: 'Buy items in the bot store' } },
+            clear: { description: { fr: 'Réinitialiser l’économie', en: 'Clear the economy' } },
+            crime: { description: { fr: 'Commettre un crime', en: 'Commit a crime' } },
+            daily: { description: { fr: 'Récupérer votre récompense quotidienne', en: 'Claim your daily money' } },
+            deleteitem: { description: { fr: 'Supprimer un rôle de la boutique', en: 'Delete a role item from the economy store' }, options: { role: { description: { fr: 'Sélectionnez un rôle', en: 'Select a role' } } } },
+            deposit: { description: { fr: 'Déposer de l’argent à la banque', en: 'Deposit money to the bank' }, options: { amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
+            fish: { description: { fr: 'Pêcher', en: 'Fish some fish' } },
+            hourly: { description: { fr: 'Récupérer votre récompense horaire', en: 'Claim your hourly money' } },
+            hunt: { description: { fr: 'Chasser des animaux', en: 'Hunt some animals' } },
+            monthly: { description: { fr: 'Récupérer votre récompense mensuelle', en: 'Claim your monthly money' } },
+            pay: { description: { fr: 'Payer un utilisateur', en: 'Pay a user' }, options: { user: { description: { fr: 'Sélectionnez un utilisateur', en: 'Select a user' } }, amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
+            present: { description: { fr: 'Récupérer un cadeau hebdomadaire', en: 'Get a weekly present' } },
+            removemoney: { description: { fr: 'Retirer de l’argent à un utilisateur', en: 'Remove money from a user' }, options: { user: { description: { fr: 'Sélectionnez un utilisateur', en: 'Select a user' } }, amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
+            rob: { description: { fr: 'Voler un utilisateur', en: 'Rob a user' }, options: { user: { description: { fr: 'Sélectionnez un utilisateur', en: 'Select a user' } } } },
+            store: { description: { fr: 'Voir la boutique du serveur', en: 'Show the store of this guild' } },
+            weekly: { description: { fr: 'Récupérer votre récompense hebdomadaire', en: 'Claim your weekly money' } },
+            withdraw: { description: { fr: 'Retirer votre argent', en: 'Withdraw your money' }, options: { amount: { description: { fr: 'Entrez un montant', en: 'Enter an amount' } } } },
+            work: { description: { fr: 'Aller travailler', en: 'Go to work' } },
+            yearly: { description: { fr: 'Récupérer votre récompense annuelle', en: 'Claim your yearly money' } },
+            leaderboard: { description: { fr: 'Voir le classement économique', en: 'See the economy leaderboard' }, options: { type: { description: { fr: 'Type de classement souhaité', en: 'The leaderboard type that you want' } } } }
+        }
+    },
 
     /** 
      * @param {Client} client

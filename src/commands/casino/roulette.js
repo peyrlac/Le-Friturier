@@ -31,27 +31,27 @@ module.exports = async (client, interaction, args) => {
 
                 await client.addMoney(interaction, user, money);
 
-                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 15x`, descKey: 'casino.roulette.win', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 15x`, descKey: 'casino.roulette.win', variables: { amount: money, coins: client.emotes.economy.coins }, type: 'editreply' }, interaction);
             }
 
             else if (isOdd(random) && colour == 1) { // Red
                 money = parseInt(money * 1.5)
                 await client.addMoney(interaction, user, money);
 
-                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 1.5x`, descKey: 'casino.roulette.win', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 1.5x`, descKey: 'casino.roulette.win', variables: { amount: money, coins: client.emotes.economy.coins }, type: 'editreply' }, interaction);
             }
 
             else if (!isOdd(random) && colour == 0) { // Black
                 money = parseInt(money * 2)
                 await client.addMoney(interaction, user, money);
 
-                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 2x`, descKey: 'casino.roulette.win', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 2x`, descKey: 'casino.roulette.win', variables: { amount: money, coins: client.emotes.economy.coins }, type: 'editreply' }, interaction);
             }
 
             else { // Wrong
                 await client.removeMoney(interaction, user, money);
 
-                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 0x`, descKey: 'casino.roulette.lose', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as perdu **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 0x`, descKey: 'casino.roulette.lose', variables: { amount: money, coins: client.emotes.economy.coins }, type: 'editreply' }, interaction);
             }
 
     } else {
