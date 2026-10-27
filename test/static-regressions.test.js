@@ -654,6 +654,14 @@ test('economy command metadata is sourced from the locale catalogs', () => {
   assert.doesNotMatch(source, /localizations:\s*\{/);
 });
 
+test('recurring economy rewards localize their embed field labels', () => {
+  for (const name of ['beg', 'daily', 'hourly', 'monthly', 'weekly', 'yearly', 'present', 'work']) {
+    const source = read(`src/commands/economy/${name}.js`);
+    assert.match(source, /client\.t\(interaction, 'economy\.(?:amount|earned|job)'\)/, name);
+    assert.doesNotMatch(source, /["'](?:Amount|Earned|Crime)["']/i, name);
+  }
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);

@@ -623,6 +623,9 @@
       "connectedChannel": "📺┆Connected channel"
     },
     "economy": {
+    "amount": "Amount",
+    "earned": "Earned",
+    "job": "Job",
       "reset": {
         "confirmTitle": "⏰・Reset economy",
         "confirmDescription": "Are you sure you want to reset the economy?",
