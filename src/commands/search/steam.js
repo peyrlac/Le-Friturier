@@ -19,27 +19,27 @@ module.exports = async (client, interaction, args) => {
         thumbnail: s.thumbnail,
         fields: [
             {
-                name: `💬┇Name`,
+                name: await client.t(interaction, 'search.application.name'),
                 value: `${s.name}`,
                 inline: true,
             },
             {
-                name: `📃┇Capital`,
+                name: await client.t(interaction, 'search.application.description'),
                 value: `${s.description}`,
                 inline: false,
             },
             {
-                name: "💻┇Developers",
+                name: await client.t(interaction, 'search.application.developers'),
                 value: `${s.developers.join(", ")}`,
                 inline: true,
             },
             {
-                name: "☁┇Publishers",
+                name: await client.t(interaction, 'search.application.publishers'),
                 value: `${s.publishers.join(", ")}`,
                 inline: true,
             },
             {
-                name: "🪙┇Price",
+                name: await client.t(interaction, 'search.application.price'),
                 value: `${s.price}`,
                 inline: true,
             }
