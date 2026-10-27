@@ -1,0 +1,16 @@
+{
+    "common": {
+        "success": "Operation completed successfully."
+    },
+    "errors": {
+        "missingTranslation": "Missing translation.",
+        "noPermission": "You do not have permission to use this command."
+    },
+    "commands": {
+        "config": {
+            "language": {
+                "success": "The server language is now {language}."
+            }
+        }
+    }
+}

@@ -10,7 +10,12 @@ const Schema = new mongoose.Schema({
     AntiInvite: { type: Boolean, default: false },
     AntiLinks: { type: Boolean, default: false },
     Prefix: String,
-    Color: String 
+    Color: String,
+    Language: {
+        type: String,
+        enum: ['fr', 'en'],
+        default: 'fr'
+    }
 });
 
 module.exports = mongoose.model("functions", Schema);

@@ -331,7 +331,7 @@ module.exports = async (client, message) => {
   }
 
   if (!guildSettings || !guildSettings.Prefix) {
-    var prefix = client.config.Discord.prefix;
+    var prefix = client.config.discord.prefix;
   } else {
     var prefix = guildSettings.Prefix;
   }
@@ -402,7 +402,7 @@ module.exports = async (client, message) => {
     Name: command,
   });
   if (cmd) {
-    return message.channel.send({ content: cmdx.Responce });
+    return message.channel.send({ content: cmd.Responce });
   }
 
   const cmdx = await CommandsSchema.findOne({

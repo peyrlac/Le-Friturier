@@ -1,0 +1,17 @@
+{
+    "common": {
+        "success": "Opération effectuée avec succès.",
+        "onlyFrench": "Texte disponible uniquement en français."
+    },
+    "errors": {
+        "missingTranslation": "Traduction manquante.",
+        "noPermission": "Vous n'avez pas la permission d'utiliser cette commande."
+    },
+    "commands": {
+        "config": {
+            "language": {
+                "success": "La langue du serveur est maintenant : {language}."
+            }
+        }
+    }
+}
