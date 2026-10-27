@@ -20,4 +20,6 @@ test('Docker build does not copy local secrets or generated dependencies', () =>
 test('Dockerfile keeps the portable bot healthcheck and Alpine Chromium path', () => {
     assert.match(dockerfile, /PUPPETEER_EXECUTABLE_PATH=\/usr\/bin\/chromium-browser/);
     assert.match(dockerfile, /existsSync\('\/tmp\/bot-alive'\)/);
+    assert.match(dockerfile, /dumb-init/);
+    assert.match(dockerfile, /STOPSIGNAL SIGTERM/);
 });
