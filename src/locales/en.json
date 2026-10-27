@@ -940,7 +940,11 @@
     "pingTitle": "{pong}・pong",
     "botLatency": "🤖・Bot latency",
     "apiLatency": "💻・API latency",
-    "databaseLatency": "📂・Database latency"
+    "databaseLatency": "📂・Database latency",
+    "changelogsTitle": "📃・Changelogs",
+    "changelogs": "_____",
+    "changelogEntry": "📃・Changelogs",
+    "changelogEntryValue": "15/03/2023: dependencies updated"
   },
   "botInfo": {
     "title": "ℹ・Bot information",

@@ -927,7 +927,11 @@
     "pingTitle": "{pong}・pong",
     "botLatency": "🤖・Latence du bot",
     "apiLatency": "💻・Latence de l'API",
-    "databaseLatency": "📂・Latence de la base de données"
+    "databaseLatency": "📂・Latence de la base de données",
+    "changelogsTitle": "📃・Journal des changements",
+    "changelogs": "_____",
+    "changelogEntry": "📃・Journal des changements",
+    "changelogEntryValue": "15/03/2023 : dépendances mises à jour"
   },
   "botInfo": {
     "title": "ℹ・Informations du bot",

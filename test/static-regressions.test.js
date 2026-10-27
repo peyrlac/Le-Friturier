@@ -867,6 +867,14 @@ test('bot info embed uses localized labels', () => {
   assert.doesNotMatch(source, /BOT INFORMATION|Bot est un bot|Nom de bot|Vitesse de l'API/);
 });
 
+test('changelogs embed uses localization keys', () => {
+  const source = read('src/commands/bot/changelogs.js');
+  for (const key of ['botResponses.changelogsTitle', 'botResponses.changelogs', 'botResponses.changelogEntry']) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  }
+  assert.doesNotMatch(source, /Changelogs|Dépendances mises à jour/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
