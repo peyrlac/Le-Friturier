@@ -186,6 +186,8 @@
       "fastTypeCompletedIn": "You did it in {time}!",
       "fastTypeFailed": "Unfortunately you didn't succeed!",
       "fastTypeCompleted": "You did it!"
+      ,"snakeTitle": "Snake",
+      "snakeScore": "GG, you scored **{score}** points!"
     },
     "images": {
       "remoteDataError": "Unable to retrieve remote data.",

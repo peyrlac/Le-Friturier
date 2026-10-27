@@ -167,6 +167,8 @@
       "fastTypeCompletedIn": "Réussi en {time} !",
       "fastTypeFailed": "Malheureusement, vous n'avez pas réussi !",
       "fastTypeCompleted": "Vous avez réussi !"
+      ,"snakeTitle": "Snake",
+      "snakeScore": "Bien joué, vous avez marqué **{score}** points !"
     },
     "images": {
       "remoteDataError": "Impossible de récupérer les données distantes.",
