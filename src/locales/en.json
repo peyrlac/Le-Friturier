@@ -874,6 +874,17 @@
     "resetSuccess": "Your family has been destroyed!",
     "resetTimeout": "The time limit expired. Your family was not changed."
   },
+  "events": {
+    "name": "events",
+    "description": "Manage events",
+    "noThread": "❌ This thread is not associated with an event. Please provide the event ID.",
+    "idRequired": "❌ Please provide the event ID or use this command in the event thread.",
+    "notFound": "❌ Event not found. Check the provided ID.",
+    "noParticipants": "No participants available.",
+    "eventTitle": "📅 {name}",
+    "listTitle": "Participants list ({count})",
+    "fetchError": "❌ An error occurred while retrieving the participants."
+  },
   "suggestions": {
     "title": "💡・Suggestion",
     "accepted": "Suggestion successfully accepted",
@@ -1229,6 +1240,17 @@
         "type": { "description": "The type of your report" },
         "description": { "description": "Description of your report" }
       }
+    },
+    "events": {
+      "name": "events",
+      "description": "Manage events",
+      "noThread": "❌ This thread is not associated with an event. Please provide the event ID.",
+      "idRequired": "❌ Please provide the event ID or use this command in the event thread.",
+      "notFound": "❌ Event not found. Check the provided ID.",
+      "noParticipants": "No participants available.",
+      "eventTitle": "📅 {name}",
+      "listTitle": "Participants list ({count})",
+      "fetchError": "❌ An error occurred while retrieving the participants."
     },
     "suggestions": {
       "name": "suggestions",

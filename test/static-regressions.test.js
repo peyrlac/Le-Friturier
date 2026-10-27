@@ -420,6 +420,14 @@ test('suggestions and sticky messages use localization keys', () => {
   assert.match(read('src/commands/stickymessages/messages.js'), /data\.length/);
 });
 
+test('event participants uses localized success and error responses', () => {
+  const source = read('src/commands/event/participants.js');
+  for (const key of ['events.noThread', 'events.idRequired', 'events.notFound', 'events.noParticipants', 'events.listTitle', 'events.fetchError']) {
+    assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), key);
+  }
+  assert.doesNotMatch(source, /Événement non trouvé|Aucun participant disponible|Une erreur est survenue lors de la récupération/i);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

@@ -861,6 +861,17 @@
     "resetSuccess": "Ta famille a été décimée !",
     "resetTimeout": "Le délai est dépassé. La famille n'a pas été modifiée."
   },
+  "events": {
+    "name": "événements",
+    "description": "Gérer les événements",
+    "noThread": "❌ Ce thread n'est pas associé à un événement. Veuillez fournir l'identifiant de l'événement.",
+    "idRequired": "❌ Veuillez fournir l'identifiant de l'événement ou utiliser cette commande dans le thread de l'événement.",
+    "notFound": "❌ Événement introuvable. Vérifiez l'identifiant fourni.",
+    "noParticipants": "Aucun participant disponible.",
+    "eventTitle": "📅 {name}",
+    "listTitle": "Liste des participants ({count})",
+    "fetchError": "❌ Une erreur est survenue lors de la récupération des participants."
+  },
   "suggestions": {
     "title": "💡・Suggestion",
     "accepted": "Suggestion acceptée avec succès",
@@ -1217,7 +1228,18 @@
         "description": { "description": "Description de votre signalement" }
       }
     },
-    "suggestions": {
+    "events": {
+      "name": "événements",
+      "description": "Gérer les événements",
+    "noThread": "❌ This thread is not associated with an event. Please provide the event ID.",
+    "idRequired": "❌ Please provide the event ID or use this command in the event thread.",
+    "notFound": "❌ Event not found. Check the provided ID.",
+    "noParticipants": "No participants available.",
+    "eventTitle": "📅 {name}",
+    "listTitle": "Participants list ({count})",
+    "fetchError": "❌ An error occurred while retrieving the participants."
+  },
+  "suggestions": {
       "name": "suggestions",
       "description": "Gérer les suggestions",
       "subcommands": {
