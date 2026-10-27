@@ -63,6 +63,8 @@ module.exports = {
      * @param {String[]} args
      */
 
+    localizationKey: 'commandMetadata.levels',
+
     run: async (client, interaction, args) => {
         const guild = await Schema.findOne({ Guild: interaction.guild.id });
         if (!guild.Levels) return client.errNormal({
