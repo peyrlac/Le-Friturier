@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 
 module.exports = {
+    localizationKey: 'commandMetadata.activities',
     data: new SlashCommandBuilder()
         .setName('activities')
         .setDescription('Démarrer une activité')
@@ -26,12 +27,6 @@ module.exports = {
                 )
         )
     ,
-
-    localizations: {
-        name: { fr: 'activites', en: 'activities' },
-        description: { fr: 'Démarrer une activité', en: 'Start an activity' },
-        options: { activity: { description: { fr: 'Activité à démarrer', en: 'Activity to start' } } }
-    },
 
     /** 
      * @param {Client} client

@@ -240,6 +240,7 @@ test('automod exposes localized command metadata and option descriptions', () =>
 test('afk and activities expose localized metadata', () => {
   const afk = require('../src/interactions/Command/afk');
   const activities = require('../src/interactions/Command/activities');
+  const { resolveCommandLocalizations } = require('../src/handlers/i18n');
 
   assert.deepEqual(afk.localizations, {
     name: { fr: 'afk', en: 'afk' },
@@ -254,8 +255,8 @@ test('afk and activities expose localized metadata', () => {
     }
   });
 
-  assert.deepEqual(activities.localizations, {
-    name: { fr: 'activites', en: 'activities' },
+  assert.deepEqual(resolveCommandLocalizations(activities), {
+    name: { fr: 'activités', en: 'activities' },
     description: { fr: 'Démarrer une activité', en: 'Start an activity' },
     options: { activity: { description: { fr: 'Activité à démarrer', en: 'Activity to start' } } }
   });

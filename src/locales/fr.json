@@ -1054,6 +1054,11 @@
     "success": "Vous avez remercié <@{user}> ! Cette personne possède maintenant {received} remerciement(s)."
   },
   "commandMetadata": {
+    "activities": {
+      "name": "activités",
+      "description": "Démarrer une activité",
+      "options": { "activity": { "description": "Activité à démarrer" } }
+    },
     "economy": {
       "name": "économie",
       "description": "Jouer au jeu économique du serveur",

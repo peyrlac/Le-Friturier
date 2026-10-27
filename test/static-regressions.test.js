@@ -557,6 +557,12 @@ test('ticket message configuration responses use localization keys', () => {
   assert.doesNotMatch(source, /message a été défini avec succès|Aucune donnée de message de ticket trouvé|The ticket message has been set successfully/i);
 });
 
+test('activities command metadata is sourced from the locale catalogs', () => {
+  const source = read('src/interactions/Command/activities.js');
+  assert.match(source, /localizationKey:\s*['"]commandMetadata\.activities['"]/);
+  assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],
