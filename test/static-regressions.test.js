@@ -542,6 +542,14 @@ test('moderation action responses use localization keys', () => {
   }
 });
 
+test('voice-role setup responses use localization keys', () => {
+  const source = read('src/commands/setup/voiceroles.js');
+  for (const key of ['voiceRoles.noPermission', 'voiceRoles.invalidChannel', 'voiceRoles.setupSuccess', 'voiceRoles.noChannels', 'voiceRoles.progress', 'voiceRoles.setupAllSuccess']) {
+    assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), key);
+  }
+  assert.doesNotMatch(source, /Vous n'avez pas la permission|doit être un salon vocal|Aucun salon vocal trouvé|Configuration des rôles vocaux/i);
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],

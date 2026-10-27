@@ -5,7 +5,7 @@ module.exports = async (client, interaction, args) => {
     // Vérifier les permissions
     if (!interaction.member.permissions.has(Discord.PermissionsBitField.Flags.ManageRoles)) {
         return client.errNormal({ 
-            error: "Vous n'avez pas la permission de gérer les rôles!", 
+            key: 'voiceRoles.noPermission',
             type: 'editreply' 
         }, interaction);
     }
@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
         // Vérifier que c'est un salon vocal
         if (channel.type !== Discord.ChannelType.GuildVoice) {
             return client.errNormal({ 
-                error: "Le salon sélectionné doit être un salon vocal!", 
+                key: 'voiceRoles.invalidChannel',
                 type: 'editreply' 
             }, interaction);
         }
@@ -44,14 +44,14 @@ module.exports = async (client, interaction, args) => {
         }
 
         return client.succNormal({
-            text: `Configuration des rôles vocaux réussie!`,
+            key: 'voiceRoles.setupSuccess',
             fields: [
                 {
-                    name: `📘┆Salon`,
+                    name: await client.t(interaction, 'voiceRoles.channel'),
                     value: `${channel} (${channel.id})`
                 },
                 {
-                    name: `📘┆Rôle`,
+                    name: await client.t(interaction, 'voiceRoles.role'),
                     value: `${role} (${role.id})`
                 }
             ],
@@ -63,7 +63,7 @@ module.exports = async (client, interaction, args) => {
         
         if (voiceChannels.size === 0) {
             return client.errNormal({ 
-                error: "Aucun salon vocal trouvé dans ce serveur!", 
+                key: 'voiceRoles.noChannels',
                 type: 'editreply' 
             }, interaction);
         }
@@ -72,7 +72,7 @@ module.exports = async (client, interaction, args) => {
         
         // Créer un message de chargement
         await client.simpleEmbed({
-            text: `Configuration en cours pour ${voiceChannels.size} salons vocaux...`,
+            text: await client.t(interaction, 'voiceRoles.progress', { count: voiceChannels.size }),
             type: 'editreply'
         }, interaction);
 
@@ -104,10 +104,10 @@ module.exports = async (client, interaction, args) => {
         }
 
         return client.succNormal({
-            text: `Configuration des rôles vocaux terminée!`,
+            key: 'voiceRoles.setupAllSuccess',
             fields: [
                 {
-                    name: `📊┆Salons configurés`,
+                    name: await client.t(interaction, 'voiceRoles.configuredChannels'),
                     value: `${setupCount}/${voiceChannels.size}`
                 }
             ],

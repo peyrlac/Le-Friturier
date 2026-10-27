@@ -835,6 +835,17 @@
     "renamed": "Le salon a été renommé en `{name}`.",
     "unlocked": "Le salon a été déverrouillé avec succès."
   },
+  "voiceRoles": {
+    "noPermission": "Vous n'avez pas la permission de gérer les rôles !",
+    "invalidChannel": "Le salon sélectionné doit être un salon vocal !",
+    "setupSuccess": "Configuration des rôles vocaux réussie !",
+    "noChannels": "Aucun salon vocal trouvé sur ce serveur !",
+    "progress": "Configuration en cours pour {count} salons vocaux...",
+    "setupAllSuccess": "Configuration des rôles vocaux terminée !",
+    "channel": "📘┆Salon",
+    "role": "📘┆Rôle",
+    "configuredChannels": "📊┆Salons configurés"
+  },
   "triggers": {
     "listTitle": "Liste des triggers",
     "documentationTitle": "Documentation des triggers",
