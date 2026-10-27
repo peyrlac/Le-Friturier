@@ -106,7 +106,13 @@
       "renamed": "Le nom du salon a été changé en {name}.",
       "operationFailed": "Une erreur est survenue.",
       "transcriptSaving": "Enregistrement du transcript...",
-      "transcriptSaved": "Transcript enregistré."
+      "transcriptSaved": "Transcript enregistré.",
+      "notice": "Bonjour <@!{user}>,\n\nPouvons-nous encore vous aider ?\nSans réponse dans les **24 heures**, ce ticket sera fermé.\n\n- Équipe {guild}",
+      "ownNotice": "Vous ne pouvez pas envoyer un rappel sur votre propre ticket.",
+      "alreadyOpen": "Le ticket est déjà ouvert.",
+      "opened": "Ticket rouvert par <@!{user}>.",
+      "cannotRemoveCreator": "Vous ne pouvez pas retirer le créateur de ce ticket.",
+      "removed": "{user} a été retiré du ticket."
     },
     "music": {
       "notInVoice": "Vous n'êtes pas dans un canal vocal !",

@@ -23,21 +23,22 @@ module.exports = async (client, interaction, args) => {
 
                         if (ticketCategory == undefined) {
                             return client.errNormal({
-                                error: "Do the setup!",
+                                key: 'tickets.setupRequired',
                                 type: type
                             }, interaction);
                         }
 
                         if (interaction.channel.parentId == ticketCategory.id) {
                             client.simpleEmbed({
-                                desc: `Hey <@!${ticketData.creator}>, \n\nCan we still help you? \nIf there is no response within **24 hours**, we will close this ticket \n\n- Team ${interaction.guild.name}`,
+                                descKey: 'tickets.notice',
+                                variables: { user: ticketData.creator, guild: interaction.guild.name },
                                 content: `<@!${ticketData.creator}>`,
                                 type: type
                             }, interaction)
                         }
                         else {
                             client.errNormal({
-                                error: "This is not a ticket!",
+                                key: 'tickets.notTicket',
                                 type: type
                             }, interaction);
 
@@ -45,7 +46,7 @@ module.exports = async (client, interaction, args) => {
                     }
                     else {
                         return client.errNormal({
-                            error: "Do the setup!",
+                            key: 'tickets.setupRequired',
                             type: type
                         }, interaction);
                     }
@@ -53,7 +54,7 @@ module.exports = async (client, interaction, args) => {
             }
             else {
                 return client.errNormal({
-                    error: "You are not allowed to notice your own ticket!",
+                    key: 'tickets.ownNotice',
                     type: 'ephemeral'
                 }, interaction)
             }
@@ -61,4 +62,4 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
+
