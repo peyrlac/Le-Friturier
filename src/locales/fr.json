@@ -1699,7 +1699,7 @@
     "activities": {
       "name": "activités",
       "description": "Démarrer une activité",
-      "options": { "activity": { "description": "Activité à démarrer" } }
+      "options": { "activity": { "description": "Activité à démarrer", "choices": { "betrayal": { "name": "Betrayal.io" }, "checkers": { "name": "Dames dans le parc" }, "chess": { "name": "Échecs dans le parc" }, "doodlecrew": { "name": "Équipe gribouillage" }, "fishington": { "name": "Fishington.io" }, "letterleague": { "name": "Ligue des lettres" }, "ocho": { "name": "Ocho" }, "poker": { "name": "Soirée poker" }, "sketchheads": { "name": "Têtes à dessiner" }, "spellcast": { "name": "Lancer de sorts" }, "wordsnacks": { "name": "En-cas de mots" }, "watchtogether": { "name": "Regarder ensemble" } } } }
     },
     "economy": {
       "name": "économie",

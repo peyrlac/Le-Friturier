@@ -13,18 +13,18 @@ module.exports = {
                 .setDescription(getCommandMetadata('commandMetadata.activities.options.activity.description'))
                 .setRequired(true)
                 .addChoices(
-                    { name: 'Betrayal.io', value: 'betrayal' },
-                    { name: 'Checkers in the Park', value: 'checkers' },
-                    { name: 'Chess in the Park', value: 'chess' },
-                    { name: 'Doodle Crew', value: 'doodlecrew' },
-                    { name: 'Fishington.io', value: 'fishington' },
-                    { name: 'Letter League', value: 'letterleague' },
-                    { name: 'Ocho', value: 'ocho' },
-                    { name: 'Poker Night', value: 'poker' },
-                    { name: 'Sketch Heads', value: 'sketchheads' },
-                    { name: 'Spell Cast', value: 'spellcast' },
-                    { name: 'Word Snacks', value: 'wordsnacks' },
-                    { name: 'Watch Together', value: 'watchtogether' }
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.betrayal.name'), value: 'betrayal' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.checkers.name'), value: 'checkers' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.chess.name'), value: 'chess' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.doodlecrew.name'), value: 'doodlecrew' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.fishington.name'), value: 'fishington' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.letterleague.name'), value: 'letterleague' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.ocho.name'), value: 'ocho' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.poker.name'), value: 'poker' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.sketchheads.name'), value: 'sketchheads' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.spellcast.name'), value: 'spellcast' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.wordsnacks.name'), value: 'wordsnacks' },
+                    { name: getCommandMetadata('commandMetadata.activities.options.activity.choices.watchtogether.name'), value: 'watchtogether' }
                 )
         )
     ,
