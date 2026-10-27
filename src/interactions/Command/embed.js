@@ -121,8 +121,8 @@ module.exports = {
 
         if (i.values == "title_embed") {
           interaction
-            .followUp({ content: "Please enter a title" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.title') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -144,8 +144,8 @@ module.exports = {
 
         if (i.values == "description_embed") {
           interaction
-            .followUp({ content: "Please enter a description" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.description') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -167,8 +167,8 @@ module.exports = {
 
         if (i.values == "author_embed") {
           interaction
-            .followUp({ content: "Please enter a author" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.author') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -193,8 +193,8 @@ module.exports = {
 
         if (i.values == "footer_embed") {
           interaction
-            .followUp({ content: "Please enter a footer" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.footer') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -218,8 +218,8 @@ module.exports = {
 
         if (i.values == "thumbnail_embed") {
           interaction
-            .followUp({ content: "Please enter a thumbnail" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.thumbnail') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -238,7 +238,7 @@ module.exports = {
                     !collected.first().content.includes("https://")
                   )
                     return interaction.followUp({
-                      content: "Incorrect thumbnail link!",
+                      content: await client.t(interaction, 'embed.invalidThumbnail'),
                     });
                   embed.setThumbnail(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -253,8 +253,8 @@ module.exports = {
 
         if (i.values == "image_embed") {
           interaction
-            .followUp({ content: "Please enter a image" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.image') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -273,7 +273,7 @@ module.exports = {
                     !collected.first().content.includes("https://")
                   )
                     return interaction.followUp({
-                      content: "Incorrect image link!",
+                      content: await client.t(interaction, 'embed.invalidImage'),
                     });
                   embed.setImage(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -283,8 +283,8 @@ module.exports = {
 
         if (i.values == "url_embed") {
           interaction
-            .followUp({ content: "Please enter a url" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.url') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
@@ -303,7 +303,7 @@ module.exports = {
                     !collected.first().content.includes("https://")
                   )
                     return interaction.followUp({
-                      content: "Incorrect url!",
+                      content: await client.t(interaction, 'embed.invalidUrl'),
                     });
                   embed.setURL(`${collected.first().content}`);
                   await interaction.editReply({ embeds: [embed] });
@@ -313,8 +313,8 @@ module.exports = {
 
         if (i.values == "color_embed") {
           interaction
-            .followUp({ content: "Please enter a color. e.g. #FF0000" })
-            .then((message) => {
+            .followUp({ content: await client.t(interaction, 'embed.prompts.color') })
+            .then(async (message) => {
               const filterMessage = (m) =>
                 m.author.id === interaction.user.id && !m.author.bot;
               interaction.channel
