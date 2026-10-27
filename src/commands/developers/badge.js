@@ -51,21 +51,21 @@ module.exports = async (client, interaction, args) => {
 
             array.push(FLAG);
 
-            model.findOne({ User: member.id }, async (err, data) => {
-                if (err) console.log(err);
-                data.FLAGS = array
-                data.save();
-            });
+            await model.findOneAndUpdate(
+                { User: member.id },
+                { $set: { FLAGS: array } },
+                { new: true }
+            );
 
-            client.succNormal({
+            await client.succNormal({
                 text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: `editreply`
             }, interaction);
         } else {
             const newSettings = new model({ User: member.id, FLAGS: [badge.toUpperCase()] });
-            await newSettings.save().catch(() => { });
+            await newSettings.save();
 
-            client.succNormal({
+            await client.succNormal({
                 text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: `editreply`
             }, interaction)
@@ -87,6 +87,11 @@ module.exports = async (client, interaction, args) => {
         });
     }
     else if (boolean == false) {
+        if (!Badges) return client.errNormal({
+            error: `The user doesn't have that badge`,
+            type: `editreply`
+        }, interaction);
+
         if (!Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
             error: `The user doesn't have that badge`,
             type: `editreply`
@@ -105,21 +110,18 @@ module.exports = async (client, interaction, args) => {
 
         if (!array[0]) {
             let deleted = await model.deleteMany({ User: member.id });
-            client.succNormal({
+            await client.succNormal({
                 text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, the user have been removed from the badge system, he has no badges left!`,
                 type: 'editreply'
             }, interaction);
 
         } else {
-            model.findOne(
+            await model.findOneAndUpdate(
                 { User: member.id },
-                async (err, data) => {
-                    if (err) console.log(err);
-                    data.FLAGS = array
-                    data.save();
-                }
+                { $set: { FLAGS: array } },
+                { new: true }
             );
-            client.succNormal({
+            await client.succNormal({
                 text: `Enlevé le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
                 type: 'editreply'
             }, interaction);
@@ -142,4 +144,4 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 
+
