@@ -17,6 +17,16 @@ test('translates keys in French and English with interpolation', () => {
     );
 });
 
+test('resolves command-domain keys without requiring the commands prefix', () => {
+    const i18n = createI18n();
+
+    assert.equal(i18n.t('en', 'games.snakeTitle'), 'Snake');
+    assert.equal(
+        i18n.t('fr', 'economy.pay.success', { user: '@Pierre' }),
+        "Vous avez envoyé de l'argent à @Pierre."
+    );
+});
+
 test('falls back to French when a key is missing from the requested locale', () => {
     const i18n = createI18n();
 

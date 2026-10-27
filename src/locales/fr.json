@@ -332,6 +332,14 @@
       }
     },
     "casino": {
+      "rouletteTitle": "🎰・Roulette",
+      "roulette": {
+        "insufficient": "Vous pariez plus que vous ne possédez !",
+        "invalidColour": "Aucune couleur correcte spécifiée !",
+        "noAccount": "Vous n'avez pas encore d'argent.",
+        "win": "Vous avez gagné **{coins} ${amount}**",
+        "lose": "Vous avez perdu **{coins} ${amount}**"
+      },
       "slots": {
         "usage": "slots [montant]",
         "insufficient": "Vous pariez plus que vous ne possédez !",

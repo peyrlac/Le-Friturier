@@ -19,42 +19,42 @@ module.exports = async (client, interaction, args) => {
 
             if (!colour || !money) return client.errUsage({ usage: "roulette [color] [amount]", type: 'editreply' }, interaction);
             colour = colour.toLowerCase()
-            if (money > data.Money) return client.errNormal({ error: `Vous pariez plus que vous ne l'avez fait!`, type: 'editreply' }, interaction);
+            if (money > data.Money) return client.errNormal({ key: 'casino.roulette.insufficient', type: 'editreply' }, interaction);
 
             if (colour == "b" || colour.includes("black")) colour = 0;
             else if (colour == "r" || colour.includes("red")) colour = 1;
             else if (colour == "g" || colour.includes("green")) colour = 2;
-            else return client.errNormal({ error: `Aucune couleur correcte spécifiée!`, type: 'editreply' }, interaction);
+            else return client.errNormal({ key: 'casino.roulette.invalidColour', type: 'editreply' }, interaction);
 
             if (random == 0 && colour == 2) { // Green
                 money *= 15
 
                 await client.addMoney(interaction, user, money);
 
-                client.embed({ title: `🎰・Multiplicateur: 15x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 15x`, descKey: 'casino.roulette.win', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else if (isOdd(random) && colour == 1) { // Red
                 money = parseInt(money * 1.5)
                 await client.addMoney(interaction, user, money);
 
-                client.embed({ title: `🎰・Multiplicateur: 1.5x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 1.5x`, descKey: 'casino.roulette.win', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else if (!isOdd(random) && colour == 0) { // Black
                 money = parseInt(money * 2)
                 await client.addMoney(interaction, user, money);
 
-                client.embed({ title: `🎰・Multiplicateur: 2x`, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 2x`, descKey: 'casino.roulette.win', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as gagné **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
             else { // Wrong
                 await client.removeMoney(interaction, user, money);
 
-                client.embed({ title: `🎰・Multiplicateur: 0x`, desc: `Tu as perdu **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
+                client.embed({ titleKey: 'casino.rouletteTitle', title: `🎰・Multiplicateur: 0x`, descKey: 'casino.roulette.lose', variables: { amount, coins: client.emotes.economy.coins }, desc: `Tu as perdu **${client.emotes.economy.coins} $${money}**`, type: 'editreply' }, interaction);
             }
 
     } else {
-        return client.errNormal({ error: `Tu n'as pas ${client.emotes.economy.coins}!`, type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'casino.roulette.noAccount', type: 'editreply' }, interaction);
     }
 }

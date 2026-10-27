@@ -351,6 +351,14 @@
       }
     },
     "casino": {
+      "rouletteTitle": "🎰・Roulette",
+      "roulette": {
+        "insufficient": "You are betting more than you own!",
+        "invalidColour": "No valid colour was specified!",
+        "noAccount": "You don't have any money yet.",
+        "win": "You won **{coins} ${amount}**",
+        "lose": "You lost **{coins} ${amount}**"
+      },
       "slots": {
         "usage": "slots [amount]",
         "insufficient": "You are betting more than you own!",
