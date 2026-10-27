@@ -13,7 +13,7 @@ module.exports = async (client, interaction, args) => {
       const url = `https://cdn.discordapp.com/banners/${user.id}/${banner}${extension}?size=1024`;
 
       client.embed({
-        title: `🖼・User Banner`,
+        titleKey: 'images.bannerTitle',
         image: url,
         type: 'editreply'
       }, interaction)
@@ -22,24 +22,26 @@ module.exports = async (client, interaction, args) => {
       if (accent_color) {
 
         client.embed({
-          title: `🖼・User Banner`,
-          desc: `${user} doesn't have a banner but they do have a accent color`,
+        titleKey: 'images.bannerTitle',
+          descKey: 'images.bannerNoBanner',
+          variables: { user: String(user) },
           color: accent_color,
           type: 'editreply'
         }, interaction)
       }
       else {
         client.embed({
-          title: `🖼・User Banner`,
-          desc: `${user} doesn't have a banner but they do have a accent color`,
+        titleKey: 'images.bannerTitle',
+          descKey: 'images.bannerNoBannerNoAccent',
+          variables: { user: String(user) },
           color: accent_color,
           type: 'editreply'
         }, interaction)
       }
     }
   } catch {
-    return client.errNormal({ error: 'Unable to retrieve this user banner.', type: 'editreply' }, interaction);
+    return client.errNormal({ key: 'images.bannerError', type: 'editreply' }, interaction);
   }
 }
 
- 
+
