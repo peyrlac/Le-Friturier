@@ -84,7 +84,10 @@
       "noSongs": "Il n'y a aucune chanson en cours.",
       "paused": "La musique a été mise en pause.",
       "resumed": "La musique a repris.",
-      "searching": "Recherche..."
+      "searching": "Recherche...",
+      "skipped": "La musique a été passée.",
+      "stopped": "La musique a été arrêtée.",
+      "queueEmpty": "Il n'y a plus de musique dans la file d'attente."
     },
     "economy": {
       "balance": {

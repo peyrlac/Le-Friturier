@@ -103,7 +103,10 @@
       "noSongs": "There are no songs currently playing.",
       "paused": "The music has been paused.",
       "resumed": "The music has resumed.",
-      "searching": "Searching..."
+      "searching": "Searching...",
+      "skipped": "The song was skipped.",
+      "stopped": "The music was stopped.",
+      "queueEmpty": "There is no more music in the queue."
     },
     "economy": {
       "balance": {
