@@ -47,7 +47,7 @@ const shardLogs = new Discord.WebhookClient({
 
 const manager = new Discord.ShardingManager('./src/bot.js', {
     totalShards: 'auto',
-    timeout: 120000,
+    timeout: 300000,
     token: process.env.DISCORD_TOKEN,
     respawn: true
 });
@@ -142,7 +142,9 @@ manager.on('shardCreate', shard => {
 });
 
 
-manager.spawn();
+manager.spawn().catch(error => {
+    logger.error('SYSTEM', 'Échec du démarrage des shards', error);
+});
 
 
 // Webhooks

@@ -5,6 +5,7 @@ const voiceCleanup = require('../../assets/utils/voiceCleanup');
 const { model: AnnouncementChannels, clearOldEventsFromDatabase } = require('../../database/models/announcement-channels');
 const { ReminderManager, createManager } = require('../../handlers/functions/eventReminders');
 const statistics = require('../../handlers/functions/statistics');
+const { applyBotStatus, getBotStatus, loadStatusPool, renderStatusActivity } = require('../../handlers/functions/botStatus');
 
 
 module.exports = async (client) => {
@@ -55,6 +56,15 @@ module.exports = async (client) => {
 
     logger.success('SYSTEM', `Shard #${client.shard.ids[0] + 1} prêt`);
     logger.success('SYSTEM', `Bot connecté sur ${client.guilds.cache.size} serveur(s)`);
+
+    const configuredStatus = await getBotStatus();
+    if (configuredStatus) {
+        await applyBotStatus(client, configuredStatus, {
+            guilds: client.guilds.cache.size,
+            uptime: `${Math.floor(process.uptime() / 60)} min`,
+        });
+        logger.info('SYSTEM', `Présence globale restaurée : ${configuredStatus.Type} ${configuredStatus.Activity}`);
+    }
 
     // Cleanup voice role
     try {
@@ -110,50 +120,31 @@ module.exports = async (client) => {
             statisticsManager.trackAllVoiceActivity(client)
         ];
         return Promise.all(promises)
-            .then(results => {
+            .then(async results => {
                 const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
+                const configuredStatus = await getBotStatus();
+                if (configuredStatus) {
+                    await applyBotStatus(client, configuredStatus, {
+                        guilds: totalGuilds,
+                        uptime: `${Math.floor(process.uptime() / 60)} min`,
+                    });
+                    return;
+                }
                 let statuttext;
 
-                if (process.env.DISCORD_STATUS) {
-                    statuttext = process.env.DISCORD_STATUS.split(', ').map(status => ({
-                        name: status,
-                        type: Discord.ActivityType.Watching // Default type, change if necessary
-                    }));
-                } else {
-                    statuttext = [
-                        { name: `League of Legends`, type: Discord.ActivityType.Playing },
-                        { name: `Minecraft`, type: Discord.ActivityType.Playing },
-                        { name: `Rocket League`, type: Discord.ActivityType.Playing },
-                        { name: `si aucune rebellion ne se forme`, type: Discord.ActivityType.Watching },
-                        { name: `le crépitement de la friture`, type: Discord.ActivityType.Listening },
-                        { name: `si Pierre fait pas de bêtises`, type: Discord.ActivityType.Watching },
-                        { name: `si ça joue à LoL`, type: Discord.ActivityType.Watching },
-                        { name: `si Yuumi a fini sa sieste`, type: Discord.ActivityType.Watching },
-                        { name: `si Lisa a bu son camfé aujourd'hui`, type: Discord.ActivityType.Watching },
-                        { name: `si Eliott et Mathieu ont ouvert le café jazz`, type: Discord.ActivityType.Watching },
-                        { name: `si Davy sait toujours dessiner des bateaux`, type: Discord.ActivityType.Watching },
-                        { name: `si Richard a trouvé le chemin de l'hosaku`, type: Discord.ActivityType.Watching },
-                        { name: `si Diana est toujours chafouine`, type: Discord.ActivityType.Watching },
-                        { name: `si Thibault maitrise toujours les 4 éléments`, type: Discord.ActivityType.Watching },
-                        { name: `si Thomas a ajouté un nouveau film à sa liste`, type: Discord.ActivityType.Watching },
-                        { name: `si une séance cinéma se prépare`, type: Discord.ActivityType.Watching },
-                        { name: `si Richard a trouvé le chemin de l'hosaku`, type: Discord.ActivityType.Watching },
-                        { name: `si Mathias et Charlotte profitent du soleil`, type: Discord.ActivityType.Watching },
-                        { name: `si Ben peut me soulever. J'ai chaud`, type: Discord.ActivityType.Watching },
-                        { name: `si Théo est toujours aussi magnifique`, type: Discord.ActivityType.Watching },
-                        { name: `si Peter est toujours suspicious :peterSus:`, type: Discord.ActivityType.Watching },
-                        { name: `si de nouveaux sons sur la soundboard ont été ajoutés`, type: Discord.ActivityType.Watching },
-                        { name: `si on a encore banni un random`, type: Discord.ActivityType.Watching },
-                        { name: `si il y a un anniversaire aujourd'hui`, type: Discord.ActivityType.Watching },
-                        { name: `${totalGuilds} serveurs`, type: Discord.ActivityType.Watching }
-                    ];
-                }
+                statuttext = loadStatusPool();
 
                 const randomText = statuttext[Math.floor(Math.random() * statuttext.length)];
 
                 // Vérification supplémentaire pour s'assurer que randomText est bien défini et a les propriétés nécessaires
                 if (randomText && typeof randomText.name === 'string' && typeof randomText.type === 'number') {
-                    client.user.setPresence({ activities: [{ name: randomText.name, type: randomText.type }], status: 'online' });
+                    client.user.setPresence({
+                        activities: [{
+                            name: renderStatusActivity(randomText.name, { guilds: totalGuilds, uptime: `${Math.floor(process.uptime() / 60)} min` }),
+                            type: randomText.type,
+                        }],
+                        status: 'online',
+                    });
                 } else {
                     logger.warn('SYSTEM', 'Format ou type d’activité invalide', randomText);
                 }

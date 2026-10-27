@@ -31,6 +31,39 @@ module.exports = {
         )
         .addSubcommand(subcommand =>
             subcommand
+                .setName('status')
+                .setDescription('Modifier la présence globale du bot ({guilds}, {users}, {uptime}, {shard})')
+                .addStringOption(option => option
+                    .setName('activity')
+                    .setDescription('Texte avec {guilds}, {membersInVoice}, {channels}, {uptime}, {time}, etc.')
+                    .setRequired(true)
+                    .setMaxLength(128)
+                )
+                .addStringOption(option => option
+                    .setName('type')
+                    .setDescription('Type de présence')
+                    .setRequired(true)
+                    .addChoices(
+                        { name: 'Joue à', value: 'Playing' },
+                        { name: 'Écoute', value: 'Listening' },
+                        { name: 'Regarde', value: 'Watching' },
+                        { name: 'Diffuse', value: 'Streaming' },
+                        { name: 'Participe à', value: 'Competing' },
+                    )
+                )
+                .addStringOption(option => option
+                    .setName('presence')
+                    .setDescription('État en ligne du bot')
+                    .addChoices(
+                        { name: 'En ligne', value: 'online' },
+                        { name: 'Inactif', value: 'idle' },
+                        { name: 'Ne pas déranger', value: 'dnd' },
+                        { name: 'Invisible', value: 'invisible' },
+                    )
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
                 .setName('levels')
                 .setDescription(getCommandMetadata('commandMetadata.config.subcommands.levels.description'))
                 .addBooleanOption(option => option.setName('boolean').setDescription(getCommandMetadata('commandMetadata.config.subcommands.levels.options.boolean.description')).setRequired(true))
@@ -124,8 +157,8 @@ module.exports = {
      */
 
     run: async (client, interaction, args) => {
-        await interaction.deferReply();
-        client.loadSubcommands(client, interaction, args);
+        if (!interaction.deferred && !interaction.replied) await interaction.deferReply();
+        await client.loadSubcommands(client, interaction, args);
     },
 };
 
