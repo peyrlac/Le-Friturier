@@ -148,6 +148,10 @@
       "leavemessage": { "success": "Le message de d\u00e9part a \u00e9t\u00e9 d\u00e9fini avec succ\u00e8s." }
     },
     "setup": {
+      "channel": "📘・Salon",
+      "role": "📘・Rôle",
+      "channelSuccess": "Le salon a été configuré avec succès !",
+      "roleSuccess": "Le rôle a été configuré avec succès !",
       "channelsorter": {
         "invalidChannel": "Le salon s\u00e9lectionn\u00e9 doit \u00eatre une cat\u00e9gorie.",
         "success": "Le tri des salons a \u00e9t\u00e9 configur\u00e9 avec succ\u00e8s."
