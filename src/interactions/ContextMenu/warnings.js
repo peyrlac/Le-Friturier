@@ -27,12 +27,12 @@ module.exports = {
             }, interaction);
             return;
         }
-        await interaction.deferReply({ ephemeral: false });
+        await interaction.deferReply();
 
         const member = interaction.guild.members.cache.get(interaction.targetId);
 
-        Schema.findOne({ Guild: interaction.guild.id, User: member.id }, async (err, data) => {
-            if (data) {
+        const data = await Schema.findOne({ Guild: interaction.guild.id, User: member.id });
+        if (data) {
                 var fields = [];
                 data.Warnings.forEach(element => {
                     fields.push({
@@ -41,7 +41,7 @@ module.exports = {
                         inline: true
                     })
                 });
-                client.embed({
+                return client.embed({
                     title: `${client.emotes.normal.error}・Warnings`,
                     desc: `The warnings of **${member.user.tag}**`,
                     fields: [
@@ -55,14 +55,11 @@ module.exports = {
                 }, interaction)
             }
             else {
-                client.embed({
+                return client.embed({
                     title: `${client.emotes.normal.error}・Warnings`,
                     desc: `User ${member.user.tag} has no warnings!`,
                     type: 'editreply'
                 }, interaction)
             }
-        })
     },
 };
-
- 
