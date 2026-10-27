@@ -42,6 +42,7 @@
         "genderPlaceholder": "Sélectionnez une option",
         "alreadyExists": "Vous avez déjà un profil.",
         "created": "Profil créé ! Consultez-le avec la commande `profile`.",
+        "deleted": "Votre profil a été supprimé.",
         "bdayUsage": "setbday [jour]/[mois]",
         "bdayInvalidNumber": "La date fournie ne contient pas de nombres valides.",
         "bdayInvalidDay": "Le format du jour est incorrect.",

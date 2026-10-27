@@ -2,23 +2,10 @@ const Schema = require('../../database/models/profile');
 
 module.exports = async (client, interaction, args) => {
 
-    Schema.findOne({ User: interaction.user.id }, async (err, data) => {
+    const data = await Schema.findOne({ User: interaction.user.id });
+    if (!data) return client.errNormal({ key: 'profile.notFound', type: 'editreply' }, interaction);
 
-        if (data) {
-            Schema.findOneAndDelete({ Guild: interaction.guild.id, User: interaction.user.id }).then(() => {
-                client.succNormal({
-                    text: "Your profile was deleted!",
-                    type: 'editreply'
-                }, interaction);
-            })
-        }
-        else {
-            client.errNormal({
-                error: 'No profile found!',
-                type: 'editreply'
-            }, interaction)
-        }
-    })
+    await Schema.findOneAndDelete({ _id: data._id });
+    return client.succNormal({ key: 'profile.deleted', type: 'editreply' }, interaction);
 }
 
- 
