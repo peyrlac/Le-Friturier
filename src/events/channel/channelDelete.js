@@ -18,7 +18,7 @@ module.exports = async (client, channel) => {
     const logsChannel = await client.getLogs(channel.guild.id);
     if (!logsChannel) return;
 
-    client.embed({
+    await client.embed({
         title: `🔧・Channel deleted`,
         desc: `A channel has been deleted`,
         fields: [
@@ -39,14 +39,15 @@ module.exports = async (client, channel) => {
                 value: `- ${types[channel.type]}`
             }
         ]
-    }, logsChannel).catch(() => { })
+    }, logsChannel).catch(console.error)
 
     try {
-        ticketChannels.findOne({ Guild: channel.guild.id, channelID: channel.id }, async (err, data) => {
-            if (data) {
-                var remove = await ticketChannels.deleteOne({ Guild: channel.guild.id, channelID: channel.id });
-            }
-        })
+        const data = await ticketChannels.findOne({ Guild: channel.guild.id, channelID: channel.id });
+        if (data) {
+            await ticketChannels.deleteOne({ Guild: channel.guild.id, channelID: channel.id });
+        }
     }
-    catch { }
+    catch (error) {
+        console.error(error);
+    }
 };
