@@ -45,7 +45,24 @@
       "input": "Input",
       "output": "Output",
       "emojifyTooLong": "Your emojify text cannot be longer than 4096 characters.",
-      "emojifyTitle": "Emojify"
+      "emojifyTitle": "Emojify",
+      "invalidEmoji": "Please supply a valid emoji!",
+      "serverNotFound": "Can't find the server!",
+      "serverTitle": "📁・{ip}",
+      "online": "🟢┇Online",
+      "version": "🏷️┇Version",
+      "playersOnline": "👤┇Players online",
+      "remoteDataUnavailable": "Unable to retrieve remote data.",
+      "passwordSent": "I generated a password and sent it to your DM.",
+      "generatedPassword": "Your generated password",
+      "password": "🔑┇Password",
+      "length": "👣┇Length",
+      "reminderExists": "You already made this reminder!",
+      "reminderSet": "Your reminder is set!",
+      "reminderEndTime": "🕘‡End Time",
+      "reminder": "💭‡Reminder",
+      "reminderEnded": "🔔・Reminder",
+      "reminderEndedDescription": "Your reminder just ended!"
     },
     "commands": {
       "messages": {
@@ -806,6 +823,14 @@
     "confirmed": "✅‡Confirmed cases",
     "recovered": "🤗‡Recovered",
     "deaths": "💀‡Deaths"
+  },
+  "notepad": {
+    "noNotes": "No notes found!"
+  },
+  "thanks": {
+    "self": "You cannot thank yourself!",
+    "alreadyGiven": "You already thanked this user!",
+    "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
     "voice": {

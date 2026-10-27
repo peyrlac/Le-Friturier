@@ -6,11 +6,11 @@ module.exports = async (client, interaction, args) => {
     const target = interaction.options.getUser('user');
     if (!target) return client.errUsage({ usage: "thanks [mention user]", type: 'editreply' }, interaction);
 
-    if (target.id === interaction.user.id) return client.errNormal({ error: `You cannot thank yourself!`, type: 'editreply' }, interaction);
+    if (target.id === interaction.user.id) return client.errNormal({ key: 'thanks.self', type: 'editreply' }, interaction);
 
     const authorRecord = await thanksAuthor.findOne({ User: target.id, Author: interaction.user.id });
     if (authorRecord) {
-        return client.errNormal({ error: `You already thanked this user!`, type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'thanks.alreadyGiven', type: 'editreply' }, interaction);
     }
 
     const data = await thanksSchema.findOne({ User: target.id });
@@ -33,7 +33,7 @@ module.exports = async (client, interaction, args) => {
         Author: interaction.user.id,
     }).save();
 
-    return client.succNormal({ text: `You have thanked <@${target.id}>! They now have \`${received}\` thanks`, type: 'editreply' }, interaction);
+    return client.succNormal({ key: 'thanks.success', variables: { user: target.id, received }, type: 'editreply' }, interaction);
 }
 
 

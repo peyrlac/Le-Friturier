@@ -11,29 +11,29 @@ module.exports = async (client, interaction, args) => {
 
         .then(async (json) => {
 
-            if (!json.players) return client.errNormal({ error: "Can't find the server!", type: 'editreply' }, interaction)
+            if (!json.players) return client.errNormal({ key: 'tools.serverNotFound', type: 'editreply' }, interaction)
 
             return client.embed({
-                title: `📁・${ip}`,
+                title: await client.t(interaction, 'tools.serverTitle', { ip }),
                 thumbnail: `https://eu.mc-api.net/v3/server/favicon/${ip}`,
                 fields: [{
-                    name: "🟢┇Online",
+                    name: await client.t(interaction, 'tools.online'),
                     value: `${json.online}`,
                     inline: true,
                 },
                 {
-                    name: "🏷️┇Version",
+                    name: await client.t(interaction, 'tools.version'),
                     value: `${json.version}`,
                     inline: true,
                 },
                 {
-                    name: "👤┇Players online",
+                    name: await client.t(interaction, 'tools.playersOnline'),
                     value: `${json.players.online}/${json.players.max}`,
                     inline: true,
                 },
                 ], type: 'editreply'
             }, interaction)
-        }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
+        }).catch(() => client.errNormal({ key: 'tools.remoteDataUnavailable', type: 'editreply' }, interaction))
 }
 
 

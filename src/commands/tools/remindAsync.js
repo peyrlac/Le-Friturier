@@ -8,15 +8,15 @@ module.exports = async (client, interaction, args) => {
 
     const data = await Schema.findOne({ Text: text, User: interaction.user.id, endTime: endtime });
     if (data) {
-        return client.errNormal({ error: 'You already made this reminder!', type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'tools.reminderExists', type: 'editreply' }, interaction);
     }
 
     await new Schema({ Text: text, User: interaction.user.id, endTime: endtime }).save();
     await client.succNormal({
-        text: 'Your reminder is set!',
+        key: 'tools.reminderSet',
         fields: [
-            { name: `${client.emotes.normal.clock}‡End Time`, value: new Date(endtime).toLocaleTimeString(), inline: true },
-            { name: '💭‡Reminder', value: text, inline: true }
+            { name: `${client.emotes.normal.clock}${await client.t(interaction, 'tools.reminderEndTime')}`, value: new Date(endtime).toLocaleTimeString(), inline: true },
+            { name: await client.t(interaction, 'tools.reminder'), value: text, inline: true }
         ],
         type: 'editreply'
     }, interaction);
@@ -24,9 +24,9 @@ module.exports = async (client, interaction, args) => {
     setTimeout(async () => {
         try {
             await client.embed({
-                title: '🔔・Reminder',
-                desc: 'Your reminder just ended!',
-                fields: [{ name: '💭‡Reminder', value: text, inline: true }]
+                title: await client.t(interaction, 'tools.reminderEnded'),
+                desc: await client.t(interaction, 'tools.reminderEndedDescription'),
+                fields: [{ name: await client.t(interaction, 'tools.reminder'), value: text, inline: true }]
             }, interaction.user);
             await Schema.findOneAndDelete({ Text: text, User: interaction.user.id, endTime: endtime });
         }
