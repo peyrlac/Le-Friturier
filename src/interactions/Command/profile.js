@@ -188,6 +188,14 @@ module.exports = {
                 .addStringOption(option => option.setName('text').setDescription('Enter a status').setRequired(true))
         ),
 
+    localizations: {
+        name: { fr: 'profil', en: 'profile' },
+        description: {
+            fr: 'Créer et gérer votre profil',
+            en: 'Create and manage your profile'
+        }
+    },
+
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction

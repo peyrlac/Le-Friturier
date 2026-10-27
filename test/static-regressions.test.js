@@ -282,6 +282,16 @@ test('profile text updates localize their field labels', () => {
   assert.match(read('src/commands/profile/status.js'), /profile\.fields\.status/);
 });
 
+test('profile and serverstats commands expose localized top-level metadata', () => {
+  const profile = require(path.join(root, 'src/interactions/Command/profile.js'));
+  const serverstats = require(path.join(root, 'src/interactions/Command/serverstats.js'));
+
+  assert.equal(profile.localizations.name.fr, 'profil');
+  assert.equal(profile.localizations.name.en, 'profile');
+  assert.equal(serverstats.localizations.name.fr, 'statistiques');
+  assert.equal(serverstats.localizations.name.en, 'serverstats');
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

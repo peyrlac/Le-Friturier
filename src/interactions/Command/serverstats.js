@@ -88,6 +88,14 @@ module.exports = {
         )
     ,
 
+    localizations: {
+        name: { fr: 'statistiques', en: 'serverstats' },
+        description: {
+            fr: 'Gérer les statistiques du serveur',
+            en: 'Manage the server stats'
+        }
+    },
+
     /** 
      * @param {Client} client
      * @param {CommandInteraction} interaction
