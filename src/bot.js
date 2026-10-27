@@ -1,5 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
 const { Manager } = require("erela.js");
 const Spotify = require("erela.js-spotify");
@@ -147,7 +149,9 @@ const warnLogs = new Discord.WebhookClient({
 // Load handlers
 fs.readdirSync('./src/handlers').forEach((dir) => {
     fs.readdirSync(`./src/handlers/${dir}`).forEach((handler) => {
-        require(`./handlers/${dir}/${handler}`)(client);
+        if (dir === 'serverstats' && handler === 'createStatsChannel.js') return;
+        const handlerModule = require(`./handlers/${dir}/${handler}`);
+        if (typeof handlerModule === 'function') handlerModule(client);
     });
 });
 
@@ -226,9 +230,10 @@ client.on(Discord.ShardEvents.Error, error => {
 
 // Healthcheck : créer un fichier pour indiquer que le bot est actif
 // Ce fichier sera vérifié par le Docker healthcheck
-const healthcheckFile = '/tmp/bot-alive';
+const healthcheckFile = path.join(os.tmpdir(), 'bot-alive');
 function updateHealthcheck() {
     try {
+        fs.mkdirSync(path.dirname(healthcheckFile), { recursive: true });
         fs.writeFileSync(healthcheckFile, new Date().toISOString(), 'utf8');
     } catch (err) {
         console.error('Erreur lors de la mise à jour du healthcheck:', err);

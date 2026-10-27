@@ -36,6 +36,20 @@ test('slash command registration uses Discord REST v10', () => {
   assert.match(source, /new REST\(\{ version: '10' \}\)/);
 });
 
+test('handler loader skips utility modules that do not export a factory', () => {
+  const source = read('src/bot.js');
+
+  assert.match(source, /typeof\s+handlerModule\s*===\s*['"]function['"]/);
+  assert.match(source, /dir\s*===\s*['"]serverstats['"]\s*&&\s*handler\s*===\s*['"]createStatsChannel\.js['"]/);
+});
+
+test('healthcheck path is portable and creates its parent directory', () => {
+  const source = read('src/bot.js');
+
+  assert.match(source, /os\.tmpdir\(\)/);
+  assert.match(source, /mkdirSync\([^\n]*recursive:\s*true/);
+});
+
 test('shared embed helpers expose French labels', () => {
   const source = read('src/handlers/components/embed.js');
 
