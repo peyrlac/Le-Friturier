@@ -16,7 +16,7 @@ module.exports = async (client, interaction, args) => {
     if (data) {
             await Schema.findOneAndDelete({ Guild: interaction.guild.id, Level: level });
                 return client.succNormal({
-                    key: 'levels.rewardRemoved',
+                    key: 'config.levels.rewardRemoved',
                     variables: { level },
                     fields: [
                         {
@@ -28,6 +28,6 @@ module.exports = async (client, interaction, args) => {
                     type: 'editreply'
                 }, interaction);
     }
-    return client.errNormal({ key: 'levels.rewardNotFound', variables: { level }, type: 'editreply' }, interaction);
+    return client.errNormal({ key: 'config.levels.rewardNotFound', variables: { level }, type: 'editreply' }, interaction);
 }
 

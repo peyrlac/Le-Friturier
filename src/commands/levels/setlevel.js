@@ -21,7 +21,7 @@ module.exports = async (client, interaction, args) => {
         const user = await client.setLevel(target.id, interaction.guild.id, level);
 
         return client.succNormal({
-            key: 'levels.levelUpdated',
+            key: 'config.levels.levelUpdated',
             variables: { level: user.level, user: target.tag },
             fields: [
                 {
@@ -40,7 +40,7 @@ module.exports = async (client, interaction, args) => {
     }
     else {
         client.errNormal({
-            key: 'levels.disabled',
+            key: 'config.levels.disabled',
             type: 'editreply'
         }, interaction);
     }

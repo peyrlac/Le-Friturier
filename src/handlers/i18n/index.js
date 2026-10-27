@@ -54,8 +54,45 @@ function initializeI18n(client) {
     };
 }
 
+function mergeLocalizedValues(frenchValue, englishValue) {
+    if (typeof frenchValue === 'string' || typeof englishValue === 'string') {
+        return {
+            fr: frenchValue ?? englishValue,
+            en: englishValue ?? frenchValue
+        };
+    }
+
+    if (!frenchValue && !englishValue) return undefined;
+
+    const result = {};
+    for (const key of new Set([
+        ...Object.keys(frenchValue || {}),
+        ...Object.keys(englishValue || {})
+    ])) {
+        const value = mergeLocalizedValues(frenchValue?.[key], englishValue?.[key]);
+        if (value !== undefined) result[key] = value;
+    }
+    return result;
+}
+
+function resolveCommandLocalizations(command) {
+    if (command?.localizations) return command.localizations;
+    if (!command?.localizationKey) return undefined;
+
+    const frenchMetadata = getValue(fr, command.localizationKey);
+    const englishMetadata = getValue(en, command.localizationKey);
+    if (!frenchMetadata && !englishMetadata) {
+        if (process.env.NODE_ENV !== 'production') {
+            console.warn(`[i18n] Missing command metadata: ${command.localizationKey}`);
+        }
+        return undefined;
+    }
+
+    return mergeLocalizedValues(frenchMetadata, englishMetadata);
+}
+
 function applyCommandLocalizations(command) {
-    const localizations = command?.localizations;
+    const localizations = resolveCommandLocalizations(command);
     const builder = command?.data;
     if (!localizations || !builder) return command;
 
@@ -98,5 +135,6 @@ initializeI18n.createI18n = createI18n;
 initializeI18n.DEFAULT_LOCALE = DEFAULT_LOCALE;
 initializeI18n.SUPPORTED_LOCALES = SUPPORTED_LOCALES;
 initializeI18n.applyCommandLocalizations = applyCommandLocalizations;
+initializeI18n.resolveCommandLocalizations = resolveCommandLocalizations;
 
 module.exports = initializeI18n;

@@ -15,12 +15,12 @@ module.exports = async (client, interaction, args) => {
 
     const data = await Schema.findOne({ Guild: interaction.guild.id, Level: level });
     if (data) {
-        return client.errNormal({ key: 'levels.rewardExists', type: 'editreply' }, interaction);
+        return client.errNormal({ key: 'config.levels.rewardExists', type: 'editreply' }, interaction);
     }
 
     await new Schema({ Guild: interaction.guild.id, Level: level, Role: role.id }).save();
     return client.succNormal({
-                key: 'levels.rewardCreated',
+                key: 'config.levels.rewardCreated',
                 variables: { level, role },
                 fields: [
                     {

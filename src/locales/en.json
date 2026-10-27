@@ -777,6 +777,12 @@
     "typeDelete": "Delete",
     "typeReact": "Add a reaction"
   },
+  "commandMetadata": {
+    "voice": {
+      "name": "voice",
+      "description": "Manage voice channels"
+    }
+  },
   "features": {
     "enabled": "The {feature} feature is enabled.",
     "disabled": "The {feature} feature is disabled.",

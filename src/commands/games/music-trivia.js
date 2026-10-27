@@ -14,9 +14,9 @@ module.exports = async (client, interaction, args) => {
     if (!number || isNaN(number)) return client.errUsage({ usage: "music-trivia [amount of numbers]", type: 'editreply' }, interaction);
 
     const channel = interaction.member.voice.channel;
-    if (!channel) return client.errNormal({ key: 'errors.notInVoice', type: 'editreply' }, interaction);
+    if (!channel) return client.errNormal({ key: 'music.notInVoice', type: 'editreply' }, interaction);
 
-    if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return client.errNormal({ key: 'errors.notSameVoice', type: 'editreply' }, interaction);
+    if (interaction.guild.members.me.voice.channel && interaction.member.voice.channel.id !== interaction.guild.members.me.voice.channel.id) return client.errNormal({ key: 'music.notSameVoice', type: 'editreply' }, interaction);
 
     if (interaction.client.playerManager.get(interaction.guild.id)) return client.errNormal({ key: 'games.musicTriviaTrackPlaying', type: 'editreply' }, interaction);
 
