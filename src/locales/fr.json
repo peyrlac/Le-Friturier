@@ -1995,6 +1995,10 @@
     "spoiler": {
       "name": "Mettre en spoiler"
     },
+    "warn": { "name": "Avertir" },
+    "unwarn": { "name": "Retirer l’avertissement" },
+    "warnings": { "name": "Avertissements" },
+    "userinfo": { "name": "Informations utilisateur" },
     "autosetup": {
       "name": "configurationauto",
       "description": "Configurer automatiquement le bot",

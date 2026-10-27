@@ -5,6 +5,7 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/warnings");
 
 module.exports = {
+    localizationKey: 'commandMetadata.unwarn',
     data: new ContextMenuCommandBuilder()
         .setName('Unwarn')
         .setType(2),
