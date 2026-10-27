@@ -609,6 +609,12 @@ test('triggers metadata is sourced from the locale catalogs', () => {
   assert.doesNotMatch(source, /localizations:\s*\{/);
 });
 
+test('config metadata is sourced from the locale catalogs', () => {
+  const source = read('src/interactions/Command/config.js');
+  assert.match(source, /localizationKey:\s*['"]commandMetadata\.config['"]/);
+  assert.doesNotMatch(source, /localizations:\s*\{/);
+});
+
 test('advanced moderation responses use localization keys', () => {
   const expectations = {
     'src/commands/moderation/banlist.js': ['moderationExtras.emptyBanlist', 'moderationExtras.banlistTitle'],

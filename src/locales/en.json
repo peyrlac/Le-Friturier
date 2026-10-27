@@ -1067,6 +1067,11 @@
     "success": "You thanked <@{user}>! They now have {received} thanks."
   },
   "commandMetadata": {
+    "config": {
+      "name": "config",
+      "description": "Customize the bot to your liking",
+      "subcommandGroups": { "feature": { "name": "feature", "description": "Manage server features", "subcommands": { "list": { "description": "List feature statuses" }, "set": { "description": "Enable or disable a feature" }, "reset": { "description": "Reset a feature" } } } }
+    },
     "triggers": {
       "name": "triggers",
       "description": "Trigger responses to matching messages",
