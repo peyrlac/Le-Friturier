@@ -1674,7 +1674,11 @@
     },
     "setup": {
       "name": "setup",
-      "description": "Manage the bot setups"
+      "description": "Manage the bot setups",
+      "subcommands": {
+        "channelsorter": { "options": { "mode": { "choices": { "automatic": { "name": "Automatic" }, "manual": { "name": "Manual" }, "hybrid": { "name": "Hybrid" } } }, "pinned-order": { "choices": { "first": { "name": "Pinned first" }, "last": { "name": "Pinned last" } } } } },
+        "deletesetup": { "options": { "setup": { "choices": { "tickets": { "name": "Tickets" }, "customvoice": { "name": "Custom voice" }, "serverlogs": { "name": "Server logs" }, "levellogs": { "name": "Level logs" }, "boostlogs": { "name": "Boost logs" }, "birthdays": { "name": "Birthdays" }, "chatbot": { "name": "Chatbot" }, "reviews": { "name": "Reviews" }, "suggestions": { "name": "Suggestions" }, "counting": { "name": "Counting" }, "gtn": { "name": "Guess the number" }, "gtw": { "name": "Guess the word" }, "welcomechannel": { "name": "Welcome channel" }, "leavechannel": { "name": "Leave channel" }, "welcomerole": { "name": "Welcome role" }, "wordsnake": { "name": "Word snake" }, "channelsorter": { "name": "Channel sorter" } } } } }
+      }
     },
     "tickets": {
       "name": "tickets",
