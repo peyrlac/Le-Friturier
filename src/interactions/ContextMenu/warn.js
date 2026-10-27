@@ -22,7 +22,7 @@ module.exports = {
         }, interaction)
         if (perms === false) {
             client.errNormal({
-                error: `You don't have the required permissions to use this command!`,
+                key: 'errors.noPermission',
                 type: 'ephemeral'
             }, interaction);
             return;
@@ -110,7 +110,7 @@ module.exports = {
 
         client.emit('warnAdd', member, interaction.user, submitted.fields.getTextInputValue("reason"));
         client.succNormal({
-            text: `User has received a warning!`,
+            key: 'errors.moderation.warnSuccess',
             fields: [
                 {
                     name: "👤┆User",

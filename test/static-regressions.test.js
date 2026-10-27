@@ -335,6 +335,17 @@ test('remaining family adoption and divorce responses use localization keys', ()
   assert.doesNotMatch(divorce, /Tu ne peux pas|Tu n'es pas marrier|Divorcés|viennent de divorcer/);
 });
 
+test('moderation context menu common responses use localization keys', () => {
+  for (const file of ['warn.js', 'warnings.js', 'unwarn.js', 'userinfo.js']) {
+    const source = read(`src/interactions/ContextMenu/${file}`);
+    assert.doesNotMatch(source, /error:\s*[`"'](?:You don't have the required permissions|User has no warnings|This user is not in this guild)/, file);
+  }
+  assert.match(read('src/interactions/ContextMenu/warn.js'), /key:\s*['"]errors\.moderation\.warnSuccess['"]/);
+  assert.match(read('src/interactions/ContextMenu/unwarn.js'), /key:\s*['"]errors\.moderation\.warningRemoved['"]/);
+  assert.match(read('src/interactions/ContextMenu/unwarn.js'), /key:\s*['"]errors\.moderation\.noWarnings['"]/);
+  assert.match(read('src/interactions/ContextMenu/userinfo.js'), /key:\s*['"]errors\.userNotInGuild['"]/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

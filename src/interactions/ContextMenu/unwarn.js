@@ -23,7 +23,7 @@ module.exports = {
 
         if (perms == false) {
             client.errNormal({
-                error: "You don't have the required permissions to use this command!",
+                key: 'errors.noPermission',
                 type: 'ephemeral'
             }, interaction);
             return;
@@ -68,7 +68,7 @@ module.exports = {
                         });
                         // Send a success message
                         client.succNormal({
-                            text: `The warning has been successfully removed`,
+                            key: 'errors.moderation.warningRemoved',
                             fields: [
                                 {
                                     name: "👤┆User",
@@ -94,7 +94,7 @@ module.exports = {
                 });
             } else {
                 return client.errNormal({
-                    error: "User has no warnings!",
+                    key: 'errors.moderation.noWarnings',
                     type: 'ephemeraledit'
                 }, interaction);
             }
