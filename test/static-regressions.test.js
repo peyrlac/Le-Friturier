@@ -459,6 +459,20 @@ test('guild information commands use localization keys for responses and labels'
   }
 });
 
+test('native radio, report, and levels responses use localization keys', () => {
+  const expectations = {
+    'src/interactions/Command/radio.js': ['voice.notInVoice'],
+    'src/interactions/Command/report.js': ['report.bugSent', 'report.userSent'],
+    'src/interactions/Command/levels.js': ['levels.disabled']
+  };
+
+  for (const [file, keys] of Object.entries(expectations)) {
+    const source = read(file);
+    for (const key of keys) assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), `${file}: ${key}`);
+    assert.doesNotMatch(source, /You're not in a voice channel|Bug successfully sent|User report successfully sent|level system is disabled/i, file);
+  }
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

@@ -55,7 +55,7 @@ module.exports = {
             });
 
             client.succNormal({
-                text: `Bug successfully sent to the developers!`,
+                key: 'report.bugSent',
                 type: 'ephemeraledit'
             }, interaction);
         }
@@ -74,7 +74,7 @@ module.exports = {
             });
 
             client.succNormal({
-                text: `User report successfully sent to the developers!`,
+                key: 'report.userSent',
                 type: 'ephemeraledit'
             }, interaction);
         }

@@ -68,7 +68,7 @@ module.exports = {
     run: async (client, interaction, args) => {
         const guild = await Schema.findOne({ Guild: interaction.guild.id });
         if (!guild.Levels) return client.errNormal({
-            error: `The level system is disabled!`,
+            key: 'levels.disabled',
             type: 'ephemeral'
         }, interaction);
 

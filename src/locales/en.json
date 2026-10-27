@@ -882,6 +882,13 @@
     "emojiAdded": "Emoji successfully added to the server.",
     "emojiNotFound": "Emoji not found!"
   },
+  "report": {
+    "bugSent": "Bug successfully sent to the developers!",
+    "userSent": "User report successfully sent to the developers!"
+  },
+  "levels": {
+    "disabled": "The level system is disabled!"
+  },
   "announcement": {
     "title": "📢・Announcement!",
     "sent": "The announcement was sent successfully!",
