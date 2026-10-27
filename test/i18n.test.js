@@ -236,6 +236,30 @@ test('automod exposes localized command metadata and option descriptions', () =>
   });
 });
 
+test('afk and activities expose localized metadata', () => {
+  const afk = require('../src/interactions/Command/afk');
+  const activities = require('../src/interactions/Command/activities');
+
+  assert.deepEqual(afk.localizations, {
+    name: { fr: 'afk', en: 'afk' },
+    description: { fr: 'Gérer son statut AFK', en: 'Manage your AFK status' },
+    subcommands: {
+      help: { description: { fr: 'Voir l’aide de la catégorie AFK', en: 'View AFK category help' } },
+      set: {
+        description: { fr: 'Se mettre en AFK', en: 'Set your AFK status' },
+        options: { reason: { description: { fr: 'Raison de votre AFK', en: 'Reason for your AFK status' } } }
+      },
+      list: { description: { fr: 'Afficher les utilisateurs AFK', en: 'List AFK users' } }
+    }
+  });
+
+  assert.deepEqual(activities.localizations, {
+    name: { fr: 'activites', en: 'activities' },
+    description: { fr: 'Démarrer une activité', en: 'Start an activity' },
+    options: { activity: { description: { fr: 'Activité à démarrer', en: 'Activity to start' } } }
+  });
+});
+
 test('serializes native command localizations for Discord', () => {
     const command = require('../src/interactions/Command/config');
     applyCommandLocalizations(command);

@@ -8,7 +8,8 @@
     "requiredArguments": "Arguments requis",
     "requiredPermission": "Permission requise",
     "tryAgainAt": "R\u00e9essayez \u00e0",
-    "languageNames": { "fr": "Fran\u00e7ais", "en": "Anglais" }
+    "languageNames": { "fr": "Fran\u00e7ais", "en": "Anglais" },
+    "notSpecified": "Non précisée"
   },
   "errors": {
     "generic": "Une erreur est survenue !",
@@ -710,6 +711,17 @@
     "added": "La commande a été ajoutée avec succès.",
     "notFound": "Impossible de trouver cette commande.",
     "removed": "La commande a été supprimée avec succès."
+  },
+  "afk": {
+    "noData": "Aucune donnée AFK disponible.",
+    "reason": "Raison",
+    "title": "Utilisateurs AFK - {guild}",
+    "already": "Vous êtes déjà AFK.",
+    "setSuccess": "Votre statut AFK a été enregistré.",
+    "nowAfk": "{user} est maintenant AFK ! **Raison :** {reason}"
+  },
+  "activities": {
+    "notInVoice": "Vous n’êtes pas dans un salon vocal."
   },
   "features": {
     "enabled": "La fonctionnalité {feature} est activée.",
