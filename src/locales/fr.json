@@ -1369,6 +1369,22 @@
       "rule9Description": "Vous pouvez les consulter ici : https://discordapp.com/guidelines",
       "rule10Title": "10. Ne rejoignez pas un salon vocal sans permission",
       "rule10Description": "Si une place est libre, demandez d'abord si vous pouvez rejoindre le salon et partez si votre présence n'est pas souhaitée."
+      },
+      "applications": {
+      "title": "💼・Candidatures",
+      "description": "_____\n\nQuoi de plus amusant que de travailler avec le meilleur bot/serveur ? Nous avons régulièrement des postes à pourvoir.\n\nMais à quoi pouvez-vous vous attendre ?",
+      "field1Title": "👥┆Une équipe formidable",
+      "field1": "Dans l'équipe du bot, l'ambiance est toujours agréable et tout le monde est traité de manière égale !",
+      "field2Title": "🥳┆Accès au programme bêta",
+      "field2": "Accédez aux fonctionnalités inédites du bot avec votre propre serveur et devenez un véritable testeur !",
+      "field3Title": "📛┆Un joli rôle et un badge",
+      "field3": "Vous recevrez un rôle dans le serveur et un badge d'équipe dans la commande userinfo.",
+      "field4Title": "📖┆Apprendre et progresser",
+      "field4": "Nous vous donnons la possibilité d'apprendre et de progresser dans votre rôle, puis éventuellement dans l'équipe de gestion.",
+      "field5Title": "📘┆Que signifient les rôles ?",
+      "field5": "**Modérateur**\nAidez à garder le serveur agréable et organisé.\n\n**Marketing**\nAidez la communauté à grandir.\n\n**Organisation**\nTravaillez avec l'équipe sur de nouveaux événements.",
+      "field6Title": "📃┆Postuler ?",
+      "field6": "Créez un ticket pour recevoir votre formulaire de candidature !"
       }
     },
     "badgeNotFound": "Je ne trouve pas ce badge.",
