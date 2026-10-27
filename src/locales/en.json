@@ -1628,7 +1628,18 @@
     },
     "giveaway": {
       "name": "giveaway",
-      "description": "Host a giveaway in your server"
+      "description": "Host a giveaway in your server",
+      "subcommands": {
+        "help": { "description": "Get information about the giveaway category commands" },
+        "start": { "description": "Start a giveaway", "options": { "channel": { "description": "Channel where the giveaway should be" }, "duration": { "description": "Duration of the giveaway" }, "winners": { "description": "The number of giveaway winners" }, "prize": { "description": "The giveaway prize" } } },
+        "drop": { "description": "Start a drop giveaway", "options": { "channel": { "description": "Channel where the giveaway should be" }, "duration": { "description": "Duration of the giveaway" }, "winners": { "description": "The number of giveaway winners" }, "prize": { "description": "The giveaway prize" } } },
+        "reroll": { "description": "Reroll a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "end": { "description": "End a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "edit": { "description": "Edit the time of a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "delete": { "description": "Delete a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "pause": { "description": "Pause a giveaway", "options": { "message": { "description": "Giveaway message ID" } } },
+        "unpause": { "description": "Unpause a giveaway", "options": { "message": { "description": "Giveaway message ID" } } }
+      }
     },
     "config": {
       "name": "config",

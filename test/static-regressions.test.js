@@ -829,6 +829,11 @@ test('core moderation setup and ticket metadata is sourced from the locale catal
   }
 });
 
+test('giveaway command descriptions are sourced from locale metadata', () => {
+  const source = read('src/interactions/Command/giveaway.js');
+  assert.doesNotMatch(source, /\.setDescription\(['"]/);
+});
+
 test('music and radio metadata is sourced from the locale catalogs', () => {
   for (const name of ['music', 'radio']) {
     const source = read(`src/interactions/Command/${name}.js`);
