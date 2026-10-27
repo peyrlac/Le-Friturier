@@ -761,6 +761,8 @@
     "casino": {
       "rouletteTitle": "🎰・Roulette",
       "roulette": {
+        "usage": "roulette [color] [amount]",
+        "multiplier": "🎰・Multiplier: {multiplier}",
         "insufficient": "You are betting more than you own!",
         "invalidColour": "No valid colour was specified!",
         "noAccount": "You don't have any money yet.",

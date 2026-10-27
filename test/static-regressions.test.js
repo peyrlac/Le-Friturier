@@ -833,6 +833,13 @@ test('crash responses use localization keys', () => {
   assert.doesNotMatch(source, /Crash a commencé|Multiplicateur|Résultats de|Perte|Profit/);
 });
 
+test('roulette dynamic titles use localization keys', () => {
+  const source = read('src/commands/casino/roulette.js');
+  assert.match(source, /commands\.casino\.roulette\.usage/);
+  assert.match(source, /commands\.casino\.roulette\.multiplier/);
+  assert.doesNotMatch(source, /Multiplicateur:/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
