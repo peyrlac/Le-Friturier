@@ -11,14 +11,14 @@ module.exports = async (client, interaction, args) => {
 
     if (perms == false) return;
 
-    ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
+    const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
+    if (data) {
             const ticketCategory = interaction.guild.channels.cache.get(data.Category);
             const ticketRole = interaction.guild.roles.cache.get(data.Role);
 
             if (ticketCategory == undefined) {
                 return client.errNormal({
-                    error: "Do the setup!",
+                    key: 'tickets.setupRequired',
                     type: 'editreply'
                 }, interaction);
             }
@@ -26,7 +26,7 @@ module.exports = async (client, interaction, args) => {
             if (interaction.channel.parentId == ticketCategory.id) {
 
                 try {
-                    interaction.channel.permissionOverwrites.edit(ticketRole, {
+                    await interaction.channel.permissionOverwrites.edit(ticketRole, {
                         ViewChannel: false,
                         SendMessages: false,
                         AttachFiles: false,
@@ -35,21 +35,22 @@ module.exports = async (client, interaction, args) => {
                     });
 
                     return client.simpleEmbed({
-                        desc: `Ticket raised by <@!${interaction.user.id}>`,
+                        descKey: 'tickets.raised',
+                        variables: { user: interaction.user.id },
                         type: 'editreply'
                     }, interaction)
                 }
                 catch {
-                    client.errNormal({
-                        error: "Something went wrong!",
+                    return client.errNormal({
+                        key: 'tickets.operationFailed',
                         type: 'editreply'
                     }, interaction);
                 }
 
             }
             else {
-                client.errNormal({
-                    error: "This is not a ticket!",
+                return client.errNormal({
+                    key: 'tickets.notTicket',
                     type: 'editreply'
                 }, interaction);
 
@@ -57,11 +58,10 @@ module.exports = async (client, interaction, args) => {
         }
         else {
             return client.errNormal({
-                error: "Do the setup!",
+                key: 'tickets.setupRequired',
                 type: 'editreply'
             }, interaction);
         }
-    })
 }
 
- 
+

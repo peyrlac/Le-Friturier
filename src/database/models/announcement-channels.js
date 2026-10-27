@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Client, Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { generateCalendarLinks } = require('../../assets/utils/calendar');
 const chalk = require('chalk');
+const logger = require('../../handlers/logger');
 
 // Définir le sous-schéma pour un rappel individuel
 const ReminderStateSchema = new mongoose.Schema({
@@ -113,8 +114,9 @@ function formatTimeForLogs(ms) {
 }
 
 async function clearOldEventsFromDatabase(client) {
+    const startedAt = Date.now();
     try {
-        console.log(chalk.blue(chalk.bold(`Cleanup`)), (chalk.white(`>>`)), chalk.green(`Starting database cleanup`));
+        logger.info('CLEANUP', 'Nettoyage des événements en base démarré');
         
         const ONE_MONTH = 30 * 24 * 60 * 60 * 1000; // 30 jours en millisecondes
         const TWO_HOURS = 2 * 60 * 60 * 1000; // 2 heures en millisecondes
@@ -124,17 +126,25 @@ async function clearOldEventsFromDatabase(client) {
         
         // Récupérer toutes les guildes
         const guilds = await AnnouncementChannels.find({});
-        console.log(chalk.blue(chalk.bold(`Cleanup`)), (chalk.white(`>>`)), chalk.green(`Found ${guilds.length} guilds to process`));
+        logger.info('CLEANUP', `${guilds.length} serveur(s) à traiter`);
         
         let totalEventsProcessed = 0;
         let totalEventsRemoved = 0;
         let totalGuildsUpdated = 0;
+        const processedGuilds = [];
+        const removedEvents = [];
         
         for (const guildData of guilds) {
             try {
                 // Vérifier si la guilde a des événements
                 if (!Array.isArray(guildData.EventThreads) || guildData.EventThreads.length === 0) {
-                    console.log(chalk.blue(chalk.bold(`Cleanup`)), (chalk.white(`>>`)), chalk.yellow(`No events found for guild ${guildData.Guild}`));
+                    const cachedGuild = client.guilds.cache.get(guildData.Guild);
+                    processedGuilds.push({
+                        id: guildData.Guild,
+                        name: cachedGuild?.name || 'Serveur sans nom',
+                        events: 0,
+                    });
+                    logger.warn('CLEANUP', `Aucun événement trouvé pour ${cachedGuild?.name || guildData.Guild}`);
                     continue;
                 }
 
@@ -153,6 +163,12 @@ async function clearOldEventsFromDatabase(client) {
                     console.log(chalk.blue(chalk.bold(`Cleanup`)), (chalk.white(`>>`)), chalk.yellow(`Skipping guild ${guildData.Guild} - Cannot access`));
                     continue;
                 }
+
+                processedGuilds.push({
+                    id: guildData.Guild,
+                    name: discordGuild.name || 'Serveur sans nom',
+                    events: guildData.EventThreads.length,
+                });
 
                 // Traiter chaque événement
                 for (const eventThread of guildData.EventThreads) {
@@ -197,6 +213,12 @@ async function clearOldEventsFromDatabase(client) {
                         if (timeSinceEvent >= ONE_MONTH && eventThread.scheduledStartTimestamp) {
                             console.log(chalk.blue(chalk.bold(`Cleanup`)), (chalk.white(`>>`)), chalk.yellow(`Removing old event ${eventThread.eventName} from guild ${guildData.Guild} (${Math.floor(timeSinceEvent / 60000)} minutes old)`));
                             totalEventsRemoved++;
+                            removedEvents.push({
+                                guildId: guildData.Guild,
+                                guildName: discordGuild.name || 'Serveur sans nom',
+                                eventId: eventThread.eventId,
+                                eventName: eventThread.eventName || 'Événement sans nom',
+                            });
                             continue;
                         }
 
@@ -297,10 +319,12 @@ async function clearOldEventsFromDatabase(client) {
             guildsProcessed: guilds.length,
             guildsUpdated: totalGuildsUpdated,
             eventsProcessed: totalEventsProcessed,
-            eventsRemoved: totalEventsRemoved
+            eventsRemoved: totalEventsRemoved,
+            guilds: processedGuilds,
+            removedEvents,
         };
 
-        console.log(chalk.blue(chalk.bold(`Cleanup`)), (chalk.white(`>>`)), chalk.green(`Cleanup completed:`), summary);
+        logger.success('CLEANUP', `Nettoyage terminé en ${Date.now() - startedAt} ms`, summary);
         return summary;
 
     } catch (error) {

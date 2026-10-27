@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const chalk = require('chalk');
+const logger = require('./handlers/logger');
 require('dotenv').config('./.env');
 const path = require('path');
 const express = require('express');
@@ -8,17 +8,18 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use('/public',(req,res,next)=>{
 res.sendFile(path.join(__dirname,'text.html'));
 });
-app.listen(3000)
+const httpPort = Number.parseInt(process.env.PORT, 10) || 3000;
+app.listen(httpPort)
 
-const axios = require('axios');
+const { getJson } = require('./handlers/http');
 // Check if is up to date
 const { version } = require('.././package.json');
-axios.get('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').then(res => {
-  if (res.data.tag_name !== version) {
-    console.log(chalk.red.bgYellow(`Votre bot n'est pas à jour! Veuillez mettre à jour la dernière version!`, version + ' -> ' + res.data.tag_name));
+getJson('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').then(data => {
+  if (data?.tag_name && data.tag_name !== version) {
+    logger.warn('UPDATE', `Une mise à jour est disponible : ${version} -> ${data.tag_name}`);
   }
 }).catch(err => {
-  console.log(chalk.red.bgYellow(`Impossible de vérifier si Le Friturier est à jour!`));
+  logger.warn('UPDATE', `Impossible de vérifier la dernière version du bot.`);
 });
 
 
@@ -46,6 +47,7 @@ const shardLogs = new Discord.WebhookClient({
 
 const manager = new Discord.ShardingManager('./src/bot.js', {
     totalShards: 'auto',
+    timeout: 300000,
     token: process.env.DISCORD_TOKEN,
     respawn: true
 });
@@ -54,12 +56,8 @@ if (process.env.TOPGG_TOKEN) {
     AutoPoster(process.env.TOPGG_TOKEN, manager);
 }
 console.clear();
-console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), (chalk.white(`...`)))
-console.log(`\u001b[0m`)
-console.log(`\u001b[0m`)
-console.log(`\u001b[0m`)
-console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), chalk.red(`Version ${require(`${process.cwd()}/package.json`).version}`), (chalk.green(`loaded`)))
-console.log(`\u001b[0m`);
+logger.info('SYSTEM', 'Démarrage du bot');
+logger.success('SYSTEM', `Version ${require(`${process.cwd()}/package.json`).version} chargée`);
 
 manager.on('shardCreate', shard => {
     let embed = new Discord.EmbedBuilder()
@@ -83,8 +81,7 @@ manager.on('shardCreate', shard => {
         embeds: [embed],
     });
 
-  console.log(chalk.blue(chalk.bold(`Système`)), (chalk.white(`>>`)), (chalk.green(`Démarrage`)), chalk.red(`Fragment #${shard.id + 1}`), (chalk.white(`...`)))
-  console.log(`\u001b[0m`);
+  logger.info('SYSTEM', `Démarrage du fragment #${shard.id + 1}`);
 
     shard.on("death", (process) => {
         const embed = new Discord.EmbedBuilder()
@@ -145,7 +142,9 @@ manager.on('shardCreate', shard => {
 });
 
 
-manager.spawn();
+manager.spawn().catch(error => {
+    logger.error('SYSTEM', 'Échec du démarrage des shards', error);
+});
 
 
 // Webhooks

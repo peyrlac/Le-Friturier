@@ -1,31 +1,32 @@
-const Discord = require('discord.js');
-const axios = require('axios');
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
     const color = interaction.options.getString('color');
 
-    const { data } = await axios.get(
+    const data = await getJson(
         `https://some-random-api.com/canvas/rgb?hex=${color}`
     ).catch(e => {
         return client.errNormal({ 
-            error: "Color not found!",
+            key: 'search.colorNotFound',
             type: 'editreply'
         }, interaction)
     });
 
+    if (!data) return;
+
     client.embed({
-        title: `🎨・Color info`,
+        titleKey: 'search.colorTitle',
         image: `https://some-random-api.com/canvas/colorviewer?hex=${color}`,
         color: `#${color}`,
         fields: [
             {
-                name: "Hex",
+                name: await client.t(interaction, 'search.hex'),
                 value: `#${color}`,
                 inline: true,
             },
             {
-                name: "RGB",
+                name: await client.t(interaction, 'search.rgb'),
                 value: `${data.r}, ${data.g}, ${data.b}`,
                 inline: true,
             }

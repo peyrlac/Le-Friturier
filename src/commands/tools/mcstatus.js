@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
@@ -7,33 +7,33 @@ module.exports = async (client, interaction, args) => {
 
     if (ip == null) return client.errUsage({ usage: "mcstatus [ip]", type: 'editreply' }, interaction)
 
-    fetch(`https://api.mcsrvstat.us/2/${ip}`)
-        .then((res) => res.json()).catch({})
+    return getJson(`https://api.mcsrvstat.us/2/${ip}`)
+
         .then(async (json) => {
 
-            if (!json.players) return client.errNormal({ error: "Can't find the server!", type: 'editreply' }, interaction)
+            if (!json.players) return client.errNormal({ key: 'tools.serverNotFound', type: 'editreply' }, interaction)
 
             return client.embed({
-                title: `📁・${ip}`,
+                title: await client.t(interaction, 'tools.serverTitle', { ip }),
                 thumbnail: `https://eu.mc-api.net/v3/server/favicon/${ip}`,
                 fields: [{
-                    name: "🟢┇Online",
+                    name: await client.t(interaction, 'tools.online'),
                     value: `${json.online}`,
                     inline: true,
                 },
                 {
-                    name: "🏷️┇Version",
+                    name: await client.t(interaction, 'tools.version'),
                     value: `${json.version}`,
                     inline: true,
                 },
                 {
-                    name: "👤┇Players online",
+                    name: await client.t(interaction, 'tools.playersOnline'),
                     value: `${json.players.online}/${json.players.max}`,
                     inline: true,
                 },
                 ], type: 'editreply'
             }, interaction)
-        }).catch({})
+        }).catch(() => client.errNormal({ key: 'tools.remoteDataUnavailable', type: 'editreply' }, interaction))
 }
 
- 
+

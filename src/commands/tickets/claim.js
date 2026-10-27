@@ -9,7 +9,7 @@ module.exports = async (client, interaction, args) => {
 
     let type = 'reply';
     if (interaction.isCommand()) type = 'editreply';
-    
+
     if (ticketData) {
         if (interaction.user.id !== ticketData.creator) {
             const perms = await client.checkUserPerms({
@@ -25,7 +25,7 @@ module.exports = async (client, interaction, args) => {
 
                     if (ticketCategory == undefined) {
                         return client.errNormal({
-                            error: "Do the ticket setup!",
+                            key: 'tickets.setupRequired',
                             type: type
                         }, interaction)
                     }
@@ -33,42 +33,43 @@ module.exports = async (client, interaction, args) => {
                     if (interaction.channel.parentId == ticketCategory.id) {
 
                         ticketData.claimed = interaction.user.id;
-                        ticketData.save();
+                        await ticketData.save();
 
                         return client.simpleEmbed({
-                            desc: `You will now be assisted by <@!${interaction.user.id}>`,
+                            descKey: 'tickets.claimedBy',
+                            variables: { user: interaction.user.id },
                             type: type
                         }, interaction)
 
                     }
                     else {
-                        client.errNormal({
-                            error: "This is not a ticket!",
+                        return client.errNormal({
+                            key: 'tickets.notTicket',
                             type: type
                         }, interaction)
                     }
                 }
                 else {
-                    client.errNormal({
-                        error: "Ticket has already been claimed!",
+                    return client.errNormal({
+                        key: 'tickets.alreadyClaimed',
                         type: 'ephemeral'
                     }, interaction)
                 }
             }
             else {
                 return client.errNormal({
-                    error: "Do the ticket setup!",
+                    key: 'tickets.setupRequired',
                     type: type
                 }, interaction)
             }
         }
         else {
             return client.errNormal({
-                error: "You are not allowed to claim your own ticket!",
+                key: 'tickets.ownTicket',
                 type: 'ephemeral'
             }, interaction)
         }
     }
 }
 
- 
+

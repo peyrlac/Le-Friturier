@@ -9,18 +9,18 @@ module.exports = async (client, interaction, args) => {
         numbers: true
     });
 
-    client.succNormal({ text: `I have generate a password and have it sent to your DM`, type: 'editreply' }, interaction);
+    client.succNormal({ key: 'tools.passwordSent', type: 'editreply' }, interaction);
 
     client.succNormal({
-        text: `Your generated password`,
+        key: 'tools.generatedPassword',
         fields: [
             {
-                name: "🔑┇Password",
+                name: await client.t(interaction, 'tools.password'),
                 value: `${password}`,
                 inline: true,
             },
             {
-                name: "👣┇Length",
+                name: await client.t(interaction, 'tools.length'),
                 value: `12`,
                 inline: true,
             }
@@ -28,5 +28,3 @@ module.exports = async (client, interaction, args) => {
     }, interaction.user)
 
 }
-
- 

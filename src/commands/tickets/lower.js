@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 
 const ticketSchema = require("../../database/models/tickets");
-const ticketChannels = require("../../database/models/ticketChannels");
 
 module.exports = async (client, interaction, args) => {
     const perms = await client.checkUserPerms({
@@ -11,57 +10,52 @@ module.exports = async (client, interaction, args) => {
 
     if (perms == false) return;
 
-    ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
-            const ticketCategory = interaction.guild.channels.cache.get(data.Category);
-            const ticketRole = interaction.guild.roles.cache.get(data.Role);
+    const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
+    if (!data) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: 'editreply'
+        }, interaction);
+    }
 
-            if (ticketCategory == undefined) {
-                return client.errNormal({
-                    error: "Do the setup!",
-                    type: 'editreply'
-                }, interaction);
-            }
+    const ticketCategory = interaction.guild.channels.cache.get(data.Category);
+    const ticketRole = interaction.guild.roles.cache.get(data.Role);
 
-            if (interaction.channel.parentId == ticketCategory.id) {
+    if (ticketCategory == undefined) {
+        return client.errNormal({
+            key: 'tickets.setupRequired',
+            type: 'editreply'
+        }, interaction);
+    }
 
-                try {
-                    interaction.channel.permissionOverwrites.edit(ticketRole, {
-                        ViewChannel: true,
-                        SendMessages: true,
-                        AttachFiles: true,
-                        ReadMessageHistory: true,
-                        AddReactions: true
-                    });
+    if (interaction.channel.parentId != ticketCategory.id) {
+        return client.errNormal({
+            key: 'tickets.notTicket',
+            type: 'editreply'
+        }, interaction);
+    }
 
-                    return client.simpleEmbed({
-                        desc: `Ticket lowered by <@!${interaction.user.id}>`,
-                        type: 'editreply'
-                    }, interaction)
-                }
-                catch {
-                    client.errNormal({
-                        error: "Something went wrong!",
-                        type: 'editreply'
-                    }, interaction);
-                }
+    try {
+        await interaction.channel.permissionOverwrites.edit(ticketRole, {
+            ViewChannel: true,
+            SendMessages: true,
+            AttachFiles: true,
+            ReadMessageHistory: true,
+            AddReactions: true
+        });
 
-            }
-            else {
-                client.errNormal({ 
-                    error: "This is not a ticket!", 
-                    type: 'editreply'
-                }, interaction);
-
-            }
-        }
-        else {
-            return client.errNormal({ 
-                error: "Do the setup!", 
-                type: 'editreply'
-            }, interaction);
-        }
-    })
+        return client.simpleEmbed({
+            descKey: 'tickets.lowered',
+            variables: { user: interaction.user.id },
+            type: 'editreply'
+        }, interaction);
+    }
+    catch {
+        return client.errNormal({
+            key: 'tickets.operationFailed',
+            type: 'editreply'
+        }, interaction);
+    }
 }
 
- 
+

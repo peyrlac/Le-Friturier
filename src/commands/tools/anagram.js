@@ -1,32 +1,32 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 
 module.exports = async (client, interaction, args) => {
 
     const word = interaction.options.getString('word');
 
-    fetch(`http://www.anagramica.com/all/${encodeURIComponent(word)}`).then((res) => res.json()).catch({})
+    return getJson(`http://www.anagramica.com/all/${encodeURIComponent(word)}`)
         .then(async (json) => {
             let content = ``;
-            if (!json.all[0]) return client.errNormal({ error: "No word found!", type: 'editreply' }, interaction)
+            if (!json.all[0]) return client.errNormal({ key: 'tools.noWordFound', type: 'editreply' }, interaction)
 
             json.all.forEach(i => {
                 content += `${i}\n`;
             });
 
             client.embed({
-                title: `❓・Anagram`,
-                desc: `I formed a word with the given letters`,
+                titleKey: 'tools.anagramTitle',
+                descKey: 'tools.anagramDescription',
                 fields: [
                     {
-                        name: `💬┇Word(s)`,
+                        name: `${await client.t(interaction, 'tools.words')}`,
                         value: content
                     }
                 ],
                 type: 'editreply'
             }, interaction)
-        }).catch({})
+        }).catch(() => client.errNormal({ key: 'tools.remoteDataError', type: 'editreply' }, interaction))
 
 }
 
- 
+

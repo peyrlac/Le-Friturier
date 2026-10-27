@@ -1,5 +1,3 @@
-const discord = require('discord.js');
-
 const invites = require("../../database/models/invites");
 const invitedBy = require("../../database/models/inviteBy");
 const welcomeSchema = require("../../database/models/welcomeChannels");
@@ -28,29 +26,9 @@ module.exports = async (client, member, invite, inviter) => {
             joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
             joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-            welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
-                if (channelData) {
-
-                    var channel = member.guild.channels.cache.get(channelData.Channel)
-
-                    await client.embed({
-                        title: `👋・Welcome`,
-                        desc: joinMessage
-                    }, channel).catch(() => { })
-                }
-            })
+            await sendWelcome(client, member, joinMessage);
         } else {
-            welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
-                if (channelData) {
-
-                    var channel = member.guild.channels.cache.get(channelData.Channel)
-
-                    client.embed({
-                        title: `👋・Welcome`,
-                        desc: `I cannot trace how **${member} | ${member.user.tag}** has been joined`
-                    }, channel).catch(() => { })
-                }
-            })
+            await sendWelcome(client, member, `I cannot trace how **${member} | ${member.user.tag}** has been joined`);
         }
     }
     else {
@@ -59,9 +37,9 @@ module.exports = async (client, member, invite, inviter) => {
         if (data) {
             data.Invites += 1;
             data.Total += 1;
-            data.save();
+            await data.save();
 
-            if (messageData) {
+            if (messageData?.inviteJoin) {
                 var joinMessage = messageData.inviteJoin;
                 joinMessage = joinMessage.replace(`{user:username}`, member.user.username)
                 joinMessage = joinMessage.replace(`{user:discriminator}`, member.user.discriminator)
@@ -78,44 +56,20 @@ module.exports = async (client, member, invite, inviter) => {
                 joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
                 joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
-                    if (channelData) {
-
-                        var channel = member.guild.channels.cache.get(channelData.Channel)
-
-                        await client.embed({
-                            title: `👋・Welcome`,
-                            desc: joinMessage
-                        }, channel).catch(() => { })
-                    }
-                })
+                await sendWelcome(client, member, joinMessage);
             }
             else {
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
-                    if (channelData) {
-
-                        var channel = member.guild.channels.cache.get(channelData.Channel)
-
-                        client.embed({
-                            title: `👋・Welcome`,
-                            desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(${data.Invites} invites)**`
-                        }, channel)
-                    }
-                })
+                await sendWelcome(client, member, `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(${data.Invites} invites)**`);
             }
 
-            rewards.findOne({ Guild: member.guild.id, Invites: data.Invites }, async (err, data) => {
-                if (data) {
-                    try {
-                        var role = member.guild.roles.cache.get(data.Role);
-                        member.roles.add(role);
-                    }
-                    catch { }
-                }
-            })
+            const reward = await rewards.findOne({ Guild: member.guild.id, Invites: data.Invites });
+            if (reward) {
+                const role = member.guild.roles.cache.get(reward.Role);
+                if (role) await member.roles.add(role);
+            }
         }
         else {
-            new invites({
+            await new invites({
                 Guild: member.guild.id,
                 User: inviter.id,
                 Invites: 1,
@@ -123,7 +77,7 @@ module.exports = async (client, member, invite, inviter) => {
                 Left: 0
             }).save();
 
-            if (messageData) {
+            if (messageData?.inviteJoin) {
                 var joinMessage = messageData.inviteJoin;
                 joinMessage = joinMessage.replace(`{user:username}`, member.user.username)
                 joinMessage = joinMessage.replace(`{user:discriminator}`, member.user.discriminator)
@@ -140,46 +94,40 @@ module.exports = async (client, member, invite, inviter) => {
                 joinMessage = joinMessage.replace(`{guild:name}`, member.guild.name)
                 joinMessage = joinMessage.replace(`{guild:members}`, member.guild.memberCount)
 
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
-                    if (channelData) {
-
-                        var channel = member.guild.channels.cache.get(channelData.Channel)
-
-                        await client.embed({
-                            title: `👋・Welcome`,
-                            desc: joinMessage
-                        }, channel).catch(() => { })
-                    }
-                })
+                await sendWelcome(client, member, joinMessage);
             }
             else {
-                welcomeSchema.findOne({ Guild: member.guild.id }, async (err, channelData) => {
-                    if (channelData) {
-
-                        var channel = member.guild.channels.cache.get(channelData.Channel)
-
-                        await client.embed({
-                            title: `👋・Welcome`,
-                            desc: `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(1 invites)**`
-                        }, channel).catch(() => { })
-                    }
-                })
+                await sendWelcome(client, member, `**${member} | ${member.user.tag}** was invited by ${inviter.tag} **(1 invites)**`);
             }
         }
 
-        invitedBy.findOne({ Guild: member.guild.id }, async (err, data2) => {
-            if (data2) {
-                data2.inviteUser = inviter.id,
-                    data2.User = member.id
-                data2.save();
-            }
-            else {
-                new invitedBy({
-                    Guild: member.guild.id,
+        await invitedBy.findOneAndUpdate(
+            { Guild: member.guild.id },
+            {
+                $set: {
                     inviteUser: inviter.id,
                     User: member.id
-                }).save();
-            }
-        })
+                }
+            },
+            { upsert: true, new: true, setDefaultsOnInsert: true }
+        );
     }
 };
+
+async function sendWelcome(client, member, description) {
+    const channelData = await welcomeSchema.findOne({ Guild: member.guild.id });
+    if (!channelData) return;
+
+    const channel = member.guild.channels.cache.get(channelData.Channel);
+    if (!channel) return;
+
+    try {
+        await client.embed({
+            title: `👋・Welcome`,
+            desc: description
+        }, channel);
+    }
+    catch (error) {
+        console.error("Failed to send welcome message", error);
+    }
+}

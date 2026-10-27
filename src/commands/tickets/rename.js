@@ -16,7 +16,7 @@ module.exports = async (client, interaction, args) => {
         const ticketCategory = interaction.guild.channels.cache.get(data.Category);
         if (ticketCategory == undefined) {
             return client.errNormal({
-                error: "Do the ticket setup!",
+                key: 'tickets.setupRequired',
                 type: 'editreply'
             }, interaction)
         }
@@ -26,17 +26,18 @@ module.exports = async (client, interaction, args) => {
             interaction.channel.edit({ name: name });
 
             return client.simpleEmbed({
-                desc: `Channel name has changed to ${name}`,
+                descKey: 'tickets.renamed',
+                variables: { name },
                 type: 'editreply'
             }, interaction)
         }
         else {
             client.errNormal({
-                error: "This is not a ticket!",
+                key: 'tickets.notTicket',
                 type: 'editreply'
             }, interaction)
         }
     }
 }
 
- 
+

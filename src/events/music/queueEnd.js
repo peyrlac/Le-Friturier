@@ -5,6 +5,6 @@ module.exports = (client, player, track) => {
 
     const channel = client.channels.cache.get(player.textChannel);
     client.errNormal({
-        error: "Queue is empty, Leaving voice channel"
+        key: 'music.queueEmpty'
     }, channel)
 };

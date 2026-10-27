@@ -8,29 +8,27 @@ module.exports = async (client, interaction, args) => {
     const channel = interaction.options.getChannel('channel');
     const logs = interaction.options.getChannel('logs');
 
-    ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
-            data.Category = category.id;
-            data.Role = role.id;
-            data.Channel = channel.id;
-            data.Logs = logs.id;
-            data.save();
-        }
-        else {
-            new ticketSchema({
-                Guild: interaction.guild.id,
-                Category: category.id,
-                Role: role.id,
-                Channel: channel.id,
-                Logs: logs.id
-            }).save();
-        }
-    })
+    const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
+    if (data) {
+        data.Category = category.id;
+        data.Role = role.id;
+        data.Channel = channel.id;
+        data.Logs = logs.id;
+        await data.save();
+    }
+    else {
+        await new ticketSchema({
+            Guild: interaction.guild.id,
+            Category: category.id,
+            Role: role.id,
+            Channel: channel.id,
+            Logs: logs.id
+        }).save();
+    }
 
-    client.succNormal({
-        text: `Tickets has been set up successfully!`,
+    return client.succNormal({
+        key: 'commands.setup.tickets.success',
         type: 'editreply'
     }, interaction);
 }
 
- 

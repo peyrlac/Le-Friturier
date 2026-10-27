@@ -18,10 +18,10 @@ module.exports = (client) => {
             if (lastDate == dateNow) return;
 
             getLastDate.Date = dateNow;
-            getLastDate.save();
+            await getLastDate.save();
         }
         else {
-            new Devs({
+            await new Devs({
                 Action: "Birthday",
                 Date: dateNow,
             }).save();
@@ -54,16 +54,15 @@ module.exports = (client) => {
 
                 const finalGuild = client.guilds.cache.get(Guild)
                 if (finalGuild) {
-                    birthdayChannel.findOne({ Guild: finalGuild.id }, async (err, data) => {
-                        if (data) {
-                            const channel = finalGuild.channels.cache.get(data.Channel);
-                            
-                            client.embed({ 
-                                title: `${client.emotes.normal.birthday}・Birthday`,
-                                desc: `Happy birthday to <@!${User}>!`
-                            }, channel)
-                        }
-                    })
+                    const data = await birthdayChannel.findOne({ Guild: finalGuild.id });
+                    if (data) {
+                        const channel = finalGuild.channels.cache.get(data.Channel);
+
+                        await client.embed({
+                            title: `${client.emotes.normal.birthday}・Birthday`,
+                            desc: `Happy birthday to <@!${User}>!`
+                        }, channel)
+                    }
                 }
             }
         }
@@ -85,4 +84,4 @@ function suffixes(number) {
                 ? `${converted}rd` : `${converted}th`
 }
 
- 
+
