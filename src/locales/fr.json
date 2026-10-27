@@ -609,6 +609,12 @@
       }
     }
   },
+  "review": {
+    "starsInvalid": "La note doit être comprise entre 1 et 5 étoiles.",
+    "noChannel": "Aucun salon d'avis n'est configuré. Utilisez `reviewchannel`.",
+    "submitted": "Votre avis a été envoyé avec succès.",
+    "newReview": "Un nouvel avis a été publié."
+  },
   "customCommands": {
     "duplicate": "Ce nom de commande est déjà utilisé dans les commandes personnalisées du serveur.",
     "promptAction": "Quelle action doit être associée à cette commande ?",
