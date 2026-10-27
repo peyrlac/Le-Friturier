@@ -64,12 +64,28 @@ function applyCommandLocalizations(command) {
         Object.entries(values).map(([locale, value]) => [discordLocale(locale), value])
     );
 
-    if (localizations.name && typeof builder.setNameLocalizations === 'function') {
-        builder.setNameLocalizations(serializeLocales(localizations.name));
-    }
-    if (localizations.description && typeof builder.setDescriptionLocalizations === 'function') {
-        builder.setDescriptionLocalizations(serializeLocales(localizations.description));
-    }
+    const applyBuilderLocalizations = (target, values) => {
+        if (!target || !values) return;
+
+        if (values.name && typeof target.setNameLocalizations === 'function') {
+            target.setNameLocalizations(serializeLocales(values.name));
+        }
+        if (values.description && typeof target.setDescriptionLocalizations === 'function') {
+            target.setDescriptionLocalizations(serializeLocales(values.description));
+        }
+
+        const children = Array.isArray(target.options) ? target.options : [];
+        for (const [name, childValues] of Object.entries(values.subcommands || {})) {
+            const child = children.find(option => option.name === name);
+            applyBuilderLocalizations(child, childValues);
+        }
+        for (const [name, childValues] of Object.entries(values.options || {})) {
+            const child = children.find(option => option.name === name);
+            applyBuilderLocalizations(child, childValues);
+        }
+    };
+
+    applyBuilderLocalizations(builder, localizations);
 
     return command;
 }
