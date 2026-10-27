@@ -25,20 +25,15 @@ module.exports = async (client, interaction, args) => {
         type: 'editreply'
     }, interaction)
 
-    Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
-        if (data) {
-            data.Color = `#${color}`;
-            data.save();
-        }
-        else {
-            new Schema({
-                Guild: interaction.guild.id,
-                Color: `#${color}`
-            }).save();
-        }
-    })
+    const data = await Schema.findOne({ Guild: interaction.guild.id });
+    if (data) {
+        data.Color = `#${color}`;
+        await data.save();
+    } else {
+        await new Schema({ Guild: interaction.guild.id, Color: `#${color}` }).save();
+    }
 
-    client.succNormal({
+    return client.succNormal({
         key: 'commands.config.setcolor.success',
         fields: [
             {
