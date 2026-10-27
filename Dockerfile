@@ -1,7 +1,7 @@
 # FriturierBot Dockerfile
 FROM node:20-alpine
 
-# Installer les dépendances système nécessaires pour canvas et puppeteer
+# Installer les dépendances système nécessaires pour canvas et Chromium
 RUN apk add --no-cache \
     python3 \
     make \
@@ -19,8 +19,9 @@ RUN apk add --no-cache \
     ttf-freefont \
     font-noto-emoji
 
-# Variables d'environnement pour Puppeteer
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+# Variables d'environnement pour les dépendances et Chromium Alpine
+ENV NODE_ENV=production \
+    PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 # Définir le répertoire de travail
@@ -29,8 +30,8 @@ WORKDIR /usr/src/app
 # Copier les fichiers package.json et package-lock.json
 COPY package*.json ./
 
-# Installer les dépendances
-RUN npm install --omit=dev
+# Installer exactement les dépendances verrouillées
+RUN npm ci --omit=dev
 
 # Copier le reste de l'application
 COPY . .
