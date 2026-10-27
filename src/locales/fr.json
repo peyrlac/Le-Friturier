@@ -27,6 +27,16 @@
     }
   },
     "commands": {
+      "automod": {
+        "wordExists": "Le mot **{word}** existe déjà dans la liste noire.",
+        "wordMissing": "Le mot **{word}** n'existe pas dans la liste noire.",
+        "noData": "Ce serveur n'a aucune donnée de liste noire.",
+        "wordField": "💬・Mot",
+        "wordAdded": "Le mot **{word}** a été ajouté à la liste noire.",
+        "wordRemoved": "Le mot **{word}** a été retiré de la liste noire.",
+        "title": "Mots sur liste noire",
+        "words": "{words}"
+      },
       "serverstats": {
         "channel": "📘・Salon",
         "channelsCreated": "Le compteur de salons a été créé.",

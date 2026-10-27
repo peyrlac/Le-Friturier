@@ -1,8 +1,10 @@
 const Discord = require('discord.js');
 
 const Schema = require("../../database/models/blacklist");
+const localizedRemove = require('./removeLocalized');
 
 module.exports = async (client, interaction, args) => {
+    return localizedRemove(client, interaction, args);
     const word = interaction.options.getString('word');
 
     Schema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
@@ -41,4 +43,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
