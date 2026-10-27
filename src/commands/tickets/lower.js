@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
 
             if (ticketCategory == undefined) {
                 return client.errNormal({
-                    error: "Do the setup!",
+                    key: 'tickets.setupRequired',
                     type: 'editreply'
                 }, interaction);
             }
@@ -35,33 +35,34 @@ module.exports = async (client, interaction, args) => {
                     });
 
                     return client.simpleEmbed({
-                        desc: `Ticket lowered by <@!${interaction.user.id}>`,
+                        descKey: 'tickets.lowered',
+                        variables: { user: interaction.user.id },
                         type: 'editreply'
                     }, interaction)
                 }
                 catch {
                     client.errNormal({
-                        error: "Something went wrong!",
+                        key: 'tickets.operationFailed',
                         type: 'editreply'
                     }, interaction);
                 }
 
             }
             else {
-                client.errNormal({ 
-                    error: "This is not a ticket!", 
+                client.errNormal({
+                    key: 'tickets.notTicket',
                     type: 'editreply'
                 }, interaction);
 
             }
         }
         else {
-            return client.errNormal({ 
-                error: "Do the setup!", 
+            return client.errNormal({
+                key: 'tickets.setupRequired',
                 type: 'editreply'
             }, interaction);
         }
     })
 }
 
- 
+

@@ -118,7 +118,14 @@
       "notClaimed": "The ticket is not claimed.",
       "notClaimedByYou": "You have not claimed this ticket.",
       "availableAgain": "This ticket can now be claimed again!",
-      "deleteCountdown": "Delete this ticket in **5 seconds**."
+      "deleteCountdown": "Delete this ticket in **5 seconds**.",
+      "added": "{user} was added to the ticket.",
+      "lowered": "Ticket permissions were lowered by <@!{user}>.",
+      "raised": "Ticket permissions were raised by <@!{user}>.",
+      "renamed": "The channel name has changed to {name}.",
+      "operationFailed": "Something went wrong.",
+      "transcriptSaving": "Saving transcript...",
+      "transcriptSaved": "Transcript saved."
     },
     "music": {
       "notInVoice": "You are not in a voice channel!",
