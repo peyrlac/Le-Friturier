@@ -64,3 +64,40 @@ test('interaction replies do not use deprecated fetchReply options', () => {
   assert.doesNotMatch(read('src/commands/search/steam.js'), /deferReply\(\{ fetchReply: true \}\)/);
   assert.doesNotMatch(read('src/handlers/components/embed.js'), /fetchReply:\s*true/);
 });
+
+test('audited interaction code uses valid reply APIs', () => {
+  const interactionSource = read('src/events/client/interactionCreate.js');
+  const docsSource = read('src/commands/search/docs.js');
+
+  assert.doesNotMatch(interactionSource, /interaction\.channel\.send\(/);
+  assert.doesNotMatch(interactionSource, /\.catch\(\{\}\)/);
+  assert.doesNotMatch(docsSource, /interaction\.editreply\(/);
+});
+
+test('empty catch handlers and per-interaction reminder initialization are gone', () => {
+  const sourceFiles = fs.readdirSync(path.join(root, 'src'), { recursive: true })
+    .filter(file => file.endsWith('.js'));
+
+  for (const file of sourceFiles) {
+    assert.doesNotMatch(read(path.join('src', file)), /\.catch\(\{\}\)/, file);
+  }
+
+  const interactionSource = read('src/events/client/interactionCreate.js');
+  assert.equal((interactionSource.match(/createManager\(\)/g) || []).length, 1);
+});
+
+test('wave 1-2 commands use translation keys for migrated responses', () => {
+  const migrated = [
+    'src/commands/config/language.js',
+    'src/commands/config/levels.js',
+    'src/commands/config/setcolor.js',
+    'src/commands/setup/channelsorter.js',
+    'src/commands/setup/deletesetup.js',
+    'src/commands/bot/ping.js',
+    'src/commands/bot/vote.js',
+  ];
+
+  for (const file of migrated) {
+    assert.match(read(file), /(?:key|descKey):[\s\S]{0,120}['"`]commands\.[\w.]+['"`]/, file);
+  }
+});

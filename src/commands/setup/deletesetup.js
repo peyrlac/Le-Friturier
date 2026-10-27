@@ -47,31 +47,32 @@ module.exports = async (client, interaction, args) => {
         
         if (categories.length === 0) {
             return client.errNormal({ 
-                error: `No channel sorter configuration found!`,
+                key: 'commands.setup.deletesetup.noConfig',
                 type: 'editreply'
             }, interaction);
         }
 
         // Créer un menu de sélection avec les catégories
+        const removalDescription = await client.t(interaction, 'commands.setup.deletesetup.removed');
         const row = new Discord.ActionRowBuilder()
             .addComponents(
                 new Discord.StringSelectMenuBuilder()
                     .setCustomId('delete_channelsorter')
-                    .setPlaceholder('Select category to remove from auto-sort')
+                    .setPlaceholder(await client.t(interaction, 'commands.setup.deletesetup.selectionPrompt'))
                     .addOptions(
                         categories.map(cat => {
                             const channel = interaction.guild.channels.cache.get(cat.Category);
                             return {
                                 label: channel ? channel.name : 'Unknown Category',
                                 value: cat.Category,
-                                description: `Remove auto-sort from this category`
+                                description: removalDescription
                             };
                         })
                     )
             );
 
         const response = await interaction.editReply({
-            content: `Select which category to remove from auto-sort:`,
+            content: await client.t(interaction, 'commands.setup.deletesetup.selectionPrompt'),
             components: [row]
         });
 
@@ -87,12 +88,12 @@ module.exports = async (client, interaction, args) => {
             });
 
             await confirmation.update({
-                content: `Channel sorter has been removed from the selected category!`,
+                content: await client.t(interaction, 'commands.setup.deletesetup.removed'),
                 components: []
             });
         } catch (e) {
             await interaction.editReply({
-                content: 'No category selected within 1 minute, operation cancelled.',
+                content: await client.t(interaction, 'commands.setup.deletesetup.cancelled'),
                 components: []
             });
         }
@@ -100,10 +101,9 @@ module.exports = async (client, interaction, args) => {
         // Comportement normal pour les autres options
         options[choice].findOneAndDelete({ Guild: interaction.guild.id }).then(() => {
             client.succNormal({ 
-                text: `Setup successfully deleted!`,
+                key: 'commands.setup.deletesetup.success',
                 type: 'editreply'
             }, interaction);
         });
     }
 }
- 

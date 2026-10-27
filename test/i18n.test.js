@@ -77,3 +77,45 @@ test('response helpers resolve a translation key before sending an embed', async
 
     assert.equal(sent[0].embeds[0].data.fields[0].value, '```Translated permission error```');
 });
+
+test('central response helpers translate common permission and success messages', async () => {
+    const installEmbeds = require('../src/handlers/components/embed');
+    const sent = [];
+    const embed = {
+        setTitle(value) { this.title = value; return this; },
+        setDescription(value) { this.description = value; return this; },
+        addFields(fields) { this.fields = fields; return this; },
+        setColor() { return this; },
+    };
+    const translations = {
+        'common.errorTitle': 'Translated error',
+        'common.successTitle': 'Translated success',
+        'common.errorComment': 'Translated comment',
+        'common.requiredPermission': 'Translated permission',
+        'common.tryAgainAt': 'Translated retry',
+        'errors.noPermission': 'Translated permission error',
+        'errors.botNoPermission': 'Translated bot permission error',
+        'errors.alreadyPerformed': 'Translated wait error',
+        'common.success': 'Translated success text',
+    };
+    const client = {
+        config: { colors: { error: '#ED4245', normal: '#5865F2', succes: '#57F287' }, discord: { footer: 'footer' } },
+        emotes: { normal: { error: 'x', check: 'ok' } },
+        user: { username: 'test', avatarURL: () => null },
+        templateEmbed: () => ({ ...embed }),
+        t: async (_interaction, key) => translations[key] || key,
+    };
+    const interaction = {
+        guild: { id: 'guild' },
+        editReply: async payload => { sent.push(payload); return payload; },
+    };
+
+    installEmbeds(client);
+    await client.errMissingPerms({ perms: 'ManageGuild', type: 'editreply' }, interaction);
+    await client.succNormal({ key: 'common.success', type: 'editreply' }, interaction);
+
+    assert.equal(sent[0].embeds[0].data.description, 'Translated permission error');
+    assert.equal(sent[0].embeds[0].data.fields[0].name, 'Translated permission');
+    assert.equal(sent[1].embeds[0].data.description, 'Translated success text');
+    assert.match(sent[1].embeds[0].data.title, /Translated success/);
+});

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 module.exports = async (client, interaction, args) => {
     client.simpleEmbed({
-        desc: `${client.emotes.animated.loading} Calcul de ping ...`,
+        descKey: 'commands.bot.ping.loading',
         type: 'editreply'
     }, interaction).then((resultMessage) => {
         const ping = Math.floor(resultMessage.createdTimestamp - interaction.createdTimestamp);
@@ -16,7 +16,7 @@ module.exports = async (client, interaction, args) => {
 
             client.embed({
                 title: `${client.emotes.normal.pong}・pong`,
-                desc: `Découvrez à quelle vitesse notre bot est`,
+                descKey: 'commands.bot.ping.description',
                 fields: [
                     {
                         name: "🤖┆Latence de bot",
@@ -40,4 +40,3 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 

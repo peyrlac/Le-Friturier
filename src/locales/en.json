@@ -1,15 +1,93 @@
 {
     "common": {
-        "success": "Operation completed successfully."
+    "success": "Operation completed successfully.",
+    "errorTitle": "Error!",
+    "successTitle": "Success!",
+    "errorComment": "Error details",
+    "requiredArguments": "Required arguments",
+    "requiredPermission": "Required permission",
+    "tryAgainAt": "Try again at",
+    "languageNames": {
+      "fr": "French",
+      "en": "English"
+    }
     },
     "errors": {
-        "missingTranslation": "Missing translation.",
-        "noPermission": "You do not have permission to use this command."
+    "generic": "Something went wrong!",
+    "missingTranslation": "Missing translation.",
+    "noPermission": "You do not have permission to use this command.",
+    "botNoPermission": "The bot does not have the required permissions.",
+    "invalidArguments": "The provided arguments are invalid.",
+    "alreadyPerformed": "You have already performed this action.",
+    "unsupportedLanguage": "This language is not supported."
     },
     "commands": {
         "config": {
             "language": {
-                "success": "The server language is now {language}."
+        "success": "The server language is now {language}.",
+        "description": "Choose the server language",
+        "optionDescription": "Choose a language"
+      },
+      "levels": {
+        "enabled": "Levels are now enabled in this server.",
+        "disabled": "Levels are now disabled in this server."
+      },
+      "setcolor": {
+        "invalid": "You did not provide a hexadecimal color. Example: FF0000",
+        "success": "The embed color was updated successfully."
+      },
+      "setchannelname": {
+        "success": "The channel name was set successfully."
+      },
+      "setverify": {
+        "success": "The verification panel was created successfully."
+      },
+      "levelmessage": {
+        "success": "The level message was set successfully."
+      },
+      "welcomemessage": {
+        "success": "The welcome message was set successfully."
+      },
+      "leavemessage": {
+        "success": "The leave message was set successfully."
+      }
+    },
+    "setup": {
+      "channelsorter": {
+        "invalidChannel": "The selected channel must be a category.",
+        "success": "Channel sorting was configured successfully."
+      },
+      "deletesetup": {
+        "noConfig": "No channel sorter configuration was found.",
+        "selectionPrompt": "Select the category to remove from auto-sort:",
+        "removed": "Channel sorting was removed from the selected category.",
+        "cancelled": "No category selected within one minute; operation cancelled.",
+        "success": "The setup was deleted successfully."
+      },
+      "tickets": {
+        "success": "Tickets have been set up successfully."
+      },
+      "customvoice": {
+        "success": "The custom voice system was set up successfully.",
+        "error": "An error occurred while setting up the custom voice system."
+      },
+      "ticketpanel": {
+        "success": "The ticket panel was set up successfully.",
+        "missingSetup": "Run the ticket setup first."
+      }
+    },
+    "bot": {
+      "ping": {
+        "loading": "Calculating ping...",
+        "description": "See how quickly our bot responds."
+      },
+      "vote": {
+        "voted": "You have voted!",
+        "notVoted": "You have not voted!",
+        "error": "An error occurred while checking your vote."
+      },
+      "feedback": {
+        "success": "Your feedback was sent to the developers successfully."
             }
         }
     }

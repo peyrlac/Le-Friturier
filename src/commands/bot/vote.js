@@ -18,7 +18,7 @@ module.exports = async (client, interaction, args) => {
         if (voted) {
             client.embed({
                 title: `📨・Vote`,
-                desc: `Vous avez voté!`,
+                descKey: 'commands.bot.vote.voted',
                 image: `https://cdn.discordapp.com/attachments/843487478881976381/874694192755007509/Bot_banner_vote.jpg`,
                 color: client.config.colors.succes,
                 components: [row],
@@ -28,14 +28,13 @@ module.exports = async (client, interaction, args) => {
         if (!voted) {
             client.embed({
                 title: `📨・Vote`,
-                desc: `Vous n'avez pas voté!`,
+                descKey: 'commands.bot.vote.notVoted',
                 image: `https://cdn.discordapp.com/attachments/843487478881976381/874694192755007509/Bot_banner_vote.jpg`,
                 color: client.config.colors.error,
                 components: [row],
                 type: 'editreply'
             }, interaction)
         }
-    }).catch(error => { client.errNormal({ text: `Il y a eu une erreur en vérifiant ce vote!`, editreply: true }, interaction) });
+    }).catch(error => { client.errNormal({ key: 'commands.bot.vote.error', type: 'editreply' }, interaction) });
 }
 
- 

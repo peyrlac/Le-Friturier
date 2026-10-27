@@ -21,7 +21,7 @@ module.exports = async (client, interaction, args) => {
     }
 
     if (!isHexColor(color)) return client.errNormal({
-        error: "Vous n'avez pas précisé de couleur hexadécimale!Exemple: FF0000",
+        key: 'commands.config.setcolor.invalid',
         type: 'editreply'
     }, interaction)
 
@@ -39,7 +39,7 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.succNormal({
-        text: `La couleur intégrée a été ajustée avec succès`,
+        key: 'commands.config.setcolor.success',
         fields: [
             {
                 name: `🎨┆New color`,
@@ -57,4 +57,3 @@ function isHexColor(hex) {
         && !isNaN(Number('0x' + hex))
 }
 
- 

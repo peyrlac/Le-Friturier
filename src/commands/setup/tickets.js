@@ -28,9 +28,8 @@ module.exports = async (client, interaction, args) => {
     })
 
     client.succNormal({
-        text: `Tickets has been set up successfully!`,
+        key: 'commands.setup.tickets.success',
         type: 'editreply'
     }, interaction);
 }
 
- 
