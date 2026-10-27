@@ -14,18 +14,15 @@ module.exports = async (client, interaction, args) => {
 
     let note = interaction.options.getString('note');
 
-    Schema.findOne({ Guild: interaction.guild.id, Code: code }, async (err, data) => {
-        if (!data) {
-            new Schema({
-                Guild: interaction.guild.id,
-                User: interaction.user.id,
-                Code: code,
-                Note: note
-            }).save();
+    const data = await Schema.findOne({ Guild: interaction.guild.id, Code: code });
+    if (data) return client.errNormal({ key: 'notes.codeCollision', type: 'editreply' }, interaction);
 
-            client.succNormal({ text: "Note has been added! \`/notepad notes\` to see all your notes", type: 'editreply' }, interaction);
-        }
-    })
+    await new Schema({
+        Guild: interaction.guild.id,
+        User: interaction.user.id,
+        Code: code,
+        Note: note
+    }).save();
+    return client.succNormal({ key: 'notes.added', type: 'editreply' }, interaction);
 }
 
- 

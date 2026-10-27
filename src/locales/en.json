@@ -29,6 +29,17 @@
     }
     },
     "commands": {
+      "notes": {
+        "codeCollision": "The note code is already in use; please try again.",
+        "added": "Note added! Use `/notepad notes` to see all your notes.",
+        "edited": "Note edited!",
+        "notFound": "No note found.",
+        "deleteNotFound": "No note found with the id **#{id}**.",
+        "deleted": "Note **#{id}** has been deleted!"
+        ,"none": "No notes found!",
+        "leaderboardTitle": "📓・{user}'s notes",
+        "entry": "**Note ID: {id}**\n{note}\n"
+      },
       "birthdays": {
         "invalidDay": "The day format is invalid.",
         "invalidMonth": "The month format is invalid.",
