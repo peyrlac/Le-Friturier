@@ -2,15 +2,16 @@ const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
 const model = require('../../database/models/badge');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     localizationKey: 'commandMetadata.message',
     data: new SlashCommandBuilder()
         .setName('message')
-        .setDescription('Post preset messages')
+        .setDescription(getCommandMetadata('commandMetadata.message.description'))
         .addStringOption(option =>
             option.setName('message')
-                .setDescription('Select a message')
+                .setDescription(getCommandMetadata('commandMetadata.message.options.message.description'))
                 .setRequired(true)
                 .addChoices(
                     { name: 'Information', value: 'information' },

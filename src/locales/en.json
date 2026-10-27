@@ -1807,6 +1807,11 @@
       "description": "Post preset messages",
       "options": { "message": { "description": "Select a message" } }
     },
+    "message": {
+      "name": "message",
+      "description": "Post preset messages",
+      "options": { "message": { "description": "Select a message" } }
+    },
     "soundboard": {
       "name": "soundboard",
       "description": "Play all the sounds in Bot",
