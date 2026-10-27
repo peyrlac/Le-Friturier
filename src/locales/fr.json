@@ -27,6 +27,14 @@
     }
   },
     "commands": {
+      "serverstats": {
+        "channel": "📘・Salon",
+        "channelsCreated": "Le compteur de salons a été créé.",
+        "membersCreated": "Le compteur de membres a été créé.",
+        "rolesCreated": "Le compteur de rôles a été créé.",
+        "boostsCreated": "Le compteur de boosts a été créé.",
+        "botsCreated": "Le compteur de bots a été créé."
+      },
       "invites": {
         "added": "{amount} invitation(s) ajoutée(s) à {user}.",
         "removed": "{amount} invitation(s) retirée(s) à {user}.",
