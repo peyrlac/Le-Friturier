@@ -861,6 +861,14 @@
     "resetSuccess": "Ta famille a été décimée !",
     "resetTimeout": "Le délai est dépassé. La famille n'a pas été modifiée."
   },
+  "guild": {
+    "userNotFound": "Cet utilisateur ne se trouve pas sur ce serveur !",
+    "userInfoTitle": "👤・Informations utilisateur",
+    "inviteNotFound": "Impossible de trouver ce serveur.",
+    "inviteInfoTitle": "📨・Informations de l'invitation",
+    "emojiAdded": "Emoji ajouté avec succès au serveur.",
+    "emojiNotFound": "Emoji introuvable !"
+  },
   "announcement": {
     "title": "📢・Annonce !",
     "sent": "L'annonce a été envoyée avec succès !",

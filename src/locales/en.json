@@ -874,6 +874,14 @@
     "resetSuccess": "Your family has been destroyed!",
     "resetTimeout": "The time limit expired. Your family was not changed."
   },
+  "guild": {
+    "userNotFound": "This user is not in this guild!",
+    "userInfoTitle": "👤・User information",
+    "inviteNotFound": "I couldn't find the server.",
+    "inviteInfoTitle": "📨・Invite information",
+    "emojiAdded": "Emoji successfully added to the server.",
+    "emojiNotFound": "Emoji not found!"
+  },
   "announcement": {
     "title": "📢・Announcement!",
     "sent": "The announcement was sent successfully!",
