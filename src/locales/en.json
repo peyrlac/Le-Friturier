@@ -106,7 +106,12 @@
       "searching": "Searching...",
       "skipped": "The song was skipped.",
       "stopped": "The music was stopped.",
-      "queueEmpty": "There is no more music in the queue."
+      "queueEmpty": "There is no more music in the queue.",
+      "currentVolume": "Current volume is **{amount}%**",
+      "invalidNumber": "Please enter a valid number!",
+      "maxVolume": "Volume cannot exceed 1000%.",
+      "volumeSet": "Volume set to **{amount}%**",
+      "seeked": "Playback moved to: {time}"
     },
     "economy": {
       "balance": {
