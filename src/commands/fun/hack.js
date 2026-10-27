@@ -22,29 +22,30 @@ module.exports = async (client, interaction, args) => {
     }
 
     client.embed({
-        title: '💻・Hacking',
-        desc: `The hack on ${user} started...`,
+        titleKey: 'fun.hackTitle',
+        descKey: 'fun.hackStarted',
+        variables: { user: String(user) },
         type: 'editreply'
     }, interaction).then(msg => {
 
         wait(140);
         client.embed({
-            title: '💻・Hacking',
-            desc: `Searching for user information..`,
+        titleKey: 'fun.hackTitle',
+            descKey: 'fun.hackSearchingUser',
             type: 'edit',
         }, msg).then(i => {
 
             wait(133);
             client.embed({
-                title: '💻・Hacking',
-                desc: `Searching for IP address...`,
+        titleKey: 'fun.hackTitle',
+                descKey: 'fun.hackSearchingIp',
                 type: 'edit',
             }, msg).then(i => {
 
                 wait(140);
                 client.embed({
-                    title: '💻・Hacking',
-                    desc: `The users ip address was found!`,
+        titleKey: 'fun.hackTitle',
+                    descKey: 'fun.hackIpFound',
                     fields: [
                         {
                             name: '🔗┆IP Adress',
@@ -57,15 +58,15 @@ module.exports = async (client, interaction, args) => {
 
                     wait(60);
                     client.embed({
-                        title: '💻・Hacking',
-                        desc: `Searching for Discord login...`,
+        titleKey: 'fun.hackTitle',
+                        descKey: 'fun.hackSearchingLogin',
                         type: 'edit',
                     }, msg).then(i => {
 
                         wait(230);
                         client.embed({
-                            title: '💻・Hacking',
-                            desc: `The users discord login was found!`,
+        titleKey: 'fun.hackTitle',
+                            descKey: 'fun.hackLoginFound',
                             fields: [
                                 {
                                     name: '📨┆Email',
@@ -81,16 +82,16 @@ module.exports = async (client, interaction, args) => {
 
                             wait(200);
                             client.embed({
-                                title: '💻・Hacking',
-                                desc: `Search for Discord token...`,
+        titleKey: 'fun.hackTitle',
+                                descKey: 'fun.hackSearchingToken',
                                 type: 'edit'
                             }, msg).then(i => {
 
                                 wait(200);
                                 getJson(`https://some-random-api.com/bottoken?${user.id}`).then(async (json) => {
                                     client.embed({
-                                        title: '💻・Hacking',
-                                        desc: `The users discord account token was found!`,
+        titleKey: 'fun.hackTitle',
+                                    descKey: 'fun.hackTokenFound',
                                         fields: [
                                             {
                                                 name: '🔧┆Token',
@@ -103,21 +104,20 @@ module.exports = async (client, interaction, args) => {
 
                                         wait(140);
                                         client.embed({
-                                            title: '💻・Hacking',
-                                            desc: `Reporting account to Discord for breaking TOS...`,
+        titleKey: 'fun.hackTitle',
+                                        descKey: 'fun.hackReporting',
                                             type: 'edit',
                                         }, msg).then(i => {
 
                                             wait(180);
-                                            client.succNormal({ text: `${user} is succesfully hacked. All the user's information was send to your dm`, type: 'edit' }, msg);
-                                            client.succNormal({ text: `${user} is succesfully hacked. All the user's information was send to your dm`, type: 'edit' }, msg);
+                                            client.succNormal({ key: 'fun.hackSuccess', variables: { user: String(user) }, type: 'edit' }, msg);
                                             client.embed({
-                                                title: '😂・Pranked',
+                                                titleKey: 'fun.hackPranked',
                                                 image: "https://media1.tenor.com/images/05006ed09075a0d6965383797c3cea00/tenor.gif?itemid=17987788",
                                             }, interaction.user)
                                         })
                                     })
-                                }).catch(() => client.errNormal({ error: 'Unable to retrieve remote data.', type: 'editreply' }, interaction))
+                                }).catch(() => client.errNormal({ key: 'fun.hackRemoteError', type: 'editreply' }, interaction))
                             })
                         })
                     })

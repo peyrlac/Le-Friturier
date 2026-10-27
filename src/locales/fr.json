@@ -115,7 +115,20 @@
       "rickrollTitle": "Rickroll",
       "gifTitle": "Gif de {query}",
       "roastTitle": "Roast"
-      ,"killTitle": "Élimination"
+      ,"killTitle": "Élimination",
+      "hackTitle": "Piratage",
+      "hackStarted": "Le piratage de {user} a commencé...",
+      "hackSearchingUser": "Recherche des informations utilisateur...",
+      "hackSearchingIp": "Recherche de l'adresse IP...",
+      "hackIpFound": "L'adresse IP de l'utilisateur a été trouvée !",
+      "hackSearchingLogin": "Recherche de la connexion Discord...",
+      "hackLoginFound": "La connexion Discord de l'utilisateur a été trouvée !",
+      "hackSearchingToken": "Recherche du token Discord...",
+      "hackTokenFound": "Le token du compte Discord a été trouvé !",
+      "hackReporting": "Signalement du compte à Discord pour non-respect des conditions...",
+      "hackSuccess": "{user} a été piraté avec succès. Les informations ont été envoyées en message privé.",
+      "hackPranked": "Canular",
+      "hackRemoteError": "Impossible de récupérer les données distantes."
     },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",

@@ -134,7 +134,20 @@
       "rickrollTitle": "Rickroll",
       "gifTitle": "{query} Gif",
       "roastTitle": "Roast"
-      ,"killTitle": "Kill"
+      ,"killTitle": "Kill",
+      "hackTitle": "Hacking",
+      "hackStarted": "The hack on {user} started...",
+      "hackSearchingUser": "Searching for user information...",
+      "hackSearchingIp": "Searching for IP address...",
+      "hackIpFound": "The user's IP address was found!",
+      "hackSearchingLogin": "Searching for Discord login...",
+      "hackLoginFound": "The user's Discord login was found!",
+      "hackSearchingToken": "Searching for Discord token...",
+      "hackTokenFound": "The user's Discord account token was found!",
+      "hackReporting": "Reporting account to Discord for breaking TOS...",
+      "hackSuccess": "{user} was successfully hacked. All the user's information was sent to your DM.",
+      "hackPranked": "Pranked",
+      "hackRemoteError": "Unable to retrieve remote data."
     },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",
