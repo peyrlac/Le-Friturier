@@ -10,12 +10,12 @@ res.sendFile(path.join(__dirname,'text.html'));
 });
 app.listen(3000)
 
-const axios = require('axios');
+const { getJson } = require('./handlers/http');
 // Check if is up to date
 const { version } = require('.././package.json');
-axios.get('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').then(res => {
-  if (res.data.tag_name !== version) {
-    console.log(chalk.red.bgYellow(`Votre bot n'est pas à jour! Veuillez mettre à jour la dernière version!`, version + ' -> ' + res.data.tag_name));
+getJson('https://api.github.com/repos/CorwinDev/Discord-Bot/releases/latest').then(data => {
+  if (data.tag_name !== version) {
+    console.log(chalk.red.bgYellow(`Votre bot n'est pas à jour! Veuillez mettre à jour la dernière version!`, version + ' -> ' + data.tag_name));
   }
 }).catch(err => {
   console.log(chalk.red.bgYellow(`Impossible de vérifier si Le Friturier est à jour!`));

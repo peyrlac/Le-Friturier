@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const axios = require("axios");
+const { getJson } = require('../../handlers/http');
 
 const model = require('../../database/models/badge');
 
@@ -14,13 +14,8 @@ module.exports = async (client, interaction, args) => {
     4: `Must have a verified phone number`
   }
 
-  axios.get(`https://discord.com/api/v9/invites/${encodeURIComponent(invite)}`).catch(async () => {
-    return client.errNormal({
-      error: "I couldn't find the server",
-      type: 'editreply'
-    }, interaction)
-  }).then(async (raw) => {
-    const { data } = raw;
+  try {
+    const data = await getJson(`https://discord.com/api/v9/invites/${encodeURIComponent(invite)}`);
     if (!data) return;
 
     let guildTimestamp = (await toUnix(data.guild.id)).timestamp;
@@ -75,8 +70,13 @@ module.exports = async (client, interaction, args) => {
         },
       ],
       type: 'editreply'
-    }, interaction)
-  })
+    }, interaction);
+  } catch {
+    return client.errNormal({
+      error: "I couldn't find the server",
+      type: 'editreply'
+    }, interaction);
+  }
 }
 
 const toUnix = (snowflake) => {
@@ -108,4 +108,4 @@ const idToBinary = (num) => {
   return bin;
 }
 
-   
+

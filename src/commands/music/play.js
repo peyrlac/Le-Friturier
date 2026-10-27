@@ -194,7 +194,7 @@ module.exports = async (client, interaction, args) => {
 
             if (first.toLowerCase() === 'cancel') {
                 if (!player.queue.current) player.destroy();
-                return interaction.channel.send('Cancelled selection.');
+                return interaction.followUp({ content: 'Cancelled selection.' });
             }
 
             const index = Number(first) - 1;

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const { decode } = require('html-entities');
-const axios = require('axios');
+const { getText } = require('../../handlers/http');
 const cheerio = require('cheerio');
 
 module.exports = async (client, interaction, args) => {
@@ -17,17 +17,17 @@ module.exports = async (client, interaction, args) => {
 
     const fetchhtml = async (url) => {
         const options = {
-            header: {
+            headers: {
                 'user-agent':
                     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
                 referer: 'https://www.google.com/',
             },
         };
-        const html = await axios.get(url, options);
-        return cheerio.load(html.data);
+        const html = await getText(url, options);
+        return cheerio.load(html);
     };
 
-    client.simpleEmbed({ 
+    client.simpleEmbed({
         title: `${client.emotes.animated.loading}┆Loading...`,
         type: 'editreply'
     }, interaction).then(async msg => {
@@ -49,7 +49,7 @@ module.exports = async (client, interaction, args) => {
             '-' +
             getRandomString(20);
 
-        const $ = await fetchhtml('http://either.io');
+        const $ = await fetchhtml('https://either.io');
 
         const blue = $('div.result.result-1').children();
         const red = $('div.result.result-2').children();
@@ -130,4 +130,4 @@ module.exports = async (client, interaction, args) => {
     });
 }
 
- 
+

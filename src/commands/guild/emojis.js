@@ -1,6 +1,4 @@
 const Discord = require('discord.js');
-const axios = require("axios");
-
 const model = require('../../database/models/badge');
 
 module.exports = async (client, interaction, args) => {
@@ -44,4 +42,4 @@ module.exports = async (client, interaction, args) => {
   }, interaction)
 }
 
- 
+

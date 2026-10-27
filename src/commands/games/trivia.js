@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const fetch = require("node-fetch");
+const { getJson } = require('../../handlers/http');
 const { decode } = require('html-entities');
 
 module.exports = async (client, interaction, args) => {
@@ -95,7 +95,7 @@ module.exports = async (client, interaction, args) => {
 
     const question = {};
 
-    await fetch(`https://opentdb.com/api.php?amount=1&type=multiple&difficulty=hard`).then((res) => res.json()).then(async (res) => {
+    await getJson(`https://opentdb.com/api.php?amount=1&type=multiple&difficulty=hard`).then(async (res) => {
         const q = [];
         q.push(res.results[0]);
         question.question = res.results[0].question;
@@ -366,4 +366,4 @@ module.exports = async (client, interaction, args) => {
     })
 }
 
- 
+
