@@ -423,7 +423,28 @@
       "ended": "Le giveaway se terminera dans moins de {seconds} secondes.",
       "paused": "Le giveaway est en pause !",
       "unpaused": "Le giveaway n'est plus en pause !",
-      "rerolled": "Les gagnants du giveaway ont été retirés au sort."
+    "rerolled": "Les gagnants du giveaway ont été retirés au sort.",
+    "started": "Giveaway lancé dans {channel}.",
+    "lastChance": "{error} **DERNIÈRE CHANCE DE PARTICIPER !** {error}",
+    "pausedMessage": "⚠️ **CE GIVEAWAY EST EN PAUSE !** ⚠️",
+    "title": "{party} **GIVEAWAY** {party}",
+    "endedTitle": "{party} **GIVEAWAY TERMINÉ** {party}",
+    "drawing": "{clock} - Se termine à : **{timestamp}** !",
+    "inviteToParticipate": "Réagissez avec 🥳 pour participer !\n",
+    "dropMessage": "Soyez le premier à réagir avec 🥳",
+    "winMessage": "Félicitations {winners} ! Vous avez gagné le **{this.prize}** !",
+    "footer": "Giveaway !",
+    "noWinner": "Giveaway annulé, pas assez de participants.\n",
+    "hostedBy": "{party} - Organisé par : {this.hostedBy}",
+    "winners": "🏆 - Gagnant(s)",
+    "endedAt": "Se termine à :",
+    "units": {
+      "seconds": "secondes",
+      "minutes": "minutes",
+      "hours": "heures",
+      "days": "jours",
+      "pluralS": false
+    }
     },
     "tickets": {
       "setupRequired": "Configurez les tickets d'abord.",
