@@ -361,6 +361,14 @@ test('localized levels and messages delegates contain no unreachable legacy impl
   }
 });
 
+test('interaction router user-facing responses use localization keys', () => {
+  const source = read('src/events/client/interactionCreate.js');
+  for (const key of ['router.banned', 'router.dmSent', 'router.cannotDM', 'router.helpTitle', 'router.helpDescription', 'router.verificationSuccess', 'router.captchaIncorrect', 'router.verificationUnavailable']) {
+    assert.match(source, new RegExp(key.replaceAll('.', '\\.') ), key);
+  }
+  assert.doesNotMatch(source, /You have been banned by the developers|I can't DM you|Help panel|successfully verified|answered the captcha incorrectly|Verify is disabled/);
+});
+
 test('core category commands expose localized top-level metadata', () => {
   for (const name of ['tickets', 'music', 'radio', 'giveaway', 'moderation', 'setup', 'bot', 'economy', 'casino']) {
     const command = require(path.join(root, `src/interactions/Command/${name}.js`));

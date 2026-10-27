@@ -818,6 +818,16 @@
     "typeDelete": "Delete",
     "typeReact": "Add a reaction"
   },
+  "router": {
+    "banned": "You have been banned by the developers of this bot.",
+    "dmSent": "I have sent you something in your DMs.",
+    "cannotDM": "I can't DM you; your direct messages may be turned off.",
+    "helpTitle": "❓・Help panel",
+    "helpDescription": "Get help with the commands in `{command}`\\n\\n{commands}",
+    "verificationSuccess": "You have been successfully verified!",
+    "captchaIncorrect": "You have answered the captcha incorrectly!",
+    "verificationUnavailable": "Verify is disabled in this server, or you are using the wrong channel!"
+  },
   "family": {
     "selfAdoption": "You cannot adopt yourself.",
     "botAdoption": "You cannot adopt a bot.",
