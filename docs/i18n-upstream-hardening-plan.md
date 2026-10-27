@@ -93,3 +93,4 @@ Pour chaque vague : remplacer les textes par des clés, traduire les description
 - Vague économie/casino commencée avec `balance`, `deposit` et `slots`, et catalogues UTF-8 corrigés.
 - Les vagues giveaways et radio utilisent désormais les clés fr/en pour leurs réponses ; les catalogues fr/en sont alignés et les validations runtime ainsi que les vagues restantes restent à clôturer.
 - La compilation de `canvas` reste bloquée dans l’environnement Node 24 faute de binaire compatible et de bibliothèques GTK/Cairo.
+- La comparaison finale avec `upstream/main` couvre 634 fichiers ; la migration V11 complète reste volontairement non fusionnée.

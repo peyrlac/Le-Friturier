@@ -38,6 +38,8 @@
 
 `main` et `upgrade` n'ont pas de merge-base commun avec cette branche ; la comparaison finale doit donc rester une comparaison directe des arbres et des fichiers ciblés, sans fusion automatique.
 
+La comparaison avec `upstream/main` porte sur 634 fichiers ; les divergences de `interactionCreate.js`, `embed.js` et musique sont conservées volontairement, tandis que les fonctionnalités locales absentes d'upstream (`verification/delete.js`, `channelSorter.js`) restent intactes.
+
 ## Audit npm au 25 octobre 2026
 
 `npm audit --omit=dev --audit-level=high` signale actuellement 26 vulnérabilités de production (12 modérées, 11 hautes et 3 critiques). Les dépendances directes ciblées ont été mises à jour et les correctifs non cassants ont été appliqués ; `sourcebin` et `puppeteer` ne sont plus les sources de leurs alertes respectives. Les alertes restantes proviennent surtout de dépendances historiques imbriquées (`request` via `weather-js`, les plugins `erela`, `discord-giveaways` et les dépendances natives de `canvas`). `npm audit fix --force` est volontairement exclu car il propose des changements cassants ; les trois alertes critiques restantes nécessitent une migration ou le remplacement de ces dépendances historiques.
