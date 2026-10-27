@@ -1027,7 +1027,9 @@
     "guessNumberTitle": "🔢・Guess the number",
     "guessNumberWon": "The number was guessed and is worth ${amount}.",
     "correctNumber": "🔢・Correct number",
-    "guessNumberInstruction": "Guess the number between **1** and **10,000**!"
+    "guessNumberInstruction": "Guess the number between **1** and **10,000**!",
+    "countTwice": "You cannot count twice in a row! Count starts again from 1.",
+    "countWrong": "The correct number was {count}! Count starts again from 1."
   },
   "customCommands": {
     "duplicate": "This command name is already used by a custom server command.",

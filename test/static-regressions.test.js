@@ -935,6 +935,14 @@ test('guess game handlers use localization keys', () => {
   assert.doesNotMatch(read('src/handlers/games/guessNumber.js'), /Guess the number|The number is guessed|Correct number/);
 });
 
+test('counting errors use localization keys', () => {
+  const source = read('src/handlers/games/counting.js');
+  assert.match(source, /key:\s*['"]gameEvents\.countTwice['"]/);
+  assert.match(source, /key:\s*['"]gameEvents\.countWrong['"]/);
+  assert.match(source, /variables:\s*\{\s*count:\s*countData\.Count\s*\}/);
+  assert.doesNotMatch(source, /You cannot count twice|The correct number was/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
