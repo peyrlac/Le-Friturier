@@ -110,22 +110,27 @@ module.exports = async (client, message) => {
               await message.channel.send({ content: levelMessage });
             }
           } else {
+            const levelUpMessage = await client.t(message, 'levels.up', {
+              user: `<@!${message.author.id}>`,
+              level: user.level,
+            });
+
             try {
               if (levelData) {
                 await client.channels.cache
                   .get(levelData.Channel)
                   .send({
-                    content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
+                    content: levelUpMessage,
                   })
                   .catch(() => { });
               } else {
-                message.channel.send({
-                  content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
+                await message.channel.send({
+                  content: levelUpMessage,
                 });
               }
             } catch {
-              message.channel.send({
-                content: `**GG** <@!${message.author.id}>, you are now level **${user.level}**`,
+              await message.channel.send({
+                content: levelUpMessage,
               });
             }
           }

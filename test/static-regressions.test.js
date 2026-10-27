@@ -1320,6 +1320,12 @@ test('spoiler context menu responses use localization keys', () => {
   assert.doesNotMatch(source, /Tu ne possèdes pas la permission requise|Ajoute un contexte pour mieux décrire|Tu as annulé la mise en spoiler|Automatic upload of an image turned into a spoiler/);
 });
 
+test('level-up fallback messages use the active locale', () => {
+  const source = read('src/events/message/messageCreate.js');
+  assert.match(source, /levels\.up/);
+  assert.doesNotMatch(source, /you are now level|\*\*GG\*\*/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 
