@@ -166,6 +166,7 @@
         "statusSuccess": "Votre statut est maintenant : {status}",
         "invalidAge": "Aucun nombre valide n'a été fourni.",
         "ageSuccess": "Votre âge est maintenant : {age}",
+        "ageField": "Âge",
         "aboutMeTooLong": "Votre présentation ne peut pas dépasser 1024 caractères.",
         "aboutMeSuccess": "Votre présentation a été mise à jour.",
         "genderPrompt": "Sélectionnez un genre",
