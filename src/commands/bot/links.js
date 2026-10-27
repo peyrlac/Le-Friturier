@@ -5,29 +5,29 @@ module.exports = async (client, interaction, args) => {
         .addComponents(
             new Discord.StringSelectMenuBuilder()
                 .setCustomId('Bot-linkspanel')
-                .setPlaceholder('❌┆Rien de sélectionné')
+                .setPlaceholder(await client.t(interaction, 'botResponses.linksPlaceholder'))
                 .addOptions([
                     {
-                        label: `Serveur d'assistance`,
-                        description: `Rejoignez le serveur Suppport`,
+                        label: await client.t(interaction, 'botResponses.supportServer'),
+                        description: await client.t(interaction, 'botResponses.supportServerDescription'),
                         emoji: "❓",
                         value: "support-linkspanel",
                     },
                     {
-                        label: `Inviter le bot`,
-                        description: `Invitez Bot sur votre serveur`,
+                        label: await client.t(interaction, 'botResponses.inviteBot'),
+                        description: await client.t(interaction, 'botResponses.inviteBotDescription'),
                         emoji: "📨",
                         value: "invite-linkspanel",
                     },
                     {
-                        label: `Community Server`,
-                        description: `Join the community server!`,
+                        label: await client.t(interaction, 'botResponses.communityServer'),
+                        description: await client.t(interaction, 'botResponses.communityServerDescription'),
                         emoji: "🌍",
                         value: "community-linkspanel",
                     },
                     {
-                        label: `Top.gg`,
-                        description: `Afficher le lien top.gg`,
+                        label: await client.t(interaction, 'botResponses.topgg'),
+                        description: await client.t(interaction, 'botResponses.topggDescription'),
                         emoji: "📃",
                         value: "top.gg-linkspanel",
                     },
@@ -35,12 +35,10 @@ module.exports = async (client, interaction, args) => {
         );
 
     client.embed({
-        title: `🔗・Links`,
-        desc: `Get access to all Bot links! Choose the link you need in the menu below`,
+        title: await client.t(interaction, 'botResponses.linksTitle'),
+        desc: await client.t(interaction, 'botResponses.linksDescription'),
         image: "https://cdn.discordapp.com/attachments/843487478881976381/874694194474668052/Bot_banner_invite.jpg",
         components: [row],
         type: 'editreply'
     }, interaction)
 }
-
- 

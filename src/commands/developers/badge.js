@@ -35,14 +35,14 @@ module.exports = async (client, interaction, args) => {
     let Badges = await model.findOne({ User: member.id });
 
     if (!badgeFlags[badge.toUpperCase()]) return client.errNormal({
-        error: `Je ne trouve pas ce badge`,
+        key: 'developers.badgeNotFound',
         type: `editreply`
     }, interaction);
 
     if (boolean == true) {
         if (Badges) {
             if (Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
-                error: `Ces utilisateurs ont déjà ce badge!`,
+                key: 'developers.badgeAlreadyAssigned',
                 type: `editreply`
             }, interaction);
 
@@ -51,22 +51,24 @@ module.exports = async (client, interaction, args) => {
 
             array.push(FLAG);
 
-            model.findOne({ User: member.id }, async (err, data) => {
-                if (err) console.log(err);
-                data.FLAGS = array
-                data.save();
-            });
+            await model.findOneAndUpdate(
+                { User: member.id },
+                { $set: { FLAGS: array } },
+                { new: true }
+            );
 
-            client.succNormal({
-                text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+            await client.succNormal({
+                key: 'developers.badgeAdded',
+                variables: { badge: badgeFlags[badge.toUpperCase()], flag: badge.toUpperCase() },
                 type: `editreply`
             }, interaction);
         } else {
             const newSettings = new model({ User: member.id, FLAGS: [badge.toUpperCase()] });
-            await newSettings.save().catch(() => { });
+            await newSettings.save();
 
-            client.succNormal({
-                text: `Ajouté le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+            await client.succNormal({
+                key: 'developers.badgeAdded',
+                variables: { badge: badgeFlags[badge.toUpperCase()], flag: badge.toUpperCase() },
                 type: `editreply`
             }, interaction)
         }
@@ -87,8 +89,13 @@ module.exports = async (client, interaction, args) => {
         });
     }
     else if (boolean == false) {
+        if (!Badges) return client.errNormal({
+            key: 'developers.badgeMissing',
+            type: `editreply`
+        }, interaction);
+
         if (!Badges.FLAGS.includes(badge.toUpperCase())) return client.errNormal({
-            error: `The user doesn't have that badge`,
+            key: 'developers.badgeMissing',
             type: `editreply`
         }, interaction);
 
@@ -105,22 +112,21 @@ module.exports = async (client, interaction, args) => {
 
         if (!array[0]) {
             let deleted = await model.deleteMany({ User: member.id });
-            client.succNormal({
-                text: `Removed the ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge, the user have been removed from the badge system, he has no badges left!`,
+            await client.succNormal({
+                key: 'developers.badgeRemovedLast',
+                variables: { badge: badgeFlags[badge.toUpperCase()], flag: badge.toUpperCase() },
                 type: 'editreply'
             }, interaction);
 
         } else {
-            model.findOne(
+            await model.findOneAndUpdate(
                 { User: member.id },
-                async (err, data) => {
-                    if (err) console.log(err);
-                    data.FLAGS = array
-                    data.save();
-                }
+                { $set: { FLAGS: array } },
+                { new: true }
             );
-            client.succNormal({
-                text: `Enlevé le ${badgeFlags[badge.toUpperCase()]} (${badge.toUpperCase()}) badge!`,
+            await client.succNormal({
+                key: 'developers.badgeRemoved',
+                variables: { badge: badgeFlags[badge.toUpperCase()], flag: badge.toUpperCase() },
                 type: 'editreply'
             }, interaction);
         }
@@ -142,4 +148,4 @@ module.exports = async (client, interaction, args) => {
     }
 }
 
- 
+
