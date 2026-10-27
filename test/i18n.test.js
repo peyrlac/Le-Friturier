@@ -511,6 +511,35 @@ test('serializes localized config choice names from command metadata', () => {
   });
 });
 
+test('serializes localized autosetup choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/autosetup');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const data = command.data.toJSON();
+  const logsChoices = data.options.find(option => option.name === 'logs').options[0].choices;
+  const funChoices = data.options.find(option => option.name === 'fun').options[0].choices;
+  const gamesChoices = data.options.find(option => option.name === 'games').options[0].choices;
+  const welcomeChoices = data.options.find(option => option.name === 'welcome').options[0].choices;
+
+  assert.deepEqual(logsChoices.find(choice => choice.value === 'serverLogs').name_localizations, {
+    fr: 'Journaux du serveur',
+    'en-US': 'Server logs'
+  });
+  assert.deepEqual(funChoices.find(choice => choice.value === 'starboard').name_localizations, {
+    fr: 'Starboard',
+    'en-US': 'Starboard'
+  });
+  assert.deepEqual(gamesChoices.find(choice => choice.value === 'gtn').name_localizations, {
+    fr: 'Devinez le nombre',
+    'en-US': 'Guess the number'
+  });
+  assert.deepEqual(welcomeChoices.find(choice => choice.value === 'leavechannel').name_localizations, {
+    fr: 'Salon de départ',
+    'en-US': 'Leave channel'
+  });
+});
+
 test('serverstats publishes localized subcommand descriptions', () => {
     const command = require('../src/interactions/Command/serverstats');
     applyCommandLocalizations(command);
