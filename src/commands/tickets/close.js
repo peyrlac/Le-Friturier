@@ -102,9 +102,9 @@ module.exports = async (client, interaction, args) => {
                 }
 
                 ticketData.resolved = true;
-                ticketData.save();
+                await ticketData.save();
 
-                interaction.channel.edit({ name: `ticket-closed` });
+                await interaction.channel.edit({ name: `ticket-closed` });
                 client.simpleEmbed({
                     descKey: 'tickets.closedBy',
                     variables: { user: interaction.user.id },

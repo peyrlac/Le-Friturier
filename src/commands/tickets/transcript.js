@@ -14,9 +14,9 @@ module.exports = async (client, interaction, args) => {
     let type = 'reply';
     if (interaction.isCommand()) type = 'editreply';
 
-    ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id }, async (err, ticketData) => {
-        if (ticketData) {
-            ticketSchema.findOne({ Guild: interaction.guild.id }, async (err, data) => {
+    const ticketData = await ticketChannels.findOne({ Guild: interaction.guild.id, channelID: interaction.channel.id });
+    if (ticketData) {
+            const data = await ticketSchema.findOne({ Guild: interaction.guild.id });
                 if (data) {
                     const ticketCategory = interaction.guild.channels.cache.get(data.Category);
 
@@ -28,22 +28,15 @@ module.exports = async (client, interaction, args) => {
                     }
 
                     if (interaction.channel.parentId == ticketCategory.id) {
-                        return client.simpleEmbed({
+                        await client.simpleEmbed({
                             descKey: 'tickets.transcriptSaving',
                             type: type
-                        }, interaction).then(async (editMsg) => {
-                            client.transcript(interaction, interaction.channel).then(() => {
-
-                                return client.simpleEmbed({
-                                    descKey: 'tickets.transcriptSaved',
-                                    type: 'editreply'
-                                }, interaction)
-
-                            })
-                        });
+                        }, interaction);
+                        await client.transcript(interaction, interaction.channel);
+                        return client.simpleEmbed({ descKey: 'tickets.transcriptSaved', type: 'editreply' }, interaction);
                     }
                     else {
-                        client.errNormal({
+                        return client.errNormal({
                             key: 'tickets.notTicket',
                             type: type
                         }, interaction);
@@ -56,9 +49,7 @@ module.exports = async (client, interaction, args) => {
                         type: type
                     }, interaction);
                 }
-            })
-        }
-    })
-}
+            }
+    }
 
 
