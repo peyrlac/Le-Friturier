@@ -149,6 +149,16 @@
       "hackPranked": "Pranked",
       "hackRemoteError": "Unable to retrieve remote data."
     },
+    "images": {
+      "remoteDataError": "Unable to retrieve remote data.",
+      "birdTitle": "Random Bird",
+      "catTitle": "Random Cat",
+      "dogTitle": "Random Dog",
+      "foxTitle": "Random Fox",
+      "koalaTitle": "Random Koala",
+      "pandaTitle": "Random Panda",
+      "redpandaTitle": "Random Redpanda"
+    },
     "giveaway": {
       "notInGuild": "This message ID is not from this guild.",
       "notFound": "I can't find the giveaway for {messageID}!",

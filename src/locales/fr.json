@@ -130,6 +130,16 @@
       "hackPranked": "Canular",
       "hackRemoteError": "Impossible de récupérer les données distantes."
     },
+    "images": {
+      "remoteDataError": "Impossible de récupérer les données distantes.",
+      "birdTitle": "Oiseau aléatoire",
+      "catTitle": "Chat aléatoire",
+      "dogTitle": "Chien aléatoire",
+      "foxTitle": "Renard aléatoire",
+      "koalaTitle": "Koala aléatoire",
+      "pandaTitle": "Panda aléatoire",
+      "redpandaTitle": "Panda roux aléatoire"
+    },
     "giveaway": {
       "notInGuild": "Cet identifiant de message ne provient pas de ce serveur.",
       "notFound": "Impossible de trouver le giveaway pour {messageID} !",
