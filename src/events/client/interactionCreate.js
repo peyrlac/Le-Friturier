@@ -11,6 +11,29 @@ const { ReminderManager, createManager } = require("../../handlers/functions/eve
 const reminderManager = createManager();
 
 module.exports = async (client, interaction) => {
+    if (interaction.isChatInputCommand() && interaction.commandName === 'config' && interaction.options.getSubcommand() === 'status') {
+        try {
+            await interaction.deferReply();
+        } catch (error) {
+            if (error.code === 10062) return;
+            throw error;
+        }
+
+        const statusWatchdog = setTimeout(() => {
+            if (interaction.deferred && !interaction.replied) {
+                interaction.editReply({
+                    content: '⚠️ La mise à jour de la présence prend trop de temps. Vérifie la connexion MongoDB et réessaie.',
+                }).catch(() => null);
+            }
+        }, 10000);
+
+        try {
+            return await require(`${process.cwd()}/src/commands/config/status.js`)(client, interaction);
+        } finally {
+            clearTimeout(statusWatchdog);
+        }
+    }
+
     /*
     if (
         interaction.isAutocomplete() &&
