@@ -1679,7 +1679,21 @@
     "bot": {
       "name": "bot",
       "description": "Obtenir des informations sur le bot",
-      "subcommands": { "feature": { "description": "Gérer les arrêts globaux des fonctionnalités", "options": { "action": { "choices": { "list": { "name": "Lister" }, "set": { "name": "Modifier" }, "reset": { "name": "Réinitialiser" } } } } } }
+      "subcommands": {
+        "help": { "description": "Obtenir des informations sur les commandes de la catégorie de bot" },
+        "info": { "description": "Obtenir des informations sur le bot" },
+        "ping": { "description": "Voir le ping du bot en millisecondes" },
+        "changelogs": { "description": "Obtenir les journaux des changements du bot" },
+        "donate": { "description": "Obtenir le lien de don du bot" },
+        "links": { "description": "Obtenir un message avec tous les liens du bot" },
+        "owner": { "description": "Obtenir des informations sur le propriétaire" },
+        "socials": { "description": "Obtenir les réseaux sociaux du bot" },
+        "support": { "description": "Obtenir une invitation du serveur d’assistance" },
+        "uptime": { "description": "Afficher la disponibilité du bot" },
+        "vote": { "description": "Vérifier si vous avez voté" },
+        "feedback": { "description": "Envoyer votre avis sur le bot aux développeurs", "options": { "feedback": { "description": "Vos réactions" } } },
+        "feature": { "description": "Gérer les arrêts globaux des fonctionnalités", "options": { "action": { "description": "Action à effectuer", "choices": { "list": { "name": "Lister" }, "set": { "name": "Modifier" }, "reset": { "name": "Réinitialiser" } } }, "feature": { "description": "Fonctionnalité à modifier" }, "enabled": { "description": "Activer la fonctionnalité" } } }
+      }
     },
     "birthdays": {
       "name": "birthdays",
