@@ -756,7 +756,24 @@
       },
       "blackjack": {
         "insufficient": "Vous pariez plus que vous ne possédez !",
-        "noAccount": "Vous n'avez pas encore d'argent."
+        "noAccount": "Vous n'avez pas encore d'argent.",
+        "usage": "blackjack [montant]",
+        "title": "♦️・Blackjack",
+        "hit": "Tirer",
+        "stand": "Rester",
+        "player": "Vous",
+        "dealer": "Croupier",
+        "dealerScore": "Le croupier avait {score}",
+        "outcome21": "Gagné ! Vous avez 21 !",
+        "outcomePlayerBust": "Perdu ! Vous avez dépassé 21 !",
+        "outcomeDealer21": "Perdu ! Le croupier a obtenu 21 !",
+        "outcomeDealerBust": "Gagné ! Le croupier a dépassé 21 !",
+        "outcomeWin": "Gagné ! Vous avez vaincu le croupier !",
+        "outcomeLose": "Perdu ! Le croupier a gagné !",
+        "outcomeTie": "Égalité !",
+        "instruction": "Utilisez le bouton Tirer ou Rester.",
+        "goodLuck": "Bonne chance !",
+        "timeout": "Perdu ! La partie a expiré."
       },
       "crash": {
         "insufficient": "Vous pariez plus que vous ne possédez !",

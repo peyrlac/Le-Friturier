@@ -804,6 +804,22 @@ test('bot information embeds use localization keys', () => {
   assert.doesNotMatch(read('src/commands/bot/uptime.js'), /Durée de la baisse|Voir le temps/);
 });
 
+test('blackjack responses use localization keys', () => {
+  const source = read('src/commands/casino/blackjack.js');
+  for (const key of [
+    'commands.casino.blackjack.usage',
+    'commands.casino.blackjack.title',
+    'commands.casino.blackjack.hit',
+    'commands.casino.blackjack.stand',
+    'commands.casino.blackjack.player',
+    'commands.casino.blackjack.dealer',
+    'commands.casino.blackjack.instruction',
+    'commands.casino.blackjack.goodLuck',
+    'commands.casino.blackjack.timeout'
+  ]) assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  assert.doesNotMatch(source, /Blackjack|Toi|Pour frapper|Bonne chance|Perdu!!/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
