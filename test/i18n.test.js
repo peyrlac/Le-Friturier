@@ -417,6 +417,21 @@ test('serializes localized choice names from command metadata', () => {
   });
 });
 
+test('serializes localized game choice names from command metadata', () => {
+  const command = require('../src/interactions/Command/games');
+  const { applyCommandLocalizations } = require('../src/handlers/i18n');
+
+  applyCommandLocalizations(command);
+  const option = command.data.toJSON().options
+    .find(subcommand => subcommand.name === 'rps').options
+    .find(child => child.name === 'option');
+
+  assert.deepEqual(option.choices.find(choice => choice.value === 'rock').name_localizations, {
+    fr: '🪨 Pierre',
+    'en-US': '🪨 Rock'
+  });
+});
+
 test('serverstats publishes localized subcommand descriptions', () => {
     const command = require('../src/interactions/Command/serverstats');
     applyCommandLocalizations(command);

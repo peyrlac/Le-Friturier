@@ -1777,7 +1777,7 @@
         "fasttype": { "description": "Learn to type faster" },
         "music-trivia": { "description": "Play music trivia", "options": { "number": { "description": "The amount of songs" } } },
         "roll": { "description": "Roll a die" },
-        "rps": { "description": "Play rock paper scissors against the bot", "options": { "option": { "description": "Choose what you want" } } },
+        "rps": { "description": "Play rock paper scissors against the bot", "options": { "option": { "description": "Choose what you want", "choices": { "rock": { "name": "🪨 Rock" }, "paper": { "name": "📃 Paper" }, "scissors": { "name": "✂️ Scissors" } } } } },
         "skipword": { "description": "Skip the current word" },
         "snake": { "description": "Playing the game snake" },
         "trivia": { "description": "Play Trivia" },
