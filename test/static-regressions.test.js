@@ -909,6 +909,19 @@ test('warning lifecycle events use localization keys', () => {
   assert.doesNotMatch(read('src/events/warn/warnRemove.js'), /Member unwarned|A user has been unwarned|> User/);
 });
 
+test('help panel support and invite handlers use localization keys', () => {
+  for (const file of ['src/handlers/helppanel/support.js', 'src/handlers/helppanel/invite.js']) {
+    const source = read(file);
+    for (const key of ['helpResponses.placeholder', 'helpResponses.commands', 'helpResponses.invite', 'helpResponses.support', 'helpResponses.changelogs']) {
+      assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), `${file}: ${key}`);
+    }
+  }
+  assert.match(read('src/handlers/helppanel/support.js'), /helpResponses.supportTitle/);
+  assert.match(read('src/handlers/helppanel/invite.js'), /helpResponses.inviteTitle/);
+  assert.doesNotMatch(read('src/handlers/helppanel/support.js'), /Nothing selected|Support server|Support`/);
+  assert.doesNotMatch(read('src/handlers/helppanel/invite.js'), /Nothing selected|Make your server even better/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);

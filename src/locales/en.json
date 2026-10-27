@@ -1001,7 +1001,10 @@
     "links": "🔗・Links",
     "linksValue": "[Website](https://corwindev.nl/) | [Invite]({invite}) | [Vote](https://top.gg/bot/798144456528363550/vote)",
     "inviteTitle": "📨・Invite",
-    "inviteDescription": "Make your server even better with the bot!"
+    "inviteDescription": "Make your server even better with the bot!",
+    "supportTitle": "❓・Support",
+    "supportPanelDescription": "Make your server even better with {bot}!",
+    "invitePanelDescription": "Make your server even better with the {bot} bot!"
   },
   "moderationEvents": {
     "warnTitle": "🔨・Member warned",
