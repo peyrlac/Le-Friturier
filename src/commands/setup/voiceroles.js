@@ -31,20 +31,19 @@ module.exports = async (client, interaction, args) => {
         });
 
         // Sauvegarder dans la base de données
-        await voiceRoles.findOne({ Guild: interaction.guild.id, VoiceChannel: channel.id }, async (err, data) => {
-            if (data) {
-                data.Role = role.id;
-                data.save();
-            } else {
-                new voiceRoles({
-                    Guild: interaction.guild.id,
-                    VoiceChannel: channel.id,
-                    Role: role.id
-                }).save();
-            }
-        });
+        const data = await voiceRoles.findOne({ Guild: interaction.guild.id, VoiceChannel: channel.id });
+        if (data) {
+            data.Role = role.id;
+            await data.save();
+        } else {
+            await new voiceRoles({
+                Guild: interaction.guild.id,
+                VoiceChannel: channel.id,
+                Role: role.id
+            }).save();
+        }
 
-        client.succNormal({
+        return client.succNormal({
             text: `Configuration des rôles vocaux réussie!`,
             fields: [
                 {
@@ -104,7 +103,7 @@ module.exports = async (client, interaction, args) => {
             }
         }
 
-        client.succNormal({
+        return client.succNormal({
             text: `Configuration des rôles vocaux terminée!`,
             fields: [
                 {
