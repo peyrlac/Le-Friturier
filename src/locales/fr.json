@@ -1370,6 +1370,30 @@
       "rule10Title": "10. Ne rejoignez pas un salon vocal sans permission",
       "rule10Description": "Si une place est libre, demandez d'abord si vous pouvez rejoindre le salon et partez si votre présence n'est pas souhaitée."
       },
+      "links": {
+        "title": "🔗・Liens",
+        "description": "_____ \n\nRetrouvez tous les liens du Bot Network !",
+        "servers": "▬▬│Serveurs│▬▬"
+      },
+      "rewards": {
+        "title": "😜・Récompenses de rôles",
+        "description": "_____ \n\nVous voulez des avantages supplémentaires sur le serveur ou vous démarquer davantage ? Consultez les récompenses ci-dessous.",
+        "levelsTitle": "🏆┆Niveaux",
+        "specialTitle": "🥳┆Spécial",
+        "economyTitle": "💰┆Économie"
+      },
+      "ourbots": {
+        "title": "🤖・Nos bots",
+        "description": "_____ \n\nEn dehors de notre communauté, nous maintenons également deux bots publics conçus pour améliorer votre serveur !",
+        "botTitle": "📘┆Qu'est-ce que Bot ?",
+        "bot": "Bot vous permet de gérer l'ensemble de votre serveur ! Avec plus de 400 commandes, il offre de nombreuses options pour améliorer votre serveur. Et le meilleur dans tout ça ? Tout est **gratuit** !",
+        "bot2Title": "🎶┆Qu'est-ce que Bot 2 ?",
+        "bot2": "Bot 2 a été créé pour la musique. Ainsi, vous ne vous gênerez pas lorsque quelqu'un écoute déjà de la musique. Il contient également un soundboard et un système de radio.",
+        "inviteTitle": "📨┆Comment inviter les bots ?",
+        "invite": "Vous pouvez inviter les bots avec la commande `/invite` ou en cliquant sur les liens ci-dessous.\n\n**Bot** - [Inviter ici]({botInvite})",
+        "helpTitle": "🎫┆Comment obtenir de l'aide ?",
+        "help": "Vous pouvez créer un ticket dans <#820308164322656327> ! Nous serons heureux de répondre à vos questions et de vous aider sur votre serveur."
+      },
       "boosterperks": {
         "title": "💎・Avantages Booster",
         "description": "_____\n\nPlus d'options sur le serveur ? Devenez un véritable Booster et profitez de nombreux avantages.",

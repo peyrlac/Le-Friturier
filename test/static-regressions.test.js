@@ -1149,6 +1149,36 @@ test('developer booster perks panel uses localization keys', () => {
   assert.doesNotMatch(source, /Use external stickers|Send TTS messages|Access to the hidden lounge|Change your nickname|Private giveaways|Custom role of your choice/);
 });
 
+test('developer links, rewards, and bots panels use localization keys', () => {
+  const source = read('src/commands/developers/args.js');
+  const keys = [
+    'developers.args.links.title',
+    'developers.args.links.description',
+    'developers.args.links.servers',
+    'developers.args.rewards.title',
+    'developers.args.rewards.description',
+    'developers.args.rewards.levelsTitle',
+    'developers.args.rewards.specialTitle',
+    'developers.args.rewards.economyTitle',
+    'developers.args.ourbots.title',
+    'developers.args.ourbots.description',
+    'developers.args.ourbots.botTitle',
+    'developers.args.ourbots.bot',
+    'developers.args.ourbots.bot2Title',
+    'developers.args.ourbots.bot2',
+    'developers.args.ourbots.inviteTitle',
+    'developers.args.ourbots.invite',
+    'developers.args.ourbots.helpTitle',
+    'developers.args.ourbots.help'
+  ];
+
+  for (const key of keys) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\\.')}`), key);
+  }
+
+  assert.doesNotMatch(source, /See all the links from Bot Network|Role Rewards|Outside of a community we also maintain|What is Bot\?|How do I invite the bots\?/);
+});
+
 test('warnings command uses async persistence and localized responses', () => {
   const source = read('src/commands/moderation/warnings.js');
 

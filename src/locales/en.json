@@ -1383,6 +1383,30 @@
       "rule10Title": "10. Do not join voice channels without permission",
       "rule10Description": "If there is a free spot, ask whether you may join first and leave if your presence is not wanted."
       },
+      "links": {
+        "title": "🔗・Links",
+        "description": "_____ \n\nSee all the links from Bot Network!",
+        "servers": "▬▬│Servers│▬▬"
+      },
+      "rewards": {
+        "title": "😜・Role Rewards",
+        "description": "_____ \n\nDo you want some extras on the server or want to stand out more? Look below for the rewards.",
+        "levelsTitle": "🏆┆Levels",
+        "specialTitle": "🥳┆Special",
+        "economyTitle": "💰┆Economy"
+      },
+      "ourbots": {
+        "title": "🤖・Our bots",
+        "description": "_____ \n\nOutside our community, we also maintain two public bots designed to make your server better!",
+        "botTitle": "📘┆What is Bot?",
+        "bot": "Bot lets you run your entire server! With more than 400 commands, it offers many options to improve your server. And the best part? Everything is **free** to use!",
+        "bot2Title": "🎶┆What is Bot 2?",
+        "bot2": "Bot 2 was created for music. This way, you never get in each other's way when someone is already listening. It also includes a soundboard and a radio system.",
+        "inviteTitle": "📨┆How do I invite the bots?",
+        "invite": "You can invite the bots with `/invite` or by clicking the links below.\n\n**Bot** - [Invite here]({botInvite})",
+        "helpTitle": "🎫┆How do I get help?",
+        "help": "You can create a ticket in <#820308164322656327>! We are happy to answer your questions and support you on your server."
+      },
       "boosterperks": {
         "title": "💎・Booster Perks",
         "description": "_____\n\nMore options on the server? Become a real Booster and enjoy many benefits.",
