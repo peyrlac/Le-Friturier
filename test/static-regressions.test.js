@@ -736,6 +736,14 @@ test('soundboard commands localize the sound names passed to responses', () => {
   }
 });
 
+test('developer badge responses use localization keys', () => {
+  const source = read('src/commands/developers/badge.js');
+  for (const key of ['developers.badgeNotFound', 'developers.badgeAlreadyAssigned', 'developers.badgeAdded', 'developers.badgeMissing', 'developers.badgeRemovedLast', 'developers.badgeRemoved']) {
+    assert.match(source, new RegExp(`['"]${key.replaceAll('.', '\\.')}`), key);
+  }
+  assert.doesNotMatch(source, /Je ne trouve pas ce badge|Ces utilisateurs ont|The user doesn't have that badge|Ajouté le|Removed the|Enlevé le/);
+});
+
 test('profile, serverstats, and tools metadata is sourced from the locale catalogs', () => {
   for (const name of ['profile', 'serverstats', 'tools']) {
     const source = read(`src/interactions/Command/${name}.js`);
