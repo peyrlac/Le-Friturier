@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const Schema = require("../../database/models/customCommandAdvanced");
 
 module.exports = async (client, interaction, args) => {
+    return require('./deleteAsync')(client, interaction, args);
+
     const cmdname = interaction.options.getString('command');
     Schema.findOne({ Guild: interaction.guild.id, Name: cmdname.toLowerCase() }, async (err, data) => {
         console.log(data)
@@ -29,5 +31,3 @@ module.exports = async (client, interaction, args) => {
     })
 
 }
-
- 
