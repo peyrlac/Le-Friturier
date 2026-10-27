@@ -5,8 +5,9 @@ const Schema = require("../../database/models/invites");
 module.exports = async (client, interaction, args) => {
     const rawLeaderboard = await Schema.find({ Guild: interaction.guild.id }).sort(([['Invites', 'descending']]));
 
-    if (!rawLeaderboard) return client.errNormal({
-        error: `No data found!`,
+    if (!rawLeaderboard.length) return client.errNormal({
+        key: 'invites.noData',
+        variables: { user: interaction.guild.name },
         type: 'editreply'
     }, interaction);
 
@@ -15,4 +16,3 @@ module.exports = async (client, interaction, args) => {
     await client.createLeaderboard(`📨・Invites - ${interaction.guild.name}`, lb, interaction);
 }
 
- 

@@ -26,7 +26,17 @@
       "warnSuccess": "L'utilisateur a re\u00e7u un avertissement."
     }
   },
-  "commands": {
+    "commands": {
+      "invites": {
+        "added": "{amount} invitation(s) ajoutée(s) à {user}.",
+        "removed": "{amount} invitation(s) retirée(s) à {user}.",
+        "noData": "Aucune donnée d'invitation trouvée pour {user}.",
+        "total": "Invitations totales",
+        "left": "Partis",
+        "title": "Invitations",
+        "description": "**{user}** possède **{invites}** invitation(s).",
+        "leaderboardTitle": "Invitations - {guild}"
+      },
       "profile": {
         "statusTooLong": "Votre statut ne peut pas dépasser 30 caractères.",
         "statusSuccess": "Votre statut est maintenant : {status}",
