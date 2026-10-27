@@ -17,6 +17,7 @@
     "generic": "Something went wrong!",
     "missingTranslation": "Missing translation.",
     "noPermission": "You do not have permission to use this command.",
+    "developerOnly": "Only Bot 2 developers are allowed to use this command.",
     "botNoPermission": "The bot does not have the required permissions.",
     "invalidArguments": "The provided arguments are invalid.",
     "alreadyPerformed": "You have already performed this action.",
