@@ -5,31 +5,31 @@ module.exports = async (client, role) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `🧻・Role deleted`,
-        desc: `A role has been deleted`,
+        title: await client.t(role, 'auditEvents.roleDeletedTitle'),
+        desc: await client.t(role, 'auditEvents.roleDeletedDescription'),
         fields: [
             {
-                name: `> Role`,
+                name: await client.t(role, 'auditEvents.role'),
                 value: `- ${role}`
             },
             {
-                name: `> Name`,
+                name: await client.t(role, 'auditEvents.name'),
                 value: `- ${role.name}`
             },
             {
-                name: `> ID`,
+                name: await client.t(role, 'auditEvents.id'),
                 value: `- ${role.id}`
             },
             {
-                name: `> Color`,
+                name: await client.t(role, 'auditEvents.color'),
                 value: `${role.hexColor}`
             },
             {
-                name: `> Position`,
+                name: await client.t(role, 'auditEvents.position'),
                 value: `${role.position}`
             },
             {
-                name: `> Timestamp`,
+                name: await client.t(role, 'auditEvents.timestamp'),
                 value: `- <t:${Math.floor(Date.now() / 1000)}:R>`
             }
         ]

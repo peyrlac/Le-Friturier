@@ -5,27 +5,27 @@ module.exports = async (client, role, oldName, newName) => {
     if (!logsChannel) return;
 
     client.embed({
-        title: `🧻・Role name updated`,
-        desc: `A role has been updated`,
+        title: await client.t(role, 'auditEvents.roleNameUpdatedTitle'),
+        desc: await client.t(role, 'auditEvents.roleUpdatedDescription'),
         fields: [
             {
-                name: `> Role`,
+                name: await client.t(role, 'auditEvents.role'),
                 value: `- ${role}`
             },
             {
-                name: `> Before`,
+                name: await client.t(role, 'auditEvents.before'),
                 value: `- ${oldName}`
             },
             {
-                name: `> After`,
+                name: await client.t(role, 'auditEvents.after'),
                 value: `- ${newName}`
             },
             {
-                name: `> ID`,
+                name: await client.t(role, 'auditEvents.id'),
                 value: `${role.id}`
             },
             {
-                name: `> Timestamp`,
+                name: await client.t(role, 'auditEvents.timestamp'),
                 value: `- <t:${Math.floor(Date.now() / 1000)}:R>`
             }
         ]
