@@ -1,24 +1,25 @@
 const { CommandInteraction, Client } = require('discord.js');
 const { SlashCommandBuilder } = require('discord.js');
 const Discord = require('discord.js');
+const { getCommandMetadata } = require('../../handlers/i18n');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('event')
-        .setDescription('Commandes liées aux événements')
+        .setName(getCommandMetadata('commandMetadata.event.name'))
+        .setDescription(getCommandMetadata('commandMetadata.event.description'))
         .addSubcommand(subcommand =>
             subcommand
                 .setName('help')
-                .setDescription('❓ Obtenir des informations à propos des commandes event.')
+                .setDescription(getCommandMetadata('commandMetadata.event.subcommands.help.description'))
         )
         .addSubcommand(subcommand =>
             subcommand
                 .setName('participants')
-                .setDescription('👥 Voir la liste des participants à un événement')
+                .setDescription(getCommandMetadata('commandMetadata.event.subcommands.participants.description'))
                 .addStringOption(option => 
                     option
                         .setName('event_id')
-                        .setDescription('ID de l\'événement (optionnel si dans le thread de l\'événement)')
+                        .setDescription(getCommandMetadata('commandMetadata.event.subcommands.participants.options.event_id.description'))
                         .setRequired(false)
                 )
         ),
