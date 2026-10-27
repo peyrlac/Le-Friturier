@@ -10,7 +10,6 @@ const {
 const { setTimeout } = require('timers');
 const { promisify } = require('util');
 const ytdl = require('ytdl-core');
-const { MessageEmbed } = require('discord.js');
 const wait = promisify(setTimeout);
 
 class TriviaPlayer {
