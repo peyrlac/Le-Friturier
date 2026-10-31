@@ -39,6 +39,7 @@ function generateCalendarLinks({ title, description, location, startDate, endDat
 function generateCalendarFile({ eventId, title, description, location, startDate, endDate }) {
     const start = new Date(startDate);
     const end = new Date(endDate);
+    const modifiedAt = new Date();
 
     if (isNaN(start.getTime())) throw new Error(`Invalid start date: ${startDate}`);
     if (isNaN(end.getTime())) throw new Error(`Invalid end date: ${endDate}`);
@@ -51,12 +52,12 @@ function generateCalendarFile({ eventId, title, description, location, startDate
         .replace(/\r?\n/g, '\\n');
 
     const fileNameDate = [
-        start.getUTCFullYear(),
-        String(start.getUTCMonth() + 1).padStart(2, '0'),
-        String(start.getUTCDate()).padStart(2, '0')
+        modifiedAt.getUTCFullYear(),
+        String(modifiedAt.getUTCMonth() + 1).padStart(2, '0'),
+        String(modifiedAt.getUTCDate()).padStart(2, '0')
     ].join('') + '-' + [
-        String(start.getUTCHours()).padStart(2, '0'),
-        String(start.getUTCMinutes()).padStart(2, '0')
+        String(modifiedAt.getUTCHours()).padStart(2, '0'),
+        String(modifiedAt.getUTCMinutes()).padStart(2, '0')
     ].join('');
 
     const safeEventId = String(eventId).replace(/[^a-zA-Z0-9_-]/g, '_');
@@ -68,7 +69,7 @@ function generateCalendarFile({ eventId, title, description, location, startDate
         'BEGIN:VEVENT',
         `UID:${safeEventId}@le-friturier`,
         'SEQUENCE:0',
-        `DTSTAMP:${formatDate(new Date())}`,
+        `DTSTAMP:${formatDate(modifiedAt)}`,
         `DTSTART:${formatDate(start)}`,
         `DTEND:${formatDate(end)}`,
         `SUMMARY:${escapeIcsText(title)}`,
