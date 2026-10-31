@@ -79,25 +79,35 @@ function initializeRemindersForTimestamp(timestamp) {
 
 function getActivityEmoji(text) {
     const searchText = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replaceAll("'", "").toLowerCase();
+    const collapsedText = searchText.replace(/(.)\1+/g, '$1');
+    const singularText = searchText.replace(/\b([a-z]+)(s|x)\b/g, '$1');
+    const collapsedSingularText = collapsedText.replace(/\b([a-z]+)(s|x)\b/g, '$1');
+    const searchVariants = [
+        searchText,
+        collapsedText,
+        singularText,
+        collapsedSingularText
+    ];
     const themes = [
         { emoji: '⭐', regex: /\b(cugnon)\b/i},
-        { emoji: '🎵', regex: /\b(musique|concert|festival|ardentes|playlist|écoute|album|chanson|chanteur)\b/i},
+        { emoji: '🕯️', regex: /\b(hommage)\b/i},
+        { emoji: '🎵', regex: /\b(musique|concert|festival|ardentes|playlist|ecoute|album|chanson|chanteur|clubber|club|cluber|notes)\b/i},
         { emoji: '🎪', regex: /\b(japan day|made in asia|comic con|comic-con|cosplay)\b/i},
         { emoji: '🌊', regex: /\b(aqualibi|aqualand|piscine|aquaparc|plage)\b/i},
         { emoji: '🎢', regex: /\b(parc|asterix|walibi|disney|attraction|attractions|rollercoaster)\b/i},
         { emoji: '🎳', regex: /\b(bowling|escape|quizz|vr|activite)\b/i},
-        { emoji: '🎬', regex: /\b(cinema|film|stream|twitch|netflix|film|vidéo|youtube)\b/i},
-        { emoji: '🎨', regex: /\b(experience|theatre|peinture|art|musee|nuit blanche|nuit de l art)\b/i},
-        { emoji: '🎮', regex: /\b(pokemon|tournoi|game|gaming|jeux vidéo|ps5|switch|xbox|jouer)\b/i},
+        { emoji: '🎬', regex: /\b(cinema|film|stream|twitch|netflix|film|video|youtube|animation)\b/i},
+        { emoji: '🎨', regex: /\b(experience|theatre|peinture|art|musee|nuit blanche|nuit de l art|musees|expos|expo)\b/i},
+        { emoji: '🎮', regex: /\b(pokemon|tournoi|game|gaming|jeux video|ps5|switch|xbox|jouer)\b/i},
         { emoji: '🍣', regex: /\b(hosaku|sushi|yayami|japonais|coreen)\b/i},
         { emoji: '🍔', regex: /\b(huggy|huggys|bk|burger king|burger|burgers|frites|frite)\b/i},
         { emoji: '🍜', regex: /\b(resto|restau|restaurant|buffet|cuisine|manger|recette|repas|nourriture)\b/i},
-        { emoji: '🎉', regex: /\b(soiree|anniversaire|annif|anniv|teuf|fête)\b/i},
+        { emoji: '🎉', regex: /\b(soiree|anniversaire|annif|anniv|teuf|fete)\b/i},
         { emoji: '🍻', regex: /\b(boite|sortie|verre|bar|zodiak)\b/i},
     ];
 
     for (const theme of themes) {
-        if (theme.regex.test(searchText)) {
+        if (searchVariants.some(variant => theme.regex.test(variant))) {
             return theme.emoji; // ou return theme pour plus de détails
         }
     }
