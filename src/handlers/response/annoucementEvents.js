@@ -293,7 +293,7 @@ module.exports = async (client) => {
                     try {
                         calendarFile = await uploadCalendarFile(client, newEvent);
                         if (eventThread.calendarMessageId) {
-                            const oldCalendarMessage = await client.channels.fetch(UPLOAD_CHANNEL_ID)
+                            const oldCalendarMessage = await client.channels.fetch(process.env.UPLOAD_CHANNEL_ID)
                                 .then(channel => channel.messages.fetch(eventThread.calendarMessageId))
                                 .catch(() => null);
                             await oldCalendarMessage?.delete().catch(() => null);
