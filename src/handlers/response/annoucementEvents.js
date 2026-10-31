@@ -3,6 +3,7 @@ const { model: AnnouncementChannels, getActivityEmoji } = require('../../databas
 const { ReminderManager, createManager } = require('../functions/eventReminders');
 const { generateCalendarLinks, generateCalendarFile } = require('../../assets/utils/calendar');
 const Discord = require('discord.js');
+const logger = require('../logger');
 const reminderManager = createManager();
 
 const UPLOAD_CHANNEL_ID = process.env.UPLOAD_CHANNEL_ID;
@@ -42,6 +43,12 @@ async function uploadCalendarFile(client, event) {
     };
 }
 
+async function getEventCreator(client, event) {
+    if (event.creator) return event.creator;
+    if (!event.creatorId) return null;
+    return client.users.fetch(event.creatorId).catch(() => null);
+}
+
 module.exports = async (client) => {
     // Créer une instance du ReminderManager
     client.on(Events.GuildScheduledEventCreate, async (event) => {
@@ -49,7 +56,7 @@ module.exports = async (client) => {
             try {
                 const data = await AnnouncementChannels.findOne({ Guild: event.guildId });
 
-                console.log(`Guild ID: ${event.guildId}`);
+                logger.info('EVENTS', `Création d'un événement | guild=${event.guildId} event=${event.id} name="${event.name}"`);
                 //console.log(`Database query result: ${JSON.stringify(data)}`);
 
                 if (!data) {
@@ -94,8 +101,8 @@ module.exports = async (client) => {
                         content: `<@${event.creatorId}> a créé un nouvel événement [${event.name}](${validURL}) !\n`
                     });
                     message.crosspost()
-                    .then(() => console.log('Crossposted message'))
-                    .catch(console.error);
+                    .then(() => logger.info('EVENTS', `Annonce crosspostée | event=${event.id}`))
+                    .catch(error => logger.warn('EVENTS', `Crosspost impossible | event=${event.id} reason="${error.message}"`));
                 } catch (error) {
                     console.error(`Failed to send message to channel ${data.Channel}: ${error.message}`);
                     return;
@@ -117,6 +124,7 @@ module.exports = async (client) => {
 
                     // Create and send the embed if there's a description
                     let followupMessageId = null;
+                    const creator = await getEventCreator(client, event);
                     //if (event.description) {
                         const embed = new EmbedBuilder()
                             .setTitle("\`📌\`  Informations importantes")
@@ -124,8 +132,8 @@ module.exports = async (client) => {
                             .setColor(0x0099FF)
                             .setTimestamp(new Date(event.scheduledStartTimestamp))
                             .setFooter({
-                                text: event.creator.globalName,
-                                iconURL: event.creator.avatarURL()
+                                text: creator?.globalName || creator?.username || 'Créateur inconnu',
+                                iconURL: creator?.avatarURL?.() || undefined
                             });
                         
                         const start = event.scheduledStartTimestamp;
@@ -169,7 +177,9 @@ module.exports = async (client) => {
                         followupMessageId = followupMessage.id;
                         // Pin le message de description
                         await followupMessage.pin().catch(error => {
-                            console.error('Erreur lors du pin du message:', error);
+                            const code = error.code || error.rawError?.code || 'UNKNOWN';
+                            const reason = error.rawError?.message || error.message || 'Erreur inconnue';
+                            logger.warn('EVENTS', `Épinglage impossible | event=${event.id} message=${followupMessage.id} code=${code} reason="${reason}"`);
                         });
                     //}
 
@@ -242,7 +252,7 @@ module.exports = async (client) => {
                         )
 
                     const welcomeMessage = await thread.send({
-                        content: `<@${event.creatorId}>, ce message se supprimera <t:${Math.floor((Date.now() + 60000) / 1000)}:R> <a:eliottSlide:974441004771967006>`,
+                        content: `<@${event.creatorId}>, ce message s\'auto-détruira <t:${Math.floor((Date.now() + 60000) / 1000)}:R> <a:eliottSlide:974441004771967006>`,
                         embeds: [welcomeEmbed],
                         allowedMentions: { parse: [] }
                     });
@@ -254,9 +264,9 @@ module.exports = async (client) => {
                         });
                     }, 60000);
 
-                    console.log(`Private thread created for event ${event.name} in guild ${event.guildId}`);
+                    logger.info('EVENTS', `Thread privé créé | guild=${event.guildId} event=${event.id} thread=${thread.id}`);
                 } catch (error) {
-                    console.error(`Failed to create private thread for event ${event.name}: ${error.message}`);
+                    logger.error('EVENTS', `Échec de création du thread | event=${event.id} name="${event.name}"`, error);
                 }
 
             } catch (error) {
@@ -291,14 +301,15 @@ module.exports = async (client) => {
                     }
 
                     // Créer le nouvel embed
+                    const creator = await getEventCreator(client, newEvent);
                     const embed = new EmbedBuilder()
                         .setTitle("\`📌\`  Informations importantes")
                         .setDescription(newEvent.description || "Pas de description fournie")
                         .setColor(0x0099FF)
                         .setTimestamp(new Date(newEvent.scheduledStartTimestamp))
                         .setFooter({
-                            text: newEvent.creator.globalName,
-                            iconURL: newEvent.creator.avatarURL()
+                            text: creator?.globalName || creator?.username || 'Créateur inconnu',
+                            iconURL: creator?.avatarURL?.() || undefined
                         });
 
                     // Générer les liens de calendrier
@@ -352,7 +363,9 @@ module.exports = async (client) => {
                     // S'assurer que le message est toujours pin
                     if (!followupMessage.pinned) {
                         await followupMessage.pin().catch(error => {
-                            console.error('Erreur lors du pin du message:', error);
+                            const code = error.code || error.rawError?.code || 'UNKNOWN';
+                            const reason = error.rawError?.message || error.message || 'Erreur inconnue';
+                            logger.warn('EVENTS', `Épinglage impossible | event=${newEvent.id} message=${followupMessage.id} code=${code} reason="${reason}"`);
                         });
                     }
 
@@ -426,7 +439,7 @@ module.exports = async (client) => {
                         //console.log(`${user.username} was tagged in thread for event ${event.name}`);
                     }
                 } else {
-                    console.log(`No thread found for event ${event.name}`);
+                    logger.warn('EVENTS', `Thread introuvable | guild=${event.guildId} event=${event.id} name="${event.name}"`);
                 }
             } catch (error) {
                 console.error(`Error handling GuildScheduledEventUserAdd event: ${error.message}`);
