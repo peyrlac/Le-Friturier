@@ -25,17 +25,6 @@ module.exports = {
         )
         .addSubcommand(subcommand =>
             subcommand
-                .setName('participant')
-                .setDescription('Afficher les participants de ton événement')
-                .addStringOption(option =>
-                    option
-                        .setName('event_id')
-                        .setDescription('Identifiant Discord de l’événement')
-                        .setRequired(false)
-                )
-        )
-        .addSubcommand(subcommand =>
-            subcommand
                 .setName('info')
                 .setDescription('Afficher les informations et les liens calendrier de ton événement')
         )

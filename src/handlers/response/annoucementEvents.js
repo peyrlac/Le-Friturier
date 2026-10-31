@@ -209,7 +209,7 @@ module.exports = async (client) => {
                              },
                              {
                                  name: '👥 Voir les participants',
-                                 value: 'Consulte la liste avec \`/event participant\` ou \`/event participants\`.'
+                                  value: 'Consulte la liste avec \`/event participants\`.'
                              },
                             { 
                                 name: '⏰ Rappels automatiques', 
