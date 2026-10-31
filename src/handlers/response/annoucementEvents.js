@@ -1,9 +1,46 @@
 const { Client, Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { model: AnnouncementChannels, getActivityEmoji } = require('../../database/models/announcement-channels');
 const { ReminderManager, createManager } = require('../functions/eventReminders');
-const { generateCalendarLinks } = require('../../assets/utils/calendar');
+const { generateCalendarLinks, generateCalendarFile } = require('../../assets/utils/calendar');
 const Discord = require('discord.js');
 const reminderManager = createManager();
+
+const UPLOAD_CHANNEL_ID = process.env.UPLOAD_CHANNEL_ID;
+
+async function uploadCalendarFile(client, event) {
+    if (!UPLOAD_CHANNEL_ID) {
+        throw new Error('UPLOAD_CHANNEL_ID is not configured');
+    }
+
+    const archiveChannel = await client.channels.fetch(UPLOAD_CHANNEL_ID).catch(() => null);
+    if (!archiveChannel?.isTextBased()) {
+        throw new Error(`Calendar upload channel ${UPLOAD_CHANNEL_ID} is unavailable`);
+    }
+
+    const start = event.scheduledStartTimestamp;
+    const end = event.scheduledEndTimestamp || (start + 60 * 60 * 1000);
+    const calendarFile = generateCalendarFile({
+        eventId: event.id,
+        title: event.name,
+        description: event.description,
+        location: event.entityMetadata?.location || '',
+        startDate: new Date(start).toISOString(),
+        endDate: new Date(end).toISOString()
+    });
+
+    const archiveMessage = await archiveChannel.send({
+        content: `Calendar file for event ${event.id}`,
+        files: [{ attachment: calendarFile.content, name: calendarFile.fileName }]
+    });
+    const attachment = archiveMessage.attachments.first();
+    if (!attachment?.url) throw new Error(`No attachment URL returned for event ${event.id}`);
+
+    return {
+        messageId: archiveMessage.id,
+        fileName: calendarFile.fileName,
+        url: attachment.url
+    };
+}
 
 module.exports = async (client) => {
     // Créer une instance du ReminderManager
@@ -100,10 +137,16 @@ module.exports = async (client) => {
                             startDate: new Date(start).toISOString(),
                             endDate: new Date(end).toISOString()
                         });
+                        let calendarFile = null;
+                        try {
+                            calendarFile = await uploadCalendarFile(client, event);
+                        } catch (error) {
+                            console.error(`Failed to archive calendar file for event ${event.id}:`, error);
+                        }
                         const calendarButton = new Discord.ActionRowBuilder()
                             .addComponents(
                                 new Discord.ButtonBuilder()
-                                    .setLabel('Ajouter à Google agenda')
+                                    .setLabel('Ajouter à Google Agenda')
                                     .setStyle(Discord.ButtonStyle.Link)
                                     .setURL(calendarLinks.google)
                             ).addComponents(
@@ -112,6 +155,15 @@ module.exports = async (client) => {
                                 .setStyle(Discord.ButtonStyle.Link)
                                 .setURL(calendarLinks.outlook)
                             )
+
+                        if (calendarFile?.url) {
+                            calendarButton.addComponents(
+                                new Discord.ButtonBuilder()
+                                    .setLabel("Télécharger l'ical")
+                                    .setStyle(Discord.ButtonStyle.Link)
+                                    .setURL(calendarFile.url)
+                            );
+                        }
 
                         const followupMessage = await thread.send({ embeds: [embed], components: [calendarButton] });
                         followupMessageId = followupMessage.id;
@@ -134,6 +186,9 @@ module.exports = async (client) => {
                                     eventId: event.id, 
                                     threadId: thread.id,
                                     followupMessageId: followupMessageId,
+                                    calendarMessageId: calendarFile?.messageId || null,
+                                    calendarFileName: calendarFile?.fileName || null,
+                                    calendarAttachmentUrl: calendarFile?.url || null,
                                     scheduledStartTimestamp: event.scheduledStartTimestamp,
                                     sentReminders: initialReminders
                                 } 
@@ -252,14 +307,28 @@ module.exports = async (client) => {
                     const calendarLinks = generateCalendarLinks({
                         title: newEvent.name,
                         description: newEvent.description,
+                        location: newEvent.entityMetadata?.location || oldEvent.entityMetadata?.location || '',
                         startDate: new Date(start).toISOString(),
                         endDate: new Date(end).toISOString()
                         });
 
+                    let calendarFile = null;
+                    try {
+                        calendarFile = await uploadCalendarFile(client, newEvent);
+                        if (eventThread.calendarMessageId) {
+                            const oldCalendarMessage = await client.channels.fetch(UPLOAD_CHANNEL_ID)
+                                .then(channel => channel.messages.fetch(eventThread.calendarMessageId))
+                                .catch(() => null);
+                            await oldCalendarMessage?.delete().catch(() => null);
+                        }
+                    } catch (error) {
+                        console.error(`Failed to archive updated calendar file for event ${newEvent.id}:`, error);
+                    }
+
                     const calendarButton = new Discord.ActionRowBuilder()
                         .addComponents(
                             new Discord.ButtonBuilder()
-                                .setLabel('Ajouter à Google agenda')
+                                .setLabel('Ajouter à Google Agenda')
                                 .setStyle(Discord.ButtonStyle.Link)
                                 .setURL(calendarLinks.google)
                         ).addComponents(
@@ -268,6 +337,15 @@ module.exports = async (client) => {
                             .setStyle(Discord.ButtonStyle.Link)
                             .setURL(calendarLinks.outlook)
                         );
+
+                    if (calendarFile?.url) {
+                        calendarButton.addComponents(
+                            new Discord.ButtonBuilder()
+                                .setLabel("Télécharger l'ical")
+                                .setStyle(Discord.ButtonStyle.Link)
+                                .setURL(calendarFile.url)
+                        );
+                    }
 
                     // Mettre à jour le message
                     await followupMessage.edit({ embeds: [embed], components: [calendarButton] });
@@ -286,7 +364,10 @@ module.exports = async (client) => {
 
                     // Préparer les mises à jour de la base de données
                     const updates = {
-                        'EventThreads.$.eventName': newEvent.name
+                        'EventThreads.$.eventName': newEvent.name,
+                        'EventThreads.$.calendarMessageId': calendarFile?.messageId || eventThread.calendarMessageId || null,
+                        'EventThreads.$.calendarFileName': calendarFile?.fileName || eventThread.calendarFileName || null,
+                        'EventThreads.$.calendarAttachmentUrl': calendarFile?.url || eventThread.calendarAttachmentUrl || null
                     };
 
                     // Si la date a changé, mettre à jour le timestamp et réinitialiser les rappels

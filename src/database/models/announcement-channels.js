@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { Client, Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
-const { generateCalendarLinks } = require('../../assets/utils/calendar');
+const { generateCalendarLinks, generateCalendarFile } = require('../../assets/utils/calendar');
 const chalk = require('chalk');
+const UPLOAD_CHANNEL_ID = process.env.UPLOAD_CHANNEL_ID;
 const logger = require('../../handlers/logger');
 
 // Définir le sous-schéma pour un rappel individuel
@@ -22,6 +23,9 @@ const EventThreadSchema = new mongoose.Schema({
     eventId: { type: String, required: true },
     threadId: { type: String, required: true },
     followupMessageId: { type: String },  // ID du message de description
+    calendarMessageId: { type: String },
+    calendarFileName: { type: String },
+    calendarAttachmentUrl: { type: String },
     scheduledStartTimestamp: { type: Number, required: true },
     sentReminders: { type: ReminderSchema, required: true, default: () => ({}) },
     version: { type: Number, default: 2 }
@@ -255,19 +259,57 @@ async function clearOldEventsFromDatabase(client) {
                                                 startDate: new Date(start).toISOString(),
                                                 endDate: new Date(end).toISOString()
                                             });
+                                             let calendarAttachmentUrl = eventThread.calendarAttachmentUrl;
+                                             if (!calendarAttachmentUrl && UPLOAD_CHANNEL_ID) {
+                                                 const archiveChannel = await client.channels.fetch(UPLOAD_CHANNEL_ID).catch(() => null);
+                                                 if (archiveChannel?.isTextBased()) {
+                                                     const calendarFile = generateCalendarFile({
+                                                         eventId: discordEvent.id,
+                                                         title: discordEvent.name,
+                                                         description: discordEvent.description,
+                                                         location: discordEvent.entityMetadata?.location || '',
+                                                         startDate: new Date(start).toISOString(),
+                                                         endDate: new Date(end).toISOString()
+                                                     });
+                                                     const archiveMessage = await archiveChannel.send({
+                                                         content: `Calendar file for event ${discordEvent.id}`,
+                                                         files: [{ attachment: calendarFile.content, name: calendarFile.fileName }]
+                                                     });
+                                                     calendarAttachmentUrl = archiveMessage.attachments.first()?.url || null;
+                                                     if (calendarAttachmentUrl) {
+                                                         await AnnouncementChannels.updateOne(
+                                                             { Guild: guildData.Guild, 'EventThreads.eventId': discordEvent.id },
+                                                             { $set: {
+                                                                 'EventThreads.$.calendarMessageId': archiveMessage.id,
+                                                                 'EventThreads.$.calendarFileName': calendarFile.fileName,
+                                                                 'EventThreads.$.calendarAttachmentUrl': calendarAttachmentUrl
+                                                             } }
+                                                         );
+                                                     }
+                                                 }
+                                             }
                                             const calendarButton = new ActionRowBuilder()
                                             .addComponents(
                                                 new ButtonBuilder()
-                                                    .setLabel('Ajouter à Google agenda')
+                                                     .setLabel('Ajouter à Google Agenda')
                                                     .setStyle(ButtonStyle.Link)
                                                     .setURL(calendarLinks.google)
                                             )
                                             .addComponents(
                                                 new ButtonBuilder()
-                                                    .setLabel('Ajouter à Outlook')
+                                                     .setLabel('Ajouter à Outlook')
                                                     .setStyle(ButtonStyle.Link)
                                                     .setURL(calendarLinks.outlook)
                                             );
+                                             if (calendarAttachmentUrl) {
+                                                 calendarButton.addComponents(
+                                                     new ButtonBuilder()
+                                                         .setLabel("Télécharger l'ical")
+                                                         .setEmoji('📅')
+                                                         .setStyle(ButtonStyle.Link)
+                                                         .setURL(calendarAttachmentUrl)
+                                                 );
+                                             }
                                             const embed = new EmbedBuilder()
                                                 .setTitle("\`📌\`  Informations importantes")
                                                 .setDescription(discordEvent.description) // Utiliser la nouvelle description

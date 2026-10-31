@@ -10,45 +10,78 @@ function generateCalendarLinks({ title, description, location, startDate, endDat
         return encodeURIComponent(date.toISOString().replace(/-|:|\.\d\d\d/g, ''));
     };
 
-    const truncate = (text, max = 150) =>
-        encodeURIComponent(text?.toString().slice(0, max) || '');
-
     const start = formatDate(startDate);
     const end = formatDate(endDate);
 
-    const encodedTitle = truncate(title, 100);
-    const encodedDesc = truncate(description, 150); // <= adapt if needed
-    const encodedLocation = truncate(location, 100);
+    const encodeParam = (value) => encodeURIComponent(value?.toString() || '');
+    const formatOutlookDate = (input) => safeDate(input)
+        .toISOString()
+        .replace(/\.\d{3}Z$/, '');
+    const encodedTitle = encodeParam(title);
+    const encodedDesc = encodeParam(description);
+    const encodedLocation = encodeParam(location);
 
-    const googleLink = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodedTitle}&dates=${start}/${end}&details=${encodedDesc}&sf=true&output=xml`;
+    const googleLink = `https://calendar.google.com/calendar/u/0/r/eventedit?dates=${start}/${end}&details=${encodedDesc}&location=${encodedLocation}&text=${encodedTitle}`;
 
-    const outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?subject=${encodedTitle}&body=${encodedDesc}&startdt=${startDate}&enddt=${endDate}`;
+    const outlookStart = encodeParam(formatOutlookDate(startDate));
+    const outlookEnd = encodeParam(formatOutlookDate(endDate));
+    const outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?allday=false&body=${encodedDesc}&enddt=${outlookEnd}&location=${encodedLocation}&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=${outlookStart}&subject=${encodedTitle}`;
 
-    const yahooLink = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodedTitle}&st=${start}&et=${end}&desc=${encodedDesc}`;
-
-    // .ics content for Apple/Samsung/others
-    const icsContent = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'BEGIN:VEVENT',
-        `DTSTART:${start}`,
-        `DTEND:${end}`,
-        `SUMMARY:${title}`,
-        `DESCRIPTION:${description}`,
-        `LOCATION:${location}`,
-        'END:VEVENT',
-        'END:VCALENDAR'
-    ].join('\n');
-
-    const icsBlob = new Blob([icsContent], { type: 'text/calendar' });
-    const icsUrl = URL.createObjectURL(icsBlob);
+    const yahooLink = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodedTitle}&st=${start}&et=${end}&desc=${encodedDesc}&in_loc=${encodedLocation}`;
 
     return {
         google: googleLink,
         outlook: outlookLink,
-        yahoo: yahooLink,
-        ics: icsUrl
+        yahoo: yahooLink
     };
 }
 
-module.exports = { generateCalendarLinks };
+function generateCalendarFile({ eventId, title, description, location, startDate, endDate }) {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (isNaN(start.getTime())) throw new Error(`Invalid start date: ${startDate}`);
+    if (isNaN(end.getTime())) throw new Error(`Invalid end date: ${endDate}`);
+
+    const formatDate = (date) => date.toISOString().replace(/[-:.]/g, '').replace(/\d{3}Z$/, 'Z');
+    const escapeIcsText = (value = '') => String(value)
+        .replace(/\\/g, '\\\\')
+        .replace(/;/g, '\\;')
+        .replace(/,/g, '\\,')
+        .replace(/\r?\n/g, '\\n');
+
+    const fileNameDate = [
+        start.getUTCFullYear(),
+        String(start.getUTCMonth() + 1).padStart(2, '0'),
+        String(start.getUTCDate()).padStart(2, '0')
+    ].join('') + '-' + [
+        String(start.getUTCHours()).padStart(2, '0'),
+        String(start.getUTCMinutes()).padStart(2, '0')
+    ].join('');
+
+    const safeEventId = String(eventId).replace(/[^a-zA-Z0-9_-]/g, '_');
+    const content = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Le Friturier//Events//FR',
+        'CALSCALE:GREGORIAN',
+        'BEGIN:VEVENT',
+        `UID:${safeEventId}@le-friturier`,
+        'SEQUENCE:0',
+        `DTSTAMP:${formatDate(new Date())}`,
+        `DTSTART:${formatDate(start)}`,
+        `DTEND:${formatDate(end)}`,
+        `SUMMARY:${escapeIcsText(title)}`,
+        `DESCRIPTION:${escapeIcsText(description)}`,
+        `LOCATION:${escapeIcsText(location)}`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+    ].join('\r\n') + '\r\n';
+
+    return {
+        fileName: `${safeEventId}-${fileNameDate}.ics`,
+        content: Buffer.from(content, 'utf8')
+    };
+}
+
+module.exports = { generateCalendarLinks, generateCalendarFile };
