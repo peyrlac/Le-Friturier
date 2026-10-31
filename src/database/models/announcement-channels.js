@@ -315,6 +315,9 @@ async function clearOldEventsFromDatabase(client) {
                                                      });
                                                      calendarAttachmentUrl = archiveMessage.attachments.first()?.url || null;
                                                      if (calendarAttachmentUrl) {
+                                                         eventThread.calendarMessageId = archiveMessage.id;
+                                                         eventThread.calendarFileName = calendarFile.fileName;
+                                                         eventThread.calendarAttachmentUrl = calendarAttachmentUrl;
                                                          await AnnouncementChannels.updateOne(
                                                              { Guild: guildData.Guild, 'EventThreads.eventId': discordEvent.id },
                                                              { $set: {

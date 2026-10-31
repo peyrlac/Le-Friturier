@@ -1,3 +1,35 @@
+const MAX_DISCORD_BUTTON_URL_LENGTH = 512;
+
+function fitCalendarUrl(buildUrl, values) {
+    const fitted = { ...values };
+
+    for (const field of ['description', 'location', 'title']) {
+        if (buildUrl(fitted).length <= MAX_DISCORD_BUTTON_URL_LENGTH) break;
+
+        const original = String(fitted[field] || '');
+        let low = 0;
+        let high = original.length;
+        let best = '';
+
+        while (low <= high) {
+            const middle = Math.floor((low + high) / 2);
+            const suffix = middle < original.length ? '…' : '';
+            const candidate = { ...fitted, [field]: original.slice(0, middle) + suffix };
+
+            if (buildUrl(candidate).length <= MAX_DISCORD_BUTTON_URL_LENGTH) {
+                best = candidate[field];
+                low = middle + 1;
+            } else {
+                high = middle - 1;
+            }
+        }
+
+        fitted[field] = best;
+    }
+
+    return buildUrl(fitted);
+}
+
 function generateCalendarLinks({ title, description, location, startDate, endDate }) {
     const safeDate = (input) => {
         const date = new Date(input);
@@ -17,17 +49,21 @@ function generateCalendarLinks({ title, description, location, startDate, endDat
     const formatOutlookDate = (input) => safeDate(input)
         .toISOString()
         .replace(/\.\d{3}Z$/, '');
-    const encodedTitle = encodeParam(title);
-    const encodedDesc = encodeParam(description);
-    const encodedLocation = encodeParam(location);
-
-    const googleLink = `https://calendar.google.com/calendar/u/0/r/eventedit?dates=${start}/${end}&details=${encodedDesc}&location=${encodedLocation}&text=${encodedTitle}`;
-
     const outlookStart = encodeParam(formatOutlookDate(startDate));
     const outlookEnd = encodeParam(formatOutlookDate(endDate));
-    const outlookLink = `https://outlook.live.com/calendar/0/deeplink/compose?allday=false&body=${encodedDesc}&enddt=${outlookEnd}&location=${encodedLocation}&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=${outlookStart}&subject=${encodedTitle}`;
+    const values = { title: title || '', description: description || '', location: location || '' };
 
-    const yahooLink = `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodedTitle}&st=${start}&et=${end}&desc=${encodedDesc}&in_loc=${encodedLocation}`;
+    const googleLink = fitCalendarUrl(({ title: fittedTitle, description: fittedDescription, location: fittedLocation }) => {
+        return `https://calendar.google.com/calendar/u/0/r/eventedit?dates=${start}/${end}&details=${encodeParam(fittedDescription)}&location=${encodeParam(fittedLocation)}&text=${encodeParam(fittedTitle)}`;
+    }, values);
+
+    const outlookLink = fitCalendarUrl(({ title: fittedTitle, description: fittedDescription, location: fittedLocation }) => {
+        return `https://outlook.live.com/calendar/0/deeplink/compose?allday=false&body=${encodeParam(fittedDescription)}&enddt=${outlookEnd}&location=${encodeParam(fittedLocation)}&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=${outlookStart}&subject=${encodeParam(fittedTitle)}`;
+    }, values);
+
+    const yahooLink = fitCalendarUrl(({ title: fittedTitle, description: fittedDescription, location: fittedLocation }) => {
+        return `https://calendar.yahoo.com/?v=60&view=d&type=20&title=${encodeParam(fittedTitle)}&st=${start}&et=${end}&desc=${encodeParam(fittedDescription)}&in_loc=${encodeParam(fittedLocation)}`;
+    }, values);
 
     return {
         google: googleLink,
