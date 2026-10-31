@@ -26,6 +26,7 @@ const EventThreadSchema = new mongoose.Schema({
     calendarMessageId: { type: String },
     calendarFileName: { type: String },
     calendarAttachmentUrl: { type: String },
+    emojiOverride: { type: String },
     scheduledStartTimestamp: { type: Number, required: true },
     sentReminders: { type: ReminderSchema, required: true, default: () => ({}) },
     version: { type: Number, default: 2 }
@@ -236,8 +237,45 @@ async function clearOldEventsFromDatabase(client) {
                             continue;
                         }
 
-                        // Si l'événement n'a pas de version ou est en version 1, on met à jour sa description
-                        if (!eventThread.version || eventThread.version === 1) {
+                        // Migration idempotente du schéma des événements
+                        const legacyReminders = eventThread.sentReminders || {};
+                        const reminderState = {};
+                        for (const reminderType of ['month', 'week', 'day']) {
+                            const value = legacyReminders[reminderType];
+                            reminderState[reminderType] = typeof value === 'object'
+                                ? {
+                                    sent: value.sent === true,
+                                    timestamp: value.timestamp || null
+                                }
+                                : {
+                                    sent: value === true,
+                                    timestamp: null
+                                };
+                        }
+
+                        if (JSON.stringify(eventThread.sentReminders || {}) !== JSON.stringify(reminderState)) {
+                            eventThread.sentReminders = reminderState;
+                            hasUpdates = true;
+                        }
+                        if (eventThread.emojiOverride === undefined) {
+                            eventThread.emojiOverride = null;
+                            hasUpdates = true;
+                        }
+                        if (eventThread.calendarMessageId === undefined) {
+                            eventThread.calendarMessageId = null;
+                            hasUpdates = true;
+                        }
+                        if (eventThread.calendarFileName === undefined) {
+                            eventThread.calendarFileName = null;
+                            hasUpdates = true;
+                        }
+                        if (eventThread.calendarAttachmentUrl === undefined) {
+                            eventThread.calendarAttachmentUrl = null;
+                            hasUpdates = true;
+                        }
+
+                        // Si l'événement est ancien ou n'a pas encore de fichier calendrier, le resynchroniser
+                        if (!eventThread.version || eventThread.version === 1 || !eventThread.calendarAttachmentUrl) {
                             try {
                                 const discordEvent = await discordGuild.scheduledEvents.fetch(eventThread.eventId);
                                 if (discordEvent) {
@@ -335,13 +373,18 @@ async function clearOldEventsFromDatabase(client) {
                                         }
                                     }
                         
-                                    // 3. Mettre à jour la version
-                                    eventThread.version = 2;
+                                    // 3. Marquer la migration comme terminée
+                                    eventThread.version = 3;
                                     hasUpdates = true;
                                 }
                             } catch (error) {
                                 console.error(`Failed to update event ${eventThread.eventName}:`, error);
                             }
+                        }
+
+                        if (eventThread.version !== 3) {
+                            eventThread.version = 3;
+                            hasUpdates = true;
                         }
 
                         // Garder l'événement dans la liste mise à jour

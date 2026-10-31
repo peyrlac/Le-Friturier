@@ -1,53 +1,11 @@
 const { Client, Events, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { model: AnnouncementChannels, getActivityEmoji } = require('../../database/models/announcement-channels');
 const { ReminderManager, createManager } = require('../functions/eventReminders');
-const { generateCalendarLinks, generateCalendarFile } = require('../../assets/utils/calendar');
+const { generateCalendarLinks } = require('../../assets/utils/calendar');
+const { getEventCreator, uploadCalendarFile } = require('../../commands/event/utils');
 const Discord = require('discord.js');
 const logger = require('../logger');
 const reminderManager = createManager();
-
-const UPLOAD_CHANNEL_ID = process.env.UPLOAD_CHANNEL_ID;
-
-async function uploadCalendarFile(client, event) {
-    if (!UPLOAD_CHANNEL_ID) {
-        throw new Error('UPLOAD_CHANNEL_ID is not configured');
-    }
-
-    const archiveChannel = await client.channels.fetch(UPLOAD_CHANNEL_ID).catch(() => null);
-    if (!archiveChannel?.isTextBased()) {
-        throw new Error(`Calendar upload channel ${UPLOAD_CHANNEL_ID} is unavailable`);
-    }
-
-    const start = event.scheduledStartTimestamp;
-    const end = event.scheduledEndTimestamp || (start + 60 * 60 * 1000);
-    const calendarFile = generateCalendarFile({
-        eventId: event.id,
-        title: event.name,
-        description: event.description,
-        location: event.entityMetadata?.location || '',
-        startDate: new Date(start).toISOString(),
-        endDate: new Date(end).toISOString()
-    });
-
-    const archiveMessage = await archiveChannel.send({
-        content: `Calendar file for event ${event.id}`,
-        files: [{ attachment: calendarFile.content, name: calendarFile.fileName }]
-    });
-    const attachment = archiveMessage.attachments.first();
-    if (!attachment?.url) throw new Error(`No attachment URL returned for event ${event.id}`);
-
-    return {
-        messageId: archiveMessage.id,
-        fileName: calendarFile.fileName,
-        url: attachment.url
-    };
-}
-
-async function getEventCreator(client, event) {
-    if (event.creator) return event.creator;
-    if (!event.creatorId) return null;
-    return client.users.fetch(event.creatorId).catch(() => null);
-}
 
 module.exports = async (client) => {
     // Créer une instance du ReminderManager
@@ -241,10 +199,18 @@ module.exports = async (client) => {
                                 name: '📌 Description en épinglés', 
                                 value: 'Modifie à tout moment la description pour garder les informations clés en épinglés' 
                             },
-                            { 
-                                name: '👁️‍🗨️ Créer des sondages', 
-                                value: 'Tu peux également créer des sondages et vérifier la liste des participants (\`/event participants\`)'
+                            {
+                                name: '🎨 Modifier l’emoji',
+                                value: 'Le créateur peut personnaliser l’emoji du thread avec `/event emoji emoji:🔥`'
                             },
+                             { 
+                                 name: '👁️‍🗨️ Créer des sondages', 
+                                 value: 'Tu peux également créer des sondages dans ce fil.'
+                             },
+                             {
+                                 name: '👥 Voir les participants',
+                                 value: 'Consulte la liste avec \`/event participant\` ou \`/event participants\`.'
+                             },
                             { 
                                 name: '⏰ Rappels automatiques', 
                                 value: reminderText
@@ -371,7 +337,7 @@ module.exports = async (client) => {
 
                     // Mettre à jour le nom du thread si nécessaire
                     if (oldEvent.name !== newEvent.name) {
-                        const eventEmoji = getActivityEmoji(`${newEvent.name} ${newEvent.description}`);
+                        const eventEmoji = eventThread.emojiOverride || getActivityEmoji(`${newEvent.name} ${newEvent.description}`);
                         await thread.setName(`${eventEmoji}・${newEvent.name}`);
                     }
 
